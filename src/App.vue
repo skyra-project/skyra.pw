@@ -11,7 +11,7 @@
         viewBox="0 0 248.5 497"
         width="2.5rem"
         height="2.5rem"
-      ><defs><svg:style>.cls-1{fill:#4e5d94;}.cls-1,.cls-2{fill-opacity:1;}.cls-2{fill:#fff;}</svg:style></defs><title>Asset 1</title><g
+      ><defs><svg:style>.cls-1{fill:#4e5d94;}.cls-1,.cls-2{fill-opacity:1;}.cls-2{fill:#fff;}</svg:style></defs><title>Logo</title><g
         id="Layer_2"
         data-name="Layer 2"
       ><g
