@@ -1,0 +1,20 @@
+{
+	"extends": [
+		"plugin:@typescript-eslint/recommended",
+		"plugin:vue/recommended",
+		"plugin:vue/essential",
+		"@vue/typescript"
+	],
+	"rules": {
+		"semi": [
+			"error",
+			"always"
+		],
+		"@typescript-eslint/no-triple-slash-reference": "off"
+	},
+	"parserOptions": {
+		"parser": "@typescript-eslint/parser",
+		"ecmaVersion": 2019,
+		"sourceType": "module"
+	}
+}
