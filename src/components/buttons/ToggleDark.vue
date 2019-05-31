@@ -41,7 +41,7 @@ export default class ToggleDark extends Vue {
                 this.holdTime = Date.now() - started;
                 if (this.dark && !this.holdFinish && this.holdTime > 1000) {
                     this.holdFinish = true;
-                    const nextTheme = this.theme === 'black' ? 'dark' : 'dark black';
+                    const nextTheme = this.theme === 'dark black' ? 'dark' : 'dark black';
                     this.$store.commit('setTheme', nextTheme);
                     this.$store.commit('setDarkTheme', nextTheme);
                 }
