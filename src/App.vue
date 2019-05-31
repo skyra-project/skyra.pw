@@ -40,16 +40,64 @@
         Skyra
       </router-link>
     </div>
-    <img
+    <svg
       id="left"
-      class="is-unselectable"
-      alt="left-circle"
-    >
-    <img
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 242 484"
+    ><defs><svg:style>.cls-1{fill:url(#linear-gradient);}</svg:style><linearGradient
+      id="linear-gradient"
+      x1="167.12"
+      y1="94.65"
+      x2="-52.67"
+      y2="404.19"
+      gradientUnits="userSpaceOnUse"
+    ><stop
+      offset="0"
+      stop-color="#869bee"
+    /><stop
+      offset="1"
+      stop-color="#3fffd1"
+      stop-opacity="0"
+    /></linearGradient></defs><title>left</title><g
+      id="Layer_2"
+      data-name="Layer 2"
+    ><g
+      id="Layer_1-2"
+      data-name="Layer 1"
+    ><path
+      class="cls-1"
+      d="M0,0C133.65,0,242,108.35,242,242S133.65,484,0,484"
+    /></g></g></svg>
+    <svg
       id="right"
-      class="is-unselectable"
-      alt="right-circle"
-    >
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 209.25 552"
+    ><defs><svg:style>.cls-1{fill:url(#linear-gradient);}</svg:style><linearGradient
+      id="linear-gradient"
+      x1="303.65"
+      y1="100.13"
+      x2="67.58"
+      y2="432.59"
+      gradientUnits="userSpaceOnUse"
+    ><stop
+      offset="0"
+      stop-color="#869bee"
+    /><stop
+      offset="1"
+      stop-color="#3fffd1"
+      stop-opacity="0"
+    /></linearGradient></defs><title>right</title><g
+      id="Layer_2"
+      data-name="Layer 2"
+    ><g
+      id="Layer_1-2"
+      data-name="Layer 1"
+    ><path
+      class="cls-1"
+      d="M209.25,0A118.07,118.07,0,0,0,107,59L15.82,217a118.06,118.06,0,0,0,0,118.06L107,493a118.07,118.07,0,0,0,102.25,59"
+    /></g></g></svg>
     <transition
       name="fade"
       mode="out-in"
@@ -221,17 +269,18 @@ $dimensions: 16 24 32 48 64 96 128 256 !default;
       }
     }
   }
-  img#left, img#right {
+  svg#left, svg#right {
     display: none;
   }
 }
+
 @include desktop {
   .site {
     background-image: url('../public/svg/bg.svg');
     background-repeat: no-repeat;
-    background-size: 100vw 24em;
+    background-size: 100vw 28em;
     h1.site-header {
-      padding-top: 1em;
+      padding-top: 1.4em;
       padding-bottom: 0.2em;
       margin-bottom: 0px !important;
       color: whitesmoke;
@@ -242,14 +291,12 @@ $dimensions: 16 24 32 48 64 96 128 256 !default;
       }
     }
   }
-  img#left {
-    content:url('../public/svg/left.svg');
+  svg#left {
     position: absolute;
     top: 9em;
     height: 11em;
   }
-  img#right {
-    content:url('../public/svg/right.svg');
+  svg#right {
     position: absolute;
     top: 4em;
     height: 14em;
