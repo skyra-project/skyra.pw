@@ -1,5 +1,9 @@
 <template>
   <AppContent title="Commands">
+    <b-loading
+      :is-full-page="true"
+      :active.sync="isLoading"
+    />
     <div
       v-for="([title, visible, commands], index) in categories"
       :key="title"
@@ -114,12 +118,14 @@ export default class extends Vue {
         6: 'This command can only be run by administrators.'
     };
     public categories: [string, boolean, Command[]][] = [];
+    public isLoading = false;
 
     beforeMount() {
         this.fetchCommands();
     }
 
     async fetchCommands() {
+        this.isLoading = true;
         while (this.categories.length) this.categories.pop();
         try {
             // const result = await fetch('https://api.skyra.pw/commands');
@@ -143,6 +149,7 @@ export default class extends Vue {
         } catch (error) {
             console.error('Failed to fetch commands:', error);
         }
+        this.isLoading = false;
     }
 }
 
