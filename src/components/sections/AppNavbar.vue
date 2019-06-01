@@ -113,6 +113,10 @@ export default class AppNavbar extends Vue {
         {
             name: 'About',
             link: '/about'
+        },
+        {
+            name: 'Commands',
+            link: '/commands'
         }
     ];
 }
