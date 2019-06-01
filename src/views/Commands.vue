@@ -134,13 +134,13 @@ export default class extends Vue {
 
     async fetchCommands() {
         this.isLoading = true;
-        this.$store.commit('clearCommands');
         const categories: [string, boolean, Command[]][] = [];
         try {
             const result = await fetch('https://api.skyra.pw/commands');
             if (!result.ok) {
                 throw result.statusText;
             }
+        		this.$store.commit('clearCommands');
             const response = await result.json() as { success: boolean; data: Command[] };
             for (const command of response.data) {
                 const category = categories.find(([name]) => command.category === name);
