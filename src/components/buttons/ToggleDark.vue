@@ -18,11 +18,12 @@
 
 <script lang="ts">
 /// <reference path="../../../node_modules/vuex/types/vue.d.ts" />
+/// <reference lib="dom" />
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
 export default class ToggleDark extends Vue {
-    private interval: NodeJS.Timeout = null;
+    private interval: number = -1;
     private holdTime: number = 0;
     private holdFinish: boolean = false;
     private get dark() {
@@ -35,7 +36,7 @@ export default class ToggleDark extends Vue {
         return this.$store.state.local.darkTheme;
     }
     public start() {
-        if (this.interval === null) {
+        if (this.interval === -1) {
             const started = Date.now();
             this.interval = setInterval(() => {
                 this.holdTime = Date.now() - started;
@@ -45,13 +46,13 @@ export default class ToggleDark extends Vue {
                     this.$store.commit('setTheme', nextTheme);
                     this.$store.commit('setDarkTheme', nextTheme);
                 }
-            }, 30);
+            }, 30) as unknown as number;
         }
     }
     public stop() {
-        if (this.interval !== null) {
+        if (this.interval !== -1) {
             clearInterval(this.interval);
-            this.interval = null;
+            this.interval = -1;
             if (this.holdTime < 200) {
                 this.$store.commit('setTheme', this.dark ? 'light' : this.darkTheme);
             }

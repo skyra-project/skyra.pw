@@ -27,7 +27,7 @@ export default class extends Vue {
 	    const parsed: Tag[] = [];
 
 	    let previous = 0;
-	    let match: RegExpExecArray;
+	    let match: RegExpExecArray | null;
 	    while ((match = regExp.exec(this.value)) !== null) {
 	        if (previous !== match.index) {
 	            parsed.push({ type: 'text', value: this.value.slice(previous, match.index) });

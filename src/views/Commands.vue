@@ -128,11 +128,9 @@ export default class extends Vue {
         this.isLoading = true;
         while (this.categories.length) this.categories.pop();
         try {
-            // const result = await fetch('https://api.skyra.pw/commands');
-            const result = await fetch('json/commands.json');
+            const result = await fetch('https://api.skyra.pw/commands');
             if (!result.ok) {
-                console.error(`[${result.status}] Failed to fetch commands.`);
-                return;
+                throw result.statusText;
             }
             const response = await result.json() as { success: boolean; data: Command[] };
             for (const command of response.data) {
