@@ -1,6 +1,8 @@
 <template>
-  <AppContent title="About">
-    <p>TBD.</p>
+  <AppContent title="404">
+    <h2 class="subtitle has-text-centered">
+      Hello there! Did you get lost?
+    </h2>
   </AppContent>
 </template>
 

@@ -111,10 +111,6 @@ export default class AppNavbar extends Vue {
     public showNav: boolean = false;
     public sections: NavbarElement[] = [
         {
-            name: 'About',
-            link: '/about'
-        },
-        {
             name: 'Commands',
             link: '/commands'
         }
