@@ -9,16 +9,16 @@ import Buefy from 'buefy';
 Vue.use(Buefy);
 
 store.subscribe((mutation) => {
-	if (mutation.type !== 'save') store.commit('save');
+    if (mutation.type !== 'save') store.commit('save');
 });
 
 Vue.config.productionTip = false;
 
 new Vue({
-	router,
-	store,
-	beforeCreate() {
-		this.$store.commit('load');
-	},
-	render: h => h(App)
+    router,
+    store,
+    beforeCreate() {
+        this.$store.commit('load');
+    },
+    render: h => h(App)
 }).$mount('#app');

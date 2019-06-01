@@ -10,7 +10,8 @@
 			"error",
 			"always"
 		],
-		"@typescript-eslint/no-triple-slash-reference": "off"
+		"@typescript-eslint/no-triple-slash-reference": "off",
+		"@typescript-eslint/no-var-requires": "off"
 	},
 	"parserOptions": {
 		"parser": "@typescript-eslint/parser",
