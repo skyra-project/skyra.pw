@@ -141,6 +141,7 @@ html {
   $red:  hsl(0, 100%, 29%);
   $orange:  hsl(14, 100%, 47%);
   $yellow:  hsl(49, 80%, 50%);
+  $cyan: hsl(204, 86%, 53%);
   span.icon.background-rounded {
     padding: 1em;
     background-color: $red;
@@ -150,7 +151,7 @@ html {
   }
   a.navbar-item {
     &:hover, &:focus {
-      color: $red !important;
+      color: $cyan !important;
     }
   }
   // Import Bulma's core
@@ -185,7 +186,7 @@ html {
   $yellow:  hsl(49, 80%, 50%);
   $green:  hsl(141, 71%, 40%);
   $turquoise:  hsl(171, 100%, 35%);
-  $cyan:  hsl(204, 86%, 45%);
+  $cyan:  hsl(204, 86%, 53%);
   $blue:  hsl(217, 71%, 49%);
   $purple:  hsl(271, 100%, 29%);
   $message-background-color: rgba(255, 255, 255, 0.247) !important;
@@ -208,7 +209,7 @@ html {
   }
   a.navbar-item {
     &:hover, &:focus {
-      color: $red !important;
+      color: $cyan !important;
     }
   }
   // Import Bulma's core
@@ -241,7 +242,7 @@ html {
   display: none;
 }
 ::-webkit-scrollbar-thumb {
-  background: hsl(0, 100%, 29%);
+  background: hsl(204, 86%, 53%);
 }
 ::-webkit-scrollbar-corner {
   display: none;
@@ -312,14 +313,6 @@ div.title.banner {
   a {
     display: inline-block;
     color: whitesmoke !important;
-    &:hover {
-      color: hsl(49, 80%, 50%) !important;
-    }
-    img {
-      display: inline-block;
-      width: 32px !important;
-      height: 32px !important;
-    }
     p {
       display: inline-block;
     }

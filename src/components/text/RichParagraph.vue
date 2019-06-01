@@ -34,10 +34,6 @@ export default class extends Vue {
 	        }
 	        previous = regExp.lastIndex;
 	        parsed.push({ type: 'emoji', value: match[0] });
-
-	        console.log(`Found ${match[0]} at ${match.index}. Next starts at ${regExp.lastIndex}.`);
-	        // expected output: "Found foo. Next starts at 9."
-	        // expected output: "Found foo. Next starts at 19."
 	    }
 	    if (previous < this.value.length) parsed.push({ type: 'text', value: this.value.slice(previous) });
 	    return parsed;
