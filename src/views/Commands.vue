@@ -104,6 +104,7 @@
 </template>
 
 <script lang="ts">
+/// <reference path="../../../node_modules/vuex/types/vue.d.ts" />
 /// <reference lib="dom" />
 import { Component, Vue } from 'vue-property-decorator';
 import AppContent from '../components/sections/AppContent.vue';
@@ -112,21 +113,29 @@ import RichParagraph from '../components/text/RichParagraph.vue';
 
 @Component({ components: { AppContent, CommandUsage, RichParagraph } })
 export default class extends Vue {
+    public readonly resetTime = 1000 * 60 * 60 * 24;
     public titles = {
         4: 'This command can only be run by staff members.',
         5: 'This command can only be run by moderators and administrators.',
         6: 'This command can only be run by administrators.'
     };
-    public categories: [string, boolean, Command[]][] = [];
     public isLoading = false;
 
     beforeMount() {
-        this.fetchCommands();
+        if (!this.$store.state.session.commands
+			|| !this.$store.state.session.lastFetched
+			|| this.$store.state.session.lastFetched < Date.now() - this.resetTime)
+            this.fetchCommands();
+    }
+
+    get categories() {
+        return this.$store.state.session.commands;
     }
 
     async fetchCommands() {
         this.isLoading = true;
-        while (this.categories.length) this.categories.pop();
+        this.$store.commit('clearCommands');
+        const categories: [string, boolean, Command[]][] = [];
         try {
             const result = await fetch('https://api.skyra.pw/commands');
             if (!result.ok) {
@@ -134,16 +143,17 @@ export default class extends Vue {
             }
             const response = await result.json() as { success: boolean; data: Command[] };
             for (const command of response.data) {
-                const category = this.categories.find(([name]) => command.category === name);
+                const category = categories.find(([name]) => command.category === name);
                 if (category) {
                     category[2].push(command);
                 } else {
-                    const index = this.categories.findIndex(([name]) => name > command.category);
-                    if (index === -1) this.categories.push([command.category, false, [command]]);
-                    else this.categories.splice(index, 0, [command.category, false, [command]]);
+                    const index = categories.findIndex(([name]) => name > command.category);
+                    if (index === -1) categories.push([command.category, false, [command]]);
+                    else categories.splice(index, 0, [command.category, false, [command]]);
                 }
             }
-            this.categories[0][1] = true;
+            categories[0][1] = true;
+            this.$store.commit('setCommands', categories);
         } catch (error) {
             console.error('Failed to fetch commands:', error);
         }
