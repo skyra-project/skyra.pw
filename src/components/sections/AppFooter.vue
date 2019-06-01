@@ -8,6 +8,7 @@
             <a
               href="https://twitter.com/SkyraBot"
               class="has-text-dark"
+              rel="noreferrer"
               target="_blank"
             >
               <b-icon

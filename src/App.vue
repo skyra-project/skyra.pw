@@ -12,13 +12,10 @@
         width="2.5rem"
         height="2.5rem"
       ><defs><svg:style>.cls-1{fill:#4e5d94;}.cls-1,.cls-2{fill-opacity:1;}.cls-2{fill:#fff;}</svg:style></defs><title>Logo</title><g
-        id="Layer_2"
         data-name="Layer 2"
       ><g
-        id="Layer_1-2"
         data-name="Layer 1"
       ><g
-        id="Capa_2"
         data-name="Capa 2"
       ><path
         class="cls-1"
@@ -27,7 +24,6 @@
         class="cls-2"
         d="M17.9,111.5l-2.6-2.6L0,124.2v30.7l15.3,15.3v-56l2.6-2.7m49.6,49.6L124.3,0,15.3,170.2l72.5,72.4L181,335.8,124.3,497,233.2,326.8,67.5,161.1M233.2,363.7v19.1l-2.5,2.7,2.5,2.5,15.3-15.3V342.1l-15.3-15.3v36.9Z"
       /></g><g
-        id="Capa_5"
         data-name="Capa 5"
       ><path
         class="cls-2"
@@ -45,8 +41,8 @@
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 242 484"
-    ><defs><svg:style>.cls-1{fill:url(#linear-gradient);}</svg:style><linearGradient
-      id="linear-gradient"
+    ><defs><svg:style>.cls-1{fill:url(#bg-linear-gradient);}</svg:style><linearGradient
+      id="bg-linear-gradient"
       x1="167.12"
       y1="94.65"
       x2="-52.67"
@@ -60,10 +56,8 @@
       stop-color="#3fffd1"
       stop-opacity="0"
     /></linearGradient></defs><title>left</title><g
-      id="Layer_2"
       data-name="Layer 2"
     ><g
-      id="Layer_1-2"
       data-name="Layer 1"
     ><path
       class="cls-1"
@@ -89,10 +83,8 @@
       stop-color="#3fffd1"
       stop-opacity="0"
     /></linearGradient></defs><title>right</title><g
-      id="Layer_2"
       data-name="Layer 2"
     ><g
-      id="Layer_1-2"
       data-name="Layer 1"
     ><path
       class="cls-1"
