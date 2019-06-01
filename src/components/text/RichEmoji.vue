@@ -1,10 +1,15 @@
 <template>
-  <span class="icon">
-    <img
-      :src="link"
-      :alt="name"
-    >
-  </span>
+  <b-tooltip
+    :label="name"
+    type="is-light"
+  >
+    <span class="icon">
+      <img
+        :src="link"
+        :alt="name"
+      >
+    </span>
+  </b-tooltip>
 </template>
 
 <script lang="ts">
