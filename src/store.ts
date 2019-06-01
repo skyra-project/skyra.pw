@@ -14,17 +14,17 @@ export default new Vuex.Store({
         }
     },
     mutations: {
-        load(this: Store<StoreState>, state) {
+        load(this: Store<StoreState>, state): void {
             const saved = localStorage.getItem('store');
             if (saved) this.replaceState({ ...state, ...JSON.parse(saved) });
         },
-        save(this: Store<StoreState>, state) {
+        save(this: Store<StoreState>, state): void {
             localStorage.setItem('store', JSON.stringify(state));
         },
-        setTheme(this: Store<StoreState>, state, theme) {
+        setTheme(this: Store<StoreState>, state, theme): void {
             state.local.theme = theme;
         },
-        setDarkTheme(this: Store<StoreState>, state, theme) {
+        setDarkTheme(this: Store<StoreState>, state, theme): void {
             state.local.darkTheme = theme;
         }
     },

@@ -11,7 +11,8 @@
 			"always"
 		],
 		"@typescript-eslint/no-triple-slash-reference": "off",
-		"@typescript-eslint/no-var-requires": "off"
+		"@typescript-eslint/no-var-requires": "off",
+		"@typescript-eslint/explicit-function-return-type": "off"
 	},
 	"parserOptions": {
 		"parser": "@typescript-eslint/parser",
