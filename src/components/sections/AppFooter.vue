@@ -19,43 +19,6 @@
           </p>
         </div>
       </div>
-      <p>
-        Designed by kyranet
-        &nbsp;
-        <b-tooltip
-          label="Do you want to see my other creations? Check out all my code!"
-          type="is-light"
-        >
-          <a
-            href="https://github.com/kyranet"
-            class="has-text-warning"
-            target="_blank"
-          >
-            <b-icon
-              pack="fab"
-              icon="github"
-              size="is-small"
-            />
-          </a>
-        </b-tooltip>
-        &nbsp;
-        <b-tooltip
-          label="Do you like the website? Consider donating at least 1 dollar!"
-          type="is-light"
-        >
-          <a
-            href="https://www.patreon.com/kyranet"
-            class="has-text-warning"
-            target="_blank"
-          >
-            <b-icon
-              pack="fab"
-              icon="patreon"
-              size="is-small"
-            />
-          </a>
-        </b-tooltip>
-      </p>
     </div>
   </footer>
 </template>
