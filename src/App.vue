@@ -118,6 +118,8 @@ export default class Home extends Vue {
 </script>
 
 <style lang="scss">
+@import './style.scss';
+
 html {
   scroll-behavior: smooth;
 }
@@ -158,7 +160,6 @@ html {
   // Import Bulma and Buefy styles
   @import '~bulma';
   @import '~buefy/src/scss/buefy';
-  @import './style.scss';
 }
 %dark-shared {
   $light:  hsl(0, 0%, 18%);
@@ -204,6 +205,9 @@ html {
       color: $cyan !important;
     }
   }
+  div.navbar-menu {
+    box-shadow: 0 0;
+  }
   // Import Bulma's core
   @import '~bulma/sass/utilities/_all';
   $menu-item-active-background-color: $info;
@@ -214,7 +218,6 @@ html {
   // Import Bulma and Buefy styles
   @import '~bulma';
   @import '~buefy/src/scss/buefy';
-  @import './style.scss';
 }
 .dark {
   background-color: hsl(210, 4%, 10%);
