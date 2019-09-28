@@ -1,27 +1,3 @@
-export const colors = {
-	LIGHT_GREY: '#272727',
-	DARK_GREY: '#1d1d1d',
-	GOLDEN_YELLOW: '#f1c40f'
-};
-
-export const spacer = 35;
-export const selectorStyles = {
-	control: styles => ({
-		...styles,
-		backgroundColor: '#1f2135',
-		borderColor: '#7289DA',
-		borderWidth: 2,
-		width: 250
-	}),
-	menu: styles => ({ ...styles, zIndex: 999 }),
-	singleValue: styles => ({ ...styles, color: '#FFF' }),
-	option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-		return {
-			...styles,
-			backgroundColor: '#2e314a'
-		};
-	}
-};
 export const breakpointValues = {
 	xs: 0,
 	sm: 600,
@@ -66,10 +42,7 @@ function between(start, end) {
 		return up(start);
 	}
 
-	return (
-		`@media (min-width:${breakpointValues[start]}px) and ` +
-		`(max-width:${breakpointValues[keys[endIndex]] - 5 / 100}px)`
-	);
+	return `@media (min-width:${breakpointValues[start]}px) and ` + `(max-width:${breakpointValues[keys[endIndex]] - 5 / 100}px)`;
 }
 
 function only(key) {
@@ -83,11 +56,3 @@ export const breakpoints = {
 	between,
 	only
 };
-
-export const responsivePadding = `
-   padding: ${spacer}px;
-   ${breakpoints.down('xs')} {
-      padding: ${spacer / 2}px;
-   }
-   transition: padding 0.5s;
-`;
