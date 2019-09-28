@@ -1,29 +1,12 @@
-# skyra-website
+### `npm start`
 
-## Project setup
-```
-yarn install
-```
+Runs the app in the development mode.<br>
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+### `npm run build`
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+Builds the app for production to the `build` folder.<br>
 
-### Run your tests
-```
-yarn run test
-```
+## Learn More
 
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+[Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+[React documentation](https://reactjs.org/).
