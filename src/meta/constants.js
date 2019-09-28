@@ -2,8 +2,6 @@ import { createBrowserHistory } from 'history';
 
 export const history = createBrowserHistory();
 
-export const FALLBACK_AVATAR = 'https://cdn.discordapp.com/embed/avatars/1.png';
-
 export const BREAKPOINTS = {
 	xs: 0,
 	sm: 600,
@@ -17,10 +15,10 @@ export const BREAKPOINT = Object.keys(BREAKPOINTS).reduce((obj, currentEle) => {
 }, {});
 
 export const CLIENT_ID = '577488230539067403';
-
 export const BASE_WEB_URL = process.env.NODE_ENV === 'production' ? 'https://www.skyra.pw' : 'http://localhost:3000';
 export const BASE_API_URL = process.env.NODE_ENV === 'production' ? 'https://api.skyra.pw' : 'http://localhost:1234';
 export const BASE_CDN_URL = 'https://cdn.skyra.pw';
+
 export const oauthURL = new URL('https://discordapp.com/oauth2/authorize');
 oauthURL.search = new URLSearchParams([
 	['redirect_uri', `${BASE_WEB_URL}/oauth/callback`],
