@@ -21,7 +21,9 @@ class CommandsPage extends Component {
 				) : (
 					<div>
 						<h1>Commands:</h1>
-						{commands.map(cmd => cmd.name).join(', ')}
+						{commands.map(cmd => (
+							<div>{cmd.name}</div>
+						))}
 					</div>
 				)}
 			</div>
