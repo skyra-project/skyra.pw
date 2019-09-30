@@ -81,3 +81,7 @@ export function displayAvatarURL(user, { format = 'default', size }) {
 	if (format === 'default') format = user.avatar.startsWith('a_') ? 'gif' : 'webp';
 	return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${format}${size ? `?size=${size}` : ''}`;
 }
+
+export function getAcronym(name) {
+	return name.replace(/\w+/g, part => part[0]).replace(/\s/g, '');
+}

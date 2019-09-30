@@ -1,18 +1,28 @@
 import React, { useGlobal, Fragment } from 'reactn';
+import Avatar from '@material-ui/core/Avatar';
 import styled from 'styled-components';
 
 import { oauthURL, history } from 'meta/constants';
-import { logOut } from 'meta/util';
+import { logOut, getAcronym } from 'meta/util';
+import { makeStyles } from '@material-ui/styles';
+import theme from 'meta/theme';
+
+const useStyles = makeStyles({
+	defaultIcon: {
+		backgroundColor: theme.palette.secondary.main
+	}
+})
 
 const Profile = styled.div`
 	margin: 10px;
 	padding: 10px;
 	width: 250px;
-`;
+	display: flex;
+	align-items: 'center';
 
-const UserAvatar = styled.img`
-	border-radius: 50%;
-	height: 60px;
+	div.MuiAvatar-root {
+		margin-right: 10px;
+	}
 `;
 
 const GuildsList = styled.div`
@@ -42,13 +52,18 @@ const GuildsList = styled.div`
 
 export default () => {
 	const [global] = useGlobal();
+	const classes = useStyles();
 	const { authenticated, user } = global;
 	return (
 		<div>
 			{authenticated ? (
 				<Fragment>
 					<Profile>
-						Logged in as {user.username} <UserAvatar src={user.avatarURL} alt={user.username} />
+						<Avatar
+							src={user.avatarURL}
+							alt={user.username}
+						/>
+						<p>{user.username}</p>
 						<button onClick={logOut}>Log out</button>
 					</Profile>
 
@@ -57,11 +72,20 @@ export default () => {
 							.filter(guild => guild.userCanManage)
 							.map(guild => (
 								<div className="guild" key={guild.id}>
-									<UserAvatar
-										onClick={() => history.push(`/guilds/${guild.id}`)}
-										src={guild.iconURL || 'https://cdn.discordapp.com/embed/avatars/1.png'}
-										alt={guild.name}
-									/>
+									{guild.iconURL ? (
+										<Avatar
+											onClick={() => history.push(`/guilds/${guild.id}`)}
+											src={guild.iconURL}
+											alt={guild.name}
+										/>
+									) : (
+										<Avatar
+											onClick={() => history.push(`/guilds/${guild.id}`)}
+											className={classes.defaultIcon}
+										>
+											{getAcronym(guild.name)}
+										</Avatar>
+									)}
 									<p className="name">{guild.name}</p>
 								</div>
 							))}
