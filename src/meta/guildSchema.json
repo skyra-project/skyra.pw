@@ -1,0 +1,98 @@
+{
+	"prefix": { "array": false, "configurable": true, "default": "sd!", "max": null, "min": null, "type": "string" },
+	"language": { "array": false, "configurable": true, "default": "en-US", "max": null, "min": null, "type": "language" },
+	"disableNaturalPrefix": { "array": false, "configurable": false, "default": false, "max": null, "min": null, "type": "boolean" },
+	"disabledCommands": { "array": true, "configurable": true, "default": [], "max": null, "min": null, "type": "command" },
+	"tags": { "array": true, "configurable": false, "default": [], "max": null, "min": null, "type": "any" },
+	"channels": {
+		"announcements": { "array": false, "configurable": true, "default": null, "max": null, "min": null, "type": "textchannel" },
+		"greeting": { "array": false, "configurable": true, "default": null, "max": null, "min": null, "type": "textchannel" },
+		"farewell": { "array": false, "configurable": true, "default": null, "max": null, "min": null, "type": "textchannel" },
+		"member-logs": { "array": false, "configurable": true, "default": null, "max": null, "min": null, "type": "textchannel" },
+		"message-logs": { "array": false, "configurable": true, "default": null, "max": null, "min": null, "type": "textchannel" },
+		"moderation-logs": { "array": false, "configurable": true, "default": null, "max": null, "min": null, "type": "textchannel" },
+		"nsfw-message-logs": { "array": false, "configurable": true, "default": null, "max": null, "min": null, "type": "textchannel" },
+		"image-logs": { "array": false, "configurable": true, "default": null, "max": null, "min": null, "type": "textchannel" },
+		"roles": { "array": false, "configurable": true, "default": null, "max": null, "min": null, "type": "textchannel" },
+		"spam": { "array": false, "configurable": true, "default": null, "max": null, "min": null, "type": "textchannel" }
+	},
+	"command-autodelete": { "array": true, "configurable": false, "default": [], "max": null, "min": null, "type": "any" },
+	"disabledChannels": { "array": true, "configurable": true, "default": [], "max": null, "min": null, "type": "textchannel" },
+	"disabledCommandsChannels": { "array": true, "configurable": false, "default": [], "max": null, "min": null, "type": "any" },
+	"events": {
+		"banAdd": { "array": false, "configurable": true, "default": false, "max": null, "min": null, "type": "boolean" },
+		"banRemove": { "array": false, "configurable": true, "default": false, "max": null, "min": null, "type": "boolean" },
+		"memberAdd": { "array": false, "configurable": true, "default": false, "max": null, "min": null, "type": "boolean" },
+		"memberRemove": { "array": false, "configurable": true, "default": false, "max": null, "min": null, "type": "boolean" },
+		"messageDelete": { "array": false, "configurable": true, "default": false, "max": null, "min": null, "type": "boolean" },
+		"messageEdit": { "array": false, "configurable": true, "default": false, "max": null, "min": null, "type": "boolean" }
+	},
+	"filter": {
+		"level": { "array": false, "configurable": false, "default": 0, "max": 7, "min": 0, "type": "integer" },
+		"raw": { "array": true, "configurable": false, "default": [], "max": null, "min": null, "type": "string" }
+	},
+	"messages": {
+		"farewell": { "array": false, "configurable": true, "default": null, "max": 2000, "min": null, "type": "string" },
+		"greeting": { "array": false, "configurable": true, "default": null, "max": 2000, "min": null, "type": "string" },
+		"join-dm": { "array": false, "configurable": true, "default": null, "max": 1500, "min": null, "type": "string" },
+		"warnings": { "array": false, "configurable": true, "default": false, "max": null, "min": null, "type": "boolean" },
+		"ignoreChannels": { "array": true, "configurable": true, "default": [], "max": null, "min": null, "type": "textchannel" }
+	},
+	"stickyRoles": { "array": true, "configurable": false, "default": [], "max": null, "min": null, "type": "any" },
+	"roles": {
+		"admin": { "array": false, "configurable": true, "default": null, "max": null, "min": null, "type": "role" },
+		"auto": { "array": true, "configurable": false, "default": [], "max": null, "min": null, "type": "any" },
+		"initial": { "array": false, "configurable": true, "default": null, "max": null, "min": null, "type": "role" },
+		"messageReaction": { "array": false, "configurable": false, "default": null, "max": 18, "min": 17, "type": "string" },
+		"moderator": { "array": false, "configurable": true, "default": null, "max": null, "min": null, "type": "role" },
+		"muted": { "array": false, "configurable": true, "default": null, "max": null, "min": null, "type": "role" },
+		"public": { "array": true, "configurable": true, "default": [], "max": null, "min": null, "type": "role" },
+		"reactions": { "array": true, "configurable": false, "default": [], "max": null, "min": null, "type": "any" },
+		"removeInitial": { "array": false, "configurable": true, "default": false, "max": null, "min": null, "type": "boolean" },
+		"staff": { "array": false, "configurable": true, "default": null, "max": null, "min": null, "type": "role" },
+		"subscriber": { "array": false, "configurable": true, "default": null, "max": null, "min": null, "type": "role" },
+		"uniqueRoleSets": { "array": true, "configurable": false, "default": [], "max": null, "min": null, "type": "any" }
+	},
+	"selfmod": {
+		"attachment": { "array": false, "configurable": true, "default": false, "max": null, "min": null, "type": "boolean" },
+		"attachmentMaximum": { "array": false, "configurable": true, "default": 20, "max": 60, "min": 0, "type": "integer" },
+		"attachmentDuration": { "array": false, "configurable": false, "default": 20000, "max": 120000, "min": 5000, "type": "integer" },
+		"attachmentAction": { "array": false, "configurable": false, "default": 0, "max": null, "min": null, "type": "integer" },
+		"attachmentPunishmentDuration": {
+			"array": false,
+			"configurable": false,
+			"default": null,
+			"max": null,
+			"min": null,
+			"type": "integer"
+		},
+		"capsfilter": { "array": false, "configurable": false, "default": 0, "max": 7, "min": 0, "type": "integer" },
+		"capsminimum": { "array": false, "configurable": true, "default": 10, "max": 2000, "min": 0, "type": "integer" },
+		"capsthreshold": { "array": false, "configurable": true, "default": 50, "max": 100, "min": 0, "type": "integer" },
+		"ignoreChannels": { "array": true, "configurable": true, "default": [], "max": null, "min": null, "type": "textchannel" },
+		"invitelinks": { "array": false, "configurable": true, "default": false, "max": null, "min": null, "type": "boolean" },
+		"raid": { "array": false, "configurable": true, "default": false, "max": null, "min": null, "type": "boolean" },
+		"raidthreshold": { "array": false, "configurable": true, "default": 10, "max": 50, "min": 2, "type": "integer" }
+	},
+	"no-mention-spam": {
+		"enabled": { "array": false, "configurable": true, "default": false, "max": null, "min": null, "type": "boolean" },
+		"alerts": { "array": false, "configurable": true, "default": false, "max": null, "min": null, "type": "boolean" },
+		"mentionsAllowed": { "array": false, "configurable": true, "default": 20, "max": null, "min": null, "type": "integer" },
+		"timePeriod": { "array": false, "configurable": true, "default": 8, "max": null, "min": null, "type": "integer" }
+	},
+	"social": {
+		"achieve": { "array": false, "configurable": true, "default": false, "max": null, "min": null, "type": "boolean" },
+		"achieveMessage": { "array": false, "configurable": true, "default": null, "max": null, "min": null, "type": "string" },
+		"ignoreChannels": { "array": true, "configurable": true, "default": [], "max": null, "min": null, "type": "textchannel" }
+	},
+	"starboard": {
+		"channel": { "array": false, "configurable": true, "default": null, "max": null, "min": null, "type": "textchannel" },
+		"emoji": { "array": false, "configurable": false, "default": "%E2%AD%90", "max": null, "min": null, "type": "string" },
+		"ignoreChannels": { "array": true, "configurable": true, "default": [], "max": null, "min": null, "type": "textchannel" },
+		"minimum": { "array": false, "configurable": true, "default": 1, "max": 20, "min": 1, "type": "integer" }
+	},
+	"trigger": {
+		"alias": { "array": true, "configurable": false, "default": [], "max": null, "min": null, "type": "any" },
+		"includes": { "array": true, "configurable": false, "default": [], "max": null, "min": null, "type": "any" }
+	}
+}

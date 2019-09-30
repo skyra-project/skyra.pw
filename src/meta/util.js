@@ -1,6 +1,10 @@
 import { setGlobal, useRef, useEffect, getGlobal } from 'reactn';
 import { history, BASE_API_URL } from 'meta/constants';
 
+export function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export function useTraceUpdate(props) {
 	const prev = useRef(props);
 	useEffect(() => {
@@ -44,10 +48,13 @@ export const saveState = (key, state) => {
 
 export async function authedFetch(path, options = { headers: {} }) {
 	options.headers.authorization = getGlobal().token;
-	return apiFetch(`${BASE_API_URL}${path}`, options);
+	return apiFetch(path, options);
 }
 
 export async function apiFetch(path, options) {
+	if (process.env.NODE_ENV === 'development') {
+		await sleep(2000);
+	}
 	options.body = JSON.stringify(options.body);
 	if (!options.headers) options.headers = {};
 	options.headers['Content-Type'] = 'application/json';
@@ -55,4 +62,16 @@ export async function apiFetch(path, options) {
 	const response = await fetch(`${BASE_API_URL}${path}`, options);
 
 	return response.json();
+}
+
+export function navigate(path) {
+	return () => history.push(path);
+}
+
+export function toTitleCase(str) {
+	let splitStr = str.toLowerCase().split(' ');
+	for (let i = 0; i < splitStr.length; i++) {
+		splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+	}
+	return splitStr.join(' ');
 }
