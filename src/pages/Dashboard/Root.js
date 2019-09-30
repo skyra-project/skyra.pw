@@ -184,12 +184,12 @@ class Root extends Component {
 							<MenuIcon color="secondary" />
 						</IconButton>
 						<Breadcrumbs className={classes.breadcrumb}>
-							<MaterialLink color="inherit" href={`/guilds/${guildID}`}>
+							<MaterialLink component={Link} color="inherit" to={`/guilds/${guildID}`}>
 								{guildData.name}
 							</MaterialLink>
 							{!!pageName && (
 								<>
-									<MaterialLink color="inherit" href="/getting-started/installation/" onClick={() => ''}>
+									<MaterialLink component={Link} color="inherit" to={`/guilds/${guildID}/${pageName}`} onClick={() => ''}>
 										{toTitleCase(pageName)}
 									</MaterialLink>
 								</>
