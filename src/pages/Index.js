@@ -56,7 +56,7 @@ export default () => {
 						{user.guilds
 							.filter(guild => guild.userCanManage)
 							.map(guild => (
-								<div className="guild">
+								<div className="guild" key={guild.id}>
 									<UserAvatar
 										onClick={() => history.push(`/guilds/${guild.id}`)}
 										src={guild.iconURL || 'https://cdn.discordapp.com/embed/avatars/1.png'}
