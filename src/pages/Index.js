@@ -48,7 +48,7 @@ export default () => {
 			{authenticated ? (
 				<Fragment>
 					<Profile>
-						Logged in as {user.username} <UserAvatar src={user.displayAvatarURL} alt={user.username} />
+						Logged in as {user.username} <UserAvatar src={user.avatarURL} alt={user.username} />
 						<button onClick={logOut}>Log out</button>
 					</Profile>
 
