@@ -1,4 +1,5 @@
 import React, { Component } from 'reactn';
+import { apiFetch } from 'meta/util';
 
 class CommandsPage extends Component {
 	state = {
@@ -7,9 +8,8 @@ class CommandsPage extends Component {
 	};
 
 	async componentDidMount() {
-		// TODO: this isnt using BASE_API_URL, because theres no commands route in skyras KDH yet.
-		const { data } = await fetch('https://api.skyra.pw/commands').then(res => res.json());
-		this.setState({ loading: false, commands: data });
+		const commands = await apiFetch('/commands');
+		this.setState({ loading: false, commands });
 	}
 
 	render() {

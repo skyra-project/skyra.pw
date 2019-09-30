@@ -51,7 +51,7 @@ export async function authedFetch(path, options = { headers: {} }) {
 	return apiFetch(path, options);
 }
 
-export async function apiFetch(path, options) {
+export async function apiFetch(path, options = {}) {
 	if (process.env.NODE_ENV === 'development') {
 		await sleep(2000);
 	}
