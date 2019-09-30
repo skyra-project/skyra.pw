@@ -16,7 +16,6 @@ import {
 	Typography,
 	Breadcrumbs,
 	Link as MaterialLink,
-	LinearProgress,
 	CircularProgress,
 	Button
 } from '@material-ui/core';
@@ -140,7 +139,6 @@ class Root extends Component {
 		const { container, classes } = this.props;
 		// The guildID and optional pageName in the URL. e.g. /guilds/228822415189344257/settings
 		const { guildID, pageName } = this.props.match.params;
-		console.log(this.props);
 		const { mobileOpen, guildData, guildSettings, guildSettingsChanges } = this.state;
 
 		if (!guildData) return <p>Loading</p>;
@@ -160,12 +158,16 @@ class Root extends Component {
 				<Divider />
 
 				<ServerHeader>
-					<img className="server-icon" src={`https://cdn.discordapp.com/icons/${guildID}/${guildData.icon}?size=512`} />
+					<img
+						alt="Server Icon"
+						className="server-icon"
+						src={`https://cdn.discordapp.com/icons/${guildID}/${guildData.icon}?size=512`}
+					/>
 					<Typography variant="body1">{guildData.name}</Typography>
 				</ServerHeader>
 				<List>
 					{pages.map(page => (
-						<ListItem component={Link} to={`/guilds/${guildID}/${page.name}`} button>
+						<ListItem component={Link} to={`/guilds/${guildID}/${page.name}`} button key={page.name}>
 							<ListItemIcon>
 								<page.icon />
 							</ListItemIcon>
@@ -188,11 +190,9 @@ class Root extends Component {
 								{guildData.name}
 							</MaterialLink>
 							{!!pageName && (
-								<>
-									<MaterialLink component={Link} color="inherit" to={`/guilds/${guildID}/${pageName}`} onClick={() => ''}>
-										{toTitleCase(pageName)}
-									</MaterialLink>
-								</>
+								<MaterialLink component={Link} color="inherit" to={`/guilds/${guildID}/${pageName}`} onClick={() => ''}>
+									{toTitleCase(pageName)}
+								</MaterialLink>
 							)}
 						</Breadcrumbs>
 					</Toolbar>
