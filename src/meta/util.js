@@ -47,15 +47,16 @@ export const saveState = (key, state) => {
 };
 
 export async function authedFetch(path, options = { headers: {} }) {
+	if (!options.headers) options.headers = {};
 	options.headers.authorization = getGlobal().token;
 	return apiFetch(path, options);
 }
 
 export async function apiFetch(path, options = {}) {
 	if (process.env.NODE_ENV === 'development') {
-		await sleep(2000);
+		await sleep(1000);
 	}
-	options.body = JSON.stringify(options.body);
+	if (options.body) options.body = JSON.stringify(options.body);
 	if (!options.headers) options.headers = {};
 	options.headers['Content-Type'] = 'application/json';
 
