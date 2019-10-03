@@ -17,9 +17,10 @@ import {
 	Breadcrumbs,
 	Link as MaterialLink,
 	CircularProgress,
-	Button
+	Button,
+	Slide
 } from '@material-ui/core';
-import { Menu as MenuIcon, Save as SaveIcon } from '@material-ui/icons';
+import { Menu as MenuIcon, Save as SaveIcon, DeleteForever as DeleteIcon } from '@material-ui/icons';
 import deepMerge from 'deepmerge';
 
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
@@ -102,10 +103,13 @@ const styles = theme => ({
 	card: {
 		background: theme.palette.secondary.main
 	},
-	saveChangesButton: {
-		position: 'absolute',
+	fabContainer: {
+		position: 'fixed',
 		bottom: 30,
-		right: 30
+		right: 30,
+		'& button': {
+			marginLeft: 30
+		}
 	},
 	saveIcon: {
 		marginRight: theme.spacing(2)
@@ -117,36 +121,68 @@ class Root extends Component {
 		mobileOpen: false,
 		guildData: null,
 		guildSettings: null,
-		guildSettingsChanges: {}
+		guildSettingsChanges: {},
+		isUpdating: false
 	};
 
 	componentDidMount() {
 		this.syncGuildData();
 	}
 
+	syncGuildData = async () => {
+		const { guildID } = this.props.match.params;
+		const [guildData, guildSettings] = await Promise.all([
+			authedFetch(`/guilds/${guildID}`),
+			authedFetch(`/guilds/${guildID}/settings`)
+		]);
+		this.setState({ guildData, guildSettings });
+	};
+
+	submitChanges = async () => {
+		this.setState({ isUpdating: true });
+
+		const { guildID } = this.props.match.params;
+		const response = await authedFetch(`/guilds/${guildID}/settings`, {
+			method: 'POST',
+			body: {
+				guild_id: guildID,
+				data: this.state.guildSettingsChanges
+			}
+		}).catch(err => {
+			console.error(err);
+		});
+
+		if (!response || !response.newSettings || response.error) {
+			console.log(response);
+			return;
+		}
+
+		this.setState({
+			guildSettingsChanges: {},
+			guildSettings: response.newSettings,
+			isUpdating: false
+		});
+	};
+
 	patchGuildData = changes => {
 		this.setState({ guildSettingsChanges: deepMerge(this.state.guildSettingsChanges, changes) });
 	};
 
 	toggleSidebar = () => this.setState({ mobileOpen: !this.state.mobileOpen });
-	syncGuildData = async () => {
-		const { guildID } = this.props.match.params;
-		const guildData = await authedFetch(`/guilds/${guildID}`);
-		this.setState({ guildData });
-	};
 
 	render() {
 		const { container, classes } = this.props;
 		// The guildID and optional pageName in the URL. e.g. /guilds/228822415189344257/settings
 		const { guildID, pageName } = this.props.match.params;
-		const { mobileOpen, guildData, guildSettings, guildSettingsChanges } = this.state;
+		const { mobileOpen, guildData, guildSettings, guildSettingsChanges, isUpdating } = this.state;
 
 		if (!guildData) return <p>Loading</p>;
 
 		const componentProps = {
 			guildSettings: deepMerge(guildSettings, guildSettingsChanges),
 			guildData,
-			guildID
+			guildID,
+			patchGuildData: this.patchGuildData
 		};
 
 		const drawer = (
@@ -197,8 +233,7 @@ class Root extends Component {
 						</Breadcrumbs>
 					</Toolbar>
 				</AppBar>
-				<nav className={classes.drawer} aria-label="mailbox folders">
-					{/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+				<nav className={classes.drawer}>
 					<Hidden smUp implementation="css">
 						<Drawer
 							container={container}
@@ -236,17 +271,33 @@ class Root extends Component {
 								component={() => 'Index Page'}
 								componentProps={componentProps}
 							/>
-							<AuthenticatedRoute path="/guilds/:guildID/settings" component={SettingsPage} />
+							<AuthenticatedRoute
+								componentProps={{ ...componentProps }}
+								path="/guilds/:guildID/settings"
+								component={SettingsPage}
+							/>
 						</Switch>
 					) : (
 						<CircularProgress className={classes.progress} />
 					)}
-					{Object.keys(guildSettingsChanges).length === 0 && (
-						<Button className={classes.saveChangesButton} color="primary" variant="contained">
-							<SaveIcon className={classes.saveIcon} />
-							Save Changes
-						</Button>
-					)}
+					<Slide direction="up" in={Object.keys(guildSettingsChanges).length > 0} mountOnEnter unmountOnExit>
+						<div className={classes.fabContainer}>
+							<Button
+								disabled={isUpdating}
+								onClick={() => this.setState({ guildSettingsChanges: {} })}
+								color="secondary"
+								variant="contained"
+								size="small"
+							>
+								<DeleteIcon className={classes.saveIcon} />
+								Reset
+							</Button>
+							<Button disabled={isUpdating} onClick={this.submitChanges} color="primary" variant="contained">
+								<SaveIcon className={classes.saveIcon} />
+								Save Changes
+							</Button>
+						</div>
+					</Slide>
 				</main>
 			</div>
 		);
