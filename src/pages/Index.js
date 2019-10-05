@@ -1,6 +1,5 @@
 import React, { useGlobal, Fragment } from 'reactn';
-import { Paper, Grid, Avatar, Card, CardHeader, IconButton, Container } from '@material-ui/core';
-import { MoreVert as MoreVertIcon } from '@material-ui/icons';
+import { Grid, Avatar, Card, CardHeader, Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
 import GuildIcon from 'components/GuildIcon';
@@ -48,7 +47,7 @@ export default () => {
 						{user.guilds
 							.filter(guild => guild.userCanManage)
 							.map(guild => (
-								<Grid item className={classes.guildCardContainer}>
+								<Grid item className={classes.guildCardContainer} key={guild.id}>
 									<Card className={classes.guildCard}>
 										<CardHeader avatar={<GuildIcon guild={guild} />} title={guild.name} />
 									</Card>
