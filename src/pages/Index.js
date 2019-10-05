@@ -1,99 +1,64 @@
 import React, { useGlobal, Fragment } from 'reactn';
-import Avatar from '@material-ui/core/Avatar';
-import styled from 'styled-components';
-
-import { oauthURL, history } from 'meta/constants';
-import { logOut, getAcronym } from 'meta/util';
+import { Paper, Grid, Avatar, Card, CardHeader, IconButton, Container } from '@material-ui/core';
+import { MoreVert as MoreVertIcon } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/styles';
-import theme from 'meta/theme';
 
-const useStyles = makeStyles({
-	defaultIcon: {
-		backgroundColor: theme.palette.secondary.main
+import GuildIcon from 'components/GuildIcon';
+import { oauthURL } from 'meta/constants';
+import { logOut } from 'meta/util';
+
+const useStyles = makeStyles(theme => ({
+	profile: {
+		margin: 10,
+		padding: 10,
+		width: 250,
+		display: 'flex',
+		alignItems: 'center'
+	},
+	guildCardContainer: {
+		flex: '1 1 0%',
+		minWidth: 250,
+		maxWidth: 250,
+		[theme.breakpoints.down('xs')]: {
+			width: '100%',
+			maxWidth: 'none'
+		},
+		transition: 'width 0.2s ease-in-out'
+	},
+	guildCard: {
+		background: theme.palette.secondary.main
 	}
-})
-
-const Profile = styled.div`
-	margin: 10px;
-	padding: 10px;
-	width: 250px;
-	display: flex;
-	align-items: 'center';
-
-	div.MuiAvatar-root {
-		margin-right: 10px;
-	}
-`;
-
-const GuildsList = styled.div`
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	margin: 10px;
-	padding: 10px;
-
-	.guild {
-		display: flex;
-		align-content: center;
-		flex-direction: column;
-		max-width: 90px;
-		margin: 0px 10px;
-
-		img {
-			align-self: center;
-		}
-
-		&:hover {
-			cursor: pointer;
-		}
-	}
-`;
+}));
 
 export default () => {
 	const [global] = useGlobal();
 	const classes = useStyles();
 	const { authenticated, user } = global;
 	return (
-		<div>
+		<Container>
 			{authenticated ? (
 				<Fragment>
-					<Profile>
-						<Avatar
-							src={user.avatarURL}
-							alt={user.username}
-						/>
+					<div className={classes.profile}>
+						<Avatar src={user.avatarURL} alt={user.username} />
 						<p>{user.username}</p>
 						<button onClick={logOut}>Log out</button>
-					</Profile>
+					</div>
 
-					<GuildsList>
+					<Grid container direction="row" justify="center" alignItems="center" spacing={3} className={classes.guildsList}>
 						{user.guilds
 							.filter(guild => guild.userCanManage)
 							.map(guild => (
-								<div className="guild" key={guild.id}>
-									{guild.iconURL ? (
-										<Avatar
-											onClick={() => history.push(`/guilds/${guild.id}`)}
-											src={guild.iconURL}
-											alt={guild.name}
-										/>
-									) : (
-										<Avatar
-											onClick={() => history.push(`/guilds/${guild.id}`)}
-											className={classes.defaultIcon}
-										>
-											{getAcronym(guild.name)}
-										</Avatar>
-									)}
-									<p className="name">{guild.name}</p>
-								</div>
+								<Grid item className={classes.guildCardContainer}>
+									<Card className={classes.guildCard}>
+										<CardHeader avatar={<GuildIcon guild={guild} />} title={guild.name} />
+									</Card>
+								</Grid>
 							))}
-					</GuildsList>
+					</Grid>
 				</Fragment>
 			) : (
 				<a href={oauthURL}>Log in</a>
 			)}
-		</div>
+		</Container>
 	);
 };
