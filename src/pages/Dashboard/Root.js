@@ -187,7 +187,7 @@ class Root extends Component {
 
 		const drawer = (
 			<div>
-				<div onClick={navigate(`/guilds/${guildID}`)} className={classes.guildImage}>
+				<div onClick={navigate(`/`)} className={classes.guildImage}>
 					<SkyraLogo />
 					<Typography variant="h5">Skyra</Typography>
 				</div>
