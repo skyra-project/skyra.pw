@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 
 import GuildIcon from 'components/GuildIcon';
 import { oauthURL } from 'meta/constants';
-import { logOut } from 'meta/util';
+import { logOut, navigate } from 'meta/util';
 
 const useStyles = makeStyles(theme => ({
 	profile: {
@@ -25,7 +25,10 @@ const useStyles = makeStyles(theme => ({
 		transition: 'width 0.2s ease-in-out'
 	},
 	guildCard: {
-		background: theme.palette.secondary.main
+		background: theme.palette.secondary.main,
+		'&:hover': {
+			cursor: 'pointer'
+		}
 	}
 }));
 
@@ -48,7 +51,7 @@ export default () => {
 							.filter(guild => guild.userCanManage)
 							.map(guild => (
 								<Grid item className={classes.guildCardContainer} key={guild.id}>
-									<Card className={classes.guildCard}>
+									<Card elevation={2} onClick={navigate(`/guilds/${guild.id}`)} className={classes.guildCard}>
 										<CardHeader avatar={<GuildIcon guild={guild} />} title={guild.name} />
 									</Card>
 								</Grid>
