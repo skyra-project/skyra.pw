@@ -74,6 +74,7 @@ export default function CustomizedDialogs({ title, guild, onChange, buttonText, 
 					<List component="nav" aria-label="secondary mailbox folders">
 						{guild.roles.sort(sort || filterByPosition).map(r => (
 							<ListItem
+								key={r.id}
 								button
 								onClick={() => {
 									onChange(r);

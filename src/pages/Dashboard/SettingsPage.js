@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { Container, TextField, FormControl, InputLabel, Select, Typography, Chip, Box, Input } from '@material-ui/core';
+import { Container, TextField, FormControl, InputLabel, Select, Typography } from '@material-ui/core';
 
 import SelectRole from 'components/SelectRole';
 
@@ -85,6 +85,7 @@ const SettingsPage = props => {
 
 							return (
 								<SelectRole
+									key={role}
 									buttonText={`${role} Role: ${displayValue}`}
 									onChange={r =>
 										props.patchGuildData({
