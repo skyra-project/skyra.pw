@@ -269,7 +269,7 @@ class Root extends Component {
 								exact
 								path="/guilds/:guildID"
 								component={() => 'Index Page'}
-								componentProps={componentProps}
+								componentProps={{ ...componentProps }}
 							/>
 							<AuthenticatedRoute
 								componentProps={{ ...componentProps }}

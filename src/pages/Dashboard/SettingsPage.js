@@ -1,6 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { Container, TextField, FormControl, InputLabel, Select, Typography } from '@material-ui/core';
+import { Container, TextField, FormControl, InputLabel, Select, Typography, Chip, Box, Input } from '@material-ui/core';
+
+import SelectRole from 'components/SelectRole';
 
 const useStyles = makeStyles(theme => ({
 	container: {
@@ -57,7 +59,7 @@ const SettingsPage = props => {
 							onChange={e => props.patchGuildData({ prefix: e.target.value })}
 							variant="outlined"
 						/>
-						<FormControl variant="outlined">
+						<FormControl variant="filled">
 							<InputLabel ref={inputLabel}>Language</InputLabel>
 							<Select
 								native
@@ -69,6 +71,33 @@ const SettingsPage = props => {
 								<option value="es-ES">es-ES</option>
 							</Select>
 						</FormControl>
+					</div>
+				</div>
+				<div className={classes.section}>
+					<Typography variant="h5" component="h1">
+						Roles
+					</Typography>
+
+					<div className={classes.section}>
+						{['admin', 'moderator'].map(role => {
+							const currentRole = props.guildData.roles.find(r => r.id === props.guildSettings.roles[role]);
+							const displayValue = currentRole ? currentRole.name : 'None';
+
+							return (
+								<SelectRole
+									buttonText={`${role} Role: ${displayValue}`}
+									onChange={r =>
+										props.patchGuildData({
+											roles: {
+												[role]: r.id
+											}
+										})
+									}
+									guild={props.guildData}
+									title={`${role} role`}
+								/>
+							);
+						})}
 					</div>
 				</div>
 			</Container>
