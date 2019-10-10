@@ -139,7 +139,7 @@ const SettingsPage = props => {
 										})
 									}
 									guild={props.guildData}
-									title={`${role.name} role`}
+									title={role.name}
 								/>
 							}
 
@@ -148,7 +148,7 @@ const SettingsPage = props => {
 
 							return <SelectRole
 								key={role.name}
-								buttonText={`${role.name} Role: ${displayValue}`}
+								buttonText={`${role.name}: ${displayValue}`}
 								onChange={r =>
 									props.patchGuildData({
 										roles: {
@@ -157,7 +157,7 @@ const SettingsPage = props => {
 									})
 								}
 								guild={props.guildData}
-								title={`${role.name} role`}
+								title={role.name}
 							/>
 						})}
 					</div>
