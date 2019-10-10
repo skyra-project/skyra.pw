@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Container, TextField, FormControl, InputLabel, Select, Typography } from '@material-ui/core';
 
+import SelectBoolean from 'components/SelectBoolean';
 import SelectRole from 'components/SelectRole';
 import SelectRoles from 'components/SelectRoles';
 
@@ -75,6 +76,39 @@ const SettingsPage = props => {
 						</FormControl>
 					</div>
 				</div>
+				{/* EndOf General */}
+				{/* Events */}
+				<div className={classes.section}>
+					<Typography variant="h5" component="h1">
+						Events
+					</Typography>
+
+					<div className={classes.section}>
+						{[
+							'banAdd',
+							'banRemove',
+							'memberAdd',
+							'memberRemove',
+							'messageDelete',
+							'messageEdit',
+						].map(name => {
+							const current = props.guildSettings.events[name];
+							return <SelectBoolean
+								key={name}
+								title={name}
+								currentValue={current}
+								onChange={r =>
+									props.patchGuildData({
+										events: {
+											[name]: r
+										}
+									})
+								}
+							/>
+						})}
+					</div>
+				</div>
+				{/* EndOf Events */}
 				{/* Roles */}
 				<div className={classes.section}>
 					<Typography variant="h5" component="h1">
@@ -95,7 +129,7 @@ const SettingsPage = props => {
 								return <SelectRoles
 									key={role.name}
 									currentValue={props.guildSettings.roles[role.name]}
-									buttonText={`${role.name} Roles`}
+									buttonText={`${role.name} Roles: ${props.guildSettings.roles[role.name].length}`}
 									onChange={r =>
 										props.patchGuildData({
 											roles: {
@@ -127,6 +161,7 @@ const SettingsPage = props => {
 						})}
 					</div>
 				</div>
+				{/* EndOf Roles */}
 			</Container>
 		</div>
 	);
