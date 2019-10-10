@@ -86,7 +86,7 @@ export default function CustomizedDialogs({ title, currentValue, guild, onChange
 			</Button>
 			<Dialog fullWidth maxWidth="xs" onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
 				<DialogTitle id="customized-dialog-title" onClose={handleClose}>
-					{title || 'Select a Roles'}
+					{title || 'Select Roles'}
 				</DialogTitle>
 				<DialogContent dividers>
 					<List component="nav" aria-label="secondary mailbox folders">
