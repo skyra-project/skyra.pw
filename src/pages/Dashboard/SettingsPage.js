@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Container, TextField, FormControl, InputLabel, Select, Typography } from '@material-ui/core';
 
 import SelectRole from 'components/SelectRole';
+import SelectRoles from 'components/SelectRoles';
 
 const useStyles = makeStyles(theme => ({
 	container: {
@@ -44,6 +45,7 @@ const SettingsPage = props => {
 	return (
 		<div>
 			<Container className={classes.container}>
+				{/* General Settings */}
 				<div className={classes.section}>
 					<Typography variant="h5" component="h1">
 						General Settings
@@ -73,31 +75,55 @@ const SettingsPage = props => {
 						</FormControl>
 					</div>
 				</div>
+				{/* Roles */}
 				<div className={classes.section}>
 					<Typography variant="h5" component="h1">
 						Roles
 					</Typography>
 
 					<div className={classes.section}>
-						{['admin', 'moderator'].map(role => {
-							const currentRole = props.guildData.roles.find(r => r.id === props.guildSettings.roles[role]);
-							const displayValue = currentRole ? currentRole.name : 'None';
-
-							return (
-								<SelectRole
-									key={role}
-									buttonText={`${role} Role: ${displayValue}`}
+						{[
+							{ name: 'admin', multi: false },
+							{ name: 'moderator', multi: false },
+							{ name: 'staff', multi: false },
+							{ name: 'public', multi: true },
+							{ name: 'initial', multi: false },
+							{ name: 'subscriber', multi: false },
+							{ name: 'muted', multi: false }
+						].map(role => {
+							if (role.multi) {
+								return <SelectRoles
+									key={role.name}
+									currentValue={props.guildSettings.roles[role.name]}
+									buttonText={`${role.name} Roles`}
 									onChange={r =>
 										props.patchGuildData({
 											roles: {
-												[role]: r.id
+												[role.name]: r
 											}
 										})
 									}
 									guild={props.guildData}
-									title={`${role} role`}
+									title={`${role.name} role`}
 								/>
-							);
+							}
+
+							const current = props.guildData.roles.find(r => r.id === props.guildSettings.roles[role.name]);
+							const displayValue = current ? current.name : 'None';
+
+							return <SelectRole
+								key={role.name}
+								buttonText={`${role.name} Role: ${displayValue}`}
+								onChange={r =>
+									props.patchGuildData({
+										roles: {
+											[role.name]: r.id
+										}
+									})
+								}
+								guild={props.guildData}
+								title={`${role.name} role`}
+							/>
 						})}
 					</div>
 				</div>
