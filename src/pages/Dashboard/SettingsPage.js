@@ -5,6 +5,7 @@ import { Container, TextField, FormControl, InputLabel, Select, Typography } fro
 import SelectBoolean from 'components/SelectBoolean';
 import SelectRole from 'components/SelectRole';
 import SelectRoles from 'components/SelectRoles';
+import DebouncedTextInput from 'components/DebouncedTextInput';
 
 const useStyles = makeStyles(theme => ({
 	container: {
@@ -163,6 +164,29 @@ const SettingsPage = props => {
 					</div>
 				</div>
 				{/* EndOf Roles */}
+				{/* Messages */}
+				<div className={classes.section}>
+					<Typography variant="h5" component="h1">
+						Messages
+					</Typography>
+
+					<div className={classes.section}>
+						{[
+							{ name: 'greeting', title: 'Greeting', maxLength: '2000' },
+							{ name: 'farewell', title: 'Farewell', maxLength: '2000' },
+							{ name: 'join-dm', title: 'Join DM', maxLength: '1500' }
+						].map(role => (
+							<DebouncedTextInput
+								key={role.name}
+								title={role.title}
+								currentValue={props.guildSettings.messages[role.name]}
+								onChange={e => props.patchGuildData({ messages: { [role.name]: e } })}
+								maxLength={role.maxLength}
+							/>
+						))}
+					</div>
+				</div>
+				{/* EndOf Messages */}
 			</Container>
 		</div>
 	);
