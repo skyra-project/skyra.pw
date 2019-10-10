@@ -11,7 +11,8 @@ const useStyles = makeStyles(theme => ({
 		display: 'flex',
 		justifyContent: 'flex-start',
 		flexWrap: 'wrap',
-		padding: theme.spacing(1)
+		padding: theme.spacing(1),
+		marginLeft: 'unset'
 	},
 	section: {
 		marginRight: theme.spacing(4),
@@ -85,22 +86,22 @@ const SettingsPage = props => {
 
 					<div className={classes.section}>
 						{[
-							'banAdd',
-							'banRemove',
-							'memberAdd',
-							'memberRemove',
-							'messageDelete',
-							'messageEdit',
-						].map(name => {
-							const current = props.guildSettings.events[name];
+							{ title: 'Ban Added', name: 'banAdd' },
+							{ title: 'Ban Revoked', name: 'banRemove' },
+							{ title: 'Member Join', name: 'memberAdd' },
+							{ title: 'Member Leave', name: 'memberRemove' },
+							{ title: 'Message Edit', name: 'messageEdit' },
+							{ title: 'Message Delete', name: 'messageDelete' },
+						].map(event => {
+							const current = props.guildSettings.events[event.name];
 							return <SelectBoolean
-								key={name}
-								title={name}
+								key={event.name}
+								title={event.title}
 								currentValue={current}
 								onChange={r =>
 									props.patchGuildData({
 										events: {
-											[name]: r
+											[event.name]: r
 										}
 									})
 								}
