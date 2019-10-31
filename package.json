@@ -12,7 +12,7 @@
 		"react-router-dom": "^5.1.1",
 		"react-scripts": "3.1.2",
 		"reactn": "^2.2.4",
-		"styled-components": "^4.4.0",
+		"styled-components": "^4.4.1",
 		"styled-react-modal": "^2.0.0"
 	},
 	"scripts": {
