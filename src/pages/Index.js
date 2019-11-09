@@ -47,7 +47,7 @@ export default () => {
 					</div>
 
 					<Grid container direction="row" justify="center" alignItems="center" spacing={3} className={classes.guildsList}>
-						{user.guilds
+						{(user.guilds || [])
 							.filter(guild => guild.userCanManage)
 							.map(guild => (
 								<Grid item className={classes.guildCardContainer} key={guild.id}>
@@ -59,8 +59,8 @@ export default () => {
 					</Grid>
 				</Fragment>
 			) : (
-				<a href={oauthURL}>Log in</a>
-			)}
+					<a href={oauthURL}>Log in</a>
+				)}
 		</Container>
 	);
 };

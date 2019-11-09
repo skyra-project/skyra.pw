@@ -1,0 +1,55 @@
+				{/* Messages */}
+				<div className={classes.section}>
+					<Typography variant="h5" component="h1">
+						Messages
+					</Typography>
+
+					<div className={classes.section}>
+						{[
+							{ name: 'greeting', title: 'Greeting', maxLength: '2000' },
+							{ name: 'farewell', title: 'Farewell', maxLength: '2000' },
+							{ name: 'join-dm', title: 'Join DM', maxLength: '1500' }
+						].map(role => (
+							<DebouncedTextInput
+								key={role.name}
+								title={role.title}
+								currentValue={props.guildSettings.messages[role.name]}
+								onChange={e => props.patchGuildData({ messages: { [role.name]: e } })}
+								maxLength={role.maxLength}
+							/>
+						))}
+					</div>
+				</div>
+				{/* EndOf Messages */}
+                				{/* Events */}
+				<div className={classes.section}>
+					<Typography variant="h5" component="h1">
+						Events
+					</Typography>
+
+					<div className={classes.section}>
+						{[
+							{ title: 'Ban Added', name: 'banAdd' },
+							{ title: 'Ban Revoked', name: 'banRemove' },
+							{ title: 'Member Join', name: 'memberAdd' },
+							{ title: 'Member Leave', name: 'memberRemove' },
+							{ title: 'Message Edit', name: 'messageEdit' },
+							{ title: 'Message Delete', name: 'messageDelete' },
+						].map(event => {
+							const current = props.guildSettings.events[event.name];
+							return <SelectBoolean
+								key={event.name}
+								title={event.title}
+								currentValue={current}
+								onChange={r =>
+									props.patchGuildData({
+										events: {
+											[event.name]: r
+										}
+									})
+								}
+							/>
+						})}
+					</div>
+				</div>
+				{/* EndOf Events */}
