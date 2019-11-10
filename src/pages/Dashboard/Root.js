@@ -31,6 +31,12 @@ import ModerationIndexPage from 'pages/Dashboard/Moderation/IndexPage';
 import ModerationFilterPage from 'pages/Dashboard/Moderation/FilterPage';
 import { authedFetch, navigate, toTitleCase } from 'meta/util';
 import SkyraLogo from 'assets/skyraLogo';
+
+// Overwrite arrays when merging
+const mergeOptions = {
+	arrayMerge: (destinationArray, sourceArray, options) => sourceArray
+};
+
 const drawerWidth = 240;
 
 const ServerHeader = styled.div`
@@ -175,7 +181,7 @@ class Root extends Component {
 	};
 
 	patchGuildData = changes => {
-		this.setState({ guildSettingsChanges: deepMerge(this.state.guildSettingsChanges, changes) });
+		this.setState({ guildSettingsChanges: deepMerge(this.state.guildSettingsChanges, changes, mergeOptions) });
 	};
 
 	toggleSidebar = () => this.setState({ mobileOpen: !this.state.mobileOpen });
@@ -198,7 +204,7 @@ class Root extends Component {
 		if (!guildData) return <p>Loading</p>;
 
 		const componentProps = {
-			guildSettings: deepMerge(guildSettings, guildSettingsChanges),
+			guildSettings: deepMerge(guildSettings, guildSettingsChanges, mergeOptions),
 			guildData,
 			guildID,
 			patchGuildData: this.patchGuildData
@@ -238,7 +244,7 @@ class Root extends Component {
 					</ListItem>
 					<Collapse in={openSubMenus.includes('moderation')} timeout="auto" unmountOnExit>
 						<List component="div" disablePadding>
-							<ListItem component={Link} to={`/guilds/${guildID}/moderation/filter`} button className={classes.nested}>
+							<ListItem dense component={Link} to={`/guilds/${guildID}/moderation/filter`} button className={classes.nested}>
 								<ListItemText primary="Filter" />
 							</ListItem>
 						</List>
