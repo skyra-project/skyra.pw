@@ -5,7 +5,6 @@ import { Chip, Paper, TextField, Button, Box } from '@material-ui/core';
 import theme from 'meta/theme';
 import Section from '../components/Section';
 import SelectBoolean from 'components/SelectBoolean';
-import SimpleGrid from '../components/SimpleGrid';
 import { removeNonAlphaNumeric } from 'meta/util';
 
 const WordsContainer = styled(Paper)`
