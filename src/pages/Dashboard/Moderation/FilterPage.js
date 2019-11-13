@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import styled from 'styled-components';
-import { Chip, Paper, TextField, Button, Grid, Box } from '@material-ui/core';
+import { Chip, Paper, TextField, Button, Box } from '@material-ui/core';
 
 import theme from 'meta/theme';
 import Section from '../components/Section';
@@ -30,6 +30,29 @@ const IndexPage = props => {
 				/>
 			</Section>
 			<Section title="Filtered Words">
+				<form
+					onSubmit={e => {
+						e.preventDefault();
+						const word = removeNonAlphaNumeric(newWord).toLowerCase();
+						if (word.length < 3 || filter.raw.includes(word)) return;
+						props.patchGuildData({ selfmod: { filter: { raw: [...filter.raw, word] } } });
+						setNewWord('');
+					}}
+				>
+					<Box display="flex" mb={2} alignContent="center" alignItems="center" justifyContent="flex-start">
+						<TextField
+							style={{ marginRight: 20 }}
+							label="Add Word"
+							value={newWord}
+							onChange={e => setNewWord(e.target.value)}
+							variant="outlined"
+						/>
+						<Button type="submit" variant="contained" color="primary">
+							Add Word
+						</Button>
+					</Box>
+				</form>
+
 				<WordsContainer>
 					{filter.raw.map(word => (
 						<Chip
@@ -42,23 +65,7 @@ const IndexPage = props => {
 						/>
 					))}
 				</WordsContainer>
-				<Box display="flex" p={1} m={3} alignContent="center" alignItems="center" justifyContent="flex-start" justifyItems="center">
-					<TextField label="Add Word" value={newWord} onChange={e => setNewWord(e.target.value)} variant="outlined" />
-					<Button
-						onClick={() => {
-							const word = removeNonAlphaNumeric(newWord).toLowerCase();
-							if (word.length < 3 || filter.raw.includes(word)) return;
-							props.patchGuildData({ selfmod: { filter: { raw: [...filter.raw, word] } } });
-							setNewWord('');
-						}}
-						variant="contained"
-						color="primary"
-					>
-						Add Word
-					</Button>
-				</Box>
 			</Section>
-			<pre>{JSON.stringify(filter, null, 2)}</pre>
 		</Fragment>
 	);
 };
