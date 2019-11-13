@@ -1,4 +1,4 @@
-import React from 'reactn';
+import React, { Fragment } from 'reactn';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
@@ -80,7 +80,7 @@ export default function CustomizedDialogs({ title, currentValue, guild, onChange
 	};
 
 	return (
-		<div>
+		<Fragment>
 			<Button variant="outlined" color="primary" onClick={handleClickOpen}>
 				{buttonText || 'Select Roles'}
 			</Button>
@@ -91,11 +91,7 @@ export default function CustomizedDialogs({ title, currentValue, guild, onChange
 				<DialogContent dividers>
 					<List component="nav" aria-label="secondary mailbox folders">
 						{guild.roles.sort(sort || filterByPosition).map(r => (
-							<ListItem
-								key={r.id}
-								button
-								onClick={handleToggle(r.id)}
-							>
+							<ListItem key={r.id} button onClick={handleToggle(r.id)}>
 								<ListItemIcon>
 									<Checkbox
 										edge="start"
@@ -111,14 +107,17 @@ export default function CustomizedDialogs({ title, currentValue, guild, onChange
 					</List>
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={() => {
-						onChange(checked);
-						handleClose();
-					}} color="primary">
+					<Button
+						onClick={() => {
+							onChange(checked);
+							handleClose();
+						}}
+						color="primary"
+					>
 						Submit
 					</Button>
 				</DialogActions>
 			</Dialog>
-		</div>
+		</Fragment>
 	);
 }

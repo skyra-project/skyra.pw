@@ -49,9 +49,9 @@ const DialogActions = withStyles(theme => ({
 	}
 }))(MuiDialogActions);
 
-const filterByPosition = (a, b) => b.rawPosition - a.rawPosition;
+const sortByPosition = (a, b) => b.rawPosition - a.rawPosition;
 
-export default function CustomizedDialogs({ title, guild, onChange, buttonText, sort }) {
+export default function CustomizedDialogs({ title, guild, onChange, buttonText, sort, type = 'text' }) {
 	const [open, setOpen] = React.useState(false);
 
 	const handleClickOpen = () => {
@@ -72,18 +72,21 @@ export default function CustomizedDialogs({ title, guild, onChange, buttonText, 
 				</DialogTitle>
 				<DialogContent dividers>
 					<List component="nav" aria-label="secondary mailbox folders">
-						{guild.channels.sort(sort || filterByPosition).map(r => (
-							<ListItem
-								key={r.id}
-								button
-								onClick={() => {
-									onChange(r);
-									setOpen(false);
-								}}
-							>
-								<ListItemText primary={r.name} />
-							</ListItem>
-						))}
+						{guild.channels
+							.sort(sort || sortByPosition)
+							.filter(ch => ch.type === 'text')
+							.map(r => (
+								<ListItem
+									key={r.id}
+									button
+									onClick={() => {
+										onChange(r);
+										setOpen(false);
+									}}
+								>
+									<ListItemText primary={r.name} />
+								</ListItem>
+							))}
 					</List>
 				</DialogContent>
 				<DialogActions>

@@ -1,4 +1,4 @@
-import React from 'reactn';
+import React, { Fragment } from 'reactn';
 import { withStyles } from '@material-ui/core/styles';
 import { Button, List, ListItem, ListItemText } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
@@ -62,7 +62,7 @@ export default function CustomizedDialogs({ title, guild, onChange, buttonText, 
 	};
 
 	return (
-		<div>
+		<Fragment>
 			<Button variant="outlined" color="primary" onClick={handleClickOpen}>
 				{buttonText || 'Select Role'}
 			</Button>
@@ -92,6 +92,6 @@ export default function CustomizedDialogs({ title, guild, onChange, buttonText, 
 					</Button>
 				</DialogActions>
 			</Dialog>
-		</div>
+		</Fragment>
 	);
 }

@@ -86,3 +86,7 @@ export function displayAvatarURL(user, { format = 'default', size }) {
 export function getAcronym(name) {
 	return name.replace(/\w+/g, part => part[0]).replace(/\s/g, '');
 }
+
+export function removeNonAlphaNumeric(str) {
+	return str.replace(/[^0-9a-zA-Z]/gi, '');
+}
