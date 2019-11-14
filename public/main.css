@@ -1,12 +1,12 @@
 div#nosc {
     position: absolute;
-    background-color: #00796b;
+    background-color: #5c71bd;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
   }
-  
+
   #nosc span {
     font-family: "Roboto";
     margin: 0;
