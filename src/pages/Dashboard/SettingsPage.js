@@ -39,7 +39,7 @@ const SettingsPage = props => {
 							labelWidth={labelWidth}
 						>
 							<option value="en-US">English</option>
-							<option value="es-ES">Espanol</option>
+							<option value="es-ES">Español</option>
 						</Select>
 					</FormControl>
 				</div>
