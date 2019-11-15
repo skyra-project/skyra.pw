@@ -23,10 +23,11 @@ import {
 } from '@material-ui/core';
 import { Menu as MenuIcon, Save as SaveIcon, DeleteForever as DeleteIcon } from '@material-ui/icons';
 import deepMerge from 'deepmerge';
-import { Settings, Gavel, ExpandMore, ExpandLess } from '@material-ui/icons/';
+import { Settings, Gavel, ExpandMore, ExpandLess, Subject } from '@material-ui/icons/';
 
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
 import SettingsPage from 'pages/Dashboard/SettingsPage';
+import LogsPage from 'pages/Dashboard/LogsPage';
 import ModerationIndexPage from 'pages/Dashboard/Moderation/IndexPage';
 import ModerationFilterPage from 'pages/Dashboard/Moderation/FilterPage';
 import { authedFetch, navigate, toTitleCase } from 'meta/util';
@@ -109,7 +110,8 @@ const styles = theme => ({
 		display: 'flex',
 		padding: theme.spacing(4),
 		paddingTop: theme.spacing(4) + 64,
-		flexDirection: 'column'
+		flexDirection: 'column',
+		overflowY: 'scroll'
 	},
 	card: {
 		background: theme.palette.secondary.main
@@ -250,6 +252,13 @@ class Root extends Component {
 						</List>
 					</Collapse>
 					{/* ------------------------------- */}
+
+					<ListItem component={Link} to={`/guilds/${guildID}/logs`} button>
+						<ListItemIcon>
+							<Subject />
+						</ListItemIcon>
+						<ListItemText primary="Message Logs" />
+					</ListItem>
 				</List>
 			</div>
 		);
@@ -326,6 +335,7 @@ class Root extends Component {
 								path="/guilds/:guildID/moderation"
 								component={ModerationIndexPage}
 							/>
+							<AuthenticatedRoute componentProps={{ ...componentProps }} path="/guilds/:guildID/logs" component={LogsPage} />
 						</Switch>
 					) : (
 						<CircularProgress className={classes.progress} />
