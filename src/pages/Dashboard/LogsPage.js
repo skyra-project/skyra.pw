@@ -37,7 +37,7 @@ const SettingsPage = props => {
 
 			<Section title="Log Events">
 				<p>
-					These are the events which will be logged to <Chip size="small" button color="secondary" label="#mod-logs" />.
+					These are the events which will be logged to <Chip size="small" clickable color="secondary" label="#mod-logs" />.
 				</p>
 				<SimpleGrid>
 					{/* EndOf Events */}
