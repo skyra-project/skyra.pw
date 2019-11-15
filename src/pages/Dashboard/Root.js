@@ -21,9 +21,16 @@ import {
 	Collapse,
 	Slide
 } from '@material-ui/core';
-import { Menu as MenuIcon, Save as SaveIcon, DeleteForever as DeleteIcon } from '@material-ui/icons';
 import deepMerge from 'deepmerge';
-import { Settings, Gavel, ExpandMore, ExpandLess, Subject } from '@material-ui/icons/';
+
+import Settings from '@material-ui/icons/Settings';
+import Subject from '@material-ui/icons/Subject';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import MenuIcon from '@material-ui/icons/Menu';
+import SaveIcon from '@material-ui/icons/Save';
+import DeleteIcon from '@material-ui/icons/DeleteForever';
+import Gavel from '@material-ui/icons/Gavel';
 
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
 import SettingsPage from 'pages/Dashboard/SettingsPage';
