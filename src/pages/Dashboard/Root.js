@@ -19,7 +19,8 @@ import {
 	CircularProgress,
 	Button,
 	Collapse,
-	Slide
+	Slide,
+	Avatar
 } from '@material-ui/core';
 import deepMerge from 'deepmerge';
 
@@ -48,16 +49,18 @@ const mergeOptions = {
 const drawerWidth = 240;
 
 const ServerHeader = styled.div`
-	display: flex;
-
-	justify-content: space-between;
-	align-items: center;
-	align-content: center;
 	padding: 14px 20px;
 
-	.server-icon {
-		border-radius: 50%;
-		height: 40px;
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	align-items: center;
+
+	min-height: 100px;
+
+	.MuiAvatar-root {
+		width: 60px;
+		height: 60px;
 	}
 `;
 
@@ -228,12 +231,10 @@ class Root extends Component {
 				<Divider />
 
 				<ServerHeader>
-					<img
-						alt="Server Icon"
-						className="server-icon"
-						src={`https://cdn.discordapp.com/icons/${guildID}/${guildData.icon}?size=512`}
-					/>
-					<Typography variant="body1">{guildData.name}</Typography>
+					<Avatar alt="" src={`https://cdn.discordapp.com/icons/${guildID}/${guildData.icon}?size=512`} />
+					<Typography variant="subtitle2" style={{ marginTop: 15 }}>
+						{guildData.name}
+					</Typography>
 				</ServerHeader>
 				<List>
 					<ListItem component={Link} to={`/guilds/${guildID}`} button>
@@ -286,6 +287,7 @@ class Root extends Component {
 						<IconButton color="primary" edge="start" onClick={this.toggleSidebar} className={classes.menuButton}>
 							<MenuIcon color="secondary" />
 						</IconButton>
+
 						<Breadcrumbs className={classes.breadcrumb}>
 							<MaterialLink component={Link} color="inherit" to={`/guilds/${guildID}`}>
 								{guildData.name}
