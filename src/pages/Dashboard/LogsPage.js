@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { Chip } from '@material-ui/core';
 
 import SelectChannel from 'components/SelectChannel';
 import SelectBoolean from 'components/SelectBoolean';
@@ -36,9 +35,7 @@ const SettingsPage = props => {
 			</Section>
 
 			<Section title="Log Events">
-				<p>
-					These are the events which will be logged to <Chip size="small" clickable color="secondary" label="#mod-logs" />.
-				</p>
+				<p>These are the events which will be logged to your message logs channel.</p>
 				<SimpleGrid>
 					{/* EndOf Events */}
 					{[

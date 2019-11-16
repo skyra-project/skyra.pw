@@ -35,8 +35,8 @@ import Gavel from '@material-ui/icons/Gavel';
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
 import SettingsPage from 'pages/Dashboard/SettingsPage';
 import LogsPage from 'pages/Dashboard/LogsPage';
-import ModerationIndexPage from 'pages/Dashboard/Moderation/IndexPage';
-import ModerationFilterPage from 'pages/Dashboard/Moderation/FilterPage';
+import ModerationIndexPage from 'pages/Dashboard/Moderation/Index';
+import ModerationFilterPage from 'pages/Dashboard/Moderation/Filter';
 import { authedFetch, navigate, toTitleCase } from 'meta/util';
 import SkyraLogo from 'assets/skyraLogo';
 
@@ -236,7 +236,7 @@ class Root extends Component {
 					<Typography variant="body1">{guildData.name}</Typography>
 				</ServerHeader>
 				<List>
-					<ListItem component={Link} to={`/guilds/${guildID}/settings`} button>
+					<ListItem component={Link} to={`/guilds/${guildID}`} button>
 						<ListItemIcon>
 							<Settings />
 						</ListItemIcon>
@@ -253,6 +253,15 @@ class Root extends Component {
 					</ListItem>
 					<Collapse in={openSubMenus.includes('moderation')} timeout="auto" unmountOnExit>
 						<List component="div" disablePadding>
+							<ListItem
+								dense
+								component={Link}
+								to={`/guilds/${guildID}/moderation/settings`}
+								button
+								className={classes.nested}
+							>
+								<ListItemText primary="Moderation Settings" />
+							</ListItem>
 							<ListItem dense component={Link} to={`/guilds/${guildID}/moderation/filter`} button className={classes.nested}>
 								<ListItemText primary="Filter" />
 							</ListItem>
@@ -322,17 +331,6 @@ class Root extends Component {
 					{guildData ? (
 						<Switch>
 							<AuthenticatedRoute
-								exact
-								path="/guilds/:guildID"
-								component={() => 'Index Page'}
-								componentProps={{ ...componentProps }}
-							/>
-							<AuthenticatedRoute
-								componentProps={{ ...componentProps }}
-								path="/guilds/:guildID/settings"
-								component={SettingsPage}
-							/>
-							<AuthenticatedRoute
 								componentProps={{ ...componentProps }}
 								path="/guilds/:guildID/moderation/filter"
 								component={ModerationFilterPage}
@@ -343,6 +341,7 @@ class Root extends Component {
 								component={ModerationIndexPage}
 							/>
 							<AuthenticatedRoute componentProps={{ ...componentProps }} path="/guilds/:guildID/logs" component={LogsPage} />
+							<AuthenticatedRoute componentProps={{ ...componentProps }} path="/guilds/:guildID" component={SettingsPage} />
 						</Switch>
 					) : (
 						<CircularProgress className={classes.progress} />

@@ -3,7 +3,6 @@ import { TextField, FormControl, InputLabel, Select } from '@material-ui/core';
 
 import SelectRole from 'components/SelectRole';
 import SelectRoles from 'components/SelectRoles';
-import SelectChannel from 'components/SelectChannel';
 
 import Section from './components/Section';
 import SimpleGrid from './components/SimpleGrid';
@@ -100,14 +99,6 @@ const SettingsPage = props => {
 				</SimpleGrid>
 			</Section>
 			{/* EndOf Roles */}
-
-			{/* Channels */}
-			<Section title="Channels">
-				<SimpleGrid>
-					<SelectChannel guild={props.guildData} buttonText="Some Channel" />
-				</SimpleGrid>
-			</Section>
-			{/* EndOf Channels */}
 		</Fragment>
 	);
 };
