@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'reactn';
 import { Link, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import { withStyles } from '@material-ui/styles';
@@ -20,7 +20,10 @@ import {
 	Button,
 	Collapse,
 	Slide,
-	Avatar
+	Avatar,
+	Box,
+	Menu,
+	MenuItem
 } from '@material-ui/core';
 import deepMerge from 'deepmerge';
 
@@ -32,13 +35,14 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/DeleteForever';
 import Gavel from '@material-ui/icons/Gavel';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
 import SettingsPage from 'pages/Dashboard/SettingsPage';
 import LogsPage from 'pages/Dashboard/LogsPage';
 import ModerationIndexPage from 'pages/Dashboard/Moderation/Index';
 import ModerationFilterPage from 'pages/Dashboard/Moderation/Filter';
-import { authedFetch, navigate, toTitleCase } from 'meta/util';
+import { authedFetch, navigate, toTitleCase, logOut } from 'meta/util';
 import SkyraLogo from 'assets/skyraLogo';
 
 // Overwrite arrays when merging
@@ -150,8 +154,14 @@ class Root extends Component {
 		guildSettingsChanges: {},
 		isUpdating: false,
 		/* Which nested list menus in the sidebar are open */
-		openSubMenus: []
+		openSubMenus: [],
+		userDropdownOpen: false
 	};
+
+	constructor(props) {
+		super(props);
+		this.userMenuRef = React.createRef();
+	}
 
 	componentDidMount() {
 		this.syncGuildData();
@@ -207,11 +217,16 @@ class Root extends Component {
 		}
 	}
 
+	toggleUserDropdown = () => {
+		this.setState({ userDropdownOpen: !this.state.userDropdownOpen });
+	};
+
 	render() {
+		const { user } = this.global;
 		const { container, classes } = this.props;
 		// The guildID and optional pageName in the URL. e.g. /guilds/228822415189344257/settings
 		const { guildID, pageName } = this.props.match.params;
-		const { mobileOpen, guildData, guildSettings, guildSettingsChanges, isUpdating, openSubMenus } = this.state;
+		const { userDropdownOpen, mobileOpen, guildData, guildSettings, guildSettingsChanges, isUpdating, openSubMenus } = this.state;
 
 		if (!guildData) return <p>Loading</p>;
 
@@ -288,16 +303,34 @@ class Root extends Component {
 							<MenuIcon color="secondary" />
 						</IconButton>
 
-						<Breadcrumbs className={classes.breadcrumb}>
-							<MaterialLink component={Link} color="inherit" to={`/guilds/${guildID}`}>
-								{guildData.name}
-							</MaterialLink>
-							{!!pageName && (
-								<MaterialLink component={Link} color="inherit" to={`/guilds/${guildID}/${pageName}`} onClick={() => ''}>
-									{toTitleCase(pageName)}
+						<Box display="flex" justifyContent="space-between" width="100%" alignItems="center">
+							<Breadcrumbs className={classes.breadcrumb}>
+								<MaterialLink component={Link} color="inherit" to={`/guilds/${guildID}`}>
+									{guildData.name}
 								</MaterialLink>
-							)}
-						</Breadcrumbs>
+								{!!pageName && (
+									<MaterialLink component={Link} color="inherit" to={`/guilds/${guildID}/${pageName}`} onClick={() => ''}>
+										{toTitleCase(pageName)}
+									</MaterialLink>
+								)}
+							</Breadcrumbs>
+
+							<Button ref={this.userMenuRef} color="inherit" onClick={this.toggleUserDropdown}>
+								<Avatar style={{ marginRight: 5, height: 40, width: 40 }} src={user.avatarURL} alt="" />
+								<ExpandMoreIcon />
+							</Button>
+							<Menu
+								style={{ marginTop: 25 }}
+								onClose={this.toggleUserDropdown}
+								anchorEl={this.userMenuRef.current}
+								open={userDropdownOpen}
+								onClick={this.toggleUserDropdown}
+							>
+								<MenuItem component="a" onClick={logOut}>
+									Logout
+								</MenuItem>
+							</Menu>
+						</Box>
 					</Toolbar>
 				</AppBar>
 				<nav className={classes.drawer}>
