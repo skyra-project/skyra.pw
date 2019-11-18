@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import { TextField } from '@material-ui/core';
 
 import SelectChannels from 'components/SelectChannels';
 import SelectChannel from 'components/SelectChannel';
+import SelectInteger from 'components/SelectInteger';
 import SimpleGrid from './components/SimpleGrid';
 import Section from './components/Section';
 
@@ -11,12 +11,11 @@ const SettingsPage = props => {
 		<Fragment>
 			<Section title="Starboard Settings">
 				<SimpleGrid>
-					<TextField
+					<SelectInteger
 						value={props.guildSettings.starboard.minimum}
 						label="Minimum Stars"
-						type="number"
-						margin="normal"
-						variant="outlined"
+						min={1}
+						max={100}
 						onChange={r =>
 							props.patchGuildData({
 								starboard: {
