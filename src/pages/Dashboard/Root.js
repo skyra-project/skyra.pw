@@ -36,9 +36,11 @@ import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/DeleteForever';
 import Gavel from '@material-ui/icons/Gavel';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import StarIcon from '@material-ui/icons/Star';
 
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
 import SettingsPage from 'pages/Dashboard/SettingsPage';
+import StarboardPage from 'pages/Dashboard/Starboard';
 import LogsPage from 'pages/Dashboard/LogsPage';
 import ModerationIndexPage from 'pages/Dashboard/Moderation/Index';
 import ModerationFilterPage from 'pages/Dashboard/Moderation/Filter';
@@ -283,6 +285,7 @@ class Root extends Component {
 							</ListItem>
 						</List>
 					</Collapse>
+
 					{/* ------------------------------- */}
 
 					<ListItem component={Link} to={`/guilds/${guildID}/logs`} button>
@@ -290,6 +293,15 @@ class Root extends Component {
 							<Subject />
 						</ListItemIcon>
 						<ListItemText primary="Message Logs" />
+					</ListItem>
+
+					{/* ------------------------------- */}
+
+					<ListItem component={Link} to={`/guilds/${guildID}/starboard`} button>
+						<ListItemIcon>
+							<StarIcon />
+						</ListItemIcon>
+						<ListItemText primary="Starboard" />
 					</ListItem>
 				</List>
 			</div>
@@ -365,6 +377,12 @@ class Root extends Component {
 				<main className={classes.content}>
 					{guildData ? (
 						<Switch>
+							<AuthenticatedRoute
+								exact
+								componentProps={{ ...componentProps }}
+								path="/guilds/:guildID/starboard"
+								component={StarboardPage}
+							/>
 							<AuthenticatedRoute
 								componentProps={{ ...componentProps }}
 								path="/guilds/:guildID/moderation/filter"

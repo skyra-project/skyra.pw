@@ -10,27 +10,22 @@ const SettingsPage = props => {
 		<Fragment>
 			<Section title="Channels">
 				<SimpleGrid>
-					{['image-logs', 'moderation-logs', 'nsfw-message-logs', 'message-logs', 'reaction-logs'].map(channel => {
-						// Some settings have more than 1 role, such as Public Roles
-						const current = props.guildData.channels.find(r => r.id === props.guildSettings.channels[channel]);
-						const displayValue = current ? current.name : 'None';
-
-						return (
-							<SelectChannel
-								key={channel}
-								buttonText={`${channel}: ${displayValue}`}
-								onChange={r =>
-									props.patchGuildData({
-										channels: {
-											[channel]: r.id
-										}
-									})
-								}
-								guild={props.guildData}
-								title={channel}
-							/>
-						);
-					})}
+					{['image-logs', 'moderation-logs', 'nsfw-message-logs', 'message-logs', 'reaction-logs'].map(channel => (
+						<SelectChannel
+							key={channel}
+							value={props.guildSettings.channels[channel]}
+							buttonText={channel}
+							onChange={r =>
+								props.patchGuildData({
+									channels: {
+										[channel]: r.id
+									}
+								})
+							}
+							guild={props.guildData}
+							title={channel}
+						/>
+					))}
 				</SimpleGrid>
 			</Section>
 

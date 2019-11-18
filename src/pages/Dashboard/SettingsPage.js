@@ -51,7 +51,6 @@ const SettingsPage = props => {
 					{[
 						{ name: 'admin', multi: false },
 						{ name: 'moderator', multi: false },
-						{ name: 'staff', multi: false },
 						{ name: 'public', multi: true },
 						{ name: 'initial', multi: false },
 						{ name: 'subscriber', multi: false },
@@ -62,8 +61,8 @@ const SettingsPage = props => {
 							return (
 								<SelectRoles
 									key={role.name}
-									currentValue={props.guildSettings.roles[role.name]}
-									buttonText={`${role.name} Roles: ${props.guildSettings.roles[role.name].length}`}
+									value={props.guildSettings.roles[role.name]}
+									buttonText={role.name}
 									onChange={r =>
 										props.patchGuildData({
 											roles: {
@@ -77,13 +76,11 @@ const SettingsPage = props => {
 							);
 						}
 
-						const current = props.guildData.roles.find(r => r.id === props.guildSettings.roles[role.name]);
-						const displayValue = current ? current.name : 'None';
-
 						return (
 							<SelectRole
 								key={role.name}
-								buttonText={`${role.name}: ${displayValue}`}
+								value={props.guildSettings.roles[role.name]}
+								buttonText={role.name}
 								onChange={r =>
 									props.patchGuildData({
 										roles: {
