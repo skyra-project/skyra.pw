@@ -79,8 +79,6 @@ export default function CustomizedDialogs({ title, value, guild, onChange, butto
 		setChecked(newChecked);
 	};
 
-	console.log(checked);
-
 	return (
 		<Fragment>
 			<Button variant="outlined" color="primary" onClick={handleClickOpen}>
