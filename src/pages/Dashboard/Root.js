@@ -20,7 +20,8 @@ import {
 	Collapse,
 	Slide,
 	Avatar,
-	Box
+	Box,
+	Fade
 } from '@material-ui/core';
 import deepMerge from 'deepmerge';
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -35,7 +36,6 @@ import Gavel from '@material-ui/icons/Gavel';
 import StarIcon from '@material-ui/icons/Star';
 
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
-import Loader from 'components/Loader';
 import UserMenu from 'components/UserMenu';
 import SettingsPage from 'pages/Dashboard/SettingsPage';
 import StarboardPage from 'pages/Dashboard/Starboard';
@@ -255,7 +255,7 @@ class Root extends Component {
 				{/* --------------------- */}
 
 				<List>
-					<ListItem component={Link} to={`/guilds/${guildID}`} button>
+					<ListItem disabled={!guildData} component={Link} to={`/guilds/${guildID}`} button>
 						<ListItemIcon>
 							<Settings />
 						</ListItemIcon>
@@ -263,7 +263,7 @@ class Root extends Component {
 					</ListItem>
 
 					{/* ------------------------------- */}
-					<ListItem button onClick={() => this.handleSubMenu('moderation')}>
+					<ListItem disabled={!guildData} button onClick={() => this.handleSubMenu('moderation')}>
 						<ListItemIcon>
 							<Gavel />
 						</ListItemIcon>
@@ -273,6 +273,7 @@ class Root extends Component {
 					<Collapse in={openSubMenus.includes('moderation')} timeout="auto" unmountOnExit>
 						<List component="div" disablePadding>
 							<ListItem
+								disabled={!guildData}
 								dense
 								component={Link}
 								to={`/guilds/${guildID}/moderation/settings`}
@@ -281,7 +282,14 @@ class Root extends Component {
 							>
 								<ListItemText primary="Moderation Settings" />
 							</ListItem>
-							<ListItem dense component={Link} to={`/guilds/${guildID}/moderation/filter`} button className={classes.nested}>
+							<ListItem
+								disabled={!guildData}
+								dense
+								component={Link}
+								to={`/guilds/${guildID}/moderation/filter`}
+								button
+								className={classes.nested}
+							>
 								<ListItemText primary="Filter" />
 							</ListItem>
 						</List>
@@ -289,7 +297,7 @@ class Root extends Component {
 
 					{/* ------------------------------- */}
 
-					<ListItem component={Link} to={`/guilds/${guildID}/logs`} button>
+					<ListItem disabled={!guildData} component={Link} to={`/guilds/${guildID}/logs`} button>
 						<ListItemIcon>
 							<Subject />
 						</ListItemIcon>
@@ -298,7 +306,7 @@ class Root extends Component {
 
 					{/* ------------------------------- */}
 
-					<ListItem component={Link} to={`/guilds/${guildID}/starboard`} button>
+					<ListItem disabled={!guildData} component={Link} to={`/guilds/${guildID}/starboard`} button>
 						<ListItemIcon>
 							<StarIcon />
 						</ListItemIcon>
@@ -372,29 +380,39 @@ class Root extends Component {
 				</nav>
 				<main className={classes.content}>
 					{guildData ? (
-						<Switch>
-							<AuthenticatedRoute
-								exact
-								componentProps={{ ...componentProps }}
-								path="/guilds/:guildID/starboard"
-								component={StarboardPage}
-							/>
-							<AuthenticatedRoute
-								componentProps={{ ...componentProps }}
-								path="/guilds/:guildID/moderation/filter"
-								component={ModerationFilterPage}
-							/>
-							<AuthenticatedRoute
-								componentProps={{ ...componentProps }}
-								path="/guilds/:guildID/moderation"
-								component={ModerationIndexPage}
-							/>
-							<AuthenticatedRoute componentProps={{ ...componentProps }} path="/guilds/:guildID/logs" component={LogsPage} />
-							<AuthenticatedRoute componentProps={{ ...componentProps }} path="/guilds/:guildID" component={SettingsPage} />
-						</Switch>
-					) : (
-						<Loader />
-					)}
+						<Fade in={!!guildData}>
+							<div>
+								<Switch>
+									<AuthenticatedRoute
+										exact
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/starboard"
+										component={StarboardPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/moderation/filter"
+										component={ModerationFilterPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/moderation"
+										component={ModerationIndexPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/logs"
+										component={LogsPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID"
+										component={SettingsPage}
+									/>
+								</Switch>
+							</div>
+						</Fade>
+					) : null}
 					<Slide direction="up" in={Object.keys(guildSettingsChanges).length > 0} mountOnEnter unmountOnExit>
 						<div className={classes.fabContainer}>
 							<Button
