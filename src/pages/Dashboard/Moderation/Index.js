@@ -12,25 +12,21 @@ const IndexPage = props => {
 			{/* Roles */}
 			<Section title="Staff Roles">
 				<SimpleGrid>
-					{['admin', 'moderator'].map(role => {
-						const current = props.guildData.roles.find(r => r.id === props.guildSettings.roles[role]);
-						const displayValue = current ? current.name : 'None';
-
-						return (
-							<SelectRole
-								key={role}
-								buttonText={`${role}: ${displayValue}`}
-								onChange={r =>
-									props.patchGuildData({
-										roles: {
-											[role]: r.id
-										}
-									})
-								}
-								guild={props.guildData}
-							/>
-						);
-					})}
+					{['admin', 'moderator'].map(role => (
+						<SelectRole
+							key={role}
+							buttonText={role}
+							value={props.guildSettings.roles[role]}
+							onChange={r =>
+								props.patchGuildData({
+									roles: {
+										[role]: r.id
+									}
+								})
+							}
+							guild={props.guildData}
+						/>
+					))}
 				</SimpleGrid>
 			</Section>
 			{/* EndOf Roles */}
@@ -39,13 +35,11 @@ const IndexPage = props => {
 			<Section title="Channels">
 				<SimpleGrid>
 					{['nsfw-message-logs', 'moderation-logs', 'image-logs', 'message-logs', 'member-logs'].map(channel => {
-						const current = props.guildData.channels.find(r => r.id === props.guildSettings.channels[channel]);
-						const displayValue = current ? current.name : 'None';
-
 						return (
 							<SelectChannel
 								key={channel}
-								buttonText={`${channel}: ${displayValue}`}
+								buttonText={channel}
+								value={props.guildSettings.channels[channel]}
 								onChange={r =>
 									props.patchGuildData({
 										channels: {
