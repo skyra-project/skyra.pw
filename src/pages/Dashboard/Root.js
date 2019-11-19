@@ -21,9 +21,7 @@ import {
 	Collapse,
 	Slide,
 	Avatar,
-	Box,
-	Menu,
-	MenuItem
+	Box
 } from '@material-ui/core';
 import deepMerge from 'deepmerge';
 
@@ -35,10 +33,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/DeleteForever';
 import Gavel from '@material-ui/icons/Gavel';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import StarIcon from '@material-ui/icons/Star';
 
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
+import UserMenu from 'components/UserMenu';
 import SettingsPage from 'pages/Dashboard/SettingsPage';
 import StarboardPage from 'pages/Dashboard/Starboard';
 import LogsPage from 'pages/Dashboard/LogsPage';
@@ -156,14 +154,8 @@ class Root extends Component {
 		guildSettingsChanges: {},
 		isUpdating: false,
 		/* Which nested list menus in the sidebar are open */
-		openSubMenus: [],
-		userDropdownOpen: false
+		openSubMenus: []
 	};
-
-	constructor(props) {
-		super(props);
-		this.userMenuRef = React.createRef();
-	}
 
 	componentDidMount() {
 		this.syncGuildData();
@@ -224,11 +216,10 @@ class Root extends Component {
 	};
 
 	render() {
-		const { user } = this.global;
 		const { container, classes } = this.props;
 		// The guildID and optional pageName in the URL. e.g. /guilds/228822415189344257/settings
 		const { guildID, pageName } = this.props.match.params;
-		const { userDropdownOpen, mobileOpen, guildData, guildSettings, guildSettingsChanges, isUpdating, openSubMenus } = this.state;
+		const { mobileOpen, guildData, guildSettings, guildSettingsChanges, isUpdating, openSubMenus } = this.state;
 
 		if (!guildData) return <p>Loading</p>;
 
@@ -326,22 +317,7 @@ class Root extends Component {
 									</MaterialLink>
 								)}
 							</Breadcrumbs>
-
-							<Button ref={this.userMenuRef} color="inherit" onClick={this.toggleUserDropdown}>
-								<Avatar style={{ marginRight: 5, height: 40, width: 40 }} src={user.avatarURL} alt="" />
-								<ExpandMoreIcon />
-							</Button>
-							<Menu
-								style={{ marginTop: 25 }}
-								onClose={this.toggleUserDropdown}
-								anchorEl={this.userMenuRef.current}
-								open={userDropdownOpen}
-								onClick={this.toggleUserDropdown}
-							>
-								<MenuItem component="a" onClick={logOut}>
-									Logout
-								</MenuItem>
-							</Menu>
+							<UserMenu />
 						</Box>
 					</Toolbar>
 				</AppBar>
