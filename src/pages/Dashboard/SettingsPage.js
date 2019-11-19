@@ -1,19 +1,14 @@
 import React, { Fragment } from 'react';
-import { TextField, FormControl, InputLabel, Select } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 
 import SelectRole from 'components/SelectRole';
 import SelectRoles from 'components/SelectRoles';
+import Select from 'components/Select';
 
 import Section from './components/Section';
 import SimpleGrid from './components/SimpleGrid';
 
 const SettingsPage = props => {
-	const inputLabel = React.useRef(null);
-	const [labelWidth, setLabelWidth] = React.useState(0);
-	React.useEffect(() => {
-		setLabelWidth(inputLabel.current.offsetWidth);
-	}, []);
-
 	return (
 		<Fragment>
 			{/* General Settings */}
@@ -29,18 +24,14 @@ const SettingsPage = props => {
 						onChange={e => props.patchGuildData({ prefix: e.target.value })}
 						variant="outlined"
 					/>
-					<FormControl variant="filled">
-						<InputLabel ref={inputLabel}>Language</InputLabel>
-						<Select
-							native
-							value={props.guildSettings.language}
-							onChange={e => props.patchGuildData({ language: e.target.value })}
-							labelWidth={labelWidth}
-						>
-							<option value="en-US">English</option>
-							<option value="es-ES">Español</option>
-						</Select>
-					</FormControl>
+					<Select
+						title="Language"
+						value={props.guildSettings.language}
+						onChange={e => props.patchGuildData({ language: e.target.value })}
+					>
+						<option value="en-US">English</option>
+						<option value="es-ES">Español</option>
+					</Select>
 				</div>
 			</Section>
 			{/* EndOf General */}
