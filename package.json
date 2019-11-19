@@ -12,6 +12,8 @@
 		"react-router-dom": "^5.1.1",
 		"react-scripts": "3.2.0",
 		"reactn": "^2.2.4",
+		"reactn-devtools": "^1.1.0",
+		"redux": "^4.0.4",
 		"styled-components": "^4.4.1",
 		"styled-react-modal": "^2.0.0"
 	},
