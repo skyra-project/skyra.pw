@@ -1,4 +1,4 @@
-import React, { Component } from 'reactn';
+import React, { Component, Fragment } from 'reactn';
 import { Link, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import { withStyles } from '@material-ui/styles';
@@ -16,7 +16,6 @@ import {
 	Typography,
 	Breadcrumbs,
 	Link as MaterialLink,
-	CircularProgress,
 	Button,
 	Collapse,
 	Slide,
@@ -24,7 +23,7 @@ import {
 	Box
 } from '@material-ui/core';
 import deepMerge from 'deepmerge';
-
+import Skeleton from '@material-ui/lab/Skeleton';
 import Settings from '@material-ui/icons/Settings';
 import Subject from '@material-ui/icons/Subject';
 import ExpandLess from '@material-ui/icons/ExpandLess';
@@ -36,13 +35,14 @@ import Gavel from '@material-ui/icons/Gavel';
 import StarIcon from '@material-ui/icons/Star';
 
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
+import Loader from 'components/Loader';
 import UserMenu from 'components/UserMenu';
 import SettingsPage from 'pages/Dashboard/SettingsPage';
 import StarboardPage from 'pages/Dashboard/Starboard';
 import LogsPage from 'pages/Dashboard/LogsPage';
 import ModerationIndexPage from 'pages/Dashboard/Moderation/Index';
 import ModerationFilterPage from 'pages/Dashboard/Moderation/Filter';
-import { authedFetch, navigate, toTitleCase, logOut } from 'meta/util';
+import { authedFetch, navigate, toTitleCase } from 'meta/util';
 import SkyraLogo from 'assets/skyraLogo';
 
 // Overwrite arrays when merging
@@ -221,8 +221,6 @@ class Root extends Component {
 		const { guildID, pageName } = this.props.match.params;
 		const { mobileOpen, guildData, guildSettings, guildSettingsChanges, isUpdating, openSubMenus } = this.state;
 
-		if (!guildData) return <p>Loading</p>;
-
 		const componentProps = {
 			guildSettings: deepMerge(guildSettings, guildSettingsChanges, mergeOptions),
 			guildData,
@@ -238,12 +236,24 @@ class Root extends Component {
 				</div>
 				<Divider />
 
+				{/* --------------------- */}
 				<ServerHeader>
-					<Avatar alt="" src={`https://cdn.discordapp.com/icons/${guildID}/${guildData.icon}?size=512`} />
-					<Typography variant="subtitle2" style={{ marginTop: 15 }}>
-						{guildData.name}
-					</Typography>
+					{guildData ? (
+						<Fragment>
+							<Avatar alt="" src={`https://cdn.discordapp.com/icons/${guildID}/${guildData.icon}?size=512`} />
+							<Typography variant="subtitle2" style={{ marginTop: 15 }}>
+								{guildData.name}
+							</Typography>
+						</Fragment>
+					) : (
+						<Fragment>
+							<Skeleton variant="circle" width={60} height={60} />
+							<Skeleton variant="text" width={100} height={14} />
+						</Fragment>
+					)}
 				</ServerHeader>
+				{/* --------------------- */}
+
 				<List>
 					<ListItem component={Link} to={`/guilds/${guildID}`} button>
 						<ListItemIcon>
@@ -307,16 +317,26 @@ class Root extends Component {
 						</IconButton>
 
 						<Box display="flex" justifyContent="space-between" width="100%" alignItems="center">
-							<Breadcrumbs className={classes.breadcrumb}>
-								<MaterialLink component={Link} color="inherit" to={`/guilds/${guildID}`}>
-									{guildData.name}
-								</MaterialLink>
-								{!!pageName && (
-									<MaterialLink component={Link} color="inherit" to={`/guilds/${guildID}/${pageName}`} onClick={() => ''}>
-										{toTitleCase(pageName)}
+							{guildData ? (
+								<Breadcrumbs className={classes.breadcrumb}>
+									<MaterialLink component={Link} color="inherit" to={`/guilds/${guildID}`}>
+										{guildData.name}
 									</MaterialLink>
-								)}
-							</Breadcrumbs>
+									{!!pageName && (
+										<MaterialLink
+											component={Link}
+											color="inherit"
+											to={`/guilds/${guildID}/${pageName}`}
+											onClick={() => ''}
+										>
+											{toTitleCase(pageName)}
+										</MaterialLink>
+									)}
+								</Breadcrumbs>
+							) : (
+								<Skeleton type="text" width={200} height={16} />
+							)}
+
 							<UserMenu />
 						</Box>
 					</Toolbar>
@@ -373,7 +393,7 @@ class Root extends Component {
 							<AuthenticatedRoute componentProps={{ ...componentProps }} path="/guilds/:guildID" component={SettingsPage} />
 						</Switch>
 					) : (
-						<CircularProgress className={classes.progress} />
+						<Loader />
 					)}
 					<Slide direction="up" in={Object.keys(guildSettingsChanges).length > 0} mountOnEnter unmountOnExit>
 						<div className={classes.fabContainer}>
