@@ -7,7 +7,7 @@ import GuildIcon from 'components/GuildIcon';
 import { navigate } from 'meta/util';
 import theme from 'meta/theme';
 import GeneralPage from 'components/GeneralPage';
-
+import { guildAddURL } from 'meta/constants';
 const useStyles = makeStyles(theme => ({
 	guildCardContainer: {
 		flex: '1 1 0%',
@@ -44,10 +44,19 @@ const HomePage = () => {
 						<Grid container direction="row" justify="center" alignItems="center" spacing={4} className={classes.guildsList}>
 							{(user.guilds || [])
 								.filter(guild => guild.userCanManage)
+								.sort((a, b) => !!b.channels - !!a.channels)
 								.map(guild => (
 									<Grid item className={classes.guildCardContainer} key={guild.id}>
-										<Card elevation={2} onClick={navigate(`/guilds/${guild.id}`)} className={classes.guildCard}>
-											<CardHeader avatar={<GuildIcon guild={guild} />} title={guild.name} />
+										<Card
+											elevation={2}
+											onClick={navigate(!!guild.channels ? `/guilds/${guild.id}` : guildAddURL(guild.id))}
+											className={classes.guildCard}
+										>
+											<CardHeader
+												subheader={!guild.channels && 'Not in server'}
+												avatar={<GuildIcon guild={guild} />}
+												title={guild.name}
+											/>
 										</Card>
 									</Grid>
 								))}

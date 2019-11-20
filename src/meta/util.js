@@ -66,7 +66,11 @@ export async function apiFetch(path, options = {}) {
 }
 
 export function navigate(path) {
-	return () => history.push(path);
+	if (path.startsWith('http')) {
+		return () => (window.location.href = path);
+	} else {
+		return () => history.push(path);
+	}
 }
 
 export function toTitleCase(str) {

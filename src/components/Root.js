@@ -7,7 +7,8 @@ import theme from 'meta/theme';
 import { history, oauthURL } from 'meta/constants';
 import UnauthenticatedRoute from 'components/UnauthenticatedRoute';
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
-import OAuthCallbackPage from 'pages/OAuthCallbackPage';
+import OAuthCallbackPage from 'pages/oauth/OAuthCallbackPage';
+import GuildCallbackPage from 'pages/oauth/GuildCallbackPage';
 import HomePage from 'pages/Index';
 import DashboardRootPage from 'pages/Dashboard/Root';
 import CommandsPage from 'pages/CommandsPage';
@@ -19,6 +20,7 @@ const Root = () => (
 			<Switch>
 				<Route exact path="/" component={HomePage} />
 				<Route exact path="/oauth/callback" component={OAuthCallbackPage} />
+				<Route exact path="/oauth/guild" component={GuildCallbackPage} />
 				<Route exact path="/commands" component={CommandsPage} />
 				<AuthenticatedRoute path="/guilds/:guildID/:pageName?" component={DashboardRootPage} />
 				<UnauthenticatedRoute path="/login" component={() => window.location.replace(oauthURL.toString())} />

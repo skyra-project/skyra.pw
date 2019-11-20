@@ -1,10 +1,11 @@
-import React, { Component, Fragment, setGlobal } from 'reactn';
+import React, { Component, setGlobal } from 'reactn';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 import { saveState, apiFetch } from 'meta/util';
 import { history, BASE_WEB_URL } from 'meta/constants';
+import GeneralPage from 'components/GeneralPage';
 
 class DiscordAuthCallbackPage extends Component {
 	state = {
@@ -27,7 +28,6 @@ class DiscordAuthCallbackPage extends Component {
 			}
 		});
 
-
 		if (data.error || !data.user || !data.access_token) {
 			this.setState({ error: data.error || 'Error fetching token.' });
 			return;
@@ -44,27 +44,22 @@ class DiscordAuthCallbackPage extends Component {
 
 	render() {
 		const { error } = this.state;
-		return error ? (
-			<Container>
-				<Fragment>
-					<div>
-						<h1>Authentication Error</h1>
-						<p>{error}</p>
-						<Button href="/" variant="contained" color="secondary">
-							Go Back
-						</Button>
-					</div>
-				</Fragment>
-			</Container>
-		) : (
-			<Fragment>
-				<LinearProgress variant="query" />
-				<Container>
-					<div>
-						<h1>Loading...</h1>
-					</div>
-				</Container>
-			</Fragment>
+		return (
+			<GeneralPage>
+				{error ? (
+					<Container>
+						<div>
+							<h1>Authentication Error</h1>
+							<p>{error}</p>
+							<Button href="/" variant="contained" color="secondary">
+								Go Back
+							</Button>
+						</div>
+					</Container>
+				) : (
+					<LinearProgress variant="query" />
+				)}
+			</GeneralPage>
 		);
 	}
 }
