@@ -90,3 +90,23 @@ export function getAcronym(name) {
 export function removeNonAlphaNumeric(str) {
 	return str.replace(/[^0-9a-zA-Z]/gi, '');
 }
+
+/**
+ * Check if a bit is set in a bitfield.
+ * @param {number} bits The bitfield value to check.
+ * @param {number} bit The bit to check.
+ */
+export function bitwiseHas(bits, bit) {
+	return (bits & bit) === bit;
+}
+
+/**
+ * Toggle a bit in a bitfield.
+ * @param {number} bits The bitfield value to modify.
+ * @param {number} bit The bit to toggle.
+ * @param {boolean} toggle The value to set.
+ */
+export function bitwiseSet(bits, bit, toggle) {
+	console.log(toggle);
+	return toggle ? bits | bit : bits & ~bit;
+}
