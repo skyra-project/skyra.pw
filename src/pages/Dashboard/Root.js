@@ -42,6 +42,8 @@ import StarboardPage from 'pages/Dashboard/Starboard';
 import LogsPage from 'pages/Dashboard/LogsPage';
 import ModerationIndexPage from 'pages/Dashboard/Moderation/Index';
 import ModerationFilterPage from 'pages/Dashboard/Moderation/Filter';
+import ModerationCapitalsPage from 'pages/Dashboard/Moderation/Capitals';
+import ModerationLinksPage from 'pages/Dashboard/Moderation/Links';
 import { authedFetch, navigate, toTitleCase } from 'meta/util';
 import SkyraLogo from 'assets/skyraLogo';
 
@@ -292,6 +294,26 @@ class Root extends Component {
 							>
 								<ListItemText primary="Filter" />
 							</ListItem>
+							<ListItem
+								disabled={!guildData}
+								dense
+								component={Link}
+								to={`/guilds/${guildID}/moderation/capitals`}
+								button
+								className={classes.nested}
+							>
+								<ListItemText primary="Capitals" />
+							</ListItem>
+							<ListItem
+								disabled={!guildData}
+								dense
+								component={Link}
+								to={`/guilds/${guildID}/moderation/links`}
+								button
+								className={classes.nested}
+							>
+								<ListItemText primary="Links" />
+							</ListItem>
 						</List>
 					</Collapse>
 
@@ -393,6 +415,16 @@ class Root extends Component {
 										componentProps={{ ...componentProps }}
 										path="/guilds/:guildID/moderation/filter"
 										component={ModerationFilterPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/moderation/capitals"
+										component={ModerationCapitalsPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/moderation/links"
+										component={ModerationLinksPage}
 									/>
 									<AuthenticatedRoute
 										componentProps={{ ...componentProps }}
