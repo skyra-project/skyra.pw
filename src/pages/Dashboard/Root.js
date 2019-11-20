@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'reactn';
 import { Link, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import { withStyles } from '@material-ui/styles';
@@ -16,19 +16,32 @@ import {
 	Typography,
 	Breadcrumbs,
 	Link as MaterialLink,
-	CircularProgress,
 	Button,
 	Collapse,
-	Slide
+	Slide,
+	Avatar,
+	Box,
+	Fade
 } from '@material-ui/core';
-import { Menu as MenuIcon, Save as SaveIcon, DeleteForever as DeleteIcon } from '@material-ui/icons';
 import deepMerge from 'deepmerge';
-import { Settings, Gavel, ExpandMore, ExpandLess } from '@material-ui/icons/';
+import Skeleton from '@material-ui/lab/Skeleton';
+import Settings from '@material-ui/icons/Settings';
+import Subject from '@material-ui/icons/Subject';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import MenuIcon from '@material-ui/icons/Menu';
+import SaveIcon from '@material-ui/icons/Save';
+import DeleteIcon from '@material-ui/icons/DeleteForever';
+import Gavel from '@material-ui/icons/Gavel';
+import StarIcon from '@material-ui/icons/Star';
 
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
+import UserMenu from 'components/UserMenu';
 import SettingsPage from 'pages/Dashboard/SettingsPage';
-import ModerationIndexPage from 'pages/Dashboard/Moderation/IndexPage';
-import ModerationFilterPage from 'pages/Dashboard/Moderation/FilterPage';
+import StarboardPage from 'pages/Dashboard/Starboard';
+import LogsPage from 'pages/Dashboard/LogsPage';
+import ModerationIndexPage from 'pages/Dashboard/Moderation/Index';
+import ModerationFilterPage from 'pages/Dashboard/Moderation/Filter';
 import { authedFetch, navigate, toTitleCase } from 'meta/util';
 import SkyraLogo from 'assets/skyraLogo';
 
@@ -40,16 +53,18 @@ const mergeOptions = {
 const drawerWidth = 240;
 
 const ServerHeader = styled.div`
-	display: flex;
-
-	justify-content: space-between;
-	align-items: center;
-	align-content: center;
 	padding: 14px 20px;
 
-	.server-icon {
-		border-radius: 50%;
-		height: 40px;
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	align-items: center;
+
+	min-height: 100px;
+
+	.MuiAvatar-root {
+		width: 60px;
+		height: 60px;
 	}
 `;
 
@@ -109,7 +124,8 @@ const styles = theme => ({
 		display: 'flex',
 		padding: theme.spacing(4),
 		paddingTop: theme.spacing(4) + 64,
-		flexDirection: 'column'
+		flexDirection: 'column',
+		overflowY: 'scroll'
 	},
 	card: {
 		background: theme.palette.secondary.main
@@ -195,13 +211,15 @@ class Root extends Component {
 		}
 	}
 
+	toggleUserDropdown = () => {
+		this.setState({ userDropdownOpen: !this.state.userDropdownOpen });
+	};
+
 	render() {
 		const { container, classes } = this.props;
 		// The guildID and optional pageName in the URL. e.g. /guilds/228822415189344257/settings
 		const { guildID, pageName } = this.props.match.params;
 		const { mobileOpen, guildData, guildSettings, guildSettingsChanges, isUpdating, openSubMenus } = this.state;
-
-		if (!guildData) return <p>Loading</p>;
 
 		const componentProps = {
 			guildSettings: deepMerge(guildSettings, guildSettingsChanges, mergeOptions),
@@ -218,16 +236,26 @@ class Root extends Component {
 				</div>
 				<Divider />
 
+				{/* --------------------- */}
 				<ServerHeader>
-					<img
-						alt="Server Icon"
-						className="server-icon"
-						src={`https://cdn.discordapp.com/icons/${guildID}/${guildData.icon}?size=512`}
-					/>
-					<Typography variant="body1">{guildData.name}</Typography>
+					{guildData ? (
+						<Fragment>
+							<Avatar alt="" src={`https://cdn.discordapp.com/icons/${guildID}/${guildData.icon}?size=512`} />
+							<Typography variant="subtitle2" style={{ marginTop: 15 }}>
+								{guildData.name}
+							</Typography>
+						</Fragment>
+					) : (
+						<Fragment>
+							<Skeleton variant="circle" width={60} height={60} />
+							<Skeleton variant="text" width={100} height={14} />
+						</Fragment>
+					)}
 				</ServerHeader>
+				{/* --------------------- */}
+
 				<List>
-					<ListItem component={Link} to={`/guilds/${guildID}/settings`} button>
+					<ListItem disabled={!guildData} component={Link} to={`/guilds/${guildID}`} button>
 						<ListItemIcon>
 							<Settings />
 						</ListItemIcon>
@@ -235,7 +263,7 @@ class Root extends Component {
 					</ListItem>
 
 					{/* ------------------------------- */}
-					<ListItem button onClick={() => this.handleSubMenu('moderation')}>
+					<ListItem disabled={!guildData} button onClick={() => this.handleSubMenu('moderation')}>
 						<ListItemIcon>
 							<Gavel />
 						</ListItemIcon>
@@ -244,12 +272,46 @@ class Root extends Component {
 					</ListItem>
 					<Collapse in={openSubMenus.includes('moderation')} timeout="auto" unmountOnExit>
 						<List component="div" disablePadding>
-							<ListItem dense component={Link} to={`/guilds/${guildID}/moderation/filter`} button className={classes.nested}>
+							<ListItem
+								disabled={!guildData}
+								dense
+								component={Link}
+								to={`/guilds/${guildID}/moderation/settings`}
+								button
+								className={classes.nested}
+							>
+								<ListItemText primary="Moderation Settings" />
+							</ListItem>
+							<ListItem
+								disabled={!guildData}
+								dense
+								component={Link}
+								to={`/guilds/${guildID}/moderation/filter`}
+								button
+								className={classes.nested}
+							>
 								<ListItemText primary="Filter" />
 							</ListItem>
 						</List>
 					</Collapse>
+
 					{/* ------------------------------- */}
+
+					<ListItem disabled={!guildData} component={Link} to={`/guilds/${guildID}/logs`} button>
+						<ListItemIcon>
+							<Subject />
+						</ListItemIcon>
+						<ListItemText primary="Message Logs" />
+					</ListItem>
+
+					{/* ------------------------------- */}
+
+					<ListItem disabled={!guildData} component={Link} to={`/guilds/${guildID}/starboard`} button>
+						<ListItemIcon>
+							<StarIcon />
+						</ListItemIcon>
+						<ListItemText primary="Starboard" />
+					</ListItem>
 				</List>
 			</div>
 		);
@@ -261,16 +323,30 @@ class Root extends Component {
 						<IconButton color="primary" edge="start" onClick={this.toggleSidebar} className={classes.menuButton}>
 							<MenuIcon color="secondary" />
 						</IconButton>
-						<Breadcrumbs className={classes.breadcrumb}>
-							<MaterialLink component={Link} color="inherit" to={`/guilds/${guildID}`}>
-								{guildData.name}
-							</MaterialLink>
-							{!!pageName && (
-								<MaterialLink component={Link} color="inherit" to={`/guilds/${guildID}/${pageName}`} onClick={() => ''}>
-									{toTitleCase(pageName)}
-								</MaterialLink>
+
+						<Box display="flex" justifyContent="space-between" width="100%" alignItems="center">
+							{guildData ? (
+								<Breadcrumbs className={classes.breadcrumb}>
+									<MaterialLink component={Link} color="inherit" to={`/guilds/${guildID}`}>
+										{guildData.name}
+									</MaterialLink>
+									{!!pageName && (
+										<MaterialLink
+											component={Link}
+											color="inherit"
+											to={`/guilds/${guildID}/${pageName}`}
+											onClick={() => ''}
+										>
+											{toTitleCase(pageName)}
+										</MaterialLink>
+									)}
+								</Breadcrumbs>
+							) : (
+								<Skeleton type="text" width={200} height={16} />
 							)}
-						</Breadcrumbs>
+
+							<UserMenu />
+						</Box>
 					</Toolbar>
 				</AppBar>
 				<nav className={classes.drawer}>
@@ -304,32 +380,39 @@ class Root extends Component {
 				</nav>
 				<main className={classes.content}>
 					{guildData ? (
-						<Switch>
-							<AuthenticatedRoute
-								exact
-								path="/guilds/:guildID"
-								component={() => 'Index Page'}
-								componentProps={{ ...componentProps }}
-							/>
-							<AuthenticatedRoute
-								componentProps={{ ...componentProps }}
-								path="/guilds/:guildID/settings"
-								component={SettingsPage}
-							/>
-							<AuthenticatedRoute
-								componentProps={{ ...componentProps }}
-								path="/guilds/:guildID/moderation/filter"
-								component={ModerationFilterPage}
-							/>
-							<AuthenticatedRoute
-								componentProps={{ ...componentProps }}
-								path="/guilds/:guildID/moderation"
-								component={ModerationIndexPage}
-							/>
-						</Switch>
-					) : (
-						<CircularProgress className={classes.progress} />
-					)}
+						<Fade in={!!guildData}>
+							<div>
+								<Switch>
+									<AuthenticatedRoute
+										exact
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/starboard"
+										component={StarboardPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/moderation/filter"
+										component={ModerationFilterPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/moderation"
+										component={ModerationIndexPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/logs"
+										component={LogsPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID"
+										component={SettingsPage}
+									/>
+								</Switch>
+							</div>
+						</Fade>
+					) : null}
 					<Slide direction="up" in={Object.keys(guildSettingsChanges).length > 0} mountOnEnter unmountOnExit>
 						<div className={classes.fabContainer}>
 							<Button

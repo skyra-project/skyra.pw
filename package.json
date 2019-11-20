@@ -5,6 +5,7 @@
 	"dependencies": {
 		"@material-ui/core": "^4.6.0",
 		"@material-ui/icons": "^4.5.1",
+		"@material-ui/lab": "^4.0.0-alpha.32",
 		"deepmerge": "^4.2.2",
 		"history": "^4.10.1",
 		"react": "^16.11.0",
@@ -12,6 +13,8 @@
 		"react-router-dom": "^5.1.1",
 		"react-scripts": "3.2.0",
 		"reactn": "^2.2.4",
+		"reactn-devtools": "^1.1.0",
+		"redux": "^4.0.4",
 		"styled-components": "^4.4.1",
 		"styled-react-modal": "^2.0.0"
 	},

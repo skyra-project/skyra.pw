@@ -56,9 +56,9 @@ const DialogActions = withStyles(theme => ({
 
 const filterByPosition = (a, b) => b.rawPosition - a.rawPosition;
 
-export default function CustomizedDialogs({ title, currentValue, guild, onChange, buttonText, sort }) {
+export default function CustomizedDialogs({ title, value, guild, onChange, buttonText, sort }) {
 	const [open, setOpen] = React.useState(false);
-	const [checked, setChecked] = React.useState(currentValue);
+	const [checked, setChecked] = React.useState(value);
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -82,7 +82,7 @@ export default function CustomizedDialogs({ title, currentValue, guild, onChange
 	return (
 		<Fragment>
 			<Button variant="outlined" color="primary" onClick={handleClickOpen}>
-				{buttonText || 'Select Roles'}
+				{buttonText}: {value.length}
 			</Button>
 			<Dialog fullWidth maxWidth="xs" onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
 				<DialogTitle id="customized-dialog-title" onClose={handleClose}>

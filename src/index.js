@@ -5,6 +5,9 @@ import * as serviceWorker from './serviceWorker';
 import { loadState } from 'meta/util';
 import Root from 'components/Root';
 
+import addReactNDevTools from 'reactn-devtools';
+addReactNDevTools();
+
 const discordUser = loadState('discord_user');
 const discordToken = loadState('discord_token');
 
