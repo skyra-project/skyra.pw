@@ -1,6 +1,9 @@
 import React from 'react';
+import styled from 'styled-components';
 
-const SvgComponent = props => (
+import { SpinUpAnimation } from 'meta/animations';
+
+const SkyraLogo = props => (
 	<svg viewBox="0 0 259.05 518.05" {...props} height="50">
 		<g data-name="Layer 2">
 			<g data-name="Layer 1">
@@ -17,4 +20,8 @@ const SvgComponent = props => (
 	</svg>
 );
 
-export default SvgComponent;
+export default styled(SkyraLogo)`
+	&:hover {
+		${SpinUpAnimation}
+	}
+`;
