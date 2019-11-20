@@ -1,10 +1,11 @@
-import React, { useGlobal, Fragment } from 'reactn';
-import { Grid, Card, CardHeader, Container } from '@material-ui/core';
+import React, { useGlobal } from 'reactn';
+import styled from 'styled-components';
+import { Grid, Card, CardHeader, Container, Box, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
 import GuildIcon from 'components/GuildIcon';
-import { oauthURL } from 'meta/constants';
 import { navigate } from 'meta/util';
+import theme from 'meta/theme';
 import GeneralPage from 'components/GeneralPage';
 
 const useStyles = makeStyles(theme => ({
@@ -26,25 +27,57 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export default () => {
+const Section = styled(Box)`
+	background: ${props => (!props.secondary ? theme.palette.primary.main : theme.palette.secondary.main)};
+	width: 100%;
+`;
+
+const HomePage = () => {
 	const [global] = useGlobal();
 	const classes = useStyles();
 	const { authenticated, user } = global;
 	return (
 		<GeneralPage>
 			{authenticated && (
-				<Grid container direction="row" justify="center" alignItems="center" spacing={3} className={classes.guildsList}>
-					{(user.guilds || [])
-						.filter(guild => guild.userCanManage)
-						.map(guild => (
-							<Grid item className={classes.guildCardContainer} key={guild.id}>
-								<Card elevation={2} onClick={navigate(`/guilds/${guild.id}`)} className={classes.guildCard}>
-									<CardHeader avatar={<GuildIcon guild={guild} />} title={guild.name} />
-								</Card>
-							</Grid>
-						))}
-				</Grid>
+				<Section p={5}>
+					<Container>
+						<Grid container direction="row" justify="center" alignItems="center" spacing={4} className={classes.guildsList}>
+							{(user.guilds || [])
+								.filter(guild => guild.userCanManage)
+								.map(guild => (
+									<Grid item className={classes.guildCardContainer} key={guild.id}>
+										<Card elevation={2} onClick={navigate(`/guilds/${guild.id}`)} className={classes.guildCard}>
+											<CardHeader avatar={<GuildIcon guild={guild} />} title={guild.name} />
+										</Card>
+									</Grid>
+								))}
+						</Grid>
+					</Container>
+				</Section>
 			)}
+			<Section secondary height={400} p={5}>
+				<Container>
+					<Typography variant="h3" component="h1">
+						Features
+					</Typography>
+				</Container>
+			</Section>
+			<Section height={400} p={5}>
+				<Container>
+					<Typography variant="h3" component="h1">
+						Stuff
+					</Typography>
+				</Container>
+			</Section>
+			<Section secondary height={400} p={5}>
+				<Container>
+					<Typography variant="h3" component="h1">
+						Features
+					</Typography>
+				</Container>
+			</Section>
 		</GeneralPage>
 	);
 };
+
+export default HomePage;
