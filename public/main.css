@@ -1,0 +1,21 @@
+div#nosc {
+    position: absolute;
+    background-color: #26262B;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+div#nosc span {
+    font-family: "Roboto";
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
+
+/* This CSS has been shamelessly copied from W3Schools */
+
