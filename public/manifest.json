@@ -1,6 +1,6 @@
 {
   "$schema": "http://json.schemastore.org/web-manifest",
-  "description": "Skyra is a multipurpose Discord bot designed to handle most of the tasks, helping users manage their servers easily.",
+  "description": "Skyra is a multipurpose Discord bot designed to handle most tasks, helping users manage their servers easily.",
   "name": "Skyra",
   "short_name": "Skyra",
   "theme_color": "#7189DA",
