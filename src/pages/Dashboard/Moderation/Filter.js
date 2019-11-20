@@ -1,9 +1,16 @@
 import React, { Fragment, useState } from 'react';
 import styled from 'styled-components';
-import { Chip, Paper, TextField, Button, Box } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import Chip from '@material-ui/core/Chip';
+import Paper from '@material-ui/core/Paper';
+import Slider from '@material-ui/core/Slider';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 
 import theme from 'meta/theme';
 import Section from '../components/Section';
+import SimpleGrid from '../components/SimpleGrid';
 import Select from 'components/Select';
 import SelectBoolean from 'components/SelectBoolean';
 import { removeNonAlphaNumeric, bitwiseSet, bitwiseHas } from 'meta/util';
@@ -23,29 +30,32 @@ const IndexPage = props => {
 	return (
 		<Fragment>
 			<Section title="Filter">
-				<SelectBoolean
-					title={`Filter ${filter.enabled ? 'Enabled' : 'Disabled'}`}
-					onChange={bool => props.patchGuildData({ selfmod: { filter: { enabled: bool } } })}
-					currentValue={filter.enabled}
-				/>
-				<SelectBoolean
-					title={`Alerts ${bitwiseHas(filter.softAction, 0b001) ? 'Enabled' : 'Disabled'}`}
-					onChange={bool => props.patchGuildData({ selfmod: { filter: { softAction: bitwiseSet(filter.softAction, 0b001, bool) } } })}
-					currentValue={bitwiseHas(filter.softAction, 0b001)}
-					label="Toggle message alerts in the channel the infraction took place."
-				/>
-				<SelectBoolean
-					title={`Logs ${bitwiseHas(filter.softAction, 0b010) ? 'Enabled' : 'Disabled'}`}
-					onChange={bool => props.patchGuildData({ selfmod: { filter: { softAction: bitwiseSet(filter.softAction, 0b010, bool) } } })}
-					currentValue={bitwiseHas(filter.softAction, 0b010)}
-					label="Toggle message logs in the moderation logs channel."
-				/>
-				<SelectBoolean
-					title={`Deletes ${bitwiseHas(filter.softAction, 0b100) ? 'Enabled' : 'Disabled'}`}
-					onChange={bool => props.patchGuildData({ selfmod: { filter: { softAction: bitwiseSet(filter.softAction, 0b100, bool) } } })}
-					currentValue={bitwiseHas(filter.softAction, 0b100)}
-					label="Toggle message deletions."
-				/>
+				<SimpleGrid>
+					<SelectBoolean
+						title={`Filter ${filter.enabled ? 'Enabled' : 'Disabled'}`}
+						onChange={bool => props.patchGuildData({ selfmod: { filter: { enabled: bool } } })}
+						currentValue={filter.enabled}
+						description="Whether or not this system should be enabled."
+					/>
+					<SelectBoolean
+						title={`Alerts ${bitwiseHas(filter.softAction, 0b001) ? 'Enabled' : 'Disabled'}`}
+						onChange={bool => props.patchGuildData({ selfmod: { filter: { softAction: bitwiseSet(filter.softAction, 0b001, bool) } } })}
+						currentValue={bitwiseHas(filter.softAction, 0b001)}
+						description="Toggle message alerts in the channel the infraction took place."
+					/>
+					<SelectBoolean
+						title={`Logs ${bitwiseHas(filter.softAction, 0b010) ? 'Enabled' : 'Disabled'}`}
+						onChange={bool => props.patchGuildData({ selfmod: { filter: { softAction: bitwiseSet(filter.softAction, 0b010, bool) } } })}
+						currentValue={bitwiseHas(filter.softAction, 0b010)}
+						description="Toggle message logs in the moderation logs channel."
+					/>
+					<SelectBoolean
+						title={`Deletes ${bitwiseHas(filter.softAction, 0b100) ? 'Enabled' : 'Disabled'}`}
+						onChange={bool => props.patchGuildData({ selfmod: { filter: { softAction: bitwiseSet(filter.softAction, 0b100, bool) } } })}
+						currentValue={bitwiseHas(filter.softAction, 0b100)}
+						description="Toggle message deletions."
+					/>
+				</SimpleGrid>
 			</Section>
 			<Section title="Punishments">
 				<Select
@@ -60,6 +70,31 @@ const IndexPage = props => {
 					<option value={4}>Softban</option>
 					<option value={5}>Ban</option>
 				</Select>
+				{/* TODO(GC | Antonio): Figure out a way for the duration */}
+				<Typography>
+					Maximum Threshold
+				</Typography>
+				<Slider
+					value={filter.thresholdMaximum}
+					onChange={(_, e) => props.patchGuildData({ selfmod: { filter: { thresholdMaximum: e } } })}
+					aria-labelledby="discrete-slider"
+					valueLabelDisplay="auto"
+					min={0}
+					max={60}
+					label="The amount of infractions that can be done within Threshold Duration before taking action, instantly if 0."
+				/>
+				<Typography>
+					Threshold Duration
+				</Typography>
+				<Slider
+					value={filter.thresholdDuration}
+					onChange={(_, e) => props.patchGuildData({ selfmod: { filter: { thresholdDuration: e } } })}
+					aria-labelledby="discrete-slider"
+					valueLabelDisplay="auto"
+					min={0}
+					max={120}
+					label="The time in which infractions will accumulate before taking action, instantly if 0."
+				/>
 			</Section>
 			<Section title="Filtered Words">
 				<form

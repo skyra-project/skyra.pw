@@ -1,7 +1,7 @@
 import React from 'reactn';
 import { Switch, FormControlLabel, ListItemText } from '@material-ui/core';
 
-export default function CustomizedDialogs({ title, currentValue, onChange, description }) {
+export default function SelectBoolean({ title, currentValue, onChange, description }) {
 	return (
 		<FormControlLabel
 			control={<Switch checked={currentValue} onChange={event => onChange(event.target.checked)} color="primary" />}
