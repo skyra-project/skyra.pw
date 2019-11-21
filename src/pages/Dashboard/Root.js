@@ -122,11 +122,10 @@ const styles = theme => ({
 	content: {
 		flexGrow: 1,
 		background: theme.palette.secondary.dark,
-		minHeight: '100%',
 		color: theme.palette.secondary.contrastText,
 		display: 'flex',
 		padding: theme.spacing(4),
-		paddingTop: theme.spacing(4) + 64,
+		marginTop: 64,
 		flexDirection: 'column',
 		overflowY: 'scroll'
 	},
