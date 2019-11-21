@@ -426,6 +426,7 @@ class Root extends Component {
 										component={StarboardPage}
 									/>
 									<AuthenticatedRoute
+										exact
 										componentProps={{ ...componentProps }}
 										path="/guilds/:guildID/filter"
 										component={FilterPage}
