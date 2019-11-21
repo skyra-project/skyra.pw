@@ -34,6 +34,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/DeleteForever';
 import Gavel from '@material-ui/icons/Gavel';
 import StarIcon from '@material-ui/icons/Star';
+import FilterListIcon from '@material-ui/icons/FilterList';
 
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
 import UserMenu from 'components/UserMenu';
@@ -41,9 +42,9 @@ import SettingsPage from 'pages/Dashboard/SettingsPage';
 import StarboardPage from 'pages/Dashboard/Starboard';
 import LogsPage from 'pages/Dashboard/LogsPage';
 import ModerationIndexPage from 'pages/Dashboard/Moderation/Index';
-import ModerationFilterPage from 'pages/Dashboard/Moderation/Filter';
-import ModerationCapitalsPage from 'pages/Dashboard/Moderation/Capitals';
-import ModerationLinksPage from 'pages/Dashboard/Moderation/Links';
+import FilterPage from 'pages/Dashboard/Filter/Index';
+import FilterCapitalsPage from 'pages/Dashboard/Filter/Capitals';
+import FilterLinksPage from 'pages/Dashboard/Filter/Links';
 import { authedFetch, navigate, toTitleCase } from 'meta/util';
 import SkyraLogo from 'assets/skyraLogo';
 
@@ -284,21 +285,34 @@ class Root extends Component {
 							>
 								<ListItemText primary="Moderation Settings" />
 							</ListItem>
+						</List>
+					</Collapse>
+
+					{/* ------------------------------- */}
+					<ListItem disabled={!guildData} button onClick={() => this.handleSubMenu('filter')}>
+						<ListItemIcon>
+							<FilterListIcon />
+						</ListItemIcon>
+						<ListItemText primary="Filter" />
+						{openSubMenus.includes('filter') ? <ExpandLess /> : <ExpandMore />}
+					</ListItem>
+					<Collapse in={openSubMenus.includes('filter')} timeout="auto" unmountOnExit>
+						<List component="div" disablePadding>
 							<ListItem
 								disabled={!guildData}
 								dense
 								component={Link}
-								to={`/guilds/${guildID}/moderation/filter`}
+								to={`/guilds/${guildID}/filter`}
 								button
 								className={classes.nested}
 							>
-								<ListItemText primary="Filter" />
+								<ListItemText primary="Words" />
 							</ListItem>
 							<ListItem
 								disabled={!guildData}
 								dense
 								component={Link}
-								to={`/guilds/${guildID}/moderation/capitals`}
+								to={`/guilds/${guildID}/filter/capitals`}
 								button
 								className={classes.nested}
 							>
@@ -308,7 +322,7 @@ class Root extends Component {
 								disabled={!guildData}
 								dense
 								component={Link}
-								to={`/guilds/${guildID}/moderation/links`}
+								to={`/guilds/${guildID}/filter/links`}
 								button
 								className={classes.nested}
 							>
@@ -413,18 +427,18 @@ class Root extends Component {
 									/>
 									<AuthenticatedRoute
 										componentProps={{ ...componentProps }}
-										path="/guilds/:guildID/moderation/filter"
-										component={ModerationFilterPage}
+										path="/guilds/:guildID/filter"
+										component={FilterPage}
 									/>
 									<AuthenticatedRoute
 										componentProps={{ ...componentProps }}
-										path="/guilds/:guildID/moderation/capitals"
-										component={ModerationCapitalsPage}
+										path="/guilds/:guildID/filter/capitals"
+										component={FilterCapitalsPage}
 									/>
 									<AuthenticatedRoute
 										componentProps={{ ...componentProps }}
-										path="/guilds/:guildID/moderation/links"
-										component={ModerationLinksPage}
+										path="/guilds/:guildID/filter/links"
+										component={FilterLinksPage}
 									/>
 									<AuthenticatedRoute
 										componentProps={{ ...componentProps }}
