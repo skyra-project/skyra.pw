@@ -85,6 +85,13 @@ const HomePage = () => {
 					</Typography>
 				</Container>
 			</Section>
+			<Section height={400} p={5}>
+				<Container>
+					<Typography variant="h3" component="h1">
+						Stuff
+					</Typography>
+				</Container>
+			</Section>
 		</GeneralPage>
 	);
 };
