@@ -127,7 +127,10 @@ const styles = theme => ({
 		padding: theme.spacing(4),
 		marginTop: 64,
 		flexDirection: 'column',
-		overflowY: 'scroll'
+		overflowY: 'scroll',
+		[theme.breakpoints.down('sm')]: {
+			marginTop: 56
+		}
 	},
 	card: {
 		background: theme.palette.secondary.main
