@@ -70,7 +70,7 @@ const Footer = () => {
 				</Hidden>
 				<Hidden smUp>
 					<Box className="container">
-						<Box display="flex" justifyContent="space-around" width="100%">
+						<Box display="flex" justifyContent="space-between" width="100%" px={3}>
 							<Left />
 							<Right />
 						</Box>
