@@ -39,7 +39,7 @@ const HomePage = () => {
 	return (
 		<GeneralPage>
 			{authenticated && (
-				<Section p={5}>
+				<Section p={2}>
 					<Container>
 						<Grid container direction="row" justify="center" alignItems="center" spacing={4} className={classes.guildsList}>
 							{(user.guilds || [])
