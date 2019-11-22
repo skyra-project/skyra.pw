@@ -20,10 +20,13 @@ export default ({ children }) => {
 	return (
 		<PageContainer>
 			<Container>
-				<Box p={1} mt={3} mb={3} display="flex" justifyContent="space-between" alignContent="center" alignItems="center">
+				<Box p={1} my={3} display="flex" justifyContent="space-between" alignContent="center" alignItems="center">
 					<Box display="flex" justifyContent="space-around" alignContent="center" alignItems="center" minWidth={120}>
 						<SkyraLogo />
-						<Typography variant="h5">Skyra</Typography>
+						<Box display="flex" flexDirection="column" ml={3}>
+							<Typography variant="h5">Skyra</Typography>
+							<Typography variant="caption">The most advanced moderation bot.</Typography>
+						</Box>
 					</Box>
 					{authenticated ? (
 						<UserMenu />
