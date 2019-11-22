@@ -91,7 +91,7 @@ const HomePage = () => {
 	return (
 		<GeneralPage>
 			{authenticated && (
-				<Section p={2} my={2}>
+				<Box p={2} my={2}>
 					<Container>
 						<Grid container direction="row" justify="center" alignItems="center" spacing={4} className={classes.guildsList}>
 							{(user.guilds || [])
@@ -114,7 +114,7 @@ const HomePage = () => {
 								))}
 						</Grid>
 					</Container>
-				</Section>
+				</Box>
 			)}
 
 			{[
