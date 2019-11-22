@@ -80,7 +80,7 @@ const Section = ({ name, image, index }) => (
 				take root and flourish vanquish the impossible.
 			</Typography>
 		</div>
-		<img alt="" loading="lazy" src={image} width="400" />
+		<img alt="" loading="lazy" src={image.src} width={image.width} height={image.height} />
 	</SectionContainer>
 );
 
@@ -118,10 +118,17 @@ const HomePage = () => {
 			)}
 
 			{[
-				{ name: 'Moderation', image: ModerationImage },
-				{ name: 'Fun', image: FunImage },
-				{ name: 'Tools', image: ToolsImage },
-				{ name: 'Weeb', image: WeebImage }
+				{
+					name: 'Moderation',
+					image: {
+						src: ModerationImage,
+						width: 300,
+						height: 343
+					}
+				},
+				{ name: 'Fun', image: { src: FunImage, width: 437, height: 190 } },
+				{ name: 'Tools', image: { src: ToolsImage, width: 400, height: 391 } },
+				{ name: 'Weeb', image: { src: WeebImage, width: 400, height: 325 } }
 			].map(({ name, image }, index) => (
 				<Section index={index} name={name} image={image} key={name} />
 			))}
