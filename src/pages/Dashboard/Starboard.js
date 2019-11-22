@@ -27,10 +27,10 @@ const SettingsPage = props => {
 					<SelectChannel
 						value={props.guildSettings.starboard.channel}
 						buttonText="Starboard Channel"
-						onChange={r =>
+						onChange={c =>
 							props.patchGuildData({
 								starboard: {
-									channel: r.id
+									channel: c ? c.id : null
 								}
 							})
 						}

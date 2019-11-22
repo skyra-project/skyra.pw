@@ -15,10 +15,10 @@ const SettingsPage = props => {
 							key={channel}
 							value={props.guildSettings.channels[channel]}
 							buttonText={channel}
-							onChange={r =>
+							onChange={c =>
 								props.patchGuildData({
 									channels: {
-										[channel]: r.id
+										[channel]: c ? c.id : null
 									}
 								})
 							}

@@ -95,8 +95,14 @@ export default function CustomizedDialogs({ title, guild, onChange, buttonText, 
 					</List>
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={handleClose} color="primary">
-						Submit
+					<Button
+						onClick={() => {
+							onChange(null);
+							setOpen(false);
+						}}
+						color="primary"
+					>
+						Reset
 					</Button>
 				</DialogActions>
 			</Dialog>

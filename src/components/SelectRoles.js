@@ -109,6 +109,14 @@ export default function CustomizedDialogs({ title, value, guild, onChange, butto
 				<DialogActions>
 					<Button
 						onClick={() => {
+							setChecked([]);
+						}}
+						color="primary"
+					>
+						Reset
+					</Button>
+					<Button
+						onClick={() => {
 							onChange(checked);
 							handleClose();
 						}}

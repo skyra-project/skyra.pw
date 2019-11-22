@@ -75,7 +75,7 @@ const SettingsPage = props => {
 								onChange={r =>
 									props.patchGuildData({
 										roles: {
-											[role.name]: r.id
+											[role.name]: r ? r.id : null
 										}
 									})
 								}

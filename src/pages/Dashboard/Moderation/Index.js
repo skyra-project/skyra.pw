@@ -40,10 +40,10 @@ const IndexPage = props => {
 								key={channel}
 								buttonText={channel}
 								value={props.guildSettings.channels[channel]}
-								onChange={r =>
+								onChange={c =>
 									props.patchGuildData({
 										channels: {
-											[channel]: r.id
+											[channel]: c ? c.id : null
 										}
 									})
 								}
