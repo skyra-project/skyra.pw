@@ -54,13 +54,13 @@ const SectionContainer = styled(Box)`
 		flex-direction: column;
 		width: 47%;
 
-		${theme.breakpoints.down('xs')} {
+		${theme.breakpoints.down('sm')} {
 			width: 100%;
 		}
 	}
 
 	img {
-		${theme.breakpoints.down('xs')} {
+		${theme.breakpoints.down('sm')} {
 			margin-top: 20px;
 		}
 	}
