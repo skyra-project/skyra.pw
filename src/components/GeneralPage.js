@@ -28,9 +28,9 @@ export default ({ children, loading = false }) => {
 							<Typography variant="caption">The most advanced moderation bot.</Typography>
 						</Box>
 					</Box>
-					{authenticated ? (
-						<UserMenu />
-					) : (
+					{authenticated && <UserMenu />}
+
+					{!authenticated && !loading && (
 						<Button href={oauthURL} variant="contained" color="secondary">
 							Log In
 						</Button>
