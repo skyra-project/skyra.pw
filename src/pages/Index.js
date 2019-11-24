@@ -40,7 +40,6 @@ const SectionContainer = styled(Box)`
 	justify-content: space-around;
 	align-items: center;
 	align-content: center;
-	height: auto;
 
 	flex-direction: ${props => (!props.secondary ? 'row-reverse' : 'row')};
 	flex-wrap: wrap;
@@ -60,8 +59,11 @@ const SectionContainer = styled(Box)`
 	}
 
 	img {
+		max-width: 400px;
+		max-height: 400px;
 		${theme.breakpoints.down('sm')} {
 			margin-top: 20px;
+			width: 100%;
 		}
 	}
 `;
@@ -80,7 +82,9 @@ const Section = ({ name, image, index }) => (
 				take root and flourish vanquish the impossible.
 			</Typography>
 		</div>
-		<img alt="" loading="lazy" src={image.src} width={image.width} height={image.height} />
+		<div className="image-container">
+			<img alt="" loading="lazy" src={image.src} />
+		</div>
 	</SectionContainer>
 );
 
