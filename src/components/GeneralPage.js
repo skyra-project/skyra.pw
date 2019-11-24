@@ -1,6 +1,6 @@
 import React, { useGlobal } from 'reactn';
 import styled from 'styled-components';
-import { Box, Typography, Button, Container } from '@material-ui/core';
+import { Box, Typography, Button, Container, LinearProgress } from '@material-ui/core';
 
 import { oauthURL } from 'meta/constants';
 import UserMenu from 'components/UserMenu';
@@ -14,7 +14,7 @@ const PageContainer = styled.div`
 	height: 100vh;
 `;
 
-export default ({ children }) => {
+export default ({ children, loading = false }) => {
 	const [global] = useGlobal();
 	const { authenticated } = global;
 	return (
@@ -37,7 +37,7 @@ export default ({ children }) => {
 					)}
 				</Box>
 			</Container>
-			{children}
+			{loading ? <LinearProgress variant="query" /> : children}
 			<Footer />
 		</PageContainer>
 	);

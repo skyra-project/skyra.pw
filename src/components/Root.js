@@ -12,6 +12,7 @@ import GuildCallbackPage from 'pages/oauth/GuildCallbackPage';
 import HomePage from 'pages/Index';
 import DashboardRootPage from 'pages/Dashboard/Root';
 import CommandsPage from 'pages/CommandsPage';
+import NotFoundPage from 'pages/NotFoundPage';
 
 const Root = () => (
 	<ThemeProvider theme={theme}>
@@ -24,7 +25,7 @@ const Root = () => (
 				<Route exact path="/commands" component={CommandsPage} />
 				<AuthenticatedRoute path="/guilds/:guildID/:pageName?" component={DashboardRootPage} />
 				<UnauthenticatedRoute path="/login" component={() => window.location.replace(oauthURL.toString())} />
-				<Route component={() => 'Not found'} />
+				<Route component={NotFoundPage} />
 			</Switch>
 		</Router>
 	</ThemeProvider>
