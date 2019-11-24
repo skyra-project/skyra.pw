@@ -62,7 +62,13 @@ export async function apiFetch(path, options = {}) {
 
 	const response = await fetch(`${BASE_API_URL}${path}`, options);
 
-	return response.json();
+	const jsonResponse = await response.json();
+
+	if (jsonResponse.error) {
+		throw new Error(jsonResponse.error);
+	} else {
+		return jsonResponse;
+	}
 }
 
 export function navigate(path) {
