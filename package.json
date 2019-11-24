@@ -42,5 +42,8 @@
 	},
 	"devDependencies": {
 		"react-snap": "^1.23.0"
+	},
+	"reactSnap": {
+		"inlineCss": false
 	}
 }
