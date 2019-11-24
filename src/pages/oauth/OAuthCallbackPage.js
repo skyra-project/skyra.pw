@@ -1,7 +1,6 @@
 import React, { Component, setGlobal } from 'reactn';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
-import LinearProgress from '@material-ui/core/LinearProgress';
 
 import { saveState, apiFetch } from 'meta/util';
 import { history, BASE_WEB_URL } from 'meta/constants';
@@ -29,6 +28,7 @@ class DiscordAuthCallbackPage extends Component {
 		});
 
 		if (data.error || !data.user || !data.access_token) {
+			// TODO toast
 			this.setState({ error: data.error || 'Error fetching token.' });
 			return;
 		}
@@ -45,8 +45,8 @@ class DiscordAuthCallbackPage extends Component {
 	render() {
 		const { error } = this.state;
 		return (
-			<GeneralPage>
-				{error ? (
+			<GeneralPage loading={!error}>
+				{error && (
 					<Container>
 						<div>
 							<h1>Authentication Error</h1>
@@ -56,8 +56,6 @@ class DiscordAuthCallbackPage extends Component {
 							</Button>
 						</div>
 					</Container>
-				) : (
-					<LinearProgress variant="query" />
 				)}
 			</GeneralPage>
 		);

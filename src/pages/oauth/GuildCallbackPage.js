@@ -2,7 +2,6 @@ import React, { Component } from 'reactn';
 import { Redirect } from 'react-router-dom';
 
 import GeneralPage from 'components/GeneralPage';
-import { LinearProgress } from '@material-ui/core';
 
 class GuildCallbackPage extends Component {
 	state = {
@@ -17,12 +16,7 @@ class GuildCallbackPage extends Component {
 	}
 
 	render() {
-		return (
-			<GeneralPage>
-				<LinearProgress variant="query" />
-				{this.state.guildID && <Redirect to={`/guilds/${this.state.guildID}`} />}
-			</GeneralPage>
-		);
+		return <GeneralPage loading>{this.state.guildID && <Redirect to={`/guilds/${this.state.guildID}`} />}</GeneralPage>;
 	}
 }
 
