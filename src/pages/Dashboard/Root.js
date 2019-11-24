@@ -168,10 +168,10 @@ class Root extends Component {
 
 	syncGuildData = async () => {
 		const { guildID } = this.props.match.params;
-		const [guildData, guildSettings] = await Promise.all([
-			authedFetch(`/guilds/${guildID}`),
-			authedFetch(`/guilds/${guildID}/settings`)
-		]);
+		const [guildData, guildSettings] = await Promise.all(
+			[authedFetch(`/guilds/${guildID}`), authedFetch(`/guilds/${guildID}/settings`)].map(p => p.catch(navigate('/404')))
+		);
+
 		this.setState({ guildData, guildSettings });
 	};
 
@@ -186,10 +186,12 @@ class Root extends Component {
 				data: this.state.guildSettingsChanges
 			}
 		}).catch(err => {
+			// TODO toast
 			console.error(err);
 		});
 
 		if (!response || !response.newSettings || response.error) {
+			// TODO toast
 			console.log(response);
 			return;
 		}
