@@ -1,5 +1,5 @@
 import React, { setGlobal } from 'reactn';
-import { hydrate, render } from 'react-dom';
+import { render } from 'react-dom';
 
 import * as serviceWorker from './serviceWorker';
 import { loadState } from 'meta/util';
@@ -18,11 +18,8 @@ setGlobal({
 });
 
 const rootElement = document.getElementById('root');
-if (rootElement.hasChildNodes()) {
-	hydrate(<Root />, rootElement);
-} else {
-	render(<Root />, rootElement);
-}
+
+render(<Root />, rootElement);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
