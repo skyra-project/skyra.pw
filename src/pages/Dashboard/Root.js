@@ -35,12 +35,14 @@ import DeleteIcon from '@material-ui/icons/DeleteForever';
 import Gavel from '@material-ui/icons/Gavel';
 import StarIcon from '@material-ui/icons/Star';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes';
 
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
 import UserMenu from 'components/UserMenu';
 import SettingsPage from 'pages/Dashboard/SettingsPage';
 import StarboardPage from 'pages/Dashboard/Starboard';
 import LogsPage from 'pages/Dashboard/LogsPage';
+import CustomCommandsPage from 'pages/Dashboard/CustomCommands';
 import ModerationIndexPage from 'pages/Dashboard/Moderation/Index';
 import FilterPage from 'pages/Dashboard/Filter/Index';
 import FilterCapitalsPage from 'pages/Dashboard/Filter/Capitals';
@@ -353,6 +355,15 @@ class Root extends Component {
 
 					{/* ------------------------------- */}
 
+					<ListItem disabled={!guildData} component={Link} to={`/guilds/${guildID}/custom-commands`} button>
+						<ListItemIcon>
+							<SpeakerNotesIcon />
+						</ListItemIcon>
+						<ListItemText primary="Custom Commands" />
+					</ListItem>
+
+					{/* ------------------------------- */}
+
 					<ListItem disabled={!guildData} component={Link} to={`/guilds/${guildID}/starboard`} button>
 						<ListItemIcon>
 							<StarIcon />
@@ -457,10 +468,16 @@ class Root extends Component {
 										path="/guilds/:guildID/moderation"
 										component={ModerationIndexPage}
 									/>
+
 									<AuthenticatedRoute
 										componentProps={{ ...componentProps }}
 										path="/guilds/:guildID/logs"
 										component={LogsPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/custom-commands"
+										component={CustomCommandsPage}
 									/>
 									<AuthenticatedRoute
 										componentProps={{ ...componentProps }}
