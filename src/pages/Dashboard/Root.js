@@ -168,9 +168,16 @@ class Root extends Component {
 
 	syncGuildData = async () => {
 		const { guildID } = this.props.match.params;
-		const [guildData, guildSettings] = await Promise.all(
-			[authedFetch(`/guilds/${guildID}`), authedFetch(`/guilds/${guildID}/settings`)].map(p => p.catch(navigate('/404')))
-		);
+		let error;
+
+		const [guildData, guildSettings] = await Promise.all([
+			authedFetch(`/guilds/${guildID}`),
+			authedFetch(`/guilds/${guildID}/settings`)
+		]).catch(() => {
+			error = true;
+			return [null, null];
+		});
+		if (error) return navigate('/404')();
 
 		this.setState({ guildData, guildSettings });
 	};
