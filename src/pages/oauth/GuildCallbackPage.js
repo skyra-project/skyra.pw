@@ -8,7 +8,7 @@ class GuildCallbackPage extends Component {
 		guildID: null
 	};
 
-	componentWillMount() {
+	componentDidMount() {
 		const urlParams = new URLSearchParams(window.location.search);
 		const id = urlParams.get('guild_id');
 
@@ -16,7 +16,11 @@ class GuildCallbackPage extends Component {
 	}
 
 	render() {
-		return <GeneralPage loading>{this.state.guildID && <Redirect to={`/guilds/${this.state.guildID}`} />}</GeneralPage>;
+		return (
+			<GeneralPage loading={!this.state.guildID}>
+				{this.state.guildID && <Redirect to={`/guilds/${this.state.guildID}`} />}
+			</GeneralPage>
+		);
 	}
 }
 
