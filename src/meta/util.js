@@ -46,6 +46,25 @@ export const saveState = (key, state) => {
 	} catch (err) {}
 };
 
+export async function syncUser() {
+	const authenticated = getGlobal().authenticated;
+	if (!authenticated) return;
+	const response = await authedFetch('/oauth/user', {
+		method: 'POST',
+		body: {
+			action: 'SYNC_USER'
+		}
+	}).catch(err => {
+		// TODO toast
+		console.error(`Failed to sync user.`, err);
+	});
+
+	if (response && response.user) {
+		saveState('discord_user', response.user);
+		setGlobal({ user: response.user });
+	}
+}
+
 export async function authedFetch(path, options = { headers: {} }) {
 	if (!options.headers) options.headers = {};
 	options.headers.authorization = getGlobal().token;
