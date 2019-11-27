@@ -46,9 +46,28 @@ export const saveState = (key, state) => {
 	} catch (err) {}
 };
 
+export const debug = str => {
+	if (process.env.NODE_ENV === 'development') {
+		console.info(str);
+	}
+};
+
+const fiveMinutes = 1000 * 60 * 5;
+
 export async function syncUser() {
-	const authenticated = getGlobal().authenticated;
-	if (!authenticated) return;
+	// If they're not logged in, don't try to sync.
+	if (!getGlobal().authenticated) return;
+
+	// Check if they've synced in the past 5 minutes.
+	const lastSync = loadState('last_sync');
+	const difference = new Date().getTime() - lastSync;
+	if (difference < fiveMinutes) {
+		debug(`Not syncing - next sync available in ${(5 - difference / 1000 / 60).toFixed(2)} mins`);
+		return;
+	}
+
+	saveState('last_sync', new Date().getTime());
+
 	const response = await authedFetch('/oauth/user', {
 		method: 'POST',
 		body: {
