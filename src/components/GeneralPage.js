@@ -16,7 +16,7 @@ const PageContainer = styled.div`
 `;
 
 class GeneralPage extends Component {
-	async componentDidMount() {
+	componentDidMount() {
 		syncUser();
 	}
 	render() {
