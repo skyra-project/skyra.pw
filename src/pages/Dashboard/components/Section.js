@@ -6,7 +6,7 @@ import theme from 'meta/theme';
 
 const SectionContainer = styled.div`
 	margin-right: ${theme.spacing(4)}px;
-	margin-bottom: ${theme.spacing(4)}px;
+	margin-bottom: ${theme.spacing(2)}px;
 
 	& > h1 {
 		border-bottom: 2px solid ${theme.palette.primary.main};
@@ -20,13 +20,6 @@ const SectionContainer = styled.div`
 		margin-right: 0;
 		&:not(:first-child) {
 			margin-top: ${theme.spacing(3)}px;
-		}
-	}
-
-	.input {
-		display: flex;
-		& > * {
-			margin-right: ${theme.spacing(2)}px;
 		}
 	}
 `;

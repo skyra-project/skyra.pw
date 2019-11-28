@@ -4,6 +4,7 @@ import { TextField } from '@material-ui/core';
 import SelectRole from 'components/SelectRole';
 import SelectRoles from 'components/SelectRoles';
 import Select from 'components/Select';
+import SelectChannels from 'components/SelectChannels';
 
 import Section from './components/Section';
 import SimpleGrid from './components/SimpleGrid';
@@ -13,7 +14,7 @@ const SettingsPage = props => {
 		<Fragment>
 			{/* General Settings */}
 			<Section title="General Settings">
-				<div className="input">
+				<SimpleGrid gridProps={{ direction: 'row', justify: 'flex-start' }}>
 					<TextField
 						autoComplete="off"
 						autoCorrect="off"
@@ -32,9 +33,36 @@ const SettingsPage = props => {
 						<option value="en-US">English</option>
 						<option value="es-ES">Español</option>
 					</Select>
-				</div>
+				</SimpleGrid>
 			</Section>
 			{/* EndOf General */}
+
+			<Section title="Channels">
+				<SimpleGrid>
+					<SelectChannels
+						value={props.guildSettings.disabledChannels}
+						buttonText="Disabled Channels"
+						onChange={channels =>
+							props.patchGuildData({
+								disabledChannels: channels
+							})
+						}
+						guild={props.guildData}
+						title="Disabled Channels"
+					/>
+					<SelectChannels
+						value={props.guildSettings.disabledCommandsChannels}
+						buttonText="Command Disabled Channels"
+						onChange={channels =>
+							props.patchGuildData({
+								disabledCommandsChannels: channels
+							})
+						}
+						guild={props.guildData}
+						title="Command Disabled Channels"
+					/>
+				</SimpleGrid>
+			</Section>
 
 			{/* Roles */}
 			<Section title="Roles">
