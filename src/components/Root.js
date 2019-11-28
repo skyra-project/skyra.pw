@@ -11,9 +11,9 @@ import OAuthCallbackPage from 'pages/oauth/OAuthCallbackPage';
 import GuildCallbackPage from 'pages/oauth/GuildCallbackPage';
 import HomePage from 'pages/Index';
 import DashboardRootPage from 'pages/Dashboard/Root';
-import CommandsPage from 'pages/CommandsPage';
-import NotFoundPage from 'pages/NotFoundPage';
-import StatusPage from 'pages/StatusPage';
+import CommandsPage from 'pages/Commands';
+import NotFoundPage from 'pages/NotFound';
+import StatusPage from 'pages/Status';
 
 const Root = () => (
 	<ThemeProvider theme={theme}>
