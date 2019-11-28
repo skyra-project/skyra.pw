@@ -112,6 +112,17 @@ const SettingsPage = props => {
 							/>
 						);
 					})}
+					<SelectRoles
+						value={props.guildSettings.stickyRoles}
+						buttonText="Sticky Roles"
+						onChange={channels =>
+							props.patchGuildData({
+								stickyRoles: channels
+							})
+						}
+						guild={props.guildData}
+						title="Sticky Roles"
+					/>
 				</SimpleGrid>
 			</Section>
 			{/* EndOf Roles */}
