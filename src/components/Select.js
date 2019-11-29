@@ -9,7 +9,7 @@ const Select = ({ title, onChange, value, children }) => {
 	}, []);
 
 	return (
-		<FormControl variant="filled">
+		<FormControl variant="outlined">
 			<InputLabel ref={inputLabel}>{title}</InputLabel>
 			<MSelect native value={value} onChange={onChange} labelWidth={labelWidth}>
 				{children}
