@@ -41,7 +41,6 @@ const SettingsPage = props => {
 				<SimpleGrid>
 					<SelectChannels
 						value={props.guildSettings.disabledChannels}
-						buttonText="Disabled Channels"
 						onChange={channels =>
 							props.patchGuildData({
 								disabledChannels: channels
@@ -88,11 +87,10 @@ const SettingsPage = props => {
 							<SelectRole
 								key={role.name}
 								value={props.guildSettings.roles[role.name]}
-								buttonText={role.name}
 								onChange={r =>
 									props.patchGuildData({
 										roles: {
-											[role.name]: r ? r.id : null
+											[role.name]: r
 										}
 									})
 								}

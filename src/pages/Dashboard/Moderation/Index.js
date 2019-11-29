@@ -9,18 +9,17 @@ import SimpleGrid from '../components/SimpleGrid';
 const IndexPage = props => {
 	return (
 		<Fragment>
-			{/* Roles */}
 			<Section title="Staff Roles">
 				<SimpleGrid>
 					{['admin', 'moderator'].map(role => (
 						<SelectRole
 							key={role}
-							buttonText={role}
+							title={role}
 							value={props.guildSettings.roles[role]}
 							onChange={r =>
 								props.patchGuildData({
 									roles: {
-										[role]: r.id
+										[role]: r
 									}
 								})
 							}
@@ -29,21 +28,19 @@ const IndexPage = props => {
 					))}
 				</SimpleGrid>
 			</Section>
-			{/* EndOf Roles */}
 
-			{/* Channels{ title, guild, onChange, buttonText, sort } */}
 			<Section title="Channels">
 				<SimpleGrid>
 					{['nsfw-message-logs', 'moderation-logs', 'image-logs', 'message-logs', 'member-logs'].map(channel => {
 						return (
 							<SelectChannel
 								key={channel}
-								buttonText={channel}
+								title={channel}
 								value={props.guildSettings.channels[channel]}
 								onChange={c =>
 									props.patchGuildData({
 										channels: {
-											[channel]: c ? c.id : null
+											[channel]: c
 										}
 									})
 								}
@@ -53,7 +50,6 @@ const IndexPage = props => {
 					})}
 				</SimpleGrid>
 			</Section>
-			{/* EndOf Channels */}
 
 			<Section title="Punishment Settings">
 				<p>These settings effect what Skyra does when you're punishing (ban, kick, mute, etc) someone.</p>
@@ -95,7 +91,6 @@ const IndexPage = props => {
 					})}
 				</SimpleGrid>
 			</Section>
-			{/* EndOf Roles */}
 		</Fragment>
 	);
 };
