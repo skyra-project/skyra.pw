@@ -50,17 +50,6 @@ const SettingsPage = props => {
 						guild={props.guildData}
 						title="Disabled Channels"
 					/>
-					<SelectChannels
-						value={props.guildSettings.disabledCommandsChannels}
-						buttonText="Command Disabled Channels"
-						onChange={channels =>
-							props.patchGuildData({
-								disabledCommandsChannels: channels
-							})
-						}
-						guild={props.guildData}
-						title="Command Disabled Channels"
-					/>
 				</SimpleGrid>
 			</Section>
 
