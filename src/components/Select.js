@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormControl, InputLabel, Select as MSelect } from '@material-ui/core';
 
-const Select = ({ title, onChange, value, children }) => {
+const Select = ({ title, onChange, value, children, variant = 'outlined' }) => {
 	const inputLabel = React.useRef(null);
 	const [labelWidth, setLabelWidth] = React.useState(0);
 	React.useEffect(() => {
@@ -9,7 +9,7 @@ const Select = ({ title, onChange, value, children }) => {
 	}, []);
 
 	return (
-		<FormControl variant="outlined">
+		<FormControl variant={variant}>
 			<InputLabel ref={inputLabel}>{title}</InputLabel>
 			<MSelect native value={value} onChange={onChange} labelWidth={labelWidth}>
 				{children}
