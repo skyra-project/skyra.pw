@@ -3,6 +3,7 @@ import { DialogActions, DialogContent, ListItemText, ListItemIcon, ListItem, Lis
 
 import DialogTitle from './DialogTitle';
 import Dialog from './Dialog';
+import { toTitleCase } from 'meta/util';
 
 export default function SelectMany({ title, value, onChange, values, name }) {
 	const [open, setOpen] = React.useState(false);
@@ -31,7 +32,7 @@ export default function SelectMany({ title, value, onChange, values, name }) {
 				{title}: {name}
 			</Button>
 			<Dialog fullWidth maxWidth="xs" onClose={handleClose} open={open}>
-				<DialogTitle onClose={handleClose}>{title}</DialogTitle>
+				<DialogTitle onClose={handleClose}>{toTitleCase(title)}</DialogTitle>
 				<DialogContent dividers>
 					<List>
 						{values.map(({ value, name }) => (

@@ -125,7 +125,10 @@ export function navigate(path) {
 }
 
 export function toTitleCase(str) {
-	let splitStr = str.toLowerCase().split(' ');
+	let splitStr = str
+		.toLowerCase()
+		.replace(/-/g, ' ')
+		.split(' ');
 	for (let i = 0; i < splitStr.length; i++) {
 		splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
 	}
