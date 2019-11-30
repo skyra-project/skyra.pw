@@ -8,14 +8,22 @@ const Container = styled.div`
 	display: flex;
 	align-items: center;
 	align-content: center;
-	margin: 10px 0px;
+	margin-bottom: ${props => (props.error ? 40 : 30)}px;
+	height: 70px;
 
 	.MuiSelect-root {
-		min-width: 90px;
+		width: 90px;
 	}
 
-	.MuiFormControl-root {
-		min-width: 90px;
+	.MuiTextField-root {
+		width: 90px;
+	}
+
+	.MuiFormHelperText-root.Mui-error {
+		position: absolute;
+		bottom: -24px;
+		left: -4px;
+		width: 500px;
 	}
 `;
 
@@ -35,32 +43,50 @@ function determineUnit(ms) {
 	}
 }
 
-const SelectDuration = ({ value, label, min, max, onChange }) => {
+const SelectDuration = ({ value, min, max, onChange }) => {
 	const [inputDuration, inputUnit] = determineUnit(value);
 	const [unit, setUnit] = useState(inputUnit);
 	const [duration, setDuration] = useState(inputDuration);
+	const [error, setError] = useState(null);
+
+	function change(ms, cb) {
+		if (typeof min === 'number' && ms < min) {
+			return setError(`The minimum duration is ${determineUnit(min).join(' ')}.`);
+		}
+
+		if (typeof max === 'number' && ms > max) {
+			return setError(`The maximum duration is ${determineUnit(max).join(' ')}.`);
+		}
+
+		// Only invoke setState callbacks if its within the min/max
+		if (cb) cb();
+
+		setError(null);
+		onChange(ms);
+	}
 
 	function onChangeDuration(e) {
+		change(e.target.value * unitMap[unit]);
 		setDuration(e.target.value);
-		onChange(duration * unitMap[unit]);
 	}
 
 	function onChangeUnit(e) {
 		setUnit(e.target.value);
-		onChange(unitMap[e.target.value] * duration);
+		change(unitMap[e.target.value] * duration);
 	}
 
 	return (
-		<Container>
+		<Container error={!!error}>
 			<TextField
+				helperText={error}
+				error={!!error}
 				variant="filled"
 				value={duration}
 				type="number"
 				label="Duration"
-				inputProps={{ min, max }}
 				onChange={onChangeDuration}
 			/>
-			<Select variant="filled" title="Unit" value={unit} onChange={onChangeUnit}>
+			<Select helperText={error} error={!!error} variant="filled" title="Unit" value={unit} onChange={onChangeUnit}>
 				<option value="seconds">Seconds</option>
 				<option value="minutes">Minutes</option>
 				<option value="hours">Hours</option>
