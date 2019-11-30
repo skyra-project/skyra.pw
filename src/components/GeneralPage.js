@@ -1,6 +1,6 @@
 import React, { Component } from 'reactn';
 import styled from 'styled-components';
-import { Box, Typography, Button, Container, LinearProgress } from '@material-ui/core';
+import { Box, Typography, Button, Container, LinearProgress, Hidden } from '@material-ui/core';
 
 import { oauthURL } from 'meta/constants';
 import UserMenu from 'components/UserMenu';
@@ -30,7 +30,9 @@ class GeneralPage extends Component {
 							<SkyraLogo />
 							<Box display="flex" flexDirection="column" ml={3}>
 								<Typography variant="h5">Skyra</Typography>
-								<Typography variant="caption">The most advanced moderation bot.</Typography>
+								<Hidden smDown>
+									<Typography variant="caption">The most advanced moderation bot.</Typography>
+								</Hidden>
 							</Box>
 						</Box>
 						{authenticated && <UserMenu />}
