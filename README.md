@@ -1,12 +1,12 @@
-### `npm start`
+# Skyra.PW
 
-Runs the app in the development mode.<br>
+## Setup/Contributing Guide
 
-### `npm run build`
+To run the dashboard locally, you'll need a local version of Skyra running. Make sure you
+have the following constants defined in your `config.ts`: CLIENT_ID, CLIENT_SECRET, REDIRECT_URI.
 
-Builds the app for production to the `build` folder.<br>
+After forking/cloning this repo to a folder locally:
 
-## Learn More
-
-[Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-[React documentation](https://reactjs.org/).
+1. Navigate to `src/meta/constants.js` and change `CLIENT_ID` to the bot you're using.
+2. Install dependencies with `yarn`.
+3. `yarn start`
