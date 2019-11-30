@@ -78,9 +78,16 @@ export async function syncUser() {
 		console.error(`Failed to sync user.`, err);
 	});
 
-	if (response && response.user) {
+	if (!response) return;
+
+	if (response.user) {
 		saveState('discord_user', response.user);
 		setGlobal({ user: response.user });
+	}
+
+	if (response.access_token) {
+		saveState('discord_token', response.access_token);
+		setGlobal({ token: response.access_token });
 	}
 }
 
