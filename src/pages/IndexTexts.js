@@ -12,11 +12,11 @@ export const FUN_TEXT = [
 export const TOOLS_TEXT = [
 	'Skyra will add a powerful toolset at your fingertips.',
 	'From searching Youtube or Wikipedia to looking up games on IGDB or the Nintendo eShop or movies on TheMovieDatabase',
-	"She can also create unspoofable polls, quote messages and get full size vesions of users' avatars."
+	"She can also create polls, quote messages, get full size vesions of users' avatars and many more tool alike!"
 ].join('');
 
 export const POKEMON_TEXT = [
-	'Skyra utilizes the graphql-pokemon API for a rich dataset of Pokémon data',
+	'Skyra utilizes has a rich dataset of Pokémon data.',
 	'Query for data on any Pokémon, get details on items, moves and abilities,',
 	'find how types matchup or learn whether a Pokémon learns a move or not.'
 ].join('');
