@@ -109,7 +109,7 @@ const HomePage = () => {
 											className={classes.guildCard}
 										>
 											<CardHeader
-												subheader={!guild.channels && 'Not in server'}
+												subheader={!guild.channels && 'Click to invite Skyra'}
 												avatar={<GuildIcon guild={guild} />}
 												title={guild.name}
 											/>
