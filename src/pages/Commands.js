@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'reactn';
+import React, { Component } from 'reactn';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -7,41 +7,43 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { apiFetch } from 'meta/util';
 import LockIcon from '@material-ui/icons/Lock';
-import Chip from '@material-ui/core/Chip';
-import Avatar from '@material-ui/core/Avatar';
-import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 import Tooltip from '@material-ui/core/Tooltip';
 import DnsIcon from '@material-ui/icons/Dns';
 import Container from '@material-ui/core/Container';
 
+import GeneralPage from 'components/GeneralPage';
+import { Box, Divider } from '@material-ui/core';
+
 const styles = theme => ({
 	root: {
-		flexGrow: 1,
+		flexGrow: 1
 	},
 	card: {
-		padding: theme.spacing(2),
-		color: theme.palette.text.secondary,
-		width: '100%',
-		height: '100%'
+		color: theme.palette.text.secondary
 	},
 	title: {
-		fontSize: 14,
+		fontSize: 14
 	},
 	chip: {
-		padding: theme.spacing(0.2)
+		padding: theme.spacing(0.2),
+		marginLeft: theme.spacing(1)
 	},
 	cardContainer: {
-		flex: '1 1 0%',
-		minWidth: 500,
-		maxWidth: 500,
+		flex: '1 1 30%',
+		minWidth: 300,
+		margin: theme.spacing(2),
 		[theme.breakpoints.down('xs')]: {
 			width: '100%',
 			maxWidth: 'none'
 		},
 		transition: 'width 0.2s ease-in-out'
+	},
+	categoryName: {
+		[theme.breakpoints.down('sm')]: {
+			textAlign: 'center'
+		}
 	}
 });
-
 
 class CommandsPage extends Component {
 	state = {
@@ -60,84 +62,83 @@ class CommandsPage extends Component {
 	}
 
 	render() {
-		const { loading, commands, titles } = this.state;
+		const { loading, commands } = this.state;
 		const { classes } = this.props;
+		const categories = [...new Set(commands.map(command => command.category))];
+
 		return (
-			<div>
-				{loading ? (
-					<h1>Loading...</h1>
-				) : (
-					<Container>
-						<Fragment>
-								<h1>Commands:</h1>
-								<Grid container direction="row" justify="center" alignItems="center" spacing={3}>
-									{commands.map(cmd => (
-										<Grid item className={classes.cardContainer} key={cmd.name}>
-											<Card className={classes.card}>
-												<CardContent>
-													<Grid item xs={12} sm container>
-														<Grid item xs container direction="column" spacing={2}>
-															<Typography variant="h5" component="h2">
-																{cmd.name}
+			<GeneralPage loading={loading}>
+				<Container px={5}>
+					{!loading && (
+						<Box display="flex" flexDirection="column">
+							{categories.map(catName => (
+								<Box my={3}>
+									<Typography variant="h2" component="h1" className={classes.categoryName}>
+										{catName}
+									</Typography>
+									<Box my={3}>
+										<Divider />
+									</Box>
+									<Box display="flex" flexWrap="wrap" flex="1 1 30%">
+										{commands
+											.filter(command => command.category === catName)
+											.map(cmd => (
+												<Grid item className={classes.cardContainer} key={cmd.name}>
+													<Card className={classes.card}>
+														<CardContent>
+															<Box display="flex" justifyContent="space-between">
+																<Typography variant="h5" component="h2">
+																	s!{cmd.name}
+																</Typography>
+																<Grid item fontSize="small" container width="45%" justify="flex-end">
+																	{/*cmd.permissionLevel > 0 && (
+														<Tooltip title={titles[cmd.permissionLevel]} placement="left">
+															<Chip
+																label={cmd.permissionLevel}
+																avatar={
+																	<Avatar>
+																		<DoubleArrowIcon />
+																	</Avatar>
+																}
+																className={classes.chip}
+															/>
+														</Tooltip>
+															)*/}
+																	{cmd.guildOnly && (
+																		<Tooltip
+																			title="This command cannot be used in DMs."
+																			placement="left"
+																		>
+																			<DnsIcon className={classes.chip} />
+																		</Tooltip>
+																	)}
+																	{cmd.guarded && (
+																		<Tooltip title="This command cannot be disabled." placement="left">
+																			<LockIcon className={classes.chip} />
+																		</Tooltip>
+																	)}
+																</Grid>
+															</Box>
+															<Typography className={classes.title} color="textSecondary" gutterBottom>
+																{cmd.description}
 															</Typography>
-														</Grid>
-														<Grid item fontSize="small">
-															{cmd.permissionLevel > 0 &&
-																<Tooltip
-																	title={titles[cmd.permissionLevel]}
-																	placement="left"
-																>
-																	<Chip
-																		label={cmd.permissionLevel}
-																		avatar={<Avatar><DoubleArrowIcon /></Avatar>}
-																		className={classes.chip}
-																	/>
-																</Tooltip>
-															}
-															{cmd.guildOnly &&
-																<Tooltip
-																	title="This command cannot be used in DMs."
-																	placement="left"
-																>
-																	<Chip
-																		label="Server Only"
-																		avatar={<Avatar><DnsIcon /></Avatar>}
-																		className={classes.chip}
-																	/>
-																</Tooltip>
-															}
-															{cmd.guarded &&
-																<Tooltip
-																	title="This command cannot be disabled."
-																	placement="left"
-																>
-																	<Chip
-																		label="Guarded"
-																		avatar={<Avatar><LockIcon /></Avatar>}
-																		className={classes.chip}
-																	/>
-																</Tooltip>
-															}
-														</Grid>
-													</Grid>
-													<Typography className={classes.title} color="textSecondary" gutterBottom>
-														{cmd.description}
-													</Typography>
-												</CardContent>
-											</Card>
-										</Grid>
-									))}
-								</Grid>
-						</Fragment>
-					</Container>
-				)}
-			</div>
+														</CardContent>
+													</Card>
+												</Grid>
+											))}
+									</Box>
+								</Box>
+							))}
+						</Box>
+					)}
+				</Container>
+			</GeneralPage>
 		);
 	}
 }
 
 CommandsPage.propTypes = {
-	classes: PropTypes.object.isRequired,
+	classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(CommandsPage);
