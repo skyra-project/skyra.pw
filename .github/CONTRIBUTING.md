@@ -10,7 +10,7 @@ in your text editor or IDE of your choice to ensure builds from GitHub Actions d
 2. Create a new branch in your fork.
 3. Make your changes.
 4. Commit your changes, and push them.
-5. Submit a Pull Request [here](https://github.com/kyranet/Skyra/pulls)!
+5. Submit a Pull Request [here](https://github.com/kyranet/skyra.pw/pulls)!
 
 ## Running the dashboard locally
 
@@ -20,5 +20,12 @@ After forking/cloning this repo to a folder locally:
 
 1. Duplicate `.env.development` and rename it to `.env.development.local`
 2. Replace the value of `REACT_APP_CLIENT_ID` to your bot's ID
-3. Install dependencies with `yarn`.
-4. Run `yarn start` to start the React dev server
+3. Go to the Discord developer portal: https://discordapp.com/developers/applications/
+4. Select your bot application and go to the `OAuth2` tab
+5. Add redirect URL's for `http://localhost:3000/oauth/callback` and `http://localhost:3000/oauth/guild`
+6. Run a local instance of Skyra, be sure to follow it's local development guidelines as well.
+
+-   You have to set the CLIENT_ID, CLIENT_SECRET in Skyra's configuration to your own bot properly!
+
+6. Install dependencies with `yarn`.
+7. Run `yarn start` to start the React dev server

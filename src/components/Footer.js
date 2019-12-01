@@ -1,6 +1,7 @@
 import React from 'reactn';
 import styled from 'styled-components';
 import { Box, Typography, Container, Hidden } from '@material-ui/core';
+import { CLIENT_ID } from 'meta/constants';
 
 import SkyraLogo from 'assets/skyraLogo';
 import Link from 'components/Link';
@@ -43,12 +44,9 @@ const Left = () => (
 );
 const Right = () => (
 	<Box textAlign="right" display="flex" flexDirection="column">
-		<Link
-			to={`https://discordapp.com/oauth2/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&permissions=356904022&scope=bot`}
-			text="Invite Link"
-		/>
+		<Link to={`https://discordapp.com/oauth2/authorize?client_id=${CLIENT_ID}&permissions=356904022&scope=bot`} text="Invite Link" />
 		<Link to="https://www.patreon.com/kyranet" text="Donate" />
-		<Link to={`https://top.gg/bot/${process.env.REACT_APP_CLIENT_ID}`} text="Vote" />
+		<Link to={`https://top.gg/bot/${CLIENT_ID}`} text="Vote" />
 	</Box>
 );
 
