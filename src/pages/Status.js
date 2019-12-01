@@ -6,10 +6,12 @@ import { apiFetch } from 'meta/util';
 import RefreshIcon from '@material-ui/icons/Refresh';
 
 class StatusPage extends Component {
+
 	state = {
 		application: null,
 		error: false
 	};
+
 	componentDidMount() {
 		this.fetchApp();
 	}
@@ -50,6 +52,7 @@ class StatusPage extends Component {
 			</GeneralPage>
 		);
 	}
+
 }
 
 export default StatusPage;

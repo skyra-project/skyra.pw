@@ -13,7 +13,7 @@ const discordUser = loadState('discord_user');
 const discordToken = loadState('discord_token');
 
 setGlobal({
-	authenticated: !!discordToken && !!discordUser,
+	authenticated: Boolean(discordToken) && Boolean(discordUser),
 	user: discordUser,
 	token: discordToken
 });

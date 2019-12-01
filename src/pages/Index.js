@@ -28,14 +28,14 @@ const useStyles = makeStyles(theme => ({
 		transition: 'width 0.2s ease-in-out'
 	},
 	guildCard: {
-		background: theme.palette.secondary.main,
+		'background': theme.palette.secondary.main,
 		'&:hover': {
 			cursor: 'pointer'
 		}
 	}
 }));
 
-const sectionStyles = makeStyles(theme => ({
+const sectionStyles = makeStyles(() => ({
 	section: {
 		minHeight: '50vh'
 	},
@@ -107,12 +107,12 @@ const Section = ({ name, image }) => {
 					dawn awaits take root and flourish vanquish the impossible.
 				</Typography>
 			</div>
-			{!isOnMobile ? (
+			{isOnMobile ? (
+				<Fragment />
+			) : (
 				<div className="image-container">
 					<img alt={name} loading="lazy" src={image.src} width={image.width} height={image.height} className={classes.image} />
 				</div>
-			) : (
-				<Fragment />
 			)}
 		</SectionContainer>
 	);
@@ -130,12 +130,12 @@ const HomePage = () => {
 						<Grid container direction="row" justify="center" alignItems="center" spacing={4} className={classes.guildsList}>
 							{(user.guilds || [])
 								.filter(guild => guild.userCanManage)
-								.sort((a, b) => !!b.channels - !!a.channels)
+								.sort((a, b) => Boolean(b.channels) - Boolean(a.channels))
 								.map(guild => (
 									<Grid item className={classes.guildCardContainer} key={guild.id}>
 										<Card
 											elevation={2}
-											onClick={navigate(!!guild.channels ? `/guilds/${guild.id}` : guildAddURL(guild.id))}
+											onClick={navigate(Boolean(guild.channels) ? `/guilds/${guild.id}` : guildAddURL(guild.id))}
 											className={classes.guildCard}
 										>
 											<CardHeader

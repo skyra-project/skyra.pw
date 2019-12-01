@@ -46,6 +46,7 @@ const styles = theme => ({
 });
 
 class CommandsPage extends Component {
+
 	state = {
 		loading: true,
 		commands: [],
@@ -91,7 +92,7 @@ class CommandsPage extends Component {
 																	s!{cmd.name}
 																</Typography>
 																<Grid item fontSize="small" container width="45%" justify="flex-end">
-																	{/*cmd.permissionLevel > 0 && (
+																	{/* cmd.permissionLevel > 0 && (
 														<Tooltip title={titles[cmd.permissionLevel]} placement="left">
 															<Chip
 																label={cmd.permissionLevel}
@@ -135,6 +136,7 @@ class CommandsPage extends Component {
 			</GeneralPage>
 		);
 	}
+
 }
 
 CommandsPage.propTypes = {

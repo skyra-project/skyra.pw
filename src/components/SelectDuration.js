@@ -76,17 +76,17 @@ const SelectDuration = ({ value, min, max, onChange }) => {
 	}
 
 	return (
-		<Container error={!!error}>
+		<Container error={Boolean(error)}>
 			<TextField
 				helperText={error}
-				error={!!error}
+				error={Boolean(error)}
 				variant="filled"
 				value={duration}
 				type="number"
 				label="Duration"
 				onChange={onChangeDuration}
 			/>
-			<Select helperText={error} error={!!error} variant="filled" title="Unit" value={unit} onChange={onChangeUnit}>
+			<Select helperText={error} error={Boolean(error)} variant="filled" title="Unit" value={unit} onChange={onChangeUnit}>
 				<option value="seconds">Seconds</option>
 				<option value="minutes">Minutes</option>
 				<option value="hours">Hours</option>

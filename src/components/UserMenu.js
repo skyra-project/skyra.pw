@@ -22,7 +22,7 @@ const UserMenu = () => {
 				<Avatar style={{ marginRight: 5, height: 40, width: 40 }} src={user.avatarURL} alt="" />
 				<ExpandMoreIcon />
 			</Button>
-			<Menu style={{ marginTop: 25 }} onClose={handleClose} anchorEl={anchorEl} open={!!anchorEl} onClick={handleClose}>
+			<Menu style={{ marginTop: 25 }} onClose={handleClose} anchorEl={anchorEl} open={Boolean(anchorEl)} onClick={handleClose}>
 				<MenuItem component="a" onClick={logOut}>
 					Logout
 				</MenuItem>

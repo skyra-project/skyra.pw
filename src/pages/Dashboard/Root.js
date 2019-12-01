@@ -54,7 +54,7 @@ import ReactionsFilterPage from './Filter/Reactions';
 
 // Overwrite arrays when merging
 const mergeOptions = {
-	arrayMerge: (destinationArray, sourceArray, options) => sourceArray
+	arrayMerge: (destinationArray, sourceArray) => sourceArray
 };
 
 const drawerWidth = 240;
@@ -108,12 +108,12 @@ const styles = theme => ({
 	},
 	guildImage: {
 		...theme.mixins.toolbar,
-		padding: `0px ${theme.spacing(3)}px`,
-		background: theme.palette.primary.main,
-		color: theme.palette.primary.contrastText,
-		display: 'flex',
-		justifyContent: 'space-between',
-		alignItems: 'center',
+		'padding': `0px ${theme.spacing(3)}px`,
+		'background': theme.palette.primary.main,
+		'color': theme.palette.primary.contrastText,
+		'display': 'flex',
+		'justifyContent': 'space-between',
+		'alignItems': 'center',
 		'&:hover': {
 			cursor: 'pointer'
 		}
@@ -140,9 +140,9 @@ const styles = theme => ({
 		background: theme.palette.secondary.main
 	},
 	fabContainer: {
-		position: 'fixed',
-		bottom: 30,
-		right: 30,
+		'position': 'fixed',
+		'bottom': 30,
+		'right': 30,
 		'& button': {
 			marginLeft: 30
 		}
@@ -156,6 +156,7 @@ const styles = theme => ({
 });
 
 class Root extends Component {
+
 	state = {
 		mobileOpen: false,
 		guildData: null,
@@ -465,7 +466,7 @@ class Root extends Component {
 				</nav>
 				<main className={classes.content}>
 					{guildData ? (
-						<Fade in={!!guildData}>
+						<Fade in={Boolean(guildData)}>
 							<div>
 								<Switch>
 									<AuthenticatedRoute
@@ -557,6 +558,7 @@ class Root extends Component {
 			</div>
 		);
 	}
+
 }
 
 export default withStyles(styles)(Root);

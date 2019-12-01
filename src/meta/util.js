@@ -29,7 +29,7 @@ export function logOut() {
 
 export const loadState = key => {
 	try {
-		let serializedState = localStorage.getItem(key);
+		const serializedState = localStorage.getItem(key);
 		if (serializedState === null) {
 			return undefined;
 		}
@@ -119,13 +119,12 @@ export async function apiFetch(path, options = {}) {
 export function navigate(path) {
 	if (path.startsWith('http')) {
 		return () => (window.location.href = path);
-	} else {
-		return () => history.push(path);
 	}
+	return () => history.push(path);
 }
 
 export function toTitleCase(str) {
-	let splitStr = str
+	const splitStr = str
 		.toLowerCase()
 		.replace(/-/g, ' ')
 		.split(' ');

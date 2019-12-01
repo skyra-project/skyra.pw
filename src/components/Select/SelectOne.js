@@ -6,7 +6,7 @@ import Dialog from './Dialog';
 import SearchBar from './SearchBar';
 import { toTitleCase } from 'meta/util';
 
-export default function SelectMany({ title, value, onChange, values, name = 'None' }) {
+export default function SelectMany({ title, onChange, values, name = 'None' }) {
 	const [open, setOpen] = useState(false);
 	const [search, setSearch] = useState(null);
 
