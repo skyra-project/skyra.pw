@@ -47,6 +47,10 @@ import FilterCapitalsPage from 'pages/Dashboard/Filter/Capitals';
 import FilterLinksPage from 'pages/Dashboard/Filter/Links';
 import { authedFetch, navigate } from 'meta/util';
 import SkyraLogo from 'assets/skyraLogo';
+import InvitesFilterPage from './Filter/Invites';
+import MessagesFilterPage from './Filter/Messages';
+import NewLinesFilterPage from './Filter/NewLines';
+import ReactionsFilterPage from './Filter/Reactions';
 
 // Overwrite arrays when merging
 const mergeOptions = {
@@ -333,11 +337,51 @@ class Root extends Component {
 								disabled={!guildData}
 								dense
 								component={Link}
+								to={`/guilds/${guildID}/filter/invites`}
+								button
+								className={classes.nested}
+							>
+								<ListItemText primary="Invites" />
+							</ListItem>
+							<ListItem
+								disabled={!guildData}
+								dense
+								component={Link}
 								to={`/guilds/${guildID}/filter/links`}
 								button
 								className={classes.nested}
 							>
 								<ListItemText primary="Links" />
+							</ListItem>
+							<ListItem
+								disabled={!guildData}
+								dense
+								component={Link}
+								to={`/guilds/${guildID}/filter/messages`}
+								button
+								className={classes.nested}
+							>
+								<ListItemText primary="Message Duplication" />
+							</ListItem>
+							<ListItem
+								disabled={!guildData}
+								dense
+								component={Link}
+								to={`/guilds/${guildID}/filter/newlines`}
+								button
+								className={classes.nested}
+							>
+								<ListItemText primary="Line Spam" />
+							</ListItem>
+							<ListItem
+								disabled={!guildData}
+								dense
+								component={Link}
+								to={`/guilds/${guildID}/filter/reactions`}
+								button
+								className={classes.nested}
+							>
+								<ListItemText primary="Reactions" />
 							</ListItem>
 						</List>
 					</Collapse>
@@ -443,8 +487,28 @@ class Root extends Component {
 									/>
 									<AuthenticatedRoute
 										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/filter/invites"
+										component={InvitesFilterPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
 										path="/guilds/:guildID/filter/links"
 										component={FilterLinksPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/filter/messages"
+										component={MessagesFilterPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/filter/newlines"
+										component={NewLinesFilterPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/filter/reactions"
+										component={ReactionsFilterPage}
 									/>
 									<AuthenticatedRoute
 										componentProps={{ ...componentProps }}

@@ -34,14 +34,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SectionContainer = styled(Box)`
-	background: ${props => (!props.secondary ? theme.palette.primary.main : theme.palette.secondary.main)};
+	background: ${props => (props.secondary === 'false' ? theme.palette.primary.main : theme.palette.secondary.main)};
 	width: 100%;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
 	align-content: center;
 
-	flex-direction: ${props => (!props.secondary ? 'row-reverse' : 'row')};
+	flex-direction: ${props => (props.secondary === 'false' ? 'row-reverse' : 'row')};
 	flex-wrap: wrap;
 
 	.MuiDivider-root {
@@ -69,7 +69,7 @@ const SectionContainer = styled(Box)`
 `;
 
 const Section = ({ name, image, index }) => (
-	<SectionContainer secondary={index % 2 === 0} p={5}>
+	<SectionContainer secondary={(index % 2 === 0).toString()} p={5}>
 		<div className="text">
 			<Typography variant="h3" component="h1">
 				{name}
@@ -83,7 +83,7 @@ const Section = ({ name, image, index }) => (
 			</Typography>
 		</div>
 		<div className="image-container">
-			<img alt="" loading="lazy" src={image.src} />
+			<img alt={name} loading="lazy" src={image.src} width={image.width} height={image.height} />
 		</div>
 	</SectionContainer>
 );
@@ -126,13 +126,13 @@ const HomePage = () => {
 					name: 'Moderation',
 					image: {
 						src: ModerationImage,
-						width: 300,
-						height: 343
+						width: 400,
+						height: 229
 					}
 				},
-				{ name: 'Fun', image: { src: FunImage, width: 437, height: 190 } },
-				{ name: 'Tools', image: { src: ToolsImage, width: 400, height: 391 } },
-				{ name: 'Weeb', image: { src: WeebImage, width: 400, height: 325 } }
+				{ name: 'Fun', image: { src: FunImage, width: 400, height: 174 } },
+				{ name: 'Tools', image: { src: ToolsImage, width: 400, height: 392 } },
+				{ name: 'Weeb', image: { src: WeebImage, width: 400, height: 326 } }
 			].map(({ name, image }, index) => (
 				<Section index={index} name={name} image={image} key={name} />
 			))}

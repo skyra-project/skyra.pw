@@ -6,6 +6,7 @@ import Section from '../components/Section';
 import SimpleGrid from '../components/SimpleGrid';
 import Select from 'components/Select';
 import SelectBoolean from 'components/SelectBoolean';
+import SelectDuration from 'components/SelectDuration';
 import { bitwiseSet, bitwiseHas } from 'meta/util';
 
 const IndexPage = props => {
@@ -48,19 +49,25 @@ const IndexPage = props => {
 				</SimpleGrid>
 			</Section>
 			<Section title="Punishments">
-				<Select
-					title="Action"
-					value={capitals.hardAction}
-					onChange={e => props.patchGuildData({ selfmod: { capitals: { hardAction: e.target.value } } })}
-				>
-					<option value={0}>None</option>
-					<option value={1}>Warning</option>
-					<option value={2}>Kick</option>
-					<option value={3}>Mute</option>
-					<option value={4}>Softban</option>
-					<option value={5}>Ban</option>
-				</Select>
-				{/* TODO(GC | Antonio): Figure out a way for the duration */}
+				<SimpleGrid gridProps={{ direction: 'row', justify: 'flex-start' }}>
+					<Select
+						title="Action"
+						value={capitals.hardAction}
+						onChange={e => props.patchGuildData({ selfmod: { capitals: { hardAction: e.target.value } } })}
+					>
+						<option value={0}>None</option>
+						<option value={1}>Warning</option>
+						<option value={2}>Kick</option>
+						<option value={3}>Mute</option>
+						<option value={4}>Softban</option>
+						<option value={5}>Ban</option>
+					</Select>
+					<SelectDuration
+						value={capitals.hardActionDuration}
+						min={1000}
+						onChange={duration => props.patchGuildData({ selfmod: { capitals: { hardActionDuration: duration } } })}
+					></SelectDuration>
+				</SimpleGrid>
 				<Typography>Maximum Threshold</Typography>
 				<Slider
 					value={capitals.thresholdMaximum}
