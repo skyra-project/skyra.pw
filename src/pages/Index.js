@@ -34,14 +34,20 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SectionContainer = styled(Box)`
-	background: ${props => (props.secondary === 'false' ? theme.palette.primary.main : theme.palette.secondary.main)};
+	background: ${theme.palette.primary.main};
 	width: 100%;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
 	align-content: center;
 
-	flex-direction: ${props => (props.secondary === 'false' ? 'row-reverse' : 'row')};
+	flex-direction: row;
+
+	&:nth-of-type(odd) {
+		flex-direction: row-reverse;
+		background: ${theme.palette.secondary.main};
+	}
+
 	flex-wrap: wrap;
 
 	.MuiDivider-root {
@@ -68,8 +74,8 @@ const SectionContainer = styled(Box)`
 	}
 `;
 
-const Section = ({ name, image, index }) => (
-	<SectionContainer secondary={(index % 2 === 0).toString()} p={5}>
+const Section = ({ name, image }) => (
+	<SectionContainer p={5}>
 		<div className="text">
 			<Typography variant="h3" component="h1">
 				{name}
@@ -133,8 +139,8 @@ const HomePage = () => {
 				{ name: 'Fun', image: { src: FunImage, width: 400, height: 174 } },
 				{ name: 'Tools', image: { src: ToolsImage, width: 400, height: 392 } },
 				{ name: 'Weeb', image: { src: WeebImage, width: 400, height: 326 } }
-			].map(({ name, image }, index) => (
-				<Section index={index} name={name} image={image} key={name} />
+			].map(({ name, image }) => (
+				<Section name={name} image={image} key={name} />
 			))}
 		</GeneralPage>
 	);
