@@ -5,7 +5,7 @@ export const MODERATION_TEXT = [
 ].join(' ');
 
 export const FUN_TEXT = [
-	'Skyra can brighter up your server with many commands aimed at just adding fun, social interaction to your server',
+	'Skyra can brighten up your server with many commands aimed at just adding fun, social interaction to your server',
 	'She can find a random blurb of text using the markov, roll a magic eightball, generate memes and much much more!'
 ].join(' ');
 
