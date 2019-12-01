@@ -1,6 +1,6 @@
-import React, { useGlobal, Fragment } from 'reactn';
+import React, { useGlobal } from 'reactn';
 import styled from 'styled-components';
-import { Grid, Card, CardHeader, Container, Box, Typography, Divider, useMediaQuery, useTheme } from '@material-ui/core';
+import { Grid, Card, CardHeader, Container, Box, Typography, Divider, useMediaQuery, useTheme, Hidden } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 
@@ -15,6 +15,7 @@ import WeebImage from 'assets/images/features/weeb.png';
 import FunImage from 'assets/images/features/fun.png';
 import ToolsImage from 'assets/images/features/tools.png';
 import PokemonImage from 'assets/images/features/pokemon.png';
+import { POKEMON_TEXT, TOOLS_TEXT, FUN_TEXT, WEEB_TEXT, MODERATION_TEXT } from './IndexTexts';
 
 const useStyles = makeStyles(theme => ({
 	guildCardContainer: {
@@ -28,7 +29,7 @@ const useStyles = makeStyles(theme => ({
 		transition: 'width 0.2s ease-in-out'
 	},
 	guildCard: {
-		'background': theme.palette.secondary.main,
+		background: theme.palette.secondary.main,
 		'&:hover': {
 			cursor: 'pointer'
 		}
@@ -88,7 +89,7 @@ const SectionContainer = styled(Box)`
 	}
 `;
 
-const Section = ({ name, image }) => {
+const Section = ({ name, image, text }) => {
 	const classes = sectionStyles();
 	const theme = useTheme();
 	const isOnMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -100,20 +101,13 @@ const Section = ({ name, image }) => {
 					{name}
 				</Typography>
 				<Divider />
-				<Typography>
-					Vangelis prime number Jean-François Champollion billions upon billions cosmic ocean Apollonius of Perga. Shores of the
-					cosmic ocean inconspicuous motes of rock and gas laws of physics globular star cluster invent the universe corpus
-					callosum? Shores of the cosmic ocean vastness is bearable only through love take root and flourish a still more glorious
-					dawn awaits take root and flourish vanquish the impossible.
-				</Typography>
+				<Typography>{text}</Typography>
 			</div>
-			{isOnMobile ? (
-				<Fragment />
-			) : (
+			<Hidden smDown>
 				<div className="image-container">
 					<img alt={name} loading="lazy" src={image.src} width={image.width} height={image.height} className={classes.image} />
 				</div>
-			)}
+			</Hidden>
 		</SectionContainer>
 	);
 };
@@ -158,14 +152,15 @@ const HomePage = () => {
 						src: ModerationImage,
 						width: 400,
 						height: 229
-					}
+					},
+					text: MODERATION_TEXT
 				},
-				{ name: 'Fun', image: { src: FunImage, width: 400, height: 174 } },
-				{ name: 'Tools', image: { src: ToolsImage, width: 400, height: 392 } },
-				{ name: 'Pokemon', image: { src: PokemonImage, width: 400, height: 364 } },
-				{ name: 'Weeb', image: { src: WeebImage, width: 400, height: 326 } }
-			].map(({ name, image }) => (
-				<Section name={name} image={image} key={name} />
+				{ name: 'Fun', image: { src: FunImage, width: 400, height: 174 }, text: FUN_TEXT },
+				{ name: 'Tools', image: { src: ToolsImage, width: 400, height: 392 }, text: TOOLS_TEXT },
+				{ name: 'Pokemon', image: { src: PokemonImage, width: 400, height: 364 }, text: POKEMON_TEXT },
+				{ name: 'Weeb', image: { src: WeebImage, width: 400, height: 326 }, text: WEEB_TEXT }
+			].map(({ name, image, text }) => (
+				<Section name={name} image={image} text={text} key={name} />
 			))}
 		</GeneralPage>
 	);
