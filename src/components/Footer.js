@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Box, Typography, Container, Hidden } from '@material-ui/core';
 
 import SkyraLogo from 'assets/skyraLogo';
+import Link from 'components/Link';
 import theme from 'meta/theme';
 
 const FooterContainer = styled.footer`
@@ -34,17 +35,20 @@ const FooterContainer = styled.footer`
 `;
 
 const Left = () => (
-	<Box textAlign="left">
-		<Typography>Support Server</Typography>
-		<Typography>Invite Link</Typography>
-		<Typography>Patreon</Typography>
+	<Box textAlign="left" display="flex" flexDirection="column">
+		<Link to="https://discordapp.com/invite/6gakFR2" text="Support Server" />
+		<Link to="https://www.patreon.com/kyranet" text="Patreon" />
+		<Link to="https://github.com/kyranet/skyra" text="Github" />
 	</Box>
 );
 const Right = () => (
-	<Box textAlign="right">
-		<Typography>Support Server</Typography>
-		<Typography>Invite Link</Typography>
-		<Typography>Patreon</Typography>
+	<Box textAlign="right" display="flex" flexDirection="column">
+		<Link
+			to="https://discordapp.com/oauth2/authorize?client_id=266624760782258186&permissions=356904022&scope=bot"
+			text="Invite Link"
+		/>
+		<Link to="https://www.patreon.com/kyranet" text="Donate" />
+		<Link to="https://top.gg/bot/266624760782258186" text="Vote" />
 	</Box>
 );
 
