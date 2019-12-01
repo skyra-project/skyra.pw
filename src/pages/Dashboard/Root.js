@@ -14,8 +14,6 @@ import {
 	Divider,
 	AppBar,
 	Typography,
-	Breadcrumbs,
-	Link as MaterialLink,
 	Button,
 	Collapse,
 	Slide,
@@ -47,7 +45,7 @@ import ModerationIndexPage from 'pages/Dashboard/Moderation/Index';
 import FilterPage from 'pages/Dashboard/Filter/Index';
 import FilterCapitalsPage from 'pages/Dashboard/Filter/Capitals';
 import FilterLinksPage from 'pages/Dashboard/Filter/Links';
-import { authedFetch, navigate, toTitleCase } from 'meta/util';
+import { authedFetch, navigate } from 'meta/util';
 import SkyraLogo from 'assets/skyraLogo';
 
 // Overwrite arrays when merging
@@ -234,7 +232,7 @@ class Root extends Component {
 	render() {
 		const { container, classes } = this.props;
 		// The guildID and optional pageName in the URL. e.g. /guilds/228822415189344257/settings
-		const { guildID, pageName } = this.props.match.params;
+		const { guildID } = this.props.match.params;
 		const { mobileOpen, guildData, guildSettings, guildSettingsChanges, isUpdating, openSubMenus } = this.state;
 
 		const componentProps = {
@@ -384,25 +382,10 @@ class Root extends Component {
 
 						<Box display="flex" justifyContent="space-between" width="100%" alignItems="center">
 							{guildData ? (
-								<Breadcrumbs className={classes.breadcrumb}>
-									<MaterialLink component={Link} color="inherit" to={`/guilds/${guildID}`}>
-										{guildData.name}
-									</MaterialLink>
-									{!!pageName && (
-										<MaterialLink
-											component={Link}
-											color="inherit"
-											to={`/guilds/${guildID}/${pageName}`}
-											onClick={() => ''}
-										>
-											{toTitleCase(pageName)}
-										</MaterialLink>
-									)}
-								</Breadcrumbs>
+								<Typography component="h1">{guildData.name}</Typography>
 							) : (
 								<Skeleton type="text" width={200} height={16} />
 							)}
-
 							<UserMenu />
 						</Box>
 					</Toolbar>
