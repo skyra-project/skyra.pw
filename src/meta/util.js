@@ -1,5 +1,5 @@
-import { setGlobal, useRef, useEffect, getGlobal } from 'reactn';
-import { history, BASE_API_URL } from 'meta/constants';
+import { BASE_API_URL, history } from 'meta/constants';
+import { getGlobal, setGlobal, useEffect, useRef } from 'reactn';
 
 export function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
