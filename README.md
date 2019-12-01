@@ -1,5 +1,8 @@
 # Skyra.PW [![Discord](https://discordapp.com/api/guilds/254360814063058944/embed.png)](https://skyra.pw/join)
 
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/kyranet/skyra.pw.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/kyranet/skyra.pw/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/kyranet/skyra.pw.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/kyranet/skyra.pw/context:javascript)
+
 ## Set-Up
 
 To run the dashboard locally, you'll need a local version of Skyra running.
