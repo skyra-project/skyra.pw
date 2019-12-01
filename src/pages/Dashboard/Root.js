@@ -247,7 +247,7 @@ class Root extends Component {
 		};
 
 		const drawer = (
-			<div>
+			<Fragment>
 				<div onClick={navigate(`/`)} className={classes.guildImage}>
 					<SkyraLogo />
 					<Typography variant="h5">Skyra</Typography>
@@ -272,7 +272,7 @@ class Root extends Component {
 				</ServerHeader>
 				{/* --------------------- */}
 
-				<List>
+				<List style={{ overflowY: 'auto' }}>
 					<ListItem disabled={!guildData} component={Link} to={`/guilds/${guildID}`} button>
 						<ListItemIcon>
 							<Settings />
@@ -413,7 +413,7 @@ class Root extends Component {
 						<ListItemText primary="Starboard" />
 					</ListItem>
 				</List>
-			</div>
+			</Fragment>
 		);
 
 		return (

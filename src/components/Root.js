@@ -1,12 +1,12 @@
 import React from 'reactn';
 import { Router, Route, Switch } from 'react-router-dom';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
 
 import theme from 'meta/theme';
 import { history, oauthURL } from 'meta/constants';
 import UnauthenticatedRoute from 'components/UnauthenticatedRoute';
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
+import CssBaseline from 'components/CssBaseline';
 import OAuthCallbackPage from 'pages/oauth/OAuthCallbackPage';
 import GuildCallbackPage from 'pages/oauth/GuildCallbackPage';
 import HomePage from 'pages/Index';
