@@ -1,6 +1,6 @@
 # Contributing
 
-**The issue tracker is only for issue reporting or proposals/suggestions. If you have a question, you can find us in our [Discord Server](https://skyra.pw/join)**.
+**If you have a question, you can find us in our [Discord Server](https://skyra.pw/join)**.
 
 To contribute to this repository, feel free to create a new fork of the repository and
 submit a pull request. We highly suggest [ESLint](https://eslint.org/) to be installed
