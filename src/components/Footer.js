@@ -44,11 +44,11 @@ const Left = () => (
 const Right = () => (
 	<Box textAlign="right" display="flex" flexDirection="column">
 		<Link
-			to="https://discordapp.com/oauth2/authorize?client_id=266624760782258186&permissions=356904022&scope=bot"
+			to={`https://discordapp.com/oauth2/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&permissions=356904022&scope=bot`}
 			text="Invite Link"
 		/>
 		<Link to="https://www.patreon.com/kyranet" text="Donate" />
-		<Link to="https://top.gg/bot/266624760782258186" text="Vote" />
+		<Link to={`https://top.gg/bot/${process.env.REACT_APP_CLIENT_ID}`} text="Vote" />
 	</Box>
 );
 

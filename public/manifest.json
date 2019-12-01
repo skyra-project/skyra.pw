@@ -1,42 +1,43 @@
 {
-  "$schema": "http://json.schemastore.org/web-manifest",
-  "description": "Skyra is a multipurpose Discord bot designed to handle most tasks, helping users manage their servers easily.",
-  "name": "Skyra",
-  "short_name": "Skyra",
-  "theme_color": "#7189DA",
-  "background_color": "#26262B",
-  "lang": "en_US",
-  "scope": "/",
-  "display": "standalone",
-  "orientation": "portrait",
-  "start_url": "/",
-  "icons": [
-    {
-      "src": "/icons/android-chrome-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/android-chrome-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ],
-  "splash_pages": {
-    "name": "Skyra",
-    "theme_color": "#7189DA",
-    "background_color": "#26262B",
-    "icons": [
-      {
-        "src": "icons/android-chrome-192x192.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      },
-      {
-        "src": "icons/android-chrome-512x512.png",
-        "sizes": "512x512",
-        "type": "image/png"
-      }
-    ]
-  }
+	"$schema": "http://json.schemastore.org/web-manifest",
+	"description": "Skyra is a multipurpose Discord bot designed to handle most tasks, helping users manage their servers easily.",
+	"name": "Skyra",
+	"short_name": "Skyra",
+	"theme_color": "#7189DA",
+	"background_color": "#26262B",
+	"dir": "auto",
+	"lang": "en_US",
+	"scope": "/",
+	"display": "standalone",
+	"orientation": "portrait",
+	"start_url": "/",
+	"icons": [
+		{
+			"src": "/icons/android-chrome-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "/icons/android-chrome-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	],
+	"splash_pages": {
+		"name": "Skyra",
+		"theme_color": "#7189DA",
+		"background_color": "#26262B",
+		"icons": [
+			{
+				"src": "icons/android-chrome-192x192.png",
+				"sizes": "192x192",
+				"type": "image/png"
+			},
+			{
+				"src": "icons/android-chrome-512x512.png",
+				"sizes": "512x512",
+				"type": "image/png"
+			}
+		]
+	}
 }

@@ -6,7 +6,8 @@ import { loadState } from 'meta/util';
 import Root from 'components/Root';
 
 import addReactNDevTools from 'reactn-devtools';
-addReactNDevTools();
+
+if (process.env.NODE_ENV === 'development') addReactNDevTools();
 
 const discordUser = loadState('discord_user');
 const discordToken = loadState('discord_token');
