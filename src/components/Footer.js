@@ -18,7 +18,6 @@ const FooterContainer = styled.footer`
 
 	.container {
 		display: flex;
-
 		justify-content: space-around;
 
 		${theme.breakpoints.down('xs')} {
@@ -37,16 +36,20 @@ const FooterContainer = styled.footer`
 
 const Left = () => (
 	<Box textAlign="left" display="flex" flexDirection="column">
-		<Link to="https://discordapp.com/invite/6gakFR2" text="Support Server" />
-		<Link to="https://www.patreon.com/kyranet" text="Patreon" />
-		<Link to="https://github.com/kyranet/skyra" text="Github" />
+		<Link variant="body1" to="https://discordapp.com/invite/6gakFR2" text="Support Server" />
+		<Link variant="body1" to="https://www.patreon.com/kyranet" text="Patreon" />
+		<Link variant="body1" to="https://github.com/kyranet/skyra" text="Github" />
 	</Box>
 );
 const Right = () => (
 	<Box textAlign="right" display="flex" flexDirection="column">
-		<Link to={`https://discordapp.com/oauth2/authorize?client_id=${CLIENT_ID}&permissions=356904022&scope=bot`} text="Invite Link" />
-		<Link to="https://www.patreon.com/kyranet" text="Donate" />
-		<Link to={`https://top.gg/bot/${CLIENT_ID}`} text="Vote" />
+		<Link
+			variant="body1"
+			to={`https://discordapp.com/oauth2/authorize?client_id=${CLIENT_ID}&permissions=356904022&scope=bot`}
+			text="Invite Link"
+		/>
+		<Link variant="body1" to="https://www.patreon.com/kyranet" text="Donate" />
+		<Link variant="body1" to={`https://top.gg/bot/${CLIENT_ID}`} text="Vote" />
 	</Box>
 );
 
