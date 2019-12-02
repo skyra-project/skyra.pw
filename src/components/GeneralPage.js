@@ -16,7 +16,6 @@ const PageContainer = styled.div`
 `;
 
 class GeneralPage extends Component {
-
 	componentDidMount() {
 		syncUser();
 	}
@@ -40,7 +39,7 @@ class GeneralPage extends Component {
 						{authenticated && <UserMenu />}
 
 						{!authenticated && !loading && (
-							<Button href={oauthURL} variant="contained" color="secondary">
+							<Button href={oauthURL.toString()} variant="contained" color="secondary">
 								Log In
 							</Button>
 						)}
@@ -51,7 +50,6 @@ class GeneralPage extends Component {
 			</PageContainer>
 		);
 	}
-
 }
 
 export default GeneralPage;
