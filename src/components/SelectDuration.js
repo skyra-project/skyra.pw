@@ -9,7 +9,6 @@ const Container = styled.div`
 	align-items: center;
 	align-content: center;
 	margin-bottom: ${props => (props.error ? 40 : 30)}px;
-	height: 70px;
 
 	.MuiSelect-root {
 		width: 90px;
@@ -22,8 +21,23 @@ const Container = styled.div`
 	.MuiFormHelperText-root.Mui-error {
 		position: absolute;
 		bottom: -24px;
-		left: -4px;
+		left: -12px;
 		width: 500px;
+	}
+
+	.MuiFormControl-root {
+		border-color: white;
+
+		&.MuiTextField-root fieldset {
+			border-top-right-radius: 0px;
+			border-bottom-right-radius: 0px;
+		}
+
+		&:not(.MuiTextField-root) fieldset {
+			margin-left: -1px;
+			border-top-left-radius: 0px;
+			border-bottom-left-radius: 0px;
+		}
 	}
 `;
 
@@ -80,13 +94,13 @@ const SelectDuration = ({ value, min, max, onChange }) => {
 			<TextField
 				helperText={error}
 				error={Boolean(error)}
-				variant="filled"
+				variant="outlined"
 				value={duration}
 				type="number"
 				label="Duration"
 				onChange={onChangeDuration}
 			/>
-			<Select helperText={error} error={Boolean(error)} variant="filled" title="Unit" value={unit} onChange={onChangeUnit}>
+			<Select helperText={error} error={Boolean(error)} variant="outlined" value={unit} onChange={onChangeUnit}>
 				<option value="seconds">Seconds</option>
 				<option value="minutes">Minutes</option>
 				<option value="hours">Hours</option>
