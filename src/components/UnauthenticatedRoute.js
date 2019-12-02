@@ -1,19 +1,10 @@
 import React, { useGlobal } from 'reactn';
 import { Route, Redirect } from 'react-router-dom';
 
-const UnauthenticatedRoute = ({ authState, component: Component, componentProps, ...rest }) => {
+const UnauthenticatedRoute = ({ component: Component, componentProps, ...rest }) => {
 	const [global] = useGlobal();
 	return (
-		<Route
-			{...rest}
-			render={props =>
-				!global.authenticated ? (
-					<Component {...componentProps} {...props} />
-				) : (
-					<Redirect to="/" />
-				)
-			}
-		/>
+		<Route {...rest} render={props => (global.authenticated ? <Redirect to="/" /> : <Component {...componentProps} {...props} />)} />
 	);
 };
 

@@ -11,13 +11,12 @@ const CustomLink = ({ to, text }) => {
 				{text}
 			</Link>
 		);
-	} else {
-		return (
-			<Link component="a" href={to}>
-				{text}
-			</Link>
-		);
 	}
+	return (
+		<Link component="a" href={to} target="_blank" rel="noopener noreferrer">
+			{text}
+		</Link>
+	);
 };
 
 export default CustomLink;

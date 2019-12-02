@@ -59,29 +59,27 @@ const Middle = () => (
 	</Box>
 );
 
-const Footer = () => {
-	return (
-		<FooterContainer>
-			<Container maxWidth="sm">
-				<Hidden xsDown>
-					<Box className="container">
+const Footer = () => (
+	<FooterContainer>
+		<Container maxWidth="sm">
+			<Hidden xsDown>
+				<Box className="container">
+					<Left />
+					<Middle />
+					<Right />
+				</Box>
+			</Hidden>
+			<Hidden smUp>
+				<Box className="container">
+					<Box display="flex" justifyContent="space-between" width="100%" px={3}>
 						<Left />
-						<Middle />
 						<Right />
 					</Box>
-				</Hidden>
-				<Hidden smUp>
-					<Box className="container">
-						<Box display="flex" justifyContent="space-between" width="100%" px={3}>
-							<Left />
-							<Right />
-						</Box>
-						<Middle />
-					</Box>
-				</Hidden>
-			</Container>
-		</FooterContainer>
-	);
-};
+					<Middle />
+				</Box>
+			</Hidden>
+		</Container>
+	</FooterContainer>
+);
 
 export default Footer;

@@ -16,9 +16,11 @@ const PageContainer = styled.div`
 `;
 
 class GeneralPage extends Component {
+
 	componentDidMount() {
 		syncUser();
 	}
+
 	render() {
 		const { children, loading = false } = this.props;
 		const { authenticated } = this.global;
@@ -49,6 +51,7 @@ class GeneralPage extends Component {
 			</PageContainer>
 		);
 	}
+
 }
 
 export default GeneralPage;

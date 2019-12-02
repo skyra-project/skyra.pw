@@ -1,7 +1,8 @@
 import React, { useGlobal } from 'reactn';
 import styled from 'styled-components';
-import { Grid, Card, CardHeader, Container, Box, Typography, Divider } from '@material-ui/core';
+import { Grid, Card, CardHeader, Container, Box, Typography, Divider, useMediaQuery, useTheme, Hidden } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import clsx from 'clsx';
 
 import GuildIcon from 'components/GuildIcon';
 import { navigate } from 'meta/util';
@@ -13,6 +14,8 @@ import ModerationImage from 'assets/images/features/moderation.png';
 import WeebImage from 'assets/images/features/weeb.png';
 import FunImage from 'assets/images/features/fun.png';
 import ToolsImage from 'assets/images/features/tools.png';
+import PokemonImage from 'assets/images/features/pokemon.png';
+import { POKEMON_TEXT, TOOLS_TEXT, FUN_TEXT, WEEB_TEXT, MODERATION_TEXT } from './IndexTexts';
 
 const useStyles = makeStyles(theme => ({
 	guildCardContainer: {
@@ -30,6 +33,18 @@ const useStyles = makeStyles(theme => ({
 		'&:hover': {
 			cursor: 'pointer'
 		}
+	}
+}));
+
+const sectionStyles = makeStyles(() => ({
+	section: {
+		minHeight: '50vh'
+	},
+	sectionMobile: {
+		minHeight: '60vh'
+	},
+	image: {
+		borderRadius: 4
 	}
 }));
 
@@ -74,25 +89,28 @@ const SectionContainer = styled(Box)`
 	}
 `;
 
-const Section = ({ name, image }) => (
-	<SectionContainer p={5}>
-		<div className="text">
-			<Typography variant="h3" component="h1">
-				{name}
-			</Typography>
-			<Divider />
-			<Typography>
-				Vangelis prime number Jean-François Champollion billions upon billions cosmic ocean Apollonius of Perga. Shores of the
-				cosmic ocean inconspicuous motes of rock and gas laws of physics globular star cluster invent the universe corpus callosum?
-				Shores of the cosmic ocean vastness is bearable only through love take root and flourish a still more glorious dawn awaits
-				take root and flourish vanquish the impossible.
-			</Typography>
-		</div>
-		<div className="image-container">
-			<img alt={name} loading="lazy" src={image.src} width={image.width} height={image.height} />
-		</div>
-	</SectionContainer>
-);
+const Section = ({ name, image, text }) => {
+	const classes = sectionStyles();
+	const theme = useTheme();
+	const isOnMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+	return (
+		<SectionContainer p={5} className={clsx({ [classes.section]: !isOnMobile, [classes.sectionMobile]: isOnMobile })}>
+			<div className="text">
+				<Typography variant="h3" component="h1">
+					{name}
+				</Typography>
+				<Divider />
+				<Typography>{text}</Typography>
+			</div>
+			<Hidden smDown>
+				<div className="image-container">
+					<img alt={name} loading="lazy" src={image.src} width={image.width} height={image.height} className={classes.image} />
+				</div>
+			</Hidden>
+		</SectionContainer>
+	);
+};
 
 const HomePage = () => {
 	const [global] = useGlobal();
@@ -106,12 +124,12 @@ const HomePage = () => {
 						<Grid container direction="row" justify="center" alignItems="center" spacing={4} className={classes.guildsList}>
 							{(user.guilds || [])
 								.filter(guild => guild.userCanManage)
-								.sort((a, b) => !!b.channels - !!a.channels)
+								.sort((a, b) => Boolean(b.channels) - Boolean(a.channels))
 								.map(guild => (
 									<Grid item className={classes.guildCardContainer} key={guild.id}>
 										<Card
 											elevation={2}
-											onClick={navigate(!!guild.channels ? `/guilds/${guild.id}` : guildAddURL(guild.id))}
+											onClick={navigate(Boolean(guild.channels) ? `/guilds/${guild.id}` : guildAddURL(guild.id))}
 											className={classes.guildCard}
 										>
 											<CardHeader
@@ -134,13 +152,15 @@ const HomePage = () => {
 						src: ModerationImage,
 						width: 400,
 						height: 229
-					}
+					},
+					text: MODERATION_TEXT
 				},
-				{ name: 'Fun', image: { src: FunImage, width: 400, height: 174 } },
-				{ name: 'Tools', image: { src: ToolsImage, width: 400, height: 392 } },
-				{ name: 'Weeb', image: { src: WeebImage, width: 400, height: 326 } }
-			].map(({ name, image }) => (
-				<Section name={name} image={image} key={name} />
+				{ name: 'Fun', image: { src: FunImage, width: 400, height: 174 }, text: FUN_TEXT },
+				{ name: 'Tools', image: { src: ToolsImage, width: 400, height: 392 }, text: TOOLS_TEXT },
+				{ name: 'Pokemon', image: { src: PokemonImage, width: 400, height: 364 }, text: POKEMON_TEXT },
+				{ name: 'Weeb', image: { src: WeebImage, width: 400, height: 326 }, text: WEEB_TEXT }
+			].map(({ name, image, text }) => (
+				<Section name={name} image={image} text={text} key={name} />
 			))}
 		</GeneralPage>
 	);
