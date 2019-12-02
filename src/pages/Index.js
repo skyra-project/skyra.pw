@@ -38,10 +38,10 @@ const useStyles = makeStyles(theme => ({
 
 const sectionStyles = makeStyles(() => ({
 	section: {
-		minHeight: '50vh'
+		minHeight: 'min-content'
 	},
 	sectionMobile: {
-		minHeight: '60vh'
+		minHeight: 'min-content'
 	},
 	image: {
 		borderRadius: 4

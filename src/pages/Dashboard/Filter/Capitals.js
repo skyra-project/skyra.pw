@@ -14,7 +14,7 @@ const IndexPage = props => {
 
 	return (
 		<Fragment>
-			<Section title="Capitals">
+			<Section title="Capital Letters Filter">
 				<SimpleGrid>
 					<SelectBoolean
 						title={`Filter ${capitals.enabled ? 'Enabled' : 'Disabled'}`}

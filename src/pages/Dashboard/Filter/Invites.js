@@ -14,7 +14,7 @@ const InvitesFilterPage = props => {
 
 	return (
 		<Fragment>
-			<Section title="Invites">
+			<Section title="Invite Link Filter">
 				<SimpleGrid>
 					<SelectBoolean
 						title={`Filter ${invites.enabled ? 'Enabled' : 'Disabled'}`}

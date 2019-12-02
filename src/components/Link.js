@@ -4,17 +4,17 @@ import Link from '@material-ui/core/Link';
 
 const RefLink = React.forwardRef((props, ref) => <RouterLink innerRef={ref} {...props} />);
 
-const CustomLink = ({ to, text }) => {
-	if (to.startsWith('/')) {
+const CustomLink = props => {
+	if (props.to.startsWith('/')) {
 		return (
-			<Link component={RefLink} to="/">
-				{text}
+			<Link {...props} component={RefLink}>
+				{props.text}
 			</Link>
 		);
 	}
 	return (
-		<Link component="a" href={to} target="_blank" rel="noopener noreferrer">
-			{text}
+		<Link {...props} component="a" href={props.to} target="_blank" rel="noopener noreferrer">
+			{props.text}
 		</Link>
 	);
 };

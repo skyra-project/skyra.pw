@@ -52,6 +52,10 @@ export const debug = str => {
 	}
 };
 
+export const error = (...args) => {
+	console.error(...args);
+};
+
 const fiveMinutes = 1000 * 60 * 5;
 
 export async function syncUser() {
@@ -75,7 +79,8 @@ export async function syncUser() {
 		}
 	}).catch(err => {
 		// TODO toast
-		console.error(`Failed to sync user.`, err);
+		error(`Failed to sync user.`);
+		if (err.status === 401) logOut();
 	});
 
 	if (!response) return;
@@ -110,7 +115,7 @@ export async function apiFetch(path, options = {}) {
 	const jsonResponse = await response.json();
 
 	if (jsonResponse.error) {
-		throw new Error(jsonResponse.error);
+		throw response;
 	} else {
 		return jsonResponse;
 	}

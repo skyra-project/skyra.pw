@@ -14,7 +14,7 @@ const ReactionsFilterPage = props => {
 
 	return (
 		<Fragment>
-			<Section title="Reactions">
+			<Section title="Reaction Filter">
 				<SimpleGrid>
 					<SelectBoolean
 						title={`Filter ${reactions.enabled ? 'Enabled' : 'Disabled'}`}

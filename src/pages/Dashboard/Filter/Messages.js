@@ -14,7 +14,7 @@ const MessagesFilterPage = props => {
 
 	return (
 		<Fragment>
-			<Section title="Message Duplication">
+			<Section title="Message Duplication Filter">
 				<SimpleGrid>
 					<SelectBoolean
 						title={`Filter ${messages.enabled ? 'Enabled' : 'Disabled'}`}

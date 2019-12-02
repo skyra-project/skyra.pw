@@ -6,7 +6,7 @@ import { oauthURL } from 'meta/constants';
 import UserMenu from 'components/UserMenu';
 import SkyraLogo from 'assets/skyraLogo';
 import Footer from 'components/Footer';
-import { syncUser } from 'meta/util';
+import { syncUser, navigate } from 'meta/util';
 
 const PageContainer = styled.div`
 	display: flex;
@@ -16,7 +16,6 @@ const PageContainer = styled.div`
 `;
 
 class GeneralPage extends Component {
-
 	componentDidMount() {
 		syncUser();
 	}
@@ -28,19 +27,21 @@ class GeneralPage extends Component {
 			<PageContainer>
 				<Container>
 					<Box p={1} my={3} display="flex" justifyContent="space-between" alignContent="center" alignItems="center">
-						<Box display="flex" justifyContent="space-around" alignContent="center" alignItems="center" minWidth={120}>
-							<SkyraLogo />
-							<Box display="flex" flexDirection="column" ml={3}>
-								<Typography variant="h5">Skyra</Typography>
-								<Hidden smDown>
-									<Typography variant="caption">The most advanced moderation bot.</Typography>
-								</Hidden>
+						<Button onClick={navigate('/')} style={{ textAlign: 'left', textTransform: 'unset' }}>
+							<Box display="flex" justifyContent="space-around" alignContent="center" alignItems="center" minWidth={120}>
+								<SkyraLogo />
+								<Box display="flex" flexDirection="column" ml={3}>
+									<Typography variant="h5">Skyra</Typography>
+									<Hidden smDown>
+										<Typography variant="caption">The most advanced moderation bot.</Typography>
+									</Hidden>
+								</Box>
 							</Box>
-						</Box>
+						</Button>
 						{authenticated && <UserMenu />}
 
 						{!authenticated && !loading && (
-							<Button href={oauthURL} variant="contained" color="secondary">
+							<Button href={oauthURL.toString()} variant="contained" color="secondary">
 								Log In
 							</Button>
 						)}
@@ -51,7 +52,6 @@ class GeneralPage extends Component {
 			</PageContainer>
 		);
 	}
-
 }
 
 export default GeneralPage;

@@ -30,7 +30,7 @@ const IndexPage = props => {
 
 	return (
 		<Fragment>
-			<Section title="Filter">
+			<Section title="Word Filter">
 				<SimpleGrid>
 					<SelectBoolean
 						title={`Filter ${filter.enabled ? 'Enabled' : 'Disabled'}`}
