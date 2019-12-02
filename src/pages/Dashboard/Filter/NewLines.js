@@ -14,7 +14,7 @@ const NewLinesFilterPage = props => {
 
 	return (
 		<Fragment>
-			<Section title="Line Spam">
+			<Section title="Line Spam Filter">
 				<SimpleGrid>
 					<SelectBoolean
 						title={`Filter ${newlines.enabled ? 'Enabled' : 'Disabled'}`}
