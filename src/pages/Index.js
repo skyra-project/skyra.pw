@@ -124,7 +124,11 @@ const HomePage = () => {
 						<Grid container direction="row" justify="center" alignItems="center" spacing={4} className={classes.guildsList}>
 							{(user.guilds || [])
 								.filter(guild => guild.userCanManage)
-								.sort((a, b) => Boolean(b.channels) - Boolean(a.channels))
+								.sort(
+									(a, b) =>
+										Boolean(b.channels) - Boolean(a.channels) ||
+										a.name.localeCompare(b.name, 'en', { sensitivity: 'base' })
+								)
 								.map(guild => (
 									<Grid item className={classes.guildCardContainer} key={guild.id}>
 										<Card
