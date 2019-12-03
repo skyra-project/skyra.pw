@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
 		transition: 'width 0.2s ease-in-out'
 	},
 	guildCard: {
-		background: theme.palette.secondary.main,
+		background: theme.palette.secondary.light,
 		'&:hover': {
 			cursor: 'pointer'
 		}
