@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
 		transition: 'width 0.2s ease-in-out'
 	},
 	guildCard: {
-		background: theme.palette.secondary.main,
+		background: theme.palette.secondary.light,
 		'&:hover': {
 			cursor: 'pointer'
 		}
@@ -49,7 +49,7 @@ const sectionStyles = makeStyles(() => ({
 }));
 
 const SectionContainer = styled(Box)`
-	background: ${theme.palette.primary.main};
+	background: ${theme.palette.secondary.main};
 	width: 100%;
 	display: flex;
 	justify-content: space-around;
@@ -60,7 +60,6 @@ const SectionContainer = styled(Box)`
 
 	&:nth-of-type(odd) {
 		flex-direction: row-reverse;
-		background: ${theme.palette.secondary.main};
 	}
 
 	flex-wrap: wrap;
@@ -124,7 +123,11 @@ const HomePage = () => {
 						<Grid container direction="row" justify="center" alignItems="center" spacing={4} className={classes.guildsList}>
 							{(user.guilds || [])
 								.filter(guild => guild.userCanManage)
-								.sort((a, b) => Boolean(b.channels) - Boolean(a.channels))
+								.sort(
+									(a, b) =>
+										Boolean(b.channels) - Boolean(a.channels) ||
+										a.name.localeCompare(b.name, 'en', { sensitivity: 'base' })
+								)
 								.map(guild => (
 									<Grid item className={classes.guildCardContainer} key={guild.id}>
 										<Card
