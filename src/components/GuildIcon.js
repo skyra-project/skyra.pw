@@ -7,7 +7,8 @@ import { getAcronym } from 'meta/util';
 
 const useStyles = makeStyles(theme => ({
 	defaultIcon: {
-		backgroundColor: theme.palette.secondary.main
+		color: theme.palette.primary.contrastText,
+		background: 'transparent'
 	}
 }));
 
