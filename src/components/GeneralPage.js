@@ -41,7 +41,7 @@ class GeneralPage extends Component {
 						{authenticated && <UserMenu />}
 
 						{!authenticated && !loading && (
-							<Button href={oauthURL.toString()} variant="contained" color="secondary">
+							<Button href={oauthURL.toString()} variant="contained" color="primary">
 								Log In
 							</Button>
 						)}
