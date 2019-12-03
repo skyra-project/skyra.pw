@@ -49,7 +49,7 @@ const sectionStyles = makeStyles(() => ({
 }));
 
 const SectionContainer = styled(Box)`
-	background: ${theme.palette.primary.main};
+	background: ${theme.palette.secondary.main};
 	width: 100%;
 	display: flex;
 	justify-content: space-around;
@@ -60,7 +60,6 @@ const SectionContainer = styled(Box)`
 
 	&:nth-of-type(odd) {
 		flex-direction: row-reverse;
-		background: ${theme.palette.secondary.main};
 	}
 
 	flex-wrap: wrap;
