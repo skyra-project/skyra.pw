@@ -8,9 +8,9 @@ import { guildAddURL } from 'meta/constants';
 import theme from 'meta/theme';
 
 const StyledCard = styled(Card)`
-	min-width: 250px;
+	min-width: 230px;
 	background: ${theme.palette.secondary.light};
-	max-width: 250px;
+	max-width: 230px;
 	margin: ${theme.spacing(2)}px;
 
 	&:hover {
