@@ -8,13 +8,13 @@ const CustomLink = props => {
 	if (props.to.startsWith('/')) {
 		return (
 			<Link {...props} component={RefLink}>
-				{props.text}
+				{props.text || props.children}
 			</Link>
 		);
 	}
 	return (
 		<Link {...props} component="a" href={props.to} target="_blank" rel="noopener noreferrer">
-			{props.text}
+			{props.text || props.children}
 		</Link>
 	);
 };

@@ -146,7 +146,10 @@ export function displayAvatarURL(user, { format = 'default', size }) {
 }
 
 export function getAcronym(name) {
-	return name.replace(/\w+/g, part => part[0]).replace(/\s/g, '');
+	return name
+		.replace(/\w+/g, part => part[0])
+		.replace(/\s/g, '')
+		.slice(0, 2);
 }
 
 export function removeNonAlphaNumeric(str) {

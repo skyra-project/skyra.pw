@@ -1,14 +1,12 @@
 import React, { useGlobal } from 'reactn';
 import styled from 'styled-components';
-import { Grid, Card, CardHeader, Container, Box, Typography, Divider, useMediaQuery, useTheme, Hidden } from '@material-ui/core';
+import { Container, Box, Typography, Divider, useMediaQuery, useTheme, Hidden } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 
-import GuildIcon from 'components/GuildIcon';
-import { navigate } from 'meta/util';
 import theme from 'meta/theme';
 import GeneralPage from 'components/GeneralPage';
-import { guildAddURL } from 'meta/constants';
+import GuildCard from 'components/GuildCard';
 
 import ModerationImage from 'assets/images/features/moderation.png';
 import WeebImage from 'assets/images/features/weeb.png';
@@ -16,25 +14,6 @@ import FunImage from 'assets/images/features/fun.png';
 import ToolsImage from 'assets/images/features/tools.png';
 import PokemonImage from 'assets/images/features/pokemon.png';
 import { POKEMON_TEXT, TOOLS_TEXT, FUN_TEXT, WEEB_TEXT, MODERATION_TEXT } from './IndexTexts';
-
-const useStyles = makeStyles(theme => ({
-	guildCardContainer: {
-		flex: '1 1 0%',
-		minWidth: 250,
-		maxWidth: 250,
-		[theme.breakpoints.down('xs')]: {
-			width: '100%',
-			maxWidth: 'none'
-		},
-		transition: 'width 0.2s ease-in-out'
-	},
-	guildCard: {
-		background: theme.palette.secondary.light,
-		'&:hover': {
-			cursor: 'pointer'
-		}
-	}
-}));
 
 const sectionStyles = makeStyles(() => ({
 	section: {
@@ -55,14 +34,12 @@ const SectionContainer = styled(Box)`
 	justify-content: space-around;
 	align-items: center;
 	align-content: center;
-
+	flex-wrap: wrap;
 	flex-direction: row;
 
 	&:nth-of-type(odd) {
 		flex-direction: row-reverse;
 	}
-
-	flex-wrap: wrap;
 
 	.MuiDivider-root {
 		margin: 10px 0px;
@@ -72,7 +49,6 @@ const SectionContainer = styled(Box)`
 		display: flex;
 		flex-direction: column;
 		width: 47%;
-
 		${theme.breakpoints.down('sm')} {
 			width: 100%;
 		}
@@ -113,39 +89,23 @@ const Section = ({ name, image, text }) => {
 
 const HomePage = () => {
 	const [global] = useGlobal();
-	const classes = useStyles();
 	const { authenticated, user } = global;
 	return (
 		<GeneralPage>
 			{authenticated && (
-				<Box p={2} my={2}>
-					<Container>
-						<Grid container direction="row" justify="center" alignItems="center" spacing={4} className={classes.guildsList}>
-							{(user.guilds || [])
-								.filter(guild => guild.userCanManage)
-								.sort(
-									(a, b) =>
-										Boolean(b.channels) - Boolean(a.channels) ||
-										a.name.localeCompare(b.name, 'en', { sensitivity: 'base' })
-								)
-								.map(guild => (
-									<Grid item className={classes.guildCardContainer} key={guild.id}>
-										<Card
-											elevation={2}
-											onClick={navigate(Boolean(guild.channels) ? `/guilds/${guild.id}` : guildAddURL(guild.id))}
-											className={classes.guildCard}
-										>
-											<CardHeader
-												subheader={!guild.channels && 'Click to invite Skyra'}
-												avatar={<GuildIcon guild={guild} />}
-												title={guild.name}
-											/>
-										</Card>
-									</Grid>
-								))}
-						</Grid>
-					</Container>
-				</Box>
+				<Container>
+					<Box display="flex" flexWrap="wrap" flexDirection="row" justifyContent="center" alignItems="center">
+						{(user.guilds || [])
+							.filter(guild => guild.userCanManage)
+							.sort(
+								(a, b) =>
+									Boolean(b.channels) - Boolean(a.channels) || a.name.localeCompare(b.name, 'en', { sensitivity: 'base' })
+							)
+							.map(guild => (
+								<GuildCard guild={guild} />
+							))}
+					</Box>
+				</Container>
 			)}
 
 			{[
