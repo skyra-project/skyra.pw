@@ -52,7 +52,7 @@
 		"babel-eslint": "10.x",
 		"eslint": "6.x",
 		"eslint-config-bamboo": "^3.0.0",
-		"eslint-config-react-app": "^5.0.2",
+		"eslint-config-react-app": "^5.1.0",
 		"eslint-plugin-flowtype": "3.x",
 		"eslint-plugin-import": "2.x",
 		"eslint-plugin-jsx-a11y": "6.x",
