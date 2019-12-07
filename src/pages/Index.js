@@ -122,21 +122,17 @@ const HomePage = () => {
 					<Container>
 						<Grid container direction="row" justify="center" alignItems="center" spacing={4} className={classes.guildsList}>
 							{(user.guilds || [])
-								.filter(guild => guild.userCanManage)
-								.sort(
-									(a, b) =>
-										Boolean(b.channels) - Boolean(a.channels) ||
-										a.name.localeCompare(b.name, 'en', { sensitivity: 'base' })
-								)
+								.filter(guild => guild.manageable)
+								.sort((a, b) => b.skyraIsIn - a.skyraIsIn || a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }))
 								.map(guild => (
 									<Grid item className={classes.guildCardContainer} key={guild.id}>
 										<Card
 											elevation={2}
-											onClick={navigate(Boolean(guild.channels) ? `/guilds/${guild.id}` : guildAddURL(guild.id))}
+											onClick={navigate(guild.skyraIsIn ? `/guilds/${guild.id}` : guildAddURL(guild.id))}
 											className={classes.guildCard}
 										>
 											<CardHeader
-												subheader={!guild.channels && 'Click to invite Skyra'}
+												subheader={!guild.skyraIsIn && 'Click to invite Skyra'}
 												avatar={<GuildIcon guild={guild} />}
 												title={guild.name}
 											/>

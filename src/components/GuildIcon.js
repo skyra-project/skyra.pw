@@ -3,7 +3,7 @@ import { Avatar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
 import { history } from 'meta/constants';
-import { getAcronym } from 'meta/util';
+import { getAcronym, displayIconURL } from 'meta/util';
 
 const useStyles = makeStyles(theme => ({
 	defaultIcon: {
@@ -15,7 +15,11 @@ const useStyles = makeStyles(theme => ({
 const GuildIcon = ({ guild }) => {
 	const classes = useStyles();
 	return (
-		<Avatar onClick={() => history.push(`/guilds/${guild.id}`)} src={guild.iconURL} className={classes.defaultIcon}>
+		<Avatar
+			onClick={() => history.push(`/guilds/${guild.id}`)}
+			src={displayIconURL(guild, { size: 64 })}
+			className={classes.defaultIcon}
+		>
 			{getAcronym(guild.name)}
 		</Avatar>
 	);
