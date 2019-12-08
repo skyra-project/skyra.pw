@@ -139,14 +139,23 @@ export function toTitleCase(str) {
 	return splitStr.join(' ');
 }
 
-export function displayAvatarURL(user, { format = 'default', size }) {
+export function displayAvatarURL(user, { format = 'default', size = 256 } = {}) {
 	if (user.avatar === null) return `https://cdn.discordapp.com/embed/avatars/${user.discriminator}.png`;
 	if (format === 'default') format = user.avatar.startsWith('a_') ? 'gif' : 'webp';
-	return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${format}${size ? `?size=${size}` : ''}`;
+	return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${format}${`?size=${size}`}`;
+}
+
+export function displayIconURL(guild, { format = 'default', size = 256 } = {}) {
+	if (guild.icon === null) return null;
+	if (format === 'default') format = guild.icon.startsWith('a_') ? 'gif' : 'webp';
+	return `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.${format}${`?size=${size}`}`;
 }
 
 export function getAcronym(name) {
-	return name.replace(/\w+/g, part => part[0]).replace(/\s/g, '');
+	return name
+		.replace(/\w+/g, part => part[0])
+		.replace(/\s/g, '')
+		.slice(0, 2);
 }
 
 export function removeNonAlphaNumeric(str) {

@@ -1,6 +1,6 @@
 import React from 'reactn';
 import { Router, Route, Switch } from 'react-router-dom';
-import { ThemeProvider } from '@material-ui/styles';
+import { ThemeProvider, StylesProvider } from '@material-ui/styles';
 
 import theme from 'meta/theme';
 import { history, oauthURL } from 'meta/constants';
@@ -16,21 +16,23 @@ import NotFoundPage from 'pages/NotFound';
 import StatusPage from 'pages/Status';
 
 const Root = () => (
-	<ThemeProvider theme={theme}>
-		<CssBaseline />
-		<Router history={history}>
-			<Switch>
-				<Route exact path="/" component={HomePage} />
-				<Route exact path="/oauth/callback" component={OAuthCallbackPage} />
-				<Route exact path="/oauth/guild" component={GuildCallbackPage} />
-				<Route exact path="/commands" component={CommandsPage} />
-				<Route exact path="/status" component={StatusPage} />
-				<AuthenticatedRoute path="/guilds/:guildID/:pageName?" component={DashboardRootPage} />
-				<UnauthenticatedRoute path="/login" component={() => window.location.replace(oauthURL.toString())} />
-				<Route component={NotFoundPage} />
-			</Switch>
-		</Router>
-	</ThemeProvider>
+	<StylesProvider injectFirst>
+		<ThemeProvider theme={theme}>
+			<CssBaseline />
+			<Router history={history}>
+				<Switch>
+					<Route exact path="/" component={HomePage} />
+					<Route exact path="/oauth/callback" component={OAuthCallbackPage} />
+					<Route exact path="/oauth/guild" component={GuildCallbackPage} />
+					<Route exact path="/commands" component={CommandsPage} />
+					<Route exact path="/status" component={StatusPage} />
+					<AuthenticatedRoute path="/guilds/:guildID/:pageName?" component={DashboardRootPage} />
+					<UnauthenticatedRoute path="/login" component={() => window.location.replace(oauthURL.toString())} />
+					<Route component={NotFoundPage} />
+				</Switch>
+			</Router>
+		</ThemeProvider>
+	</StylesProvider>
 );
 
 export default Root;

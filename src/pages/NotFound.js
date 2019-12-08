@@ -9,7 +9,7 @@ const NotFoundPage = () => (
 		<Box alignSelf="center" textAlign="center" display="flex" flexDirection="column" justifyContent="space-around" height="50%">
 			<Typography variant="h1">Not Found</Typography>
 			<Box alignItems="center">
-				<Button onClick={navigate('/')} color="secondary" variant="contained">
+				<Button onClick={navigate('/')} color="primary" variant="contained">
 					Back Home
 				</Button>
 			</Box>

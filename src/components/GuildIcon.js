@@ -1,24 +1,20 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Avatar } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
 
-import { history } from 'meta/constants';
-import { getAcronym } from 'meta/util';
+import Link from 'components/Link';
+import theme from 'meta/theme';
+import { getAcronym, displayIconURL } from 'meta/util';
 
-const useStyles = makeStyles(theme => ({
-	defaultIcon: {
-		color: theme.palette.primary.contrastText,
-		background: 'transparent'
-	}
-}));
+const CustomAvatar = styled(Avatar)`
+	color: ${theme.palette.secondary.contrastText};
+	background: ${theme.palette.secondary.main};
+`;
 
-const GuildIcon = ({ guild }) => {
-	const classes = useStyles();
-	return (
-		<Avatar onClick={() => history.push(`/guilds/${guild.id}`)} src={guild.iconURL} className={classes.defaultIcon}>
-			{getAcronym(guild.name)}
-		</Avatar>
-	);
-};
+const GuildIcon = ({ guild, size = 128 }) => (
+	<Link to={`/guilds/${guild.id}`}>
+		<CustomAvatar src={displayIconURL(guild, { size })}>{getAcronym(guild.name)}</CustomAvatar>
+	</Link>
+);
 
 export default GuildIcon;
