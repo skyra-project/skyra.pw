@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === 'development') addReactNDevTools();
 const discordUser = loadState('discord_user');
 const discordToken = loadState('discord_token');
 
-if (discordUser.avatarURL) {
+if (discordUser && discordUser.avatarURL) {
 	logOut();
 } else {
 	setGlobal({
