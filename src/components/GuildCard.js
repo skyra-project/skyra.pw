@@ -21,6 +21,14 @@ const StyledCard = styled(Card)`
 		width: 100%;
 		max-width: none;
 	}
+
+	.MuiCardHeader-content span,
+	.MuiCardHeader-content {
+		white-space: nowrap;
+		overflow: hidden;
+		display: block;
+		text-overflow: ellipsis;
+	}
 `;
 
 const GuildCard = ({ guild }) => (
