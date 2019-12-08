@@ -7,13 +7,7 @@ import clsx from 'clsx';
 import theme from 'meta/theme';
 import GeneralPage from 'components/GeneralPage';
 import GuildCard from 'components/GuildCard';
-
-import ModerationImage from 'assets/images/features/moderation.png';
-import WeebImage from 'assets/images/features/weeb.png';
-import FunImage from 'assets/images/features/fun.png';
-import ToolsImage from 'assets/images/features/tools.png';
-import PokemonImage from 'assets/images/features/pokemon.png';
-import { POKEMON_TEXT, TOOLS_TEXT, FUN_TEXT, WEEB_TEXT, MODERATION_TEXT } from './IndexTexts';
+import features from 'assets/features';
 
 const sectionStyles = makeStyles(() => ({
 	section: {
@@ -105,21 +99,7 @@ const HomePage = () => {
 				</Container>
 			)}
 
-			{[
-				{
-					name: 'Moderation',
-					image: {
-						src: ModerationImage,
-						width: 400,
-						height: 229
-					},
-					text: MODERATION_TEXT
-				},
-				{ name: 'Fun', image: { src: FunImage, width: 400, height: 174 }, text: FUN_TEXT },
-				{ name: 'Tools', image: { src: ToolsImage, width: 400, height: 392 }, text: TOOLS_TEXT },
-				{ name: 'Pokemon', image: { src: PokemonImage, width: 400, height: 364 }, text: POKEMON_TEXT },
-				{ name: 'Weeb', image: { src: WeebImage, width: 400, height: 326 }, text: WEEB_TEXT }
-			].map(({ name, image, text }) => (
+			{features.map(({ name, image, text }) => (
 				<Section name={name} image={image} text={text} key={name} />
 			))}
 		</GeneralPage>
