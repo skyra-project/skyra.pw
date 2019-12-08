@@ -258,7 +258,7 @@ class Root extends Component {
 				<ServerHeader>
 					{guildData ? (
 						<Fragment>
-							<GuildIcon guild={guildData} />
+							<GuildIcon guild={guildData} size={256} />
 							<Typography variant="subtitle2" style={{ marginTop: 15 }}>
 								{guildData.name}
 							</Typography>

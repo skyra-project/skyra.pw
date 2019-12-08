@@ -96,11 +96,8 @@ const HomePage = () => {
 				<Container>
 					<Box display="flex" flexWrap="wrap" flexDirection="row" justifyContent="center" alignItems="center">
 						{(user.guilds || [])
-							.filter(guild => guild.userCanManage)
-							.sort(
-								(a, b) =>
-									Boolean(b.channels) - Boolean(a.channels) || a.name.localeCompare(b.name, 'en', { sensitivity: 'base' })
-							)
+							.filter(guild => guild.manageable)
+							.sort((a, b) => b.skyraIsIn - a.skyraIsIn || a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }))
 							.map(guild => (
 								<GuildCard guild={guild} />
 							))}

@@ -24,8 +24,8 @@ const StyledCard = styled(Card)`
 `;
 
 const GuildCard = ({ guild }) => (
-	<StyledCard elevation={2} onClick={navigate(Boolean(guild.channels) ? `/guilds/${guild.id}` : guildAddURL(guild.id))}>
-		<CardHeader subheader={!guild.channels && 'Click to invite Skyra'} avatar={<GuildIcon guild={guild} />} title={guild.name} />
+	<StyledCard elevation={2} onClick={navigate(guild.skyraIsIn ? `/guilds/${guild.id}` : guildAddURL(guild.id))}>
+		<CardHeader subheader={!guild.skyraIsIn && 'Click to invite Skyra'} avatar={<GuildIcon guild={guild} />} title={guild.name} />
 	</StyledCard>
 );
 
