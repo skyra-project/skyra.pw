@@ -33,6 +33,7 @@ import Gavel from '@material-ui/icons/Gavel';
 import StarIcon from '@material-ui/icons/Star';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes';
+import MusicIcon from '@material-ui/icons/MusicNote';
 
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
 import UserMenu from 'components/UserMenu';
@@ -411,6 +412,15 @@ class Root extends Component {
 							<StarIcon />
 						</ListItemIcon>
 						<ListItemText primary="Starboard" />
+					</ListItem>
+
+					{/* ------------------------------- */}
+
+					<ListItem component={Link} to={`/music/${guildID}`} button>
+						<ListItemIcon>
+							<MusicIcon />
+						</ListItemIcon>
+						<ListItemText primary="Music" />
 					</ListItem>
 				</List>
 			</Fragment>
