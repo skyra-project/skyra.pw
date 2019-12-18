@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'reactn';
 import styled from 'styled-components';
 import ReactPlayer from 'react-player';
 import {
@@ -21,7 +21,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import PauseIcon from '@material-ui/icons/Pause';
 
 import GeneralPage from 'components/GeneralPage';
-import { authedFetch } from 'meta/util';
 import theme from 'meta/theme';
 
 const CurrentlyPlaying = styled(Card)`
@@ -40,6 +39,8 @@ const CurrentlyPlaying = styled(Card)`
 			display: none;
 		}
 	}
+
+	overflow: unset;
 `;
 
 class MusicPage extends Component {
@@ -47,16 +48,86 @@ class MusicPage extends Component {
 		musicData: null
 	};
 
-	async componentDidMount() {
+	skipSong = () => {
+		const { guildID } = this.props.match.params;
+		this.ws.sendJSON({
+			action: 'MUSIC_QUEUE_UPDATE',
+			data: {
+				guild_id: guildID,
+				music_action: 'SKIP_SONG'
+			}
+		});
+	};
+
+	pauseSong = () => {
+		const { guildID } = this.props.match.params;
+		this.ws.sendJSON({
+			action: 'MUSIC_QUEUE_UPDATE',
+			data: {
+				guild_id: guildID,
+				music_action: 'PAUSE_SONG'
+			}
+		});
+	};
+
+	resumeSong = () => {
+		const { guildID } = this.props.match.params;
+		this.ws.sendJSON({
+			action: 'MUSIC_QUEUE_UPDATE',
+			data: {
+				guild_id: guildID,
+				music_action: 'RESUME_PLAYING'
+			}
+		});
+	};
+
+	componentDidMount() {
 		const { guildID } = this.props.match.params;
 
-		const musicData = await authedFetch(`/guilds/${guildID}/music`);
+		this.ws = new WebSocket('ws://localhost:565');
+		this.ws.sendJSON = obj => this.ws.send(JSON.stringify(obj));
+		this.ws.onopen = () => {
+			console.log('connected to websocket');
+			if (this.global.authenticated) {
+				this.ws.send(
+					JSON.stringify({
+						action: 'AUTHENTICATE',
+						data: {
+							token: this.global.token,
+							user_id: this.global.user.id
+						}
+					})
+				);
+			}
+		};
 
-		this.setState({ musicData });
+		this.ws.onmessage = event => {
+			const message = JSON.parse(event.data);
+			console.log(message);
+
+			if (message.action === 'AUTHENTICATE') {
+				this.ws.sendJSON({
+					action: 'SUBSCRIPTION_UPDATE',
+					data: {
+						subscription_name: 'MUSIC',
+						subscription_action: 'SUBSCRIBE',
+						guild_id: guildID
+					}
+				});
+				return console.log(`Authenticating was ${message.success ? 'successfull' : 'unsucessfull'}`);
+			}
+			if (message.action === 'MUSIC_SYNC') {
+				this.setState({ musicData: message.data });
+			}
+		};
+
+		this.ws.onclose = e => {
+			console.log(e);
+		};
 	}
 
-	playerRef = player => {
-		this.player = player;
+	playerRef = playerRef => {
+		this.playerRef = playerRef;
 	};
 
 	render() {
@@ -66,22 +137,33 @@ class MusicPage extends Component {
 			<GeneralPage loading={!musicData}>
 				{musicData && (
 					<Box m={3} height="100%" display="flex" flexDirection="column">
-						{musicData.playing ? (
+						{musicData.song ? (
 							<CurrentlyPlaying>
 								<div>
 									<CardContent>
 										<Typography component="h5" variant="h5">
-											{musicData.playing.title}
+											{musicData.song.title}
 										</Typography>
 										<Typography variant="subtitle1" color="textSecondary">
-											{musicData.playing.author}
+											{musicData.song.author}
 										</Typography>
 									</CardContent>
-									<IconButton aria-label="previous">
+									<IconButton>
 										<SkipPreviousIcon />
 									</IconButton>
-									<IconButton aria-label="play/pause">{true ? <PauseIcon /> : <PlayArrowIcon />}</IconButton>
-									<IconButton aria-label="next">
+									{musicData.status === 1 && (
+										<IconButton onClick={this.pauseSong}>
+											<PauseIcon />
+										</IconButton>
+									)}
+
+									{musicData.status === 2 && (
+										<IconButton onClick={this.resumeSong}>
+											<PlayArrowIcon />
+										</IconButton>
+									)}
+
+									<IconButton onClick={this.skipSong}>
 										<SkipNextIcon />
 									</IconButton>
 								</div>
@@ -89,10 +171,14 @@ class MusicPage extends Component {
 									<ReactPlayer
 										width="100%"
 										height="100%"
-										onStart={() => this.player.seekTo(musicData.position / 1000, 'seconds')}
+										onStart={() =>
+											this.playerRef &&
+											this.playerRef.current &&
+											this.playerRef.current.seekTo(musicData.position / 1000, 'seconds')
+										}
 										ref={this.playerRef}
-										url={musicData.playing.url}
-										playing
+										url={musicData.song.url}
+										playing={musicData.status === 1}
 									/>
 								</div>
 							</CurrentlyPlaying>
@@ -102,19 +188,21 @@ class MusicPage extends Component {
 							</Typography>
 						)}
 						<List>
-							{musicData.queue.map(song => (
-								<ListItem key={song.identifier}>
-									<ListItemIcon>
-										<Avatar src={`https://img.youtube.com/vi/${song.identifier}/hqdefault.jpg`} />
-									</ListItemIcon>
-									<ListItemText primary={song.title} secondary={song.author} />
-									<ListItemSecondaryAction>
-										<IconButton edge="end">
-											<DeleteIcon />
-										</IconButton>
-									</ListItemSecondaryAction>
-								</ListItem>
-							))}
+							{musicData &&
+								musicData.queue &&
+								musicData.queue.map(song => (
+									<ListItem key={song.identifier}>
+										<ListItemIcon>
+											<Avatar src={`https://img.youtube.com/vi/${song.identifier}/hqdefault.jpg`} />
+										</ListItemIcon>
+										<ListItemText primary={song.title} secondary={song.author} />
+										<ListItemSecondaryAction>
+											<IconButton edge="end">
+												<DeleteIcon />
+											</IconButton>
+										</ListItemSecondaryAction>
+									</ListItem>
+								))}
 						</List>
 					</Box>
 				)}
