@@ -21,10 +21,10 @@ class GeneralPage extends Component {
 	}
 
 	render() {
-		const { children, loading = false } = this.props;
+		const { children, loading = false, containerProps = {} } = this.props;
 		const { authenticated } = this.global;
 		return (
-			<PageContainer>
+			<PageContainer {...containerProps}>
 				<Container>
 					<Box p={1} my={3} display="flex" justifyContent="space-between" alignContent="center" alignItems="center">
 						<Button onClick={navigate('/')} style={{ textAlign: 'left', textTransform: 'unset' }}>

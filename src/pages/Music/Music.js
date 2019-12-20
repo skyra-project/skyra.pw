@@ -151,7 +151,14 @@ class MusicPage extends Component {
 		const { musicData } = this.state;
 
 		return (
-			<GeneralPage loading={false}>
+			<GeneralPage
+				containerProps={{
+					style: {
+						justifyContent: 'flex-start'
+					}
+				}}
+				loading={false}
+			>
 				{musicData && (
 					<Container>
 						<Box overflow="visible" display="flex" flexDirection="column">
