@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import ReactPlayer from 'react-player';
 import FlipMove from 'react-flip-move';
 import {
-	ListItemSecondaryAction,
 	ListItemText,
 	List,
 	ListItem,
@@ -19,7 +18,6 @@ import {
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
-import DeleteIcon from '@material-ui/icons/Delete';
 import PauseIcon from '@material-ui/icons/Pause';
 
 import GeneralPage from 'components/GeneralPage';
@@ -237,11 +235,13 @@ class MusicPage extends Component {
 															<Avatar src={`https://img.youtube.com/vi/${song.identifier}/hqdefault.jpg`} />
 														</ListItemIcon>
 														<ListItemText primary={song.title} secondary={song.author} />
+														{/*
 														<ListItemSecondaryAction>
 															<IconButton edge="end">
 																<DeleteIcon />
 															</IconButton>
 														</ListItemSecondaryAction>
+														*/}
 													</ListItem>
 												</Link>
 											</div>
