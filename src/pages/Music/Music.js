@@ -10,12 +10,11 @@ import {
 	Typography,
 	IconButton,
 	CardContent,
-	Card,
 	Box,
 	Avatar,
 	ListItemIcon,
 	Container,
-	CircularProgress
+	Divider
 } from '@material-ui/core';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
@@ -27,7 +26,7 @@ import GeneralPage from 'components/GeneralPage';
 import Link from 'components/Link';
 import theme from 'meta/theme';
 
-const CurrentlyPlaying = styled(Card)`
+const CurrentlyPlaying = styled.div`
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -44,11 +43,19 @@ const CurrentlyPlaying = styled(Card)`
 		}
 	}
 
+	.MuiCardContent-root {
+		max-width: 400px;
+		min-width: 400px;
+		min-height: 150px;
+		max-height: 150px;
+	}
+
 	overflow: unset;
 `;
 
 const StyledList = styled(List)`
-	width: 700px;
+	max-width: 700px;
+	width: 100%;
 	margin: 0 auto;
 `;
 
@@ -144,78 +151,80 @@ class MusicPage extends Component {
 		const { musicData } = this.state;
 
 		return (
-			<GeneralPage loading={!musicData}>
+			<GeneralPage loading={false}>
 				{musicData && (
 					<Container>
 						<Box overflow="visible" display="flex" flexDirection="column">
 							{musicData.song ? (
-								<CurrentlyPlaying>
-									<div>
-										<CardContent>
-											<Typography component="h5" variant="h5">
-												{musicData.song.title}
-											</Typography>
-											<Typography variant="subtitle1" color="textSecondary">
-												{musicData.song.author}
-											</Typography>
-										</CardContent>
-										{this.global.authenticated && (
-											<Fragment>
-												<IconButton>
-													<SkipPreviousIcon />
-												</IconButton>
-												{musicData.status === 1 && (
-													<IconButton onClick={this.pauseSong}>
-														<PauseIcon />
+								<FlipMove staggerDelayBy={150} appearAnimation="fade" enterAnimation="fade" leaveAnimation="fade">
+									<CurrentlyPlaying key={musicData.song.identifier + musicData.song.position}>
+										<div>
+											<CardContent>
+												<Typography component="h5" variant="h5">
+													{musicData.song.title}
+												</Typography>
+												<Typography variant="subtitle1" color="textSecondary">
+													{musicData.song.author}
+												</Typography>
+											</CardContent>
+											{this.global.authenticated && (
+												<Fragment>
+													<IconButton>
+														<SkipPreviousIcon />
 													</IconButton>
-												)}
+													{musicData.status === 1 || musicData.status === 3 ? (
+														<IconButton onClick={this.pauseSong}>
+															<PauseIcon />
+														</IconButton>
+													) : (
+														<IconButton onClick={this.resumeSong}>
+															<PlayArrowIcon />
+														</IconButton>
+													)}
 
-												{musicData.status === 2 && (
-													<IconButton onClick={this.resumeSong}>
-														<PlayArrowIcon />
+													<IconButton onClick={this.skipSong}>
+														<SkipNextIcon />
 													</IconButton>
-												)}
-
-												{musicData.status === 0 && (
-													<IconButton onClick={this.resumeSong}>
-														<CircularProgress />
-													</IconButton>
-												)}
-
-												<IconButton onClick={this.skipSong}>
-													<SkipNextIcon />
-												</IconButton>
-											</Fragment>
-										)}
-									</div>
-									<div className="video-container">
-										<ReactPlayer
-											width="100%"
-											height="100%"
-											onStart={() => this.playerRef && this.playerRef.seekTo(musicData.position / 1000, 'seconds')}
-											ref={this.playerRef}
-											url={musicData.song.url}
-											playing={musicData.status === 1}
-										/>
-									</div>
-								</CurrentlyPlaying>
+												</Fragment>
+											)}
+										</div>
+										<div className="video-container">
+											<ReactPlayer
+												width="100%"
+												height="100%"
+												onStart={() =>
+													this.playerRef && this.playerRef.seekTo(musicData.position / 1000, 'seconds')
+												}
+												ref={this.playerRef}
+												url={musicData.song.url}
+												playing={musicData.status === 1}
+											/>
+										</div>
+									</CurrentlyPlaying>
+								</FlipMove>
 							) : (
-								<Typography variant="h2" component="h1">
-									Not playing
-								</Typography>
+								<CurrentlyPlaying>
+									<Typography variant="h2" component="h1">
+										Not playing
+									</Typography>
+								</CurrentlyPlaying>
 							)}
+							<Divider />
 							{musicData && musicData.queue && (
 								<StyledList>
+									{console.log(musicData.queue)}
+
 									<FlipMove
 										staggerDelayBy={80}
 										appearAnimation="fade"
-										enterAnimation="accordionVertical"
+										enterAnimation="fade"
 										leaveAnimation="accordionVertical"
 									>
+										{/* Need to wrap an extra div here because of a bug in flipmove */}
 										{musicData.queue.map(song => (
-											<div key={song.identifier}>
+											<div key={song.id}>
 												<Link underline="none" color="textPrimary" to={song.url}>
-													<ListItem button key={song.identifier}>
+													<ListItem button>
 														<ListItemIcon>
 															<Avatar src={`https://img.youtube.com/vi/${song.identifier}/hqdefault.jpg`} />
 														</ListItemIcon>
