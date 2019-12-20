@@ -25,6 +25,7 @@ import PauseIcon from '@material-ui/icons/Pause';
 import GeneralPage from 'components/GeneralPage';
 import Link from 'components/Link';
 import theme from 'meta/theme';
+import { debug } from 'meta/util';
 
 const CurrentlyPlaying = styled.div`
 	display: flex;
@@ -99,11 +100,11 @@ class MusicPage extends Component {
 
 	componentDidMount() {
 		const { guildID } = this.props.match.params;
-		console.log(this.global);
 		this.ws = new WebSocket('ws://localhost:565');
 		this.ws.sendJSON = obj => this.ws.send(JSON.stringify(obj));
 		this.ws.onopen = () => {
-			console.log('connected to websocket');
+			debug('Connected to websocket.');
+
 			if (this.global.authenticated) {
 				this.ws.send(
 					JSON.stringify({
@@ -128,18 +129,20 @@ class MusicPage extends Component {
 
 		this.ws.onmessage = event => {
 			const message = JSON.parse(event.data);
-			console.log(message);
+			debug(message);
 
 			if (message.action === 'AUTHENTICATE') {
-				return console.log(`Authenticating was ${message.success ? 'successfull' : 'unsucessfull'}`);
+				debug(`Authenticating was ${message.success ? 'successful' : 'unsucessful'}`);
 			}
+
 			if (message.action === 'MUSIC_SYNC') {
 				this.setState({ musicData: message.data });
+				debug('Received Music Sync.');
 			}
 		};
 
 		this.ws.onclose = e => {
-			console.log(e);
+			debug('Disconnected from websocket', e);
 		};
 	}
 
@@ -217,10 +220,8 @@ class MusicPage extends Component {
 								</CurrentlyPlaying>
 							)}
 							<Divider />
-							{musicData && musicData.queue && (
+							{musicData.queue && (
 								<StyledList>
-									{console.log(musicData.queue)}
-
 									<FlipMove
 										staggerDelayBy={80}
 										appearAnimation="fade"
