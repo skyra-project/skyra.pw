@@ -28,7 +28,7 @@ const Root = () => (
 					<Route exact path="/commands" component={CommandsPage} />
 					<Route exact path="/status" component={StatusPage} />
 					<AuthenticatedRoute path="/guilds/:guildID/:pageName?" component={DashboardRootPage} />
-					<AuthenticatedRoute exact path="/music/:guildID" component={MusicPage} />
+					<Route exact path="/music/:guildID" component={MusicPage} />
 					<UnauthenticatedRoute path="/login" component={() => window.location.replace(oauthURL.toString())} />
 					<Route component={NotFoundPage} />
 				</Switch>
