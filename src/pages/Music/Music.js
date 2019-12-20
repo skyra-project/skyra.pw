@@ -1,6 +1,7 @@
-import React, { Component } from 'reactn';
+import React, { Component, Fragment } from 'reactn';
 import styled from 'styled-components';
 import ReactPlayer from 'react-player';
+import FlipMove from 'react-flip-move';
 import {
 	ListItemSecondaryAction,
 	ListItemText,
@@ -12,7 +13,9 @@ import {
 	Card,
 	Box,
 	Avatar,
-	ListItemIcon
+	ListItemIcon,
+	Container,
+	CircularProgress
 } from '@material-ui/core';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
@@ -21,6 +24,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import PauseIcon from '@material-ui/icons/Pause';
 
 import GeneralPage from 'components/GeneralPage';
+import Link from 'components/Link';
 import theme from 'meta/theme';
 
 const CurrentlyPlaying = styled(Card)`
@@ -41,6 +45,11 @@ const CurrentlyPlaying = styled(Card)`
 	}
 
 	overflow: unset;
+`;
+
+const StyledList = styled(List)`
+	width: 700px;
+	margin: 0 auto;
 `;
 
 class MusicPage extends Component {
@@ -83,7 +92,7 @@ class MusicPage extends Component {
 
 	componentDidMount() {
 		const { guildID } = this.props.match.params;
-
+		console.log(this.global);
 		this.ws = new WebSocket('ws://localhost:565');
 		this.ws.sendJSON = obj => this.ws.send(JSON.stringify(obj));
 		this.ws.onopen = () => {
@@ -99,6 +108,15 @@ class MusicPage extends Component {
 					})
 				);
 			}
+
+			this.ws.sendJSON({
+				action: 'SUBSCRIPTION_UPDATE',
+				data: {
+					subscription_name: 'MUSIC',
+					subscription_action: 'SUBSCRIBE',
+					guild_id: guildID
+				}
+			});
 		};
 
 		this.ws.onmessage = event => {
@@ -106,14 +124,6 @@ class MusicPage extends Component {
 			console.log(message);
 
 			if (message.action === 'AUTHENTICATE') {
-				this.ws.sendJSON({
-					action: 'SUBSCRIPTION_UPDATE',
-					data: {
-						subscription_name: 'MUSIC',
-						subscription_action: 'SUBSCRIBE',
-						guild_id: guildID
-					}
-				});
 				return console.log(`Authenticating was ${message.success ? 'successfull' : 'unsucessfull'}`);
 			}
 			if (message.action === 'MUSIC_SYNC') {
@@ -136,75 +146,94 @@ class MusicPage extends Component {
 		return (
 			<GeneralPage loading={!musicData}>
 				{musicData && (
-					<Box m={3} height="100%" display="flex" flexDirection="column">
-						{musicData.song ? (
-							<CurrentlyPlaying>
-								<div>
-									<CardContent>
-										<Typography component="h5" variant="h5">
-											{musicData.song.title}
-										</Typography>
-										<Typography variant="subtitle1" color="textSecondary">
-											{musicData.song.author}
-										</Typography>
-									</CardContent>
-									<IconButton>
-										<SkipPreviousIcon />
-									</IconButton>
-									{musicData.status === 1 && (
-										<IconButton onClick={this.pauseSong}>
-											<PauseIcon />
-										</IconButton>
-									)}
+					<Container>
+						<Box overflow="visible" display="flex" flexDirection="column">
+							{musicData.song ? (
+								<CurrentlyPlaying>
+									<div>
+										<CardContent>
+											<Typography component="h5" variant="h5">
+												{musicData.song.title}
+											</Typography>
+											<Typography variant="subtitle1" color="textSecondary">
+												{musicData.song.author}
+											</Typography>
+										</CardContent>
+										{this.global.authenticated && (
+											<Fragment>
+												<IconButton>
+													<SkipPreviousIcon />
+												</IconButton>
+												{musicData.status === 1 && (
+													<IconButton onClick={this.pauseSong}>
+														<PauseIcon />
+													</IconButton>
+												)}
 
-									{musicData.status === 2 && (
-										<IconButton onClick={this.resumeSong}>
-											<PlayArrowIcon />
-										</IconButton>
-									)}
+												{musicData.status === 2 && (
+													<IconButton onClick={this.resumeSong}>
+														<PlayArrowIcon />
+													</IconButton>
+												)}
 
-									<IconButton onClick={this.skipSong}>
-										<SkipNextIcon />
-									</IconButton>
-								</div>
-								<div className="video-container">
-									<ReactPlayer
-										width="100%"
-										height="100%"
-										onStart={() =>
-											this.playerRef &&
-											this.playerRef.current &&
-											this.playerRef.current.seekTo(musicData.position / 1000, 'seconds')
-										}
-										ref={this.playerRef}
-										url={musicData.song.url}
-										playing={musicData.status === 1}
-									/>
-								</div>
-							</CurrentlyPlaying>
-						) : (
-							<Typography variant="h2" component="h1">
-								Not playing
-							</Typography>
-						)}
-						<List>
-							{musicData &&
-								musicData.queue &&
-								musicData.queue.map(song => (
-									<ListItem key={song.identifier}>
-										<ListItemIcon>
-											<Avatar src={`https://img.youtube.com/vi/${song.identifier}/hqdefault.jpg`} />
-										</ListItemIcon>
-										<ListItemText primary={song.title} secondary={song.author} />
-										<ListItemSecondaryAction>
-											<IconButton edge="end">
-												<DeleteIcon />
-											</IconButton>
-										</ListItemSecondaryAction>
-									</ListItem>
-								))}
-						</List>
-					</Box>
+												{musicData.status === 0 && (
+													<IconButton onClick={this.resumeSong}>
+														<CircularProgress />
+													</IconButton>
+												)}
+
+												<IconButton onClick={this.skipSong}>
+													<SkipNextIcon />
+												</IconButton>
+											</Fragment>
+										)}
+									</div>
+									<div className="video-container">
+										<ReactPlayer
+											width="100%"
+											height="100%"
+											onStart={() => this.playerRef && this.playerRef.seekTo(musicData.position / 1000, 'seconds')}
+											ref={this.playerRef}
+											url={musicData.song.url}
+											playing={musicData.status === 1}
+										/>
+									</div>
+								</CurrentlyPlaying>
+							) : (
+								<Typography variant="h2" component="h1">
+									Not playing
+								</Typography>
+							)}
+							{musicData && musicData.queue && (
+								<StyledList>
+									<FlipMove
+										staggerDelayBy={80}
+										appearAnimation="fade"
+										enterAnimation="accordionVertical"
+										leaveAnimation="accordionVertical"
+									>
+										{musicData.queue.map(song => (
+											<div key={song.identifier}>
+												<Link underline="none" color="textPrimary" to={song.url}>
+													<ListItem button key={song.identifier}>
+														<ListItemIcon>
+															<Avatar src={`https://img.youtube.com/vi/${song.identifier}/hqdefault.jpg`} />
+														</ListItemIcon>
+														<ListItemText primary={song.title} secondary={song.author} />
+														<ListItemSecondaryAction>
+															<IconButton edge="end">
+																<DeleteIcon />
+															</IconButton>
+														</ListItemSecondaryAction>
+													</ListItem>
+												</Link>
+											</div>
+										))}
+									</FlipMove>
+								</StyledList>
+							)}
+						</Box>
+					</Container>
 				)}
 			</GeneralPage>
 		);
