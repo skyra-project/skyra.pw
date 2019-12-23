@@ -24,6 +24,7 @@ import GeneralPage from 'components/GeneralPage';
 import Link from 'components/Link';
 import theme from 'meta/theme';
 import { debug } from 'meta/util';
+import { WS_URL } from 'meta/constants';
 
 const CurrentlyPlaying = styled.div`
 	display: flex;
@@ -98,7 +99,7 @@ class MusicPage extends Component {
 
 	componentDidMount() {
 		const { guildID } = this.props.match.params;
-		this.ws = new WebSocket('ws://localhost:565');
+		this.ws = new WebSocket(WS_URL);
 		this.ws.sendJSON = obj => this.ws.send(JSON.stringify(obj));
 		this.ws.onopen = () => {
 			debug('Connected to websocket.');
