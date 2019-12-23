@@ -1,3 +1,6 @@
+- name: 'Milestone: Music'
+  description: Issues and PRs related to the V8 engine.
+  color: 97A8EC
 - name: 'Meta: V8'
   description: Issues and PRs related to the V8 engine.
   color: ffff00
