@@ -6,7 +6,7 @@
 	"dependencies": {
 		"@material-ui/core": "^4.8.1",
 		"@material-ui/icons": "^4.5.1",
-		"@material-ui/lab": "^4.0.0-alpha.36",
+		"@material-ui/lab": "^4.0.0-alpha.37",
 		"clsx": "^1.0.4",
 		"deepmerge": "^4.2.2",
 		"history": "^4.10.1",
