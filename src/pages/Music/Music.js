@@ -64,6 +64,9 @@ class MusicPage extends Component {
 		musicData: null
 	};
 
+	/** @type {ReactPlayer | null} */
+	playerRef = null;
+
 	skipSong = () => {
 		const { guildID } = this.props.match.params;
 		this.ws.sendJSON({
@@ -229,8 +232,7 @@ class MusicPage extends Component {
 							...data.musicData,
 							song: message.data,
 							position: 0,
-							status: 1,
-							queue: data.musicData.queue.slice(1)
+							status: 1
 						}
 					}));
 					break;
@@ -243,8 +245,7 @@ class MusicPage extends Component {
 							status: 1
 						}
 					}));
-					// TODO(Magna): Why is `this.playerRef`, `null`?
-					// this.playerRef.seekTo(0, 'seconds');
+					this.playerRef.seekTo(0, 'seconds');
 					break;
 
 				case 'MUSIC_SONG_RESUME':
@@ -263,8 +264,7 @@ class MusicPage extends Component {
 							position: message.data.position
 						}
 					}));
-					// TODO(Magna): Why is `this.playerRef`, `null`?
-					// this.playerRef.seekTo(message.data.position / 1000, 'seconds');
+					this.playerRef.seekTo(message.data.position / 1000, 'seconds');
 					break;
 
 				case 'MUSIC_SONG_SKIP':
@@ -283,10 +283,6 @@ class MusicPage extends Component {
 			debug('Disconnected from websocket', e);
 		};
 	}
-
-	playerRef = playerRef => {
-		this.playerRef = playerRef;
-	};
 
 	render() {
 		const { musicData } = this.state;
@@ -344,7 +340,7 @@ class MusicPage extends Component {
 													this.playerRef && this.playerRef.seekTo(musicData.position / 1000, 'seconds')
 												}
 												loop={musicData.replay}
-												ref={this.playerRef}
+												ref={ref => (this.playerRef = ref)}
 												url={musicData.song.url}
 												playing={musicData.status === 1}
 											/>
