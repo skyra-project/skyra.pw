@@ -185,7 +185,15 @@ class MusicPage extends Component {
 					}));
 					break;
 
-				// case 'MUSIC_REPLAY_UPDATE':
+				case 'MUSIC_REPLAY_UPDATE':
+					this.setState(data => ({
+						musicData: {
+							...data.musicData,
+							replay: message.data.replay
+						}
+					}));
+					break;
+
 				case 'MUSIC_SHUFFLE_QUEUE':
 					this.setState(data => ({
 						musicData: {
@@ -235,6 +243,8 @@ class MusicPage extends Component {
 							status: 1
 						}
 					}));
+					// TODO(Magna): Why is `this.playerRef`, `null`?
+					// this.playerRef.seekTo(0, 'seconds');
 					break;
 
 				case 'MUSIC_SONG_RESUME':
@@ -253,6 +263,8 @@ class MusicPage extends Component {
 							position: message.data.position
 						}
 					}));
+					// TODO(Magna): Why is `this.playerRef`, `null`?
+					// this.playerRef.seekTo(message.data.position / 1000, 'seconds');
 					break;
 
 				case 'MUSIC_SONG_SKIP':
@@ -331,6 +343,7 @@ class MusicPage extends Component {
 												onStart={() =>
 													this.playerRef && this.playerRef.seekTo(musicData.position / 1000, 'seconds')
 												}
+												loop={musicData.replay}
 												ref={this.playerRef}
 												url={musicData.song.url}
 												playing={musicData.status === 1}
