@@ -64,6 +64,12 @@ class MusicPage extends Component {
 		musicData: null
 	};
 
+	/** @type {WebSocket | null} */
+	ws = null;
+
+	/** @type {ReactPlayer | null} */
+	playerRef = null;
+
 	skipSong = () => {
 		const { guildID } = this.props.match.params;
 		this.ws.sendJSON({
@@ -130,13 +136,149 @@ class MusicPage extends Component {
 			const message = JSON.parse(event.data);
 			debug(message);
 
-			if (message.action === 'AUTHENTICATE') {
-				debug(`Authenticating was ${message.success ? 'successful' : 'unsucessful'}`);
-			}
+			switch (message.action) {
+				case 'AUTHENTICATE':
+					debug(`Authenticating was ${message.success ? 'successful' : 'unsucessful'}`);
+					break;
 
-			if (message.action === 'MUSIC_SYNC') {
-				this.setState({ musicData: message.data });
-				debug('Received Music Sync.');
+				case 'MUSIC_SYNC':
+					this.setState({ musicData: message.data });
+					debug('Received Music Sync.');
+					break;
+
+				case 'MUSIC_CONNECT':
+					this.setState(data => ({
+						musicData: {
+							...data.musicData,
+							voiceChannel: message.data.id
+						}
+					}));
+					break;
+
+				case 'MUSIC_LEAVE':
+					this.setState(data => ({
+						musicData: {
+							...data.musicData,
+							voiceChannel: null
+						}
+					}));
+					break;
+
+				case 'MUSIC_ADD':
+					this.setState(data => ({
+						musicData: {
+							...data.musicData,
+							queue: data.musicData.queue.concat(message.data)
+						}
+					}));
+					break;
+
+				case 'MUSIC_PRUNE':
+					this.setState(data => ({
+						musicData: {
+							...data.musicData,
+							queue: []
+						}
+					}));
+					break;
+
+				case 'MUSIC_REMOVE':
+					this.setState(data => ({
+						musicData: {
+							...data.musicData,
+							queue: data.musicData.filter(song => song.id !== message.data.id)
+						}
+					}));
+					break;
+
+				case 'MUSIC_REPLAY_UPDATE':
+					this.setState(data => ({
+						musicData: {
+							...data.musicData,
+							replay: message.data.replay
+						}
+					}));
+					break;
+
+				case 'MUSIC_SHUFFLE_QUEUE':
+					this.setState(data => ({
+						musicData: {
+							...data.musicData,
+							queue: message.data
+						}
+					}));
+					break;
+
+				case 'MUSIC_SONG_FINISH':
+					this.setState(data => ({
+						musicData: {
+							...data.musicData,
+							song: null,
+							position: 0,
+							status: 3
+						}
+					}));
+					break;
+
+				case 'MUSIC_SONG_PAUSE':
+					this.setState(data => ({
+						musicData: {
+							...data.musicData,
+							status: 2
+						}
+					}));
+					break;
+
+				case 'MUSIC_SONG_PLAY':
+					this.setState(data => ({
+						musicData: {
+							...data.musicData,
+							song: message.data,
+							position: 0,
+							status: 1
+						}
+					}));
+					break;
+
+				case 'MUSIC_SONG_REPLAY':
+					this.setState(data => ({
+						musicData: {
+							...data.musicData,
+							position: 0,
+							status: 1
+						}
+					}));
+					this.playerRef.seekTo(0, 'seconds');
+					break;
+
+				case 'MUSIC_SONG_RESUME':
+					this.setState(data => ({
+						musicData: {
+							...data.musicData,
+							status: 1
+						}
+					}));
+					break;
+
+				case 'MUSIC_SONG_SEEK_UPDATE':
+					this.setState(data => ({
+						musicData: {
+							...data.musicData,
+							position: message.data.position
+						}
+					}));
+					this.playerRef.seekTo(message.data.position / 1000, 'seconds');
+					break;
+
+				case 'MUSIC_SONG_SKIP':
+					this.setState(data => ({
+						musicData: {
+							...data.musicData,
+							song: null,
+							queue: data.musicData.queue.slice(1)
+						}
+					}));
+					break;
 			}
 		};
 
@@ -145,9 +287,9 @@ class MusicPage extends Component {
 		};
 	}
 
-	playerRef = playerRef => {
-		this.playerRef = playerRef;
-	};
+	componentWillUnmount() {
+		if (this.ws) this.ws.close(1000);
+	}
 
 	render() {
 		const { musicData } = this.state;
@@ -204,7 +346,8 @@ class MusicPage extends Component {
 												onStart={() =>
 													this.playerRef && this.playerRef.seekTo(musicData.position / 1000, 'seconds')
 												}
-												ref={this.playerRef}
+												loop={musicData.replay}
+												ref={ref => (this.playerRef = ref)}
 												url={musicData.song.url}
 												playing={musicData.status === 1}
 											/>
