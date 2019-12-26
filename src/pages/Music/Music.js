@@ -64,6 +64,9 @@ class MusicPage extends Component {
 		musicData: null
 	};
 
+	/** @type {WebSocket | null} */
+	ws = null;
+
 	/** @type {ReactPlayer | null} */
 	playerRef = null;
 
@@ -282,6 +285,10 @@ class MusicPage extends Component {
 		this.ws.onclose = e => {
 			debug('Disconnected from websocket', e);
 		};
+	}
+
+	componentWillUnmount() {
+		if (this.ws) this.ws.close(1000);
 	}
 
 	render() {
