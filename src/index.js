@@ -6,7 +6,18 @@ import * as serviceWorker from './serviceWorker';
 import { loadState, logOut } from 'meta/util';
 import Root from 'components/Root';
 
-if (process.env.NODE_ENV === 'development') addReactNDevTools();
+const rootElement = document.getElementById('root');
+
+if (process.env.NODE_ENV === 'development') {
+	addReactNDevTools();
+
+	if (module.hot) {
+		module.hot.accept('./components/Root.js', () => {
+			const NextApp = require('./components/Root.js').default;
+			render(<NextApp />, rootElement);
+		});
+	}
+}
 
 const discordUser = loadState('discord_user');
 const discordToken = loadState('discord_token');
@@ -20,8 +31,6 @@ if (discordUser && discordUser.avatarURL) {
 		token: discordToken
 	});
 }
-
-const rootElement = document.getElementById('root');
 
 render(<Root />, rootElement);
 
