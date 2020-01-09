@@ -60,7 +60,7 @@
 		"eslint-plugin-jsx-a11y": "6.x",
 		"eslint-plugin-react": "7.x",
 		"eslint-plugin-react-hooks": "2.3.0",
-		"husky": "^4.0.1",
+		"husky": "^4.0.3",
 		"lint-staged": "^9.5.0",
 		"prettier": "1.19.1",
 		"pretty-quick": "^2.0.1",
