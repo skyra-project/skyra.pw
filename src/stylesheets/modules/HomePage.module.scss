@@ -1,0 +1,41 @@
+@import '../variables/breakpoints';
+
+.box {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
+	flex-wrap: wrap;
+	flex-direction: row;
+	min-height: min-content;
+
+	&:nth-of-type(odd) {
+		flex-direction: row-reverse;
+	}
+}
+
+.divider {
+	margin: 10px 0px;
+}
+
+.text {
+	display: flex;
+	flex-direction: column;
+	width: 47%;
+
+	@include sm {
+		width: 100%;
+	}
+}
+
+.previewImage {
+	border-radius: 4px;
+	max-width: 400px;
+	max-height: 400px;
+
+	@include sm {
+		margin-top: 20px;
+		width: 100%;
+	}
+}

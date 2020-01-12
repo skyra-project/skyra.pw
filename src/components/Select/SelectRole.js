@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SelectOne from 'components/Select/SelectOne';
+import SelectOne from './SelectOne';
 
 const SelectRole = ({ title, value, guild, onChange }) => {
 	let name;

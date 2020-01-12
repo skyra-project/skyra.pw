@@ -1,12 +1,14 @@
 import React, { Fragment } from 'react';
-import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
+import MenuItem from '@material-ui/core/MenuItem';
 
-import Section from '../components/Section';
-import SimpleGrid from '../components/SimpleGrid';
-import Select from 'components/Select';
-import SelectBoolean from 'components/SelectBoolean';
-import SelectDuration from 'components/SelectDuration';
+import Select from 'components/Select/Select';
+import SelectBoolean from 'components/Select/SelectBoolean';
+import SelectDuration from 'components/Select/SelectDuration';
+
+import Section from 'components/Section';
+import SimpleGrid from 'components/SimpleGrid';
+import Slider from 'components/Slider';
 import { bitwiseSet, bitwiseHas } from 'meta/util';
 
 const MessagesFilterPage = props => {
@@ -52,15 +54,16 @@ const MessagesFilterPage = props => {
 				<SimpleGrid gridProps={{ direction: 'row', justify: 'flex-start' }}>
 					<Select
 						title="Action"
+						helperText="The action to perform as punishment"
 						value={messages.hardAction}
 						onChange={e => props.patchGuildData({ selfmod: { messages: { hardAction: e.target.value } } })}
 					>
-						<option value={0}>None</option>
-						<option value={1}>Warning</option>
-						<option value={2}>Kick</option>
-						<option value={3}>Mute</option>
-						<option value={4}>Softban</option>
-						<option value={5}>Ban</option>
+						<MenuItem value={0}>None</MenuItem>
+						<MenuItem value={1}>Warning</MenuItem>
+						<MenuItem value={2}>Kick</MenuItem>
+						<MenuItem value={3}>Mute</MenuItem>
+						<MenuItem value={4}>Softban</MenuItem>
+						<MenuItem value={5}>Ban</MenuItem>
 					</Select>
 					<SelectDuration
 						value={messages.hardActionDuration}
@@ -72,21 +75,19 @@ const MessagesFilterPage = props => {
 				<Slider
 					value={messages.thresholdMaximum}
 					onChange={(_, e) => props.patchGuildData({ selfmod: { messages: { thresholdMaximum: e } } })}
-					aria-labelledby="discrete-slider"
+					aria-labelledby="Messages selfmod filter maximum threshold slider"
 					valueLabelDisplay="auto"
 					min={0}
 					max={60}
-					label="The amount of infractions that can be done within Threshold Duration before taking action, instantly if 0."
 				/>
 				<Typography>Threshold Duration</Typography>
 				<Slider
 					value={messages.thresholdDuration}
 					onChange={(_, e) => props.patchGuildData({ selfmod: { messages: { thresholdDuration: e } } })}
-					aria-labelledby="discrete-slider"
+					aria-labelledby="Messages selfmod filter threshold duration slider"
 					valueLabelDisplay="auto"
 					min={0}
 					max={120}
-					label="The time in which infractions will accumulate before taking action, instantly if 0."
 				/>
 			</Section>
 		</Fragment>

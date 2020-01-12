@@ -1,7 +1,7 @@
 # Skyra.PW [![Discord](https://discordapp.com/api/guilds/254360814063058944/embed.png)](https://skyra.pw/join)
 
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/kyranet/skyra.pw.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/kyranet/skyra.pw/alerts/)
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/kyranet/skyra.pw.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/kyranet/skyra.pw/context:javascript)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/skyra-project/skyra.pw.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/skyra-project/skyra.pw/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/skyra-project/skyra.pw.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/skyra-project/skyra.pw/context:javascript)
 
 ## Set-Up
 
@@ -15,7 +15,9 @@ After forking/cloning this repo to a folder locally:
 4. Select your bot application and go to the `OAuth2` tab
 5. Add redirect URL's for `http://localhost:3000/oauth/callback` and `http://localhost:3000/oauth/guild`
 6. Run a local instance of Skyra, be sure to follow it's local development guidelines as well.
-  - You have to set the CLIENT_ID, CLIENT_SECRET in Skyra's configuration to your own bot properly!
+
+-   You have to set the CLIENT_ID, CLIENT_SECRET in Skyra's configuration to your own bot properly!
+
 7. Install dependencies with `yarn`.
 8. Run `yarn start` to start the React dev server
 

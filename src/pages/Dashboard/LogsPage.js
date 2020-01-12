@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
 
-import SelectChannel from 'components/SelectChannel';
-import SelectBoolean from 'components/SelectBoolean';
-import Section from './components/Section';
-import SimpleGrid from './components/SimpleGrid';
+import SelectChannel from 'components/Select/SelectChannel';
+import SelectBoolean from 'components/Select/SelectBoolean';
+
+import Section from 'components/Section';
+import SimpleGrid from 'components/SimpleGrid';
 
 const SettingsPage = props => (
 	<Fragment>

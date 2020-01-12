@@ -1,7 +1,7 @@
 {
 	"extends": ["react-app", "bamboo"],
 	"parserOptions": {
-		"project": "./tsconfig.json"
+		"project": "./tsconfig.eslint.json"
 	},
 	"rules": {
 		// TODO: Remove these after moving to a TypeScript codebase
@@ -12,6 +12,7 @@
 		// Disabled because the following are handled by Prettier
 		"operator-linebreak": "off",
 		"padded-blocks": "off",
-		"quote-props": "off"
+		"quote-props": "off",
+		"function-paren-newline": "off"
 	}
 }

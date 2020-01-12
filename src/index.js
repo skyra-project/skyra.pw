@@ -6,6 +6,8 @@ import * as serviceWorker from './serviceWorker';
 import { loadState, logOut } from 'meta/util';
 import Root from 'components/Root';
 
+import 'stylesheets/basestyles.scss';
+
 const rootElement = document.getElementById('root');
 
 if (process.env.NODE_ENV === 'development') {

@@ -9,7 +9,7 @@ import theme from 'meta/theme';
 
 const StyledCard = styled(Card)`
 	min-width: 230px;
-	background: ${theme.palette.secondary.light};
+	background: ${theme.palette.secondary.main};
 	max-width: 230px;
 	margin: ${theme.spacing(2)}px;
 

@@ -1,11 +1,11 @@
 import React from 'reactn';
 import styled from 'styled-components';
 import { Box, Typography, Container, Hidden } from '@material-ui/core';
-import { CLIENT_ID } from 'meta/constants';
 
-import SkyraLogo from 'assets/skyraLogo';
 import Link from 'components/Link';
+import SkyraLogo from 'assets/skyraLogo';
 import theme from 'meta/theme';
+import { CLIENT_ID } from 'meta/constants';
 
 const FooterContainer = styled.footer`
 	padding: 50px 0px;

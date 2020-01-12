@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react';
 
-import SelectRole from 'components/SelectRole';
-import SelectChannel from 'components/SelectChannel';
-import SelectBoolean from 'components/SelectBoolean';
-import Section from '../components/Section';
-import SimpleGrid from '../components/SimpleGrid';
+import SelectRole from 'components/Select/SelectRole';
+import SelectChannel from 'components/Select/SelectChannel';
+import SelectBoolean from 'components/Select/SelectBoolean';
+
+import Section from 'components/Section';
+import SimpleGrid from 'components/SimpleGrid';
 
 const IndexPage = props => (
 	<Fragment>

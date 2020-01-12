@@ -178,6 +178,12 @@ export function bitwiseHas(bits, bit) {
  * @param {boolean} toggle The value to set.
  */
 export function bitwiseSet(bits, bit, toggle) {
-	console.log(toggle);
 	return toggle ? bits | bit : bits & ~bit;
+}
+
+/**
+ * No operation function
+ */
+export function noOp() {
+	return undefined;
 }
