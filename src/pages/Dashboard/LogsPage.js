@@ -6,7 +6,7 @@ import SelectBoolean from 'components/Select/SelectBoolean';
 import Section from 'components/Section';
 import SimpleGrid from 'components/SimpleGrid';
 
-const SettingsPage = props => (
+const LogsPage = props => (
 	<Fragment>
 		<Section title="Channels">
 			<SimpleGrid>
@@ -61,4 +61,4 @@ const SettingsPage = props => (
 	</Fragment>
 );
 
-export default SettingsPage;
+export default LogsPage;

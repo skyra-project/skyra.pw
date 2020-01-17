@@ -14,7 +14,8 @@ const Slider: FC<SliderProps> = ({ value, onChange, 'aria-labelledby': ariaLabel
 			root: scss.slider,
 			thumb: scss.thumb,
 			track: scss.track,
-			rail: scss.rail
+			rail: scss.rail,
+			valueLabel: scss.valueLabel
 		}}
 	/>
 );

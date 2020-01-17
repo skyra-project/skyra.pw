@@ -140,7 +140,7 @@ export function toTitleCase(str) {
 }
 
 export function displayAvatarURL(user, { format = 'default', size = 256 } = {}) {
-	if (user.avatar === null) return `https://cdn.discordapp.com/embed/avatars/${user.discriminator}.png`;
+	if (user === null || user.avatar === null) return `https://cdn.discordapp.com/embed/avatars/${user.discriminator}.png`;
 	if (format === 'default') format = user.avatar.startsWith('a_') ? 'gif' : 'webp';
 	return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${format}${`?size=${size}`}`;
 }

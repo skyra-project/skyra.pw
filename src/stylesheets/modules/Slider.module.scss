@@ -1,9 +1,12 @@
 @import '../variables/theme';
-@import '../variables/breakpoints';
 
 .slider {
 	color: $secondaryLighter;
 	height: 8px;
+}
+
+.valueLabel {
+	left: calc(-50% - 0.5rem);
 }
 
 .thumb {

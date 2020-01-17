@@ -44,7 +44,7 @@ import SettingsPage from 'pages/Dashboard/SettingsPage';
 import StarboardPage from 'pages/Dashboard/Starboard';
 import LogsPage from 'pages/Dashboard/LogsPage';
 import CustomCommandsPage from 'pages/Dashboard/CustomCommands';
-import ModerationIndexPage from 'pages/Dashboard/Moderation/Index';
+import ModerationSettingsPage from 'pages/Dashboard/Moderation/Settings';
 import FilterWordsPage from 'pages/Dashboard/Filter/Words';
 import FilterCapitalsPage from 'pages/Dashboard/Filter/Capitals';
 import FilterLinksPage from 'pages/Dashboard/Filter/Links';
@@ -551,7 +551,7 @@ const RootComponent = props => {
 								<AuthenticatedRoute
 									componentProps={{ ...componentProps }}
 									path="/guilds/:guildID/moderation"
-									component={ModerationIndexPage}
+									component={ModerationSettingsPage}
 								/>
 
 								<AuthenticatedRoute

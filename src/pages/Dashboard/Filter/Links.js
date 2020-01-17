@@ -18,6 +18,7 @@ import SimpleGrid from 'components/SimpleGrid';
 import theme from 'meta/theme';
 import { bitwiseSet, bitwiseHas } from 'meta/util';
 import scss from 'stylesheets/modules/FilterOptions.module.scss';
+import { When } from 'react-if';
 
 const WordsContainer = styled(Paper)`
 	padding: ${theme.spacing(1)}px;
@@ -27,7 +28,7 @@ const WordsContainer = styled(Paper)`
 	}
 `;
 
-const IndexPage = props => {
+const LinksFilterPage = props => {
 	const { links } = props.guildSettings.selfmod;
 	const [newWord, setNewWord] = useState('');
 
@@ -128,21 +129,25 @@ const IndexPage = props => {
 					</Box>
 				</form>
 
-				<WordsContainer>
-					{links.whitelist.map(word => (
-						<Chip
-							color="primary"
-							key={word}
-							label={word}
-							onDelete={() =>
-								props.patchGuildData({ selfmod: { links: { whitelist: links.whitelist.filter(item => item !== word) } } })
-							}
-						/>
-					))}
-				</WordsContainer>
+				<When condition={links.whitelist.length !== 0}>
+					<WordsContainer>
+						{links.whitelist.map(word => (
+							<Chip
+								color="primary"
+								key={word}
+								label={word}
+								onDelete={() =>
+									props.patchGuildData({
+										selfmod: { links: { whitelist: links.whitelist.filter(item => item !== word) } }
+									})
+								}
+							/>
+						))}
+					</WordsContainer>
+				</When>
 			</Section>
 		</Fragment>
 	);
 };
 
-export default IndexPage;
+export default LinksFilterPage;

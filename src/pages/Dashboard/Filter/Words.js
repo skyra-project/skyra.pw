@@ -18,6 +18,7 @@ import Slider from 'components/Slider';
 import theme from 'meta/theme';
 import { removeNonAlphaNumeric, bitwiseSet, bitwiseHas } from 'meta/util';
 import scss from 'stylesheets/modules/FilterOptions.module.scss';
+import { When } from 'react-if';
 
 const WordsContainer = styled(Paper)`
 	padding: ${theme.spacing(1)}px;
@@ -27,7 +28,7 @@ const WordsContainer = styled(Paper)`
 	}
 `;
 
-const IndexPage = props => {
+const WordsPage = props => {
 	const { filter } = props.guildSettings.selfmod;
 	const [newWord, setNewWord] = useState('');
 
@@ -125,21 +126,23 @@ const IndexPage = props => {
 					</Box>
 				</form>
 
-				<WordsContainer>
-					{filter.raw.map(word => (
-						<Chip
-							color="primary"
-							key={word}
-							label={word}
-							onDelete={() =>
-								props.patchGuildData({ selfmod: { filter: { raw: filter.raw.filter(item => item !== word) } } })
-							}
-						/>
-					))}
-				</WordsContainer>
+				<When condition={filter.raw.length !== 0}>
+					<WordsContainer>
+						{filter.raw.map(word => (
+							<Chip
+								color="primary"
+								key={word}
+								label={word}
+								onDelete={() =>
+									props.patchGuildData({ selfmod: { filter: { raw: filter.raw.filter(item => item !== word) } } })
+								}
+							/>
+						))}
+					</WordsContainer>
+				</When>
 			</Section>
 		</Fragment>
 	);
 };
 
-export default IndexPage;
+export default WordsPage;

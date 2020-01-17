@@ -7,7 +7,7 @@ import SelectInteger from 'components/Select/SelectInteger';
 import SimpleGrid from 'components/SimpleGrid';
 import Section from 'components/Section';
 
-const SettingsPage = props => (
+const StarboardPage = props => (
 	<Fragment>
 		<Section title="Starboard Settings">
 			<SimpleGrid>
@@ -53,4 +53,4 @@ const SettingsPage = props => (
 	</Fragment>
 );
 
-export default SettingsPage;
+export default StarboardPage;

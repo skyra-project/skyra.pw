@@ -10,7 +10,7 @@ import SimpleGrid from 'components/SimpleGrid';
 import Section from 'components/Section';
 import { bitwiseSet, bitwiseHas } from 'meta/util';
 
-const IndexPage = props => {
+const CapitalsFilterPage = props => {
 	const { capitals } = props.guildSettings.selfmod;
 
 	return (
@@ -113,4 +113,4 @@ const IndexPage = props => {
 	);
 };
 
-export default IndexPage;
+export default CapitalsFilterPage;

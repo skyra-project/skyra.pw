@@ -5,7 +5,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Section from 'components/Section';
 import scss from 'stylesheets/modules/CustomCommands.module.scss';
 
-const SettingsPage = props => {
+const CustomCommandsPage = props => {
 	const [newTag, setNewTag] = useState(['', '']);
 
 	const { tags, prefix } = props.guildSettings;
@@ -67,4 +67,4 @@ const SettingsPage = props => {
 	);
 };
 
-export default SettingsPage;
+export default CustomCommandsPage;
