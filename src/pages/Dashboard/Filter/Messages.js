@@ -25,11 +25,11 @@ const MessagesFilterPage = props => {
 						description="Whether or not this system should be enabled."
 					/>
 					<SelectBoolean
-						title={`Alerts ${bitwiseHas(messages.softAction, 0b001) ? 'Enabled' : 'Disabled'}`}
+						title={`Alerts ${bitwiseHas(messages.softAction, 0b100) ? 'Enabled' : 'Disabled'}`}
 						onChange={bool =>
-							props.patchGuildData({ selfmod: { messages: { softAction: bitwiseSet(messages.softAction, 0b001, bool) } } })
+							props.patchGuildData({ selfmod: { messages: { softAction: bitwiseSet(messages.softAction, 0b100, bool) } } })
 						}
-						currentValue={bitwiseHas(messages.softAction, 0b001)}
+						currentValue={bitwiseHas(messages.softAction, 0b100)}
 						description="Toggle message alerts in the channel the infraction took place."
 					/>
 					<SelectBoolean
@@ -41,11 +41,11 @@ const MessagesFilterPage = props => {
 						description="Toggle message logs in the moderation logs channel."
 					/>
 					<SelectBoolean
-						title={`Deletes ${bitwiseHas(messages.softAction, 0b100) ? 'Enabled' : 'Disabled'}`}
+						title={`Deletes ${bitwiseHas(messages.softAction, 0b001) ? 'Enabled' : 'Disabled'}`}
 						onChange={bool =>
-							props.patchGuildData({ selfmod: { messages: { softAction: bitwiseSet(messages.softAction, 0b100, bool) } } })
+							props.patchGuildData({ selfmod: { messages: { softAction: bitwiseSet(messages.softAction, 0b001, bool) } } })
 						}
-						currentValue={bitwiseHas(messages.softAction, 0b100)}
+						currentValue={bitwiseHas(messages.softAction, 0b001)}
 						description="Toggle message deletions."
 					/>
 				</SimpleGrid>
