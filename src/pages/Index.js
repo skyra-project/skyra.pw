@@ -1,85 +1,25 @@
 import React, { useGlobal } from 'reactn';
-import styled from 'styled-components';
-import { Container, Box, Typography, Divider, useMediaQuery, useTheme, Hidden } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-import clsx from 'clsx';
+import { Container, Box, Typography, Divider, Hidden } from '@material-ui/core';
 
-import theme from 'meta/theme';
 import GeneralPage from 'components/GeneralPage';
 import GuildCard from 'components/GuildCard';
 import features from 'assets/features';
+import scss from 'stylesheets/modules/HomePage.module.scss';
 
-const sectionStyles = makeStyles(() => ({
-	section: {
-		minHeight: 'min-content'
-	},
-	sectionMobile: {
-		minHeight: 'min-content'
-	},
-	image: {
-		borderRadius: 4
-	}
-}));
-
-const SectionContainer = styled(Box)`
-	background: ${theme.palette.secondary.main};
-	width: 100%;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	align-content: center;
-	flex-wrap: wrap;
-	flex-direction: row;
-
-	&:nth-of-type(odd) {
-		flex-direction: row-reverse;
-	}
-
-	.MuiDivider-root {
-		margin: 10px 0px;
-	}
-
-	.text {
-		display: flex;
-		flex-direction: column;
-		width: 47%;
-		${theme.breakpoints.down('sm')} {
-			width: 100%;
-		}
-	}
-
-	img {
-		max-width: 400px;
-		max-height: 400px;
-		${theme.breakpoints.down('sm')} {
-			margin-top: 20px;
-			width: 100%;
-		}
-	}
-`;
-
-const Section = ({ name, image, text }) => {
-	const classes = sectionStyles();
-	const theme = useTheme();
-	const isOnMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
-	return (
-		<SectionContainer p={5} className={clsx({ [classes.section]: !isOnMobile, [classes.sectionMobile]: isOnMobile })}>
-			<div className="text">
-				<Typography variant="h3" component="h1">
-					{name}
-				</Typography>
-				<Divider />
-				<Typography>{text}</Typography>
-			</div>
-			<Hidden smDown>
-				<div className="image-container">
-					<img alt={name} loading="lazy" src={image.src} width={image.width} height={image.height} className={classes.image} />
-				</div>
-			</Hidden>
-		</SectionContainer>
-	);
-};
+const Section = ({ name, image, text }) => (
+	<Box p={5} className={scss.box}>
+		<div className={scss.text}>
+			<Typography variant="h3" component="h1">
+				{name}
+			</Typography>
+			<Divider classes={{ root: scss.divider }} />
+			<Typography>{text}</Typography>
+		</div>
+		<Hidden smDown>
+			<img alt={name} src={image.src} width={image.width} height={image.height} className={scss.previewImage} loading="lazy" />
+		</Hidden>
+	</Box>
+);
 
 const HomePage = () => {
 	const [global] = useGlobal();
@@ -93,7 +33,7 @@ const HomePage = () => {
 							.filter(guild => guild.manageable)
 							.sort((a, b) => b.skyraIsIn - a.skyraIsIn || a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }))
 							.map(guild => (
-								<GuildCard guild={guild} />
+								<GuildCard guild={guild} key={guild.id} />
 							))}
 					</Box>
 				</Container>

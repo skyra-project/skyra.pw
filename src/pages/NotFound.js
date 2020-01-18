@@ -1,7 +1,7 @@
 import React from 'react';
+import { Box, Button, Typography } from '@material-ui/core';
 
 import GeneralPage from 'components/GeneralPage';
-import { Box, Button, Typography } from '@material-ui/core';
 import { navigate } from 'meta/util';
 
 const NotFoundPage = () => (

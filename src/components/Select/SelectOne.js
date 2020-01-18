@@ -1,9 +1,9 @@
 import React, { Fragment, useState } from 'react';
 import { DialogActions, DialogContent, ListItemText, ListItem, List, Button } from '@material-ui/core';
 
-import DialogTitle from './DialogTitle';
-import Dialog from './Dialog';
-import SearchBar from './SearchBar';
+import DialogTitle from 'components/DialogTitle';
+import Dialog from 'components/Dialog';
+import SearchBar from 'components/SearchBar';
 import { toTitleCase } from 'meta/util';
 
 export default function SelectMany({ title, onChange, values, name = 'None' }) {
@@ -16,7 +16,7 @@ export default function SelectMany({ title, onChange, values, name = 'None' }) {
 
 	return (
 		<Fragment>
-			<Button variant="outlined" color="primary" onClick={() => setOpen(true)}>
+			<Button variant="contained" color="primary" onClick={() => setOpen(true)}>
 				{title}: {name}
 			</Button>
 			<Dialog fullWidth maxWidth="xs" onClose={handleClose} open={open}>

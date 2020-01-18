@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-
-import GeneralPage from 'components/GeneralPage';
 import { Button, Box, Typography, Divider } from '@material-ui/core';
-import { apiFetch } from 'meta/util';
 import RefreshIcon from '@material-ui/icons/Refresh';
 
-class StatusPage extends Component {
+import GeneralPage from 'components/GeneralPage';
+import { apiFetch } from 'meta/util';
 
+class StatusPage extends Component {
 	state = {
 		application: null,
 		error: false
@@ -52,7 +51,6 @@ class StatusPage extends Component {
 			</GeneralPage>
 		);
 	}
-
 }
 
 export default StatusPage;

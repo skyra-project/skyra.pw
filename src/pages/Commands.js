@@ -2,17 +2,18 @@ import React, { Component } from 'reactn';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
-import { withStyles } from '@material-ui/core/styles';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { apiFetch } from 'meta/util';
 import LockIcon from '@material-ui/icons/Lock';
 import Tooltip from '@material-ui/core/Tooltip';
 import DnsIcon from '@material-ui/icons/Dns';
 import Container from '@material-ui/core/Container';
+import Box from '@material-ui/core/Box';
+import Divider from '@material-ui/core/Divider';
+import { withStyles } from '@material-ui/core/styles';
 
 import GeneralPage from 'components/GeneralPage';
-import { Box, Divider } from '@material-ui/core';
+import { apiFetch } from 'meta/util';
 
 const styles = theme => ({
 	root: {
@@ -46,7 +47,6 @@ const styles = theme => ({
 });
 
 class CommandsPage extends Component {
-
 	state = {
 		loading: true,
 		commands: [],
@@ -136,7 +136,6 @@ class CommandsPage extends Component {
 			</GeneralPage>
 		);
 	}
-
 }
 
 CommandsPage.propTypes = {

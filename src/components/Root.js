@@ -1,12 +1,10 @@
 import React from 'reactn';
 import { Router, Route, Switch } from 'react-router-dom';
 import { ThemeProvider, StylesProvider } from '@material-ui/styles';
+import { CssBaseline } from '@material-ui/core';
 
-import theme from 'meta/theme';
-import { history, oauthURL } from 'meta/constants';
 import UnauthenticatedRoute from 'components/UnauthenticatedRoute';
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
-import CssBaseline from 'components/CssBaseline';
 import OAuthCallbackPage from 'pages/oauth/OAuthCallbackPage';
 import GuildCallbackPage from 'pages/oauth/GuildCallbackPage';
 import HomePage from 'pages/Index';
@@ -15,6 +13,8 @@ import CommandsPage from 'pages/Commands';
 import NotFoundPage from 'pages/NotFound';
 import StatusPage from 'pages/Status';
 import MusicPage from 'pages/Music/Music';
+import { history, oauthURL } from 'meta/constants';
+import theme from 'meta/theme';
 
 const Root = () => (
 	<StylesProvider injectFirst>

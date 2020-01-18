@@ -25,7 +25,6 @@ export default function CustomizedDialogs({ title, currentValue, maxLength, onCh
 			label={title}
 			value={content}
 			onChange={onChangeValue}
-			variant="outlined"
 			multiline
 			fullWidth
 			maxLength={maxLength}

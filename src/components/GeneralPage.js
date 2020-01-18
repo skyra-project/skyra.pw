@@ -2,10 +2,10 @@ import React, { Component } from 'reactn';
 import styled from 'styled-components';
 import { Box, Typography, Button, Container, LinearProgress, Hidden } from '@material-ui/core';
 
-import { oauthURL } from 'meta/constants';
 import UserMenu from 'components/UserMenu';
-import SkyraLogo from 'assets/skyraLogo';
 import Footer from 'components/Footer';
+import SkyraLogo from 'assets/skyraLogo';
+import { oauthURL } from 'meta/constants';
 import { syncUser, navigate } from 'meta/util';
 
 const PageContainer = styled.div`

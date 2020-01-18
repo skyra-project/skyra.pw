@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react';
-import { TextField } from '@material-ui/core';
+import { TextField, MenuItem } from '@material-ui/core';
 
-import SelectRole from 'components/SelectRole';
-import SelectRoles from 'components/SelectRoles';
-import Select from 'components/Select';
-import SelectChannels from 'components/SelectChannels';
+import SelectRole from 'components/Select/SelectRole';
+import SelectRoles from 'components/Select/SelectRoles';
+import Select from 'components/Select/Select';
+import SelectChannels from 'components/Select/SelectChannels';
 
-import Section from './components/Section';
-import SimpleGrid from './components/SimpleGrid';
+import Section from 'components/Section';
+import SimpleGrid from 'components/SimpleGrid';
 
 const SettingsPage = props => (
 	<Fragment>
@@ -22,15 +22,15 @@ const SettingsPage = props => (
 					label="Prefix"
 					value={props.guildSettings.prefix}
 					onChange={e => props.patchGuildData({ prefix: e.target.value })}
-					variant="outlined"
 				/>
 				<Select
 					title="Language"
+					helperText="Select the language you want for this guild"
 					value={props.guildSettings.language}
 					onChange={e => props.patchGuildData({ language: e.target.value })}
 				>
-					<option value="en-US">English</option>
-					<option value="es-ES">Español</option>
+					<MenuItem value="en-US">English</MenuItem>
+					<MenuItem value="es-ES">Español</MenuItem>
 				</Select>
 			</SimpleGrid>
 		</Section>

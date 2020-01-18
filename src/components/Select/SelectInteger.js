@@ -8,7 +8,6 @@ const SelectInteger = ({ value, label, min, max, onChange }) => (
 		label={label}
 		type="number"
 		margin="normal"
-		variant="outlined"
 		style={{ minWidth: 200 }}
 		inputProps={{ min, max }}
 		onChange={onChange}

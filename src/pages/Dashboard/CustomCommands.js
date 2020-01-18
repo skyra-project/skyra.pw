@@ -1,19 +1,11 @@
 import React, { Fragment, useState } from 'react';
-import styled from 'styled-components';
-import { TextField, Box, ListItem, ListItemText, List, ListItemSecondaryAction, IconButton, Typography, Button } from '@material-ui/core';
+import { Box, Button, IconButton, List, ListItem, ListItemSecondaryAction, ListItemText, TextField, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import Section from './components/Section';
+import Section from 'components/Section';
+import scss from 'stylesheets/modules/CustomCommands.module.scss';
 
-const Container = styled(Box)`
-	max-width: 500px;
-	display: flex;
-	flex-direction: column;
-`;
-
-const SettingsPage = props => {
-	console.log(props.guildSettings);
-
+const CustomCommandsPage = props => {
 	const [newTag, setNewTag] = useState(['', '']);
 
 	const { tags, prefix } = props.guildSettings;
@@ -21,20 +13,13 @@ const SettingsPage = props => {
 	return (
 		<Fragment>
 			<Section title="Add Command">
-				<Container>
-					<TextField
-						label="Name"
-						value={newTag[0]}
-						onChange={e => setNewTag([e.target.value, newTag[1]])}
-						variant="outlined"
-						margin="normal"
-					/>
+				<Box className={scss.container}>
+					<TextField label="Name" value={newTag[0]} onChange={e => setNewTag([e.target.value, newTag[1]])} margin="normal" />
 					<TextField
 						multiline
 						label="Content / Response"
 						value={newTag[1]}
 						onChange={e => setNewTag([newTag[0], e.target.value])}
-						variant="outlined"
 						margin="normal"
 						rows="3"
 					/>
@@ -53,10 +38,10 @@ const SettingsPage = props => {
 					>
 						Add
 					</Button>
-				</Container>
+				</Box>
 			</Section>
 			<Section title="Custom Commands">
-				<Container>
+				<Box className={scss.container}>
 					<List>
 						{tags.length > 0 ? (
 							tags.map(([name, content]) => (
@@ -76,10 +61,10 @@ const SettingsPage = props => {
 							<Typography>You have no commands!</Typography>
 						)}
 					</List>
-				</Container>
+				</Box>
 			</Section>
 		</Fragment>
 	);
 };
 
-export default SettingsPage;
+export default CustomCommandsPage;

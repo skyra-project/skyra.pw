@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SelectMany from 'components/Select/SelectMany';
+import SelectMany from './SelectMany';
 
 const SelectRoles = ({ title, value, guild, onChange }) => (
 	<SelectMany

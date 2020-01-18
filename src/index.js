@@ -6,18 +6,9 @@ import * as serviceWorker from './serviceWorker';
 import { loadState, logOut } from 'meta/util';
 import Root from 'components/Root';
 
+import 'stylesheets/basestyles.scss';
+
 const rootElement = document.getElementById('root');
-
-if (process.env.NODE_ENV === 'development') {
-	addReactNDevTools();
-
-	if (module.hot) {
-		module.hot.accept('./components/Root.js', () => {
-			const NextApp = require('./components/Root.js').default;
-			render(<NextApp />, rootElement);
-		});
-	}
-}
 
 const discordUser = loadState('discord_user');
 const discordToken = loadState('discord_token');
@@ -38,3 +29,13 @@ render(<Root />, rootElement);
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+if (process.env.NODE_ENV === 'development') {
+	addReactNDevTools();
+	if (module.hot) {
+		module.hot.accept('./components/Root.js', () => {
+			const NextApp = require('./components/Root.js').default;
+			render(<NextApp />, rootElement);
+		});
+	}
+}

@@ -1,9 +1,10 @@
+import React, { setGlobal, useEffect, useState } from 'reactn';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+
 import GeneralPage from 'components/GeneralPage';
 import { BASE_WEB_URL, history } from 'meta/constants';
 import { apiFetch, saveState } from 'meta/util';
-import React, { setGlobal, useEffect, useState } from 'reactn';
 
 function DiscordAuthCallbackPage() {
 	const [error, setError] = useState(null);

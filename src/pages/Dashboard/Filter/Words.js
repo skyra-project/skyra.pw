@@ -3,18 +3,22 @@ import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
+import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
-import Slider from '@material-ui/core/Slider';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
+import Select from 'components/Select/Select';
+import SelectBoolean from 'components/Select/SelectBoolean';
+import SelectDuration from 'components/Select/SelectDuration';
+
+import Section from 'components/Section';
+import SimpleGrid from 'components/SimpleGrid';
+import Slider from 'components/Slider';
 import theme from 'meta/theme';
-import Section from '../components/Section';
-import SimpleGrid from '../components/SimpleGrid';
-import Select from 'components/Select';
-import SelectBoolean from 'components/SelectBoolean';
-import SelectDuration from 'components/SelectDuration';
 import { removeNonAlphaNumeric, bitwiseSet, bitwiseHas } from 'meta/util';
+import scss from 'stylesheets/modules/FilterOptions.module.scss';
+import { When } from 'react-if';
 
 const WordsContainer = styled(Paper)`
 	padding: ${theme.spacing(1)}px;
@@ -24,7 +28,7 @@ const WordsContainer = styled(Paper)`
 	}
 `;
 
-const IndexPage = props => {
+const WordsPage = props => {
 	const { filter } = props.guildSettings.selfmod;
 	const [newWord, setNewWord] = useState('');
 
@@ -68,41 +72,40 @@ const IndexPage = props => {
 				<SimpleGrid gridProps={{ direction: 'row', justify: 'flex-start' }}>
 					<Select
 						title="Action"
+						helperText="The action to perform as punishment"
 						value={filter.hardAction}
 						onChange={e => props.patchGuildData({ selfmod: { filter: { hardAction: e.target.value } } })}
 					>
-						<option value={0}>None</option>
-						<option value={1}>Warning</option>
-						<option value={2}>Kick</option>
-						<option value={3}>Mute</option>
-						<option value={4}>Softban</option>
-						<option value={5}>Ban</option>
+						<MenuItem value={0}>None</MenuItem>
+						<MenuItem value={1}>Warning</MenuItem>
+						<MenuItem value={2}>Kick</MenuItem>
+						<MenuItem value={3}>Mute</MenuItem>
+						<MenuItem value={4}>Softban</MenuItem>
+						<MenuItem value={5}>Ban</MenuItem>
 					</Select>
 					<SelectDuration
 						value={filter.hardActionDuration}
 						min={1000}
 						onChange={duration => props.patchGuildData({ selfmod: { filter: { hardActionDuration: duration } } })}
-					></SelectDuration>
+					/>
 				</SimpleGrid>
 				<Typography>Maximum Threshold</Typography>
 				<Slider
 					value={filter.thresholdMaximum}
 					onChange={(_, e) => props.patchGuildData({ selfmod: { filter: { thresholdMaximum: e } } })}
-					aria-labelledby="discrete-slider"
+					aria-labelledby="Words selfmod filter maximum threshold slider"
 					valueLabelDisplay="auto"
 					min={0}
 					max={60}
-					label="The amount of infractions that can be done within Threshold Duration before taking action, instantly if 0."
 				/>
 				<Typography>Threshold Duration</Typography>
 				<Slider
 					value={filter.thresholdDuration}
 					onChange={(_, e) => props.patchGuildData({ selfmod: { filter: { thresholdDuration: e } } })}
-					aria-labelledby="discrete-slider"
+					aria-labelledby="Word selfmod filter threshold duration slider"
 					valueLabelDisplay="auto"
 					min={0}
 					max={120}
-					label="The time in which infractions will accumulate before taking action, instantly if 0."
 				/>
 			</Section>
 			<Section title="Filtered Words">
@@ -116,34 +119,30 @@ const IndexPage = props => {
 					}}
 				>
 					<Box display="flex" mb={2} alignContent="center" alignItems="center" justifyContent="flex-start">
-						<TextField
-							style={{ marginRight: 20 }}
-							label="Add Word"
-							value={newWord}
-							onChange={e => setNewWord(e.target.value)}
-							variant="outlined"
-						/>
+						<TextField className={scss.textField} label="Add Word" value={newWord} onChange={e => setNewWord(e.target.value)} />
 						<Button type="submit" variant="contained" color="primary">
-							Add Word
+							Confirm
 						</Button>
 					</Box>
 				</form>
 
-				<WordsContainer>
-					{filter.raw.map(word => (
-						<Chip
-							color="primary"
-							key={word}
-							label={word}
-							onDelete={() =>
-								props.patchGuildData({ selfmod: { filter: { raw: filter.raw.filter(item => item !== word) } } })
-							}
-						/>
-					))}
-				</WordsContainer>
+				<When condition={filter.raw.length !== 0}>
+					<WordsContainer>
+						{filter.raw.map(word => (
+							<Chip
+								color="primary"
+								key={word}
+								label={word}
+								onDelete={() =>
+									props.patchGuildData({ selfmod: { filter: { raw: filter.raw.filter(item => item !== word) } } })
+								}
+							/>
+						))}
+					</WordsContainer>
+				</When>
 			</Section>
 		</Fragment>
 	);
 };
 
-export default IndexPage;
+export default WordsPage;

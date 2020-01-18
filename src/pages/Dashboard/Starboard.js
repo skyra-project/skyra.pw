@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react';
 
-import SelectChannels from 'components/SelectChannels';
-import SelectChannel from 'components/SelectChannel';
-import SelectInteger from 'components/SelectInteger';
-import SimpleGrid from './components/SimpleGrid';
-import Section from './components/Section';
+import SelectChannels from 'components/Select/SelectChannels';
+import SelectChannel from 'components/Select/SelectChannel';
+import SelectInteger from 'components/Select/SelectInteger';
 
-const SettingsPage = props => (
+import SimpleGrid from 'components/SimpleGrid';
+import Section from 'components/Section';
+
+const StarboardPage = props => (
 	<Fragment>
 		<Section title="Starboard Settings">
 			<SimpleGrid>
@@ -52,4 +53,4 @@ const SettingsPage = props => (
 	</Fragment>
 );
 
-export default SettingsPage;
+export default StarboardPage;
