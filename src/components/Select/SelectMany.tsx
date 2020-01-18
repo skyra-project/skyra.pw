@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, ChangeEvent, ReactNode } from 'react';
 import { DialogActions, DialogContent, ListItemText, ListItemIcon, ListItem, List, Button, Checkbox } from '@material-ui/core';
 
 import DialogTitle from 'components/DialogTitle';
@@ -6,16 +6,26 @@ import Dialog from 'components/Dialog';
 import SearchBar from 'components/SearchBar';
 import { toTitleCase } from 'meta/util';
 
-export default function SelectMany({ title, value, onChange, values, name }) {
+export interface SelectManyProps {
+	title: ReactNode;
+	value: string | string[];
+	name: ReactNode;
+	values: {
+		name: string;
+		value: string;
+	}[];
+
+	onChange(...args: any[]): void;
+}
+
+export default function SelectMany({ title, value, onChange, values, name }: SelectManyProps) {
 	const [open, setOpen] = useState(false);
 	const [checked, setChecked] = useState(value);
-	const [search, setSearch] = useState(null);
+	const [search, setSearch] = useState('');
 
-	const handleClose = () => {
-		setOpen(false);
-	};
+	const handleClose = () => setOpen(!open);
 
-	const handleToggle = value => () => {
+	const handleToggle = (value: string) => () => {
 		const currentIndex = checked.indexOf(value);
 		const newChecked = [...checked];
 
@@ -35,7 +45,7 @@ export default function SelectMany({ title, value, onChange, values, name }) {
 			</Button>
 			<Dialog fullWidth maxWidth="xs" onClose={handleClose} open={open}>
 				<DialogTitle onClose={handleClose}>{toTitleCase(title)}</DialogTitle>
-				{values.length > 10 && <SearchBar onChange={e => setSearch(e.target.value)} />}
+				{values.length > 10 && <SearchBar onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} />}
 				<DialogContent dividers>
 					<List>
 						{values
@@ -46,7 +56,7 @@ export default function SelectMany({ title, value, onChange, values, name }) {
 							.map(({ value, name }) => (
 								<ListItem key={value} button onClick={handleToggle(value)}>
 									<ListItemIcon>
-										<Checkbox edge="start" checked={checked.includes(value)} tabIndex={-1} disableRipple />
+										<Checkbox edge="start" checked={checked.includes(value)} tabIndex={-1} color="primary" />
 									</ListItemIcon>
 									<ListItemText primary={name} />
 								</ListItem>
@@ -54,12 +64,7 @@ export default function SelectMany({ title, value, onChange, values, name }) {
 					</List>
 				</DialogContent>
 				<DialogActions>
-					<Button
-						onClick={() => {
-							setChecked([]);
-						}}
-						color="primary"
-					>
+					<Button onClick={() => setChecked([])} color="primary">
 						Reset
 					</Button>
 					<Button

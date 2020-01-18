@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, ReactNode, ChangeEvent } from 'react';
 import { DialogActions, DialogContent, ListItemText, ListItem, List, Button } from '@material-ui/core';
 
 import DialogTitle from 'components/DialogTitle';
@@ -6,13 +6,21 @@ import Dialog from 'components/Dialog';
 import SearchBar from 'components/SearchBar';
 import { toTitleCase } from 'meta/util';
 
-export default function SelectMany({ title, onChange, values, name = 'None' }) {
-	const [open, setOpen] = useState(false);
-	const [search, setSearch] = useState(null);
+export interface SelectOneProps {
+	title: ReactNode;
+	name: ReactNode;
+	values: {
+		name: string;
+		value: string;
+	}[];
 
-	const handleClose = () => {
-		setOpen(false);
-	};
+	onChange(...args: any[]): void;
+}
+
+export default function SelectOne({ title, onChange, values, name = 'None' }: SelectOneProps) {
+	const [open, setOpen] = useState(false);
+	const [search, setSearch] = useState('');
+	const handleClose = () => setOpen(!open);
 
 	return (
 		<Fragment>
@@ -21,7 +29,7 @@ export default function SelectMany({ title, onChange, values, name = 'None' }) {
 			</Button>
 			<Dialog fullWidth maxWidth="xs" onClose={handleClose} open={open}>
 				<DialogTitle onClose={handleClose}>{toTitleCase(title)}</DialogTitle>
-				{values.length > 10 && <SearchBar onChange={e => setSearch(e.target.value)} />}
+				{values.length > 10 && <SearchBar onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} />}
 				<DialogContent dividers>
 					<List component="nav">
 						{values
