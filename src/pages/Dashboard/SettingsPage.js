@@ -78,6 +78,7 @@ const SettingsPage = props => (
 								}
 								guild={props.guildData}
 								title={role.name}
+								filterEveryone
 							/>
 						);
 					}
@@ -95,6 +96,7 @@ const SettingsPage = props => (
 							}
 							guild={props.guildData}
 							title={role.name}
+							filterEveryone
 						/>
 					);
 				})}
@@ -108,6 +110,7 @@ const SettingsPage = props => (
 					}
 					guild={props.guildData}
 					title="Sticky Roles"
+					filterEveryone
 				/>
 			</SimpleGrid>
 		</Section>

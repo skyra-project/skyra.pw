@@ -24,6 +24,7 @@ const IndexPage = props => (
 							})
 						}
 						guild={props.guildData}
+						filterEveryone
 					/>
 				))}
 			</SimpleGrid>
