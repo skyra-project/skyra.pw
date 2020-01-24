@@ -18,7 +18,7 @@
 		"react-router-dom": "^5.1.2",
 		"reactn": "^2.2.4",
 		"redux": "^4.0.5",
-		"styled-components": "^4.4.1",
+		"styled-components": "^5.0.0",
 		"styled-react-modal": "^2.0.0"
 	},
 	"scripts": {
@@ -43,8 +43,8 @@
 	},
 	"devDependencies": {
 		"@types/history": "^4.7.3",
-		"@types/jest": "^24.0.25",
-		"@types/node": "^13.1.8",
+		"@types/jest": "^24.9.1",
+		"@types/node": "^13.5.0",
 		"@types/react": "^16.9.19",
 		"@types/react-dom": "^16.9.5",
 		"@types/react-router": "^5.1.4",
@@ -62,7 +62,7 @@
 		"eslint-plugin-jsx-a11y": "6.x",
 		"eslint-plugin-react": "7.18.0",
 		"eslint-plugin-react-hooks": "2.3.0",
-		"husky": "^4.2.0",
+		"husky": "^4.2.1",
 		"lint-staged": "^10.0.2",
 		"node-sass": "^4.13.1",
 		"prettier": "1.19.1",
