@@ -4,6 +4,7 @@ import addReactNDevTools from 'reactn-devtools';
 
 import * as serviceWorker from './serviceWorker';
 import { loadState, logOut } from 'meta/util';
+import { RootState, HotNodeModule } from 'meta/typings/Reactn';
 import Root from 'components/Root';
 
 import 'stylesheets/basestyles.scss';
@@ -16,7 +17,7 @@ const discordToken = loadState('discord_token');
 if (discordUser && discordUser.avatarURL) {
 	logOut();
 } else {
-	setGlobal({
+	setGlobal<RootState>({
 		authenticated: Boolean(discordToken) && Boolean(discordUser),
 		user: discordUser,
 		token: discordToken
@@ -32,9 +33,9 @@ serviceWorker.unregister();
 
 if (process.env.NODE_ENV === 'development') {
 	addReactNDevTools();
-	if (module.hot) {
-		module.hot.accept('./components/Root.js', () => {
-			const NextApp = require('./components/Root.js').default;
+	if ((module as HotNodeModule).hot) {
+		(module as HotNodeModule).hot.accept('./components/Root.tsx', () => {
+			const NextApp = require('./components/Root.tsx').default;
 			render(<NextApp />, rootElement);
 		});
 	}

@@ -1,20 +1,19 @@
-import React from 'reactn';
-import { Router, Route, Switch } from 'react-router-dom';
-import { ThemeProvider, StylesProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
-
-import UnauthenticatedRoute from 'components/UnauthenticatedRoute';
+import { StylesProvider, ThemeProvider } from '@material-ui/styles';
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
-import OAuthCallbackPage from 'pages/oauth/OAuthCallbackPage';
-import GuildCallbackPage from 'pages/oauth/GuildCallbackPage';
-import HomePage from 'pages/Index';
-import DashboardRootPage from 'pages/Dashboard/Root';
-import CommandsPage from 'pages/Commands';
-import NotFoundPage from 'pages/NotFound';
-import StatusPage from 'pages/Status';
-import MusicPage from 'pages/Music/Music';
-import { history, oauthURL } from 'meta/constants';
+import UnauthenticatedRoute from 'components/UnauthenticatedRoute';
+import { history, oauthURL, serverURL } from 'meta/constants';
 import theme from 'meta/theme';
+import CommandsPage from 'pages/Commands';
+import DashboardRootPage from 'pages/Dashboard/Root';
+import HomePage from 'pages/Index';
+import MusicPage from 'pages/Music/Music';
+import NotFoundPage from 'pages/NotFound';
+import GuildCallbackPage from 'pages/oauth/GuildCallbackPage';
+import OAuthCallbackPage from 'pages/oauth/OAuthCallbackPage';
+import StatusPage from 'pages/Status';
+import { Route, Router, Switch } from 'react-router-dom';
+import React from 'reactn';
 
 const Root = () => (
 	<StylesProvider injectFirst>
@@ -29,7 +28,20 @@ const Root = () => (
 					<Route exact path="/status" component={StatusPage} />
 					<AuthenticatedRoute path="/guilds/:guildID/:pageName?" component={DashboardRootPage} />
 					<Route exact path="/music/:guildID" component={MusicPage} />
-					<UnauthenticatedRoute path="/login" component={() => window.location.replace(oauthURL.toString())} />
+					<UnauthenticatedRoute
+						path="/login"
+						component={() => {
+							window.location.replace(oauthURL.toString());
+							return null;
+						}}
+					/>
+					<UnauthenticatedRoute
+						path="/join"
+						component={() => {
+							window.location.replace(serverURL);
+							return null;
+						}}
+					/>
 					<Route component={NotFoundPage} />
 				</Switch>
 			</Router>

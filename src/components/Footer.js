@@ -5,7 +5,7 @@ import { Box, Typography, Container, Hidden } from '@material-ui/core';
 import Link from 'components/Link';
 import SkyraLogo from 'assets/skyraLogo';
 import theme from 'meta/theme';
-import { CLIENT_ID } from 'meta/constants';
+import { CLIENT_ID, inviteURL } from 'meta/constants';
 
 const FooterContainer = styled.footer`
 	padding: 50px 0px;
@@ -43,11 +43,7 @@ const Left = () => (
 );
 const Right = () => (
 	<Box textAlign="right" display="flex" flexDirection="column">
-		<Link
-			variant="body1"
-			to={`https://discordapp.com/oauth2/authorize?client_id=${CLIENT_ID}&permissions=356904022&scope=bot`}
-			text="Invite Link"
-		/>
+		<Link variant="body1" to={inviteURL.toString()} text="Invite Link" />
 		<Link variant="body1" to="https://www.patreon.com/kyranet" text="Donate" />
 		<Link variant="body1" to={`https://top.gg/bot/${CLIENT_ID}`} text="Vote" />
 	</Box>
