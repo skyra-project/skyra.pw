@@ -9,6 +9,7 @@ export const WS_URL = process.env.REACT_APP_WS_URL;
 export const BASE_CDN_URL = 'https://cdn.skyra.pw';
 
 const DiscordOauthURL = `https://discordapp.com/oauth2/authorize`;
+export const serverURL = 'https://discordapp.com/invite/6gakFR2';
 export const oauthURL = new URL(DiscordOauthURL);
 export const inviteURL = new URL(DiscordOauthURL);
 oauthURL.search = new URLSearchParams([

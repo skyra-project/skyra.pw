@@ -2,7 +2,7 @@ import { CssBaseline } from '@material-ui/core';
 import { StylesProvider, ThemeProvider } from '@material-ui/styles';
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
 import UnauthenticatedRoute from 'components/UnauthenticatedRoute';
-import { history, oauthURL, inviteURL } from 'meta/constants';
+import { history, oauthURL, serverURL } from 'meta/constants';
 import theme from 'meta/theme';
 import CommandsPage from 'pages/Commands';
 import DashboardRootPage from 'pages/Dashboard/Root';
@@ -38,7 +38,7 @@ const Root = () => (
 					<UnauthenticatedRoute
 						path="/join"
 						component={() => {
-							window.location.replace(inviteURL.toString());
+							window.location.replace(serverURL);
 							return null;
 						}}
 					/>
