@@ -1,4 +1,4 @@
-# Skyra.PW [![Discord](https://discordapp.com/api/guilds/254360814063058944/embed.png)](https://skyra.pw/join)
+# Skyra.PW [![Discord](https://discordapp.com/api/guilds/254360814063058944/embed.png)](https://join.skyra.pw)
 
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/skyra-project/skyra.pw.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/skyra-project/skyra.pw/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/skyra-project/skyra.pw.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/skyra-project/skyra.pw/context:javascript)
@@ -26,7 +26,7 @@ After forking/cloning this repo to a folder locally:
 **Skyra links**
 
 -   [Skyra Invite Link](https://skyra.pw/invite)
--   [Support Server](https://skyra.pw/join)
+-   [Support Server](https://join.skyra.pw)
 -   [Patreon](https://www.patreon.com/kyranet)
 
 ## Buy me a donut
