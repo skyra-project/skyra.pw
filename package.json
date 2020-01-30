@@ -78,7 +78,7 @@
 	},
 	"lint-staged": {
 		"*.{js,jsx,ts,tsx}": [
-			"yarn lint"
+			"eslint --ext js,jsx,ts,tsx --fix"
 		]
 	},
 	"repository": {
