@@ -4,7 +4,7 @@ import { Switch, FormControlLabel, ListItemText } from '@material-ui/core';
 export interface SelectBooleanProps {
 	title: string;
 	currentValue: boolean;
-	description: string;
+	description?: string;
 
 	onChange(...args: any[]): void;
 }

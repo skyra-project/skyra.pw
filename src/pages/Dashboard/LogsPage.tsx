@@ -5,8 +5,16 @@ import SelectBoolean from 'components/Select/SelectBoolean';
 
 import Section from 'components/Section';
 import SimpleGrid from 'components/SimpleGrid';
+import { FlattenedGuild } from 'meta/typings/ApiData';
+import { GuildSettings } from 'meta/typings/GuildSettings';
 
-const LogsPage = props => (
+export interface LogsPageProps {
+	guildData: FlattenedGuild;
+	guildSettings: GuildSettings;
+	patchGuildData: (changes: any) => void;
+}
+
+const LogsPage = (props: LogsPageProps) => (
 	<Fragment>
 		<Section title="Channels">
 			<SimpleGrid>
@@ -38,7 +46,8 @@ const LogsPage = props => (
 					{ title: 'Member Join', name: 'memberAdd' },
 					{ title: 'Member Leave', name: 'memberRemove' },
 					{ title: 'Message Edit', name: 'messageEdit' },
-					{ title: 'Message Delete', name: 'messageDelete' }
+					{ title: 'Message Delete', name: 'messageDelete' },
+					{ title: 'Twemoji Reactions', name: 'twemoji-reactions' }
 				].map(event => {
 					const current = props.guildSettings.events[event.name];
 					return (

@@ -1,0 +1,23 @@
+@import '../variables/breakpoints';
+@import '../variables/theme';
+
+.root {
+	margin-right: 2rem;
+	margin-bottom: 1rem;
+
+	> h1 {
+		border-bottom: 2px solid $primaryMain;
+		margin-bottom: 1.5rem;
+		padding-bottom: 0.6rem;
+	}
+
+	@include sm {
+		flex-basis: 100%;
+		widows: 100%;
+		margin-right: 0;
+
+		&:not(:first-child) {
+			margin-top: 1.5rem;
+		}
+	}
+}
