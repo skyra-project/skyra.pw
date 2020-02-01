@@ -1,7 +1,7 @@
 import { CssBaseline } from '@material-ui/core';
 import { StylesProvider, ThemeProvider } from '@material-ui/styles';
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
-import UnauthenticatedRoute from 'components/UnauthenticatedRoute';
+import RedirectRoute from 'components/RedirectRoute';
 import { history, oauthURL, serverURL } from 'meta/constants';
 import theme from 'meta/theme';
 import CommandsPage from 'pages/Commands';
@@ -28,20 +28,8 @@ const Root = () => (
 					<Route exact path="/status" component={StatusPage} />
 					<AuthenticatedRoute path="/guilds/:guildID/:pageName?" component={DashboardRootPage} />
 					<Route exact path="/music/:guildID" component={MusicPage} />
-					<UnauthenticatedRoute
-						path="/login"
-						component={() => {
-							window.location.replace(oauthURL.toString());
-							return null;
-						}}
-					/>
-					<UnauthenticatedRoute
-						path="/join"
-						component={() => {
-							window.location.replace(serverURL);
-							return null;
-						}}
-					/>
+					<RedirectRoute path="/login" redirectUri={oauthURL.toString()} />
+					<RedirectRoute path="/join" redirectUri={serverURL} />
 					<Route component={NotFoundPage} />
 				</Switch>
 			</Router>
