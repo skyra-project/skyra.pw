@@ -9645,10 +9645,10 @@ reactn-devtools@^1.1.0:
   dependencies:
     redux-devtools-extension "^2.13.8"
 
-reactn@^2.2.4:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/reactn/-/reactn-2.2.4.tgz#f42168177f865feeeba057c8ad558d5456c730f9"
-  integrity sha512-ROZGocaVrunwcyxmmi7tQWk0/NhersX55Zh0yInDXxD2sc7L4iriSu6oG0Cmq2QcwfEJTFXIEL+ASBpDgAYywQ==
+reactn@^2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/reactn/-/reactn-2.2.5.tgz#1f5d7d89738b5909d5afb6399f36200467c8078f"
+  integrity sha512-+8ZG0veUZj1X+xAXiL4YqvQWnZTmaMQ5eTaRcHjbXyO67z+9BmftnqQRxfZ+xV3ZHqXxTXnYdXeCGIOygYUZuw==
   dependencies:
     use-force-update "^1.0.5"
 
