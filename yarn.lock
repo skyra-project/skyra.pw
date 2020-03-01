@@ -9868,10 +9868,10 @@ reactn-devtools@^1.1.0:
   dependencies:
     redux-devtools-extension "^2.13.8"
 
-reactn@^2.2.5:
-  version "2.2.5"
-  resolved "https://registry.yarnpkg.com/reactn/-/reactn-2.2.5.tgz#1f5d7d89738b5909d5afb6399f36200467c8078f"
-  integrity sha512-+8ZG0veUZj1X+xAXiL4YqvQWnZTmaMQ5eTaRcHjbXyO67z+9BmftnqQRxfZ+xV3ZHqXxTXnYdXeCGIOygYUZuw==
+reactn@^2.2.6:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/reactn/-/reactn-2.2.6.tgz#73128a8a95845e0bf6478674be5c7e9193d46a0f"
+  integrity sha512-xYE6agye3WVetZdYY8cUWDLnAIV/z/74lUDc8TPd3UobQGKTvwH3Z6or6+Whart6uwb6ml1MhCHv9e5ipLx3MQ==
   dependencies:
     use-force-update "^1.0.5"
 
