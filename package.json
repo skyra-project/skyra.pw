@@ -10,7 +10,7 @@
 		"clsx": "^1.0.4",
 		"deepmerge": "^4.2.2",
 		"history": "^4.10.1",
-		"react": "^16.12.0",
+		"react": "^16.13.0",
 		"react-dom": "^16.12.0",
 		"react-flip-move": "^3.0.4",
 		"react-if": "^3.4.3",
