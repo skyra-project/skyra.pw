@@ -17,7 +17,8 @@
 		"baseUrl": "src",
 		"sourceMap": true,
 		"noEmit": true,
-		"incremental": false /* Incremental is inherited as true from eslint-config-bamboo but needs to be false when noEmit is true, which is required for React */
+		/* Incremental is inherited as true from eslint-config-bamboo but needs to be false when noEmit is true, which is required for React */
+		"incremental": false
 	},
 	"include": ["src"]
 }

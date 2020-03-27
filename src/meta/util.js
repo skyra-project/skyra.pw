@@ -129,10 +129,7 @@ export function navigate(path) {
 }
 
 export function toTitleCase(str) {
-	const splitStr = str
-		.toLowerCase()
-		.replace(/-/g, ' ')
-		.split(' ');
+	const splitStr = str.toLowerCase().replace(/-/g, ' ').split(' ');
 	for (let i = 0; i < splitStr.length; i++) {
 		splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
 	}
@@ -140,7 +137,7 @@ export function toTitleCase(str) {
 }
 
 export function displayAvatarURL(user, { format = 'default', size = 256 } = {}) {
-	if (user === null) return `https://cdn.discordapp.com/embed/avatars/${Math.floor(Math.random() * 4) + 1}.png`;
+	if (!user) return `https://cdn.discordapp.com/embed/avatars/${Math.floor(Math.random() * 4) + 1}.png`;
 	if (user.avatar === null) return `https://cdn.discordapp.com/embed/avatars/${user.discriminator}.png`;
 	if (format === 'default') format = user.avatar.startsWith('a_') ? 'gif' : 'webp';
 	return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${format}${`?size=${size}`}`;
