@@ -44,7 +44,6 @@
 	},
 	"devDependencies": {
 		"@favware/eslint-config": "^3.3.0",
-		"@favware/ts-config": "^1.1.2",
 		"@rws-air/eslint-config": "^3.0.10",
 		"@types/history": "^4.7.5",
 		"@types/node": "^13.9.5",

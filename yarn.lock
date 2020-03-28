@@ -1346,11 +1346,6 @@
     "@typescript-eslint/parser" "^2.22.0"
     eslint "^6.8.0"
 
-"@favware/ts-config@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@favware/ts-config/-/ts-config-1.1.2.tgz#a6bbdffcbe395a7d14448db5d952aedd6620320b"
-  integrity sha512-kQv1hItPw7QcQVaQuP6mFXs7zEl6XxNHToZZW89xCDNIKxKmznT0WbXsTYee+Ae/NVs1/R2dPbaIIcsR0yKEeQ==
-
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"

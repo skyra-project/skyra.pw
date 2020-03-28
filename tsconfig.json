@@ -1,9 +1,7 @@
 {
-	"extends": "@favware/ts-config",
-	"compileOnSave": false,
 	"compilerOptions": {
-		"target": "es6",
-		"lib": ["dom", "es2020"],
+		"target": "ES2018",
+		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
 		"skipLibCheck": true,
 		"esModuleInterop": true,
@@ -14,12 +12,10 @@
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"isolatedModules": true,
+		"noEmit": true,
 		"jsx": "react",
 		"baseUrl": "src",
-		"sourceMap": true,
-		"noEmit": true,
-		/* Incremental is inherited as true from eslint-config-bamboo but needs to be false when noEmit is true, which is required for React */
-		"incremental": false
+    "rootDir": "src"
 	},
 	"include": ["src"]
 }
