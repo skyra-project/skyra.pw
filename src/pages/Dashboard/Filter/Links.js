@@ -118,7 +118,9 @@ const LinksFilterPage = props => {
 								props.patchGuildData({ selfmod: { links: { whitelist: [...links.whitelist, hostname] } } });
 								setNewWord('');
 							}
-						} catch {}
+						} catch {
+							// intentionally empty
+						}
 					}}
 				>
 					<Box display="flex" mb={2} alignContent="center" alignItems="center" justifyContent="flex-start">

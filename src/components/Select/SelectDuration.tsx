@@ -15,6 +15,7 @@ const unitMap: Record<string, number> = {
 
 const unitEntries = Object.entries(unitMap);
 
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 function determineUnit(ms: number) {
 	for (let i = 0; i < unitEntries.length; i++) {
 		const [, nextDuration] = unitEntries[i + 1];

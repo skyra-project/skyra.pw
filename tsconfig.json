@@ -1,8 +1,9 @@
 {
-	"extends": "eslint-config-bamboo",
+	"extends": "@favware/ts-config",
+	"compileOnSave": false,
 	"compilerOptions": {
 		"target": "es6",
-		"lib": ["dom", "dom.iterable", "esnext"],
+		"lib": ["dom", "es2020"],
 		"allowJs": true,
 		"skipLibCheck": true,
 		"esModuleInterop": true,

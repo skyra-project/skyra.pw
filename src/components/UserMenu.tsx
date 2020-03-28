@@ -45,7 +45,7 @@ export default () => {
 
 	useEffect(() => {
 		if (prevOpen.current === true && open === false) {
-			anchorRef.current!.focus();
+			anchorRef.current?.focus();
 		}
 
 		prevOpen.current = open;

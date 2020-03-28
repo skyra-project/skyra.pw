@@ -1,26 +1,19 @@
-import React, { setGlobal, useEffect, useState } from 'reactn';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-
 import GeneralPage from 'components/GeneralPage';
 import { BASE_WEB_URL, history } from 'meta/constants';
 import { apiFetch, saveState } from 'meta/util';
+import React, { setGlobal, useEffect, useState } from 'reactn';
 
 function DiscordAuthCallbackPage() {
 	const [error, setError] = useState(null);
-
-	useEffect(() => {
-		const urlParams = new URLSearchParams(window.location.search);
-		const code = urlParams.get('code');
-
-		finalizeAuthFlow(code);
-	});
 
 	async function finalizeAuthFlow(code) {
 		const data = await apiFetch(`/oauth/callback`, {
 			method: 'POST',
 			body: {
 				code,
+				// eslint-disable-next-line @typescript-eslint/camelcase
 				redirect_uri: `${BASE_WEB_URL}/oauth/callback`
 			}
 		});
@@ -39,6 +32,13 @@ function DiscordAuthCallbackPage() {
 
 		history.push('/');
 	}
+
+	useEffect(() => {
+		const urlParams = new URLSearchParams(window.location.search);
+		const code = urlParams.get('code');
+
+		finalizeAuthFlow(code);
+	});
 
 	return (
 		<GeneralPage loading={!error}>

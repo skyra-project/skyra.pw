@@ -43,7 +43,9 @@ export const saveState = (key, state) => {
 	try {
 		const serializedState = JSON.stringify(state);
 		localStorage.setItem(key, serializedState);
-	} catch (err) {}
+	} catch (err) {
+		// intentionally empty
+	}
 };
 
 export const debug = str => {
@@ -57,6 +59,31 @@ export const error = (...args) => {
 };
 
 const fiveMinutes = 1000 * 60 * 5;
+
+export async function apiFetch(path, options = {}) {
+	if (process.env.NODE_ENV === 'development') {
+		await sleep(1000);
+	}
+	if (options.body) options.body = JSON.stringify(options.body);
+	if (!options.headers) options.headers = {};
+	options.headers['Content-Type'] = 'application/json';
+
+	const response = await fetch(`${BASE_API_URL}${path}`, options);
+
+	const jsonResponse = await response.json();
+
+	if (jsonResponse.error) {
+		throw response;
+	} else {
+		return jsonResponse;
+	}
+}
+
+export async function authedFetch(path, options = { headers: {} }) {
+	if (!options.headers) options.headers = {};
+	options.headers.authorization = getGlobal().token;
+	return apiFetch(path, options);
+}
 
 export async function syncUser() {
 	// If they're not logged in, don't try to sync.
@@ -93,31 +120,6 @@ export async function syncUser() {
 	if (response.access_token) {
 		saveState('discord_token', response.access_token);
 		setGlobal({ token: response.access_token });
-	}
-}
-
-export async function authedFetch(path, options = { headers: {} }) {
-	if (!options.headers) options.headers = {};
-	options.headers.authorization = getGlobal().token;
-	return apiFetch(path, options);
-}
-
-export async function apiFetch(path, options = {}) {
-	if (process.env.NODE_ENV === 'development') {
-		await sleep(1000);
-	}
-	if (options.body) options.body = JSON.stringify(options.body);
-	if (!options.headers) options.headers = {};
-	options.headers['Content-Type'] = 'application/json';
-
-	const response = await fetch(`${BASE_API_URL}${path}`, options);
-
-	const jsonResponse = await response.json();
-
-	if (jsonResponse.error) {
-		throw response;
-	} else {
-		return jsonResponse;
 	}
 }
 

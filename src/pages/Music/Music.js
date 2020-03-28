@@ -59,6 +59,8 @@ const StyledList = styled(List)`
 	margin: 0 auto;
 `;
 
+/* eslint-disable @typescript-eslint/camelcase, no-invalid-this */
+
 class MusicPage extends Component {
 	state = {
 		musicData: null
@@ -136,6 +138,7 @@ class MusicPage extends Component {
 			const message = JSON.parse(event.data);
 			debug(message);
 
+			// eslint-disable-next-line default-case
 			switch (message.action) {
 				case 'AUTHENTICATE':
 					debug(`Authenticating was ${message.success ? 'successful' : 'unsucessful'}`);

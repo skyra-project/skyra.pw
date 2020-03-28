@@ -5,6 +5,7 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import GeneralPage from 'components/GeneralPage';
 import { apiFetch } from 'meta/util';
 
+/* eslint-disable no-invalid-this */
 class StatusPage extends Component {
 	state = {
 		application: null,

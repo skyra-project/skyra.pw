@@ -201,6 +201,7 @@ const RootComponent = props => {
 		const response = await authedFetch(`/guilds/${guildID}/settings`, {
 			method: 'POST',
 			body: {
+				// eslint-disable-next-line @typescript-eslint/camelcase
 				guild_id: guildID,
 				data: state.guildSettingsChanges
 			}
