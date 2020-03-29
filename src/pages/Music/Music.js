@@ -1,30 +1,29 @@
-import React, { Component, Fragment } from 'reactn';
-import styled from 'styled-components';
-import ReactPlayer from 'react-player';
-import FlipMove from 'react-flip-move';
 import {
-	ListItemText,
+	Avatar,
+	Box,
+	CardContent,
+	Container,
+	Divider,
+	IconButton,
 	List,
 	ListItem,
-	Typography,
-	IconButton,
-	CardContent,
-	Box,
-	Avatar,
 	ListItemIcon,
-	Container,
-	Divider
+	ListItemText,
+	Typography
 } from '@material-ui/core';
-import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
+import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
-import PauseIcon from '@material-ui/icons/Pause';
-
+import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import GeneralPage from 'components/GeneralPage';
 import Link from 'components/Link';
+import { WS_URL } from 'meta/constants';
 import theme from 'meta/theme';
 import { debug } from 'meta/util';
-import { WS_URL } from 'meta/constants';
+import FlipMove from 'react-flip-move';
+import ReactPlayer from 'react-player';
+import React, { Component, Fragment } from 'reactn';
+import styled from 'styled-components';
 
 const CurrentlyPlaying = styled.div`
 	display: flex;
@@ -314,10 +313,10 @@ class MusicPage extends Component {
 									<CurrentlyPlaying key={musicData.song.identifier + musicData.song.position}>
 										<div>
 											<CardContent>
-												<Typography component="h5" variant="h5">
+												<Typography component="h5" variant="h5" data-premid="music-title">
 													{musicData.song.title}
 												</Typography>
-												<Typography variant="subtitle1" color="textSecondary">
+												<Typography variant="subtitle1" color="textSecondary" data-premid="music-from">
 													{musicData.song.author}
 												</Typography>
 											</CardContent>

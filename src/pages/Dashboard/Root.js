@@ -1,55 +1,54 @@
-import React, { Fragment, useState, useEffect } from 'reactn';
-import { Link, Switch } from 'react-router-dom';
-import { If, Then, Else } from 'react-if';
-import styled from 'styled-components';
 import {
-	Toolbar,
+	AppBar,
+	Box,
+	Button,
+	Collapse,
+	Divider,
+	Drawer,
+	Fade,
+	Hidden,
+	IconButton,
+	List,
 	ListItem,
 	ListItemIcon,
 	ListItemText,
-	List,
-	IconButton,
-	Hidden,
-	Drawer,
-	Divider,
-	AppBar,
-	Typography,
-	Button,
-	Collapse,
 	Slide,
-	Box,
-	Fade,
+	Toolbar,
+	Typography,
 	useMediaQuery
 } from '@material-ui/core';
-import { createStyles, useTheme, makeStyles } from '@material-ui/styles';
-import deepMerge from 'deepmerge';
-import Skeleton from '@material-ui/lab/Skeleton';
-import Settings from '@material-ui/icons/Settings';
-import Subject from '@material-ui/icons/Subject';
+import DeleteIcon from '@material-ui/icons/DeleteForever';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import MenuIcon from '@material-ui/icons/Menu';
-import SaveIcon from '@material-ui/icons/Save';
-import DeleteIcon from '@material-ui/icons/DeleteForever';
-import Gavel from '@material-ui/icons/Gavel';
-import StarIcon from '@material-ui/icons/Star';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes';
+import Gavel from '@material-ui/icons/Gavel';
+import MenuIcon from '@material-ui/icons/Menu';
 import MusicIcon from '@material-ui/icons/MusicNote';
-
+import SaveIcon from '@material-ui/icons/Save';
+import Settings from '@material-ui/icons/Settings';
+import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes';
+import StarIcon from '@material-ui/icons/Star';
+import Subject from '@material-ui/icons/Subject';
+import Skeleton from '@material-ui/lab/Skeleton';
+import { createStyles, makeStyles, useTheme } from '@material-ui/styles';
+import SkyraLogo from 'assets/skyraLogo';
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
-import UserMenu from 'components/UserMenu';
 import GuildIcon from 'components/GuildIcon';
-import SettingsPage from 'pages/Dashboard/SettingsPage';
-import StarboardPage from 'pages/Dashboard/Starboard';
-import LogsPage from 'pages/Dashboard/LogsPage';
+import UserMenu from 'components/UserMenu';
+import deepMerge from 'deepmerge';
+import { authedFetch, navigate, noOp } from 'meta/util';
 import CustomCommandsPage from 'pages/Dashboard/CustomCommands';
-import ModerationSettingsPage from 'pages/Dashboard/Moderation/Settings';
-import FilterWordsPage from 'pages/Dashboard/Filter/Words';
 import FilterCapitalsPage from 'pages/Dashboard/Filter/Capitals';
 import FilterLinksPage from 'pages/Dashboard/Filter/Links';
-import { authedFetch, navigate, noOp } from 'meta/util';
-import SkyraLogo from 'assets/skyraLogo';
+import FilterWordsPage from 'pages/Dashboard/Filter/Words';
+import LogsPage from 'pages/Dashboard/LogsPage';
+import ModerationSettingsPage from 'pages/Dashboard/Moderation/Settings';
+import SettingsPage from 'pages/Dashboard/SettingsPage';
+import StarboardPage from 'pages/Dashboard/Starboard';
+import { Else, If, Then } from 'react-if';
+import { Link, Switch } from 'react-router-dom';
+import React, { Fragment, useEffect, useState } from 'reactn';
+import styled from 'styled-components';
 import InvitesFilterPage from './Filter/Invites';
 import MessagesFilterPage from './Filter/Messages';
 import NewLinesFilterPage from './Filter/NewLines';
@@ -265,7 +264,7 @@ const RootComponent = props => {
 					<Then>
 						<Fragment>
 							<GuildIcon guild={guildData} size={256} />
-							<Typography variant="subtitle2" style={{ marginTop: 15 }}>
+							<Typography variant="subtitle2" style={{ marginTop: 15 }} data-premid="server-title">
 								{guildData?.name}
 							</Typography>
 						</Fragment>
