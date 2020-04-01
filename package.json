@@ -44,7 +44,7 @@
 	},
 	"devDependencies": {
 		"@favware/eslint-config": "^3.3.0",
-		"@rws-air/eslint-config": "^3.0.11",
+		"@rws-air/eslint-config": "^3.0.12",
 		"@types/history": "^4.7.5",
 		"@types/node": "^13.9.8",
 		"@types/react": "^16.9.31",
@@ -81,6 +81,7 @@
 	},
 	"resolutions": {
 		"acorn": "^6.4.1",
-		"minimist": "^1.2.2"
+		"minimist": "^1.2.2",
+		"kind-of": "^6.0.3"
 	}
 }
