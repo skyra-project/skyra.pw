@@ -45,6 +45,8 @@ const LogsPage = (props: LogsPageProps) => (
 					{ title: 'Ban Revoked', name: 'banRemove' },
 					{ title: 'Member Join', name: 'memberAdd' },
 					{ title: 'Member Leave', name: 'memberRemove' },
+					{ title: 'Member Role Changes', name: 'memberRoleUpdate' },
+					{ title: 'Member Name Changes', name: 'memberNameUpdate' },
 					{ title: 'Message Edit', name: 'messageEdit' },
 					{ title: 'Message Delete', name: 'messageDelete' },
 					{ title: 'Twemoji Reactions', name: 'twemoji-reactions' }
