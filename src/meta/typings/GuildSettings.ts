@@ -42,6 +42,7 @@ interface Events extends Record<string, boolean> {
 	memberAdd: boolean;
 	memberRemove: boolean;
 	memberNameUpdate: boolean;
+	memberRoleUpdate: boolean;
 	messageDelete: boolean;
 	messageEdit: boolean;
 	'twemoji-reactions': boolean;
