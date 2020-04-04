@@ -11,8 +11,9 @@ import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 import LockIcon from '@material-ui/icons/Lock';
 import GeneralPage from 'components/GeneralPage';
 import Tooltip from 'components/Tooltip';
-import { apiFetch } from 'meta/util';
+import { apiFetch, cutText } from 'meta/util';
 import React, { useEffect, useState } from 'react';
+import { Else, If, Then } from 'react-if';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -37,19 +38,26 @@ const useStyles = makeStyles((theme: Theme) =>
 			flex: '1 1 30%',
 			minWidth: 300,
 			margin: theme.spacing(2),
+			transition: 'width 0.2s ease-in-out',
 			[theme.breakpoints.down('xs')]: {
 				width: '100%',
-				maxWidth: 'none'
-			},
-			transition: 'width 0.2s ease-in-out'
+				maxWidth: 'none',
+				marginLeft: 0,
+				marginRight: 0
+			}
 		},
 		categoryName: {
 			[theme.breakpoints.down('sm')]: {
-				textAlign: 'center'
+				textAlign: 'center',
+				fontSize: '2rem'
 			}
 		},
 		rankIcon: {
 			transform: 'rotate(-90deg)'
+		},
+		shinyIcon: {
+			height: 16,
+			paddingLeft: '0.5rem'
 		}
 	})
 );
@@ -85,6 +93,8 @@ export default () => {
 		});
 	}, []);
 
+	const parseDescription = (description: string) => description.replace(/<:shiny:[0-9]{18}>/gi, 'shiny');
+
 	const categories = [...new Set(commands.map(command => command.category))];
 
 	return (
@@ -108,9 +118,20 @@ export default () => {
 												<Card className={classes.card}>
 													<CardContent>
 														<Box display="flex" justifyContent="space-between">
-															<Typography variant="h5" component="h2">
-																s!{cmd.name}
-															</Typography>
+															<If condition={cmd.name.length < 19}>
+																<Then>
+																	<Typography variant="h5" component="h2">
+																		s!{cmd.name}
+																	</Typography>
+																</Then>
+																<Else>
+																	<Tooltip title={`s!${cmd.name}`}>
+																		<Typography variant="h5" component="h2">
+																			{cutText(`s!${cmd.name}`, 19)}
+																		</Typography>
+																	</Tooltip>
+																</Else>
+															</If>
 															<Grid item container justify="flex-end">
 																{cmd.permissionLevel > 0 && (
 																	<Tooltip title={titles[cmd.permissionLevel]} placement="top">
@@ -150,7 +171,7 @@ export default () => {
 															</Grid>
 														</Box>
 														<Typography className={classes.title} color="textSecondary" gutterBottom>
-															{cmd.description}
+															{parseDescription(cmd.description)}
 														</Typography>
 													</CardContent>
 												</Card>

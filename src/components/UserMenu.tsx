@@ -10,6 +10,10 @@ const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		popper: {
 			marginTop: theme.spacing(1)
+		},
+		button: {
+			borderBottomLeftRadius: 0,
+			borderTopLeftRadius: 0
 		}
 	})
 );
@@ -57,8 +61,10 @@ export default () => {
 				ref={anchorRef}
 				aria-controls={open ? 'logout-popover' : undefined}
 				aria-haspopup="true"
-				color="inherit"
+				color="primary"
+				variant="contained"
 				onClick={handleToggle}
+				classes={{ root: classes.button }}
 			>
 				<Avatar style={{ marginRight: 5, height: 40, width: 40 }} src={displayAvatarURL(user, { size: 128 })} alt="" />
 				<ExpandMoreIcon />

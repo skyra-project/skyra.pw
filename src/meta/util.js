@@ -187,3 +187,27 @@ export function bitwiseSet(bits, bit, toggle) {
 export function noOp() {
 	return undefined;
 }
+
+/**
+ * Split a string by its latest space character in a range from the character 0 to the selected one.
+ * @param {string} str The text to split.
+ * @param {number} length The length of the desired string.
+ * @param {string} char The character to split with
+ */
+export function splitText(str, length, char = ' ') {
+	const x = str.substring(0, length).lastIndexOf(char);
+	const pos = x === -1 ? length : x;
+	return str.substring(0, pos);
+}
+
+/**
+ * Split a text by its latest space character in a range from the character 0 to the selected one.
+ * @param {string} str The text to split.
+ * @param {number} length The length of the desired string.
+ */
+export function cutText(str, length) {
+	if (str.length < length) return str;
+	const cut = splitText(str, length - 3);
+	if (cut.length < length - 3) return `${cut}...`;
+	return `${cut.slice(0, length - 3)}...`;
+}

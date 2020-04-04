@@ -2,6 +2,7 @@ import {
 	Box,
 	BoxProps,
 	Button,
+	ButtonGroup,
 	Container,
 	createStyles,
 	Grid,
@@ -33,7 +34,8 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'flex',
 			flexDirection: 'column',
 			justifyContent: 'space-between',
-			height: '100vh'
+			height: '100vh',
+			width: '100vw'
 		},
 		grid: {
 			padding: theme.spacing(1),
@@ -47,12 +49,27 @@ const useStyles = makeStyles((theme: Theme) =>
 			alignContent: 'center',
 			alignItems: 'center'
 		},
-		button: {
-			textAlign: 'right'
+		loginButton: {
+			borderBottomLeftRadius: 0,
+			borderTopLeftRadius: 0
 		},
 		skyraButton: {
 			textAlign: 'left',
 			textTransform: 'unset'
+		},
+		skyraGrid: {
+			[theme.breakpoints.down('xs')]: {
+				textAlign: 'center',
+				paddingBottom: theme.spacing(2)
+			}
+		},
+		buttonGroupGrid: {
+			[theme.breakpoints.up('sm')]: {
+				textAlign: 'right'
+			},
+			[theme.breakpoints.down('xs')]: {
+				textAlign: 'center'
+			}
 		},
 		buttonText: {
 			fontWeight: 500,
@@ -80,7 +97,7 @@ export default ({ children, loading = false, containerProps = {} }: PropsWithChi
 					alignContent="center"
 					alignItems="center"
 				>
-					<Grid item xs={10}>
+					<Grid item xs={12} sm={6} md={6} lg={6} classes={{ root: classes.skyraGrid }}>
 						<Tooltip title="Click to go home" placement="bottom">
 							<Button onClick={navigate('/')} classes={{ root: classes.skyraButton }}>
 								<Box className={classes.svg}>
@@ -96,26 +113,31 @@ export default ({ children, loading = false, containerProps = {} }: PropsWithChi
 						</Tooltip>
 					</Grid>
 
-					<Grid classes={{ root: classes.button }} item xs={1}>
-						<Button onClick={navigate('/commands')} variant="contained" color="primary">
-							<Typography classes={{ root: classes.buttonText }} variant="body2" color="textPrimary">
-								Commands
-							</Typography>
-						</Button>
-					</Grid>
-
-					<Grid classes={{ root: classes.button }} item xs={1}>
-						<When condition={authenticated}>
-							<UserMenu />
-						</When>
-
-						<When condition={!authenticated && !loading}>
-							<Button href={oauthURL.toString()} variant="contained" color="primary">
+					<Grid item xs={12} sm={6} md={6} lg={6} classes={{ root: classes.buttonGroupGrid }}>
+						<ButtonGroup size="large" color="primary" variant="contained">
+							<Button onClick={navigate('/commands')}>
 								<Typography classes={{ root: classes.buttonText }} variant="body2" color="textPrimary">
-									Log In
+									Commands
 								</Typography>
 							</Button>
-						</When>
+
+							<When condition={authenticated}>
+								<UserMenu />
+							</When>
+
+							<When condition={!authenticated && !loading}>
+								<Button
+									variant="contained"
+									color="primary"
+									onClick={navigate(oauthURL.toString())}
+									classes={{ root: classes.loginButton }}
+								>
+									<Typography classes={{ root: classes.buttonText }} variant="body2" color="textPrimary">
+										Log In
+									</Typography>
+								</Button>
+							</When>
+						</ButtonGroup>
 					</Grid>
 				</Grid>
 			</Container>
