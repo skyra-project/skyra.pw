@@ -4,6 +4,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { RootState } from 'meta/typings/Reactn';
 import { displayAvatarURL, logOut } from 'meta/util';
 import React, { useEffect, useRef, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useGlobal } from 'reactn';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -21,6 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default () => {
 	const [{ user }] = useGlobal<RootState>();
 	const [open, setOpen] = useState(false);
+	const routeParams = useParams();
 
 	const classes = useStyles();
 	const anchorRef = useRef<HTMLButtonElement>(null);
@@ -61,7 +63,7 @@ export default () => {
 				ref={anchorRef}
 				aria-controls={open ? 'logout-popover' : undefined}
 				aria-haspopup="true"
-				color="primary"
+				color={Reflect.has(routeParams, 'guildID') ? 'secondary' : 'primary'}
 				variant="contained"
 				onClick={handleToggle}
 				classes={{ root: classes.button }}

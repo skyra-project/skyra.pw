@@ -1,25 +1,25 @@
-import React from 'react';
-
-import SelectOne from './SelectOne';
 import { FlattenedGuild } from 'meta/typings/ApiData';
+import React from 'react';
+import SelectOne, { SelectOneProps } from './SelectOne';
 
-export interface SelectChannelProps {
-	title: string;
+export interface SelectChannelProps extends Omit<SelectOneProps, 'values' | 'name'> {
 	value: string;
 	guild: FlattenedGuild;
 	onChange(...args: any[]): void;
 }
 
-const SelectChannel = ({ title, value, guild, onChange }: SelectChannelProps) => {
+const SelectChannel = ({ label, value, guild, onChange, tooltipTitle, ...props }: SelectChannelProps) => {
 	let name;
 	const channel = guild.channels.find(c => c.id === value);
 	if (channel) name = channel.name;
 
 	return (
 		<SelectOne
-			title={title}
+			{...props}
+			label={label}
 			name={name}
 			onChange={onChange}
+			tooltipTitle={tooltipTitle}
 			values={guild.channels
 				.filter(c => c.type === 'text')
 				.sort((c1, c2) => c1.rawPosition - c2.rawPosition)

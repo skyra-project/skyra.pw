@@ -1,20 +1,17 @@
-import React from 'react';
-
 import { FlattenedGuild } from 'meta/typings/ApiData';
-import SelectMany from './SelectMany';
+import React from 'react';
+import SelectMany, { SelectManyProps } from './SelectMany';
 
-interface SelectRolesProps {
-	title: string;
-	value: string;
+interface SelectRolesProps extends Omit<SelectManyProps, 'values' | 'name'> {
 	guild: FlattenedGuild;
 	filterEveryone: boolean;
-	onChange(...args: any[]): void;
 }
 
-const SelectRoles = ({ title, value, guild, filterEveryone, onChange }: SelectRolesProps) => (
+const SelectRoles = ({ label, value, guild, filterEveryone, onChange, ...props }: SelectRolesProps) => (
 	<SelectMany
+		{...props}
 		name={value.length}
-		title={title}
+		label={label}
 		value={value}
 		onChange={onChange}
 		values={guild.roles

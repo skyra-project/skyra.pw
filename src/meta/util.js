@@ -1,4 +1,4 @@
-import { BASE_API_URL, history } from 'meta/constants';
+import { BASE_API_URL, history, Time } from 'meta/constants';
 import { getGlobal, setGlobal, useEffect, useRef } from 'reactn';
 
 export function sleep(ms) {
@@ -15,7 +15,7 @@ export function useTraceUpdate(props) {
 			return ps;
 		}, {});
 		if (Object.keys(changedProps).length > 0) {
-			console.info('Changed props:', changedProps);
+			// Do nothing
 		}
 		prev.current = props;
 	});
@@ -47,18 +47,6 @@ export const saveState = (key, state) => {
 		// intentionally empty
 	}
 };
-
-export const debug = str => {
-	if (process.env.NODE_ENV === 'development') {
-		console.info(str);
-	}
-};
-
-export const error = (...args) => {
-	console.error(...args);
-};
-
-const fiveMinutes = 1000 * 60 * 5;
 
 export async function apiFetch(path, options = {}) {
 	if (process.env.NODE_ENV === 'development') {
@@ -92,8 +80,7 @@ export async function syncUser() {
 	// Check if they've synced in the past 5 minutes.
 	const lastSync = loadState('last_sync');
 	const difference = new Date().getTime() - lastSync;
-	if (difference < fiveMinutes) {
-		debug(`Not syncing - next sync available in ${(5 - difference / 1000 / 60).toFixed(2)} mins`);
+	if (difference < Time.Minute * 5) {
 		return;
 	}
 
@@ -106,7 +93,6 @@ export async function syncUser() {
 		}
 	}).catch(err => {
 		// TODO toast
-		error(`Failed to sync user.`);
 		if (err.status === 401) logOut();
 	});
 

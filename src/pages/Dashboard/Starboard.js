@@ -26,7 +26,7 @@ const StarboardPage = props => (
 				/>
 				<SelectChannel
 					value={props.guildSettings.starboard.channel}
-					title="Starboard Channel"
+					label="Starboard Channel"
 					onChange={c =>
 						props.patchGuildData({
 							starboard: {
@@ -46,7 +46,7 @@ const StarboardPage = props => (
 						})
 					}
 					guild={props.guildData}
-					title="Ignored Channels"
+					label="Ignored Channels"
 				/>
 			</SimpleGrid>
 		</Section>

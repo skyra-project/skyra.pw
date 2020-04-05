@@ -50,7 +50,7 @@ const CapitalsFilterPage = props => {
 				</SimpleGrid>
 			</Section>
 			<Section title="Punishments">
-				<SimpleGrid gridProps={{ direction: 'row', justify: 'flex-start' }}>
+				<SimpleGrid direction="row" justify="flex-start">
 					<Select
 						title="Action"
 						helperText="The action to perform as punishment"

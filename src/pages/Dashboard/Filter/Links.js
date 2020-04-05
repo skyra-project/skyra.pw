@@ -1,24 +1,22 @@
-import React, { Fragment, useState } from 'react';
-import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
+import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import MenuItem from '@material-ui/core/MenuItem';
-
+import Section from 'components/Section';
 import Select from 'components/Select/Select';
 import SelectBoolean from 'components/Select/SelectBoolean';
 import SelectDuration from 'components/Select/SelectDuration';
-
-import Slider from 'components/Slider';
-import Section from 'components/Section';
 import SimpleGrid from 'components/SimpleGrid';
+import Slider from 'components/Slider';
 import theme from 'meta/theme';
-import { bitwiseSet, bitwiseHas } from 'meta/util';
-import scss from 'stylesheets/modules/FilterOptions.module.scss';
+import { bitwiseHas, bitwiseSet } from 'meta/util';
+import React, { Fragment, useState } from 'react';
 import { When } from 'react-if';
+import styled from 'styled-components';
+import scss from 'stylesheets/modules/FilterOptions.module.scss';
 
 const WordsContainer = styled(Paper)`
 	padding: ${theme.spacing(1)}px;
@@ -69,7 +67,7 @@ const LinksFilterPage = props => {
 				</SimpleGrid>
 			</Section>
 			<Section title="Punishments">
-				<SimpleGrid gridProps={{ direction: 'row', justify: 'flex-start' }}>
+				<SimpleGrid direction="row" justify="flex-start">
 					<Select
 						title="Action"
 						helperText="The action to perform as punishment"

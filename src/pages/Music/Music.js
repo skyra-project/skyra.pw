@@ -19,7 +19,6 @@ import GeneralPage from 'components/GeneralPage';
 import Link from 'components/Link';
 import { WS_URL } from 'meta/constants';
 import theme from 'meta/theme';
-import { debug } from 'meta/util';
 import FlipMove from 'react-flip-move';
 import ReactPlayer from 'react-player';
 import React, { Component, Fragment } from 'reactn';
@@ -109,8 +108,6 @@ class MusicPage extends Component {
 		this.ws = new WebSocket(WS_URL);
 		this.ws.sendJSON = obj => this.ws.send(JSON.stringify(obj));
 		this.ws.onopen = () => {
-			debug('Connected to websocket.');
-
 			if (this.global.authenticated) {
 				this.ws.send(
 					JSON.stringify({
@@ -135,17 +132,14 @@ class MusicPage extends Component {
 
 		this.ws.onmessage = event => {
 			const message = JSON.parse(event.data);
-			debug(message);
 
 			// eslint-disable-next-line default-case
 			switch (message.action) {
 				case 'AUTHENTICATE':
-					debug(`Authenticating was ${message.success ? 'successful' : 'unsucessful'}`);
 					break;
 
 				case 'MUSIC_SYNC':
 					this.setState({ musicData: message.data });
-					debug('Received Music Sync.');
 					break;
 
 				case 'MUSIC_CONNECT':
@@ -282,10 +276,6 @@ class MusicPage extends Component {
 					}));
 					break;
 			}
-		};
-
-		this.ws.onclose = e => {
-			debug('Disconnected from websocket', e);
 		};
 	}
 

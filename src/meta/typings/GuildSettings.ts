@@ -1,11 +1,21 @@
+import { DeepPartial } from 'utility-types';
+import { FlattenedGuild } from './ApiData';
+
+export interface SettingsPageProps {
+	guildData: FlattenedGuild;
+	guildSettings: GuildSettings;
+	guildID: string;
+	patchGuildData: (changes: DeepPartial<GuildSettings>) => void;
+}
+
 export interface GuildSettings {
-	'command-autodelete': readonly [string, number][];
+	'command-autodelete': [string, number][];
 	'no-mention-spam': NoMentionSpam;
 	channels: Channels;
 	commandUses: number;
-	disabledChannels: readonly string[];
-	disabledCommands: readonly string[];
-	disabledCommandsChannels: readonly DisabledCommandChannel[];
+	disabledChannels: string[];
+	disabledCommands: string[];
+	disabledCommandsChannels: DisabledCommandChannel[];
 	disableNaturalPrefix: boolean;
 	events: Events;
 	language: string;
@@ -16,12 +26,12 @@ export interface GuildSettings {
 	selfmod: Selfmod;
 	social: Social;
 	starboard: Starboard;
-	stickyRoles: readonly StickyRole[];
-	tags: readonly [string, string][];
+	stickyRoles: StickyRole[];
+	tags: [string, string][];
 	trigger: Trigger;
 }
 
-interface Channels extends Record<string, string> {
+export interface Channels {
 	announcements: string;
 	greeting: string;
 	farewell: string;
@@ -36,7 +46,7 @@ interface Channels extends Record<string, string> {
 	spam: string;
 }
 
-interface Events extends Record<string, boolean> {
+export interface Events {
 	banAdd: boolean;
 	banRemove: boolean;
 	memberAdd: boolean;
@@ -55,14 +65,15 @@ interface DisabledCommandChannel {
 
 interface StickyRole {
 	user: string;
-	roles: readonly string[];
+	roles: string[];
 }
 
-interface Messages {
+export interface Messages {
 	farewell: string;
 	greeting: string;
 	'join-dm': string;
 	ignoreChannels: string[];
+	'announcement-embed': boolean;
 	'moderation-dm': boolean;
 	'moderation-reason-display': boolean;
 	'moderation-message-display': boolean;
@@ -70,7 +81,7 @@ interface Messages {
 	'moderator-name-display': boolean;
 }
 
-interface Roles {
+export interface Roles {
 	admin: string;
 	auto: Readonly<{
 		id: string;
