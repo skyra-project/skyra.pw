@@ -1,8 +1,20 @@
-import { Avatar, Box, Button, ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from '@material-ui/core';
+import Avatar from '@material-ui/core/Avatar';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grid';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import LogoutIcon from '@material-ui/icons/Eject';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import SyncIcon from '@material-ui/icons/Sync';
 import { RootState } from 'meta/typings/Reactn';
-import { displayAvatarURL, logOut } from 'meta/util';
+import { displayAvatarURL, logOut, syncUser } from 'meta/util';
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGlobal } from 'reactn';
@@ -15,6 +27,19 @@ const useStyles = makeStyles((theme: Theme) =>
 		button: {
 			borderBottomLeftRadius: 0,
 			borderTopLeftRadius: 0
+		},
+		syncLogo: {
+			'&:hover': {
+				animation: `$syncLogoSpin 2s infinite cubic-bezier(0.65, 0.05, 0.36, 1)`
+			}
+		},
+		'@keyframes syncLogoSpin': {
+			'0%': {
+				transform: 'rotate(0deg)'
+			},
+			'100%': {
+				transform: 'rotate(-360deg)'
+			}
 		}
 	})
 );
@@ -84,7 +109,21 @@ export default () => {
 											logOut();
 										}}
 									>
-										Logout
+										<ListItemIcon>
+											<LogoutIcon />
+										</ListItemIcon>
+										<Typography variant="inherit">Logout</Typography>
+									</MenuItem>
+									<MenuItem
+										onClick={(...args: Parameters<typeof handleClose>) => {
+											handleClose(...args);
+											syncUser();
+										}}
+									>
+										<ListItemIcon>
+											<SyncIcon className={classes.syncLogo} />
+										</ListItemIcon>
+										<Typography variant="inherit">Resync</Typography>
 									</MenuItem>
 								</MenuList>
 							</ClickAwayListener>

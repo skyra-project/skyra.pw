@@ -79,12 +79,12 @@ export async function syncUser() {
 
 	// Check if they've synced in the past 5 minutes.
 	const lastSync = loadState('last_sync');
-	const difference = new Date().getTime() - lastSync;
+	const difference = Date.now() - lastSync;
 	if (difference < Time.Minute * 5) {
 		return;
 	}
 
-	saveState('last_sync', new Date().getTime());
+	saveState('last_sync', Date.now());
 
 	const response = await authedFetch('/oauth/user', {
 		method: 'POST',
