@@ -4,12 +4,17 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { RootState } from 'meta/typings/Reactn';
 import { displayAvatarURL, logOut } from 'meta/util';
 import React, { useEffect, useRef, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useGlobal } from 'reactn';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		popper: {
 			marginTop: theme.spacing(1)
+		},
+		button: {
+			borderBottomLeftRadius: 0,
+			borderTopLeftRadius: 0
 		}
 	})
 );
@@ -17,6 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default () => {
 	const [{ user }] = useGlobal<RootState>();
 	const [open, setOpen] = useState(false);
+	const routeParams = useParams();
 
 	const classes = useStyles();
 	const anchorRef = useRef<HTMLButtonElement>(null);
@@ -57,8 +63,10 @@ export default () => {
 				ref={anchorRef}
 				aria-controls={open ? 'logout-popover' : undefined}
 				aria-haspopup="true"
-				color="inherit"
+				color={Reflect.has(routeParams, 'guildID') ? 'secondary' : 'primary'}
+				variant="contained"
 				onClick={handleToggle}
+				classes={{ root: classes.button }}
 			>
 				<Avatar style={{ marginRight: 5, height: 40, width: 40 }} src={displayAvatarURL(user, { size: 128 })} alt="" />
 				<ExpandMoreIcon />

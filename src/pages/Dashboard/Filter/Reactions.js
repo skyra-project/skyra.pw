@@ -1,15 +1,13 @@
-import React, { Fragment } from 'react';
-import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
-
+import Typography from '@material-ui/core/Typography';
+import Section from 'components/Section';
 import Select from 'components/Select/Select';
 import SelectBoolean from 'components/Select/SelectBoolean';
 import SelectDuration from 'components/Select/SelectDuration';
-
-import Section from 'components/Section';
 import SimpleGrid from 'components/SimpleGrid';
 import Slider from 'components/Slider';
-import { bitwiseSet, bitwiseHas } from 'meta/util';
+import { bitwiseHas, bitwiseSet } from 'meta/util';
+import React, { Fragment } from 'react';
 
 const ReactionsFilterPage = props => {
 	const { reactions } = props.guildSettings.selfmod;
@@ -51,7 +49,7 @@ const ReactionsFilterPage = props => {
 				</SimpleGrid>
 			</Section>
 			<Section title="Punishments">
-				<SimpleGrid gridProps={{ direction: 'row', justify: 'flex-start' }}>
+				<SimpleGrid direction="row" justify="flex-start">
 					<Select
 						title="Action"
 						helperText="The action to perform as punishment"

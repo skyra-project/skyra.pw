@@ -1,24 +1,19 @@
-import React, { Fragment, useState, ChangeEvent, ReactNode } from 'react';
-import { DialogActions, DialogContent, ListItemText, ListItemIcon, ListItem, List, Button, Checkbox } from '@material-ui/core';
-
-import DialogTitle from 'components/DialogTitle';
+import { Checkbox, DialogActions, DialogContent, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import Dialog from 'components/Dialog';
+import DialogTitle from 'components/DialogTitle';
 import SearchBar from 'components/SearchBar';
+import Tooltip from 'components/Tooltip';
 import { toTitleCase } from 'meta/util';
+import React, { ChangeEvent, Fragment, PropsWithChildren, useState } from 'react';
+import { Else, If, Then } from 'react-if';
+import { SelectOneProps } from './SelectOne';
 
-export interface SelectManyProps {
-	title: ReactNode;
-	value: string | string[];
-	name: ReactNode;
-	values: {
-		name: string;
-		value: string;
-	}[];
-
-	onChange(...args: any[]): void;
+export interface SelectManyProps extends SelectOneProps {
+	value: string[];
 }
 
-export default function SelectMany({ title, value, onChange, values, name }: SelectManyProps) {
+export default ({ label, value, onChange, values, name, tooltipTitle, buttonProps }: PropsWithChildren<SelectManyProps>) => {
 	const [open, setOpen] = useState(false);
 	const [checked, setChecked] = useState(value);
 	const [search, setSearch] = useState('');
@@ -40,11 +35,22 @@ export default function SelectMany({ title, value, onChange, values, name }: Sel
 
 	return (
 		<Fragment>
-			<Button variant="contained" color="primary" onClick={() => setOpen(true)}>
-				{title}: {name}
-			</Button>
+			<If condition={Boolean(tooltipTitle)}>
+				<Then>
+					<Tooltip title={tooltipTitle} placement="top">
+						<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...buttonProps}>
+							{label}: {name}
+						</Button>
+					</Tooltip>
+				</Then>
+				<Else>
+					<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...buttonProps}>
+						{label}: {name}
+					</Button>
+				</Else>
+			</If>
 			<Dialog fullWidth maxWidth="xs" onClose={handleClose} open={open}>
-				<DialogTitle onClose={handleClose}>{toTitleCase(title)}</DialogTitle>
+				<DialogTitle onClose={handleClose}>{toTitleCase(label)}</DialogTitle>
 				{values.length > 10 && <SearchBar onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} />}
 				<DialogContent dividers>
 					<List>
@@ -80,4 +86,4 @@ export default function SelectMany({ title, value, onChange, values, name }: Sel
 			</Dialog>
 		</Fragment>
 	);
-}
+};

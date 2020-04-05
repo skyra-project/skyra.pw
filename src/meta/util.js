@@ -1,4 +1,4 @@
-import { BASE_API_URL, history } from 'meta/constants';
+import { BASE_API_URL, history, Time } from 'meta/constants';
 import { getGlobal, setGlobal, useEffect, useRef } from 'reactn';
 
 export function sleep(ms) {
@@ -15,7 +15,7 @@ export function useTraceUpdate(props) {
 			return ps;
 		}, {});
 		if (Object.keys(changedProps).length > 0) {
-			console.info('Changed props:', changedProps);
+			// Do nothing
 		}
 		prev.current = props;
 	});
@@ -47,18 +47,6 @@ export const saveState = (key, state) => {
 		// intentionally empty
 	}
 };
-
-export const debug = str => {
-	if (process.env.NODE_ENV === 'development') {
-		console.info(str);
-	}
-};
-
-export const error = (...args) => {
-	console.error(...args);
-};
-
-const fiveMinutes = 1000 * 60 * 5;
 
 export async function apiFetch(path, options = {}) {
 	if (process.env.NODE_ENV === 'development') {
@@ -92,8 +80,7 @@ export async function syncUser() {
 	// Check if they've synced in the past 5 minutes.
 	const lastSync = loadState('last_sync');
 	const difference = new Date().getTime() - lastSync;
-	if (difference < fiveMinutes) {
-		debug(`Not syncing - next sync available in ${(5 - difference / 1000 / 60).toFixed(2)} mins`);
+	if (difference < Time.Minute * 5) {
 		return;
 	}
 
@@ -106,7 +93,6 @@ export async function syncUser() {
 		}
 	}).catch(err => {
 		// TODO toast
-		error(`Failed to sync user.`);
 		if (err.status === 401) logOut();
 	});
 
@@ -186,4 +172,28 @@ export function bitwiseSet(bits, bit, toggle) {
  */
 export function noOp() {
 	return undefined;
+}
+
+/**
+ * Split a string by its latest space character in a range from the character 0 to the selected one.
+ * @param {string} str The text to split.
+ * @param {number} length The length of the desired string.
+ * @param {string} char The character to split with
+ */
+export function splitText(str, length, char = ' ') {
+	const x = str.substring(0, length).lastIndexOf(char);
+	const pos = x === -1 ? length : x;
+	return str.substring(0, pos);
+}
+
+/**
+ * Split a text by its latest space character in a range from the character 0 to the selected one.
+ * @param {string} str The text to split.
+ * @param {number} length The length of the desired string.
+ */
+export function cutText(str, length) {
+	if (str.length < length) return str;
+	const cut = splitText(str, length - 3);
+	if (cut.length < length - 3) return `${cut}...`;
+	return `${cut.slice(0, length - 3)}...`;
 }

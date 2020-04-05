@@ -10,16 +10,17 @@
 		"clsx": "^1.1.0",
 		"deepmerge": "^4.2.2",
 		"history": "^4.10.1",
-		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
 		"react-flip-move": "^3.0.4",
 		"react-if": "^3.4.3",
 		"react-player": "^1.15.3",
 		"react-router-dom": "^5.1.2",
+		"react": "^16.13.1",
 		"reactn": "^2.2.6",
 		"redux": "^4.0.5",
 		"styled-components": "^5.0.1",
-		"styled-react-modal": "^2.0.0"
+		"styled-react-modal": "^2.0.0",
+		"use-debounce": "^3.4.1"
 	},
 	"scripts": {
 		"start": "react-scripts start",
@@ -59,7 +60,8 @@
 		"prettier": "2.0.2",
 		"react-scripts": "3.4.1",
 		"reactn-devtools": "^1.1.0",
-		"typescript": "^3.8.3"
+		"typescript": "^3.8.3",
+		"utility-types": "^3.10.0"
 	},
 	"husky": {
 		"hooks": {
@@ -81,7 +83,7 @@
 	},
 	"resolutions": {
 		"acorn": "^6.4.1",
-		"minimist": "^1.2.2",
+		"minimist": "^1.2.5",
 		"kind-of": "^6.0.3"
 	}
 }

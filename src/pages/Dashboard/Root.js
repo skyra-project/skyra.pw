@@ -20,15 +20,17 @@ import {
 import DeleteIcon from '@material-ui/icons/DeleteForever';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import CustomCommandsIcon from '@material-ui/icons/Extension';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import Gavel from '@material-ui/icons/Gavel';
+import ChannelsIcon from '@material-ui/icons/Forum';
+import GavelIcon from '@material-ui/icons/Gavel';
 import MenuIcon from '@material-ui/icons/Menu';
+import MessagesIcon from '@material-ui/icons/Message';
 import MusicIcon from '@material-ui/icons/MusicNote';
-import SaveIcon from '@material-ui/icons/Save';
-import Settings from '@material-ui/icons/Settings';
-import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes';
+import SaveIconIcon from '@material-ui/icons/Save';
+import SettingsIcon from '@material-ui/icons/Settings';
 import StarIcon from '@material-ui/icons/Star';
-import Subject from '@material-ui/icons/Subject';
+import EventIcon from '@material-ui/icons/EventNote';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { createStyles, makeStyles, useTheme } from '@material-ui/styles';
 import SkyraLogo from 'assets/skyraLogo';
@@ -41,7 +43,7 @@ import CustomCommandsPage from 'pages/Dashboard/CustomCommands';
 import FilterCapitalsPage from 'pages/Dashboard/Filter/Capitals';
 import FilterLinksPage from 'pages/Dashboard/Filter/Links';
 import FilterWordsPage from 'pages/Dashboard/Filter/Words';
-import LogsPage from 'pages/Dashboard/LogsPage';
+import EventsPage from 'pages/Dashboard/EventsPage';
 import ModerationSettingsPage from 'pages/Dashboard/Moderation/Settings';
 import SettingsPage from 'pages/Dashboard/SettingsPage';
 import StarboardPage from 'pages/Dashboard/Starboard';
@@ -49,10 +51,12 @@ import { Else, If, Then } from 'react-if';
 import { Link, Switch } from 'react-router-dom';
 import React, { Fragment, useEffect, useState } from 'reactn';
 import styled from 'styled-components';
+import ChannelsPage from './ChannelsPage';
 import InvitesFilterPage from './Filter/Invites';
 import MessagesFilterPage from './Filter/Messages';
 import NewLinesFilterPage from './Filter/NewLines';
 import ReactionsFilterPage from './Filter/Reactions';
+import MessagesPage from './MessagesPage';
 
 // Overwrite arrays when merging
 const mergeOptions = {
@@ -204,9 +208,9 @@ const RootComponent = props => {
 				guild_id: guildID,
 				data: state.guildSettingsChanges
 			}
-		}).catch(err => {
+		}).catch(() => {
 			// TODO toast
-			console.error(err);
+			// Do nothing
 		});
 
 		if (!response || !response.newSettings || response.error) {
@@ -283,7 +287,7 @@ const RootComponent = props => {
 				<List style={{ overflowY: 'auto' }}>
 					<ListItem onClick={closeSidebarOnMobile} disabled={!guildData} component={Link} to={`/guilds/${guildID}`} button>
 						<ListItemIcon>
-							<Settings />
+							<SettingsIcon />
 						</ListItemIcon>
 						<ListItemText primary="Settings" />
 					</ListItem>
@@ -291,7 +295,7 @@ const RootComponent = props => {
 					{/* ------------------------------- */}
 					<ListItem disabled={!guildData} button onClick={() => handleSubMenu('moderation')}>
 						<ListItemIcon>
-							<Gavel />
+							<GavelIcon />
 						</ListItemIcon>
 						<ListItemText primary="Moderation" />
 						{openSubMenus.includes('moderation') ? <ExpandLess /> : <ExpandMore />}
@@ -404,11 +408,41 @@ const RootComponent = props => {
 
 					{/* ------------------------------- */}
 
-					<ListItem onClick={closeSidebarOnMobile} disabled={!guildData} component={Link} to={`/guilds/${guildID}/logs`} button>
+					<ListItem onClick={closeSidebarOnMobile} disabled={!guildData} component={Link} to={`/guilds/${guildID}/events`} button>
 						<ListItemIcon>
-							<Subject />
+							<EventIcon />
 						</ListItemIcon>
-						<ListItemText primary="Message Logs" />
+						<ListItemText primary="Events" />
+					</ListItem>
+
+					{/* ------------------------------- */}
+
+					<ListItem
+						onClick={closeSidebarOnMobile}
+						disabled={!guildData}
+						component={Link}
+						to={`/guilds/${guildID}/channels`}
+						button
+					>
+						<ListItemIcon>
+							<ChannelsIcon />
+						</ListItemIcon>
+						<ListItemText primary="Channels" />
+					</ListItem>
+
+					{/* ------------------------------- */}
+
+					<ListItem
+						onClick={closeSidebarOnMobile}
+						disabled={!guildData}
+						component={Link}
+						to={`/guilds/${guildID}/messages`}
+						button
+					>
+						<ListItemIcon>
+							<MessagesIcon />
+						</ListItemIcon>
+						<ListItemText primary="Messages" />
 					</ListItem>
 
 					{/* ------------------------------- */}
@@ -421,7 +455,7 @@ const RootComponent = props => {
 						button
 					>
 						<ListItemIcon>
-							<SpeakerNotesIcon />
+							<CustomCommandsIcon />
 						</ListItemIcon>
 						<ListItemText primary="Custom Commands" />
 					</ListItem>
@@ -464,7 +498,9 @@ const RootComponent = props => {
 
 					<Box display="flex" justifyContent="space-between" width="100%" alignItems="center">
 						{guildData ? (
-							<Typography component="h1">{guildData.name}</Typography>
+							<Typography component="h1" data-premid="server-title">
+								{guildData.name}
+							</Typography>
 						) : (
 							<Skeleton type="text" width={200} height={16} />
 						)}
@@ -556,8 +592,18 @@ const RootComponent = props => {
 
 								<AuthenticatedRoute
 									componentProps={{ ...componentProps }}
-									path="/guilds/:guildID/logs"
-									component={LogsPage}
+									path="/guilds/:guildID/events"
+									component={EventsPage}
+								/>
+								<AuthenticatedRoute
+									componentProps={{ ...componentProps }}
+									path="/guilds/:guildID/channels"
+									component={ChannelsPage}
+								/>
+								<AuthenticatedRoute
+									componentProps={{ ...componentProps }}
+									path="/guilds/:guildID/messages"
+									component={MessagesPage}
 								/>
 								<AuthenticatedRoute
 									componentProps={{ ...componentProps }}
@@ -586,7 +632,7 @@ const RootComponent = props => {
 							Reset
 						</Button>
 						<Button disabled={isUpdating} onClick={submitChanges} color="primary" variant="contained">
-							<SaveIcon className={classes.saveIcon} />
+							<SaveIconIcon className={classes.saveIcon} />
 							Save Changes
 						</Button>
 					</div>
