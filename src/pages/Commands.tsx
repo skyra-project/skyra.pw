@@ -93,7 +93,7 @@ export default () => {
 		});
 	}, []);
 
-	const parseDescription = (description: string) => description.replace(/<:shiny:[0-9]{18}>/gi, 'shiny');
+	const parseDescription = (description: string) => description.replace(/<:(\w{2,32}):[0-9]{18}>/gi, '$1');
 
 	const categories = [...new Set(commands.map(command => command.category))];
 
