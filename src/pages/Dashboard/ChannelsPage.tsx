@@ -100,7 +100,12 @@ const CHANNELS: Channel[] = [
 	{ name: 'Announcements', tooltip: 'The channel for announcements', key: 'announcements' },
 	{ name: 'Greetings', tooltip: 'The channel I will use to send greetings', key: 'greeting' },
 	{ name: 'Farewells', tooltip: 'The channel I will use to send farewells', key: 'farewell' },
-	{ name: 'Member Logs', tooltip: 'The channel for (non-NSFW) message logs', key: 'member-logs' },
+	{ name: 'Message Logs', tooltip: 'The channel for (non-NSFW) message logs', key: 'message-logs' },
+	{
+		name: 'Member Logs',
+		tooltip: 'The channel for member logs, once enabled, I will post all member related events there.',
+		key: 'member-logs'
+	},
 	{
 		name: 'Moderation Logs',
 		tooltip: 'The channel for moderation logs, once enabled, I will post all my moderation cases there.',
