@@ -37,7 +37,11 @@ export default ({ label, value, onChange, values, name, tooltipTitle, buttonProp
 		<Fragment>
 			<If condition={Boolean(tooltipTitle)}>
 				<Then>
-					<Tooltip title={tooltipTitle} placement="top">
+					<Tooltip
+						// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+						title={tooltipTitle!}
+						placement="top"
+					>
 						<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...buttonProps}>
 							{label}: {name}
 						</Button>
