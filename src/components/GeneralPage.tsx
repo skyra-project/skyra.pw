@@ -34,8 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'flex',
 			flexDirection: 'column',
 			justifyContent: 'space-between',
-			height: '100vh',
-			width: '100vw'
+			height: '100vh'
 		},
 		grid: {
 			padding: theme.spacing(1),

@@ -28,6 +28,14 @@ const useStyles = makeStyles((theme: Theme) =>
 			borderBottomLeftRadius: 0,
 			borderTopLeftRadius: 0
 		},
+		transparantButton: {
+			background: 'transparent',
+			boxShadow: 'none',
+			'&:hover': {
+				background: theme.palette.primary.dark,
+				boxShadow: theme.shadows[1]
+			}
+		},
 		syncLogo: {
 			'&:hover': {
 				animation: `$syncLogoSpin 2s infinite cubic-bezier(0.65, 0.05, 0.36, 1)`
@@ -91,7 +99,7 @@ export default () => {
 				color={Reflect.has(routeParams, 'guildID') ? 'secondary' : 'primary'}
 				variant="contained"
 				onClick={handleToggle}
-				classes={{ root: classes.button }}
+				classes={{ root: classes.button, containedSecondary: classes.transparantButton }}
 			>
 				<Avatar style={{ marginRight: 5, height: 40, width: 40 }} src={displayAvatarURL(user, { size: 128 })} alt="" />
 				<ExpandMoreIcon />

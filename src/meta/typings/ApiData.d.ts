@@ -24,6 +24,7 @@ export interface FlattenedGuild {
 	description: string | null;
 	banner: string | null;
 	ownerID: string;
+	skyraIsIn: boolean;
 }
 
 export interface FlattenedRole {

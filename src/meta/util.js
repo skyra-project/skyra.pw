@@ -132,7 +132,7 @@ export function displayAvatarURL(user, { format = 'default', size = 256 } = {}) 
 }
 
 export function displayIconURL(guild, { format = 'default', size = 256 } = {}) {
-	if (guild.icon === null) return null;
+	if (guild.icon === null) return undefined;
 	if (format === 'default') format = guild.icon.startsWith('a_') ? 'gif' : 'webp';
 	return `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.${format}${`?size=${size}`}`;
 }
