@@ -1,19 +1,39 @@
-import React, { Fragment, useState } from 'react';
-import { Box, Button, IconButton, List, ListItem, ListItemSecondaryAction, ListItemText, TextField, Typography } from '@material-ui/core';
+import {
+	Box,
+	Button,
+	createStyles,
+	IconButton,
+	List,
+	ListItem,
+	ListItemSecondaryAction,
+	ListItemText,
+	makeStyles,
+	TextField,
+	Typography
+} from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-
 import Section from 'components/Section';
-import scss from 'stylesheets/modules/CustomCommands.module.scss';
+import { SettingsPageProps } from 'meta/typings/GuildSettings';
+import React, { Fragment, PropsWithChildren, useState } from 'react';
 
-const CustomCommandsPage = props => {
+const useStyles = makeStyles(() =>
+	createStyles({
+		container: {
+			maxWidth: 500,
+			display: 'flex',
+			flexDirection: 'column'
+		}
+	})
+);
+
+const CustomCommandsPage = ({ patchGuildData, guildSettings: { tags, prefix } }: PropsWithChildren<SettingsPageProps>) => {
+	const classes = useStyles();
 	const [newTag, setNewTag] = useState(['', '']);
-
-	const { tags, prefix } = props.guildSettings;
 
 	return (
 		<Fragment>
 			<Section title="Add Command">
-				<Box className={scss.container}>
+				<Box className={classes.container}>
 					<TextField label="Name" value={newTag[0]} onChange={e => setNewTag([e.target.value, newTag[1]])} margin="normal" />
 					<TextField
 						multiline
@@ -30,7 +50,7 @@ const CustomCommandsPage = props => {
 							if (content.length >= 2000) return;
 							if (tags.some(tag => tag[0] === name)) return;
 
-							props.patchGuildData({ tags: [...tags, newTag] });
+							patchGuildData({ tags: [...tags, newTag] });
 							setNewTag(['', '']);
 						}}
 						color="primary"
@@ -41,7 +61,7 @@ const CustomCommandsPage = props => {
 				</Box>
 			</Section>
 			<Section title="Custom Commands">
-				<Box className={scss.container}>
+				<Box className={classes.container}>
 					<List>
 						{tags.length > 0 ? (
 							tags.map(([name, content]) => (
@@ -50,7 +70,7 @@ const CustomCommandsPage = props => {
 									<ListItemSecondaryAction>
 										<IconButton
 											edge="end"
-											onClick={() => props.patchGuildData({ tags: tags.filter(tag => tag[0] !== name) })}
+											onClick={() => patchGuildData({ tags: tags.filter(tag => tag[0] !== name) })}
 										>
 											<DeleteIcon />
 										</IconButton>

@@ -16,7 +16,7 @@ import SyncIcon from '@material-ui/icons/Sync';
 import { RootState } from 'meta/typings/Reactn';
 import { displayAvatarURL, logOut, syncUser } from 'meta/util';
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useGlobal } from 'reactn';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -56,6 +56,7 @@ export default () => {
 	const [{ user }] = useGlobal<RootState>();
 	const [open, setOpen] = useState(false);
 	const routeParams = useParams();
+	const { pathname } = useLocation();
 
 	const classes = useStyles();
 	const anchorRef = useRef<HTMLButtonElement>(null);
@@ -96,7 +97,7 @@ export default () => {
 				ref={anchorRef}
 				aria-controls={open ? 'logout-popover' : undefined}
 				aria-haspopup="true"
-				color={Reflect.has(routeParams, 'guildID') ? 'secondary' : 'primary'}
+				color={Reflect.has(routeParams, 'guildID') && !pathname.includes('music') ? 'secondary' : 'primary'}
 				variant="contained"
 				onClick={handleToggle}
 				classes={{ root: classes.button, containedSecondary: classes.transparantButton }}

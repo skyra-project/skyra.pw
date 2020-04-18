@@ -18,6 +18,7 @@ import {
 	useMediaQuery
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/DeleteForever';
+import EventIcon from '@material-ui/icons/EventNote';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import CustomCommandsIcon from '@material-ui/icons/Extension';
@@ -30,7 +31,6 @@ import MusicIcon from '@material-ui/icons/MusicNote';
 import SaveIconIcon from '@material-ui/icons/Save';
 import SettingsIcon from '@material-ui/icons/Settings';
 import StarIcon from '@material-ui/icons/Star';
-import EventIcon from '@material-ui/icons/EventNote';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { createStyles, makeStyles, useTheme } from '@material-ui/styles';
 import SkyraLogo from 'assets/skyraLogo';
@@ -40,17 +40,16 @@ import UserMenu from 'components/UserMenu';
 import deepMerge from 'deepmerge';
 import { authedFetch, navigate, noOp } from 'meta/util';
 import CustomCommandsPage from 'pages/Dashboard/CustomCommands';
+import EventsPage from 'pages/Dashboard/EventsPage';
 import FilterCapitalsPage from 'pages/Dashboard/Filter/Capitals';
 import FilterLinksPage from 'pages/Dashboard/Filter/Links';
 import FilterWordsPage from 'pages/Dashboard/Filter/Words';
-import EventsPage from 'pages/Dashboard/EventsPage';
 import ModerationSettingsPage from 'pages/Dashboard/Moderation/Settings';
 import SettingsPage from 'pages/Dashboard/SettingsPage';
 import StarboardPage from 'pages/Dashboard/Starboard';
 import { Else, If, Then } from 'react-if';
 import { Link, Switch } from 'react-router-dom';
 import React, { Fragment, useEffect, useState } from 'reactn';
-import styled from 'styled-components';
 import ChannelsPage from './ChannelsPage';
 import InvitesFilterPage from './Filter/Invites';
 import MessagesFilterPage from './Filter/Messages';
@@ -60,26 +59,10 @@ import MessagesPage from './MessagesPage';
 
 // Overwrite arrays when merging
 const mergeOptions = {
-	arrayMerge: (destinationArray, sourceArray) => sourceArray
+	arrayMerge: (_, sourceArray) => sourceArray
 };
 
 const drawerWidth = 240;
-
-const ServerHeader = styled.div`
-	padding: 14px 20px;
-
-	display: flex;
-	flex-direction: column;
-	align-content: center;
-	align-items: center;
-
-	min-height: 100px;
-
-	.MuiAvatar-root {
-		width: 60px;
-		height: 60px;
-	}
-`;
 
 const useStyles = makeStyles(theme =>
 	createStyles({
@@ -110,7 +93,6 @@ const useStyles = makeStyles(theme =>
 		},
 		toolbar: {
 			...theme.mixins.toolbar,
-			background: theme.palette.primary.main,
 			color: theme.palette.primary.contrastText
 		},
 		guildImage: {
@@ -159,6 +141,25 @@ const useStyles = makeStyles(theme =>
 		},
 		nested: {
 			paddingLeft: theme.spacing(4)
+		},
+		serverHeader: {
+			paddingRight: theme.spacing(1),
+			paddingLeft: theme.spacing(1),
+			paddingTop: theme.spacing(1.5),
+			paddingBottom: theme.spacing(1.5),
+			display: 'flex',
+			flexDirection: 'column',
+			alignContent: 'center',
+			alignItems: 'center',
+			minHeight: 100
+		},
+		serverAvatar: {
+			width: 60,
+			height: 60,
+			minHeight: 60,
+			maxHeight: 60,
+			minWidth: 60,
+			maxWidth: 60
 		}
 	})
 );
@@ -263,11 +264,11 @@ const RootComponent = props => {
 			<Divider />
 
 			{/* --------------------- */}
-			<ServerHeader>
+			<Box className={classes.serverHeader}>
 				<If condition={guildData !== null}>
 					<Then>
 						<Fragment>
-							<GuildIcon guild={guildData} size={256} />
+							<GuildIcon guild={guildData} size={256} sizeClass={classes.serverAvatar} />
 							<Typography variant="subtitle2" style={{ marginTop: 15 }} data-premid="server-title">
 								{guildData?.name}
 							</Typography>
@@ -280,7 +281,7 @@ const RootComponent = props => {
 						</Fragment>
 					</Else>
 				</If>
-			</ServerHeader>
+			</Box>
 			{/* --------------------- */}
 
 			<div role="presentation" onKeyDown={isOnMobile ? toggleSidebar : noOp}>
