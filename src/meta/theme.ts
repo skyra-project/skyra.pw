@@ -8,20 +8,20 @@ export default createMuiTheme({
 			main: blue[600],
 			light: blue[400],
 			dark: blue[800],
-			contrastText: '#ffffff'
+			contrastText: '#FFFFFF'
 		},
 		secondary: {
 			main: '#2D2D2D',
 			light: '#36393F',
 			dark: '#212121',
-			contrastText: '#ffffff'
+			contrastText: '#FFFFFF'
 		},
 		background: {
-			default: '#16171d'
+			default: '#16171D'
 		},
 		common: {
 			white: '#EEEEEE',
-			black: '#16171d'
+			black: '#16171D'
 		},
 		error: {
 			main: '#C22E14'

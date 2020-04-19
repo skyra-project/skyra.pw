@@ -3,8 +3,8 @@
 	"description": "Skyra is a multipurpose Discord bot designed to handle most tasks, helping users manage their servers easily.",
 	"name": "Skyra",
 	"short_name": "Skyra",
-	"theme_color": "#7189DA",
-	"background_color": "#26262B",
+	"theme_color": "#1E88E5",
+	"background_color": "#16171D",
 	"dir": "auto",
 	"lang": "en_US",
 	"scope": "/",
@@ -25,8 +25,8 @@
 	],
 	"splash_pages": {
 		"name": "Skyra",
-		"theme_color": "#7189DA",
-		"background_color": "#26262B",
+		"theme_color": "#1E88E5",
+		"background_color": "#16171D",
 		"icons": [
 			{
 				"src": "icons/android-chrome-192x192.png",
