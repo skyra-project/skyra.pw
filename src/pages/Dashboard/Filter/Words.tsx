@@ -1,3 +1,4 @@
+import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
@@ -11,24 +12,30 @@ import SelectBoolean from 'components/Select/SelectBoolean';
 import SelectDuration from 'components/Select/SelectDuration';
 import SimpleGrid from 'components/SimpleGrid';
 import Slider from 'components/Slider';
-import theme from 'meta/theme';
+import { SettingsPageProps } from 'meta/typings/GuildSettings';
 import { bitwiseHas, bitwiseSet, removeNonAlphaNumeric } from 'meta/util';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, PropsWithChildren, useState } from 'react';
 import { When } from 'react-if';
-import styled from 'styled-components';
-import scss from 'stylesheets/modules/FilterOptions.module.scss';
 
-const WordsContainer = styled(Paper)`
-	padding: ${theme.spacing(1)}px;
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		words: {
+			padding: theme.spacing(1),
+			'& > *': {
+				margin: theme.spacing(1)
+			}
+		},
+		textField: {
+			marginRight: theme.spacing(1),
+			marginBottom: theme.spacing(1)
+		}
+	})
+);
 
-	& > * {
-		margin: ${theme.spacing(1)}px;
-	}
-`;
-
-const WordsPage = props => {
+export default (props: PropsWithChildren<SettingsPageProps>) => {
 	const { filter } = props.guildSettings.selfmod;
 	const [newWord, setNewWord] = useState('');
+	const classes = useStyles();
 
 	return (
 		<Fragment>
@@ -90,7 +97,7 @@ const WordsPage = props => {
 				<Typography>Maximum Threshold</Typography>
 				<Slider
 					value={filter.thresholdMaximum}
-					onChange={(_, e) => props.patchGuildData({ selfmod: { filter: { thresholdMaximum: e } } })}
+					onChange={(_, value) => props.patchGuildData({ selfmod: { filter: { thresholdMaximum: value } } })}
 					aria-labelledby="Words selfmod filter maximum threshold slider"
 					valueLabelDisplay="auto"
 					min={0}
@@ -117,7 +124,12 @@ const WordsPage = props => {
 					}}
 				>
 					<Box display="flex" mb={2} alignContent="center" alignItems="center" justifyContent="flex-start">
-						<TextField className={scss.textField} label="Add Word" value={newWord} onChange={e => setNewWord(e.target.value)} />
+						<TextField
+							classes={{ root: classes.textField }}
+							label="Add Word"
+							value={newWord}
+							onChange={e => setNewWord(e.target.value)}
+						/>
 						<Button type="submit" variant="contained" color="primary">
 							Confirm
 						</Button>
@@ -125,7 +137,7 @@ const WordsPage = props => {
 				</form>
 
 				<When condition={filter.raw.length !== 0}>
-					<WordsContainer>
+					<Paper classes={{ root: classes.words }}>
 						{filter.raw.map(word => (
 							<Chip
 								color="primary"
@@ -136,11 +148,9 @@ const WordsPage = props => {
 								}
 							/>
 						))}
-					</WordsContainer>
+					</Paper>
 				</When>
 			</Section>
 		</Fragment>
 	);
 };
-
-export default WordsPage;

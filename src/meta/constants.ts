@@ -7,7 +7,7 @@ export const history = createBrowserHistory();
 export const CLIENT_ID = process.env.REACT_APP_CLIENT_ID!;
 export const BASE_WEB_URL = process.env.REACT_APP_BASE_WEB_URL!;
 export const BASE_API_URL = process.env.REACT_APP_BASE_API_URL!;
-export const WS_URL = process.env.REACT_APP_WS_URL;
+export const WS_URL = process.env.REACT_APP_WS_URL!;
 export const BASE_CDN_URL = 'https://cdn.skyra.pw';
 
 const DiscordOauthURL = `https://discordapp.com/oauth2/authorize`;

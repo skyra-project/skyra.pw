@@ -204,11 +204,11 @@ const RootComponent = props => {
 		const { guildID } = props.match.params;
 		const response = await authedFetch(`/guilds/${guildID}/settings`, {
 			method: 'POST',
-			body: {
+			body: JSON.stringify({
 				// eslint-disable-next-line @typescript-eslint/camelcase
 				guild_id: guildID,
 				data: state.guildSettingsChanges
-			}
+			})
 		}).catch(() => {
 			// TODO toast
 			// Do nothing
