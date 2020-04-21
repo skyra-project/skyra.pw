@@ -53,7 +53,7 @@ const Middle = () => (
 	<Box display="flex" flexDirection="column">
 		<SkyraLogo />
 		<Typography style={{ marginTop: 15 }} variant="caption">
-			Copyright © 2019 Kyra. All rights reserved.
+			Copyright © 2020 Skyra Project. All rights reserved.
 		</Typography>
 	</Box>
 );
