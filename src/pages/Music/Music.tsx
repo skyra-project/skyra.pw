@@ -1,5 +1,4 @@
-// @ts-nocheck
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import CardContent from '@material-ui/core/CardContent';
@@ -18,14 +17,22 @@ import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import GeneralPage from 'components/GeneralPage';
 import Link from 'components/Link';
 import { WS_URL } from 'meta/constants';
-import { ClientActions, FlattenedSong, MusicActions, MusicData, MusicStatus, ServerActions, WebsocketMessage } from 'meta/typings/Music';
-import { RootState } from 'meta/typings/Reactn';
-import React, { createRef, useState } from 'react';
+import {
+	ClientActions,
+	IncomingWebsocketMessage,
+	MusicActions,
+	MusicData,
+	MusicStatus,
+	OutgoingWebsocketMessage,
+	ServerActions
+} from 'meta/typings/Music';
+import { getAcronym } from 'meta/util';
+import { useRef } from 'react';
 import FlipMove from 'react-flip-move';
 import { Else, If, Then, When } from 'react-if';
 import ReactPlayer from 'react-player';
 import { useParams } from 'react-router-dom';
-import { getGlobal } from 'reactn';
+import React, { useEffect, useGlobal, useState } from 'reactn';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -53,6 +60,10 @@ const useStyles = makeStyles((theme: Theme) =>
 			minHeight: 150,
 			maxHeight: 150
 		},
+		cardPlayPauseIcon: {
+			height: 38,
+			width: 38
+		},
 		list: {
 			maxWidth: 700,
 			width: '100%',
@@ -61,17 +72,26 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-/* eslint-disable @typescript-eslint/camelcase, no-invalid-this */
-// TODO:  -favna/kyra-  Type out the entire Websocket Music module in Skyra and transfer types to here
 export default () => {
-	const ws = new WebSocket(WS_URL);
-	const playerRef = createRef<ReactPlayer>();
 	const classes = useStyles();
 	const { guildID } = useParams();
-	const { authenticated, token, user } = getGlobal<RootState>();
-	const [musicData, setMusicData] = useState<Partial<MusicData>>();
+	const [authenticated] = useGlobal('authenticated');
+	const [token] = useGlobal('token');
+	const [user] = useGlobal('user');
+	const theme = useTheme();
 
-	const updateMusicData = (newData: Partial<MusicData>) => setMusicData({ ...musicData, ...newData });
+	const [voiceChannel, setVoiceChannel] = useState<MusicData['voiceChannel']>(null);
+	const [song, setSong] = useState<MusicData['song']>(null);
+	const [queue, setQueue] = useState<MusicData['queue']>([]);
+	const [position, setPosition] = useState<MusicData['position']>(0);
+	const [status, setStatus] = useState<MusicData['status']>(MusicStatus.INSTANTIATED);
+	const [, setVolume] = useState<MusicData['volume']>(0);
+	const [replay, setReplay] = useState<MusicData['replay']>(false);
+	const [ws, setWs] = useState<WebSocket>(new WebSocket(WS_URL));
+
+	const playerRef = useRef<ReactPlayer | null>(null);
+
+	/* eslint-disable @typescript-eslint/camelcase */
 	const skipSong = () => {
 		ws.sendJSON({
 			action: ClientActions.MusicQueueUpdate,
@@ -100,110 +120,136 @@ export default () => {
 		});
 	};
 
-	ws.sendJSON = data => ws.send(JSON.stringify(data));
+	useEffect(() => {
+		if (!ws) setWs(new WebSocket(WS_URL));
 
-	ws.onopen = () => {
-		if (authenticated) {
+		ws.sendJSON = data => ws.send(JSON.stringify(data));
+
+		ws.onopen = () => {
+			if (authenticated) {
+				ws.sendJSON({
+					action: ClientActions.Authenticate,
+					data: {
+						token: token,
+						user_id: user.id
+					}
+				});
+			}
+
 			ws.sendJSON({
-				action: ClientActions.Authenticate,
+				action: ClientActions.SubscriptionUpdate,
 				data: {
-					token: token,
-					user_id: user.id
+					subscription_name: MusicActions.WebsocketSubscriptionName,
+					subscription_action: MusicActions.WebsocketSubscriptionAction,
+					guild_id: guildID
 				}
 			});
-		}
+		};
+		/* eslint-enable @typescript-eslint/camelcase */
 
-		ws.sendJSON({
-			action: ClientActions.SubscriptionUpdate,
-			data: {
-				subscription_name: MusicActions.WebsocketSubscriptionName,
-				subscription_action: MusicActions.WebsocketSubscriptionAction,
-				guild_id: guildID
+		ws.onmessage = event => {
+			const { action, data } = JSON.parse(event.data) as IncomingWebsocketMessage;
+
+			/* eslint-disable	@typescript-eslint/no-non-null-assertion,
+								@typescript-eslint/no-unnecessary-type-assertion,
+								react-hooks/exhaustive-deps
+			*/
+			switch (action) {
+				case ServerActions.Authenticate:
+					// This event doesn't need to be handled
+					break;
+
+				case ServerActions.MusicAdd:
+					setQueue(data!.queue);
+					break;
+
+				case ServerActions.MusicConnect:
+					setVoiceChannel(data!.voiceChannel);
+					break;
+
+				case ServerActions.MusicLeave:
+					setVoiceChannel(null);
+					break;
+
+				case ServerActions.MusicPrune:
+					setQueue([]);
+					break;
+
+				case ServerActions.MusicRemove:
+					setQueue(queue.filter(song => song.id !== data!.song!.id));
+					break;
+
+				case ServerActions.MusicReplayUpdate:
+					setReplay(data!.replay);
+					break;
+
+				case ServerActions.MusicShuffleQueue:
+					setQueue(data!.queue);
+					break;
+
+				case ServerActions.MusicSongFinish:
+					setSong(null);
+					setQueue(data!.queue);
+					setPosition(0);
+					setStatus(MusicStatus.ENDED);
+					break;
+
+				case ServerActions.MusicSongPause:
+					setStatus(MusicStatus.PAUSED);
+					break;
+
+				case ServerActions.MusicSongPlay:
+					setSong(data!.song);
+					setQueue(data!.queue);
+					setPosition(0);
+					// setStatus(MusicStatus.PLAYING);
+					break;
+
+				case ServerActions.MusicSongReplay:
+					setSong(data!.song);
+					setPosition(0);
+					setStatus(MusicStatus.PLAYING);
+					break;
+
+				case ServerActions.MusicSongResume:
+					setStatus(MusicStatus.PLAYING);
+					break;
+
+				case ServerActions.MusicSongSeekUpdate:
+					setPosition(data!.position);
+					break;
+
+				case ServerActions.MusicSongSkip:
+					setSong(null);
+					setQueue(data!.queue);
+					break;
+
+				case ServerActions.MusicSongVolumeUpdate:
+					setVolume(data!.volume);
+					break;
+
+				case ServerActions.MusicSync:
+					setVoiceChannel(data!.voiceChannel);
+					setSong(data!.song);
+					setPosition(data!.position);
+					setStatus(data!.status);
+					setQueue(data!.queue);
+					break;
+
+				case ServerActions.MusicVoiceChannelJoin:
+					// This event doesn't need to be handled, its handled by MusicConnect
+					break;
+
+				case ServerActions.MusicVoiceChannelLeave:
+					// This event doesn't need to be handled, its handled by MusicLeave
+					break;
 			}
-		});
-	};
-
-	ws.onmessage = event => {
-		const { action, data } = JSON.parse(event.data) as WebsocketMessage;
-
-		switch (action) {
-			case ServerActions.Authenticate:
-				break;
-
-			case ServerActions.MusicSync:
-				updateMusicData(data);
-				break;
-
-			case ServerActions.MusicConnect:
-				updateMusicData({ voiceChannel: data.id });
-				break;
-
-			case ServerActions.MusicLeave:
-				updateMusicData({ voiceChannel: null });
-				break;
-
-			case ServerActions.MusicAdd:
-				console.log('receiving a music add event');
-				console.log('the current musicData: ', musicData);
-				console.log('the current queue: ', musicData?.queue);
-				console.log('about to add: ', data);
-				console.log('should be after add: ', { ...musicData, ...{ queue: musicData?.queue.concat(data) } });
-				updateMusicData({ queue: musicData?.queue.concat(data) });
-				break;
-
-			case ServerActions.MusicPrune:
-				updateMusicData({ queue: [] });
-				break;
-
-			case ServerActions.MusicRemove:
-				updateMusicData({ queue: musicData?.queue.filter((song: FlattenedSong) => song.id !== data.id) });
-				break;
-
-			case ServerActions.MusicReplayUpdate:
-				// TODO -favna/kyra- support replaying songs
-				break;
-
-			case ServerActions.MusicShuffleQueue:
-				// TODO -favna/kyra- support shuffling songs
-				updateMusicData({ queue: data });
-				break;
-
-			case ServerActions.MusicSongFinish:
-				updateMusicData({
-					song: null,
-					queue: musicData?.queue.filter((song: FlattenedSong) => song.id !== data.id),
-					position: 0,
-					status: MusicStatus.STOPPED
-				});
-				break;
-
-			case ServerActions.MusicSongPause:
-				updateMusicData({ status: MusicStatus.PAUSED });
-				break;
-
-			case ServerActions.MusicSongPlay:
-				updateMusicData({ song: data, position: 0, status: MusicStatus.PLAYING });
-				break;
-
-			case ServerActions.MusicSongReplay:
-				updateMusicData({ position: 0, status: MusicStatus.PLAYING });
-				break;
-
-			case ServerActions.MusicSongResume:
-				updateMusicData({ status: MusicStatus.PLAYING });
-				break;
-
-			case ServerActions.MusicSongSeekUpdate:
-				updateMusicData({ position: data.position });
-				break;
-
-			case ServerActions.MusicSongSkip:
-				updateMusicData({ song: null, queue: musicData?.queue.slice(1) });
-				break;
-		}
-	};
-
-	console.log(musicData);
+		};
+	}, []);
+	/* eslint-enable	@typescript-eslint/no-non-null-assertion,
+						@typescript-eslint/no-unnecessary-type-assertion,
+						react-hooks/exhaustive-deps
+	*/
 
 	return (
 		<GeneralPage
@@ -214,109 +260,110 @@ export default () => {
 			}}
 			loading={false}
 		>
-			{musicData && (
-				<Container>
-					<Box overflow="visible" display="flex" flexDirection="column">
-						<If condition={musicData.song !== null}>
-							<Then>
-								<FlipMove staggerDelayBy={150} appearAnimation="fade" enterAnimation="fade" leaveAnimation="fade">
-									<Box component="div" className={classes.currentlyPlaying} key={musicData.song?.identifier}>
+			<Container>
+				<Box overflow="visible" display="flex" flexDirection="column">
+					<If condition={song === null || voiceChannel === null}>
+						<Then>
+							<Box component="div" className={classes.currentlyPlaying}>
+								<Typography variant="h2" component="h1">
+									Not Playing
+								</Typography>
+							</Box>
+						</Then>
+						<Else>
+							<FlipMove staggerDelayBy={150} appearAnimation="fade" enterAnimation="fade" leaveAnimation="fade">
+								<Box component="div" className={classes.currentlyPlaying} key={song?.identifier}>
+									<Box component="div">
 										<CardContent classes={{ root: classes.cardContent }}>
 											<Typography component="h5" variant="h5" data-premid="music-title">
-												{musicData.song?.title || 'Unknown Title'}
+												{song?.title || 'Unknown Title'}
 											</Typography>
 											<Typography variant="subtitle1" color="textSecondary" data-premid="music-from">
-												{musicData.song?.author || 'Unknown Uploader'}
+												{song?.author || 'Unknown Uploader'}
 											</Typography>
 										</CardContent>
 										<When condition={authenticated}>
-											<IconButton>
-												<SkipPreviousIcon />
+											<IconButton disabled aria-label={theme.direction === 'rtl' ? 'next' : 'previous'}>
+												{theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
 											</IconButton>
-											<If
-												condition={
-													musicData.status === MusicStatus.PLAYING || musicData.status === MusicStatus.STOPPED
-												}
-											>
+											<If condition={status === MusicStatus.PLAYING}>
 												<Then>
 													<IconButton onClick={pauseSong}>
-														<PauseIcon />
+														<PauseIcon className={classes.cardPlayPauseIcon} />
 													</IconButton>
 												</Then>
 												<Else>
 													<IconButton onClick={resumeSong}>
-														<PlayArrowIcon />
+														<PlayArrowIcon className={classes.cardPlayPauseIcon} />
 													</IconButton>
 												</Else>
 											</If>
 
-											<IconButton onClick={skipSong}>
-												<SkipNextIcon />
+											<IconButton onClick={skipSong} aria-label={theme.direction === 'rtl' ? 'previous' : 'next'}>
+												{theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
 											</IconButton>
 										</When>
-										<Box className={classes.videoContainer}>
-											<ReactPlayer
-												width="100%"
-												height="100%"
-												onStart={() =>
-													playerRef.current && playerRef.current.seekTo(musicData.position / 1000, 'seconds')
-												}
-												// TODO -favna/kyra- implement music replaying
-												// loop={musicData.replay}
-												ref={playerRef}
-												url={musicData.song?.url}
-												playing={musicData.status === MusicStatus.PLAYING}
-											/>
-										</Box>
 									</Box>
-								</FlipMove>
-							</Then>
-							<Else>
-								<Box component="div" className={classes.currentlyPlaying}>
-									<Typography variant="h2" component="h1">
-										Not Playing
-									</Typography>
+									<Box className={classes.videoContainer}>
+										<ReactPlayer
+											width="100%"
+											height="100%"
+											onStart={() => playerRef.current && playerRef.current.seekTo(position / 1000, 'seconds')}
+											onReady={() => setStatus(MusicStatus.PLAYING)}
+											loop={replay}
+											ref={playerRef}
+											url={song?.url}
+											playing={status === MusicStatus.PLAYING}
+											muted
+										/>
+									</Box>
 								</Box>
-							</Else>
-						</If>
-						<Divider />
-						<When condition={musicData?.queue?.length !== 0}>
-							<List classes={{ root: classes.list }}>
-								<FlipMove
-									staggerDelayBy={80}
-									appearAnimation="fade"
-									enterAnimation="fade"
-									leaveAnimation="accordionVertical"
-								>
-									{musicData?.queue?.map((song, index) => (
-										<div key={index}>
-											<Link to={song.url}>
-												<ListItem button>
-													<ListItemIcon>
-														<Avatar src={`https://img.youtube.com/vi/${song.identifier}/hqdefault.jpg`} />
-													</ListItemIcon>
-													<ListItemText primary={song.title} secondary={song.author} />
-													{/* <ListItemSecondaryAction>
-														<IconButton edge="end">
-															<DeleteIcon />
-														</IconButton>
-													</ListItemSecondaryAction> */}
-												</ListItem>
-											</Link>
-										</div>
-									))}
-								</FlipMove>
-							</List>
-						</When>
-					</Box>
-				</Container>
-			)}
+							</FlipMove>
+						</Else>
+					</If>
+					<Divider />
+					<When condition={queue.length !== 0}>
+						<List classes={{ root: classes.list }}>
+							<FlipMove
+								delay={0}
+								staggerDurationBy={15}
+								staggerDelayBy={20}
+								duration={700}
+								easing="ease"
+								appearAnimation="fade"
+								enterAnimation="fade"
+								leaveAnimation="accordionVertical"
+							>
+								{queue.map((song, index) => (
+									<div key={index}>
+										<Link to={song.url}>
+											<ListItem button>
+												<ListItemIcon>
+													<If condition={song.url.includes('youtube')}>
+														<Then>
+															<Avatar src={`https://img.youtube.com/vi/${song.identifier}/hqdefault.jpg`} />
+														</Then>
+														<Else>
+															<Avatar>{getAcronym(song.title)}</Avatar>
+														</Else>
+													</If>
+												</ListItemIcon>
+												<ListItemText primary={song.title} secondary={song.author} />
+											</ListItem>
+										</Link>
+									</div>
+								))}
+							</FlipMove>
+						</List>
+					</When>
+				</Box>
+			</Container>
 		</GeneralPage>
 	);
 };
 
 declare global {
 	interface WebSocket {
-		sendJSON: (data: WebsocketMessage) => void;
+		sendJSON: (data: OutgoingWebsocketMessage) => void;
 	}
 }
