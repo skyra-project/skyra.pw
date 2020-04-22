@@ -95,3 +95,16 @@ export interface FlattenedMember {
 	premiumSinceTimestamp: number | null;
 	roles: FlattenedRole[];
 }
+
+export interface FlattenedCommand {
+	bucket: number;
+	category: string;
+	cooldown: number;
+	description: string;
+	guarded: boolean;
+	guildOnly: boolean;
+	name: string;
+	permissionLevel: number;
+	requiredPermissions: string[];
+	usage: string;
+}

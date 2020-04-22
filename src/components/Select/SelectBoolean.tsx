@@ -6,7 +6,7 @@ export interface SelectBooleanProps {
 	currentValue: boolean;
 	description?: string;
 
-	onChange(...args: any[]): void;
+	onChange(isChecked: boolean): void;
 }
 
 export default function SelectBoolean({ title, currentValue, onChange, description }: SelectBooleanProps) {

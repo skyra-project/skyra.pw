@@ -11,6 +11,7 @@ import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 import LockIcon from '@material-ui/icons/Lock';
 import GeneralPage from 'components/GeneralPage';
 import Tooltip from 'components/Tooltip';
+import { FlattenedCommand } from 'meta/typings/ApiData';
 import { apiFetch, cutText } from 'meta/util';
 import React, { useEffect, useState } from 'react';
 import { Else, If, Then } from 'react-if';
@@ -62,23 +63,10 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-interface Command {
-	bucket: number;
-	category: string;
-	cooldown: number;
-	description: string;
-	guarded: boolean;
-	guildOnly: boolean;
-	name: string;
-	permissionLevel: number;
-	requiredPermissions: string[];
-	usage: string;
-}
-
 export default () => {
 	const classes = useStyles();
 	const [loading, setLoading] = useState(true);
-	const [commands, setCommands] = useState<Command[]>([]);
+	const [commands, setCommands] = useState<FlattenedCommand[]>([]);
 
 	const titles: Record<number, string> = {
 		4: 'This command can only be run by staff members.',

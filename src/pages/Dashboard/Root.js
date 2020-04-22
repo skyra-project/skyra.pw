@@ -25,6 +25,7 @@ import CustomCommandsIcon from '@material-ui/icons/Extension';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import ChannelsIcon from '@material-ui/icons/Forum';
 import GavelIcon from '@material-ui/icons/Gavel';
+import InputIcon from '@material-ui/icons/Input';
 import MenuIcon from '@material-ui/icons/Menu';
 import MessagesIcon from '@material-ui/icons/Message';
 import MusicIcon from '@material-ui/icons/MusicNote';
@@ -51,6 +52,7 @@ import { Else, If, Then } from 'react-if';
 import { Link, Switch } from 'react-router-dom';
 import React, { Fragment, useEffect, useState } from 'reactn';
 import ChannelsPage from './ChannelsPage';
+import DisableCommandsPage from './DisableCommandsPage';
 import InvitesFilterPage from './Filter/Invites';
 import MessagesFilterPage from './Filter/Messages';
 import NewLinesFilterPage from './Filter/NewLines';
@@ -452,6 +454,21 @@ const RootComponent = props => {
 						onClick={closeSidebarOnMobile}
 						disabled={!guildData}
 						component={Link}
+						to={`/guilds/${guildID}/disabled-commands`}
+						button
+					>
+						<ListItemIcon>
+							<InputIcon />
+						</ListItemIcon>
+						<ListItemText primary="Disable Commands" />
+					</ListItem>
+
+					{/* ------------------------------- */}
+
+					<ListItem
+						onClick={closeSidebarOnMobile}
+						disabled={!guildData}
+						component={Link}
 						to={`/guilds/${guildID}/custom-commands`}
 						button
 					>
@@ -605,6 +622,11 @@ const RootComponent = props => {
 									componentProps={{ ...componentProps }}
 									path="/guilds/:guildID/messages"
 									component={MessagesPage}
+								/>
+								<AuthenticatedRoute
+									componentProps={{ ...componentProps }}
+									path="/guilds/:guildID/disabled-commands"
+									component={DisableCommandsPage}
 								/>
 								<AuthenticatedRoute
 									componentProps={{ ...componentProps }}

@@ -34,6 +34,10 @@ export const saveState = (key: string, state: unknown) => {
 };
 
 export async function apiFetch(path: string, options: RequestInit = {}) {
+	if (process.env.NODE_ENV === 'development') {
+		await sleep(1000);
+	}
+
 	const response = await fetch(`${BASE_API_URL}${path}`, {
 		...options,
 		headers: {
