@@ -176,7 +176,7 @@ export default () => {
 					break;
 
 				case ServerActions.MusicRemove:
-					setQueue(queue.filter(song => song.id !== data!.song!.id));
+					setQueue(data!.queue);
 					break;
 
 				case ServerActions.MusicReplayUpdate:
