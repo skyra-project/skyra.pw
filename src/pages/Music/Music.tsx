@@ -202,7 +202,6 @@ export default () => {
 					setSong(data!.song);
 					setQueue(data!.queue);
 					setPosition(0);
-					// setStatus(MusicStatus.PLAYING);
 					break;
 
 				case ServerActions.MusicSongReplay:
