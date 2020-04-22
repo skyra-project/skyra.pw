@@ -1,7 +1,6 @@
 import { BASE_API_URL, history, Time } from 'meta/constants';
 import { getGlobal, setGlobal } from 'reactn';
 import { FlattenedGuild, FlattenedUser } from './typings/ApiData';
-import { RootState } from './typings/Reactn';
 
 export function sleep(ms: number) {
 	return new Promise(resolve => setTimeout(resolve, ms));
@@ -13,13 +12,13 @@ export function logOut() {
 	history.replace('/');
 }
 
-export const loadState = (key: string) => {
+export const loadState = <T = any>(key: string) => {
 	try {
 		const serializedState = localStorage.getItem(key);
 		if (serializedState === null) {
 			return undefined;
 		}
-		return JSON.parse(serializedState);
+		return JSON.parse(serializedState) as T;
 	} catch (err) {
 		return undefined;
 	}
@@ -53,13 +52,13 @@ export async function apiFetch(path: string, options: RequestInit = {}) {
 }
 
 export async function authedFetch(path: string, options: RequestInit = {}) {
-	options.headers = { authorization: getGlobal<RootState>().token };
+	options.headers = { authorization: getGlobal().token };
 	return apiFetch(path, options);
 }
 
 export async function syncUser() {
 	// If they're not logged in, don't try to sync.
-	if (!getGlobal<RootState>().authenticated) return;
+	if (!getGlobal().authenticated) return;
 
 	// Check if they've synced in the past 5 minutes.
 	const lastSync = loadState('last_sync');

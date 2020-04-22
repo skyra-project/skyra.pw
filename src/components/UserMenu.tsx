@@ -13,7 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import LogoutIcon from '@material-ui/icons/Eject';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SyncIcon from '@material-ui/icons/Sync';
-import { RootState } from 'meta/typings/Reactn';
 import { displayAvatarURL, logOut, syncUser } from 'meta/util';
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
@@ -53,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default () => {
-	const [{ user }] = useGlobal<RootState>();
+	const [user] = useGlobal('user');
 	const [open, setOpen] = useState(false);
 	const routeParams = useParams();
 	const { pathname } = useLocation();

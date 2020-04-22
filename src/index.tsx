@@ -1,22 +1,20 @@
-import React, { setGlobal } from 'reactn';
-import { render } from 'react-dom';
-import addReactNDevTools from 'reactn-devtools';
-
-import { loadState, logOut } from 'meta/util';
-import { RootState, HotNodeModule } from 'meta/typings/Reactn';
 import Root from 'components/Root';
-
+import { FlattenedGuild, FlattenedUser } from 'meta/typings/ApiData';
+import { loadState, logOut } from 'meta/util';
+import { render } from 'react-dom';
+import React, { setGlobal } from 'reactn';
+import addReactNDevTools from 'reactn-devtools';
 import 'stylesheets/basestyles.scss';
 
 const rootElement = document.getElementById('root');
 
-const discordUser = loadState('discord_user');
+const discordUser = loadState<UserState>('discord_user');
 const discordToken = loadState('discord_token');
 
 if (discordUser && discordUser.avatarURL) {
 	logOut();
 } else {
-	setGlobal<RootState>({
+	setGlobal({
 		authenticated: Boolean(discordToken) && Boolean(discordUser),
 		user: discordUser,
 		token: discordToken
@@ -38,5 +36,21 @@ if (process.env.NODE_ENV === 'development') {
 			const NextApp = require('./components/Root.tsx').default;
 			render(<NextApp />, rootElement);
 		});
+	}
+}
+
+interface HotNodeModule extends NodeModule {
+	hot: any;
+}
+
+interface UserState extends FlattenedUser {
+	guilds: FlattenedGuild[];
+}
+
+declare module 'reactn/default' {
+	export interface State {
+		authenticated: boolean;
+		token: string;
+		user: UserState;
 	}
 }
