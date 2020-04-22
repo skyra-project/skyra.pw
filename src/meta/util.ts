@@ -12,13 +12,13 @@ export function logOut() {
 	history.replace('/');
 }
 
-export const loadState = <T = any>(key: string) => {
+export const loadState = (key: string) => {
 	try {
 		const serializedState = localStorage.getItem(key);
 		if (serializedState === null) {
 			return undefined;
 		}
-		return JSON.parse(serializedState) as T;
+		return JSON.parse(serializedState) as unknown;
 	} catch (err) {
 		return undefined;
 	}
@@ -61,7 +61,7 @@ export async function syncUser() {
 	if (!getGlobal().authenticated) return;
 
 	// Check if they've synced in the past 5 minutes.
-	const lastSync = loadState('last_sync');
+	const lastSync = loadState('last_sync') as number;
 	const difference = Date.now() - lastSync;
 	if (difference < Time.Minute * 5) {
 		return;

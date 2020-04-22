@@ -8,8 +8,8 @@ import 'stylesheets/basestyles.scss';
 
 const rootElement = document.getElementById('root');
 
-const discordUser = loadState<UserState>('discord_user');
-const discordToken = loadState('discord_token');
+const discordUser = loadState('discord_user') as UserState;
+const discordToken = loadState('discord_token') as string;
 
 if (discordUser && discordUser.avatarURL) {
 	logOut();
