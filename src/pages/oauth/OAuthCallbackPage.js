@@ -11,11 +11,11 @@ function DiscordAuthCallbackPage() {
 	async function finalizeAuthFlow(code) {
 		const data = await apiFetch(`/oauth/callback`, {
 			method: 'POST',
-			body: {
+			body: JSON.stringify({
 				code,
 				// eslint-disable-next-line @typescript-eslint/camelcase
 				redirect_uri: `${BASE_WEB_URL}/oauth/callback`
-			}
+			})
 		});
 
 		if (data.error || !data.user || !data.access_token) {

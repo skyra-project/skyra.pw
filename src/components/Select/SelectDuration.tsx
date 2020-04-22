@@ -27,8 +27,8 @@ function determineUnit(ms: number) {
 interface SelectDurationProps {
 	value: number;
 	min: number;
-	max: number;
-	onChange: (...args: unknown[]) => void;
+	max?: number;
+	onChange: (value: number) => void;
 }
 
 const SelectDuration: FC<SelectDurationProps> = ({ value, min, max, onChange }) => {

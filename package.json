@@ -17,9 +17,7 @@
 		"react-player": "^1.15.3",
 		"react-router-dom": "^5.1.2",
 		"reactn": "^2.2.7",
-		"redux": "^4.0.5",
-		"styled-components": "^5.1.0",
-		"styled-react-modal": "^2.0.1"
+		"redux": "^4.0.5"
 	},
 	"scripts": {
 		"start": "react-scripts start",
@@ -51,8 +49,6 @@
 		"@types/react-dom": "^16.9.6",
 		"@types/react-router": "^5.1.5",
 		"@types/react-router-dom": "^5.1.4",
-		"@types/styled-components": "^5.1.0",
-		"@types/styled-react-modal": "^1.2.0",
 		"husky": "^4.2.5",
 		"lint-staged": "^10.1.6",
 		"node-sass": "^4.13.1",

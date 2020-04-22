@@ -16,7 +16,6 @@ import SkyraLogo from 'assets/skyraLogo';
 import Footer from 'components/Footer';
 import UserMenu from 'components/UserMenu';
 import { oauthURL } from 'meta/constants';
-import { RootState } from 'meta/typings/Reactn';
 import { navigate, syncUser } from 'meta/util';
 import React, { PropsWithChildren, useEffect } from 'react';
 import { Else, If, Then, When } from 'react-if';
@@ -79,7 +78,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default ({ children, loading = false, containerProps = {} }: PropsWithChildren<GeneralPageProps>) => {
 	const classes = useStyles();
-	const [{ authenticated }] = useGlobal<RootState>();
+	const [authenticated] = useGlobal('authenticated');
 
 	useEffect(() => {
 		syncUser();

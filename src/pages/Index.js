@@ -1,9 +1,8 @@
-import React, { useGlobal } from 'reactn';
-import { Container, Box, Typography, Divider, Hidden } from '@material-ui/core';
-
+import { Box, Container, Divider, Hidden, Typography } from '@material-ui/core';
+import features from 'assets/features';
 import GeneralPage from 'components/GeneralPage';
 import GuildCard from 'components/GuildCard';
-import features from 'assets/features';
+import React, { useGlobal } from 'reactn';
 import scss from 'stylesheets/modules/HomePage.module.scss';
 
 const Section = ({ name, image, text }) => (
@@ -22,8 +21,8 @@ const Section = ({ name, image, text }) => (
 );
 
 const HomePage = () => {
-	const [global] = useGlobal();
-	const { authenticated, user } = global;
+	const [authenticated] = useGlobal('authenticated');
+	const [user] = useGlobal('user');
 	return (
 		<GeneralPage>
 			{authenticated && (

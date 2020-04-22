@@ -1,24 +1,9 @@
 import { BASE_API_URL, history, Time } from 'meta/constants';
-import { getGlobal, setGlobal, useEffect, useRef } from 'reactn';
+import { getGlobal, setGlobal } from 'reactn';
+import { FlattenedGuild, FlattenedUser } from './typings/ApiData';
 
-export function sleep(ms) {
+export function sleep(ms: number) {
 	return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-export function useTraceUpdate(props) {
-	const prev = useRef(props);
-	useEffect(() => {
-		const changedProps = Object.entries(props).reduce((ps, [k, v]) => {
-			if (prev.current[k] !== v) {
-				ps[k] = [prev.current[k], v];
-			}
-			return ps;
-		}, {});
-		if (Object.keys(changedProps).length > 0) {
-			// Do nothing
-		}
-		prev.current = props;
-	});
 }
 
 export function logOut() {
@@ -27,19 +12,19 @@ export function logOut() {
 	history.replace('/');
 }
 
-export const loadState = key => {
+export const loadState = (key: string) => {
 	try {
 		const serializedState = localStorage.getItem(key);
 		if (serializedState === null) {
 			return undefined;
 		}
-		return JSON.parse(serializedState);
+		return JSON.parse(serializedState) as unknown;
 	} catch (err) {
 		return undefined;
 	}
 };
 
-export const saveState = (key, state) => {
+export const saveState = (key: string, state: unknown) => {
 	try {
 		const serializedState = JSON.stringify(state);
 		localStorage.setItem(key, serializedState);
@@ -48,15 +33,14 @@ export const saveState = (key, state) => {
 	}
 };
 
-export async function apiFetch(path, options = {}) {
-	if (process.env.NODE_ENV === 'development') {
-		await sleep(1000);
-	}
-	if (options.body) options.body = JSON.stringify(options.body);
-	if (!options.headers) options.headers = {};
-	options.headers['Content-Type'] = 'application/json';
-
-	const response = await fetch(`${BASE_API_URL}${path}`, options);
+export async function apiFetch(path: string, options: RequestInit = {}) {
+	const response = await fetch(`${BASE_API_URL}${path}`, {
+		...options,
+		headers: {
+			...options.headers,
+			'Content-Type': 'application/json'
+		}
+	});
 
 	const jsonResponse = await response.json();
 
@@ -67,9 +51,8 @@ export async function apiFetch(path, options = {}) {
 	}
 }
 
-export async function authedFetch(path, options = { headers: {} }) {
-	if (!options.headers) options.headers = {};
-	options.headers.authorization = getGlobal().token;
+export async function authedFetch(path: string, options: RequestInit = {}) {
+	options.headers = { authorization: getGlobal().token };
 	return apiFetch(path, options);
 }
 
@@ -78,7 +61,7 @@ export async function syncUser() {
 	if (!getGlobal().authenticated) return;
 
 	// Check if they've synced in the past 5 minutes.
-	const lastSync = loadState('last_sync');
+	const lastSync = loadState('last_sync') as number;
 	const difference = Date.now() - lastSync;
 	if (difference < Time.Minute * 5) {
 		return;
@@ -88,9 +71,9 @@ export async function syncUser() {
 
 	const response = await authedFetch('/oauth/user', {
 		method: 'POST',
-		body: {
+		body: JSON.stringify({
 			action: 'SYNC_USER'
-		}
+		})
 	}).catch(err => {
 		// TODO toast
 		if (err.status === 401) logOut();
@@ -109,14 +92,14 @@ export async function syncUser() {
 	}
 }
 
-export function navigate(path) {
+export function navigate(path: string) {
 	if (path.startsWith('http')) {
 		return () => (window.location.href = path);
 	}
 	return () => history.push(path);
 }
 
-export function toTitleCase(str) {
+export function toTitleCase(str: string) {
 	const splitStr = str.toLowerCase().replace(/-/g, ' ').split(' ');
 	for (let i = 0; i < splitStr.length; i++) {
 		splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
@@ -124,46 +107,51 @@ export function toTitleCase(str) {
 	return splitStr.join(' ');
 }
 
-export function displayAvatarURL(user, { format = 'default', size = 256 } = {}) {
+export function displayAvatarURL(user: FlattenedUser, { format = 'default', size = 256 } = {}) {
 	if (!user) return `https://cdn.discordapp.com/embed/avatars/${Math.floor(Math.random() * 4) + 1}.png`;
 	if (user.avatar === null) return `https://cdn.discordapp.com/embed/avatars/${user.discriminator}.png`;
 	if (format === 'default') format = user.avatar.startsWith('a_') ? 'gif' : 'webp';
 	return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${format}${`?size=${size}`}`;
 }
 
-export function displayIconURL(guild, { format = 'default', size = 256 } = {}) {
+export function displayIconURL(guild: FlattenedGuild, { format = 'default', size = 256 } = {}) {
 	if (guild.icon === null) return undefined;
-	if (format === 'default') format = guild.icon.startsWith('a_') ? 'gif' : 'webp';
+	if (format === 'default') format = guild.icon.startsWith('a_') ? 'gif' : 'png';
 	return `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.${format}${`?size=${size}`}`;
 }
 
-export function getAcronym(name) {
+/**
+ * Retrieves an acronym for a guild name based on Discord datamining
+ * @see https://github.com/discordjs/discord.js/pull/4104
+ * @param name The guild name to retrieve the acronym for
+ */
+export function getAcronym(name: string) {
 	return name
-		.replace(/\w+/g, part => part[0])
-		.replace(/\s/g, '')
-		.slice(0, 2);
+		.replace(/'s /g, ' ')
+		.replace(/\w+/g, e => e[0])
+		.replace(/\s/g, '');
 }
 
-export function removeNonAlphaNumeric(str) {
+export function removeNonAlphaNumeric(str: string) {
 	return str.replace(/[^0-9a-zA-Z]/gi, '');
 }
 
 /**
  * Check if a bit is set in a bitfield.
- * @param {number} bits The bitfield value to check.
- * @param {number} bit The bit to check.
+ * @param bits The bitfield value to check.
+ * @param bit The bit to check.
  */
-export function bitwiseHas(bits, bit) {
+export function bitwiseHas(bits: number, bit: number) {
 	return (bits & bit) === bit;
 }
 
 /**
  * Toggle a bit in a bitfield.
- * @param {number} bits The bitfield value to modify.
- * @param {number} bit The bit to toggle.
- * @param {boolean} toggle The value to set.
+ * @param bits The bitfield value to modify.
+ * @param bit The bit to toggle.
+ * @param toggle The value to set.
  */
-export function bitwiseSet(bits, bit, toggle) {
+export function bitwiseSet(bits: number, bit: number, toggle: boolean) {
 	return toggle ? bits | bit : bits & ~bit;
 }
 
@@ -176,11 +164,11 @@ export function noOp() {
 
 /**
  * Split a string by its latest space character in a range from the character 0 to the selected one.
- * @param {string} str The text to split.
- * @param {number} length The length of the desired string.
- * @param {string} char The character to split with
+ * @param str The text to split.
+ * @param length The length of the desired string.
+ * @param char The character to split with
  */
-export function splitText(str, length, char = ' ') {
+export function splitText(str: string, length: number, char = ' ') {
 	const x = str.substring(0, length).lastIndexOf(char);
 	const pos = x === -1 ? length : x;
 	return str.substring(0, pos);
@@ -188,10 +176,10 @@ export function splitText(str, length, char = ' ') {
 
 /**
  * Split a text by its latest space character in a range from the character 0 to the selected one.
- * @param {string} str The text to split.
- * @param {number} length The length of the desired string.
+ * @param str The text to split.
+ * @param length The length of the desired string.
  */
-export function cutText(str, length) {
+export function cutText(str: string, length: number) {
 	if (str.length < length) return str;
 	const cut = splitText(str, length - 3);
 	if (cut.length < length - 3) return `${cut}...`;

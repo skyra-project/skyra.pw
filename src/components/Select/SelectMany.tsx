@@ -1,6 +1,13 @@
-import { Checkbox, DialogActions, DialogContent, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import Dialog from 'components/Dialog';
+import Checkbox from '@material-ui/core/Checkbox';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 import DialogTitle from 'components/DialogTitle';
 import SearchBar from 'components/SearchBar';
 import Tooltip from 'components/Tooltip';
@@ -13,10 +20,23 @@ export interface SelectManyProps extends SelectOneProps {
 	value: string[];
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		dialogContent: {
+			padding: theme.spacing(2)
+		},
+		dialogActions: {
+			margin: 0,
+			padding: theme.spacing(1)
+		}
+	})
+);
+
 export default ({ label, value, onChange, values, name, tooltipTitle, buttonProps }: PropsWithChildren<SelectManyProps>) => {
 	const [open, setOpen] = useState(false);
 	const [checked, setChecked] = useState(value);
 	const [search, setSearch] = useState('');
+	const classes = useStyles();
 
 	const handleClose = () => setOpen(!open);
 
@@ -56,7 +76,7 @@ export default ({ label, value, onChange, values, name, tooltipTitle, buttonProp
 			<Dialog fullWidth maxWidth="xs" onClose={handleClose} open={open}>
 				<DialogTitle onClose={handleClose}>{toTitleCase(label)}</DialogTitle>
 				{values.length > 10 && <SearchBar onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} />}
-				<DialogContent dividers>
+				<DialogContent dividers classes={{ root: classes.dialogContent }}>
 					<List>
 						{values
 							.filter(({ name, value }) => {
@@ -73,7 +93,7 @@ export default ({ label, value, onChange, values, name, tooltipTitle, buttonProp
 							))}
 					</List>
 				</DialogContent>
-				<DialogActions>
+				<DialogActions classes={{ root: classes.dialogActions }}>
 					<Button onClick={() => setChecked([])} color="primary">
 						Reset
 					</Button>

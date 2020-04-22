@@ -84,6 +84,7 @@ export interface FlattenedUser {
 	username: string;
 	discriminator: string;
 	avatar: string | null;
+	avatarURL: string | null;
 }
 
 export interface FlattenedMember {
