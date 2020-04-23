@@ -11,12 +11,13 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Section from 'components/Section';
 import SelectBoolean from 'components/Select/SelectBoolean';
 import { FlattenedCommand } from 'meta/typings/ApiData';
 import { SettingsPageProps } from 'meta/typings/GuildSettings';
-import { apiFetch } from 'meta/util';
+import { apiFetch, parseCommandDescription } from 'meta/util';
 import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -57,6 +58,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWithChildren<SettingsPageProps>) => {
+	// const theme = useTheme();
+	const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 	const classes = useStyles();
 	const [expanded, setExpanded] = useState<string | false>(false);
 	const [loading, setLoading] = useState(true);
@@ -117,10 +120,10 @@ export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWi
 									{Object.values(commands)
 										.filter(command => command.category === catName)
 										.map((cmd, idx) => (
-											<Grid item key={idx} xs={4}>
+											<Grid item key={idx} xs={12} md={6} lg={4} xl={3}>
 												<SelectBoolean
 													title={cmd.name}
-													description={cmd.description}
+													description={parseCommandDescription(cmd.description)}
 													currentValue={cmd.isEnabled}
 													onChange={isEnabled => {
 														return setCommands({ ...commands, [cmd.name]: { ...cmd, isEnabled } });
@@ -152,7 +155,7 @@ export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWi
 										});
 									}}
 								>
-									Enable all
+									{matches ? 'Enable' : 'Enable all'}
 								</Button>
 								<Button
 									size="small"
@@ -174,7 +177,7 @@ export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWi
 										});
 									}}
 								>
-									Disable all
+									{matches ? 'Disable' : 'Disable all'}
 								</Button>
 								<Button size="small" variant="contained" classes={{ root: classes.cancelButton }} onClick={fetchCommands}>
 									Reset

@@ -12,7 +12,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import GeneralPage from 'components/GeneralPage';
 import Tooltip from 'components/Tooltip';
 import { FlattenedCommand } from 'meta/typings/ApiData';
-import { apiFetch, cutText } from 'meta/util';
+import { apiFetch, cutText, parseCommandDescription } from 'meta/util';
 import React, { useEffect, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 
@@ -80,8 +80,6 @@ export default () => {
 			setLoading(false);
 		});
 	}, []);
-
-	const parseDescription = (description: string) => description.replace(/<:(\w{2,32}):[0-9]{18}>/gi, '$1');
 
 	const categories = [...new Set(commands.map(command => command.category))];
 
@@ -159,7 +157,7 @@ export default () => {
 															</Grid>
 														</Box>
 														<Typography className={classes.title} color="textSecondary" gutterBottom>
-															{parseDescription(cmd.description)}
+															{parseCommandDescription(cmd.description)}
 														</Typography>
 													</CardContent>
 												</Card>

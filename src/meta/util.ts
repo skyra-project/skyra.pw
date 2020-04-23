@@ -189,3 +189,9 @@ export function cutText(str: string, length: number) {
 	if (cut.length < length - 3) return `${cut}...`;
 	return `${cut.slice(0, length - 3)}...`;
 }
+
+/**
+ * Parses command descriptions, replacing emojis with their proper counterparts
+ * @param description Command description to parse
+ */
+export const parseCommandDescription = (description: string) => description.replace(/<:(\w{2,32}):[0-9]{18}>/gi, '$1');
