@@ -41,7 +41,8 @@ export default [
 		text: [
 			'Skyra has a rich dataset of Pokémon data.',
 			'Query for data on any Pokémon, get details on items, moves and abilities,',
-			'Find how types matchup or learn whether a Pokémon learns a move or not.'
+			'Find how types matchup or learn whether a Pokémon learns a move or not.',
+			'Data is (nearly) always up-to-date by using the amazing GraphQL Pokémon API!'
 		].join(' ')
 	},
 	{

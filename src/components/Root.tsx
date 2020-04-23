@@ -14,27 +14,30 @@ import OAuthCallbackPage from 'pages/oauth/OAuthCallbackPage';
 import StatusPage from 'pages/Status';
 import { Route, Router, Switch } from 'react-router-dom';
 import React from 'reactn';
+import { ServiceWorkerProvider } from 'ServiceWorkerContext';
+import ServiceWorkerUpdater from './ServiceWorkerUpdater';
 
-const Root = () => (
-	<StylesProvider injectFirst>
-		<ThemeProvider theme={theme}>
-			<CssBaseline />
-			<Router history={history}>
-				<Switch>
-					<Route exact path="/" component={HomePage} />
-					<Route exact path="/oauth/callback" component={OAuthCallbackPage} />
-					<Route exact path="/oauth/guild" component={GuildCallbackPage} />
-					<Route exact path="/commands" component={CommandsPage} />
-					<Route exact path="/status" component={StatusPage} />
-					<AuthenticatedRoute path="/guilds/:guildID/:pageName?" component={DashboardRootPage} />
-					<Route exact path="/music/:guildID" component={MusicPage} />
-					<RedirectRoute path="/login" redirectUri={oauthURL.toString()} />
-					<RedirectRoute path="/join" redirectUri={serverURL} />
-					<Route component={NotFoundPage} />
-				</Switch>
-			</Router>
-		</ThemeProvider>
-	</StylesProvider>
+export default () => (
+	<ServiceWorkerProvider>
+		<StylesProvider injectFirst>
+			<ThemeProvider theme={theme}>
+				<CssBaseline />
+				<ServiceWorkerUpdater />
+				<Router history={history}>
+					<Switch>
+						<Route exact path="/" component={HomePage} />
+						<Route exact path="/oauth/callback" component={OAuthCallbackPage} />
+						<Route exact path="/oauth/guild" component={GuildCallbackPage} />
+						<Route exact path="/commands" component={CommandsPage} />
+						<Route exact path="/status" component={StatusPage} />
+						<AuthenticatedRoute path="/guilds/:guildID/:pageName?" component={DashboardRootPage} />
+						<Route exact path="/music/:guildID" component={MusicPage} />
+						<RedirectRoute path="/login" redirectUri={oauthURL.toString()} />
+						<RedirectRoute path="/join" redirectUri={serverURL} />
+						<Route component={NotFoundPage} />
+					</Switch>
+				</Router>
+			</ThemeProvider>
+		</StylesProvider>
+	</ServiceWorkerProvider>
 );
-
-export default Root;
