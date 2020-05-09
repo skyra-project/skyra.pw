@@ -38,15 +38,15 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Left = () => (
 	<Box textAlign="left" display="flex" flexDirection="column">
-		<Link to="https://discordapp.com/invite/6gakFR2" text="Support Server" />
-		<Link to="https://www.patreon.com/kyranet" text="Patreon" />
-		<Link to="https://github.com/kyranet/skyra" text="Github" />
+		<Link to="https://join.skyra.pw" text="Support Server" />
+		<Link to="https://donate.skyra.pw/patreon" text="Patreon" />
+		<Link to="https://github.com/skyra-project/skyra" text="Github" />
 	</Box>
 );
 const Right = () => (
 	<Box textAlign="right" display="flex" flexDirection="column">
 		<Link to={inviteURL.toString()} text="Invite Link" />
-		<Link to="https://www.patreon.com/kyranet" text="Donate" />
+		<Link to="https://donate.skyra.pw/paypal" text="Donate" />
 		<Link to={`https://top.gg/bot/${CLIENT_ID}`} text="Vote" />
 	</Box>
 );
