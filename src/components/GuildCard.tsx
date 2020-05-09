@@ -16,6 +16,8 @@ const useStyles = makeStyles((theme: Theme) =>
 		card: {
 			minWidth: 230,
 			maxWidth: 230,
+			minHeight: 80,
+			maxHeight: 80,
 			background: theme.palette.secondary.main,
 			margin: theme.spacing(2),
 			'&:hover': {
