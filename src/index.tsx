@@ -4,7 +4,7 @@ import { loadState, logOut } from 'meta/util';
 import { render } from 'react-dom';
 import React, { setGlobal } from 'reactn';
 import addReactNDevTools from 'reactn-devtools';
-import 'stylesheets/basestyles.scss';
+import './index.css';
 
 const rootElement = document.getElementById('root');
 
