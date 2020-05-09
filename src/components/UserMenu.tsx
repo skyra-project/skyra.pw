@@ -105,8 +105,8 @@ export default () => {
 				<ExpandMoreIcon />
 			</Button>
 			<Popper className={classes.popper} open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
-				{({ TransitionProps, placement }) => (
-					<Grow {...TransitionProps} style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}>
+				{({ placement }) => (
+					<Grow style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}>
 						<Paper>
 							<ClickAwayListener onClickAway={handleClose}>
 								<MenuList autoFocusItem={open} id="logout-popover" onKeyDown={handleListKeyDown}>
