@@ -13,7 +13,7 @@ import SelectDuration from 'components/Select/SelectDuration';
 import SimpleGrid from 'components/SimpleGrid';
 import Slider from 'components/Slider';
 import { SettingsPageProps } from 'meta/typings/GuildSettings';
-import { bitwiseHas, bitwiseSet } from 'meta/util';
+import { bitwiseHas, bitwiseSet, updateSliderValueObj } from 'meta/util';
 import React, { Fragment, PropsWithChildren, useState } from 'react';
 import { When } from 'react-if';
 
@@ -97,7 +97,7 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 				<Typography>Maximum Threshold</Typography>
 				<Slider
 					value={links.thresholdMaximum}
-					onChange={(_, value) => props.patchGuildData({ selfmod: { links: { thresholdMaximum: value } } })}
+					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('links', 'thresholdMaximum', value))}
 					aria-labelledby="Links selfmod filter maximum threshold slider"
 					valueLabelDisplay="auto"
 					min={0}
@@ -106,7 +106,7 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 				<Typography>Threshold Duration</Typography>
 				<Slider
 					value={links.thresholdDuration}
-					onChange={(_, e) => props.patchGuildData({ selfmod: { links: { thresholdDuration: e } } })}
+					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('links', 'thresholdDuration', value))}
 					aria-labelledby="Links selfmod filter threshold duration slider"
 					valueLabelDisplay="auto"
 					min={0}

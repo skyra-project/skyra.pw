@@ -201,6 +201,21 @@ interface Selfmod {
 	ignoreChannels: string[];
 }
 
+export type SelfmodSliderSettings = Omit<
+	Selfmod,
+	| 'attachment'
+	| 'attachmentMaximum'
+	| 'attachmentDuration'
+	| 'attachmentAction'
+	| 'attachmentPunishmentDuration'
+	| 'raid'
+	| 'selfmod.raid'
+	| 'raidthreshold'
+	| 'ignoreChannels'
+>;
+
+export type SelfmodSliderProp = 'thresholdMaximum' | 'thresholdDuration' | 'minimum' | 'maximum';
+
 interface NoMentionSpam {
 	enabled: boolean;
 	alerts: boolean;

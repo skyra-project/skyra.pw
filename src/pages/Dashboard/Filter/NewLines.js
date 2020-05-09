@@ -6,7 +6,7 @@ import SelectBoolean from 'components/Select/SelectBoolean';
 import SelectDuration from 'components/Select/SelectDuration';
 import SimpleGrid from 'components/SimpleGrid';
 import Slider from 'components/Slider';
-import { bitwiseHas, bitwiseSet } from 'meta/util';
+import { bitwiseHas, bitwiseSet, updateSliderValueObj } from 'meta/util';
 import React, { Fragment } from 'react';
 
 const NewLinesFilterPage = props => {
@@ -72,7 +72,7 @@ const NewLinesFilterPage = props => {
 				<Typography>Maximum Threshold</Typography>
 				<Slider
 					value={newlines.thresholdMaximum}
-					onChange={(_, e) => props.patchGuildData({ selfmod: { newlines: { thresholdMaximum: e } } })}
+					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('newlines', 'thresholdMaximum', value))}
 					aria-labelledby="New lines selfmod filter maximum duration slider"
 					valueLabelDisplay="auto"
 					min={0}
@@ -81,7 +81,7 @@ const NewLinesFilterPage = props => {
 				<Typography>Threshold Duration</Typography>
 				<Slider
 					value={newlines.thresholdDuration}
-					onChange={(_, e) => props.patchGuildData({ selfmod: { newlines: { thresholdDuration: e } } })}
+					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('newlines', 'thresholdDuration', value))}
 					aria-labelledby="New lines selfmod filter threshold duration slider"
 					valueLabelDisplay="auto"
 					min={0}

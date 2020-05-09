@@ -1,6 +1,7 @@
 import { BASE_API_URL, history, Time } from 'meta/constants';
 import { getGlobal, setGlobal } from 'reactn';
 import { FlattenedGuild, FlattenedUser } from './typings/ApiData';
+import { SelfmodSliderProp, SelfmodSliderSettings } from './typings/GuildSettings';
 
 export function sleep(ms: number) {
 	return new Promise(resolve => setTimeout(resolve, ms));
@@ -195,3 +196,11 @@ export function cutText(str: string, length: number) {
  * @param description Command description to parse
  */
 export const parseCommandDescription = (description: string) => description.replace(/<:(\w{2,32}):[0-9]{18}>/gi, '$1');
+
+export const updateSliderValueObj = (category: keyof SelfmodSliderSettings, prop: SelfmodSliderProp, value: number | number[]) => ({
+	selfmod: {
+		[category]: {
+			[prop]: Array.isArray(value) ? value[0] : value
+		}
+	}
+});

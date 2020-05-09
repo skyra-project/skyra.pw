@@ -6,7 +6,7 @@ import SelectBoolean from 'components/Select/SelectBoolean';
 import SelectDuration from 'components/Select/SelectDuration';
 import SimpleGrid from 'components/SimpleGrid';
 import Slider from 'components/Slider';
-import { bitwiseHas, bitwiseSet } from 'meta/util';
+import { bitwiseHas, bitwiseSet, updateSliderValueObj } from 'meta/util';
 import React, { Fragment } from 'react';
 
 const ReactionsFilterPage = props => {
@@ -72,7 +72,7 @@ const ReactionsFilterPage = props => {
 				<Typography>Maximum Threshold</Typography>
 				<Slider
 					value={reactions.thresholdMaximum}
-					onChange={(_, e) => props.patchGuildData({ selfmod: { reactions: { thresholdMaximum: e } } })}
+					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('reactions', 'thresholdMaximum', value))}
 					aria-labelledby="Reactions selfmod filter maximum threshold slider"
 					valueLabelDisplay="auto"
 					min={0}
@@ -81,7 +81,7 @@ const ReactionsFilterPage = props => {
 				<Typography>Threshold Duration</Typography>
 				<Slider
 					value={reactions.thresholdDuration}
-					onChange={(_, e) => props.patchGuildData({ selfmod: { reactions: { thresholdDuration: e } } })}
+					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('reactions', 'thresholdDuration', value))}
 					aria-labelledby="Reactions selfmod filter threshold duration slider"
 					valueLabelDisplay="auto"
 					min={0}

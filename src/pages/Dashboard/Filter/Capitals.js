@@ -1,14 +1,12 @@
-import React, { Fragment } from 'react';
 import { MenuItem, Typography } from '@material-ui/core';
-
+import Section from 'components/Section';
 import Select from 'components/Select/Select';
 import SelectBoolean from 'components/Select/SelectBoolean';
 import SelectDuration from 'components/Select/SelectDuration';
-
-import Slider from 'components/Slider';
 import SimpleGrid from 'components/SimpleGrid';
-import Section from 'components/Section';
-import { bitwiseSet, bitwiseHas } from 'meta/util';
+import Slider from 'components/Slider';
+import { bitwiseHas, bitwiseSet, updateSliderValueObj } from 'meta/util';
+import React, { Fragment } from 'react';
 
 const CapitalsFilterPage = props => {
 	const { capitals } = props.guildSettings.selfmod;
@@ -73,7 +71,7 @@ const CapitalsFilterPage = props => {
 				<Typography>Maximum Threshold</Typography>
 				<Slider
 					value={capitals.thresholdMaximum}
-					onChange={(_, e) => props.patchGuildData({ selfmod: { capitals: { thresholdMaximum: e } } })}
+					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('capitals', 'thresholdMaximum', value))}
 					aria-labelledby="Capitals selfmod filter maximum threshold slider"
 					valueLabelDisplay="auto"
 					min={0}
@@ -82,7 +80,7 @@ const CapitalsFilterPage = props => {
 				<Typography>Threshold Duration</Typography>
 				<Slider
 					value={capitals.thresholdDuration}
-					onChange={(_, e) => props.patchGuildData({ selfmod: { capitals: { thresholdDuration: e } } })}
+					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('capitals', 'thresholdDuration', value))}
 					aria-labelledby="Capitals selfmod filter threshold duration slider"
 					valueLabelDisplay="auto"
 					min={0}
@@ -93,7 +91,7 @@ const CapitalsFilterPage = props => {
 				<Typography>Minimum Characters</Typography>
 				<Slider
 					value={capitals.minimum}
-					onChange={(_, e) => props.patchGuildData({ selfmod: { capitals: { minimum: e } } })}
+					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('capitals', 'minimum', value))}
 					aria-labelledby="Capitals selfmod filter minimum characters slider"
 					valueLabelDisplay="auto"
 					min={5}
@@ -102,7 +100,7 @@ const CapitalsFilterPage = props => {
 				<Typography>Maximum Uppercase Characters (%)</Typography>
 				<Slider
 					value={capitals.maximum}
-					onChange={(_, e) => props.patchGuildData({ selfmod: { capitals: { maximum: e } } })}
+					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('capitals', 'maximum', value))}
 					aria-labelledby="Capitals selfmod filter maximum uppercase characters slider"
 					valueLabelDisplay="auto"
 					min={10}

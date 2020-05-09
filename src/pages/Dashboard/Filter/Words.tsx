@@ -13,7 +13,7 @@ import SelectDuration from 'components/Select/SelectDuration';
 import SimpleGrid from 'components/SimpleGrid';
 import Slider from 'components/Slider';
 import { SettingsPageProps } from 'meta/typings/GuildSettings';
-import { bitwiseHas, bitwiseSet, removeNonAlphaNumeric } from 'meta/util';
+import { bitwiseHas, bitwiseSet, removeNonAlphaNumeric, updateSliderValueObj } from 'meta/util';
 import React, { Fragment, PropsWithChildren, useState } from 'react';
 import { When } from 'react-if';
 
@@ -97,7 +97,7 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 				<Typography>Maximum Threshold</Typography>
 				<Slider
 					value={filter.thresholdMaximum}
-					onChange={(_, value) => props.patchGuildData({ selfmod: { filter: { thresholdMaximum: value } } })}
+					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('filter', 'thresholdMaximum', value))}
 					aria-labelledby="Words selfmod filter maximum threshold slider"
 					valueLabelDisplay="auto"
 					min={0}
@@ -106,7 +106,7 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 				<Typography>Threshold Duration</Typography>
 				<Slider
 					value={filter.thresholdDuration}
-					onChange={(_, e) => props.patchGuildData({ selfmod: { filter: { thresholdDuration: e } } })}
+					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('filter', 'thresholdDuration', value))}
 					aria-labelledby="Word selfmod filter threshold duration slider"
 					valueLabelDisplay="auto"
 					min={0}
