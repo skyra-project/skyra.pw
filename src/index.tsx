@@ -38,7 +38,7 @@ interface HotNodeModule extends NodeModule {
 }
 
 interface UserState extends FlattenedUser {
-	guilds: FlattenedGuild[];
+	guilds?: FlattenedGuild[];
 }
 
 declare module 'reactn/default' {

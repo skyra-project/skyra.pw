@@ -2,7 +2,7 @@ import { Box, Container, createStyles, Divider, Hidden, makeStyles, Theme, Typog
 import features from 'assets/features';
 import GeneralPage from 'components/GeneralPage';
 import GuildCard from 'components/GuildCard';
-import React, { useGlobal, useMemo } from 'reactn';
+import React, { useGlobal } from 'reactn';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -68,36 +68,28 @@ export default () => {
 	const [authenticated] = useGlobal('authenticated');
 	const [user] = useGlobal('user');
 
-	const skyraGuildList = useMemo(
-		() =>
-			(user.guilds || [])
-				// Filter on mangeable servers
-				.filter(g => g.manageable)
-				.sort((gA, gB) => (gA.manageable === gB.manageable ? 0 : gA.manageable ? -1 : 1))
-				// Sort by whether Skyra is in the serve ror not
-				.sort((gA, gB) => (gA.skyraIsIn === gB.skyraIsIn ? 0 : gA.skyraIsIn ? -1 : 1))
-				// Sort by name of the server
-				.sort((gA, gB) => gA.name.localeCompare(gB.name, 'en', { sensitivity: 'base' }))
-				// Map the servers to GuildCards
-				.map((g, index) => <GuildCard guild={g} key={index} />),
-		[user.guilds]
-	);
-
-	const skyraFeatures = useMemo(
-		() => features.map(({ name, image, text }) => <Section name={name} image={image} text={text} key={name} />),
-		[]
-	);
-
 	return (
 		<GeneralPage>
 			{authenticated && (
 				<Container>
 					<Box display="flex" flexWrap="wrap" flexDirection="row" justifyContent="center" alignItems="center">
-						{skyraGuildList}
+						{(user?.guilds ?? [])
+							// Filter on mangeable servers
+							.filter(g => g.manageable)
+							// Sort by whether Skyra is in the serve ror not
+							.sort((gA, gB) => (gA.skyraIsIn === gB.skyraIsIn ? 0 : gA.skyraIsIn ? -1 : 1))
+							// Sort by name of the server
+							.sort((gA, gB) => gA.name.localeCompare(gB.name, 'en', { sensitivity: 'base' }))
+							// Map the servers to GuildCards
+							.map((g, index) => (
+								<GuildCard guild={g} key={index} />
+							))}
 					</Box>
 				</Container>
 			)}
-			{skyraFeatures}
+			{features.map(({ name, image, text }) => (
+				<Section name={name} image={image} text={text} key={name} />
+			))}
 		</GeneralPage>
 	);
 };
