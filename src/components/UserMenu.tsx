@@ -2,7 +2,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grid';
+import Grow from '@material-ui/core/Grow';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
@@ -15,17 +15,13 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SyncIcon from '@material-ui/icons/Sync';
 import { displayAvatarURL, logOut, syncUser } from 'meta/util';
 import React, { useEffect, useRef, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
 import { useGlobal } from 'reactn';
+import Tooltip from './Tooltip';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		popper: {
 			marginTop: theme.spacing(1)
-		},
-		button: {
-			borderBottomLeftRadius: 0,
-			borderTopLeftRadius: 0
 		},
 		transparantButton: {
 			background: 'transparent',
@@ -54,8 +50,6 @@ const useStyles = makeStyles((theme: Theme) =>
 export default () => {
 	const [user] = useGlobal('user');
 	const [open, setOpen] = useState(false);
-	const routeParams = useParams();
-	const { pathname } = useLocation();
 
 	const classes = useStyles();
 	const anchorRef = useRef<HTMLButtonElement>(null);
@@ -92,21 +86,23 @@ export default () => {
 
 	return (
 		<Box component="div">
-			<Button
-				ref={anchorRef}
-				aria-controls={open ? 'logout-popover' : undefined}
-				aria-haspopup="true"
-				color={Reflect.has(routeParams, 'guildID') && !pathname.includes('music') ? 'secondary' : 'primary'}
-				variant="contained"
-				onClick={handleToggle}
-				classes={{ root: classes.button, containedSecondary: classes.transparantButton }}
-			>
-				<Avatar style={{ marginRight: 5, height: 40, width: 40 }} src={displayAvatarURL(user, { size: 128 })} alt="" />
-				<ExpandMoreIcon />
-			</Button>
+			<Tooltip title="Click to open the user menu" placement="bottom">
+				<Button
+					ref={anchorRef}
+					aria-controls={open ? 'logout-popover' : undefined}
+					aria-haspopup="true"
+					color="primary"
+					variant="contained"
+					onClick={handleToggle}
+					classes={{ root: classes.transparantButton }}
+				>
+					<Avatar style={{ marginRight: 5, height: 40, width: 40 }} src={displayAvatarURL(user, { size: 128 })} alt="" />
+					<ExpandMoreIcon />
+				</Button>
+			</Tooltip>
 			<Popper className={classes.popper} open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
-				{({ placement }) => (
-					<Grow style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}>
+				{({ TransitionProps, placement }) => (
+					<Grow {...TransitionProps} style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}>
 						<Paper>
 							<ClickAwayListener onClickAway={handleClose}>
 								<MenuList autoFocusItem={open} id="logout-popover" onKeyDown={handleListKeyDown}>

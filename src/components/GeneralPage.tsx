@@ -1,19 +1,20 @@
-import {
-	Box,
-	BoxProps,
-	Button,
-	ButtonGroup,
-	Container,
-	createStyles,
-	Grid,
-	Hidden,
-	LinearProgress,
-	makeStyles,
-	Theme,
-	Typography
-} from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import AppBar from '@material-ui/core/AppBar';
+import Box, { BoxProps } from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
+import Hidden from '@material-ui/core/Hidden';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import Zoom from '@material-ui/core/Zoom';
+import CommandsIcon from '@material-ui/icons/Extension';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import LoginIcon from '@material-ui/icons/VpnKey';
 import SkyraLogo from 'assets/skyraLogo';
 import Footer from 'components/Footer';
+import MobileNavMenu from 'components/MobileNavMenu';
 import UserMenu from 'components/UserMenu';
 import { oauthURL } from 'meta/constants';
 import { navigate, syncUser } from 'meta/util';
@@ -35,11 +36,6 @@ const useStyles = makeStyles((theme: Theme) =>
 			justifyContent: 'space-between',
 			height: '100vh'
 		},
-		grid: {
-			padding: theme.spacing(1),
-			marginTop: theme.spacing(3),
-			marginBottom: theme.spacing(3)
-		},
 		svg: {
 			minWidth: 120,
 			display: 'flex',
@@ -47,36 +43,55 @@ const useStyles = makeStyles((theme: Theme) =>
 			alignContent: 'center',
 			alignItems: 'center'
 		},
-		loginButton: {
-			borderBottomLeftRadius: 0,
-			borderTopLeftRadius: 0
-		},
 		skyraButton: {
 			textAlign: 'left',
 			textTransform: 'unset'
 		},
-		skyraGrid: {
-			[theme.breakpoints.down('xs')]: {
-				textAlign: 'center',
-				paddingBottom: theme.spacing(2)
-			}
+		scrollToTopButton: {
+			position: 'fixed',
+			bottom: theme.spacing(2),
+			right: theme.spacing(2),
+			zIndex: theme.zIndex.drawer + 2
 		},
-		buttonGroupGrid: {
-			[theme.breakpoints.up('sm')]: {
-				textAlign: 'right'
-			},
-			[theme.breakpoints.down('xs')]: {
-				textAlign: 'center'
-			}
+		menuButton: {
+			marginRight: theme.spacing(2)
 		},
-		buttonText: {
-			fontWeight: 500,
-			lineHeight: 1.75
+		transparantButton: {
+			background: 'transparent',
+			boxShadow: 'none',
+			'&:hover': {
+				background: theme.palette.primary.dark,
+				boxShadow: theme.shadows[1]
+			}
 		}
 	})
 );
 
-export default ({ children, loading = false, containerProps = {} }: PropsWithChildren<GeneralPageProps>) => {
+const ScrollToTopButton = ({ children }: PropsWithChildren<unknown>) => {
+	const classes = useStyles();
+	const trigger = useScrollTrigger({
+		disableHysteresis: true,
+		threshold: 100
+	});
+
+	const handleClick = () => {
+		window.scrollTo({
+			top: 0,
+			left: 0,
+			behavior: 'smooth'
+		});
+	};
+
+	return (
+		<Zoom in={trigger}>
+			<Box onClick={handleClick} role="presentation" className={classes.scrollToTopButton}>
+				{children}
+			</Box>
+		</Zoom>
+	);
+};
+
+export default ({ children, loading = false, containerProps = {}, ...props }: PropsWithChildren<GeneralPageProps>) => {
 	const classes = useStyles();
 	const [authenticated] = useGlobal('authenticated');
 
@@ -85,67 +100,92 @@ export default ({ children, loading = false, containerProps = {} }: PropsWithChi
 	}, []);
 
 	return (
-		<Box component="div" className={classes.container} {...containerProps}>
-			<Container>
-				<Grid
-					classes={{ root: classes.grid }}
-					container
-					direction="row"
-					justify="space-between"
-					alignContent="center"
-					alignItems="center"
-				>
-					<Grid item xs={12} sm={6} md={6} lg={6} classes={{ root: classes.skyraGrid }}>
-						<Tooltip title="Click to go home" placement="bottom">
-							<Button onClick={navigate('/')} classes={{ root: classes.skyraButton }}>
-								<Box className={classes.svg}>
-									<SkyraLogo />
-									<Box display="flex" flexDirection="column" ml={3}>
-										<Typography variant="h5">Skyra</Typography>
-										<Hidden smDown>
-											<Typography variant="caption">The most advanced moderation bot.</Typography>
-										</Hidden>
-									</Box>
-								</Box>
-							</Button>
-						</Tooltip>
-					</Grid>
+		<Box component="section" className={classes.container}>
+			<Box component="nav">
+				<AppBar position="fixed">
+					<Toolbar>
+						<Hidden mdUp>
+							<MobileNavMenu />
+						</Hidden>
 
-					<Grid item xs={12} sm={6} md={6} lg={6} classes={{ root: classes.buttonGroupGrid }}>
-						<ButtonGroup size="large" color="primary" variant="contained">
-							<Button onClick={navigate('/commands')}>
-								<Typography classes={{ root: classes.buttonText }} variant="body2" color="textPrimary">
-									Commands
-								</Typography>
-							</Button>
+						<Box flexGrow={1}>
+							<Tooltip title="Click to go home" placement="bottom">
+								<Button onClick={navigate('/')} classes={{ root: classes.skyraButton }}>
+									<Box className={classes.svg}>
+										<SkyraLogo />
+										<Box display="flex" flexDirection="column" ml={3}>
+											<Typography variant="h5">Skyra</Typography>
+											<Hidden smDown>
+												<Typography variant="caption">The most advanced moderation bot.</Typography>
+											</Hidden>
+										</Box>
+									</Box>
+								</Button>
+							</Tooltip>
+						</Box>
+
+						<Hidden smDown>
+							<Tooltip title="Click to view Skyra's commands" placement="bottom">
+								<Button
+									color="primary"
+									variant="contained"
+									classes={{ root: classes.transparantButton }}
+									onClick={navigate('/commands')}
+									startIcon={<CommandsIcon />}
+								>
+									<Typography variant="body2" color="textPrimary">
+										Commands
+									</Typography>
+								</Button>
+							</Tooltip>
 
 							<When condition={authenticated}>
 								<UserMenu />
 							</When>
 
 							<When condition={!authenticated && !loading}>
-								<Button
-									variant="contained"
-									color="primary"
-									onClick={navigate(oauthURL.toString())}
-									classes={{ root: classes.loginButton }}
-								>
-									<Typography classes={{ root: classes.buttonText }} variant="body2" color="textPrimary">
-										Log In
-									</Typography>
-								</Button>
+								<Tooltip title="Click to login and manage your servers" placement="bottom">
+									<Button
+										color="primary"
+										variant="contained"
+										classes={{ root: classes.transparantButton }}
+										onClick={navigate(oauthURL.toString())}
+										startIcon={<LoginIcon />}
+									>
+										<Typography variant="body2" color="textPrimary">
+											Log In
+										</Typography>
+									</Button>
+								</Tooltip>
 							</When>
-						</ButtonGroup>
-					</Grid>
-				</Grid>
-			</Container>
-			<If condition={loading}>
-				<Then>
-					<LinearProgress variant="query" />
-				</Then>
-				<Else>{children}</Else>
-			</If>
+						</Hidden>
+					</Toolbar>
+				</AppBar>
+
+				{/* These toolbars are to ensure there is some offset for the content.
+			For more information see https://material-ui.com/components/app-bar/#fixed-placement */}
+				<Toolbar />
+				<Toolbar />
+			</Box>
+
+			<Box component="main" role="content">
+				<If condition={loading}>
+					<Then>
+						<LinearProgress variant="query" />
+					</Then>
+					<Else>{children}</Else>
+				</If>
+			</Box>
+
 			<Footer />
+
+			<Box component="span" role="scroll-to-top">
+				<ScrollToTopButton {...props}>
+					<Fab color="secondary" size="small" aria-label="scroll back to top">
+						<KeyboardArrowUpIcon />
+					</Fab>
+				</ScrollToTopButton>
+			</Box>
 		</Box>
 	);
 };
