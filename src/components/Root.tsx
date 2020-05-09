@@ -6,7 +6,7 @@ import { history, oauthURL, serverURL } from 'meta/constants';
 import theme from 'meta/theme';
 import CommandsPage from 'pages/Commands';
 import DashboardRootPage from 'pages/Dashboard/Root';
-import HomePage from 'pages/Index';
+import HomePage from 'pages/HomePage';
 import MusicPage from 'pages/Music/Music';
 import NotFoundPage from 'pages/NotFound';
 import GuildCallbackPage from 'pages/oauth/GuildCallbackPage';

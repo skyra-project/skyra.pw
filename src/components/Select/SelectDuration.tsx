@@ -1,10 +1,9 @@
-import React, { useState, FC, ChangeEvent } from 'react';
-import TextField from '@material-ui/core/TextField';
+import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
-
+import TextField from '@material-ui/core/TextField';
+import React, { ChangeEvent, FC, useState } from 'react';
 import Select from './Select';
-import scss from 'stylesheets/modules/SelectDuration.module.scss';
 
 const unitMap: Record<string, number> = {
 	seconds: 1000,
@@ -31,7 +30,46 @@ interface SelectDurationProps {
 	onChange: (value: number) => void;
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		box: {
+			marginBottom: theme.spacing(3)
+		},
+		selectBox: {
+			width: theme.spacing(20)
+		},
+		selectBoxMargin: {
+			[theme.breakpoints.down('sm')]: {
+				marginTop: theme.spacing(2)
+			}
+		},
+		textField: {
+			paddingLeft: theme.spacing(2),
+			width: theme.spacing(28),
+			[theme.breakpoints.down('sm')]: {
+				marginTop: theme.spacing(2),
+				width: theme.spacing(10),
+				paddingLeft: 'unset'
+			}
+		},
+		textFieldHelperText: {
+			position: 'absolute',
+			bottom: theme.spacing(-3),
+			left: theme.spacing(-1.5),
+			width: theme.spacing(62.5),
+			paddingLeft: theme.spacing(2)
+		},
+		label: {
+			paddingLeft: theme.spacing(2),
+			[theme.breakpoints.down('sm')]: {
+				paddingLeft: 'unset'
+			}
+		}
+	})
+);
+
 const SelectDuration: FC<SelectDurationProps> = ({ value, min, max, onChange }) => {
+	const classes = useStyles();
 	const [inputDuration, inputUnit] = determineUnit(value)!;
 	const [unit, setUnit] = useState(inputUnit);
 	const [duration, setDuration] = useState(inputDuration);
@@ -64,9 +102,9 @@ const SelectDuration: FC<SelectDurationProps> = ({ value, min, max, onChange }) 
 	}
 
 	return (
-		<Box className={scss.box}>
+		<Box className={classes.box}>
 			<TextField
-				className={scss.textField}
+				className={classes.textField}
 				helperText={error}
 				error={Boolean(error)}
 				value={isNaN(duration) ? '' : duration}
@@ -75,19 +113,19 @@ const SelectDuration: FC<SelectDurationProps> = ({ value, min, max, onChange }) 
 				onChange={onChangeDuration}
 				InputLabelProps={{
 					classes: {
-						root: scss.label
+						root: classes.label
 					}
 				}}
 				FormHelperTextProps={{
 					classes: {
-						error: scss.textFieldHelperText
+						error: classes.textFieldHelperText
 					}
 				}}
 			/>
 			<Select
-				customClasses={scss.selectBox}
-				customFormControlClasses={scss.selectBoxMargin}
-				title="Duration unit"
+				customClasses={classes.selectBox}
+				customFormControlClasses={classes.selectBoxMargin}
+				title={error ? '' : 'Duration unit'}
 				error={Boolean(error)}
 				value={unit}
 				onChange={onChangeUnit}
