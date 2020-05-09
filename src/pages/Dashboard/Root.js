@@ -2,6 +2,7 @@ import {
 	AppBar,
 	Box,
 	Button,
+	ButtonGroup,
 	Collapse,
 	Divider,
 	Drawer,
@@ -133,10 +134,7 @@ const useStyles = makeStyles(theme =>
 		fabContainer: {
 			position: 'fixed',
 			bottom: 30,
-			right: 30,
-			'& button': {
-				marginLeft: 30
-			}
+			right: 30
 		},
 		saveIcon: {
 			marginRight: theme.spacing(2)
@@ -643,22 +641,22 @@ const RootComponent = props => {
 					</Fade>
 				) : null}
 				<Slide direction="up" in={Object.keys(guildSettingsChanges).length > 0} mountOnEnter unmountOnExit>
-					<div className={classes.fabContainer}>
-						<Button
-							disabled={isUpdating}
-							onClick={() => setState({ ...state, guildSettingsChanges: {} })}
-							color="secondary"
-							variant="contained"
-							size="small"
-						>
-							<DeleteIcon className={classes.saveIcon} />
-							Reset
-						</Button>
-						<Button disabled={isUpdating} onClick={submitChanges} color="primary" variant="contained">
-							<SaveIconIcon className={classes.saveIcon} />
-							Save Changes
-						</Button>
-					</div>
+					<Box className={classes.fabContainer}>
+						<ButtonGroup size="small" variant="contained" color="primary">
+							<Button
+								disabled={isUpdating}
+								onClick={() => setState({ ...state, guildSettingsChanges: {} })}
+								color="secondary"
+							>
+								<DeleteIcon className={classes.saveIcon} />
+								Reset
+							</Button>
+							<Button disabled={isUpdating} onClick={submitChanges} color="primary">
+								<SaveIconIcon className={classes.saveIcon} />
+								Save Changes
+							</Button>
+						</ButtonGroup>
+					</Box>
 				</Slide>
 			</main>
 		</div>
