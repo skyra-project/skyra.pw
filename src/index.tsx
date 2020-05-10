@@ -21,6 +21,13 @@ if (discordUser && discordUser.avatarURL) {
 	});
 }
 
+window.$discordMessage = {
+	avatars: {
+		default: 'blue',
+		skyra: 'https://github.com/NM-EEA-Y.png'
+	}
+};
+
 render(<Root />, rootElement);
 
 if (process.env.NODE_ENV === 'development') {
@@ -46,5 +53,21 @@ declare module 'reactn/default' {
 		authenticated: boolean;
 		token: string;
 		user: UserState;
+	}
+}
+
+declare global {
+	interface DiscordMessageProfile {
+		author: string;
+		avatar: string;
+		bot: boolean;
+		roleColor: string;
+	}
+
+	interface Window {
+		$discordMessage: Partial<{
+			avatars: Record<string, string>;
+			profiles: Record<string, DiscordMessageProfile>;
+		}>;
 	}
 }

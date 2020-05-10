@@ -1,4 +1,5 @@
 import { Box, Container, createStyles, Divider, Hidden, makeStyles, Theme, Typography } from '@material-ui/core';
+import { DiscordEmbed, DiscordMessage, DiscordMessages } from '@skyra/discord-message-components';
 import features from 'assets/features';
 import GeneralPage from 'components/GeneralPage';
 import GuildCard from 'components/GuildCard';
@@ -87,6 +88,27 @@ export default () => {
 					</Box>
 				</Container>
 			)}
+			<DiscordMessages data-qa="test" style={{ width: 400, borderRadius: 4 }}>
+				<DiscordMessage roleColor="#5c71bd" author="Skyra" avatar="skyra" bot>
+					<DiscordEmbed
+						slot="embeds"
+						color="#FFD54F"
+						authorImage="https://cdn.discordapp.com/avatars/157797566833098752/a_58c11318d45efbde40e37dd1ac7408b0.gif?size=2048"
+						authorName="Magnaboy#7556"
+						footerImage="https://github.com/NM-EEA-Y.png"
+						timestamp={new Date()}
+					>
+						<strong>> Type</strong>: Temporary Mute
+						<br />
+						<strong>> User</strong>: enkiel#8897 (489096182069461003)
+						<br />
+						<strong>> Reason</strong>: Spamming.
+						<br />
+						<strong>> Expires In</strong>: 10 minutes
+						<span slot="footer">Case 11</span>
+					</DiscordEmbed>
+				</DiscordMessage>
+			</DiscordMessages>
 			{features.map(({ name, image, text }) => (
 				<Section name={name} image={image} text={text} key={name} />
 			))}
