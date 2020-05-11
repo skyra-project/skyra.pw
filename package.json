@@ -7,19 +7,19 @@
 		"@material-ui/core": "^4.9.13",
 		"@material-ui/icons": "^4.9.1",
 		"@material-ui/lab": "^4.0.0-alpha.52",
-		"@skyra/discord-message-components": "^1.0.1",
+		"@skyra/discord-components-core": "^1.0.1",
+		"@skyra/discord-components-react": "^1.0.1",
 		"clsx": "^1.1.0",
 		"deepmerge": "^4.2.2",
 		"history": "^4.10.1",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
+		"react-emoji-render": "^1.2.3",
 		"react-flip-move": "^3.0.4",
 		"react-if": "^3.4.3",
 		"react-player": "^2.0.1",
 		"react-router-dom": "^5.1.2",
-		"reactn": "^2.2.7",
-		"redux": "^4.0.5",
-		"wc-discord-message": "^1.0.1"
+		"reactn": "^2.2.7"
 	},
 	"scripts": {
 		"start": "react-scripts start",
@@ -56,6 +56,7 @@
 		"prettier": "^2.0.5",
 		"react-scripts": "^3.4.1",
 		"reactn-devtools": "^1.1.0",
+		"redux": "^4.0.5",
 		"typescript": "^3.8.3",
 		"utility-types": "^3.10.0"
 	},

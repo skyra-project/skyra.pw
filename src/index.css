@@ -1,3 +1,4 @@
+/* Overwrite Chromium browser scrollbar */
 *::-webkit-scrollbar {
 	width: 0.45em;
 }
@@ -24,4 +25,60 @@
 *::-webkit-scrollbar-thumb:vertical:active {
 	border-radius: 100px;
 	-webkit-border-radius: 100px;
+}
+
+/* Whitney font face to match Discord */
+@font-face {
+	font-family: Whitney;
+	font-style: light;
+	font-weight: 300;
+	src: url(https://discordapp.com/assets/6c6374bad0b0b6d204d8d6dc4a18d820.woff) format('woff');
+}
+@font-face {
+	font-family: Whitney;
+	font-style: normal;
+	font-weight: 500;
+	src: url(https://discordapp.com/assets/e8acd7d9bf6207f99350ca9f9e23b168.woff) format('woff');
+}
+@font-face {
+	font-family: Whitney;
+	font-style: medium;
+	font-weight: 600;
+	src: url(https://discordapp.com/assets/3bdef1251a424500c1b3a78dea9b7e57.woff) format('woff');
+}
+@font-face {
+	font-family: WhitneyMedium;
+	font-style: medium;
+	font-weight: 600;
+	src: url(https://discordapp.com/assets/be0060dafb7a0e31d2a1ca17c0708636.woff) format('woff');
+}
+@font-face {
+	font-family: Whitney;
+	font-style: bold;
+	font-weight: 700;
+	src: url(https://discordapp.com/assets/8e12fb4f14d9c4592eb8ec9f22337b04.woff) format('woff');
+}
+
+/* Setting default CSS for Discord messages */
+.discord-message,
+.discord-messages {
+	font-family: Whitney, Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.discord-messages {
+	border-radius: 4px;
+}
+
+/* Discord's CSS for rendering inline code */
+code {
+	padding: 0.2em;
+	margin: -0.2em 0;
+	border-radius: 3px;
+	font-size: 85%;
+	font-family: Consolas, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
+		Liberation Mono, Nimbus Mono L, Monaco, Courier New, Courier, monospace;
+	text-indent: 0;
+	border: none;
+	white-space: pre-wrap;
+	background-color: #202225;
 }

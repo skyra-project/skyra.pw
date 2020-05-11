@@ -24,7 +24,27 @@ if (discordUser && discordUser.avatarURL) {
 window.$discordMessage = {
 	avatars: {
 		default: 'blue',
-		skyra: 'https://github.com/NM-EEA-Y.png'
+		favna: '/avatars/favna.png',
+		skyra: '/avatars/skyra.png'
+	},
+	profiles: {
+		skyra: {
+			author: 'Skyra',
+			avatar: '/avatars/skyra.png',
+			bot: true,
+			verified: true,
+			roleColor: '#1E88E5'
+		},
+		favna: {
+			author: 'Favna',
+			avatar: '/avatars/favna.png',
+			roleColor: '#FF0000'
+		},
+		kyra: {
+			author: 'Kyra',
+			avatar: '/avatars/kyra.png',
+			roleColor: '#FF9D01'
+		}
 	}
 };
 
@@ -57,17 +77,30 @@ declare module 'reactn/default' {
 }
 
 declare global {
-	interface DiscordMessageProfile {
+	type DiscordMessageAvatars = Record<string, string> &
+		Partial<{
+			blue: string;
+			gray: string;
+			green: string;
+			orange: string;
+			red: string;
+		}>;
+
+	type DiscordMessageProfile = Partial<{
 		author: string;
 		avatar: string;
 		bot: boolean;
+		verified: boolean;
 		roleColor: string;
-	}
+	}>;
 
 	interface Window {
 		$discordMessage: Partial<{
-			avatars: Record<string, string>;
+			avatars: DiscordMessageAvatars;
 			profiles: Record<string, DiscordMessageProfile>;
+			defaultTheme: string;
+			defaultMode: string;
+			defaultBackground: 'discord' | 'none';
 		}>;
 	}
 }

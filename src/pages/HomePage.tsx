@@ -1,5 +1,4 @@
 import { Box, Container, createStyles, Divider, Hidden, makeStyles, Theme, Typography } from '@material-ui/core';
-import { DiscordEmbed, DiscordMessage, DiscordMessages } from '@skyra/discord-message-components';
 import features from 'assets/features';
 import GeneralPage from 'components/GeneralPage';
 import GuildCard from 'components/GuildCard';
@@ -20,25 +19,15 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'flex',
 			flexDirection: 'column',
 			width: '47%',
-			[theme.breakpoints.down('sm')]: {
-				width: '100%'
-			}
-		},
-		previewImage: {
-			borderRadius: 4,
-			maxWidth: 400,
-			maxHeight: 400,
-			[theme.breakpoints.down('sm')]: {
-				marginTop: theme.spacing(2.5),
+			[theme.breakpoints.down('md')]: {
 				width: '100%'
 			}
 		}
 	})
 );
 
-const Section = ({ name, image, text }: typeof features extends Array<infer U> ? U : never) => {
+const Section = ({ name, previewContent, text }: typeof features extends Array<infer U> ? U : never) => {
 	const classes = useStyles();
-
 	return (
 		<Box
 			p={5}
@@ -58,9 +47,7 @@ const Section = ({ name, image, text }: typeof features extends Array<infer U> ?
 				<Divider classes={{ root: classes.divider }} />
 				<Typography>{text}</Typography>
 			</div>
-			<Hidden smDown>
-				<img alt={name} src={image.src} width={image.width} height={image.height} className={classes.previewImage} loading="lazy" />
-			</Hidden>
+			<Hidden mdDown>{previewContent}</Hidden>
 		</Box>
 	);
 };
@@ -88,29 +75,8 @@ export default () => {
 					</Box>
 				</Container>
 			)}
-			<DiscordMessages data-qa="test" style={{ width: 400, borderRadius: 4 }}>
-				<DiscordMessage roleColor="#5c71bd" author="Skyra" avatar="skyra" bot>
-					<DiscordEmbed
-						slot="embeds"
-						color="#FFD54F"
-						authorImage="https://cdn.discordapp.com/avatars/157797566833098752/a_58c11318d45efbde40e37dd1ac7408b0.gif?size=2048"
-						authorName="Magnaboy#7556"
-						footerImage="https://github.com/NM-EEA-Y.png"
-						timestamp={new Date()}
-					>
-						<strong>> Type</strong>: Temporary Mute
-						<br />
-						<strong>> User</strong>: enkiel#8897 (489096182069461003)
-						<br />
-						<strong>> Reason</strong>: Spamming.
-						<br />
-						<strong>> Expires In</strong>: 10 minutes
-						<span slot="footer">Case 11</span>
-					</DiscordEmbed>
-				</DiscordMessage>
-			</DiscordMessages>
-			{features.map(({ name, image, text }) => (
-				<Section name={name} image={image} text={text} key={name} />
+			{features.map(({ name, previewContent, text }) => (
+				<Section name={name} text={text} previewContent={previewContent} key={name} />
 			))}
 		</GeneralPage>
 	);

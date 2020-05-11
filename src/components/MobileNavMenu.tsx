@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import InviteIcon from '@material-ui/icons/Add';
 import LogoutIcon from '@material-ui/icons/Eject';
 import CommandsIcon from '@material-ui/icons/Extension';
+import DiscordChatIcon from '@material-ui/icons/Forum';
 import MenuIcon from '@material-ui/icons/Menu';
 import SyncIcon from '@material-ui/icons/Sync';
 import LoginIcon from '@material-ui/icons/VpnKey';
@@ -20,7 +21,6 @@ import { displayAvatarURL, logOut, navigate, syncUser } from 'meta/util';
 import React, { useEffect, useRef, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import { useGlobal } from 'reactn';
-import Tooltip from './Tooltip';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -98,31 +98,29 @@ export default () => {
 
 	return (
 		<>
-			<Tooltip title="Tap to open menu">
-				<IconButton
-					ref={anchorRef}
-					edge="start"
-					aria-controls={open ? 'menu-popover' : undefined}
-					aria-haspopup="true"
-					className={classes.menuButton}
-					color="inherit"
-					aria-label="menu"
-					onClick={handleToggle}
-				>
-					<If condition={authenticated}>
-						<Then>
-							<Avatar
-								// style={{ marginRight: 5, height: 40, width: 40 }}
-								src={displayAvatarURL(user, { size: 32 })}
-								alt=""
-							/>
-						</Then>
-						<Else>
-							<MenuIcon />
-						</Else>
-					</If>
-				</IconButton>
-			</Tooltip>
+			<IconButton
+				ref={anchorRef}
+				edge="start"
+				aria-controls={open ? 'menu-popover' : undefined}
+				aria-haspopup="true"
+				className={classes.menuButton}
+				color="inherit"
+				aria-label="menu"
+				onClick={handleToggle}
+			>
+				<If condition={authenticated}>
+					<Then>
+						<Avatar
+							// style={{ marginRight: 5, height: 40, width: 40 }}
+							src={displayAvatarURL(user, { size: 32 })}
+							alt=""
+						/>
+					</Then>
+					<Else>
+						<MenuIcon />
+					</Else>
+				</If>
+			</IconButton>
 			<Popper className={classes.popper} open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
 				{({ TransitionProps, placement }) => (
 					<Grow {...TransitionProps} style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}>
@@ -175,6 +173,12 @@ export default () => {
 											<InviteIcon />
 										</ListItemIcon>
 										<Typography variant="inherit">Add Skyra to server</Typography>
+									</MenuItem>
+									<MenuItem onClick={navigate('https://join.skyra.pw')}>
+										<ListItemIcon>
+											<DiscordChatIcon />
+										</ListItemIcon>
+										<Typography variant="inherit">Join our Discord</Typography>
 									</MenuItem>
 								</MenuList>
 							</ClickAwayListener>
