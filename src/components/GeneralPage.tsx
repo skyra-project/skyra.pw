@@ -9,7 +9,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Zoom from '@material-ui/core/Zoom';
+import InviteIcon from '@material-ui/icons/Add';
 import CommandsIcon from '@material-ui/icons/Extension';
+import DiscordChatIcon from '@material-ui/icons/Forum';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import LoginIcon from '@material-ui/icons/VpnKey';
 import SkyraLogo from 'assets/skyraLogo';
@@ -116,7 +118,7 @@ export default ({ children, loading = false, containerProps = {}, ...props }: Pr
 										<Box display="flex" flexDirection="column" ml={3}>
 											<Typography variant="h5">Skyra</Typography>
 											<Hidden smDown>
-												<Typography variant="caption">The most advanced moderation bot.</Typography>
+												<Typography variant="caption">The most advanced moderation bot</Typography>
 											</Hidden>
 										</Box>
 									</Box>
@@ -125,6 +127,32 @@ export default ({ children, loading = false, containerProps = {}, ...props }: Pr
 						</Box>
 
 						<Hidden smDown>
+							<Tooltip title="Click to add Skyra to your server" placement="bottom">
+								<Button
+									color="primary"
+									variant="contained"
+									classes={{ root: classes.transparantButton }}
+									onClick={navigate('https://invite.skyra.pw')}
+									startIcon={<InviteIcon />}
+								>
+									<Typography variant="body2" color="textPrimary">
+										Add Skyra to server
+									</Typography>
+								</Button>
+							</Tooltip>
+							<Tooltip title="Click to join Skyra Lounge Discord server" placement="bottom">
+								<Button
+									color="primary"
+									variant="contained"
+									classes={{ root: classes.transparantButton }}
+									onClick={navigate('https://join.skyra.pw')}
+									startIcon={<DiscordChatIcon />}
+								>
+									<Typography variant="body2" color="textPrimary">
+										Join our Discord
+									</Typography>
+								</Button>
+							</Tooltip>
 							<Tooltip title="Click to view Skyra's commands" placement="bottom">
 								<Button
 									color="primary"
@@ -181,7 +209,7 @@ export default ({ children, loading = false, containerProps = {}, ...props }: Pr
 
 			<Box component="span" role="scroll-to-top">
 				<ScrollToTopButton {...props}>
-					<Fab color="secondary" size="small" aria-label="scroll back to top">
+					<Fab color="primary" size="small" aria-label="scroll back to top">
 						<KeyboardArrowUpIcon />
 					</Fab>
 				</ScrollToTopButton>

@@ -19,25 +19,15 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'flex',
 			flexDirection: 'column',
 			width: '47%',
-			[theme.breakpoints.down('sm')]: {
-				width: '100%'
-			}
-		},
-		previewImage: {
-			borderRadius: 4,
-			maxWidth: 400,
-			maxHeight: 400,
-			[theme.breakpoints.down('sm')]: {
-				marginTop: theme.spacing(2.5),
+			[theme.breakpoints.down('md')]: {
 				width: '100%'
 			}
 		}
 	})
 );
 
-const Section = ({ name, image, text }: typeof features extends Array<infer U> ? U : never) => {
+const Section = ({ name, previewContent, text }: typeof features extends Array<infer U> ? U : never) => {
 	const classes = useStyles();
-
 	return (
 		<Box
 			p={5}
@@ -57,9 +47,7 @@ const Section = ({ name, image, text }: typeof features extends Array<infer U> ?
 				<Divider classes={{ root: classes.divider }} />
 				<Typography>{text}</Typography>
 			</div>
-			<Hidden smDown>
-				<img alt={name} src={image.src} width={image.width} height={image.height} className={classes.previewImage} loading="lazy" />
-			</Hidden>
+			<Hidden mdDown>{previewContent}</Hidden>
 		</Box>
 	);
 };
@@ -87,8 +75,8 @@ export default () => {
 					</Box>
 				</Container>
 			)}
-			{features.map(({ name, image, text }) => (
-				<Section name={name} image={image} text={text} key={name} />
+			{features.map(({ name, previewContent, text }) => (
+				<Section name={name} text={text} previewContent={previewContent} key={name} />
 			))}
 		</GeneralPage>
 	);
