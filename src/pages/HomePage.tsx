@@ -1,13 +1,19 @@
 import { Box, Container, createStyles, Divider, Hidden, makeStyles, Theme, Typography } from '@material-ui/core';
 import features from 'assets/features';
+import clsx from 'clsx';
 import GeneralPage from 'components/GeneralPage';
 import GuildCard from 'components/GuildCard';
 import React, { useGlobal } from 'reactn';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
-		box: {
+		oddBox: {
 			'&:nth-of-type(odd)': {
+				flexDirection: 'row-reverse'
+			}
+		},
+		evenBox: {
+			'&:nth-of-type(even)': {
 				flexDirection: 'row-reverse'
 			}
 		},
@@ -28,6 +34,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Section = ({ name, previewContent, text }: typeof features extends Array<infer U> ? U : never) => {
 	const classes = useStyles();
+	const [authenticated] = useGlobal('authenticated');
+
 	return (
 		<Box
 			p={5}
@@ -38,7 +46,7 @@ const Section = ({ name, previewContent, text }: typeof features extends Array<i
 			flexWrap="wrap"
 			flexDirection="row"
 			minHeight="min-content"
-			className={classes.box}
+			className={clsx({ [classes.evenBox]: authenticated, [classes.oddBox]: !authenticated })}
 		>
 			<div className={classes.text}>
 				<Typography variant="h3" component="h1">
