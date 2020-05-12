@@ -14,7 +14,7 @@
 		"history": "^4.10.1",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
-		"react-emoji-render": "^1.2.3",
+		"react-emoji-render": "^1.2.4",
 		"react-flip-move": "^3.0.4",
 		"react-if": "^3.4.3",
 		"react-player": "^2.0.1",

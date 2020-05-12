@@ -9098,10 +9098,10 @@ react-dom@^16.13.1:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
-react-emoji-render@^1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/react-emoji-render/-/react-emoji-render-1.2.3.tgz#41a52eece93e6f9ff60c53a1fb8e3c71bf0111b6"
-  integrity sha512-LNmtGW72xBsHAOaZ/SEM3elBLOLyyi2WYeEh7gyGhjCyDNHuJZu2XlHrkA/VNkOgqtzLK0SH4orhTsdhtNHfrw==
+react-emoji-render@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/react-emoji-render/-/react-emoji-render-1.2.4.tgz#fa3542a692e1eed3236f0f12b8e3a61b2818e2c2"
+  integrity sha512-AqktVXV38uDpgf02BoCXrzLYFsHAsxfdWwjrLexSJ22l1JgB01y1KejjxW/zTuCzod6O7BZfiMS866LEEfMHmA==
   dependencies:
     classnames "^2.2.5"
     emoji-regex "^6.4.1"
