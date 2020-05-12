@@ -164,7 +164,10 @@ const useStyles = makeStyles(theme =>
 			maxWidth: 60
 		},
 		errorButton: {
-			backgroundColor: theme.palette.error.main
+			backgroundColor: theme.palette.error.main,
+			'&:hover': {
+				backgroundColor: theme.palette.error.dark
+			}
 		}
 	})
 );
@@ -653,12 +656,18 @@ const RootComponent = props => {
 							color="secondary"
 							classes={{ root: classes.errorButton }}
 							variant="contained"
-							size="small"
+							size={isOnMobile ? 'small' : 'large'}
 						>
 							<DeleteIcon className={classes.saveIcon} />
 							Reset
 						</Button>
-						<Button disabled={isUpdating} onClick={submitChanges} color="primary" variant="contained" size="small">
+						<Button
+							disabled={isUpdating}
+							onClick={submitChanges}
+							color="primary"
+							variant="contained"
+							size={isOnMobile ? 'small' : 'large'}
+						>
 							<SaveIconIcon className={classes.saveIcon} />
 							Reset
 						</Button>

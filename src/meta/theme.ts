@@ -24,7 +24,9 @@ export default createMuiTheme({
 			black: '#16171D'
 		},
 		error: {
-			main: '#C22E14'
+			main: '#C62828',
+			dark: '#8E0000',
+			light: '#FF5F52'
 		}
 	}
 });
