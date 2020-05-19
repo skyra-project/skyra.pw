@@ -1345,17 +1345,18 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@skyra/discord-components-core@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@skyra/discord-components-core/-/discord-components-core-1.0.1.tgz#c7a5d36e06e23367e6899f0d1525f1198d76dced"
-  integrity sha512-eljqbYYzd5j2rMUL1ABhzH0KmLZosgb7D5TQt4JcI49ZcCHqpsXrtlaA9gQcLsfqbKVt4UDP9gFAYjdIzrXcnw==
+"@skyra/discord-components-core@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@skyra/discord-components-core/-/discord-components-core-1.1.0.tgz#e244d95f3bc5cb91528d887bc8d1869feefe6e6e"
+  integrity sha512-QEFxz/+F7hft36nzPMNjW61/+bjwjsmeUTXq73pDRxtyK5W6E3VeIcdbBjMjoskW4ZKm98AoyyY9TikzGVIHpA==
   dependencies:
+    clsx "^1.1.0"
     hex-to-rgba "^2.0.1"
 
-"@skyra/discord-components-react@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@skyra/discord-components-react/-/discord-components-react-1.0.1.tgz#3a6cdcce3eb2a3c50da5ff01852e0b7004d33223"
-  integrity sha512-BardHb32c5hQ0kVfKbSiBQWbxkoul5omr9kmmmkKRN1J7vndP2zRy8LCw+0aJgHjeoHR9nQIb1ShwLTjSBQe+g==
+"@skyra/discord-components-react@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@skyra/discord-components-react/-/discord-components-react-1.1.0.tgz#7f9ebcaf01051fdd9628a9f198bb89a7936c34df"
+  integrity sha512-kKQayFcG/nOPtft4lJiX843GxCzxwthFlj4mO5/p6aIadMDH7wbeAVVSYcv3JkRRiXiD5WrEcF/hisUTQiZ9Jw==
 
 "@svgr/babel-plugin-add-jsx-attribute@^4.2.0":
   version "4.2.0"

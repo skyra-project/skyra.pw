@@ -23,10 +23,10 @@ export default [
 		previewContent: (
 			<Paper elevation={8}>
 				<DiscordMessages>
-					<DiscordMessage author="Favna" roleColor="#FF9D01" profile="favna">
+					<DiscordMessage profile="favna">
 						Skyra, mute <DiscordMention>Kyra</DiscordMention> 10m Spamming.
 					</DiscordMessage>
-					<DiscordMessage author="Skyra" roleColor="#1E88E5" bot verified profile="skyra">
+					<DiscordMessage profile="skyra">
 						<DiscordEmbed
 							slot="embeds"
 							color="#FFD54F"
@@ -60,10 +60,8 @@ export default [
 		previewContent: (
 			<Paper elevation={8}>
 				<DiscordMessages>
-					<DiscordMessage author="Kyra" roleColor="#FF9D01" profile="kyra">
-						Skyra, markov
-					</DiscordMessage>
-					<DiscordMessage author="Skyra" roleColor="#1E88E5" bot verified profile="skyra">
+					<DiscordMessage profile="kyra">Skyra, markov</DiscordMessage>
+					<DiscordMessage profile="skyra">
 						<DiscordEmbed slot="embeds" color="#FF9D01">
 							Big mama is beyond Merlin's powers I'm basing this though i like it, and calls <code>renderToString()</code> and
 							throw if I'd add test to them are down to go that can be <i>reviewed</i> by myself and its loaded from google
@@ -84,18 +82,18 @@ export default [
 		previewContent: (
 			<Paper elevation={8}>
 				<DiscordMessages>
-					<DiscordMessage author="Kyra" roleColor="#FF9D01" profile="kyra">
-						Skyra, youtube BeatSaber - Caramelldansen (Speedcake Remix) [FullBodyTracking]
-					</DiscordMessage>
-					<DiscordMessage author="Skyra" roleColor="#1E88E5" bot verified profile="skyra">
+					<DiscordMessage profile="kyra">Skyra, youtube Big Buck Bunny</DiscordMessage>
+					<DiscordMessage profile="skyra">
 						<DiscordEmbed
 							slot="embeds"
 							color="#FF0000"
-							authorName="omotea"
-							authorUrl="https://youtu.be/flAsTHJ6mlU"
-							url="https://youtu.be/flAsTHJ6mlU"
-							embedTitle="BeatSaber - Caramelldansen (Speedcake Remix) [FullBodyTracking]"
-							image="https://i.ytimg.com/vi/flAsTHJ6mlU/hqdefault.jpg"
+							provider="YouTube"
+							authorName="Blender"
+							authorUrl="https://www.youtube.com/user/BlenderFoundation"
+							url="https://youtu.be/aqz-KE-bpKQ"
+							video="https://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_1080p_stereo.ogg"
+							embedTitle="Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film"
+							image="https://cdn.skyra.pw/dashboard/bigbuckbunny.jpg"
 						></DiscordEmbed>
 					</DiscordMessage>
 				</DiscordMessages>
@@ -113,10 +111,8 @@ export default [
 		previewContent: (
 			<Paper elevation={8}>
 				<DiscordMessages>
-					<DiscordMessage author="Favna" roleColor="#FF9D01" profile="favna">
-						Skyra, pokedex Dragonite
-					</DiscordMessage>
-					<DiscordMessage author="Skyra" roleColor="#1E88E5" bot verified profile="skyra">
+					<DiscordMessage profile="favna">Skyra, pokedex Dragonite</DiscordMessage>
+					<DiscordMessage profile="skyra">
 						<DiscordEmbed
 							slot="embeds"
 							color="#A3501A"
@@ -125,13 +121,13 @@ export default [
 							thumbnail="https://play.pokemonshowdown.com/sprites/ani/dragonite.gif"
 						>
 							<DiscordEmbedFields slot="fields">
-								<DiscordEmbedField fieldTitle="Type(s)" inline>
+								<DiscordEmbedField fieldTitle="Type(s)" inline inlineIndex={1}>
 									Dragon, Flying
 								</DiscordEmbedField>
-								<DiscordEmbedField fieldTitle="Abilities" inline>
+								<DiscordEmbedField fieldTitle="Abilities" inline inlineIndex={2}>
 									Inner Focus, <i>Multiscale</i>
 								</DiscordEmbedField>
-								<DiscordEmbedField fieldTitle="Gender Ratio" inline>
+								<DiscordEmbedField fieldTitle="Gender Ratio" inline inlineIndex={3}>
 									<Twemoji text="50% ♂️ | 50% ♀️" />
 								</DiscordEmbedField>
 								<DiscordEmbedField fieldTitle="Evolutionary line">
@@ -166,10 +162,8 @@ export default [
 		previewContent: (
 			<Paper elevation={8}>
 				<DiscordMessages>
-					<DiscordMessage author="Favna" roleColor="#FF9D01" profile="favna">
-						Skyra, anime Fate/Zero
-					</DiscordMessage>
-					<DiscordMessage author="Skyra" roleColor="#1E88E5" bot verified profile="skyra">
+					<DiscordMessage profile="favna">Skyra, anime Fate/Zero</DiscordMessage>
+					<DiscordMessage profile="skyra">
 						<DiscordEmbed
 							slot="embeds"
 							color="#80C33E"
@@ -178,22 +172,22 @@ export default [
 							thumbnail="https://media.kitsu.io/anime/poster_images/6028/original.jpg?1492613350"
 						>
 							<DiscordEmbedFields slot="fields">
-								<DiscordEmbedField inline fieldTitle="Type">
+								<DiscordEmbedField inline fieldTitle="Type" inlineIndex={1}>
 									<Twemoji text="📺 TV" />
 								</DiscordEmbedField>
-								<DiscordEmbedField inline fieldTitle="Score">
+								<DiscordEmbedField inline fieldTitle="Score" inlineIndex={2}>
 									82.63%
 								</DiscordEmbedField>
-								<DiscordEmbedField inline fieldTitle="Episode(s)">
+								<DiscordEmbedField inline fieldTitle="Episode(s)" inlineIndex={3}>
 									13
 								</DiscordEmbedField>
-								<DiscordEmbedField inline fieldTitle="Episode length">
+								<DiscordEmbedField inline fieldTitle="Episode length" inlineIndex={1}>
 									28 minutes
 								</DiscordEmbedField>
-								<DiscordEmbedField inline fieldTitle="Age rating">
+								<DiscordEmbedField inline fieldTitle="Age rating" inlineIndex={2}>
 									R
 								</DiscordEmbedField>
-								<DiscordEmbedField inline fieldTitle="First air date">
+								<DiscordEmbedField inline fieldTitle="First air date" inlineIndex={3}>
 									October 2nd 2011
 								</DiscordEmbedField>
 								<DiscordEmbedField fieldTitle="Watch it here">
