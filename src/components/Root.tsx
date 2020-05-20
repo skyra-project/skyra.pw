@@ -16,7 +16,7 @@ import StatusPage from 'pages/Status';
 import { Route, Router, Switch } from 'react-router-dom';
 import React from 'reactn';
 import { ServiceWorkerProvider } from 'ServiceWorkerContext';
-import ServiceWorkerUpdater from './ServiceWorkerUpdater';
+import ServiceWorkerUpdater from './Alerts/ServiceWorkerUpdate';
 
 export default () => (
 	<ErrorBoundary>
