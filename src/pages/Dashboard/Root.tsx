@@ -1,23 +1,23 @@
-import {
-	AppBar,
-	Box,
-	Button,
-	Collapse,
-	Divider,
-	Drawer,
-	Fade,
-	Hidden,
-	IconButton,
-	List,
-	ListItem,
-	ListItemIcon,
-	ListItemText,
-	Slide,
-	Toolbar,
-	Typography,
-	useMediaQuery
-} from '@material-ui/core';
+import { useMediaQuery } from '@material-ui/core';
+import AppBar from '@material-ui/core/AppBar';
+import Backdrop from '@material-ui/core/Backdrop';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Collapse from '@material-ui/core/Collapse';
+import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import Fade from '@material-ui/core/Fade';
+import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Slide from '@material-ui/core/Slide';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import DeleteIcon from '@material-ui/icons/DeleteForever';
 import EventIcon from '@material-ui/icons/EventNote';
 import ExpandLess from '@material-ui/icons/ExpandLess';
@@ -36,8 +36,10 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import StarIcon from '@material-ui/icons/Star';
 import Skeleton from '@material-ui/lab/Skeleton';
 import SkyraLogo from 'assets/skyraLogo';
+import ErrorAlert from 'components/Alerts/Error';
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
 import GuildIcon from 'components/GuildIcon';
+import Tooltip from 'components/Tooltip';
 import UserMenu from 'components/UserMenu';
 import deepMerge, { Options as DeepMergeOptions } from 'deepmerge';
 import { FlattenedGuild } from 'meta/typings/ApiData';
@@ -175,6 +177,14 @@ const useStyles = makeStyles((theme: Theme) =>
 			'&:hover': {
 				backgroundColor: theme.palette.error.dark
 			}
+		},
+		backdrop: {
+			zIndex: theme.zIndex.drawer + 1,
+			color: '#fff'
+		},
+		link: {
+			color: theme.palette.primary.contrastText,
+			fontWeight: 'bolder'
 		}
 	})
 );
@@ -190,6 +200,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 	const [isUpdating, setIsUpdating] = useState(false);
 	const [openSubMenus, setOpenSubMenus] = useState<string[]>([]);
 	const [mobileOpen, setMobileOpen] = useState(false);
+	const [hasError, setHasError] = useState(false);
 
 	const { guildID } = useParams();
 
@@ -203,7 +214,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 			setGuildData(guildData);
 			setGuildSettings(guildSettings);
 		} catch {
-			return navigate('/404');
+			navigate('/404');
 		}
 	};
 
@@ -212,28 +223,28 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 	}, []); // eslint-disable-line
 
 	const submitChanges = async () => {
-		setIsUpdating(true);
+		try {
+			setIsUpdating(true);
 
-		const response = await authedFetch(`/guilds/${guildID}/settings`, {
-			method: 'POST',
-			body: JSON.stringify({
-				// eslint-disable-next-line @typescript-eslint/camelcase
-				guild_id: guildID,
-				data: guildSettingsChanges
-			})
-		}).catch(() => {
-			// TODO toast
-			// Do nothing
-		});
+			const response = (await authedFetch(`/guilds/${guildID}/settings`, {
+				method: 'POST',
+				body: JSON.stringify({
+					// eslint-disable-next-line @typescript-eslint/camelcase
+					guild_id: guildID,
+					data: guildSettingsChanges
+				})
+			})) as { newSettings: GuildSettings; error?: string };
 
-		if (!response || !response.newSettings || response.error) {
-			// TODO toast
-			return;
+			if (!response || !response.newSettings || response.error) {
+				setHasError(true);
+			} else {
+				setGuildSettingsChanges(undefined);
+				setGuildSettings(response.newSettings);
+				setIsUpdating(false);
+			}
+		} catch {
+			setHasError(true);
 		}
-
-		setGuildSettingsChanges(undefined);
-		setGuildSettings(response.newSettings);
-		setIsUpdating(false);
 	};
 
 	const patchGuildData = (changes?: DeepPartial<GuildSettings>) => {
@@ -263,10 +274,12 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 
 	const drawer = (
 		<Fragment>
-			<Box component="div" onClick={navigate(`/`)} className={classes.guildImage}>
-				<SkyraLogo />
-				<Typography variant="h5">Skyra</Typography>
-			</Box>
+			<Tooltip title="Go back to homepage">
+				<Box component="div" onClick={navigate(`/`)} className={classes.guildImage}>
+					<SkyraLogo />
+					<Typography variant="h5">Skyra</Typography>
+				</Box>
+			</Tooltip>
 			<Divider />
 
 			{/* --------------------- */}
@@ -519,174 +532,198 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 		</Fragment>
 	);
 
+	const readyToRender =
+		guildData !== undefined &&
+		guildSettings !== undefined &&
+		Object.keys(guildData).length !== 0 &&
+		Object.keys(guildSettings).length !== 0;
+
 	return (
-		<Box className={classes.root}>
-			<AppBar position="fixed" className={classes.appBar}>
-				<Toolbar>
-					<IconButton color="primary" edge="start" onClick={toggleSidebar} className={classes.menuButton}>
-						<MenuIcon color="secondary" />
-					</IconButton>
-
-					<Box display="flex" justifyContent="space-between" width="100%" alignItems="center">
-						{guildData ? (
-							<Typography component="h1" data-premid="server-title">
-								{guildData.name}
-							</Typography>
-						) : (
-							<Skeleton variant="text" width={100} height={14} />
-						)}
-						<UserMenu />
+		<>
+			<Backdrop className={classes.backdrop} open={isUpdating}>
+				<CircularProgress color="inherit" />
+			</Backdrop>
+			<ErrorAlert
+				open={hasError}
+				errorText="An error occurred getting data from Skyra's server."
+				errorSubText={
+					<Box component="span">
+						Maybe try again later, or join{' '}
+						<a className={classes.link} href="https://join.skyra.pw">
+							the support server
+						</a>{' '}
+						and ask for support.
 					</Box>
-				</Toolbar>
-			</AppBar>
-			<Box component="nav" className={classes.drawer}>
-				<Hidden smUp>
-					<Drawer
-						container={container}
-						variant="temporary"
-						open={mobileOpen}
-						onClose={toggleSidebar}
-						classes={{
-							paper: classes.drawerPaper
-						}}
-						ModalProps={{
-							keepMounted: true // Better open performance on mobile.
-						}}
-					>
-						{drawer}
-					</Drawer>
-				</Hidden>
-				<Hidden xsDown>
-					<Drawer
-						classes={{
-							paper: classes.drawerPaper
-						}}
-						variant="permanent"
-						open
-					>
-						{drawer}
-					</Drawer>
-				</Hidden>
-			</Box>
-			<Box component="main" className={classes.content}>
-				{guildData ? (
-					<Fade in={Boolean(guildData)}>
-						<Box>
-							<Switch>
-								<AuthenticatedRoute
-									exact
-									componentProps={{ ...componentProps }}
-									path="/guilds/:guildID/starboard"
-									component={StarboardPage}
-								/>
-								<AuthenticatedRoute
-									exact
-									componentProps={{ ...componentProps }}
-									path="/guilds/:guildID/filter"
-									component={FilterWordsPage}
-								/>
-								<AuthenticatedRoute
-									componentProps={{ ...componentProps }}
-									path="/guilds/:guildID/filter/capitals"
-									component={FilterCapitalsPage}
-								/>
-								<AuthenticatedRoute
-									componentProps={{ ...componentProps }}
-									path="/guilds/:guildID/filter/invites"
-									component={InvitesFilterPage}
-								/>
-								<AuthenticatedRoute
-									componentProps={{ ...componentProps }}
-									path="/guilds/:guildID/filter/links"
-									component={FilterLinksPage}
-								/>
-								<AuthenticatedRoute
-									componentProps={{ ...componentProps }}
-									path="/guilds/:guildID/filter/messages"
-									component={MessagesFilterPage}
-								/>
-								<AuthenticatedRoute
-									componentProps={{ ...componentProps }}
-									path="/guilds/:guildID/filter/newlines"
-									component={NewLinesFilterPage}
-								/>
-								<AuthenticatedRoute
-									componentProps={{ ...componentProps }}
-									path="/guilds/:guildID/filter/reactions"
-									component={ReactionsFilterPage}
-								/>
-								<AuthenticatedRoute
-									componentProps={{ ...componentProps }}
-									path="/guilds/:guildID/moderation"
-									component={ModerationSettingsPage}
-								/>
+				}
+			/>
+			<Box className={classes.root}>
+				<AppBar position="fixed" className={classes.appBar}>
+					<Toolbar>
+						<IconButton color="primary" edge="start" onClick={toggleSidebar} className={classes.menuButton}>
+							<MenuIcon color="secondary" />
+						</IconButton>
 
-								<AuthenticatedRoute
-									componentProps={{ ...componentProps }}
-									path="/guilds/:guildID/events"
-									component={EventsPage}
-								/>
-								<AuthenticatedRoute
-									componentProps={{ ...componentProps }}
-									path="/guilds/:guildID/channels"
-									component={ChannelsPage}
-								/>
-								<AuthenticatedRoute
-									componentProps={{ ...componentProps }}
-									path="/guilds/:guildID/roles"
-									component={RolesPage}
-								/>
-								<AuthenticatedRoute
-									componentProps={{ ...componentProps }}
-									path="/guilds/:guildID/messages"
-									component={MessagesPage}
-								/>
-								<AuthenticatedRoute
-									componentProps={{ ...componentProps }}
-									path="/guilds/:guildID/disabled-commands"
-									component={DisableCommandsPage}
-								/>
-								<AuthenticatedRoute
-									componentProps={{ ...componentProps }}
-									path="/guilds/:guildID/custom-commands"
-									component={CustomCommandsPage}
-								/>
-								<AuthenticatedRoute
-									componentProps={{ ...componentProps }}
-									path="/guilds/:guildID"
-									component={SettingsPage}
-								/>
-							</Switch>
+						<Box display="flex" justifyContent="space-between" width="100%" alignItems="center">
+							{guildData ? (
+								<Typography component="h1" data-premid="server-title">
+									{guildData.name}
+								</Typography>
+							) : (
+								<Skeleton variant="text" width={100} height={14} />
+							)}
+							<UserMenu />
 						</Box>
-					</Fade>
-				) : null}
-				<Slide direction="up" in={Object.keys(guildSettingsChanges ?? {}).length > 0} mountOnEnter unmountOnExit>
-					<Box component="div" className={classes.fabContainer}>
-						<Button
-							disabled={isUpdating}
-							onClick={() => setGuildSettingsChanges(undefined)}
-							color="secondary"
-							classes={{ root: classes.errorButton }}
-							variant="contained"
-							size={isOnMobile ? 'small' : 'large'}
+					</Toolbar>
+				</AppBar>
+				<Box component="nav" className={classes.drawer}>
+					<Hidden smUp>
+						<Drawer
+							container={container}
+							variant="temporary"
+							open={mobileOpen}
+							onClose={toggleSidebar}
+							classes={{
+								paper: classes.drawerPaper
+							}}
+							ModalProps={{
+								keepMounted: true // Better open performance on mobile.
+							}}
 						>
-							<DeleteIcon className={classes.saveIcon} />
-							Reset
-						</Button>
-						<Button
-							disabled={isUpdating}
-							onClick={submitChanges}
-							color="primary"
-							variant="contained"
-							size={isOnMobile ? 'small' : 'large'}
+							{drawer}
+						</Drawer>
+					</Hidden>
+					<Hidden xsDown>
+						<Drawer
+							classes={{
+								paper: classes.drawerPaper
+							}}
+							variant="permanent"
+							open
 						>
-							<SaveIconIcon className={classes.saveIcon} />
-							Reset
-						</Button>
-					</Box>
-				</Slide>
+							{drawer}
+						</Drawer>
+					</Hidden>
+				</Box>
+				<Box component="main" className={classes.content}>
+					{readyToRender ? (
+						<Fade in={Boolean(guildData)}>
+							<Box>
+								<Switch>
+									<AuthenticatedRoute
+										exact
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/starboard"
+										component={StarboardPage}
+									/>
+									<AuthenticatedRoute
+										exact
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/filter"
+										component={FilterWordsPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/filter/capitals"
+										component={FilterCapitalsPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/filter/invites"
+										component={InvitesFilterPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/filter/links"
+										component={FilterLinksPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/filter/messages"
+										component={MessagesFilterPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/filter/newlines"
+										component={NewLinesFilterPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/filter/reactions"
+										component={ReactionsFilterPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/moderation"
+										component={ModerationSettingsPage}
+									/>
+
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/events"
+										component={EventsPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/channels"
+										component={ChannelsPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/roles"
+										component={RolesPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/messages"
+										component={MessagesPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/disabled-commands"
+										component={DisableCommandsPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/custom-commands"
+										component={CustomCommandsPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID"
+										component={SettingsPage}
+									/>
+								</Switch>
+							</Box>
+						</Fade>
+					) : null}
+					<Slide direction="up" in={Object.keys(guildSettingsChanges ?? {}).length > 0} mountOnEnter unmountOnExit>
+						<Box component="div" className={classes.fabContainer}>
+							<Button
+								disabled={isUpdating}
+								onClick={() => setGuildSettingsChanges(undefined)}
+								color="secondary"
+								classes={{ root: classes.errorButton }}
+								variant="contained"
+								size={isOnMobile ? 'small' : 'large'}
+							>
+								<DeleteIcon className={classes.saveIcon} />
+								Reset
+							</Button>
+							<Button
+								disabled={isUpdating}
+								onClick={submitChanges}
+								color="primary"
+								variant="contained"
+								size={isOnMobile ? 'small' : 'large'}
+							>
+								<SaveIconIcon className={classes.saveIcon} />
+								Save
+							</Button>
+						</Box>
+					</Slide>
+				</Box>
 			</Box>
-		</Box>
+		</>
 	);
 };
 
