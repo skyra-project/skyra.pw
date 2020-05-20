@@ -9,6 +9,7 @@ import {
 	ListItemText,
 	makeStyles,
 	TextField,
+	Theme,
 	Typography
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -16,12 +17,15 @@ import Section from 'components/Section';
 import { SettingsPageProps } from 'meta/typings/GuildSettings';
 import React, { Fragment, PropsWithChildren, useState } from 'react';
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		container: {
 			maxWidth: 500,
 			display: 'flex',
 			flexDirection: 'column'
+		},
+		bottomSection: {
+			marginTop: theme.spacing(5)
 		}
 	})
 );
@@ -60,7 +64,7 @@ const CustomCommandsPage = ({ patchGuildData, guildSettings: { tags, prefix } }:
 					</Button>
 				</Box>
 			</Section>
-			<Section title="Custom Commands">
+			<Section title="Registered Custom Commands" className={classes.bottomSection}>
 				<Box className={classes.container}>
 					<List>
 						{tags.length > 0 ? (
@@ -78,7 +82,7 @@ const CustomCommandsPage = ({ patchGuildData, guildSettings: { tags, prefix } }:
 								</ListItem>
 							))
 						) : (
-							<Typography>You have no commands!</Typography>
+							<Typography>You have no registered custom commands!</Typography>
 						)}
 					</List>
 				</Box>
