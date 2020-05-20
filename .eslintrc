@@ -1,5 +1,5 @@
 {
-	"extends": ["@favware", "@rws-air"],
+	"extends": ["@rws-air"],
 	"rules": {
 		// TODO: Remove these after moving to a TypeScript codebase
 		"@typescript-eslint/explicit-member-accessibility": "off",
