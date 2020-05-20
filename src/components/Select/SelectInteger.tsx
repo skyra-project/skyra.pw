@@ -1,8 +1,7 @@
+import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
 import React from 'react';
 
-import { TextField } from '@material-ui/core';
-
-export interface SelectIntegerProps {
+export interface SelectIntegerProps extends StandardTextFieldProps {
 	value: number;
 	label: string;
 	min: number;
@@ -10,8 +9,9 @@ export interface SelectIntegerProps {
 	onChange(...args: any[]): void;
 }
 
-const SelectInteger = ({ value, label, min, max, onChange }: SelectIntegerProps) => (
+const SelectInteger = ({ value, label, min, max, onChange, ...props }: SelectIntegerProps) => (
 	<TextField
+		{...props}
 		value={value}
 		label={label}
 		type="number"

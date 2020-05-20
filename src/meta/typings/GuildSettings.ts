@@ -232,6 +232,7 @@ interface Social {
 }
 
 interface Starboard {
+	minimum: number;
 	channel: string;
 	emoji: string;
 	ignoreChannels: string[];
