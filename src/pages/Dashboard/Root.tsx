@@ -309,32 +309,23 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 						<ListItemIcon>
 							<SettingsIcon />
 						</ListItemIcon>
-						<ListItemText primary="Settings" />
+						<ListItemText primary="General Settings" />
 					</ListItem>
 
 					{/* ------------------------------- */}
-					<ListItem disabled={!guildData} button onClick={() => handleSubMenu('moderation')}>
+
+					<ListItem
+						onClick={closeSidebarOnMobile}
+						disabled={!guildData}
+						component={Link}
+						to={`/guilds/${guildID}/moderation`}
+						button
+					>
 						<ListItemIcon>
 							<GavelIcon />
 						</ListItemIcon>
 						<ListItemText primary="Moderation" />
-						{openSubMenus.includes('moderation') ? <ExpandLess /> : <ExpandMore />}
 					</ListItem>
-					<Collapse in={openSubMenus.includes('moderation')} timeout="auto" unmountOnExit>
-						<List component="div" disablePadding>
-							<ListItem
-								onClick={closeSidebarOnMobile}
-								disabled={!guildData}
-								dense
-								component={Link}
-								to={`/guilds/${guildID}/moderation/settings`}
-								button
-								className={classes.nested}
-							>
-								<ListItemText primary="Moderation Settings" />
-							</ListItem>
-						</List>
-					</Collapse>
 
 					{/* ------------------------------- */}
 					<ListItem disabled={!guildData} button onClick={() => handleSubMenu('filter')}>
