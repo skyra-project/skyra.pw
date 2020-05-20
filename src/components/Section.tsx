@@ -1,8 +1,9 @@
 import { Box, BoxProps, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import clsx from 'clsx';
 import React, { FC, ReactNode } from 'react';
 import { Else, If, Then, When } from 'react-if';
 
-export interface SectionProps {
+export interface SectionProps extends Omit<BoxProps, 'title'> {
 	title: ReactNode;
 	disableTypography?: boolean;
 	titleProps?: BoxProps;
@@ -33,11 +34,11 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-export const Section: FC<SectionProps> = ({ title, children, titleProps, disableTypography = false }) => {
+export const Section: FC<SectionProps> = ({ title, children, titleProps, disableTypography = false, ...props }) => {
 	const classes = useStyles();
 
 	return (
-		<Box className={classes.root}>
+		<Box {...props} className={clsx(classes.root, props.className)}>
 			<When condition={Boolean(title)}>
 				<If condition={disableTypography}>
 					<Then>
