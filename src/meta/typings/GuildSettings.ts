@@ -5,7 +5,7 @@ export interface SettingsPageProps {
 	guildData: FlattenedGuild;
 	guildSettings: GuildSettings;
 	guildID: string;
-	patchGuildData: (changes: DeepPartial<GuildSettings>) => void;
+	patchGuildData: (changes?: DeepPartial<GuildSettings>) => void;
 }
 
 export interface GuildSettings {

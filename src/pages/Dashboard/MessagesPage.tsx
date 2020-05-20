@@ -52,7 +52,7 @@ export default ({ guildData, guildSettings, patchGuildData }: PropsWithChildren<
 				!guildSettings.events.memberAdd ? 'You must configure Member Join on the Events page.' : null
 			].join(' '),
 			tooltipText: `This is the message I will send to ${
-				guildData.channels.find(c => c.id === guildSettings.channels.greeting)?.name ?? 'the configured Greeting channel'
+				guildData?.channels.find(c => c.id === guildSettings.channels.greeting)?.name ?? 'the configured Greeting channel'
 			} when a member joins.`
 		},
 		{
@@ -63,13 +63,13 @@ export default ({ guildData, guildSettings, patchGuildData }: PropsWithChildren<
 				!guildSettings.events.memberRemove ? 'You must configure Member Leave on the Events page.' : null
 			].join(' '),
 			tooltipText: `This is the message I will send to ${
-				guildData.channels.find(c => c.id === guildSettings.channels.farewell)?.name ?? 'the configured Farewell channel'
+				guildData?.channels.find(c => c.id === guildSettings.channels.farewell)?.name ?? 'the configured Farewell channel'
 			} when a member leaves.`
 		}
 	];
 
 	const REPLACEABLE_MATCHERS: Matcher[] = [
-		{ matchKey: Matches.Guild, description: `I will replace this with ${guildData.name}` },
+		{ matchKey: Matches.Guild, description: `I will replace this with ${guildData?.name}` },
 		{ matchKey: Matches.Member, description: `I will replace this a mention of the member` },
 		{ matchKey: Matches.MemberName, description: `I will replace this with the username of the member` },
 		{ matchKey: Matches.MemberTag, description: `I will replace this with the unique tag of the member` },

@@ -1,12 +1,12 @@
 import { Avatar, createStyles, makeStyles, Theme } from '@material-ui/core';
+import clsx from 'clsx';
 import Link from 'components/Link';
 import { FlattenedGuild } from 'meta/typings/ApiData';
 import { displayIconURL, getAcronym } from 'meta/util';
-import React, { PropsWithChildren } from 'react';
-import clsx from 'clsx';
+import React, { Fragment, PropsWithChildren } from 'react';
 
 interface GuildIconProps {
-	guild: FlattenedGuild;
+	guild?: FlattenedGuild;
 	size?: number;
 	sizeClass?: string;
 }
@@ -22,6 +22,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default ({ guild, sizeClass, size = 128 }: PropsWithChildren<GuildIconProps>) => {
 	const classes = useStyles();
+
+	if (!guild) {
+		return <Fragment />;
+	}
 
 	return (
 		<Link to={`/guilds/${guild.id}`}>

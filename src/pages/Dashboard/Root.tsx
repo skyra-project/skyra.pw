@@ -17,6 +17,7 @@ import {
 	Typography,
 	useMediaQuery
 } from '@material-ui/core';
+import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/DeleteForever';
 import EventIcon from '@material-ui/icons/EventNote';
 import ExpandLess from '@material-ui/icons/ExpandLess';
@@ -25,6 +26,7 @@ import CustomCommandsIcon from '@material-ui/icons/Extension';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import ChannelsIcon from '@material-ui/icons/Forum';
 import GavelIcon from '@material-ui/icons/Gavel';
+import RolesIcon from '@material-ui/icons/Group';
 import InputIcon from '@material-ui/icons/Input';
 import MenuIcon from '@material-ui/icons/Menu';
 import MessagesIcon from '@material-ui/icons/Message';
@@ -33,12 +35,13 @@ import SaveIconIcon from '@material-ui/icons/Save';
 import SettingsIcon from '@material-ui/icons/Settings';
 import StarIcon from '@material-ui/icons/Star';
 import Skeleton from '@material-ui/lab/Skeleton';
-import { createStyles, makeStyles, useTheme } from '@material-ui/styles';
 import SkyraLogo from 'assets/skyraLogo';
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
 import GuildIcon from 'components/GuildIcon';
 import UserMenu from 'components/UserMenu';
-import deepMerge from 'deepmerge';
+import deepMerge, { Options as DeepMergeOptions } from 'deepmerge';
+import { FlattenedGuild } from 'meta/typings/ApiData';
+import { GuildSettings, SettingsPageProps } from 'meta/typings/GuildSettings';
 import { authedFetch, navigate, noOp } from 'meta/util';
 import CustomCommandsPage from 'pages/Dashboard/CustomCommands';
 import EventsPage from 'pages/Dashboard/EventsPage';
@@ -48,9 +51,12 @@ import FilterWordsPage from 'pages/Dashboard/Filter/Words';
 import ModerationSettingsPage from 'pages/Dashboard/Moderation/Settings';
 import SettingsPage from 'pages/Dashboard/SettingsPage';
 import StarboardPage from 'pages/Dashboard/Starboard';
+import { PropsWithChildren } from 'react';
 import { Else, If, Then } from 'react-if';
+import { useParams } from 'react-router';
 import { Link, Switch } from 'react-router-dom';
 import React, { Fragment, useEffect, useState } from 'reactn';
+import { DeepPartial } from 'utility-types';
 import ChannelsPage from './ChannelsPage';
 import DisableCommandsPage from './DisableCommandsPage';
 import InvitesFilterPage from './Filter/Invites';
@@ -58,15 +64,16 @@ import MessagesFilterPage from './Filter/Messages';
 import NewLinesFilterPage from './Filter/NewLines';
 import ReactionsFilterPage from './Filter/Reactions';
 import MessagesPage from './MessagesPage';
+import RolesPage from './RolesPage';
 
 // Overwrite arrays when merging
-const mergeOptions = {
+const mergeOptions: DeepMergeOptions = {
 	arrayMerge: (_, sourceArray) => sourceArray
 };
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
 			display: 'flex',
@@ -172,34 +179,32 @@ const useStyles = makeStyles(theme =>
 	})
 );
 
-const RootComponent = props => {
+const RootComponent = (props: PropsWithChildren<any>) => {
 	const theme = useTheme();
 	const isOnMobile = useMediaQuery(theme.breakpoints.down('sm'));
 	const classes = useStyles(props);
-	const [state, setState] = useState({
-		mobileOpen: false,
-		guildData: null,
-		guildSettings: {},
-		guildSettingsChanges: {},
-		isUpdating: false,
-		/* Which nested list menus in the sidebar are open */
-		openSubMenus: []
-	});
+
+	const [guildData, setGuildData] = useState<FlattenedGuild>();
+	const [guildSettings, setGuildSettings] = useState<GuildSettings>();
+	const [guildSettingsChanges, setGuildSettingsChanges] = useState<GuildSettings>();
+	const [isUpdating, setIsUpdating] = useState(false);
+	const [openSubMenus, setOpenSubMenus] = useState<string[]>([]);
+	const [mobileOpen, setMobileOpen] = useState(false);
+
+	const { guildID } = useParams();
 
 	const syncGuildData = async () => {
-		const { guildID } = props.match.params;
-		let error;
+		try {
+			const [guildData, guildSettings] = (await Promise.all([
+				authedFetch(`/guilds/${guildID}`),
+				authedFetch(`/guilds/${guildID}/settings`)
+			])) as [FlattenedGuild, GuildSettings];
 
-		const [guildData, guildSettings] = await Promise.all([
-			authedFetch(`/guilds/${guildID}`),
-			authedFetch(`/guilds/${guildID}/settings`)
-		]).catch(() => {
-			error = true;
-			return [null, null];
-		});
-		if (error) return navigate('/404')();
-
-		setState({ ...state, guildData, guildSettings });
+			setGuildData(guildData);
+			setGuildSettings(guildSettings);
+		} catch {
+			return navigate('/404');
+		}
 	};
 
 	useEffect(() => {
@@ -207,15 +212,14 @@ const RootComponent = props => {
 	}, []); // eslint-disable-line
 
 	const submitChanges = async () => {
-		setState({ ...state, isUpdating: true });
+		setIsUpdating(true);
 
-		const { guildID } = props.match.params;
 		const response = await authedFetch(`/guilds/${guildID}/settings`, {
 			method: 'POST',
 			body: JSON.stringify({
 				// eslint-disable-next-line @typescript-eslint/camelcase
 				guild_id: guildID,
-				data: state.guildSettingsChanges
+				data: guildSettingsChanges
 			})
 		}).catch(() => {
 			// TODO toast
@@ -227,48 +231,42 @@ const RootComponent = props => {
 			return;
 		}
 
-		setState({
-			...state,
-			guildSettingsChanges: {},
-			guildSettings: response.newSettings,
-			isUpdating: false
-		});
+		setGuildSettingsChanges(undefined);
+		setGuildSettings(response.newSettings);
+		setIsUpdating(false);
 	};
 
-	const patchGuildData = changes => {
-		setState({ ...state, guildSettingsChanges: deepMerge(state.guildSettingsChanges, changes, mergeOptions) });
+	const patchGuildData = (changes?: DeepPartial<GuildSettings>) => {
+		setGuildSettingsChanges(
+			deepMerge<GuildSettings, DeepPartial<GuildSettings>>(guildSettingsChanges ?? {}, changes ?? {}, mergeOptions)
+		);
 	};
 
-	const toggleSidebar = () => setState({ ...state, mobileOpen: !state.mobileOpen });
+	const toggleSidebar = () => setMobileOpen(!mobileOpen);
 	const closeSidebarOnMobile = () => (isOnMobile ? toggleSidebar() : noOp());
 
-	const handleSubMenu = menuName => {
-		const { openSubMenus } = state;
-		if (openSubMenus.includes(menuName)) {
-			setState({ ...state, openSubMenus: openSubMenus.filter(item => item !== menuName) });
-		} else {
-			setState({ ...state, openSubMenus: [...openSubMenus, menuName] });
-		}
+	const handleSubMenu = (menuName: string) => {
+		return openSubMenus.includes(menuName)
+			? setOpenSubMenus(openSubMenus.filter(item => item !== menuName))
+			: setOpenSubMenus([...openSubMenus, menuName]);
 	};
 
 	const { container } = props;
-	// The guildID and optional pageName in the URL. e.g. /guilds/228822415189344257/settings
-	const { guildID } = props.match.params;
-	const { mobileOpen, guildData, guildSettings, guildSettingsChanges, isUpdating, openSubMenus } = state;
 
-	const componentProps = {
-		guildSettings: deepMerge(guildSettings || {}, guildSettingsChanges || {}, mergeOptions),
-		guildData,
+	const componentProps: SettingsPageProps = {
+		guildSettings: deepMerge(guildSettings ?? {}, guildSettingsChanges ?? {}, mergeOptions),
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion, @typescript-eslint/no-non-null-assertion
+		guildData: guildData!,
 		guildID,
 		patchGuildData
 	};
 
 	const drawer = (
 		<Fragment>
-			<div onClick={navigate(`/`)} className={classes.guildImage}>
+			<Box component="div" onClick={navigate(`/`)} className={classes.guildImage}>
 				<SkyraLogo />
 				<Typography variant="h5">Skyra</Typography>
-			</div>
+			</Box>
 			<Divider />
 
 			{/* --------------------- */}
@@ -292,7 +290,7 @@ const RootComponent = props => {
 			</Box>
 			{/* --------------------- */}
 
-			<div role="presentation" onKeyDown={isOnMobile ? toggleSidebar : noOp}>
+			<Box component="div" role="presentation" onKeyDown={isOnMobile ? toggleSidebar : noOp}>
 				<List style={{ overflowY: 'auto' }}>
 					<ListItem onClick={closeSidebarOnMobile} disabled={!guildData} component={Link} to={`/guilds/${guildID}`} button>
 						<ListItemIcon>
@@ -456,6 +454,15 @@ const RootComponent = props => {
 
 					{/* ------------------------------- */}
 
+					<ListItem onClick={closeSidebarOnMobile} disabled={!guildData} component={Link} to={`/guilds/${guildID}/roles`} button>
+						<ListItemIcon>
+							<RolesIcon />
+						</ListItemIcon>
+						<ListItemText primary="Roles" />
+					</ListItem>
+
+					{/* ------------------------------- */}
+
 					<ListItem
 						onClick={closeSidebarOnMobile}
 						disabled={!guildData}
@@ -508,12 +515,12 @@ const RootComponent = props => {
 						<ListItemText primary="Music" />
 					</ListItem>
 				</List>
-			</div>
+			</Box>
 		</Fragment>
 	);
 
 	return (
-		<div className={classes.root}>
+		<Box className={classes.root}>
 			<AppBar position="fixed" className={classes.appBar}>
 				<Toolbar>
 					<IconButton color="primary" edge="start" onClick={toggleSidebar} className={classes.menuButton}>
@@ -526,13 +533,13 @@ const RootComponent = props => {
 								{guildData.name}
 							</Typography>
 						) : (
-							<Skeleton type="text" width={200} height={16} />
+							<Skeleton variant="text" width={100} height={14} />
 						)}
 						<UserMenu />
 					</Box>
 				</Toolbar>
 			</AppBar>
-			<nav className={classes.drawer}>
+			<Box component="nav" className={classes.drawer}>
 				<Hidden smUp>
 					<Drawer
 						container={container}
@@ -560,11 +567,11 @@ const RootComponent = props => {
 						{drawer}
 					</Drawer>
 				</Hidden>
-			</nav>
-			<main className={classes.content}>
+			</Box>
+			<Box component="main" className={classes.content}>
 				{guildData ? (
 					<Fade in={Boolean(guildData)}>
-						<div>
+						<Box>
 							<Switch>
 								<AuthenticatedRoute
 									exact
@@ -626,6 +633,11 @@ const RootComponent = props => {
 								/>
 								<AuthenticatedRoute
 									componentProps={{ ...componentProps }}
+									path="/guilds/:guildID/roles"
+									component={RolesPage}
+								/>
+								<AuthenticatedRoute
+									componentProps={{ ...componentProps }}
 									path="/guilds/:guildID/messages"
 									component={MessagesPage}
 								/>
@@ -645,14 +657,14 @@ const RootComponent = props => {
 									component={SettingsPage}
 								/>
 							</Switch>
-						</div>
+						</Box>
 					</Fade>
 				) : null}
-				<Slide direction="up" in={Object.keys(guildSettingsChanges).length > 0} mountOnEnter unmountOnExit>
+				<Slide direction="up" in={Object.keys(guildSettingsChanges ?? {}).length > 0} mountOnEnter unmountOnExit>
 					<Box component="div" className={classes.fabContainer}>
 						<Button
 							disabled={isUpdating}
-							onClick={() => setState({ ...state, guildSettingsChanges: {} })}
+							onClick={() => setGuildSettingsChanges(undefined)}
 							color="secondary"
 							classes={{ root: classes.errorButton }}
 							variant="contained"
@@ -673,8 +685,8 @@ const RootComponent = props => {
 						</Button>
 					</Box>
 				</Slide>
-			</main>
-		</div>
+			</Box>
+		</Box>
 	);
 };
 
