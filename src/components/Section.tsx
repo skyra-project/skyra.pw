@@ -27,8 +27,8 @@ const useStyles = makeStyles((theme: Theme) =>
 			borderBottomWidth: 2,
 			borderBottomStyle: 'solid',
 			borderBottomColor: theme.palette.primary.main,
-			marginBottom: '1.5rem',
-			paddingBottom: '0.6rem'
+			marginBottom: theme.spacing(3),
+			paddingBottom: theme.spacing(0.25)
 		}
 	})
 );

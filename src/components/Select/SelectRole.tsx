@@ -1,7 +1,6 @@
-import React from 'react';
-
-import SelectOne, { SelectOneProps } from './SelectOne';
 import { FlattenedGuild } from 'meta/typings/ApiData';
+import React from 'react';
+import SelectOne, { SelectOneProps } from './SelectOne';
 
 export interface SelectRoleProps extends Omit<SelectOneProps, 'values' | 'name'> {
 	value: string;
@@ -9,13 +8,14 @@ export interface SelectRoleProps extends Omit<SelectOneProps, 'values' | 'name'>
 	filterEveryone: boolean;
 }
 
-const SelectRole = ({ label, value, guild, filterEveryone, onChange }: SelectRoleProps) => {
+const SelectRole = ({ label, value, guild, filterEveryone, onChange, ...props }: SelectRoleProps) => {
 	let name;
 	const role = guild.roles.find(c => c.id === value);
 	if (role) name = role.name;
 
 	return (
 		<SelectOne
+			{...props}
 			label={label}
 			name={name}
 			onChange={onChange}
