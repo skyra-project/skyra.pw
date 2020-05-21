@@ -53,11 +53,10 @@ import FilterWordsPage from 'pages/Dashboard/Filter/Words';
 import ModerationSettingsPage from 'pages/Dashboard/Moderation/Settings';
 import SettingsPage from 'pages/Dashboard/SettingsPage';
 import StarboardPage from 'pages/Dashboard/Starboard';
-import { PropsWithChildren } from 'react';
+import React, { Fragment, PropsWithChildren, useCallback, useEffect, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import { useParams } from 'react-router';
 import { Link, Switch } from 'react-router-dom';
-import React, { Fragment, useEffect, useState } from 'reactn';
 import { DeepPartial } from 'utility-types';
 import ChannelsPage from './ChannelsPage';
 import DisableCommandsPage from './DisableCommandsPage';
@@ -197,34 +196,37 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 	const [guildData, setGuildData] = useState<FlattenedGuild>();
 	const [guildSettings, setGuildSettings] = useState<GuildSettings>();
 	const [guildSettingsChanges, setGuildSettingsChanges] = useState<GuildSettings>();
-	const [isUpdating, setIsUpdating] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const [openSubMenus, setOpenSubMenus] = useState<string[]>([]);
 	const [mobileOpen, setMobileOpen] = useState(false);
 	const [hasError, setHasError] = useState(false);
 
 	const { guildID } = useParams();
 
-	const syncGuildData = async () => {
+	const syncGuildData = useCallback(async () => {
+		setIsLoading(true);
 		try {
-			const [guildData, guildSettings] = (await Promise.all([
-				authedFetch(`/guilds/${guildID}`),
-				authedFetch(`/guilds/${guildID}/settings`)
-			])) as [FlattenedGuild, GuildSettings];
+			const [guildData, guildSettings] = await Promise.all([
+				authedFetch<FlattenedGuild>(`/guilds/${guildID}`),
+				authedFetch<GuildSettings>(`/guilds/${guildID}/settings`)
+			]);
 
 			setGuildData(guildData);
 			setGuildSettings(guildSettings);
-		} catch {
-			navigate('/404');
+		} catch (err) {
+			navigate('/404')();
+		} finally {
+			setIsLoading(false);
 		}
-	};
+	}, [guildID]);
 
 	useEffect(() => {
 		syncGuildData();
-	}, []); // eslint-disable-line
+	}, [syncGuildData]);
 
 	const submitChanges = async () => {
 		try {
-			setIsUpdating(true);
+			setIsLoading(true);
 
 			const response = (await authedFetch(`/guilds/${guildID}/settings`, {
 				method: 'POST',
@@ -240,7 +242,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 			} else {
 				setGuildSettingsChanges(undefined);
 				setGuildSettings(response.newSettings);
-				setIsUpdating(false);
+				setIsLoading(false);
 			}
 		} catch {
 			setHasError(true);
@@ -305,7 +307,13 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 
 			<Box component="div" role="presentation" onKeyDown={isOnMobile ? toggleSidebar : noOp}>
 				<List style={{ overflowY: 'auto' }}>
-					<ListItem onClick={closeSidebarOnMobile} disabled={!guildData} component={Link} to={`/guilds/${guildID}`} button>
+					<ListItem
+						onClick={closeSidebarOnMobile}
+						disabled={!guildData && !isLoading}
+						component={Link}
+						to={`/guilds/${guildID}`}
+						button
+					>
 						<ListItemIcon>
 							<SettingsIcon />
 						</ListItemIcon>
@@ -316,7 +324,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 
 					<ListItem
 						onClick={closeSidebarOnMobile}
-						disabled={!guildData}
+						disabled={!guildData && !isLoading}
 						component={Link}
 						to={`/guilds/${guildID}/moderation`}
 						button
@@ -328,7 +336,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 					</ListItem>
 
 					{/* ------------------------------- */}
-					<ListItem disabled={!guildData} button onClick={() => handleSubMenu('filter')}>
+					<ListItem disabled={!guildData && !isLoading} button onClick={() => handleSubMenu('filter')}>
 						<ListItemIcon>
 							<FilterListIcon />
 						</ListItemIcon>
@@ -339,7 +347,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 						<List component="div" disablePadding>
 							<ListItem
 								onClick={closeSidebarOnMobile}
-								disabled={!guildData}
+								disabled={!guildData && !isLoading}
 								dense
 								component={Link}
 								to={`/guilds/${guildID}/filter`}
@@ -350,7 +358,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 							</ListItem>
 							<ListItem
 								onClick={closeSidebarOnMobile}
-								disabled={!guildData}
+								disabled={!guildData && !isLoading}
 								dense
 								component={Link}
 								to={`/guilds/${guildID}/filter/capitals`}
@@ -361,7 +369,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 							</ListItem>
 							<ListItem
 								onClick={closeSidebarOnMobile}
-								disabled={!guildData}
+								disabled={!guildData && !isLoading}
 								dense
 								component={Link}
 								to={`/guilds/${guildID}/filter/invites`}
@@ -372,7 +380,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 							</ListItem>
 							<ListItem
 								onClick={closeSidebarOnMobile}
-								disabled={!guildData}
+								disabled={!guildData && !isLoading}
 								dense
 								component={Link}
 								to={`/guilds/${guildID}/filter/links`}
@@ -383,7 +391,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 							</ListItem>
 							<ListItem
 								onClick={closeSidebarOnMobile}
-								disabled={!guildData}
+								disabled={!guildData && !isLoading}
 								dense
 								component={Link}
 								to={`/guilds/${guildID}/filter/messages`}
@@ -394,7 +402,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 							</ListItem>
 							<ListItem
 								onClick={closeSidebarOnMobile}
-								disabled={!guildData}
+								disabled={!guildData && !isLoading}
 								dense
 								component={Link}
 								to={`/guilds/${guildID}/filter/newlines`}
@@ -405,7 +413,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 							</ListItem>
 							<ListItem
 								onClick={closeSidebarOnMobile}
-								disabled={!guildData}
+								disabled={!guildData && !isLoading}
 								dense
 								component={Link}
 								to={`/guilds/${guildID}/filter/reactions`}
@@ -419,7 +427,13 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 
 					{/* ------------------------------- */}
 
-					<ListItem onClick={closeSidebarOnMobile} disabled={!guildData} component={Link} to={`/guilds/${guildID}/events`} button>
+					<ListItem
+						onClick={closeSidebarOnMobile}
+						disabled={!guildData && !isLoading}
+						component={Link}
+						to={`/guilds/${guildID}/events`}
+						button
+					>
 						<ListItemIcon>
 							<EventIcon />
 						</ListItemIcon>
@@ -430,7 +444,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 
 					<ListItem
 						onClick={closeSidebarOnMobile}
-						disabled={!guildData}
+						disabled={!guildData && !isLoading}
 						component={Link}
 						to={`/guilds/${guildID}/channels`}
 						button
@@ -445,7 +459,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 
 					<ListItem
 						onClick={closeSidebarOnMobile}
-						disabled={!guildData}
+						disabled={!guildData && !isLoading}
 						component={Link}
 						to={`/guilds/${guildID}/messages`}
 						button
@@ -458,7 +472,13 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 
 					{/* ------------------------------- */}
 
-					<ListItem onClick={closeSidebarOnMobile} disabled={!guildData} component={Link} to={`/guilds/${guildID}/roles`} button>
+					<ListItem
+						onClick={closeSidebarOnMobile}
+						disabled={!guildData && !isLoading}
+						component={Link}
+						to={`/guilds/${guildID}/roles`}
+						button
+					>
 						<ListItemIcon>
 							<RolesIcon />
 						</ListItemIcon>
@@ -469,7 +489,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 
 					<ListItem
 						onClick={closeSidebarOnMobile}
-						disabled={!guildData}
+						disabled={!guildData && !isLoading}
 						component={Link}
 						to={`/guilds/${guildID}/disabled-commands`}
 						button
@@ -484,7 +504,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 
 					<ListItem
 						onClick={closeSidebarOnMobile}
-						disabled={!guildData}
+						disabled={!guildData && !isLoading}
 						component={Link}
 						to={`/guilds/${guildID}/custom-commands`}
 						button
@@ -499,7 +519,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 
 					<ListItem
 						onClick={closeSidebarOnMobile}
-						disabled={!guildData}
+						disabled={!guildData && !isLoading}
 						component={Link}
 						to={`/guilds/${guildID}/starboard`}
 						button
@@ -512,7 +532,13 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 
 					{/* ------------------------------- */}
 
-					<ListItem onClick={closeSidebarOnMobile} component={Link} to={`/music/${guildID}`} button>
+					<ListItem
+						onClick={closeSidebarOnMobile}
+						disabled={!guildData && !isLoading}
+						component={Link}
+						to={`/music/${guildID}`}
+						button
+					>
 						<ListItemIcon>
 							<MusicIcon />
 						</ListItemIcon>
@@ -531,7 +557,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 
 	return (
 		<>
-			<Backdrop className={classes.backdrop} open={isUpdating}>
+			<Backdrop className={classes.backdrop} open={isLoading}>
 				<CircularProgress color="inherit" />
 			</Backdrop>
 			<ErrorAlert
@@ -690,7 +716,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 					<Slide direction="up" in={Object.keys(guildSettingsChanges ?? {}).length > 0} mountOnEnter unmountOnExit>
 						<Box component="div" className={classes.fabContainer}>
 							<Button
-								disabled={isUpdating}
+								disabled={isLoading}
 								onClick={() => setGuildSettingsChanges(undefined)}
 								color="secondary"
 								classes={{ root: classes.errorButton }}
@@ -701,7 +727,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 								Reset
 							</Button>
 							<Button
-								disabled={isUpdating}
+								disabled={isLoading}
 								onClick={submitChanges}
 								color="primary"
 								variant="contained"

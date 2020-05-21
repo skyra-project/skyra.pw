@@ -109,3 +109,7 @@ export interface FlattenedCommand {
 	requiredPermissions: string[];
 	usage: string;
 }
+
+export interface OauthFlattenedUser extends FlattenedUser {
+	guilds: OauthFlattenedGuild[];
+}

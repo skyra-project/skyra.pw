@@ -1,6 +1,6 @@
 import { BASE_API_URL, history, Time } from 'meta/constants';
 import { getGlobal, setGlobal } from 'reactn';
-import { FlattenedGuild, FlattenedUser } from './typings/ApiData';
+import { FlattenedGuild, FlattenedUser, OauthFlattenedUser } from './typings/ApiData';
 import { SelfmodSliderProp, SelfmodSliderSettings } from './typings/GuildSettings';
 
 export function sleep(ms: number) {
@@ -34,7 +34,7 @@ export const saveState = (key: string, state: unknown) => {
 	}
 };
 
-export async function apiFetch(path: string, options: RequestInit = {}) {
+export async function apiFetch<T>(path: string, options: RequestInit = {}) {
 	if (process.env.NODE_ENV === 'development') {
 		await sleep(1000);
 	}
@@ -52,13 +52,13 @@ export async function apiFetch(path: string, options: RequestInit = {}) {
 	if (jsonResponse.error) {
 		throw response;
 	} else {
-		return jsonResponse;
+		return jsonResponse as T;
 	}
 }
 
-export async function authedFetch(path: string, options: RequestInit = {}) {
+export async function authedFetch<T>(path: string, options: RequestInit = {}) {
 	options.headers = { authorization: getGlobal().token };
-	return apiFetch(path, options);
+	return apiFetch<T>(path, options);
 }
 
 export async function syncUser() {
@@ -74,7 +74,7 @@ export async function syncUser() {
 
 	saveState('last_sync', Date.now());
 
-	const response = await authedFetch('/oauth/user', {
+	const response = await authedFetch<{ access_token: string; user: OauthFlattenedUser }>('/oauth/user', {
 		method: 'POST',
 		body: JSON.stringify({
 			action: 'SYNC_USER'

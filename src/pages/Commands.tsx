@@ -75,7 +75,7 @@ export default () => {
 	};
 
 	useEffect(() => {
-		apiFetch('/commands').then(commands => {
+		apiFetch<FlattenedCommand[]>('/commands').then(commands => {
 			setCommands(commands);
 			setLoading(false);
 		});
