@@ -1,12 +1,20 @@
-import React, { useRef, useState, useEffect, FC } from 'react';
-import { FormControl, InputLabel, Select as MSelect, FormHelperText, SelectProps as MSelectProps } from '@material-ui/core';
-import clsx from 'clsx';
+import FormControl, { FormControlProps } from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import InputLabel from '@material-ui/core/InputLabel';
+import MSelect, { SelectProps as MSelectProps } from '@material-ui/core/Select';
+import React, { FC, useEffect, useRef, useState } from 'react';
 
+/**
+ * Props to pass to the Select component.
+ * Any additional props will be passed to the Material-UI Select component
+ */
 interface SelectProps extends MSelectProps {
 	title: string;
 	helperText?: string;
-	customClasses?: string;
-	customFormControlClasses?: string;
+	fullWidth?: boolean;
+
+	/** Additional props to pass to the FormControl component */
+	FormControlProps?: FormControlProps;
 
 	onChange: (...args: any[]) => void;
 }
@@ -17,9 +25,10 @@ const Select: FC<SelectProps> = ({
 	value,
 	children,
 	error,
+	fullWidth = false,
 	helperText = '',
-	customClasses = '',
-	customFormControlClasses = ''
+	FormControlProps,
+	...props
 }) => {
 	const inputLabel = useRef<HTMLLabelElement>(null);
 	const [labelWidth, setLabelWidth] = useState(0);
@@ -31,16 +40,17 @@ const Select: FC<SelectProps> = ({
 	}, []);
 
 	return (
-		<FormControl error={error} classes={{ root: customFormControlClasses }}>
+		<FormControl {...FormControlProps} fullWidth={fullWidth} error={error}>
 			<InputLabel id={`label-for-${title}-select`} ref={inputLabel}>
 				{title}
 			</InputLabel>
 			<MSelect
-				className={clsx(customClasses)}
+				{...props}
 				labelId={`label-for-${title}-select`}
 				value={value}
 				onChange={onChange}
 				labelWidth={labelWidth}
+				fullWidth={fullWidth}
 			>
 				{children}
 			</MSelect>

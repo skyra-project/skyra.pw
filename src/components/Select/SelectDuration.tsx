@@ -123,8 +123,8 @@ const SelectDuration: FC<SelectDurationProps> = ({ value, min, max, onChange }) 
 				}}
 			/>
 			<Select
-				customClasses={classes.selectBox}
-				customFormControlClasses={classes.selectBoxMargin}
+				classes={{ root: classes.selectBox }}
+				FormControlProps={{ classes: { root: classes.selectBoxMargin } }}
 				title={error ? '' : 'Duration unit'}
 				error={Boolean(error)}
 				value={unit}
