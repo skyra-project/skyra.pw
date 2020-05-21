@@ -29,6 +29,11 @@ const useStyles = makeStyles((theme: Theme) =>
 		tagHeader: {
 			textDecoration: 'underline',
 			fontWeight: 'bolder'
+		},
+		button: {
+			[theme.breakpoints.only('md')]: {
+				minHeight: 60
+			}
 		}
 	})
 );
@@ -110,7 +115,13 @@ const CustomCommandsPage = ({ patchGuildData, guildSettings: { tags, prefix } }:
 									required
 									fullWidth
 								/>
-								<Button onClick={submitForm} color="primary" variant="contained">
+								<Button
+									fullWidth
+									classes={{ root: classes.button }}
+									onClick={submitForm}
+									color="primary"
+									variant="contained"
+								>
 									Add
 								</Button>
 							</>
