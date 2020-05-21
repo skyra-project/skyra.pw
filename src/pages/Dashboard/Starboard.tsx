@@ -26,71 +26,69 @@ const StarboardPage = (props: PropsWithChildren<SettingsPageProps>) => {
 
 	return (
 		<Section title="Starboard Settings">
-			<SimpleGrid>
-				<SimpleGrid
-					direction="row"
-					justify="flex-start"
-					gridItemProps={{
-						xs: 12,
-						sm: 12,
-						md: 12,
-						lg: 12,
-						xl: 12
+			<SimpleGrid
+				direction="row"
+				justify="flex-start"
+				gridItemProps={{
+					xs: 12,
+					sm: 12,
+					md: 12,
+					lg: 12,
+					xl: 12
+				}}
+			>
+				<SelectInteger
+					value={props.guildSettings.starboard.minimum}
+					label="Minimum Stars"
+					min={1}
+					max={100}
+					fullWidth
+					onChange={r =>
+						props.patchGuildData({
+							starboard: {
+								minimum: r.target.value
+							}
+						})
+					}
+				/>
+				<SelectChannel
+					value={props.guildSettings.starboard.channel}
+					label="Starboard Channel"
+					onChange={c =>
+						props.patchGuildData({
+							starboard: {
+								channel: c
+							}
+						})
+					}
+					guild={props.guildData}
+					buttonProps={{
+						fullWidth: true,
+						classes: {
+							root: classes.button,
+							label: classes.buttonText
+						}
 					}}
-				>
-					<SelectInteger
-						value={props.guildSettings.starboard.minimum}
-						label="Minimum Stars"
-						min={1}
-						max={100}
-						fullWidth
-						onChange={r =>
-							props.patchGuildData({
-								starboard: {
-									minimum: r.target.value
-								}
-							})
-						}
-					/>
-					<SelectChannel
-						value={props.guildSettings.starboard.channel}
-						label="Starboard Channel"
-						onChange={c =>
-							props.patchGuildData({
-								starboard: {
-									channel: c
-								}
-							})
-						}
-						guild={props.guildData}
-						buttonProps={{
-							fullWidth: true,
-							classes: {
-								root: classes.button,
-								label: classes.buttonText
+				/>
+				<SelectChannels
+					value={props.guildSettings.starboard.ignoreChannels}
+					onChange={channels =>
+						props.patchGuildData({
+							starboard: {
+								ignoreChannels: channels
 							}
-						}}
-					/>
-					<SelectChannels
-						value={props.guildSettings.starboard.ignoreChannels}
-						onChange={channels =>
-							props.patchGuildData({
-								starboard: {
-									ignoreChannels: channels
-								}
-							})
+						})
+					}
+					guild={props.guildData}
+					label="Ignored Channels"
+					buttonProps={{
+						fullWidth: true,
+						classes: {
+							root: classes.button,
+							label: classes.buttonText
 						}
-						guild={props.guildData}
-						label="Ignored Channels"
-						buttonProps={{
-							fullWidth: true,
-							classes: {
-								root: classes.button,
-								label: classes.buttonText
-							}
-						}}
-					/>
-				</SimpleGrid>
+					}}
+				/>
 			</SimpleGrid>
 		</Section>
 	);
