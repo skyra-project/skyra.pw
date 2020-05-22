@@ -8,8 +8,6 @@ export interface SettingsPageProps {
 	patchGuildData: (changes?: DeepPartial<GuildSettings>) => void;
 }
 
-export type IndexedGuildSettings = GuildSettings & Record<PropertyKey, unknown>;
-
 export interface GuildSettings {
 	'command-autodelete': [string, number][];
 	'custom-commands': CustomCommand[];

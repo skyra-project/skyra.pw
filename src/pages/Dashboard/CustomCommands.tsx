@@ -236,18 +236,11 @@ const CustomCommandsPage = ({
 									<ListItemSecondaryAction>
 										<IconButton
 											edge="end"
-											onClick={() => {
-												console.log('prefilter: ', customCommands);
-												console.log('to filter: ', name);
-												console.log(
-													'postFilter: ',
-													customCommands.filter(command => command.id !== name)
-												);
-												console.log('about to patch');
-												return patchGuildData({
+											onClick={() =>
+												patchGuildData({
 													'custom-commands': customCommands.filter(command => command.id !== name)
-												});
-											}}
+												})
+											}
 										>
 											<DeleteIcon />
 										</IconButton>
