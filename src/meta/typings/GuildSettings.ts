@@ -10,6 +10,7 @@ export interface SettingsPageProps {
 
 export interface GuildSettings {
 	'command-autodelete': [string, number][];
+	'custom-commands': [string, string][];
 	'no-mention-spam': NoMentionSpam;
 	channels: Channels;
 	commandUses: number;
@@ -27,7 +28,6 @@ export interface GuildSettings {
 	social: Social;
 	starboard: Starboard;
 	stickyRoles: StickyRole[];
-	tags: [string, string][];
 	trigger: Trigger;
 }
 

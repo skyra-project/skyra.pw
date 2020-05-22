@@ -1,3 +1,7 @@
+// TODO: USE SAME VERIFICATION AS SERIALIZER
+// TODO: CHANGE STRUCTURE TO MATCH TYPINGS
+// TODO: ENSURE COMMANDS CANNOT BE ADDED TWICE UNDER THE SAME NAME
+
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
@@ -38,7 +42,10 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const CustomCommandsPage = ({ patchGuildData, guildSettings: { tags, prefix } }: PropsWithChildren<SettingsPageProps>) => {
+const CustomCommandsPage = ({
+	patchGuildData,
+	guildSettings: { 'custom-commands': customCommands, prefix }
+}: PropsWithChildren<SettingsPageProps>) => {
 	const classes = useStyles();
 	const validationSchema = object<NewTagForm>({
 		name: string().required('A tag must have a name'),
@@ -57,15 +64,15 @@ const CustomCommandsPage = ({ patchGuildData, guildSettings: { tags, prefix } }:
 		onSubmit: ({ name, content }, { setSubmitting }) => {
 			setSubmitting(true);
 
-			// if (tags.some(tag => tag[0] === name)) return;
-			patchGuildData({ tags: [...tags, [name, content]] });
+			if (customCommands.some(customCommand => customCommand[0] === name)) return;
+			patchGuildData({ 'custom-commands': [...customCommands, [name, content]] });
 
 			setSubmitting(false);
 		}
 	};
 
-	const sortTags = (firstTag: [string, string], secondTag: [string, string]) => {
-		return firstTag[0] < secondTag[0] ? -1 : firstTag[0] > secondTag[0] ? 1 : 0;
+	const sortCommands = (firstCommand: [string, string], secondCommand: [string, string]) => {
+		return firstCommand[0] < secondCommand[0] ? -1 : firstCommand[0] > secondCommand[0] ? 1 : 0;
 	};
 
 	return (
@@ -142,8 +149,8 @@ const CustomCommandsPage = ({ patchGuildData, guildSettings: { tags, prefix } }:
 					}}
 				>
 					<List>
-						{tags.length > 0 ? (
-							tags.sort(sortTags).map(([name, content]) => (
+						{customCommands.length > 0 ? (
+							customCommands.sort(sortCommands).map(([name, content]) => (
 								<ListItem key={name}>
 									<ListItemText
 										disableTypography
@@ -161,7 +168,9 @@ const CustomCommandsPage = ({ patchGuildData, guildSettings: { tags, prefix } }:
 									<ListItemSecondaryAction>
 										<IconButton
 											edge="end"
-											onClick={() => patchGuildData({ tags: tags.filter(tag => tag[0] !== name) })}
+											onClick={() =>
+												patchGuildData({ 'custom-commands': customCommands.filter(command => command[0] !== name) })
+											}
 										>
 											<DeleteIcon />
 										</IconButton>
