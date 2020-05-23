@@ -1,4 +1,4 @@
-# Skyra.PW [![Discord](https://discordapp.com/api/guilds/254360814063058944/embed.png)](https://join.skyra.pw)
+# Skyra.PW [![Discord](https://discord.com/api/guilds/254360814063058944/embed.png)](https://join.skyra.pw)
 
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/skyra-project/skyra.pw.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/skyra-project/skyra.pw/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/skyra-project/skyra.pw.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/skyra-project/skyra.pw/context:javascript)
@@ -11,7 +11,7 @@ After forking/cloning this repo to a folder locally:
 
 1. Duplicate `.env.development` and rename it to `.env.development.local`
 2. Replace the value of `REACT_APP_CLIENT_ID` to your bot's ID
-3. Go to the Discord developer portal: https://discordapp.com/developers/applications/
+3. Go to the Discord developer portal: https://discord.com/developers/applications/
 4. Select your bot application and go to the `OAuth2` tab
 5. Add redirect URL's for `http://localhost:3000/oauth/callback` and `http://localhost:3000/oauth/guild`
 6. Run a local instance of Skyra, be sure to follow it's local development guidelines as well.
