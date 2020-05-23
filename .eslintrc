@@ -11,5 +11,14 @@
 		"padded-blocks": "off",
 		"quote-props": "off",
 		"function-paren-newline": "off"
-	}
+	},
+		"overrides": [
+		{
+			"files": ["src/lib/structures/color/*.ts"],
+			"rules": {
+				"import/first": 0,
+				"no-throw-literal": 0
+			}
+		}
+	]
 }

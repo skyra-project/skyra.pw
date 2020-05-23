@@ -7,7 +7,7 @@ import SelectBoolean from 'components/Select/SelectBoolean';
 import SelectRole from 'components/Select/SelectRole';
 import SelectRoles from 'components/Select/SelectRoles';
 import SimpleGrid from 'components/SimpleGrid';
-import { Roles, SettingsPageProps } from 'meta/typings/GuildSettings';
+import { Roles, SettingsPageProps } from 'lib/types/GuildSettings';
 import React, { PropsWithChildren } from 'react';
 import { PickByValue } from 'utility-types';
 

@@ -15,9 +15,9 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Section from 'components/Section';
 import SelectBoolean from 'components/Select/SelectBoolean';
-import { FlattenedCommand } from 'meta/typings/ApiData';
-import { SettingsPageProps } from 'meta/typings/GuildSettings';
-import { apiFetch, parseCommandDescription } from 'meta/util';
+import { FlattenedCommand } from 'lib/types/ApiData';
+import { SettingsPageProps } from 'lib/types/GuildSettings';
+import { apiFetch, parseCommandDescription } from 'lib/util/util';
 import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>

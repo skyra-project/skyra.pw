@@ -1,7 +1,8 @@
-import { BASE_API_URL, history, Time } from 'meta/constants';
 import { getGlobal, setGlobal } from 'reactn';
-import { FlattenedGuild, FlattenedUser, OauthFlattenedUser } from './typings/ApiData';
-import { SelfmodSliderProp, SelfmodSliderSettings } from './typings/GuildSettings';
+import { FlattenedGuild, OauthFlattenedUser } from '../types/ApiData';
+import { SelfmodSliderProp, SelfmodSliderSettings } from '../types/GuildSettings';
+import { BASE_API_URL, history } from './constants';
+import { Time } from './skyraUtils';
 
 export function sleep(ms: number) {
 	return new Promise(resolve => setTimeout(resolve, ms));
@@ -104,21 +105,6 @@ export function navigate(path: string) {
 	return () => history.push(path);
 }
 
-export function toTitleCase(str: string) {
-	const splitStr = str.toLowerCase().replace(/-/g, ' ').split(' ');
-	for (let i = 0; i < splitStr.length; i++) {
-		splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-	}
-	return splitStr.join(' ');
-}
-
-export function displayAvatarURL(user: FlattenedUser, { format = 'default', size = 256 } = {}) {
-	if (!user) return `https://cdn.discordapp.com/embed/avatars/${Math.floor(Math.random() * 4) + 1}.png`;
-	if (user.avatar === null) return `https://cdn.discordapp.com/embed/avatars/${user.discriminator}.png`;
-	if (format === 'default') format = user.avatar.startsWith('a_') ? 'gif' : 'png';
-	return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${format}${`?size=${size}`}`;
-}
-
 export function displayIconURL(guild: FlattenedGuild, { format = 'default', size = 256 } = {}) {
 	if (guild.icon === null) return undefined;
 	if (format === 'default') format = guild.icon.startsWith('a_') ? 'gif' : 'png';
@@ -158,37 +144,6 @@ export function bitwiseHas(bits: number, bit: number) {
  */
 export function bitwiseSet(bits: number, bit: number, toggle: boolean) {
 	return toggle ? bits | bit : bits & ~bit;
-}
-
-/**
- * No operation function
- */
-export function noOp() {
-	return undefined;
-}
-
-/**
- * Split a string by its latest space character in a range from the character 0 to the selected one.
- * @param str The text to split.
- * @param length The length of the desired string.
- * @param char The character to split with
- */
-export function splitText(str: string, length: number, char = ' ') {
-	const x = str.substring(0, length).lastIndexOf(char);
-	const pos = x === -1 ? length : x;
-	return str.substring(0, pos);
-}
-
-/**
- * Split a text by its latest space character in a range from the character 0 to the selected one.
- * @param str The text to split.
- * @param length The length of the desired string.
- */
-export function cutText(str: string, length: number) {
-	if (str.length < length) return str;
-	const cut = splitText(str, length - 3);
-	if (cut.length < length - 3) return `${cut}...`;
-	return `${cut.slice(0, length - 3)}...`;
 }
 
 /**

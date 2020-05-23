@@ -3,7 +3,7 @@ import Section from 'components/Section';
 import SelectChannel from 'components/Select/SelectChannel';
 import SelectChannels from 'components/Select/SelectChannels';
 import SimpleGrid from 'components/SimpleGrid';
-import { Channels, SettingsPageProps } from 'meta/typings/GuildSettings';
+import { Channels, SettingsPageProps } from 'lib/types/GuildSettings';
 import React, { PropsWithChildren } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>

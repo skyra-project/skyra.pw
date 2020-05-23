@@ -6,7 +6,7 @@ import Select from 'components/Select/Select';
 import SimpleGrid from 'components/SimpleGrid';
 import { FastField } from 'formik';
 import { TextField } from 'formik-material-ui';
-import { SettingsPageProps } from 'meta/typings/GuildSettings';
+import { SettingsPageProps } from 'lib/types/GuildSettings';
 import React, { PropsWithChildren } from 'react';
 import { object, string } from 'yup';
 

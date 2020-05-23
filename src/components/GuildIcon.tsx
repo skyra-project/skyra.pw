@@ -1,8 +1,8 @@
 import { Avatar, createStyles, makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import Link from 'components/Link';
-import { FlattenedGuild } from 'meta/typings/ApiData';
-import { displayIconURL, getAcronym } from 'meta/util';
+import { FlattenedGuild } from 'lib/types/ApiData';
+import { displayIconURL, getAcronym } from 'lib/util/util';
 import React, { Fragment, PropsWithChildren } from 'react';
 
 interface GuildIconProps {

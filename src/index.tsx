@@ -1,6 +1,6 @@
 import Root from 'components/Root';
-import { FlattenedGuild, FlattenedUser } from 'meta/typings/ApiData';
-import { loadState, logOut } from 'meta/util';
+import { FlattenedGuild, FlattenedUser } from 'lib/types/ApiData';
+import { loadState, logOut } from 'lib/util/util';
 import { render } from 'react-dom';
 import React, { setGlobal } from 'reactn';
 import addReactNDevTools from 'reactn-devtools';

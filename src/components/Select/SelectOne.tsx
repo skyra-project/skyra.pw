@@ -1,3 +1,4 @@
+import { toTitleCase } from 'lib/util/klasaUtils';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Button, { ButtonProps as MButtonProps } from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,7 +10,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import DialogTitle from 'components/DialogTitle';
 import SearchBar from 'components/SearchBar';
 import Tooltip from 'components/Tooltip';
-import { toTitleCase } from 'meta/util';
 import React, { ChangeEvent, Fragment, ReactNode, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 

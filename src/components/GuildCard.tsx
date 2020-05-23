@@ -2,9 +2,9 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import GuildIcon from 'components/GuildIcon';
-import { guildAddURL } from 'meta/constants';
-import { FlattenedGuild } from 'meta/typings/ApiData';
-import { navigate } from 'meta/util';
+import { guildAddURL } from 'lib/util/constants';
+import { FlattenedGuild } from 'lib/types/ApiData';
+import { navigate } from 'lib/util/util';
 import React, { PropsWithChildren } from 'react';
 
 interface GuildCardProps {

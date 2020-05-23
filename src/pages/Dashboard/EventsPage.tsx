@@ -2,7 +2,7 @@ import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import Section from 'components/Section';
 import SelectBoolean from 'components/Select/SelectBoolean';
 import SimpleGrid from 'components/SimpleGrid';
-import { Events, SettingsPageProps } from 'meta/typings/GuildSettings';
+import { Events, SettingsPageProps } from 'lib/types/GuildSettings';
 import React, { PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
 

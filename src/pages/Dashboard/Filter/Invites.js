@@ -6,7 +6,7 @@ import SelectBoolean from 'components/Select/SelectBoolean';
 import SelectDuration from 'components/Select/SelectDuration';
 import SimpleGrid from 'components/SimpleGrid';
 import Slider from 'components/Slider';
-import { bitwiseHas, bitwiseSet, updateSliderValueObj } from 'meta/util';
+import { bitwiseHas, bitwiseSet, updateSliderValueObj } from 'lib/util/util';
 import React, { Fragment } from 'react';
 
 const InvitesFilterPage = props => {

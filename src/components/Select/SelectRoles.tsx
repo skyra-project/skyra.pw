@@ -1,4 +1,4 @@
-import { FlattenedGuild } from 'meta/typings/ApiData';
+import { FlattenedGuild } from 'lib/types/ApiData';
 import React from 'react';
 import SelectMany, { SelectManyProps } from './SelectMany';
 

@@ -12,8 +12,8 @@ import SelectBoolean from 'components/Select/SelectBoolean';
 import SelectDuration from 'components/Select/SelectDuration';
 import SimpleGrid from 'components/SimpleGrid';
 import Slider from 'components/Slider';
-import { SettingsPageProps } from 'meta/typings/GuildSettings';
-import { bitwiseHas, bitwiseSet, removeNonAlphaNumeric, updateSliderValueObj } from 'meta/util';
+import { SettingsPageProps } from 'lib/types/GuildSettings';
+import { bitwiseHas, bitwiseSet, removeNonAlphaNumeric, updateSliderValueObj } from 'lib/util/util';
 import React, { Fragment, PropsWithChildren, useState } from 'react';
 import { When } from 'react-if';
 

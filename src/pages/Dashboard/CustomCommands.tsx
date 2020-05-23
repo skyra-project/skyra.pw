@@ -15,7 +15,7 @@ import Section from 'components/Section';
 import SimpleGrid from 'components/SimpleGrid';
 import { FastField, Formik, FormikConfig } from 'formik';
 import { TextField } from 'formik-material-ui';
-import { SettingsPageProps } from 'meta/typings/GuildSettings';
+import { SettingsPageProps } from 'lib/types/GuildSettings';
 import React, { Fragment, PropsWithChildren } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { object, string } from 'yup';

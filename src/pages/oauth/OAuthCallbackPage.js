@@ -1,8 +1,8 @@
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import GeneralPage from 'components/GeneralPage';
-import { BASE_WEB_URL, history } from 'meta/constants';
-import { apiFetch, saveState } from 'meta/util';
+import { BASE_WEB_URL, history } from 'lib/util/constants';
+import { apiFetch, saveState } from 'lib/util/util';
 import React, { setGlobal, useEffect, useState } from 'reactn';
 
 function DiscordAuthCallbackPage() {
