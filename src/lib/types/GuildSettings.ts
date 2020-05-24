@@ -8,8 +8,11 @@ export interface SettingsPageProps {
 	patchGuildData: (changes?: DeepPartial<GuildSettings>) => void;
 }
 
+export type IndexedGuildSettings = GuildSettings & Record<PropertyKey, unknown>;
+
 export interface GuildSettings {
 	'command-autodelete': [string, number][];
+	'custom-commands': CustomCommand[];
 	'no-mention-spam': NoMentionSpam;
 	channels: Channels;
 	commandUses: number;
@@ -27,7 +30,6 @@ export interface GuildSettings {
 	social: Social;
 	starboard: Starboard;
 	stickyRoles: StickyRole[];
-	tags: [string, string][];
 	trigger: Trigger;
 }
 
@@ -61,6 +63,14 @@ export interface Events {
 interface DisabledCommandChannel {
 	channel: string;
 	commands: readonly string[];
+}
+
+export interface CustomCommand {
+	id: string;
+	content: string;
+	color: number;
+	embed: boolean;
+	args: any[];
 }
 
 interface StickyRole {

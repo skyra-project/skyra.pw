@@ -2,7 +2,7 @@ import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import Section from 'components/Section';
 import SelectBoolean from 'components/Select/SelectBoolean';
 import SimpleGrid from 'components/SimpleGrid';
-import { Events, SettingsPageProps } from 'meta/typings/GuildSettings';
+import { Events, SettingsPageProps } from 'lib/types/GuildSettings';
 import React, { PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -67,10 +67,10 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 							title={title}
 							description={description}
 							currentValue={props.guildSettings.events[key]}
-							onChange={isChecked =>
+							onChange={event =>
 								props.patchGuildData({
 									events: {
-										[key]: isChecked
+										[key]: event.target.checked
 									}
 								})
 							}
@@ -93,10 +93,10 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 							title={title}
 							description={description}
 							currentValue={props.guildSettings.events[key]}
-							onChange={r =>
+							onChange={event =>
 								props.patchGuildData({
 									events: {
-										[key]: r
+										[key]: event.target.checked
 									}
 								})
 							}
@@ -120,10 +120,10 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 							title={title}
 							description={description}
 							currentValue={props.guildSettings.events[key]}
-							onChange={r =>
+							onChange={event =>
 								props.patchGuildData({
 									events: {
-										[key]: r
+										[key]: event.target.checked
 									}
 								})
 							}

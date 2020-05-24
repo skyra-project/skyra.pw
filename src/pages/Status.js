@@ -3,7 +3,7 @@ import { Button, Box, Typography, Divider } from '@material-ui/core';
 import RefreshIcon from '@material-ui/icons/Refresh';
 
 import GeneralPage from 'components/GeneralPage';
-import { apiFetch } from 'meta/util';
+import { apiFetch } from 'lib/util/util';
 
 /* eslint-disable no-invalid-this */
 class StatusPage extends Component {

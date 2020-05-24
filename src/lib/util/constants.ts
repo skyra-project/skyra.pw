@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { createBrowserHistory } from 'history';
-// import URLSearchParams from './URLSearchParams';
+import { createBrowserHistory, History } from 'history';
 
-export const history = createBrowserHistory();
+export const history: History<History.PoorMansUnknown> = createBrowserHistory();
 
 export const CLIENT_ID = process.env.REACT_APP_CLIENT_ID!;
 export const BASE_WEB_URL = process.env.REACT_APP_BASE_WEB_URL!;
@@ -10,8 +9,8 @@ export const BASE_API_URL = process.env.REACT_APP_BASE_API_URL!;
 export const WS_URL = process.env.REACT_APP_WS_URL!;
 export const BASE_CDN_URL = 'https://cdn.skyra.pw';
 
-const DiscordOauthURL = `https://discordapp.com/oauth2/authorize`;
-export const serverURL = 'https://discordapp.com/invite/6gakFR2';
+const DiscordOauthURL = `https://discord.com/oauth2/authorize`;
+export const serverURL = 'https://discord.com/invite/6gakFR2';
 export const oauthURL = new URL(DiscordOauthURL);
 export const inviteURL = new URL(DiscordOauthURL);
 oauthURL.search = new URLSearchParams([
@@ -38,12 +37,3 @@ export const guildAddURL = (guildID: string) => {
 	]).toString();
 	return guildAuthURL.toString();
 };
-
-export enum Time {
-	Millisecond = 1,
-	Second = 1000,
-	Minute = 1000 * 60,
-	Hour = 1000 * 60 * 60,
-	Day = 1000 * 60 * 60 * 24,
-	Year = 1000 * 60 * 60 * 24 * 365
-}

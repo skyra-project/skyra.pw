@@ -1,7 +1,7 @@
 import Section from 'components/Section';
 import SelectBoolean from 'components/Select/SelectBoolean';
 import SimpleGrid from 'components/SimpleGrid';
-import { Messages, SettingsPageProps } from 'meta/typings/GuildSettings';
+import { Messages, SettingsPageProps } from 'lib/types/GuildSettings';
 import React, { PropsWithChildren } from 'react';
 import { PickByValue } from 'utility-types';
 
@@ -34,10 +34,10 @@ export default (props: PropsWithChildren<SettingsPageProps>) => (
 					title={setting.name}
 					currentValue={props.guildSettings.messages[setting.key]}
 					description={setting.description}
-					onChange={bool =>
+					onChange={event =>
 						props.patchGuildData({
 							messages: {
-								[setting.key]: bool
+								[setting.key]: event.target.checked
 							}
 						})
 					}

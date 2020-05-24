@@ -4,7 +4,7 @@ import SelectChannel from 'components/Select/SelectChannel';
 import SelectChannels from 'components/Select/SelectChannels';
 import SelectInteger from 'components/Select/SelectInteger';
 import SimpleGrid from 'components/SimpleGrid';
-import { SettingsPageProps } from 'meta/typings/GuildSettings';
+import { SettingsPageProps } from 'lib/types/GuildSettings';
 import React, { PropsWithChildren } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>

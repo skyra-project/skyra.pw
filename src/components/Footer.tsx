@@ -5,7 +5,7 @@ import Hidden from '@material-ui/core/Hidden';
 import Typography from '@material-ui/core/Typography';
 import SkyraLogo from 'assets/skyraLogo';
 import Link from 'components/Link';
-import { CLIENT_ID, inviteURL } from 'meta/constants';
+import { CLIENT_ID, inviteURL } from 'lib/util/constants';
 import React from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>

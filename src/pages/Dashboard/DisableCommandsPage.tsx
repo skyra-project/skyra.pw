@@ -15,9 +15,9 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Section from 'components/Section';
 import SelectBoolean from 'components/Select/SelectBoolean';
-import { FlattenedCommand } from 'meta/typings/ApiData';
-import { SettingsPageProps } from 'meta/typings/GuildSettings';
-import { apiFetch, parseCommandDescription } from 'meta/util';
+import { FlattenedCommand } from 'lib/types/ApiData';
+import { SettingsPageProps } from 'lib/types/GuildSettings';
+import { apiFetch, parseCommandDescription } from 'lib/util/util';
 import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -125,8 +125,11 @@ export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWi
 													title={cmd.name}
 													description={parseCommandDescription(cmd.description)}
 													currentValue={cmd.isEnabled}
-													onChange={isEnabled => {
-														return setCommands({ ...commands, [cmd.name]: { ...cmd, isEnabled } });
+													onChange={event => {
+														return setCommands({
+															...commands,
+															[cmd.name]: { ...cmd, isEnabled: event.target.checked }
+														});
 													}}
 												/>
 											</Grid>

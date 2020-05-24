@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import ForumIcon from '@material-ui/icons/Forum';
 import HomeIcon from '@material-ui/icons/Home';
 import GeneralPage from 'components/GeneralPage';
-import { navigate } from 'meta/util';
+import { navigate } from 'lib/util/util';
 import React from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>

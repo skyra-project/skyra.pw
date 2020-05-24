@@ -16,11 +16,12 @@ import DiscordChatIcon from '@material-ui/icons/Forum';
 import MenuIcon from '@material-ui/icons/Menu';
 import SyncIcon from '@material-ui/icons/Sync';
 import LoginIcon from '@material-ui/icons/VpnKey';
-import { oauthURL } from 'meta/constants';
-import { displayAvatarURL, logOut, navigate, syncUser } from 'meta/util';
+import { oauthURL } from 'lib/util/constants';
+import { logOut, navigate, syncUser } from 'lib/util/util';
 import React, { useEffect, useRef, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import { useGlobal } from 'reactn';
+import { displayAvatarURL } from 'lib/util/skyraUtils';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -110,11 +111,7 @@ export default () => {
 			>
 				<If condition={authenticated}>
 					<Then>
-						<Avatar
-							// style={{ marginRight: 5, height: 40, width: 40 }}
-							src={displayAvatarURL(user, { size: 32 })}
-							alt=""
-						/>
+						<Avatar src={displayAvatarURL(user, { size: 32 })} alt="U" />
 					</Then>
 					<Else>
 						<MenuIcon />

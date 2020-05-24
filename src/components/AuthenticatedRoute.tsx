@@ -1,4 +1,4 @@
-import { SettingsPageProps } from 'meta/typings/GuildSettings';
+import { SettingsPageProps } from 'lib/types/GuildSettings';
 import React, { ComponentType, createElement } from 'react';
 import { Redirect, Route, RouteComponentProps, RouteProps } from 'react-router-dom';
 import { useGlobal } from 'reactn';

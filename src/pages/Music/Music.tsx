@@ -16,7 +16,7 @@ import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import GeneralPage from 'components/GeneralPage';
 import Link from 'components/Link';
-import { WS_URL } from 'meta/constants';
+import { WS_URL } from 'lib/util/constants';
 import {
 	ClientActions,
 	IncomingWebsocketMessage,
@@ -25,8 +25,8 @@ import {
 	MusicStatus,
 	OutgoingWebsocketMessage,
 	ServerActions
-} from 'meta/typings/Music';
-import { getAcronym } from 'meta/util';
+} from 'lib/types/Music';
+import { getAcronym } from 'lib/util/util';
 import { useRef } from 'react';
 import FlipMove from 'react-flip-move';
 import { Else, If, Then, When } from 'react-if';

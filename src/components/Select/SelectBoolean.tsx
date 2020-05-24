@@ -1,19 +1,23 @@
-import React from 'reactn';
-import { Switch, FormControlLabel, ListItemText } from '@material-ui/core';
+import FormControlLabel, { FormControlLabelProps } from '@material-ui/core/FormControlLabel';
+import ListItemText from '@material-ui/core/ListItemText';
+import Switch, { SwitchProps } from '@material-ui/core/Switch';
+import React from 'react';
 
-export interface SelectBooleanProps {
+export interface SelectBooleanProps extends SwitchProps {
+	/** The title to show next to the Switch */
 	title: string;
+	/** The current value of the Switch */
 	currentValue: boolean;
+	/** Description to show under the Switch */
 	description?: string;
-
-	onChange(isChecked: boolean): void;
+	/** Additional props to pass to the FormControlLabel component */
+	FormControlLabelProps?: FormControlLabelProps;
 }
 
-export default function SelectBoolean({ title, currentValue, onChange, description }: SelectBooleanProps) {
-	return (
-		<FormControlLabel
-			control={<Switch checked={currentValue} onChange={event => onChange(event.target.checked)} color="primary" />}
-			label={<ListItemText primary={title} secondary={description} />}
-		/>
-	);
-}
+export default ({ title, currentValue, onChange, description, FormControlLabelProps, ...props }: SelectBooleanProps) => (
+	<FormControlLabel
+		{...FormControlLabelProps}
+		control={<Switch {...props} checked={currentValue} onChange={onChange} color="primary" />}
+		label={<ListItemText primary={title} secondary={description} />}
+	/>
+);

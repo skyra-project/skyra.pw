@@ -11,10 +11,11 @@ import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 import LockIcon from '@material-ui/icons/Lock';
 import GeneralPage from 'components/GeneralPage';
 import Tooltip from 'components/Tooltip';
-import { FlattenedCommand } from 'meta/typings/ApiData';
-import { apiFetch, cutText, parseCommandDescription } from 'meta/util';
+import { FlattenedCommand } from 'lib/types/ApiData';
+import { apiFetch, parseCommandDescription } from 'lib/util/util';
 import React, { useEffect, useState } from 'react';
 import { Else, If, Then } from 'react-if';
+import { cutText } from 'lib/util/skyraUtils';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

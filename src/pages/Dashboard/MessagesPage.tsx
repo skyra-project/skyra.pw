@@ -5,7 +5,7 @@ import SelectBoolean from 'components/Select/SelectBoolean';
 import SelectChannels from 'components/Select/SelectChannels';
 import SimpleGrid from 'components/SimpleGrid';
 import Tooltip from 'components/Tooltip';
-import { Messages, SettingsPageProps } from 'meta/typings/GuildSettings';
+import { Messages, SettingsPageProps } from 'lib/types/GuildSettings';
 import React, { PropsWithChildren } from 'react';
 import { PickByValue } from 'utility-types';
 
@@ -179,10 +179,10 @@ export default ({ guildData, guildSettings, patchGuildData }: PropsWithChildren<
 						title="Send announcements in Message Embeds"
 						currentValue={guildSettings.messages['announcement-embed']}
 						description="Whether announcement messages should be send in Message Embeds"
-						onChange={bool =>
+						onChange={event =>
 							patchGuildData({
 								messages: {
-									'announcement-embed': bool
+									'announcement-embed': event.target.checked
 								}
 							})
 						}

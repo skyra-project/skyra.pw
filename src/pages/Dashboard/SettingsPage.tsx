@@ -1,12 +1,12 @@
 import MenuItem from '@material-ui/core/MenuItem';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AutoSavingForm from 'components/Formik/AutoSaveForm';
+import TextField from 'components/Formik/TextField';
 import Section from 'components/Section';
 import Select from 'components/Select/Select';
 import SimpleGrid from 'components/SimpleGrid';
 import { FastField } from 'formik';
-import { TextField } from 'formik-material-ui';
-import { SettingsPageProps } from 'meta/typings/GuildSettings';
+import { SettingsPageProps } from 'lib/types/GuildSettings';
 import React, { PropsWithChildren } from 'react';
 import { object, string } from 'yup';
 
@@ -60,13 +60,6 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 						type="text"
 						label="Prefix"
 						placeholder="This is your server's prefix, use it to trigger Skyra commands."
-						autoComplete="on"
-						autoCorrect="off"
-						autoCapitalize="off"
-						spellCheck="off"
-						required
-						autoFocus
-						fullWidth
 					/>
 				</AutoSavingForm>
 				<Select

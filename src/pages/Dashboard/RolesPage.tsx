@@ -7,7 +7,7 @@ import SelectBoolean from 'components/Select/SelectBoolean';
 import SelectRole from 'components/Select/SelectRole';
 import SelectRoles from 'components/Select/SelectRoles';
 import SimpleGrid from 'components/SimpleGrid';
-import { Roles, SettingsPageProps } from 'meta/typings/GuildSettings';
+import { Roles, SettingsPageProps } from 'lib/types/GuildSettings';
 import React, { PropsWithChildren } from 'react';
 import { PickByValue } from 'utility-types';
 
@@ -51,10 +51,10 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 					title={REMOVE_INITIAL.name}
 					description={REMOVE_INITIAL.tooltip}
 					currentValue={props.guildSettings.roles.removeInitial}
-					onChange={isChecked =>
+					onChange={event =>
 						props.patchGuildData({
 							roles: {
-								removeInitial: isChecked
+								removeInitial: event.target.checked
 							}
 						})
 					}

@@ -6,7 +6,7 @@ import SelectBoolean from 'components/Select/SelectBoolean';
 import SelectDuration from 'components/Select/SelectDuration';
 import SimpleGrid from 'components/SimpleGrid';
 import Slider from 'components/Slider';
-import { bitwiseHas, bitwiseSet, updateSliderValueObj } from 'meta/util';
+import { bitwiseHas, bitwiseSet, updateSliderValueObj } from 'lib/util/util';
 import React, { Fragment } from 'react';
 
 const InvitesFilterPage = props => {
@@ -18,30 +18,36 @@ const InvitesFilterPage = props => {
 				<SimpleGrid>
 					<SelectBoolean
 						title={`Filter ${invites.enabled ? 'Enabled' : 'Disabled'}`}
-						onChange={bool => props.patchGuildData({ selfmod: { invites: { enabled: bool } } })}
+						onChange={event => props.patchGuildData({ selfmod: { invites: { enabled: event.target.checked } } })}
 						currentValue={invites.enabled}
 						description="Whether or not this system should be enabled."
 					/>
 					<SelectBoolean
 						title={`Alerts ${bitwiseHas(invites.softAction, 0b100) ? 'Enabled' : 'Disabled'}`}
-						onChange={bool =>
-							props.patchGuildData({ selfmod: { invites: { softAction: bitwiseSet(invites.softAction, 0b100, bool) } } })
+						onChange={event =>
+							props.patchGuildData({
+								selfmod: { invites: { softAction: bitwiseSet(invites.softAction, 0b100, event.target.checked) } }
+							})
 						}
 						currentValue={bitwiseHas(invites.softAction, 0b100)}
 						description="Toggle message alerts in the channel the infraction took place."
 					/>
 					<SelectBoolean
 						title={`Logs ${bitwiseHas(invites.softAction, 0b010) ? 'Enabled' : 'Disabled'}`}
-						onChange={bool =>
-							props.patchGuildData({ selfmod: { invites: { softAction: bitwiseSet(invites.softAction, 0b010, bool) } } })
+						onChange={event =>
+							props.patchGuildData({
+								selfmod: { invites: { softAction: bitwiseSet(invites.softAction, 0b010, event.target.checked) } }
+							})
 						}
 						currentValue={bitwiseHas(invites.softAction, 0b010)}
 						description="Toggle message logs in the moderation logs channel."
 					/>
 					<SelectBoolean
 						title={`Deletes ${bitwiseHas(invites.softAction, 0b001) ? 'Enabled' : 'Disabled'}`}
-						onChange={bool =>
-							props.patchGuildData({ selfmod: { invites: { softAction: bitwiseSet(invites.softAction, 0b001, bool) } } })
+						onChange={event =>
+							props.patchGuildData({
+								selfmod: { invites: { softAction: bitwiseSet(invites.softAction, 0b001, event.target.checked) } }
+							})
 						}
 						currentValue={bitwiseHas(invites.softAction, 0b001)}
 						description="Toggle message deletions."

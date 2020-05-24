@@ -2,10 +2,10 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Grow from '@material-ui/core/Grow';
 import Snackbar from '@material-ui/core/Snackbar';
 import AlertTitle from '@material-ui/lab/AlertTitle';
+import { Time } from 'lib/util/skyraUtils';
 import { PropsWithChildren, ReactNode } from 'react';
 import React from 'reactn';
 import BaseAlert from './Base';
-import { Time } from 'meta/constants';
 
 /** Props to pass to the ErrorAlert component, any additional props are passed to the `Snackbar` component */
 interface ErrorAlertProps {
