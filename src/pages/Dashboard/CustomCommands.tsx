@@ -64,10 +64,16 @@ const CustomCommandsPage = ({
 }: PropsWithChildren<SettingsPageProps>) => {
 	const classes = useStyles();
 	const validationSchema = object<NewTagForm>({
-		id: string().required('A tag must have a name'),
+		id: string()
+			.required('A tag must have a name')
+			.max(50, 'A tag name must be 50 or less characters long.')
+			.matches(/[^`\u200B]/, {
+				excludeEmptyString: true,
+				message: 'A tag name may not have a grave accent nor invisible characters.'
+			}),
 		content: string()
 			.required('A custom command must have content to send')
-			.max(2000, 'Custom command length cannot exceed 2000 characters'),
+			.max(1950, 'Custom command length cannot exceed 1950 characters'),
 		color: string().required().default('#1E88E5').ensure(),
 		embed: boolean().defined().default(false)
 	});
