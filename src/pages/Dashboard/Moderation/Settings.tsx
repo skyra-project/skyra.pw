@@ -34,10 +34,10 @@ export default (props: PropsWithChildren<SettingsPageProps>) => (
 					title={setting.name}
 					currentValue={props.guildSettings.messages[setting.key]}
 					description={setting.description}
-					onChange={bool =>
+					onChange={event =>
 						props.patchGuildData({
 							messages: {
-								[setting.key]: bool
+								[setting.key]: event.target.checked
 							}
 						})
 					}

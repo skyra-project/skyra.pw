@@ -179,10 +179,10 @@ export default ({ guildData, guildSettings, patchGuildData }: PropsWithChildren<
 						title="Send announcements in Message Embeds"
 						currentValue={guildSettings.messages['announcement-embed']}
 						description="Whether announcement messages should be send in Message Embeds"
-						onChange={bool =>
+						onChange={event =>
 							patchGuildData({
 								messages: {
-									'announcement-embed': bool
+									'announcement-embed': event.target.checked
 								}
 							})
 						}

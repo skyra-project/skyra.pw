@@ -43,30 +43,36 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 				<SimpleGrid>
 					<SelectBoolean
 						title={`Filter ${filter.enabled ? 'Enabled' : 'Disabled'}`}
-						onChange={bool => props.patchGuildData({ selfmod: { filter: { enabled: bool } } })}
+						onChange={event => props.patchGuildData({ selfmod: { filter: { enabled: event.target.checked } } })}
 						currentValue={filter.enabled}
 						description="Whether or not this system should be enabled."
 					/>
 					<SelectBoolean
 						title={`Alerts ${bitwiseHas(filter.softAction, 0b100) ? 'Enabled' : 'Disabled'}`}
-						onChange={bool =>
-							props.patchGuildData({ selfmod: { filter: { softAction: bitwiseSet(filter.softAction, 0b100, bool) } } })
+						onChange={event =>
+							props.patchGuildData({
+								selfmod: { filter: { softAction: bitwiseSet(filter.softAction, 0b100, event.target.checked) } }
+							})
 						}
 						currentValue={bitwiseHas(filter.softAction, 0b100)}
 						description="Toggle message alerts in the channel the infraction took place."
 					/>
 					<SelectBoolean
 						title={`Logs ${bitwiseHas(filter.softAction, 0b010) ? 'Enabled' : 'Disabled'}`}
-						onChange={bool =>
-							props.patchGuildData({ selfmod: { filter: { softAction: bitwiseSet(filter.softAction, 0b010, bool) } } })
+						onChange={event =>
+							props.patchGuildData({
+								selfmod: { filter: { softAction: bitwiseSet(filter.softAction, 0b010, event.target.checked) } }
+							})
 						}
 						currentValue={bitwiseHas(filter.softAction, 0b010)}
 						description="Toggle message logs in the moderation logs channel."
 					/>
 					<SelectBoolean
 						title={`Deletes ${bitwiseHas(filter.softAction, 0b001) ? 'Enabled' : 'Disabled'}`}
-						onChange={bool =>
-							props.patchGuildData({ selfmod: { filter: { softAction: bitwiseSet(filter.softAction, 0b001, bool) } } })
+						onChange={event =>
+							props.patchGuildData({
+								selfmod: { filter: { softAction: bitwiseSet(filter.softAction, 0b001, event.target.checked) } }
+							})
 						}
 						currentValue={bitwiseHas(filter.softAction, 0b001)}
 						description="Toggle message deletions."

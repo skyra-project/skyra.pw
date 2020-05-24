@@ -125,8 +125,11 @@ export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWi
 													title={cmd.name}
 													description={parseCommandDescription(cmd.description)}
 													currentValue={cmd.isEnabled}
-													onChange={isEnabled => {
-														return setCommands({ ...commands, [cmd.name]: { ...cmd, isEnabled } });
+													onChange={event => {
+														return setCommands({
+															...commands,
+															[cmd.name]: { ...cmd, isEnabled: event.target.checked }
+														});
 													}}
 												/>
 											</Grid>

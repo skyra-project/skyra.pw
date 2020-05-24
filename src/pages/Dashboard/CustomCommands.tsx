@@ -1,8 +1,7 @@
 // TODO: USE SAME VERIFICATION AS SERIALIZER
-// TODO: CHANGE STRUCTURE TO MATCH TYPINGS
-// TODO: ENSURE COMMANDS CANNOT BE ADDED TWICE UNDER THE SAME NAME
 
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -11,18 +10,23 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import DeleteIcon from '@material-ui/icons/Delete';
+import ColorPicker from 'components/ColorPicker/ColorPicker';
+import SelectWithLabel from 'components/Formik/SelectWithLabel';
+import TextField from 'components/Formik/TextField';
 import Section from 'components/Section';
 import SimpleGrid from 'components/SimpleGrid';
 import { FastField, Formik, FormikConfig } from 'formik';
-import { TextField } from 'formik-material-ui';
-import { SettingsPageProps } from 'lib/types/GuildSettings';
+import { CustomCommand, SettingsPageProps } from 'lib/types/GuildSettings';
+import { parse } from 'lib/util/Color';
 import React, { Fragment, PropsWithChildren } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { object, string } from 'yup';
+import { boolean, object, string } from 'yup';
 
 interface NewTagForm {
-	name: string;
+	id: string;
 	content: string;
+	color: string;
+	embed: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -38,6 +42,18 @@ const useStyles = makeStyles((theme: Theme) =>
 			[theme.breakpoints.only('md')]: {
 				minHeight: 60
 			}
+		},
+		errorLabelTop: {
+			position: 'absolute',
+			top: theme.spacing(6.5)
+		},
+		errorLabelBottom: {
+			position: 'absolute',
+			bottom: theme.spacing(-0.5),
+			top: 'unset'
+		},
+		contentBoxPadding: {
+			paddingBottom: theme.spacing(3)
 		}
 	})
 );
@@ -48,32 +64,55 @@ const CustomCommandsPage = ({
 }: PropsWithChildren<SettingsPageProps>) => {
 	const classes = useStyles();
 	const validationSchema = object<NewTagForm>({
-		name: string().required('A tag must have a name'),
+		id: string().required('A tag must have a name'),
 		content: string()
 			.required('A custom command must have content to send')
-			.max(2000, 'Custom command length cannot exceed 2000 characters')
+			.max(2000, 'Custom command length cannot exceed 2000 characters'),
+		color: string().required().default('#1E88E5').ensure(),
+		embed: boolean().defined().default(false)
 	});
+
+	const mergeCustomCommands = (prev: CustomCommand[], next: CustomCommand) => {
+		const clone = prev.slice();
+		const prevEntry = clone.find(command => command.id === next.id);
+
+		if (prevEntry !== undefined) {
+			clone[clone.indexOf(prevEntry)] = next;
+			return clone;
+		}
+
+		return [...clone, next];
+	};
 
 	const formikConfig: FormikConfig<NewTagForm> = {
 		initialValues: {
-			name: '',
-			content: ''
+			id: '',
+			content: '',
+			color: '#1E88E5',
+			embed: false
 		},
 		enableReinitialize: true,
 		validationSchema,
-		onSubmit: ({ name, content }, { setSubmitting }) => {
+		onSubmit: ({ id, content, color, embed }, { setSubmitting, resetForm }) => {
 			setSubmitting(true);
 
-			if (customCommands.some(customCommand => customCommand[0] === name)) return;
-			patchGuildData({ 'custom-commands': [...customCommands, [name, content]] });
+			patchGuildData({
+				'custom-commands': mergeCustomCommands(customCommands, {
+					id,
+					content,
+					color: parse(color || '#1E88E5').b10.value,
+					embed,
+					args: []
+				})
+			});
 
+			resetForm();
 			setSubmitting(false);
 		}
 	};
 
-	const sortCommands = (firstCommand: [string, string], secondCommand: [string, string]) => {
-		return firstCommand[0] < secondCommand[0] ? -1 : firstCommand[0] > secondCommand[0] ? 1 : 0;
-	};
+	const sortCommands = (firstCommand: CustomCommand, secondCommand: CustomCommand) =>
+		firstCommand.id < secondCommand.id ? -1 : firstCommand.id > secondCommand.id ? 1 : 0;
 
 	return (
 		<Fragment>
@@ -92,20 +131,45 @@ const CustomCommandsPage = ({
 					<Formik {...formikConfig}>
 						{({ submitForm }) => (
 							<>
-								<FastField
-									component={TextField}
-									name="name"
-									type="text"
-									label="Name"
-									placeholder="Fill in the name for your custom command here"
-									autoComplete="off"
-									autoCorrect="off"
-									autoCapitalize="off"
-									spellCheck="off"
-									margin="normal"
-									required
-									fullWidth
-								/>
+								<Grid
+									spacing={4}
+									container
+									direction="row"
+									justify="space-between"
+									alignContent="stretch"
+									alignItems="flex-end"
+								>
+									<Grid item xs={8}>
+										<FastField
+											component={TextField}
+											name="id"
+											type="text"
+											label="Name"
+											placeholder="Fill in the name for your custom command here"
+											autoComplete="off"
+											margin="normal"
+											autoFocus
+										/>
+									</Grid>
+									<Grid item xs={2}>
+										<FastField
+											component={ColorPicker}
+											name="color"
+											type="text"
+											label="Color"
+											placeholder="Pick a color for the embedded message"
+											autoComplete="off"
+											autoCorrect="off"
+											autoCapitalize="off"
+											spellCheck="off"
+											margin="normal"
+											fullWidth
+										/>
+									</Grid>
+									<Grid item xs={2}>
+										<FastField component={SelectWithLabel} name="embed" color="primary" title="Embed" />
+									</Grid>
+								</Grid>
 								<FastField
 									component={TextField}
 									name="content"
@@ -119,8 +183,12 @@ const CustomCommandsPage = ({
 									margin="normal"
 									rows={3}
 									multiline
-									required
-									fullWidth
+									classes={{
+										root: classes.contentBoxPadding
+									}}
+									FormHelperTextProps={{
+										classes: { error: classes.errorLabelBottom }
+									}}
 								/>
 								<Button
 									fullWidth
@@ -150,7 +218,7 @@ const CustomCommandsPage = ({
 				>
 					<List>
 						{customCommands.length > 0 ? (
-							customCommands.sort(sortCommands).map(([name, content]) => (
+							customCommands.sort(sortCommands).map(({ id: name, content }) => (
 								<ListItem key={name}>
 									<ListItemText
 										disableTypography
@@ -168,9 +236,18 @@ const CustomCommandsPage = ({
 									<ListItemSecondaryAction>
 										<IconButton
 											edge="end"
-											onClick={() =>
-												patchGuildData({ 'custom-commands': customCommands.filter(command => command[0] !== name) })
-											}
+											onClick={() => {
+												console.log('prefilter: ', customCommands);
+												console.log('to filter: ', name);
+												console.log(
+													'postFilter: ',
+													customCommands.filter(command => command.id !== name)
+												);
+												console.log('about to patch');
+												return patchGuildData({
+													'custom-commands': customCommands.filter(command => command.id !== name)
+												});
+											}}
 										>
 											<DeleteIcon />
 										</IconButton>

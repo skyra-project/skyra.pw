@@ -51,10 +51,10 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 					title={REMOVE_INITIAL.name}
 					description={REMOVE_INITIAL.tooltip}
 					currentValue={props.guildSettings.roles.removeInitial}
-					onChange={isChecked =>
+					onChange={event =>
 						props.patchGuildData({
 							roles: {
-								removeInitial: isChecked
+								removeInitial: event.target.checked
 							}
 						})
 					}

@@ -67,10 +67,10 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 							title={title}
 							description={description}
 							currentValue={props.guildSettings.events[key]}
-							onChange={isChecked =>
+							onChange={event =>
 								props.patchGuildData({
 									events: {
-										[key]: isChecked
+										[key]: event.target.checked
 									}
 								})
 							}
@@ -93,10 +93,10 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 							title={title}
 							description={description}
 							currentValue={props.guildSettings.events[key]}
-							onChange={r =>
+							onChange={event =>
 								props.patchGuildData({
 									events: {
-										[key]: r
+										[key]: event.target.checked
 									}
 								})
 							}
@@ -120,10 +120,10 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 							title={title}
 							description={description}
 							currentValue={props.guildSettings.events[key]}
-							onChange={r =>
+							onChange={event =>
 								props.patchGuildData({
 									events: {
-										[key]: r
+										[key]: event.target.checked
 									}
 								})
 							}

@@ -18,30 +18,36 @@ const ReactionsFilterPage = props => {
 				<SimpleGrid>
 					<SelectBoolean
 						title={`Filter ${reactions.enabled ? 'Enabled' : 'Disabled'}`}
-						onChange={bool => props.patchGuildData({ selfmod: { reactions: { enabled: bool } } })}
+						onChange={event => props.patchGuildData({ selfmod: { reactions: { enabled: event.target.checked } } })}
 						currentValue={reactions.enabled}
 						description="Whether or not this system should be enabled."
 					/>
 					<SelectBoolean
 						title={`Alerts ${bitwiseHas(reactions.softAction, 0b100) ? 'Enabled' : 'Disabled'}`}
-						onChange={bool =>
-							props.patchGuildData({ selfmod: { reactions: { softAction: bitwiseSet(reactions.softAction, 0b100, bool) } } })
+						onChange={event =>
+							props.patchGuildData({
+								selfmod: { reactions: { softAction: bitwiseSet(reactions.softAction, 0b100, event.target.checked) } }
+							})
 						}
 						currentValue={bitwiseHas(reactions.softAction, 0b100)}
 						description="Toggle message alerts in the channel the infraction took place."
 					/>
 					<SelectBoolean
 						title={`Logs ${bitwiseHas(reactions.softAction, 0b010) ? 'Enabled' : 'Disabled'}`}
-						onChange={bool =>
-							props.patchGuildData({ selfmod: { reactions: { softAction: bitwiseSet(reactions.softAction, 0b010, bool) } } })
+						onChange={event =>
+							props.patchGuildData({
+								selfmod: { reactions: { softAction: bitwiseSet(reactions.softAction, 0b010, event.target.checked) } }
+							})
 						}
 						currentValue={bitwiseHas(reactions.softAction, 0b010)}
 						description="Toggle message logs in the moderation logs channel."
 					/>
 					<SelectBoolean
 						title={`Deletes ${bitwiseHas(reactions.softAction, 0b001) ? 'Enabled' : 'Disabled'}`}
-						onChange={bool =>
-							props.patchGuildData({ selfmod: { reactions: { softAction: bitwiseSet(reactions.softAction, 0b001, bool) } } })
+						onChange={event =>
+							props.patchGuildData({
+								selfmod: { reactions: { softAction: bitwiseSet(reactions.softAction, 0b001, event.target.checked) } }
+							})
 						}
 						currentValue={bitwiseHas(reactions.softAction, 0b001)}
 						description="Toggle message deletions."
