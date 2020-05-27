@@ -3,12 +3,13 @@
 
 import Avatar from '@material-ui/core/Avatar';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import MuiTextField from '@material-ui/core/TextField';
 import { fieldToTextField, TextFieldProps } from 'formik-material-ui';
 import { REGEXP } from 'lib/util/Color';
 import React, { ChangeEvent, PropsWithChildren, useCallback, useState } from 'react';
 import PickerDialog from './PickerDialog';
+import { useMediaQuery } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -26,6 +27,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export default ({ form: { setFieldValue, ...form }, field, ...props }: PropsWithChildren<Omit<TextFieldProps, 'variant'>>) => {
 	const [showPicker, setShowPicker] = useState(false);
 	const classes = useStyles();
+	const theme = useTheme();
+	const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
 	const onChange = useCallback(
 		(event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -58,6 +61,9 @@ export default ({ form: { setFieldValue, ...form }, field, ...props }: PropsWith
 				onClick={togglePicker}
 				FormHelperTextProps={{
 					classes: { error: classes.errorLabel }
+				}}
+				inputProps={{
+					readonly: isMobile ? 'readonly' : undefined
 				}}
 			/>
 			{showPicker && (
