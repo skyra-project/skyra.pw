@@ -52,7 +52,7 @@ export default ({ value, onClick, onChange }: PickerDialogProps) => {
 		<Box component="div" className={classes.pickerBox}>
 			<Box component="div" className={classes.positionBox}>
 				<Box component="div" className={classes.clickEventBox} onClick={onClick} />
-				<ChromePicker ref={scrollLockRef} color={value} onChange={onChange} />
+				<ChromePicker ref={scrollLockRef} color={value} onChange={onChange} disableAlpha />
 			</Box>
 		</Box>
 	);
