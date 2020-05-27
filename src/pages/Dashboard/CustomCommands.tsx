@@ -145,7 +145,7 @@ const CustomCommandsPage = ({
 									alignContent="stretch"
 									alignItems="flex-end"
 								>
-									<Grid item xs={8}>
+									<Grid item xs={12} sm={12} md={8} lg={8}>
 										<FastField
 											component={TextField}
 											name="id"
@@ -157,7 +157,7 @@ const CustomCommandsPage = ({
 											autoFocus
 										/>
 									</Grid>
-									<Grid item xs={2}>
+									<Grid item xs={12} sm={12} md={4} lg={2}>
 										<FastField
 											component={ColorPicker}
 											name="color"
@@ -172,7 +172,7 @@ const CustomCommandsPage = ({
 											fullWidth
 										/>
 									</Grid>
-									<Grid item xs={2}>
+									<Grid item xs={12} sm={12} md={12} lg={2}>
 										<FastField component={SelectWithLabel} name="embed" color="primary" title="Embed" />
 									</Grid>
 								</Grid>
