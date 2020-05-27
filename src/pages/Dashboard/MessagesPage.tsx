@@ -1,4 +1,12 @@
-import { Box, createStyles, IconButton, List, ListItem, ListItemText, makeStyles, TextField, Theme, Typography } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
+import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 import InfoIcon from '@material-ui/icons/Info';
 import Section from 'components/Section';
 import SelectBoolean from 'components/Select/SelectBoolean';
@@ -106,39 +114,41 @@ export default ({ guildData, guildSettings, patchGuildData }: PropsWithChildren<
 						<Typography variant="h5" component="span">
 							Messages I can send
 						</Typography>
-						<Tooltip
-							title={
-								<Box p={1}>
-									<Typography variant="body2">
-										{[
-											'These messages support various special texts that will be replaced',
-											'when the message is triggered.',
-											'You can read more about each of the replaceable bits by hovering over the text field.'
-										].join(' ')}
-									</Typography>
-									<List dense disablePadding>
-										{REPLACEABLE_MATCHERS.map((matcher, index) => (
-											<ListItem key={index} dense disableGutters>
-												<ListItemText
-													primary={matcher.matchKey}
-													secondary={matcher.description}
-													primaryTypographyProps={{ variant: 'body2', className: classes.primaryItemText }}
-													secondaryTypographyProps={{
-														variant: 'body2',
-														className: classes.secondaryItemText,
-														style: { color: 'black' }
-													}}
-												/>
-											</ListItem>
-										))}
-									</List>
-								</Box>
-							}
-						>
-							<IconButton disableFocusRipple disableRipple disableTouchRipple color="primary">
-								<InfoIcon />
-							</IconButton>
-						</Tooltip>
+						<Hidden smDown>
+							<Tooltip
+								title={
+									<Box p={1}>
+										<Typography variant="body2">
+											{[
+												'These messages support various special texts that will be replaced',
+												'when the message is triggered.',
+												'You can read more about each of the replaceable bits by hovering over the text field.'
+											].join(' ')}
+										</Typography>
+										<List dense disablePadding>
+											{REPLACEABLE_MATCHERS.map((matcher, index) => (
+												<ListItem key={index} dense disableGutters>
+													<ListItemText
+														primary={matcher.matchKey}
+														secondary={matcher.description}
+														primaryTypographyProps={{ variant: 'body2', className: classes.primaryItemText }}
+														secondaryTypographyProps={{
+															variant: 'body2',
+															className: classes.secondaryItemText,
+															style: { color: 'black' }
+														}}
+													/>
+												</ListItem>
+											))}
+										</List>
+									</Box>
+								}
+							>
+								<IconButton disableFocusRipple disableRipple disableTouchRipple color="primary">
+									<InfoIcon />
+								</IconButton>
+							</Tooltip>
+						</Hidden>
 					</>
 				}
 				disableTypography
