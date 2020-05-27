@@ -17,7 +17,7 @@ import Section from 'components/Section';
 import SimpleGrid from 'components/SimpleGrid';
 import { FastField, Formik, FormikConfig } from 'formik';
 import { CustomCommand, SettingsPageProps } from 'lib/types/GuildSettings';
-import { parse } from 'lib/util/Color';
+import { parse, REGEXP } from 'lib/util/Color';
 import React, { Fragment, PropsWithChildren } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { boolean, object, string } from 'yup';
@@ -74,7 +74,11 @@ const CustomCommandsPage = ({
 		content: string()
 			.required('A custom command must have content to send')
 			.max(1950, 'Custom command length cannot exceed 1950 characters'),
-		color: string().required().default('#1E88E5').ensure(),
+		color: string()
+			.required()
+			.default('#1E88E5')
+			.matches(REGEXP.HEX, 'That is not a valid colour, please use the colour picker or type a valid HEX colour.')
+			.ensure(),
 		embed: boolean().defined().default(false)
 	});
 
