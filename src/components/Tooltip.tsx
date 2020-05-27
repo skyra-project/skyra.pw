@@ -23,11 +23,11 @@ export default ({ title, placement, enterDelay, children, ...props }: TooltipPro
 
 	return (
 		<MUITooltip
-			{...props}
 			title={<Box className={classes.box}>{title}</Box>}
 			placement={placement ?? 'top'}
 			enterDelay={enterDelay ?? 300}
-			classes={{ tooltip: clsx(classes.tooltip) }}
+			{...props}
+			classes={{ tooltip: clsx(classes.tooltip, props.classes?.tooltip) }}
 		>
 			{children}
 		</MUITooltip>
