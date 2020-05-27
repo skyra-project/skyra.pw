@@ -3,7 +3,8 @@
 
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import React, { MouseEventHandler } from 'react';
+import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import React, { MouseEventHandler, useEffect, useRef } from 'react';
 import { ChromePicker, ColorChangeHandler } from 'react-color';
 
 interface PickerDialogProps {
@@ -33,11 +34,25 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default ({ value, onClick, onChange }: PickerDialogProps) => {
 	const classes = useStyles();
+	const scrollLockRef = useRef<ChromePicker>(null);
+
+	useEffect(() => {
+		if (scrollLockRef.current !== null) {
+			disableBodyScroll((scrollLockRef.current as unknown) as HTMLElement);
+		} else {
+			enableBodyScroll((scrollLockRef.current as unknown) as HTMLElement);
+		}
+
+		return () => {
+			clearAllBodyScrollLocks();
+		};
+	});
+
 	return (
 		<Box component="div" className={classes.pickerBox}>
 			<Box component="div" className={classes.positionBox}>
 				<Box component="div" className={classes.clickEventBox} onClick={onClick} />
-				<ChromePicker color={value} onChange={onChange} />
+				<ChromePicker ref={scrollLockRef} color={value} onChange={onChange} />
 			</Box>
 		</Box>
 	);
