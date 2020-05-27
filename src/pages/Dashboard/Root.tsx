@@ -558,7 +558,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 
 	return (
 		<>
-			<Backdrop className={classes.backdrop} open={isLoading}>
+			<Backdrop className={classes.backdrop} open={isLoading} unmountOnExit mountOnEnter>
 				<CircularProgress color="inherit" />
 			</Backdrop>
 			<ErrorAlert

@@ -93,7 +93,7 @@ export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWi
 
 	return (
 		<>
-			<Backdrop className={classes.backdrop} open={loading}>
+			<Backdrop className={classes.backdrop} open={loading} unmountOnExit mountOnEnter>
 				<CircularProgress color="primary" />
 			</Backdrop>
 			<Section title="Commands">
