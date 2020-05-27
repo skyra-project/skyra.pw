@@ -1,5 +1,3 @@
-// TODO: USE SAME VERIFICATION AS SERIALIZER
-
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid/Grid';
 import IconButton from '@material-ui/core/IconButton';
