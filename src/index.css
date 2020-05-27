@@ -69,6 +69,11 @@
 	border-radius: 4px;
 }
 
+.chrome-picker > div:nth-child(2) > *,
+.chrome-picker > div:nth-child(2) input {
+	font-family: Roboto, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+}
+
 /* Discord's CSS for rendering inline code */
 code {
 	padding: 0.2em;

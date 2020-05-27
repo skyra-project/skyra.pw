@@ -63,7 +63,7 @@ export default ({ form: { setFieldValue, ...form }, field, ...props }: PropsWith
 					classes: { error: classes.errorLabel }
 				}}
 				inputProps={{
-					readonly: isMobile ? 'readonly' : undefined
+					readOnly: isMobile ? 'readonly' : undefined
 				}}
 			/>
 			{showPicker && (
