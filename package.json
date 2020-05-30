@@ -50,7 +50,7 @@
 	},
 	"devDependencies": {
 		"@favware/ts-config": "^2.0.0",
-		"@rws-air/eslint-config": "^4.0.0",
+		"@rws-air/eslint-config": "^5.0.2",
 		"@types/body-scroll-lock": "^2.6.1",
 		"@types/history": "^4.7.6",
 		"@types/lodash": "^4.14.152",
