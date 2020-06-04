@@ -102,6 +102,7 @@ export interface Roles {
 	'restricted-reaction': string;
 	'restricted-embed': string;
 	'restricted-attachment': string;
+	'restricted-emoji': string;
 	'restricted-voice': string;
 	public: string[];
 	reactions: Readonly<{

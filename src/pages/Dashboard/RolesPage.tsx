@@ -172,6 +172,11 @@ const ROLES: Role[] = [
 		key: 'restricted-embed'
 	},
 	{
+		name: 'Restricted Emoji',
+		tooltip: 'The role that is used for the restrictEmoji moderation command.',
+		key: 'restricted-emoji'
+	},
+	{
 		name: 'Restricted Voice',
 		tooltip: 'The role that is used for the restrictVoice moderation command.',
 		key: 'restricted-voice'
