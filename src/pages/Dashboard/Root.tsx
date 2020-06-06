@@ -231,17 +231,18 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 		try {
 			setIsLoading(true);
 
-			const response = (await authedFetch(`/guilds/${guildID}/settings`, {
+			const response = await authedFetch<{ newSettings: GuildSettings; error?: string }>(`/guilds/${guildID}/settings`, {
 				method: 'POST',
 				body: JSON.stringify({
 					// eslint-disable-next-line @typescript-eslint/camelcase
 					guild_id: guildID,
 					data: guildSettingsChanges
 				})
-			})) as { newSettings: GuildSettings; error?: string };
+			});
 
 			if (!response || !response.newSettings || response.error) {
 				setHasError(true);
+				setTimeout(() => setIsLoading(false), Time.Second);
 			} else {
 				setGuildSettingsChanges(undefined);
 				setGuildSettings(response.newSettings);
@@ -249,6 +250,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 			}
 		} catch {
 			setHasError(true);
+			setTimeout(() => setIsLoading(false), Time.Second);
 		}
 	};
 
