@@ -95,9 +95,6 @@ const useStyles = makeStyles((theme: Theme) =>
 				width: `calc(100% - ${drawerWidth}px)`
 			}
 		},
-		breadcrumb: {
-			color: theme.palette.primary.contrastText
-		},
 		menuButton: {
 			marginRight: theme.spacing(2),
 			[theme.breakpoints.up('sm')]: {
