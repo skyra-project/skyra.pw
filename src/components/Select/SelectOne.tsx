@@ -1,5 +1,4 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import Avatar from '@material-ui/core/Avatar';
 import Button, { ButtonProps as MButtonProps } from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -9,6 +8,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import DialogTitle from 'components/DialogTitle';
+import LazyAvatar from 'components/LazyAvatar';
 import SearchBar from 'components/SearchBar';
 import Tooltip from 'components/Tooltip';
 import { toTitleCase } from 'lib/util/klasaUtils';
@@ -60,13 +60,13 @@ export default function SelectOne({ label, onChange, values, name = 'None', imag
 				<Then>
 					<Tooltip title={tooltipTitle ?? ''} placement="top">
 						<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...buttonProps}>
-							{label}: {name} {imageInName && <Avatar alt="Emoji" src={imageInName} className={classes.nameImage} />}
+							{label}: {name} {imageInName && <LazyAvatar alt="Emoji" src={imageInName} className={classes.nameImage} />}
 						</Button>
 					</Tooltip>
 				</Then>
 				<Else>
 					<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...buttonProps}>
-						{label}: {name} {imageInName && <Avatar alt="Emoji" src={imageInName} className={classes.nameImage} />}
+						{label}: {name} {imageInName && <LazyAvatar alt="Emoji" src={imageInName} className={classes.nameImage} />}
 					</Button>
 				</Else>
 			</If>
@@ -92,7 +92,7 @@ export default function SelectOne({ label, onChange, values, name = 'None', imag
 									<ListItemText primary={name} />
 									{iconUrl && (
 										<ListItemSecondaryAction>
-											<Avatar alt={value} src={iconUrl} variant="square" />
+											<LazyAvatar alt={value} src={iconUrl} variant="square" />
 										</ListItemSecondaryAction>
 									)}
 								</ListItem>

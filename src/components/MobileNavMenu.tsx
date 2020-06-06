@@ -1,5 +1,4 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import Avatar from '@material-ui/core/Avatar';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import IconButton from '@material-ui/core/IconButton';
@@ -17,11 +16,12 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SyncIcon from '@material-ui/icons/Sync';
 import LoginIcon from '@material-ui/icons/VpnKey';
 import { oauthURL } from 'lib/util/constants';
+import { displayAvatarURL } from 'lib/util/skyraUtils';
 import { logOut, navigate, syncUser } from 'lib/util/util';
 import React, { useEffect, useRef, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import { useGlobal } from 'reactn';
-import { displayAvatarURL } from 'lib/util/skyraUtils';
+import LazyAvatar from './LazyAvatar';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -111,7 +111,7 @@ export default () => {
 			>
 				<If condition={authenticated}>
 					<Then>
-						<Avatar src={displayAvatarURL(user, { size: 32 })} alt="U" />
+						<LazyAvatar src={displayAvatarURL(user, { size: 32 })} alt="U" />
 					</Then>
 					<Else>
 						<MenuIcon />

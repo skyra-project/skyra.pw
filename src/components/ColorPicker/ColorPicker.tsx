@@ -1,15 +1,15 @@
 // Copyright (c) 2017 LoicMahieu. All rights reserved. MIT license.
 // Source: https://github.com/LoicMahieu/material-ui-color-picker
 
-import Avatar from '@material-ui/core/Avatar';
+import { useMediaQuery } from '@material-ui/core';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import MuiTextField from '@material-ui/core/TextField';
+import LazyAvatar from 'components/LazyAvatar';
 import { fieldToTextField, TextFieldProps } from 'formik-material-ui';
 import { REGEXP } from 'lib/util/Color';
 import React, { ChangeEvent, PropsWithChildren, useCallback, useState } from 'react';
 import PickerDialog from './PickerDialog';
-import { useMediaQuery } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -46,12 +46,12 @@ export default ({ form: { setFieldValue, ...form }, field, ...props }: PropsWith
 				InputProps={{
 					startAdornment: (
 						<InputAdornment disablePointerEvents position="start">
-							<Avatar
+							<LazyAvatar
 								style={{ backgroundColor: REGEXP.HEX.test(field.value) ? field.value : 'transparent' }}
 								className={classes.smallAvatar}
 							>
 								{'\u200B'}
-							</Avatar>
+							</LazyAvatar>
 						</InputAdornment>
 					)
 				}}

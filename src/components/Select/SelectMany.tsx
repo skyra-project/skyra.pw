@@ -1,4 +1,3 @@
-import { toTitleCase } from 'lib/util/klasaUtils';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -8,12 +7,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import DialogTitle from 'components/DialogTitle';
+import LazyAvatar from 'components/LazyAvatar';
 import SearchBar from 'components/SearchBar';
 import Tooltip from 'components/Tooltip';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import Avatar from '@material-ui/core/Avatar';
+import { toTitleCase } from 'lib/util/klasaUtils';
 import React, { ChangeEvent, Fragment, PropsWithChildren, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import { SelectOneProps } from './SelectOne';
@@ -66,13 +66,13 @@ export default ({ label, value, onChange, values, name, imageInName, tooltipTitl
 				<Then>
 					<Tooltip title={tooltipTitle ?? ''} placement="top">
 						<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...buttonProps}>
-							{label}: {name} {imageInName && <Avatar alt="Emoji" src={imageInName} className={classes.nameImage} />}
+							{label}: {name} {imageInName && <LazyAvatar alt="Emoji" src={imageInName} className={classes.nameImage} />}
 						</Button>
 					</Tooltip>
 				</Then>
 				<Else>
 					<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...buttonProps}>
-						{label}: {name} {imageInName && <Avatar alt="Emoji" src={imageInName} className={classes.nameImage} />}
+						{label}: {name} {imageInName && <LazyAvatar alt="Emoji" src={imageInName} className={classes.nameImage} />}
 					</Button>
 				</Else>
 			</If>
@@ -94,7 +94,7 @@ export default ({ label, value, onChange, values, name, imageInName, tooltipTitl
 									<ListItemText primary={name} />
 									{iconUrl && (
 										<ListItemSecondaryAction>
-											<Avatar alt={value} src={iconUrl} variant="square" />
+											<LazyAvatar alt={value} src={iconUrl} variant="square" />
 										</ListItemSecondaryAction>
 									)}
 								</ListItem>

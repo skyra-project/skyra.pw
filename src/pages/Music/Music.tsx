@@ -1,5 +1,4 @@
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core';
-import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import CardContent from '@material-ui/core/CardContent';
 import Container from '@material-ui/core/Container';
@@ -15,8 +14,8 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import GeneralPage from 'components/GeneralPage';
+import LazyAvatar from 'components/LazyAvatar';
 import Link from 'components/Link';
-import { WS_URL } from 'lib/util/constants';
 import {
 	ClientActions,
 	IncomingWebsocketMessage,
@@ -26,6 +25,7 @@ import {
 	OutgoingWebsocketMessage,
 	ServerActions
 } from 'lib/types/Music';
+import { WS_URL } from 'lib/util/constants';
 import { getAcronym } from 'lib/util/util';
 import { useRef } from 'react';
 import FlipMove from 'react-flip-move';
@@ -340,10 +340,12 @@ export default () => {
 												<ListItemIcon>
 													<If condition={song.url.includes('youtube')}>
 														<Then>
-															<Avatar src={`https://img.youtube.com/vi/${song.identifier}/hqdefault.jpg`} />
+															<LazyAvatar
+																src={`https://img.youtube.com/vi/${song.identifier}/hqdefault.jpg`}
+															/>
 														</Then>
 														<Else>
-															<Avatar>{getAcronym(song.title)}</Avatar>
+															<LazyAvatar>{getAcronym(song.title)}</LazyAvatar>
 														</Else>
 													</If>
 												</ListItemIcon>

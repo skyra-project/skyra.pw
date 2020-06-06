@@ -1,4 +1,3 @@
-import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -17,6 +16,7 @@ import { displayAvatarURL } from 'lib/util/skyraUtils';
 import { logOut, syncUser } from 'lib/util/util';
 import React, { useEffect, useRef, useState } from 'react';
 import { useGlobal } from 'reactn';
+import LazyAvatar from './LazyAvatar';
 import Tooltip from './Tooltip';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -97,7 +97,7 @@ export default () => {
 					onClick={handleToggle}
 					classes={{ root: classes.transparantButton }}
 				>
-					<Avatar style={{ marginRight: 5, height: 40, width: 40 }} src={displayAvatarURL(user, { size: 128 })} alt="" />
+					<LazyAvatar style={{ marginRight: 5, height: 40, width: 40 }} src={displayAvatarURL(user, { size: 128 })} alt="" />
 					<ExpandMoreIcon />
 				</Button>
 			</Tooltip>
