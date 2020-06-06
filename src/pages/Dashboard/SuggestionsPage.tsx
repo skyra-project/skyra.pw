@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'flex',
 			textAlign: 'left',
 			alignItems: 'center',
-			justifyContent: 'flex-start'
+			justifyContent: 'space-between'
 		}
 	})
 );
