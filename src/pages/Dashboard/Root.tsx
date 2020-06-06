@@ -23,6 +23,7 @@ import EventIcon from '@material-ui/icons/EventNote';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import CustomCommandsIcon from '@material-ui/icons/Extension';
+import FeedbackIcon from '@material-ui/icons/Feedback';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import ChannelsIcon from '@material-ui/icons/Forum';
 import GavelIcon from '@material-ui/icons/Gavel';
@@ -44,16 +45,17 @@ import UserMenu from 'components/UserMenu';
 import deepMerge, { Options as DeepMergeOptions } from 'deepmerge';
 import { FlattenedGuild } from 'lib/types/ApiData';
 import { GuildSettings, SettingsPageProps } from 'lib/types/GuildSettings';
-import { noOp } from 'lib/util/skyraUtils';
+import { noOp, Time } from 'lib/util/skyraUtils';
 import { authedFetch, navigate } from 'lib/util/util';
 import CustomCommandsPage from 'pages/Dashboard/CustomCommands';
 import EventsPage from 'pages/Dashboard/EventsPage';
 import FilterCapitalsPage from 'pages/Dashboard/Filter/Capitals';
 import FilterLinksPage from 'pages/Dashboard/Filter/Links';
 import FilterWordsPage from 'pages/Dashboard/Filter/Words';
+import SettingsPage from 'pages/Dashboard/GeneralSettingsPage';
 import ModerationSettingsPage from 'pages/Dashboard/Moderation/Settings';
-import SettingsPage from 'pages/Dashboard/SettingsPage';
 import StarboardPage from 'pages/Dashboard/Starboard';
+import SuggestionsPage from 'pages/Dashboard/SuggestionsPage';
 import React, { Fragment, PropsWithChildren, useCallback, useEffect, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import { useParams } from 'react-router';
@@ -537,6 +539,21 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 						onClick={closeSidebarOnMobile}
 						disabled={!guildData && !isLoading}
 						component={Link}
+						to={`/guilds/${guildID}/suggestions`}
+						button
+					>
+						<ListItemIcon>
+							<FeedbackIcon />
+						</ListItemIcon>
+						<ListItemText primary="Suggestions" />
+					</ListItem>
+
+					{/* ------------------------------- */}
+
+					<ListItem
+						onClick={closeSidebarOnMobile}
+						disabled={!guildData && !isLoading}
+						component={Link}
 						to={`/music/${guildID}`}
 						button
 					>
@@ -704,6 +721,11 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 										componentProps={{ ...componentProps }}
 										path="/guilds/:guildID/custom-commands"
 										component={CustomCommandsPage}
+									/>
+									<AuthenticatedRoute
+										componentProps={{ ...componentProps }}
+										path="/guilds/:guildID/suggestions"
+										component={SuggestionsPage}
 									/>
 									<AuthenticatedRoute
 										componentProps={{ ...componentProps }}

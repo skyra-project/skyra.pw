@@ -28,6 +28,7 @@ export interface GuildSettings {
 	social: Social;
 	starboard: Starboard;
 	stickyRoles: StickyRole[];
+	suggestions: Suggestions;
 	trigger: Trigger;
 }
 
@@ -74,6 +75,23 @@ export interface CustomCommand {
 interface StickyRole {
 	user: string;
 	roles: string[];
+}
+
+export interface Suggestions {
+	emojis: SuggestionEmojis;
+	channel: string;
+	'on-action': SuggestionActions;
+}
+
+export interface SuggestionEmojis {
+	downvote: string;
+	upvote: string;
+}
+
+export interface SuggestionActions {
+	dm: boolean;
+	repost: boolean;
+	'hide-author': boolean;
 }
 
 export interface Messages {

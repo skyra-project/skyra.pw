@@ -37,15 +37,15 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 						xl: 4
 					}}
 				>
-					{CHANNELS.map(({ name, tooltip, key: settingsProp }, index) => (
+					{CHANNELS.map(({ name, description, key }, index) => (
 						<SelectChannel
 							key={index}
-							tooltipTitle={tooltip}
-							value={props.guildSettings.channels[settingsProp]}
-							onChange={(channel: typeof props.guildSettings.channels[typeof settingsProp]) =>
+							tooltipTitle={description}
+							value={props.guildSettings.channels[key]}
+							onChange={(channel: typeof props.guildSettings.channels[typeof key]) =>
 								props.patchGuildData({
 									channels: {
-										[settingsProp]: channel
+										[key]: channel
 									}
 								})
 							}
@@ -62,7 +62,7 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 					))}
 					<SelectChannels
 						key={CHANNELS.length + 1}
-						tooltipTitle={DISABLED_CHANNELS.tooltip}
+						tooltipTitle={DISABLED_CHANNELS.description}
 						value={props.guildSettings.disabledChannels}
 						onChange={(channels: typeof props.guildSettings.disabledChannels) =>
 							props.patchGuildData({
@@ -87,7 +87,7 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 
 const DISABLED_CHANNELS: Channel = {
 	name: 'Disabled Channels',
-	tooltip: [
+	description: [
 		'A list of channels for disabled commands, for example,',
 		'setting up a channel called general will forbid all users',
 		'from using my commands there. Moderators+ override this',
@@ -97,41 +97,41 @@ const DISABLED_CHANNELS: Channel = {
 };
 
 const CHANNELS: Channel[] = [
-	{ name: 'Announcements', tooltip: 'The channel for announcements', key: 'announcements' },
-	{ name: 'Greetings', tooltip: 'The channel I will use to send greetings', key: 'greeting' },
-	{ name: 'Farewells', tooltip: 'The channel I will use to send farewells', key: 'farewell' },
-	{ name: 'Message Logs', tooltip: 'The channel for (non-NSFW) message logs', key: 'message-logs' },
+	{ name: 'Announcements', description: 'The channel for announcements', key: 'announcements' },
+	{ name: 'Greetings', description: 'The channel I will use to send greetings', key: 'greeting' },
+	{ name: 'Farewells', description: 'The channel I will use to send farewells', key: 'farewell' },
+	{ name: 'Message Logs', description: 'The channel for (non-NSFW) message logs', key: 'message-logs' },
 	{
 		name: 'Member Logs',
-		tooltip: 'The channel for member logs, once enabled, I will post all member related events there.',
+		description: 'The channel for member logs, once enabled, I will post all member related events there.',
 		key: 'member-logs'
 	},
 	{
 		name: 'Moderation Logs',
-		tooltip: 'The channel for moderation logs, once enabled, I will post all my moderation cases there.',
+		description: 'The channel for moderation logs, once enabled, I will post all my moderation cases there.',
 		key: 'moderation-logs'
 	},
 	{
 		name: 'NSFW Logs',
-		tooltip: 'The channel for NSFW message logs, same requirement as normal message logs, but will only send NSFW messages.',
+		description: 'The channel for NSFW message logs, same requirement as normal message logs, but will only send NSFW messages.',
 		key: 'nsfw-message-logs'
 	},
-	{ name: 'Image Logs', tooltip: 'The channel I will use to re-upload all images I see.', key: 'image-logs' },
+	{ name: 'Image Logs', description: 'The channel I will use to re-upload all images I see.', key: 'image-logs' },
 	{
 		name: 'Prune Logs',
-		tooltip: 'The channel for prune logs, same requirement as normal mesasge logs, but will only send prune messages.',
+		description: 'The channel for prune logs, same requirement as normal mesasge logs, but will only send prune messages.',
 		key: 'prune-logs'
 	},
 	{
 		name: 'Reaction Logs',
-		tooltip: 'The channel for the reaction logs, same requirement as normal message logs, but will only send message reactions',
+		description: 'The channel for the reaction logs, same requirement as normal message logs, but will only send message reactions',
 		key: 'reaction-logs'
 	},
-	{ name: 'Spam', tooltip: 'The channel for me to redirect users to when they use commands I consider spammy.', key: 'spam' }
+	{ name: 'Spam', description: 'The channel for me to redirect users to when they use commands I consider spammy.', key: 'spam' }
 ];
 
 interface Channel {
 	name: string;
-	tooltip: string;
 	key: keyof Channels;
+	description: string;
 }

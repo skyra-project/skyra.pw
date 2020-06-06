@@ -1,7 +1,6 @@
-import Divider from '@material-ui/core/Divider';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import PageHeader from 'components/PageHeader';
 import Section from 'components/Section';
 import SelectBoolean from 'components/Select/SelectBoolean';
 import SelectRole from 'components/Select/SelectRole';
@@ -37,14 +36,15 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 
 	return (
 		<>
-			<Typography variant="h5" component="h1" color="textPrimary">
-				Roles
-			</Typography>
-			<Typography variant="subtitle1" color="textSecondary">
-				Here you can configure special roles known to Skyra for your server.
-				{isOnMobile ? ' Long press' : ' Hover over'} a button to get more informatation about that particular role
-			</Typography>
-			<Divider classes={{ root: classes.divider }} />
+			<PageHeader
+				title="Roles"
+				subtitle={
+					<>
+						Here you can configure special roles known to Skyra for your server.
+						{isOnMobile ? ' Long press' : ' Hover over'} a button to get more informatation about that particular role
+					</>
+				}
+			/>
 
 			<Section title="Toggles">
 				<SelectBoolean

@@ -1,15 +1,17 @@
-import { toTitleCase } from 'lib/util/klasaUtils';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import Avatar from '@material-ui/core/Avatar';
 import Button, { ButtonProps as MButtonProps } from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import DialogTitle from 'components/DialogTitle';
 import SearchBar from 'components/SearchBar';
 import Tooltip from 'components/Tooltip';
+import { toTitleCase } from 'lib/util/klasaUtils';
 import React, { ChangeEvent, Fragment, ReactNode, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 
@@ -19,9 +21,11 @@ export interface SelectOneProps {
 	values: {
 		name: string;
 		value: string;
+		iconUrl?: string;
 	}[];
 	tooltipTitle?: string;
 	buttonProps?: MButtonProps;
+	imageInName?: string;
 
 	onChange(...args: any[]): void;
 }
@@ -34,11 +38,16 @@ const useStyles = makeStyles((theme: Theme) =>
 		dialogActions: {
 			margin: 0,
 			padding: theme.spacing(1)
+		},
+		nameImage: {
+			display: 'inline-flex',
+			height: theme.spacing(2),
+			width: theme.spacing(2)
 		}
 	})
 );
 
-export default function SelectOne({ label, onChange, values, name = 'None', tooltipTitle, buttonProps }: SelectOneProps) {
+export default function SelectOne({ label, onChange, values, name = 'None', imageInName, tooltipTitle, buttonProps }: SelectOneProps) {
 	const [open, setOpen] = useState(false);
 	const [search, setSearch] = useState('');
 	const classes = useStyles();
@@ -49,19 +58,15 @@ export default function SelectOne({ label, onChange, values, name = 'None', tool
 		<Fragment>
 			<If condition={Boolean(tooltipTitle)}>
 				<Then>
-					<Tooltip
-						// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-						title={tooltipTitle!}
-						placement="top"
-					>
+					<Tooltip title={tooltipTitle ?? ''} placement="top">
 						<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...buttonProps}>
-							{label}: {name}
+							{label}: {name} {imageInName && <Avatar alt="Emoji" src={imageInName} className={classes.nameImage} />}
 						</Button>
 					</Tooltip>
 				</Then>
 				<Else>
 					<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...buttonProps}>
-						{label}: {name}
+						{label}: {name} {imageInName && <Avatar alt="Emoji" src={imageInName} className={classes.nameImage} />}
 					</Button>
 				</Else>
 			</If>
@@ -75,7 +80,7 @@ export default function SelectOne({ label, onChange, values, name = 'None', tool
 								if (!search) return true;
 								return `${name} ${value}`.toLowerCase().includes(search);
 							})
-							.map(({ name, value }) => (
+							.map(({ name, value, iconUrl }) => (
 								<ListItem
 									key={value}
 									button
@@ -85,6 +90,11 @@ export default function SelectOne({ label, onChange, values, name = 'None', tool
 									}}
 								>
 									<ListItemText primary={name} />
+									{iconUrl && (
+										<ListItemSecondaryAction>
+											<Avatar alt={value} src={iconUrl} variant="square" />
+										</ListItemSecondaryAction>
+									)}
 								</ListItem>
 							))}
 					</List>

@@ -24,8 +24,19 @@ export interface FlattenedGuild {
 	description: string | null;
 	banner: string | null;
 	ownerID: string;
+	emojis: FlattenedEmoji[];
 	skyraIsIn: boolean;
 	manageable: boolean;
+}
+
+export interface FlattenedEmoji {
+	name: string;
+	roles: any[];
+	id: string;
+	require_colons: boolean;
+	managed: boolean;
+	animated: boolean;
+	available: boolean;
 }
 
 export interface FlattenedRole {

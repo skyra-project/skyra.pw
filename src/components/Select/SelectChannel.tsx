@@ -5,7 +5,6 @@ import SelectOne, { SelectOneProps } from './SelectOne';
 export interface SelectChannelProps extends Omit<SelectOneProps, 'values' | 'name'> {
 	value: string;
 	guild: FlattenedGuild;
-	onChange(...args: any[]): void;
 }
 
 const SelectChannel = ({ label, value, guild, onChange, tooltipTitle, ...props }: SelectChannelProps) => {

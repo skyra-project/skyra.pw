@@ -12,6 +12,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import DialogTitle from 'components/DialogTitle';
 import SearchBar from 'components/SearchBar';
 import Tooltip from 'components/Tooltip';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import Avatar from '@material-ui/core/Avatar';
 import React, { ChangeEvent, Fragment, PropsWithChildren, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import { SelectOneProps } from './SelectOne';
@@ -28,11 +30,16 @@ const useStyles = makeStyles((theme: Theme) =>
 		dialogActions: {
 			margin: 0,
 			padding: theme.spacing(1)
+		},
+		nameImage: {
+			display: 'inline-flex',
+			height: theme.spacing(2),
+			width: theme.spacing(2)
 		}
 	})
 );
 
-export default ({ label, value, onChange, values, name, tooltipTitle, buttonProps }: PropsWithChildren<SelectManyProps>) => {
+export default ({ label, value, onChange, values, name, imageInName, tooltipTitle, buttonProps }: PropsWithChildren<SelectManyProps>) => {
 	const [open, setOpen] = useState(false);
 	const [checked, setChecked] = useState(value);
 	const [search, setSearch] = useState('');
@@ -57,19 +64,15 @@ export default ({ label, value, onChange, values, name, tooltipTitle, buttonProp
 		<Fragment>
 			<If condition={Boolean(tooltipTitle)}>
 				<Then>
-					<Tooltip
-						// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-						title={tooltipTitle!}
-						placement="top"
-					>
+					<Tooltip title={tooltipTitle ?? ''} placement="top">
 						<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...buttonProps}>
-							{label}: {name}
+							{label}: {name} {imageInName && <Avatar alt="Emoji" src={imageInName} className={classes.nameImage} />}
 						</Button>
 					</Tooltip>
 				</Then>
 				<Else>
 					<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...buttonProps}>
-						{label}: {name}
+						{label}: {name} {imageInName && <Avatar alt="Emoji" src={imageInName} className={classes.nameImage} />}
 					</Button>
 				</Else>
 			</If>
@@ -83,12 +86,17 @@ export default ({ label, value, onChange, values, name, tooltipTitle, buttonProp
 								if (!search) return true;
 								return `${name} ${value}`.toLowerCase().includes(search);
 							})
-							.map(({ value, name }) => (
+							.map(({ value, name, iconUrl }) => (
 								<ListItem key={value} button onClick={handleToggle(value)}>
 									<ListItemIcon>
 										<Checkbox edge="start" checked={checked.includes(value)} tabIndex={-1} color="primary" />
 									</ListItemIcon>
 									<ListItemText primary={name} />
+									{iconUrl && (
+										<ListItemSecondaryAction>
+											<Avatar alt={value} src={iconUrl} variant="square" />
+										</ListItemSecondaryAction>
+									)}
 								</ListItem>
 							))}
 					</List>
