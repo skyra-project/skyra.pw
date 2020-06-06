@@ -24,6 +24,7 @@
 		"react-markdown": "^4.3.1",
 		"react-player": "^2.1.0",
 		"react-router-dom": "^5.2.0",
+		"react-virtuoso": "^0.17.0",
 		"reactn": "^2.2.7",
 		"yup": "^0.29.1"
 	},

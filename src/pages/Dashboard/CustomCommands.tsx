@@ -5,7 +5,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ColorPicker from 'components/ColorPicker/ColorPicker';
@@ -18,6 +18,7 @@ import { CustomCommand, SettingsPageProps } from 'lib/types/GuildSettings';
 import { parse, REGEXP } from 'lib/util/Color';
 import React, { Fragment, PropsWithChildren } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { Virtuoso } from 'react-virtuoso';
 import { boolean, object, string } from 'yup';
 
 interface NewTagForm {
@@ -52,6 +53,13 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		contentBoxPadding: {
 			paddingBottom: theme.spacing(3)
+		},
+		virtualizedList: {
+			margin: theme.spacing(1)
+		},
+		virtualizedListContainer: {
+			margin: 0,
+			padding: 0
 		}
 	})
 );
@@ -61,6 +69,8 @@ const CustomCommandsPage = ({
 	guildSettings: { 'custom-commands': customCommands, prefix }
 }: PropsWithChildren<SettingsPageProps>) => {
 	const classes = useStyles();
+	const theme = useTheme();
+
 	const validationSchema = object<NewTagForm>({
 		id: string()
 			.required('A tag must have a name')
@@ -121,6 +131,8 @@ const CustomCommandsPage = ({
 
 	const sortCommands = (firstCommand: CustomCommand, secondCommand: CustomCommand) =>
 		firstCommand.id < secondCommand.id ? -1 : firstCommand.id > secondCommand.id ? 1 : 0;
+
+	const sortedCommands = customCommands.sort(sortCommands);
 
 	return (
 		<Fragment>
@@ -224,20 +236,38 @@ const CustomCommandsPage = ({
 						xl: 12
 					}}
 				>
-					<List>
-						{customCommands.length > 0 ? (
-							customCommands.sort(sortCommands).map(({ id: name, content }) => (
-								<ListItem key={name}>
+					{customCommands.length > 0 ? (
+						<Virtuoso
+							totalCount={sortedCommands.length}
+							overscan={10}
+							style={{ height: theme.spacing(40), width: '100%' }}
+							className={classes.virtualizedList}
+							ListContainer={({ listRef, style, children, ...props }) => (
+								<List component="nav" {...props} ref={listRef} style={style} className={classes.virtualizedListContainer}>
+									{children}
+								</List>
+							)}
+							ItemContainer={({ children, ...props }) => (
+								<ListItem {...props} style={{ margin: 0 }}>
+									{children}
+								</ListItem>
+							)}
+							item={index => (
+								<>
 									<ListItemText
 										disableTypography
 										primary={
 											<Typography variant="body1" classes={{ root: classes.tagHeader }}>
-												{prefix + name}
+												{prefix + sortedCommands[index].id}
 											</Typography>
 										}
 										secondary={
 											<Typography component="div" variant="body2">
-												<ReactMarkdown source={content} skipHtml parserOptions={{ gfm: true }} />
+												<ReactMarkdown
+													source={sortedCommands[index].content}
+													skipHtml
+													parserOptions={{ gfm: true }}
+												/>
 											</Typography>
 										}
 									/>
@@ -246,19 +276,21 @@ const CustomCommandsPage = ({
 											edge="end"
 											onClick={() =>
 												patchGuildData({
-													'custom-commands': customCommands.filter(command => command.id !== name)
+													'custom-commands': customCommands.filter(
+														command => command.id !== sortedCommands[index].id
+													)
 												})
 											}
 										>
 											<DeleteIcon />
 										</IconButton>
 									</ListItemSecondaryAction>
-								</ListItem>
-							))
-						) : (
-							<Typography>You have no registered custom commands!</Typography>
-						)}
-					</List>
+								</>
+							)}
+						/>
+					) : (
+						<Typography>You have no registered custom commands!</Typography>
+					)}
 				</SimpleGrid>
 			</Section>
 		</Fragment>
