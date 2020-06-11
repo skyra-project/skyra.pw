@@ -22,8 +22,8 @@ export * from './RGB';
 export interface ColorHandler {
 	check(): void;
 	toString(): string;
-	readonly hex: import('./HEX').HEX;
-	readonly rgb: import('./RGB').RGB;
-	readonly hsl: import('./HSL').HSL;
-	readonly b10: import('./B10').B10;
+	readonly Hex: import('./HEX').HEX;
+	readonly Rgb: import('./RGB').RGB;
+	readonly Hsl: import('./HSL').HSL;
+	readonly B10: import('./B10').B10;
 }

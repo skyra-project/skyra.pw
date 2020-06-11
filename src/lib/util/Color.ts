@@ -29,8 +29,8 @@ export const REGEXP = {
 };
 
 export function parse(input: string): Resolver.ColorHandler {
-	if (REGEXP.RANDOM.test(input)) return _generateRandom();
-	const output = _HEX(input) || _B10(input) || _RGB(input) || _HSL(input);
+	if (REGEXP.RANDOM.test(input)) return generateRandom();
+	const output = HEX(input) || B10(input) || RGB(input) || HSL(input);
 
 	if (output === null) throw `${input} is not a supported type.`;
 	return output;
@@ -48,11 +48,11 @@ export function hexConcat(r: number, g: number, b: number) {
 	return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
 }
 
-function _generateRandom() {
+function generateRandom() {
 	return new Resolver.HSL(generateBetween(360, 0), generateBetween(100, 75), generateBetween(100, 65));
 }
 
-function _HEX(input: string) {
+function HEX(input: string) {
 	if (!REGEXP.HEX.test(input)) return null;
 	let raw = REGEXP.HEX_EXEC.exec(input)![1];
 	if (raw.length === 3)
@@ -63,19 +63,19 @@ function _HEX(input: string) {
 	return new Resolver.HEX(raw.substring(0, 2), raw.substring(2, 4), raw.substring(4, 6));
 }
 
-function _RGB(input: string) {
+function RGB(input: string) {
 	if (!REGEXP.RGB.test(input)) return null;
 	const raw = REGEXP.RGB_EXEC.exec(input)!;
 	return new Resolver.RGB(parseInt(raw[1], 10), parseInt(raw[2], 10), parseInt(raw[3], 10));
 }
 
-function _HSL(input: string) {
+function HSL(input: string) {
 	if (!REGEXP.HSL.test(input)) return null;
 	const raw = REGEXP.HSL_EXEC.exec(input)!;
 	return new Resolver.HSL(parseInt(raw[1], 10), parseInt(raw[2], 10), parseInt(raw[3], 10));
 }
 
-function _B10(input: string) {
+function B10(input: string) {
 	if (!REGEXP.B10.test(input)) return null;
 	return new Resolver.B10(input);
 }

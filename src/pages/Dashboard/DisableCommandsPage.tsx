@@ -85,7 +85,7 @@ export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWi
 		fetchCommands();
 	}, [fetchCommands]);
 
-	const handleToggleExpansionPanel = (panel: string) => (_: React.ChangeEvent<{}>, isExpanded: boolean) => {
+	const handleToggleExpansionPanel = (panel: string) => (_: React.ChangeEvent<unknown>, isExpanded: boolean) => {
 		setExpanded(isExpanded ? panel : false);
 	};
 

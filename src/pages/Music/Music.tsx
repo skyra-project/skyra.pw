@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import CardContent from '@material-ui/core/CardContent';
@@ -91,7 +92,6 @@ export default () => {
 
 	const playerRef = useRef<ReactPlayer | null>(null);
 
-	/* eslint-disable @typescript-eslint/camelcase */
 	const skipSong = () => {
 		ws.sendJSON({
 			action: ClientActions.MusicQueueUpdate,
@@ -145,7 +145,6 @@ export default () => {
 				}
 			});
 		};
-		/* eslint-enable @typescript-eslint/camelcase */
 
 		ws.onmessage = event => {
 			const { action, data } = JSON.parse(event.data) as IncomingWebsocketMessage;
@@ -236,11 +235,8 @@ export default () => {
 					break;
 
 				case ServerActions.MusicVoiceChannelJoin:
-					// This event doesn't need to be handled, its handled by MusicConnect
-					break;
-
 				case ServerActions.MusicVoiceChannelLeave:
-					// This event doesn't need to be handled, its handled by MusicLeave
+					// These events don't need to be handled, its handled by MusicConnect
 					break;
 			}
 		};

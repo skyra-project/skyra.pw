@@ -42,16 +42,16 @@ export class RGB implements ColorHandler {
 		if (this.b < 0 || this.b > 255) throw `Invalid Blue range. Must be between 0 and 255, and it is ${this.b}`;
 	}
 
-	public get hex() {
+	public get Hex() {
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
 		return new HEX(this.r.toString(16), this.g.toString(16), this.b.toString(16));
 	}
 
-	public get rgb() {
+	public get Rgb() {
 		return this;
 	}
 
-	public get hsl() {
+	public get Hsl() {
 		const r = this.r / 255;
 		const g = this.g / 255;
 		const b = this.b / 255;
@@ -85,8 +85,8 @@ export class RGB implements ColorHandler {
 		return new HSL(Math.round(h! * 360), Math.round(s * 100), Math.round(l * 100));
 	}
 
-	public get b10() {
-		return this.hex.b10;
+	public get B10() {
+		return this.Hex.B10;
 	}
 
 	public toString() {

@@ -10,9 +10,10 @@ import { SettingsPageProps } from 'lib/types/GuildSettings';
 import React, { PropsWithChildren } from 'react';
 import { object, string } from 'yup';
 
-interface GeneralSettingsForm {
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+type GeneralSettingsForm = {
 	prefix: string;
-}
+};
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

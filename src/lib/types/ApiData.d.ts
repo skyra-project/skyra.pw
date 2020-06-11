@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 export interface FlattenedGuild {
 	id: string;
 	available: boolean;

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment, @typescript-eslint/no-non-null-assertion */
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -14,7 +15,6 @@ const unitMap: Record<string, number> = {
 
 const unitEntries = Object.entries(unitMap);
 
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 // @ts-ignore
 function determineUnit(ms: number) {
 	for (let i = 0; i < unitEntries.length; i++) {

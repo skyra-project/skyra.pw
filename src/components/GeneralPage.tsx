@@ -93,7 +93,7 @@ const ScrollToTopButton = ({ children }: PropsWithChildren<unknown>) => {
 	);
 };
 
-export default ({ children, loading = false, containerProps = {}, ...props }: PropsWithChildren<GeneralPageProps>) => {
+export default ({ children, loading = false, containerProps, ...props }: PropsWithChildren<GeneralPageProps>) => {
 	const classes = useStyles();
 	const [authenticated] = useGlobal('authenticated');
 
@@ -102,7 +102,7 @@ export default ({ children, loading = false, containerProps = {}, ...props }: Pr
 	}, []);
 
 	return (
-		<Box component="section" className={classes.container}>
+		<Box component="section" className={classes.container} {...containerProps}>
 			<Box component="nav">
 				<AppBar position="fixed">
 					<Toolbar>

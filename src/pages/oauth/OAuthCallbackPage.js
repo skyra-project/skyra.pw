@@ -13,7 +13,7 @@ function DiscordAuthCallbackPage() {
 			method: 'POST',
 			body: JSON.stringify({
 				code,
-				// eslint-disable-next-line @typescript-eslint/camelcase
+				// eslint-disable-next-line @typescript-eslint/naming-convention
 				redirect_uri: `${BASE_WEB_URL}/oauth/callback`
 			})
 		});

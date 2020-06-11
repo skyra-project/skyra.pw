@@ -41,20 +41,20 @@ export class HEX implements ColorHandler {
 		if (Number.isNaN(parseInt(this.b, 16))) throw `Invalid Blue range. Must be between '00' and 'ff', and it is '${this.b}'`;
 	}
 
-	public get hex() {
+	public get Hex() {
 		return this;
 	}
 
-	public get rgb() {
+	public get Rgb() {
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
 		return new RGB(parseInt(this.r, 16), parseInt(this.g, 16), parseInt(this.b, 16));
 	}
 
-	public get hsl() {
-		return this.rgb.hsl;
+	public get Hsl() {
+		return this.Rgb.Hsl;
 	}
 
-	public get b10() {
+	public get B10() {
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
 		return new B10(parseInt(this.r + this.g + this.b, 16));
 	}

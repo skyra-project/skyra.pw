@@ -75,6 +75,7 @@ export async function syncUser() {
 
 	saveState('last_sync', Date.now());
 
+	// eslint-disable-next-line @typescript-eslint/naming-convention
 	const response = await authedFetch<{ access_token: string; user: OauthFlattenedUser }>('/oauth/user', {
 		method: 'POST',
 		body: JSON.stringify({

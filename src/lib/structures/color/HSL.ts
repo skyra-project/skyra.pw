@@ -41,11 +41,11 @@ export class HSL implements ColorHandler {
 		if (this.l < 0 || this.l > 100) throw `Invalid Lightness range. Must be between 0 and 100, and it is ${this.l}`;
 	}
 
-	public get hex() {
-		return this.rgb.hex;
+	public get Hex() {
+		return this.Rgb.Hex;
 	}
 
-	public get rgb() {
+	public get Rgb() {
 		const h = this.h / 360;
 		const s = this.s / 100;
 		const l = this.l / 100;
@@ -70,12 +70,12 @@ export class HSL implements ColorHandler {
 		return new RGB(Math.round(r * 255), Math.round(g * 255), Math.round(b * 255));
 	}
 
-	public get hsl() {
+	public get Hsl() {
 		return this;
 	}
 
-	public get b10() {
-		return this.hex.b10;
+	public get B10() {
+		return this.Hex.B10;
 	}
 
 	public toString() {

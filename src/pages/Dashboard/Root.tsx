@@ -231,7 +231,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 			const response = await authedFetch<{ newSettings: GuildSettings; error?: string }>(`/guilds/${guildID}/settings`, {
 				method: 'POST',
 				body: JSON.stringify({
-					// eslint-disable-next-line @typescript-eslint/camelcase
+					// eslint-disable-next-line @typescript-eslint/naming-convention
 					guild_id: guildID,
 					data: guildSettingsChanges
 				})

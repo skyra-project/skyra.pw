@@ -54,6 +54,7 @@ if (process.env.NODE_ENV === 'development') {
 	addReactNDevTools();
 	if ((module as HotNodeModule).hot) {
 		(module as HotNodeModule).hot.accept('./components/Root.tsx', () => {
+			// eslint-disable-next-line @typescript-eslint/no-var-requires
 			const NextApp = require('./components/Root.tsx').default;
 			render(<NextApp />, rootElement);
 		});

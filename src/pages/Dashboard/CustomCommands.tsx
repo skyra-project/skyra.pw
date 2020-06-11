@@ -118,7 +118,7 @@ const CustomCommandsPage = ({
 				'custom-commands': mergeCustomCommands(customCommands, {
 					id,
 					content,
-					color: parse(color || '#1E88E5').b10.value,
+					color: parse(color || '#1E88E5').B10.value,
 					embed,
 					args: []
 				})

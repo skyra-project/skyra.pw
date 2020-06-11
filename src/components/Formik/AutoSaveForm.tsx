@@ -4,7 +4,7 @@ import { debounce } from 'lodash';
 import React, { Fragment, PropsWithChildren, useCallback, useEffect } from 'react';
 import { ObjectSchema } from 'yup';
 
-interface AutoSavingFormProps<T extends object> {
+interface AutoSavingFormProps<T extends Record<string, unknown>> {
 	/** The initial values for this form */
 	initialValues: T;
 	/** The `yup` validation schema for this form */
@@ -15,7 +15,7 @@ interface AutoSavingFormProps<T extends object> {
 	onSubmit(values: T, formikHelpers: FormikHelpers<T>): void | Promise<any>;
 }
 
-function AutoSave<T extends object>({ submitDebounceMs = Time.Second }: Pick<AutoSavingFormProps<T>, 'submitDebounceMs'>) {
+function AutoSave<T extends Record<string, unknown>>({ submitDebounceMs = Time.Second }: Pick<AutoSavingFormProps<T>, 'submitDebounceMs'>) {
 	const formik = useFormikContext<T>();
 
 	const debouncedSubmit = useCallback(
@@ -40,7 +40,7 @@ function AutoSave<T extends object>({ submitDebounceMs = Time.Second }: Pick<Aut
 	return <Fragment />;
 }
 
-function AutoSavingForm<T extends object>({
+function AutoSavingForm<T extends Record<string, unknown>>({
 	initialValues,
 	onSubmit,
 	validationSchema,
