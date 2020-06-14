@@ -1687,10 +1687,10 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@types/yup@^0.29.2":
-  version "0.29.2"
-  resolved "https://registry.yarnpkg.com/@types/yup/-/yup-0.29.2.tgz#88475225c515a523c6def5d102cc89aa3508cdf4"
-  integrity sha512-+xWGnndRDsBxa5Ep5Of/XoiKdcUWVurh48N4zOqk1Zpqn09gjncY+VDctoBdSQ4ubmIDWA32FB7HN0y5vNhL4A==
+"@types/yup@^0.29.3":
+  version "0.29.3"
+  resolved "https://registry.yarnpkg.com/@types/yup/-/yup-0.29.3.tgz#5a85024796bffe0eb01601bfc180fe218356dba4"
+  integrity sha512-XxZFKnxzTfm+DR8MMBA35UUXfUPmjPpi8HJ90VZg7q/LIbtiOhVGJ26gNnATcflcpnIyf2Qm9A+oEhswaqoDpA==
 
 "@typescript-eslint/eslint-plugin@^2.10.0", "@typescript-eslint/eslint-plugin@^3.1.0":
   version "3.2.0"
@@ -6885,10 +6885,10 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
-lint-staged@^10.2.9:
-  version "10.2.9"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-10.2.9.tgz#6013ecfa80829cd422446b545fd30a96bca3098c"
-  integrity sha512-ziRAuXEqvJLSXg43ezBpHxRW8FOJCXISaXU//BWrxRrp5cBdRkIx7g5IsB3OI45xYGE0S6cOacfekSjDyDKF2g==
+lint-staged@^10.2.10:
+  version "10.2.10"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-10.2.10.tgz#f0f78bf8786bbe90e1775a0dc540f7f12b6a79b2"
+  integrity sha512-dgelFaNH6puUGAcU+OVMgbfpKSerNYsPSn6+nlbRDjovL0KigpsVpCu0PFZG6BJxX8gnHJqaZlR9krZamQsb0w==
   dependencies:
     chalk "^4.0.0"
     cli-truncate "2.1.0"
@@ -9327,10 +9327,10 @@ react-markdown@^4.3.1:
     unist-util-visit "^1.3.0"
     xtend "^4.0.1"
 
-react-player@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/react-player/-/react-player-2.2.0.tgz#dfda060ce0fe87d6d41b168fc53eede449f3ffd4"
-  integrity sha512-TsUn7NL3IWmVwoeU+Jbbbrq6+2HQYsiAyC75deWI0dCkJA3InbR194VBJJiYIZvFL+tUZAcbBDHt+tYyPA0Wjg==
+react-player@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/react-player/-/react-player-2.3.0.tgz#89242d406623559b65025df2d537da6cd7bade21"
+  integrity sha512-pz2IUOOcAFoVK+qOXHU0oFd3lBdhmJlUjTqUZdZQwJfVbcN2cIvhZ0cCkBR0GgWAE68uLLndK388eE3J9l6oqg==
   dependencies:
     deepmerge "^4.0.0"
     load-script "^1.0.0"
@@ -9437,10 +9437,10 @@ react-transition-group@^4.4.0:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react-virtuoso@^0.17.1:
-  version "0.17.1"
-  resolved "https://registry.yarnpkg.com/react-virtuoso/-/react-virtuoso-0.17.1.tgz#cac61821cfcf4d91c1faa7953d9c6b9fdc7e3674"
-  integrity sha512-3nZVF5aUjKWk5mcqE8QoJzugGAgggIzlotvavR5LM/5PJMfvg5oNVzGjOduohqNPrN4D3j1EH/MLJ7tN5C8CiQ==
+react-virtuoso@^0.17.3:
+  version "0.17.3"
+  resolved "https://registry.yarnpkg.com/react-virtuoso/-/react-virtuoso-0.17.3.tgz#373b7bbb8a81087a6df255855fcb1e9006691668"
+  integrity sha512-terKMw3uZ8UerBa9sjeP2B6TGgL5dbKDtZlg63teRPyi9AJrJ9vdAmGxPrQ1FhWwXKLFB61aK57FZ7K1KYHRPA==
   dependencies:
     "@scarf/scarf" "^1.0.5"
     resize-observer-polyfill "^1.5.1"
