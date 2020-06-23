@@ -103,11 +103,34 @@
 		<!-- Internet Explorer Meta Tags -->
 		<meta http-equiv="Page-Enter" content="RevealTrans(Duration=2.0,Transition=2)" />
 		<meta http-equiv="Page-Exit" content="RevealTrans(Duration=3.0,Transition=12)" />
+
+		<style>
+			noscript {
+				position: absolute;
+				background-color: #16171d;
+				top: 0;
+				left: 0;
+				height: 100%;
+				width: 100%;
+			}
+
+			noscript span {
+				font-family: 'Roboto';
+				margin: 0;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				color: white;
+			}
+		</style>
 	</head>
 	<body>
 		<noscript>
-			<meta http-equiv="refresh" content="0;url=%PUBLIC_URL%/noscript.html" />
-			<p>If you don't get redirected click <a href="%PUBLIC_URL%/noscript.html">here</a></p>
+			<span>
+				<h1>Uh-oh. Seems like JavaScript isn't enabled</h1>
+				<h4>Make sure that your browser or any antivirus software isn't blocking JavaScript execution</h4>
+			</span>
 		</noscript>
 		<div id="root"></div>
 	</body>
