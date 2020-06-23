@@ -28,6 +28,7 @@ export default () => (
 					<Router history={history}>
 						<Switch>
 							<Route exact path="/" component={HomePage} />
+							<Route exact path="/index.html" component={HomePage} />
 							<Route exact path="/oauth/callback" component={OAuthCallbackPage} />
 							<Route exact path="/oauth/guild" component={GuildCallbackPage} />
 							<Route exact path="/commands" component={CommandsPage} />
