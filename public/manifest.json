@@ -6,7 +6,7 @@
 	"dir": "auto",
 	"display": "standalone",
 	"lang": "en_US",
-	"name": "Skyra",
+	"name": "Skyra Dashboard",
 	"orientation": "portrait-primary",
 	"scope": "https://skyra.pw",
 	"short_name": "Skyra",
