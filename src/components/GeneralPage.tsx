@@ -116,9 +116,13 @@ export default ({ children, loading = false, containerProps, ...props }: PropsWi
 									<Box className={classes.svg}>
 										<SkyraLogo />
 										<Box display="flex" flexDirection="column" ml={3}>
-											<Typography variant="h5">Skyra</Typography>
+											<Typography variant="h5" component="h1">
+												Skyra
+											</Typography>
 											<Hidden smDown>
-												<Typography variant="caption">The most advanced moderation bot</Typography>
+												<Typography variant="caption" component="h1">
+													The most advanced moderation bot
+												</Typography>
 											</Hidden>
 										</Box>
 									</Box>
