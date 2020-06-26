@@ -74,13 +74,29 @@ export default function SelectOne({ label, onChange, values, name = 'None', imag
 				<Then>
 					<Tooltip title={tooltipTitle ?? ''} placement="top">
 						<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...buttonProps}>
-							{label}: {name} {imageInName && <LazyAvatar alt="Emoji" src={imageInName} className={classes.nameImage} />}
+							{label}: {name}{' '}
+							{imageInName && (
+								<LazyAvatar
+									imgProps={{ height: theme.spacing(2), width: theme.spacing(2) }}
+									alt="Emoji"
+									src={imageInName}
+									className={classes.nameImage}
+								/>
+							)}
 						</Button>
 					</Tooltip>
 				</Then>
 				<Else>
 					<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...buttonProps}>
-						{label}: {name} {imageInName && <LazyAvatar alt="Emoji" src={imageInName} className={classes.nameImage} />}
+						{label}: {name}{' '}
+						{imageInName && (
+							<LazyAvatar
+								imgProps={{ height: theme.spacing(2), width: theme.spacing(2) }}
+								alt="Emoji"
+								src={imageInName}
+								className={classes.nameImage}
+							/>
+						)}
 					</Button>
 				</Else>
 			</If>

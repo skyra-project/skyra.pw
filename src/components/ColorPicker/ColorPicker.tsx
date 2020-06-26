@@ -47,6 +47,7 @@ export default ({ form: { setFieldValue, ...form }, field, ...props }: PropsWith
 					startAdornment: (
 						<InputAdornment disablePointerEvents position="start">
 							<LazyAvatar
+								imgProps={{ height: theme.spacing(2), width: theme.spacing(2) }}
 								style={{ backgroundColor: REGEXP.HEX.test(field.value) ? field.value : 'transparent' }}
 								className={classes.smallAvatar}
 							>

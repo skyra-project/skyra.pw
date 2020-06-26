@@ -337,6 +337,7 @@ export default () => {
 													<If condition={song.url.includes('youtube')}>
 														<Then>
 															<LazyAvatar
+																imgProps={{ height: 360, width: 480 }}
 																src={`https://img.youtube.com/vi/${song.identifier}/hqdefault.jpg`}
 															/>
 														</Then>

@@ -30,7 +30,11 @@ export default ({ guild, sizeClass, size = 128 }: PropsWithChildren<GuildIconPro
 
 	return (
 		<Link to={`/guilds/${guild.id}`}>
-			<LazyAvatar classes={{ root: clsx(classes.avatar, sizeClass) }} src={displayIconURL(guild, { size })}>
+			<LazyAvatar
+				classes={{ root: clsx(classes.avatar, sizeClass) }}
+				imgProps={{ height: 256, width: 256 }}
+				src={displayIconURL(guild, { size })}
+			>
 				{getAcronym(guild.name)}
 			</LazyAvatar>
 		</Link>
