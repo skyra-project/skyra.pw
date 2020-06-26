@@ -1,9 +1,10 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import { Button, createStyles, makeStyles, Theme } from '@material-ui/core';
 import Grow from '@material-ui/core/Grow';
 import Snackbar from '@material-ui/core/Snackbar';
+import CancelIcon from '@material-ui/icons/Cancel';
 import AlertTitle from '@material-ui/lab/AlertTitle';
 import { Time } from 'lib/util/skyraUtils';
-import { PropsWithChildren, ReactNode } from 'react';
+import { Dispatch, PropsWithChildren, ReactNode, SetStateAction } from 'react';
 import React from 'reactn';
 import BaseAlert from './Base';
 
@@ -21,6 +22,8 @@ interface ErrorAlertProps {
 	 * @default false
 	 */
 	open?: boolean;
+	/** A local state setter that should trigger open state */
+	setOpen?: Dispatch<SetStateAction<boolean>>;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -38,7 +41,13 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-export default ({ errorText, errorSubText = '', open = false, ...props }: PropsWithChildren<ErrorAlertProps>) => {
+export default ({
+	errorText,
+	errorSubText = '',
+	open = false,
+	setOpen = (...args: any[]) => args,
+	...props
+}: PropsWithChildren<ErrorAlertProps>) => {
 	const classes = useStyles();
 	return (
 		<Snackbar
@@ -48,7 +57,15 @@ export default ({ errorText, errorSubText = '', open = false, ...props }: PropsW
 			classes={{ root: classes.snackbar }}
 			{...props}
 		>
-			<BaseAlert severity="error" classes={{ root: classes.paper }}>
+			<BaseAlert
+				severity="error"
+				classes={{ root: classes.paper }}
+				action={
+					<Button endIcon={<CancelIcon />} color="inherit" size="large" onClick={() => setOpen(!open ?? false)}>
+						CLOSE
+					</Button>
+				}
+			>
 				<AlertTitle>{errorText}</AlertTitle>
 				{errorSubText}
 			</BaseAlert>

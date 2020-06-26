@@ -579,6 +579,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 			</Backdrop>
 			<ErrorAlert
 				open={hasError}
+				setOpen={setHasError}
 				errorText="An error occurred getting data from Skyra's server."
 				errorSubText={
 					<Box component="span">
