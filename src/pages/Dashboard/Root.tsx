@@ -342,7 +342,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 						<ListItemIcon>
 							<FilterListIcon />
 						</ListItemIcon>
-						<ListItemText primary="Filter" />
+						<ListItemText primary="Filters" />
 						{openSubMenus.includes('filter') ? <ExpandLess /> : <ExpandMore />}
 					</ListItem>
 					<Collapse in={openSubMenus.includes('filter')} timeout="auto" unmountOnExit>
