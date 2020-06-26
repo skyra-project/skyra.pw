@@ -14,6 +14,8 @@ import LazyAvatar from 'components/LazyAvatar';
 import SearchBar from 'components/SearchBar';
 import Tooltip from 'components/Tooltip';
 import { toTitleCase } from 'lib/util/klasaUtils';
+import { Time } from 'lib/util/skyraUtils';
+import { sleep } from 'lib/util/util';
 import React, { ChangeEvent, Fragment, PropsWithChildren, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import { Virtuoso } from 'react-virtuoso';
@@ -56,10 +58,19 @@ export default ({ label, value, onChange, values, name, imageInName, tooltipTitl
 
 	const filteredValues = values.filter(({ name, value }) => {
 		if (!search) return true;
-		return `${name} ${value}`.toLowerCase().includes(search);
+		return `${name} ${value}`.toLowerCase().includes(search.toLowerCase());
 	});
 
-	const handleClose = () => setOpen(!open);
+	const handleClose = async () => {
+		// Close the dialog
+		setOpen(!open);
+
+		// Wait 1 second before clearing search because otherwise the resutls pop up while the dialog is animating away
+		await sleep(Time.Second);
+
+		// Clear the search
+		setSearch('');
+	};
 
 	const handleToggle = (value: string) => () => {
 		const currentIndex = checked.indexOf(value);

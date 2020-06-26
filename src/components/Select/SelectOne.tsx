@@ -12,6 +12,8 @@ import LazyAvatar from 'components/LazyAvatar';
 import SearchBar from 'components/SearchBar';
 import Tooltip from 'components/Tooltip';
 import { toTitleCase } from 'lib/util/klasaUtils';
+import { Time } from 'lib/util/skyraUtils';
+import { sleep } from 'lib/util/util';
 import React, { ChangeEvent, Fragment, ReactNode, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import { Virtuoso } from 'react-virtuoso';
@@ -61,11 +63,20 @@ export default function SelectOne({ label, onChange, values, name = 'None', imag
 	const classes = useStyles();
 	const theme = useTheme();
 
-	const handleClose = () => setOpen(!open);
+	const handleClose = async () => {
+		// Close the dialog
+		setOpen(!open);
+
+		// Wait 1 second before clearing search because otherwise the resutls pop up while the dialog is animating away
+		await sleep(Time.Second);
+
+		// Clear the search
+		setSearch('');
+	};
 
 	const filteredValues = values.filter(({ name, value }) => {
 		if (!search) return true;
-		return `${name} ${value}`.toLowerCase().includes(search);
+		return `${name} ${value}`.toLowerCase().includes(search.toLowerCase());
 	});
 
 	return (
