@@ -28,7 +28,16 @@ export default ({ onChange }: PropsWithChildren<InputBaseProps>) => {
 	return (
 		<Box className={classes.root}>
 			<SearchIcon className={classes.svg} />
-			<InputBase placeholder="Search…" onChange={onChange} inputProps={{ 'aria-label': 'search input' }} />
+			<InputBase
+				autoFocus
+				autoCapitalize="false"
+				autoComplete="off"
+				autoCorrect="false"
+				results={4}
+				placeholder="Search…"
+				onChange={onChange}
+				inputProps={{ 'aria-label': 'search input' }}
+			/>
 		</Box>
 	);
 };
