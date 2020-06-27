@@ -105,7 +105,7 @@
   color: 128A0C
 - name: 'Status: Invalid'
   description: Issues that will not be fixed or PRs that will not merge, e.g. due to backwards compatibility.
-  color: 5319e7
+  color: 671df0
 - name: 'Status: Duplicate'
   description: Issues/PRs that are duplicated.
   color: d93f0b
