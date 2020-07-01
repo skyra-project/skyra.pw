@@ -26,6 +26,20 @@
         "projectManagement",
         "review"
       ]
+    },
+    {
+      "login": "kyranet",
+      "name": "Antonio Román",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/24852502?v=4",
+      "profile": "https://github.com/kyranet",
+      "contributions": [
+        "bug",
+        "code",
+        "content",
+        "design",
+        "projectManagement",
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 7
