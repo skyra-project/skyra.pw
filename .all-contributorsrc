@@ -64,6 +64,15 @@
         "design",
         "code"
       ]
+    },
+    {
+      "login": "MrJacz",
+      "name": "Jacz",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/23615291?v=4",
+      "profile": "https://jaczaus.me/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
