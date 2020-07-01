@@ -54,6 +54,16 @@
         "platform",
         "review"
       ]
+    },
+    {
+      "login": "cfanoulis",
+      "name": "Charalampos Fanoulis",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/38255093?v=4",
+      "profile": "https://github.com/cfanoulis",
+      "contributions": [
+        "design",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
