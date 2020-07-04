@@ -20,20 +20,4 @@
 		<loc>https://skyra.pw/commands</loc>
 		<lastmod>2020-04-22</lastmod>
 	</url>
-	<url>
-		<loc>https://skyra.pw/oauth/callback</loc>
-		<lastmod>2020-04-22</lastmod>
-	</url>
-	<url>
-		<loc>https://skyra.pw/oauth/guild</loc>
-		<lastmod>2020-04-22</lastmod>
-	</url>
-	<url>
-		<loc>https://skyra.pw/login</loc>
-		<lastmod>2020-04-22</lastmod>
-	</url>
-	<url>
-		<loc>https://skyra.pw/join</loc>
-		<lastmod>2020-04-22</lastmod>
-	</url>
 </urlset>
