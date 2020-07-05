@@ -1,13 +1,13 @@
+import Accordion from '@material-ui/core/Accordion';
+import AccordionActions from '@material-ui/core/AccordionActions';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Backdrop from '@material-ui/core/Backdrop';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { green } from '@material-ui/core/colors';
 import Divider from '@material-ui/core/Divider';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			zIndex: theme.zIndex.drawer + 1,
 			color: theme.palette.primary.contrastText
 		},
-		expansionPanels: {
+		accordions: {
 			marginTop: theme.spacing(3)
 		},
 		cancelButton: {
@@ -85,7 +85,7 @@ export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWi
 		fetchCommands();
 	}, [fetchCommands]);
 
-	const handleToggleExpansionPanel = (panel: string) => (_: React.ChangeEvent<unknown>, isExpanded: boolean) => {
+	const handleToggleAccordion = (panel: string) => (_: React.ChangeEvent<unknown>, isExpanded: boolean) => {
 		setExpanded(isExpanded ? panel : false);
 	};
 
@@ -100,22 +100,18 @@ export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWi
 				<Typography variant="subtitle2" color="textPrimary">
 					On this page you can disable commands on your server
 				</Typography>
-				<Box className={classes.expansionPanels}>
+				<Box className={classes.accordions}>
 					{categories.map((catName, catIndex) => (
-						<ExpansionPanel
+						<Accordion
 							key={catIndex}
 							expanded={expanded === catName}
-							onChange={handleToggleExpansionPanel(catName)}
+							onChange={handleToggleAccordion(catName)}
 							TransitionProps={{ unmountOnExit: true }}
 						>
-							<ExpansionPanelSummary
-								expandIcon={<ExpandMoreIcon />}
-								aria-controls={`${catName}-content`}
-								id={`${catName}-header`}
-							>
+							<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`${catName}-content`} id={`${catName}-header`}>
 								<Typography variant="body1">{catName}</Typography>
-							</ExpansionPanelSummary>
-							<ExpansionPanelDetails>
+							</AccordionSummary>
+							<AccordionDetails>
 								<Grid container spacing={1} direction="row" justify="flex-start" alignItems="center" alignContent="center">
 									{Object.values(commands)
 										.filter(command => command.category === catName)
@@ -135,9 +131,9 @@ export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWi
 											</Grid>
 										))}
 								</Grid>
-							</ExpansionPanelDetails>
+							</AccordionDetails>
 							<Divider />
-							<ExpansionPanelActions>
+							<AccordionActions>
 								<Button
 									size="small"
 									variant="contained"
@@ -199,8 +195,8 @@ export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWi
 								>
 									Save
 								</Button>
-							</ExpansionPanelActions>
-						</ExpansionPanel>
+							</AccordionActions>
+						</Accordion>
 					))}
 				</Box>
 			</Section>

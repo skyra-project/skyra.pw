@@ -112,7 +112,7 @@ export default () => {
 				<If condition={authenticated}>
 					<Then>
 						<LazyAvatar src={displayAvatarURL(user, { size: 32 })} imgProps={{ height: 32, width: 32 }}>
-							{getAcronym(user.username)}
+							{getAcronym(user?.username ?? '')}
 						</LazyAvatar>
 					</Then>
 					<Else>

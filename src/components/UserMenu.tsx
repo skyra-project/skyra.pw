@@ -102,7 +102,7 @@ export default () => {
 						style={{ marginRight: 5, height: 40, width: 40 }}
 						src={displayAvatarURL(user, { size: 128 })}
 					>
-						{getAcronym(user.username)}
+						{getAcronym(user?.username ?? '')}
 					</LazyAvatar>
 					<ExpandMoreIcon />
 				</Button>
