@@ -7,8 +7,8 @@
 		"@material-ui/core": "^4.11.0",
 		"@material-ui/icons": "^4.9.1",
 		"@material-ui/lab": "^4.0.0-alpha.56",
-		"@skyra/discord-components-core": "^1.1.2",
-		"@skyra/discord-components-react": "^1.1.2",
+		"@skyra/discord-components-core": "^1.1.4",
+		"@skyra/discord-components-react": "^1.1.4",
 		"body-scroll-lock": "^3.0.3",
 		"clsx": "^1.1.1",
 		"deepmerge": "^4.2.2",
@@ -93,8 +93,8 @@
 		"acorn": "^6.4.1",
 		"minimist": "^1.2.5",
 		"kind-of": "^6.0.3",
-		"@typescript-eslint/eslint-plugin": "^3.4.0",
-		"@typescript-eslint/parser": "^3.4.0",
-		"eslint": "^7.3.1"
+		"@typescript-eslint/eslint-plugin": "^3.5.0",
+		"@typescript-eslint/parser": "^3.5.0",
+		"eslint": "^7.4.0"
 	}
 }
