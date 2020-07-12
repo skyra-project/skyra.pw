@@ -17,7 +17,7 @@ import SyncIcon from '@material-ui/icons/Sync';
 import LoginIcon from '@material-ui/icons/VpnKey';
 import { oauthURL } from 'lib/util/constants';
 import { displayAvatarURL } from 'lib/util/skyraUtils';
-import { getAcronym, logOut, navigate, syncUser } from 'lib/util/util';
+import { logOut, navigate, syncUser } from 'lib/util/util';
 import React, { useEffect, useRef, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import { useGlobal } from 'reactn';
@@ -111,9 +111,7 @@ export default () => {
 			>
 				<If condition={authenticated}>
 					<Then>
-						<LazyAvatar src={displayAvatarURL(user, { size: 32 })} imgProps={{ height: 32, width: 32 }}>
-							{getAcronym(user?.username ?? '')}
-						</LazyAvatar>
+						<LazyAvatar src={displayAvatarURL(user, { size: 32 })} imgProps={{ height: 32, width: 32 }} alt="U" />
 					</Then>
 					<Else>
 						<MenuIcon />

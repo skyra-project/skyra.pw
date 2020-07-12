@@ -13,7 +13,7 @@ import LogoutIcon from '@material-ui/icons/Eject';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SyncIcon from '@material-ui/icons/Sync';
 import { displayAvatarURL } from 'lib/util/skyraUtils';
-import { getAcronym, logOut, syncUser } from 'lib/util/util';
+import { logOut, syncUser } from 'lib/util/util';
 import React, { useEffect, useRef, useState } from 'react';
 import { useGlobal } from 'reactn';
 import LazyAvatar from './LazyAvatar';
@@ -101,9 +101,8 @@ export default () => {
 						imgProps={{ height: 128, width: 128 }}
 						style={{ marginRight: 5, height: 40, width: 40 }}
 						src={displayAvatarURL(user, { size: 128 })}
-					>
-						{getAcronym(user?.username ?? '')}
-					</LazyAvatar>
+						alt="U"
+					/>
 					<ExpandMoreIcon />
 				</Button>
 			</Tooltip>
