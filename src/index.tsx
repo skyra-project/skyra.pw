@@ -1,6 +1,6 @@
 import Root from 'components/Root';
-import { FlattenedGuild, FlattenedUser } from 'lib/types/ApiData';
-import { loadState, logOut } from 'lib/util/util';
+import { DashboardPack } from 'lib/types/ApiData';
+import { loadState } from 'lib/util/util';
 import { render } from 'react-dom';
 import React, { setGlobal } from 'reactn';
 import addReactNDevTools from 'reactn-devtools';
@@ -8,18 +8,14 @@ import './index.css';
 
 const rootElement = document.getElementById('root');
 
-const discordUser = loadState('discord_user') as UserState;
-const discordToken = loadState('discord_token') as string;
+const discordPack = loadState<DashboardPack>('discord_pack');
 
-if (discordUser && discordUser.avatarURL) {
-	logOut();
-} else {
-	setGlobal({
-		authenticated: Boolean(discordToken) && Boolean(discordUser),
-		user: discordUser,
-		token: discordToken
-	});
-}
+setGlobal({
+	authenticated: Boolean(discordPack) && Boolean(discordPack?.user),
+	pack: discordPack ?? {
+		user: null
+	}
+});
 
 window.$discordMessage = {
 	avatars: {
@@ -65,15 +61,10 @@ interface HotNodeModule extends NodeModule {
 	hot: any;
 }
 
-interface UserState extends FlattenedUser {
-	guilds?: FlattenedGuild[];
-}
-
 declare module 'reactn/default' {
 	export interface State {
 		authenticated: boolean;
-		token: string;
-		user: UserState;
+		pack: DashboardPack;
 	}
 }
 

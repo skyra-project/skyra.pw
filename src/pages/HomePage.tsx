@@ -62,14 +62,14 @@ const Section = ({ name, previewContent, text }: typeof features extends Array<i
 
 export default () => {
 	const [authenticated] = useGlobal('authenticated');
-	const [user] = useGlobal('user');
+	const [pack] = useGlobal('pack');
 
 	return (
 		<GeneralPage>
 			{authenticated && (
 				<Container>
 					<Box display="flex" flexWrap="wrap" flexDirection="row" justifyContent="center" alignItems="center">
-						{(user?.guilds ?? [])
+						{(pack.user?.guilds ?? [])
 							// Filter on mangeable servers
 							.filter(g => g.manageable)
 							// Sort by whether Skyra is in the serve ror not

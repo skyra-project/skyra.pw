@@ -1,34 +1,31 @@
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import GeneralPage from 'components/GeneralPage';
-import { BASE_WEB_URL, history } from 'lib/util/constants';
+import { BASE_WEB_URL, history, CLIENT_ID } from 'lib/util/constants';
 import { apiFetch, saveState } from 'lib/util/util';
 import React, { setGlobal, useEffect, useState } from 'reactn';
 
 function DiscordAuthCallbackPage() {
 	const [error, setError] = useState(null);
 
-	async function finalizeAuthFlow(code) {
-		const data = await apiFetch(`/oauth/callback`, {
+	async function finalizeAuthFlow(code: string | null) {
+		const data: any = await apiFetch(`/oauth/callback`, {
 			method: 'POST',
 			body: JSON.stringify({
 				code,
-				// eslint-disable-next-line @typescript-eslint/naming-convention
-				redirect_uri: `${BASE_WEB_URL}/oauth/callback`
+				clientId: CLIENT_ID,
+				redirectUri: `${BASE_WEB_URL}/oauth/callback`
 			})
 		});
 
-		if (data.error || !data.user || !data.access_token) {
-			// TODO toast
-			setError(data.error || 'Error fetching token.');
+		if (data.error || !data.user) {
+			setError(data.error || 'Error fetching user data.');
 			return;
 		}
 
-		const { user } = data;
-		saveState('discord_token', data.access_token);
-		saveState('discord_user', user);
+		saveState('discord_pack', data);
 
-		setGlobal({ user, token: data.access_token, authenticated: true });
+		setGlobal({ authenticated: true, pack: data });
 
 		history.push('/');
 	}

@@ -46,7 +46,7 @@ import deepMerge, { Options as DeepMergeOptions } from 'deepmerge';
 import { FlattenedGuild } from 'lib/types/ApiData';
 import { GuildSettings, SettingsPageProps } from 'lib/types/GuildSettings';
 import { noOp, Time } from 'lib/util/skyraUtils';
-import { authedFetch, navigate } from 'lib/util/util';
+import { apiFetch, navigate } from 'lib/util/util';
 import CustomCommandsPage from 'pages/Dashboard/CustomCommands';
 import EventsPage from 'pages/Dashboard/EventsPage';
 import FilterCapitalsPage from 'pages/Dashboard/Filter/Capitals';
@@ -207,8 +207,8 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 		setIsLoading(true);
 		try {
 			const [guildData, guildSettings] = await Promise.all([
-				authedFetch<FlattenedGuild>(`/guilds/${guildID}`),
-				authedFetch<GuildSettings>(`/guilds/${guildID}/settings`)
+				apiFetch<FlattenedGuild>(`/guilds/${guildID}`),
+				apiFetch<GuildSettings>(`/guilds/${guildID}/settings`)
 			]);
 
 			setGuildData(guildData);
@@ -228,7 +228,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 		try {
 			setIsLoading(true);
 
-			const response = await authedFetch<{ newSettings: GuildSettings; error?: string }>(`/guilds/${guildID}/settings`, {
+			const response = await apiFetch<{ newSettings: GuildSettings; error?: string }>(`/guilds/${guildID}/settings`, {
 				method: 'POST',
 				body: JSON.stringify({
 					// eslint-disable-next-line @typescript-eslint/naming-convention

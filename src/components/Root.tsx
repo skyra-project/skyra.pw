@@ -12,7 +12,6 @@ import MusicPage from 'pages/Music/Music';
 import NotFoundPage from 'pages/NotFound';
 import GuildCallbackPage from 'pages/oauth/GuildCallbackPage';
 import OAuthCallbackPage from 'pages/oauth/OAuthCallbackPage';
-import StatusPage from 'pages/Status';
 import { Route, Router, Switch } from 'react-router-dom';
 import React from 'reactn';
 import { ServiceWorkerProvider } from 'ServiceWorkerContext';
@@ -32,7 +31,6 @@ export default () => (
 							<Route exact path="/oauth/callback" component={OAuthCallbackPage} />
 							<Route exact path="/oauth/guild" component={GuildCallbackPage} />
 							<Route exact path="/commands" component={CommandsPage} />
-							<Route exact path="/status" component={StatusPage} />
 							<AuthenticatedRoute path="/guilds/:guildID/:pageName?" component={DashboardRootPage} />
 							<Route exact path="/music/:guildID" component={MusicPage} />
 							<RedirectRoute path="/login" redirectUri={oauthURL.toString()} />

@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default () => {
 	const classes = useStyles();
-	const [user] = useGlobal('user');
+	const [pack] = useGlobal('pack');
 	const [authenticated] = useGlobal('authenticated');
 	const [open, setOpen] = useState(false);
 	const anchorRef = useRef<HTMLButtonElement>(null);
@@ -111,7 +111,7 @@ export default () => {
 			>
 				<If condition={authenticated}>
 					<Then>
-						<LazyAvatar src={displayAvatarURL(user, { size: 32 })} imgProps={{ height: 32, width: 32 }} alt="U" />
+						<LazyAvatar src={displayAvatarURL(pack.user, { size: 32 })} imgProps={{ height: 32, width: 32 }} alt="U" />
 					</Then>
 					<Else>
 						<MenuIcon />

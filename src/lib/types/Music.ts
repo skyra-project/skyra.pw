@@ -34,7 +34,6 @@ export enum MusicStatus {
 }
 
 export enum ClientActions {
-	Authenticate = 'AUTHENTICATE',
 	MusicQueueUpdate = 'MUSIC_QUEUE_UPDATE',
 	SubscriptionUpdate = 'SUBSCRIPTION_UPDATE'
 }
@@ -48,7 +47,6 @@ export enum MusicActions {
 }
 
 export enum ServerActions {
-	Authenticate = 'AUTHENTICATE',
 	MusicAdd = 'MUSIC_ADD',
 	MusicConnect = 'MUSIC_CONNECT',
 	MusicLeave = 'MUSIC_LEAVE',

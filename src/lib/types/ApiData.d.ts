@@ -1,4 +1,12 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+export interface DashboardPack {
+	user: DashboardUserPack | null;
+}
+
+export interface DashboardUserPack extends FlattenedUser {
+	guilds?: FlattenedGuild[];
+}
+
 export interface FlattenedGuild {
 	id: string;
 	available: boolean;

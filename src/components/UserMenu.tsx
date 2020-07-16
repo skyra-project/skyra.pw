@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default () => {
-	const [user] = useGlobal('user');
+	const [pack] = useGlobal('pack');
 	const [open, setOpen] = useState(false);
 
 	const classes = useStyles();
@@ -100,7 +100,7 @@ export default () => {
 					<LazyAvatar
 						imgProps={{ height: 128, width: 128 }}
 						style={{ marginRight: 5, height: 40, width: 40 }}
-						src={displayAvatarURL(user, { size: 128 })}
+						src={displayAvatarURL(pack.user, { size: 128 })}
 						alt="U"
 					/>
 					<ExpandMoreIcon />

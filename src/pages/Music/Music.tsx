@@ -77,8 +77,6 @@ export default () => {
 	const classes = useStyles();
 	const { guildID } = useParams();
 	const [authenticated] = useGlobal('authenticated');
-	const [token] = useGlobal('token');
-	const [user] = useGlobal('user');
 	const theme = useTheme();
 
 	const [voiceChannel, setVoiceChannel] = useState<MusicData['voiceChannel']>(null);
@@ -126,16 +124,6 @@ export default () => {
 		ws.sendJSON = data => ws.send(JSON.stringify(data));
 
 		ws.onopen = () => {
-			if (authenticated) {
-				ws.sendJSON({
-					action: ClientActions.Authenticate,
-					data: {
-						token: token,
-						user_id: user.id
-					}
-				});
-			}
-
 			ws.sendJSON({
 				action: ClientActions.SubscriptionUpdate,
 				data: {
@@ -154,10 +142,6 @@ export default () => {
 								react-hooks/exhaustive-deps
 			*/
 			switch (action) {
-				case ServerActions.Authenticate:
-					// This event doesn't need to be handled
-					break;
-
 				case ServerActions.MusicAdd:
 					setQueue(data!.queue);
 					break;

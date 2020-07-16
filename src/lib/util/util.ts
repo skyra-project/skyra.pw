@@ -10,29 +10,24 @@ export function sleep(ms: number) {
 
 export function logOut() {
 	localStorage.clear();
-	setGlobal({ user: null, token: null, authenticated: false });
+	setGlobal({ pack: undefined, authenticated: false });
 	history.replace('/');
 }
 
-export const loadState = (key: string) => {
-	try {
-		const serializedState = localStorage.getItem(key);
-		if (serializedState === null) {
-			return undefined;
-		}
-		return JSON.parse(serializedState) as unknown;
-	} catch (err) {
-		return undefined;
-	}
+export const loadState = <T>(key: string): T | null => {
+	const serializedState = localStorage.getItem(key);
+	return serializedState ? (JSON.parse(serializedState) as T) : null;
 };
 
-export const saveState = (key: string, state: unknown) => {
+export const saveState = <T>(key: string, state: T): T => {
 	try {
 		const serializedState = JSON.stringify(state);
 		localStorage.setItem(key, serializedState);
-	} catch (err) {
+	} catch {
 		// intentionally empty
 	}
+
+	return state;
 };
 
 export async function apiFetch<T>(path: string, options: RequestInit = {}) {
@@ -42,6 +37,7 @@ export async function apiFetch<T>(path: string, options: RequestInit = {}) {
 
 	const response = await fetch(`${BASE_API_URL}${path}`, {
 		...options,
+		credentials: 'include',
 		headers: {
 			...options.headers,
 			'Content-Type': 'application/json'
@@ -57,11 +53,6 @@ export async function apiFetch<T>(path: string, options: RequestInit = {}) {
 	}
 }
 
-export async function authedFetch<T>(path: string, options: RequestInit = {}) {
-	options.headers = { authorization: getGlobal().token };
-	return apiFetch<T>(path, options);
-}
-
 export async function syncUser() {
 	// If they're not logged in, don't try to sync.
 	if (!getGlobal().authenticated) return;
@@ -75,8 +66,7 @@ export async function syncUser() {
 
 	saveState('last_sync', Date.now());
 
-	// eslint-disable-next-line @typescript-eslint/naming-convention
-	const response = await authedFetch<{ access_token: string; user: OauthFlattenedUser }>('/oauth/user', {
+	const response = await apiFetch<{ user: OauthFlattenedUser }>('/oauth/user', {
 		method: 'POST',
 		body: JSON.stringify({
 			action: 'SYNC_USER'
@@ -89,13 +79,7 @@ export async function syncUser() {
 	if (!response) return;
 
 	if (response.user) {
-		saveState('discord_user', response.user);
-		setGlobal({ user: response.user });
-	}
-
-	if (response.access_token) {
-		saveState('discord_token', response.access_token);
-		setGlobal({ token: response.access_token });
+		setGlobal({ pack: response });
 	}
 }
 
