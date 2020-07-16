@@ -33,6 +33,7 @@ import FlipMove from 'react-flip-move';
 import { Else, If, Then, When } from 'react-if';
 import ReactPlayer from 'react-player';
 import { useParams } from 'react-router-dom';
+import { Virtuoso } from 'react-virtuoso';
 import React, { useEffect, useGlobal, useState } from 'reactn';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -66,9 +67,12 @@ const useStyles = makeStyles((theme: Theme) =>
 			width: 38
 		},
 		list: {
-			maxWidth: 700,
 			width: '100%',
-			margin: '0 auto'
+			margin: 0,
+			padding: 0
+		},
+		virtualizedRoot: {
+			margin: theme.spacing(1)
 		}
 	})
 );
@@ -302,41 +306,40 @@ export default () => {
 					</If>
 					<Divider />
 					<When condition={queue.length !== 0}>
-						<List classes={{ root: classes.list }}>
-							<FlipMove
-								delay={0}
-								staggerDurationBy={15}
-								staggerDelayBy={20}
-								duration={700}
-								easing="ease"
-								appearAnimation="fade"
-								enterAnimation="fade"
-								leaveAnimation="accordionVertical"
-							>
-								{queue.map((song, index) => (
-									<div key={index}>
-										<Link to={song.url}>
-											<ListItem button>
-												<ListItemIcon>
-													<If condition={song.url.includes('youtube')}>
-														<Then>
-															<LazyAvatar
-																imgProps={{ height: 360, width: 480 }}
-																src={`https://img.youtube.com/vi/${song.identifier}/hqdefault.jpg`}
-															/>
-														</Then>
-														<Else>
-															<LazyAvatar>{getAcronym(song.title)}</LazyAvatar>
-														</Else>
-													</If>
-												</ListItemIcon>
-												<ListItemText primary={song.title} secondary={song.author} />
-											</ListItem>
-										</Link>
-									</div>
-								))}
-							</FlipMove>
-						</List>
+						<Virtuoso
+							totalCount={queue.length}
+							className={classes.virtualizedRoot}
+							style={{ height: '510px' }}
+							overscan={400}
+							ListContainer={({ listRef, style, children }) => (
+								<List ref={listRef} style={style} classes={{ root: classes.list }}>
+									{children}
+								</List>
+							)}
+							ItemContainer={({ children, ...props }) => (
+								<ListItem {...props} button style={{ margin: 0 }}>
+									{children}
+								</ListItem>
+							)}
+							item={index => (
+								<Link to={queue[index].url}>
+									<ListItemIcon>
+										<If condition={queue[index].url.includes('youtube')}>
+											<Then>
+												<LazyAvatar
+													imgProps={{ height: 360, width: 480 }}
+													src={`https://img.youtube.com/vi/${queue[index].identifier}/hqdefault.jpg`}
+												/>
+											</Then>
+											<Else>
+												<LazyAvatar>{getAcronym(queue[index].title)}</LazyAvatar>
+											</Else>
+										</If>
+									</ListItemIcon>
+									<ListItemText primary={queue[index].title} secondary={queue[index].author} />
+								</Link>
+							)}
+						/>
 					</When>
 				</Box>
 			</Container>
