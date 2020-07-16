@@ -61,7 +61,7 @@ const REG_EMOJI = /^<?a?:\w{2,32}:(\d{17,21})>?$/;
 
 export default memo((props: PropsWithChildren<SettingsPageProps>) => {
 	const classes = useStyles();
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+
 	const findEmoji = useMemo(() => (id: string) => props.guildData.emojis.find(e => e.id === id)!, [props.guildData.emojis]);
 	const tagToId = useMemo(() => (tag: string) => tag.replace(REG_EMOJI, '$1'), []);
 	const idToTag = useMemo(() => (id: string, name: string, animated: boolean) => `<${animated ? 'a' : ''}:${name}:${id}>`, []);

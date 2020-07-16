@@ -231,7 +231,6 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 			const response = await apiFetch<{ newSettings: GuildSettings; error?: string }>(`/guilds/${guildID}/settings`, {
 				method: 'POST',
 				body: JSON.stringify({
-					// eslint-disable-next-line @typescript-eslint/naming-convention
 					guild_id: guildID,
 					data: guildSettingsChanges
 				})
@@ -270,7 +269,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 
 	const componentProps: SettingsPageProps = {
 		guildSettings: deepMerge(guildSettings ?? {}, guildSettingsChanges ?? {}, mergeOptions),
-		// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion, @typescript-eslint/no-non-null-assertion
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
 		guildData: guildData!,
 		guildID,
 		patchGuildData

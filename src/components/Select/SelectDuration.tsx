@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment, @typescript-eslint/no-non-null-assertion */
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -15,7 +14,7 @@ const unitMap: Record<string, number> = {
 
 const unitEntries = Object.entries(unitMap);
 
-// @ts-ignore
+// @ts-ignore this needs to be properly worked out
 function determineUnit(ms: number) {
 	for (let i = 0; i < unitEntries.length; i++) {
 		const [, nextDuration] = unitEntries[i + 1];

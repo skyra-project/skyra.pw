@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-/* eslint-disable @typescript-eslint/no-non-null-assertion, no-throw-literal */
 import * as Resolver from '../structures/color';
 
 export const REGEXP = {

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import CardContent from '@material-ui/core/CardContent';
@@ -141,10 +140,7 @@ export default () => {
 		ws.onmessage = event => {
 			const { action, data } = JSON.parse(event.data) as IncomingWebsocketMessage;
 
-			/* eslint-disable	@typescript-eslint/no-non-null-assertion,
-								@typescript-eslint/no-unnecessary-type-assertion,
-								react-hooks/exhaustive-deps
-			*/
+			/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 			switch (action) {
 				case ServerActions.MusicAdd:
 					setQueue(data!.queue);
@@ -228,11 +224,9 @@ export default () => {
 					break;
 			}
 		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-	/* eslint-enable	@typescript-eslint/no-non-null-assertion,
-						@typescript-eslint/no-unnecessary-type-assertion,
-						react-hooks/exhaustive-deps
-	*/
+	/* eslint-enable @typescript-eslint/no-unnecessary-type-assertion */
 
 	return (
 		<GeneralPage

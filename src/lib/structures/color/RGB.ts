@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { ColorHandler } from './index';
 
 export class RGB implements ColorHandler {
