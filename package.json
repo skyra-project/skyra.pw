@@ -12,7 +12,7 @@
 		"body-scroll-lock": "^3.0.3",
 		"clsx": "^1.1.1",
 		"deepmerge": "^4.2.2",
-		"formik": "^2.1.4",
+		"formik": "^2.1.5",
 		"formik-material-ui": "^2.0.1",
 		"history": "4.x",
 		"react": "^16.13.1",
@@ -68,7 +68,7 @@
 		"react-scripts": "^3.4.1",
 		"reactn-devtools": "^1.1.0",
 		"redux": "^4.0.5",
-		"typescript": "^3.9.6",
+		"typescript": "^3.9.7",
 		"utility-types": "^3.10.0"
 	},
 	"husky": {
