@@ -72,8 +72,7 @@ export async function syncUser() {
 			action: 'SYNC_USER'
 		})
 	}).catch(err => {
-		// TODO toast
-		if (err.status === 401) logOut();
+		if (err.status === 401 || err.status === 403) logOut();
 	});
 
 	if (!response) return;
