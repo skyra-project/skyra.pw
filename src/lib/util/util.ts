@@ -8,7 +8,8 @@ export function sleep(ms: number) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export function logOut() {
+export async function logOut() {
+	await apiFetch<{ user: OauthFlattenedUser }>('/oauth/logout', { method: 'POST' });
 	localStorage.clear();
 	setGlobal({ pack: undefined, authenticated: false });
 	history.replace('/');
