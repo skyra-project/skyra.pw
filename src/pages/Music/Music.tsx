@@ -89,12 +89,12 @@ export default () => {
 	const [status, setStatus] = useState<MusicData['status']>(MusicStatus.INSTANTIATED);
 	const [, setVolume] = useState<MusicData['volume']>(0);
 	const [replay, setReplay] = useState<MusicData['replay']>(false);
-	const [ws, setWs] = useState<WebSocket>(new WebSocket(WS_URL));
+	const [ws, setWs] = useState<WebSocket | undefined>();
 
 	const playerRef = useRef<ReactPlayer | null>(null);
 
 	const skipSong = () => {
-		ws.sendJSON({
+		ws!.sendJSON({
 			action: ClientActions.MusicQueueUpdate,
 			data: {
 				guild_id: guildID,
@@ -103,7 +103,7 @@ export default () => {
 		});
 	};
 	const pauseSong = () => {
-		ws.sendJSON({
+		ws!.sendJSON({
 			action: ClientActions.MusicQueueUpdate,
 			data: {
 				guild_id: guildID,
@@ -112,7 +112,7 @@ export default () => {
 		});
 	};
 	const resumeSong = () => {
-		ws.sendJSON({
+		ws!.sendJSON({
 			action: ClientActions.MusicQueueUpdate,
 			data: {
 				guild_id: guildID,
@@ -124,108 +124,108 @@ export default () => {
 	useEffect(() => {
 		if (!ws) setWs(new WebSocket(WS_URL));
 
-		ws.sendJSON = data => ws.send(JSON.stringify(data));
+		if (ws) {
+			ws.sendJSON = data => ws.send(JSON.stringify(data));
 
-		ws.onopen = () => {
-			ws.sendJSON({
-				action: ClientActions.SubscriptionUpdate,
-				data: {
-					subscription_name: MusicActions.WebsocketSubscriptionName,
-					subscription_action: MusicActions.WebsocketSubscriptionAction,
-					guild_id: guildID
+			ws.onopen = () => {
+				ws.sendJSON({
+					action: ClientActions.SubscriptionUpdate,
+					data: {
+						subscription_name: MusicActions.WebsocketSubscriptionName,
+						subscription_action: MusicActions.WebsocketSubscriptionAction,
+						guild_id: guildID
+					}
+				});
+			};
+
+			ws.onmessage = event => {
+				const { action, data } = JSON.parse(event.data) as IncomingWebsocketMessage;
+
+				/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
+				switch (action) {
+					case ServerActions.MusicAdd:
+						setQueue(data!.queue);
+						break;
+
+					case ServerActions.MusicConnect:
+						setVoiceChannel(data!.voiceChannel);
+						break;
+
+					case ServerActions.MusicLeave:
+						setVoiceChannel(null);
+						break;
+
+					case ServerActions.MusicPrune:
+						setQueue([]);
+						break;
+
+					case ServerActions.MusicRemove:
+						setQueue(data!.queue);
+						break;
+
+					case ServerActions.MusicReplayUpdate:
+						setReplay(data!.replay);
+						break;
+
+					case ServerActions.MusicShuffleQueue:
+						setQueue(data!.queue);
+						break;
+
+					case ServerActions.MusicSongFinish:
+						setSong(null);
+						setQueue(data!.queue);
+						setPosition(0);
+						setStatus(MusicStatus.ENDED);
+						break;
+
+					case ServerActions.MusicSongPause:
+						setStatus(MusicStatus.PAUSED);
+						break;
+
+					case ServerActions.MusicSongPlay:
+						setSong(data!.song);
+						setQueue(data!.queue);
+						setPosition(0);
+						break;
+
+					case ServerActions.MusicSongReplay:
+						setSong(data!.song);
+						setPosition(0);
+						setStatus(MusicStatus.PLAYING);
+						break;
+
+					case ServerActions.MusicSongResume:
+						setStatus(MusicStatus.PLAYING);
+						break;
+
+					case ServerActions.MusicSongSeekUpdate:
+						setPosition(data!.position);
+						break;
+
+					case ServerActions.MusicSongSkip:
+						setQueue(data!.queue);
+						break;
+
+					case ServerActions.MusicSongVolumeUpdate:
+						setVolume(data!.volume);
+						break;
+
+					case ServerActions.MusicSync:
+						setVoiceChannel(data!.voiceChannel);
+						setSong(data!.song);
+						setPosition(data!.position);
+						setStatus(data!.status);
+						setQueue(data!.queue);
+						break;
+
+					case ServerActions.MusicVoiceChannelJoin:
+					case ServerActions.MusicVoiceChannelLeave:
+						// These events don't need to be handled, its handled by MusicConnect
+						break;
 				}
-			});
-		};
-
-		ws.onmessage = event => {
-			const { action, data } = JSON.parse(event.data) as IncomingWebsocketMessage;
-
-			/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
-			switch (action) {
-				case ServerActions.MusicAdd:
-					setQueue(data!.queue);
-					break;
-
-				case ServerActions.MusicConnect:
-					setVoiceChannel(data!.voiceChannel);
-					break;
-
-				case ServerActions.MusicLeave:
-					setVoiceChannel(null);
-					break;
-
-				case ServerActions.MusicPrune:
-					setQueue([]);
-					break;
-
-				case ServerActions.MusicRemove:
-					setQueue(data!.queue);
-					break;
-
-				case ServerActions.MusicReplayUpdate:
-					setReplay(data!.replay);
-					break;
-
-				case ServerActions.MusicShuffleQueue:
-					setQueue(data!.queue);
-					break;
-
-				case ServerActions.MusicSongFinish:
-					setSong(null);
-					setQueue(data!.queue);
-					setPosition(0);
-					setStatus(MusicStatus.ENDED);
-					break;
-
-				case ServerActions.MusicSongPause:
-					setStatus(MusicStatus.PAUSED);
-					break;
-
-				case ServerActions.MusicSongPlay:
-					setSong(data!.song);
-					setQueue(data!.queue);
-					setPosition(0);
-					break;
-
-				case ServerActions.MusicSongReplay:
-					setSong(data!.song);
-					setPosition(0);
-					setStatus(MusicStatus.PLAYING);
-					break;
-
-				case ServerActions.MusicSongResume:
-					setStatus(MusicStatus.PLAYING);
-					break;
-
-				case ServerActions.MusicSongSeekUpdate:
-					setPosition(data!.position);
-					break;
-
-				case ServerActions.MusicSongSkip:
-					setSong(null);
-					setQueue(data!.queue);
-					break;
-
-				case ServerActions.MusicSongVolumeUpdate:
-					setVolume(data!.volume);
-					break;
-
-				case ServerActions.MusicSync:
-					setVoiceChannel(data!.voiceChannel);
-					setSong(data!.song);
-					setPosition(data!.position);
-					setStatus(data!.status);
-					setQueue(data!.queue);
-					break;
-
-				case ServerActions.MusicVoiceChannelJoin:
-				case ServerActions.MusicVoiceChannelLeave:
-					// These events don't need to be handled, its handled by MusicConnect
-					break;
-			}
-		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+			};
+		}
+	}, [guildID, ws]);
 	/* eslint-enable @typescript-eslint/no-unnecessary-type-assertion */
 
 	return (
