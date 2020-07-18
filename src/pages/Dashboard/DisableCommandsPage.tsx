@@ -58,7 +58,6 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWithChildren<SettingsPageProps>) => {
-	// const theme = useTheme();
 	const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 	const classes = useStyles();
 	const [expanded, setExpanded] = useState<string | false>(false);
@@ -83,7 +82,8 @@ export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWi
 
 	useEffect(() => {
 		fetchCommands();
-	}, [fetchCommands]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const handleToggleAccordion = (panel: string) => (_: React.ChangeEvent<unknown>, isExpanded: boolean) => {
 		setExpanded(isExpanded ? panel : false);
