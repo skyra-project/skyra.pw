@@ -78,7 +78,8 @@ export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWi
 		}
 		setCommands(commandsForState);
 		setLoading(false);
-	}, [disabledCommands]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	useEffect(() => {
 		fetchCommands();
