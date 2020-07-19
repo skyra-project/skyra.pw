@@ -3,8 +3,8 @@ import { StylesProvider, ThemeProvider } from '@material-ui/styles';
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
 import ErrorBoundary from 'components/ErrorBoundary';
 import RedirectRoute from 'components/RedirectRoute';
-import { history, oauthURL, serverURL } from 'lib/util/constants';
 import theme from 'lib/theme';
+import { history, oauthURL, serverURL } from 'lib/util/constants';
 import CommandsPage from 'pages/Commands';
 import DashboardRootPage from 'pages/Dashboard/Root';
 import HomePage from 'pages/HomePage';
@@ -12,6 +12,7 @@ import MusicPage from 'pages/Music/Music';
 import NotFoundPage from 'pages/NotFound';
 import GuildCallbackPage from 'pages/oauth/GuildCallbackPage';
 import OAuthCallbackPage from 'pages/oauth/OAuthCallbackPage';
+import PrivacyPolicy from 'pages/PrivacyPolicy';
 import { Route, Router, Switch } from 'react-router-dom';
 import React from 'reactn';
 import { ServiceWorkerProvider } from 'ServiceWorkerContext';
@@ -31,6 +32,7 @@ export default () => (
 							<Route exact path="/oauth/callback" component={OAuthCallbackPage} />
 							<Route exact path="/oauth/guild" component={GuildCallbackPage} />
 							<Route exact path="/commands" component={CommandsPage} />
+							<Route exact path="/privacy" component={PrivacyPolicy} />
 							<AuthenticatedRoute path="/guilds/:guildID/:pageName?" component={DashboardRootPage} />
 							<Route exact path="/music/:guildID" component={MusicPage} />
 							<RedirectRoute path="/login" redirectUri={oauthURL.toString()} />

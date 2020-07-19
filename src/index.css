@@ -44,7 +44,7 @@
 }
 @font-face {
 	/* Whitney-Medium-Regular */
-	font-family: Whitney; 
+	font-family: Whitney;
 	font-style: medium;
 	font-weight: 600;
 	src: url('/fonts/Whitney-Medium-Regular.woff') format('woff');
@@ -85,10 +85,26 @@ code {
 	margin: -0.2em 0;
 	border-radius: 3px;
 	font-size: 85%;
-	font-family: Consolas, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono,
-		Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Monaco, Courier New, Courier, monospace;
+	font-family: Consolas, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
+		Liberation Mono, Nimbus Mono L, Monaco, Courier New, Courier, monospace;
 	text-indent: 0;
 	border: none;
 	white-space: pre-wrap;
 	background-color: #202225;
+}
+
+/* Global Link colour overwrites */
+a {
+	color: #1e88e5;
+}
+
+a:visited {
+	color: #1e88e5;
+	filter: brightness(80%);
+}
+
+a:hover,
+a:focus {
+	color: #1e88e5;
+	filter: brightness(90%);
 }
