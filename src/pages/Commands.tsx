@@ -10,12 +10,13 @@ import DnsIcon from '@material-ui/icons/Dns';
 import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 import LockIcon from '@material-ui/icons/Lock';
 import GeneralPage from 'components/GeneralPage';
+import ScrollToTop from 'components/ScrollToTop';
 import Tooltip from 'components/Tooltip';
 import { FlattenedCommand } from 'lib/types/ApiData';
+import { cutText } from 'lib/util/skyraUtils';
 import { apiFetch, parseCommandDescription } from 'lib/util/util';
 import React, { useEffect, useState } from 'react';
 import { Else, If, Then } from 'react-if';
-import { cutText } from 'lib/util/skyraUtils';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -85,91 +86,97 @@ export default () => {
 	const categories = [...new Set(commands.map(command => command.category))];
 
 	return (
-		<GeneralPage loading={loading}>
-			<Container>
-				{!loading && (
-					<Box display="flex" flexDirection="column">
-						{categories.map((catName, catIndex) => (
-							<Box my={3} key={catIndex}>
-								<Typography variant="h2" component="h1" className={classes.categoryName}>
-									{catName}
-								</Typography>
-								<Box my={3}>
-									<Divider />
-								</Box>
-								<Box display="flex" flexWrap="wrap" flex="1 1 30%">
-									{commands
-										.filter(command => command.category === catName)
-										.map((cmd, idx) => (
-											<Grid item className={classes.cardContainer} key={idx}>
-												<Card className={classes.card}>
-													<CardContent>
-														<Box display="flex" justifyContent="space-between">
-															<If condition={cmd.name.length < 19}>
-																<Then>
-																	<Typography variant="h5" component="h2">
-																		s!{cmd.name}
-																	</Typography>
-																</Then>
-																<Else>
-																	<Tooltip title={`s!${cmd.name}`}>
+		<>
+			<ScrollToTop />
+			<GeneralPage loading={loading}>
+				<Container>
+					{!loading && (
+						<Box display="flex" flexDirection="column">
+							{categories.map((catName, catIndex) => (
+								<Box my={3} key={catIndex}>
+									<Typography variant="h2" component="h1" className={classes.categoryName}>
+										{catName}
+									</Typography>
+									<Box my={3}>
+										<Divider />
+									</Box>
+									<Box display="flex" flexWrap="wrap" flex="1 1 30%">
+										{commands
+											.filter(command => command.category === catName)
+											.map((cmd, idx) => (
+												<Grid item className={classes.cardContainer} key={idx}>
+													<Card className={classes.card}>
+														<CardContent>
+															<Box display="flex" justifyContent="space-between">
+																<If condition={cmd.name.length < 19}>
+																	<Then>
 																		<Typography variant="h5" component="h2">
-																			{cutText(`s!${cmd.name}`, 19)}
+																			s!{cmd.name}
 																		</Typography>
-																	</Tooltip>
-																</Else>
-															</If>
-															<Grid item container justify="flex-end">
-																{cmd.permissionLevel > 0 && (
-																	<Tooltip title={titles[cmd.permissionLevel]} placement="top">
-																		<Chip
-																			size="small"
-																			label={cmd.permissionLevel}
-																			icon={<DoubleArrowIcon />}
-																			classes={{
-																				root: classes.chip,
-																				iconSmall: classes.rankIcon
-																			}}
-																		/>
-																	</Tooltip>
-																)}
-																{cmd.guildOnly && (
-																	<Tooltip title="This command cannot be used in DMs." placement="top">
-																		<Chip
-																			size="small"
-																			icon={<DnsIcon />}
-																			classes={{
-																				root: classes.chip
-																			}}
-																		/>
-																	</Tooltip>
-																)}
-																{cmd.guarded && (
-																	<Tooltip title="This command cannot be disabled." placement="top">
-																		<Chip
-																			size="small"
-																			icon={<LockIcon />}
-																			classes={{
-																				root: classes.chip
-																			}}
-																		/>
-																	</Tooltip>
-																)}
-															</Grid>
-														</Box>
-														<Typography className={classes.title} color="textSecondary" gutterBottom>
-															{parseCommandDescription(cmd.description)}
-														</Typography>
-													</CardContent>
-												</Card>
-											</Grid>
-										))}
+																	</Then>
+																	<Else>
+																		<Tooltip title={`s!${cmd.name}`}>
+																			<Typography variant="h5" component="h2">
+																				{cutText(`s!${cmd.name}`, 19)}
+																			</Typography>
+																		</Tooltip>
+																	</Else>
+																</If>
+																<Grid item container justify="flex-end">
+																	{cmd.permissionLevel > 0 && (
+																		<Tooltip title={titles[cmd.permissionLevel]} placement="top">
+																			<Chip
+																				size="small"
+																				label={cmd.permissionLevel}
+																				icon={<DoubleArrowIcon />}
+																				classes={{
+																					root: classes.chip,
+																					iconSmall: classes.rankIcon
+																				}}
+																			/>
+																		</Tooltip>
+																	)}
+																	{cmd.guildOnly && (
+																		<Tooltip
+																			title="This command cannot be used in DMs."
+																			placement="top"
+																		>
+																			<Chip
+																				size="small"
+																				icon={<DnsIcon />}
+																				classes={{
+																					root: classes.chip
+																				}}
+																			/>
+																		</Tooltip>
+																	)}
+																	{cmd.guarded && (
+																		<Tooltip title="This command cannot be disabled." placement="top">
+																			<Chip
+																				size="small"
+																				icon={<LockIcon />}
+																				classes={{
+																					root: classes.chip
+																				}}
+																			/>
+																		</Tooltip>
+																	)}
+																</Grid>
+															</Box>
+															<Typography className={classes.title} color="textSecondary" gutterBottom>
+																{parseCommandDescription(cmd.description)}
+															</Typography>
+														</CardContent>
+													</Card>
+												</Grid>
+											))}
+									</Box>
 								</Box>
-							</Box>
-						))}
-					</Box>
-				)}
-			</Container>
-		</GeneralPage>
+							))}
+						</Box>
+					)}
+				</Container>
+			</GeneralPage>
+		</>
 	);
 };

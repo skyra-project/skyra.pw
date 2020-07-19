@@ -3,6 +3,7 @@ import features from 'assets/features';
 import clsx from 'clsx';
 import GeneralPage from 'components/GeneralPage';
 import GuildCard from 'components/GuildCard';
+import ScrollToTop from 'components/ScrollToTop';
 import React, { useGlobal } from 'reactn';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -65,27 +66,30 @@ export default () => {
 	const [pack] = useGlobal('pack');
 
 	return (
-		<GeneralPage>
-			{authenticated && (
-				<Container>
-					<Box display="flex" flexWrap="wrap" flexDirection="row" justifyContent="center" alignItems="center">
-						{(pack.user?.guilds ?? [])
-							// Filter on mangeable servers
-							.filter(g => g.manageable)
-							// Sort by whether Skyra is in the serve ror not
-							.sort((gA, gB) => (gA.skyraIsIn === gB.skyraIsIn ? 0 : gA.skyraIsIn ? -1 : 1))
-							// Sort by name of the server
-							.sort((gA, gB) => gA.name.localeCompare(gB.name, 'en', { sensitivity: 'base' }))
-							// Map the servers to GuildCards
-							.map((g, index) => (
-								<GuildCard guild={g} key={index} />
-							))}
-					</Box>
-				</Container>
-			)}
-			{features.map(({ name, previewContent, text }) => (
-				<Section name={name} text={text} previewContent={previewContent} key={name} />
-			))}
-		</GeneralPage>
+		<>
+			<ScrollToTop />
+			<GeneralPage>
+				{authenticated && (
+					<Container>
+						<Box display="flex" flexWrap="wrap" flexDirection="row" justifyContent="center" alignItems="center">
+							{(pack.user?.guilds ?? [])
+								// Filter on mangeable servers
+								.filter(g => g.manageable)
+								// Sort by whether Skyra is in the serve ror not
+								.sort((gA, gB) => (gA.skyraIsIn === gB.skyraIsIn ? 0 : gA.skyraIsIn ? -1 : 1))
+								// Sort by name of the server
+								.sort((gA, gB) => gA.name.localeCompare(gB.name, 'en', { sensitivity: 'base' }))
+								// Map the servers to GuildCards
+								.map((g, index) => (
+									<GuildCard guild={g} key={index} />
+								))}
+						</Box>
+					</Container>
+				)}
+				{features.map(({ name, previewContent, text }) => (
+					<Section name={name} text={text} previewContent={previewContent} key={name} />
+				))}
+			</GeneralPage>
+		</>
 	);
 };
