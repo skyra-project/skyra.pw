@@ -78,7 +78,7 @@ export default ({ guildData, guildSettings, patchGuildData }: PropsWithChildren<
 
 	const REPLACEABLE_MATCHERS: Matcher[] = [
 		{ matchKey: Matches.Guild, description: `I will replace this with ${guildData?.name}` },
-		{ matchKey: Matches.Member, description: `I will replace this a mention of the member` },
+		{ matchKey: Matches.Member, description: `I will replace this with a mention of the member` },
 		{ matchKey: Matches.MemberName, description: `I will replace this with the username of the member` },
 		{ matchKey: Matches.MemberTag, description: `I will replace this with the unique tag of the member` },
 		{ matchKey: Matches.MemberCount, description: `I will replace this with the amount of members currently in the server` },
