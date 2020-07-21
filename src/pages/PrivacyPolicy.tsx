@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import clsx from 'clsx';
 import GeneralPage from 'components/GeneralPage';
 import ScrollToTop from 'components/ScrollToTop';
 import React from 'react';
@@ -25,6 +26,12 @@ const useStyles = makeStyles((theme: Theme) =>
 		spacedText: {
 			paddingTop: theme.spacing(1),
 			paddingBottom: theme.spacing(1)
+		},
+		link: {
+			color: theme.palette.primary.main,
+			'&:hover': {
+				color: theme.palette.primary.dark
+			}
 		}
 	})
 );
@@ -35,7 +42,7 @@ const Email = () => {
 	return (
 		<span>
 			{' '}
-			<a className={classes.email} href="mailto:skyra.project@gmail.com">
+			<a className={clsx(classes.email, classes.link)} href="mailto:skyra.project@gmail.com">
 				skyra.project@gmail.com
 			</a>
 		</span>
@@ -80,12 +87,19 @@ const PrivacyPolicy = () => {
 						WELCOME TO SKYRA PROJECT!
 					</Typography>
 					<Typography component="div">
-						Skyra Project provides a chat bot for the <a href="https://discord.com/privacy">Discord</a> chat platform, (the
-						"Bot"), a website that serves as a dashboard (the "Site") and various related services (collectively, the
-						"Service(s)"). The Service is operated by Skyra Project (the "Company", "we" or "us") for users of the Service
-						("you" or the "user(s)"). This privacy policy sets forth our policy with respect to information that is collected
-						from visitors to the Site and users of the Bot and/or the Services. Under applicable law, Skyra Project is the "data
-						controller" of <a href="https://discord.com/privacy">Discord</a> user data collected through the Services.
+						Skyra Project provides a chat bot for the{' '}
+						<a className={classes.link} href="https://discord.com/privacy">
+							Discord
+						</a>{' '}
+						chat platform, (the "Bot"), a website that serves as a dashboard (the "Site") and various related services
+						(collectively, the "Service(s)"). The Service is operated by Skyra Project (the "Company", "we" or "us") for users
+						of the Service ("you" or the "user(s)"). This privacy policy sets forth our policy with respect to information that
+						is collected from visitors to the Site and users of the Bot and/or the Services. Under applicable law, Skyra Project
+						is the "data controller" of{' '}
+						<a className={classes.link} href="https://discord.com/privacy">
+							Discord
+						</a>{' '}
+						user data collected through the Services.
 					</Typography>
 					<Typography id="information-we-collect" variant="h2" classes={{ root: classes.header }}>
 						INFORMATION WE COLLECT
@@ -334,15 +348,23 @@ const PrivacyPolicy = () => {
 						the application); location information (because your IP address may indicate your general location); and other
 						information that identifies or can be reasonably associated with you. For examples of the precise data points we
 						collect and the sources of such collection, please see the{' '}
-						<a href="#information-we-collect">“INFORMATION WE COLLECT”</a> section above. We collect personal information for
-						the business and commercial purposes described in{' '}
-						<a href="#our-use-of-your-information">“OUR USE OF YOUR INFORMATION”</a> above.
+						<a className={classes.link} href="#information-we-collect">
+							“INFORMATION WE COLLECT”
+						</a>{' '}
+						section above. We collect personal information for the business and commercial purposes described in{' '}
+						<a className={classes.link} href="#our-use-of-your-information">
+							“OUR USE OF YOUR INFORMATION”
+						</a>{' '}
+						above.
 					</Typography>
 					<Typography component="div" classes={{ root: classes.spacedText }}>
 						<span className={classes.boldText}>Disclosure of Personal Information</span>: We may share your personal information
 						with third parties as described in the{' '}
-						<a href="#our-disclosure-of-your-information">“OUR DISCLOSURE OF YOUR INFORMATION”</a> section above. We disclose
-						the categories of personal information mentioned above for business or commercial purposes.
+						<a className={classes.link} href="#our-disclosure-of-your-information">
+							“OUR DISCLOSURE OF YOUR INFORMATION”
+						</a>{' '}
+						section above. We disclose the categories of personal information mentioned above for business or commercial
+						purposes.
 					</Typography>
 					<Typography component="div" classes={{ root: classes.spacedText }}>
 						<span className={classes.boldText}>No Sale of Personal Information</span>: The CCPA sets forth certain obligations
@@ -353,8 +375,11 @@ const PrivacyPolicy = () => {
 						have the right to request (1) more information about the categories and specific pieces of personal information we
 						have collected and disclosed for a business purpose in the last 12 months, (2) deletion of your personal
 						information, and (3) to opt out of sales of your personal information, if applicable. Details on how to make these
-						requests are in the <a href="#your-data-rights-and-choices">“YOUR DATA RIGHTS AND CHOICES”</a> section above. We
-						will not discriminate against you if you exercise your rights under the CCPA.
+						requests are in the{' '}
+						<a className={classes.link} href="#your-data-rights-and-choices">
+							“YOUR DATA RIGHTS AND CHOICES”
+						</a>{' '}
+						section above. We will not discriminate against you if you exercise your rights under the CCPA.
 					</Typography>
 					<Typography component="div" classes={{ root: classes.spacedText }}>
 						Requests Received: We received the following number of data requests between November 24, 2016 and July 20, 2020:

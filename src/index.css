@@ -92,19 +92,3 @@ code {
 	white-space: pre-wrap;
 	background-color: #202225;
 }
-
-/* Global Link colour overwrites */
-a {
-	color: #1e88e5;
-}
-
-a:visited {
-	color: #1e88e5;
-	filter: brightness(80%);
-}
-
-a:hover,
-a:focus {
-	color: #1e88e5;
-	filter: brightness(90%);
-}
