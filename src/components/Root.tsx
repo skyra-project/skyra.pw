@@ -17,6 +17,8 @@ import { Route, Router, Switch } from 'react-router-dom';
 import React from 'reactn';
 import { ServiceWorkerProvider } from 'ServiceWorkerContext';
 import ServiceWorkerUpdater from './Alerts/ServiceWorkerUpdate';
+import { CookieConsentProvider } from './CookieConsent/ContextProvider';
+import CookieWarning from './CookieConsent/WarningSnackbar';
 
 export default () => (
 	<ErrorBoundary>
@@ -24,22 +26,25 @@ export default () => (
 			<StylesProvider injectFirst>
 				<ThemeProvider theme={theme}>
 					<CssBaseline />
-					<ServiceWorkerUpdater />
-					<Router history={history}>
-						<Switch>
-							<Route exact path="/" component={HomePage} />
-							<Route exact path="/index.html" component={HomePage} />
-							<Route exact path="/oauth/callback" component={OAuthCallbackPage} />
-							<Route exact path="/oauth/guild" component={GuildCallbackPage} />
-							<Route exact path="/commands" component={CommandsPage} />
-							<Route exact path="/privacy" component={PrivacyPolicy} />
-							<AuthenticatedRoute path="/guilds/:guildID/:pageName?" component={DashboardRootPage} />
-							<Route exact path="/music/:guildID" component={MusicPage} />
-							<RedirectRoute path="/login" redirectUri={oauthURL.toString()} />
-							<RedirectRoute path="/join" redirectUri={serverURL} />
-							<Route component={NotFoundPage} />
-						</Switch>
-					</Router>
+					<CookieConsentProvider>
+						<ServiceWorkerUpdater />
+						<CookieWarning />
+						<Router history={history}>
+							<Switch>
+								<Route exact path="/" component={HomePage} />
+								<Route exact path="/index.html" component={HomePage} />
+								<Route exact path="/oauth/callback" component={OAuthCallbackPage} />
+								<Route exact path="/oauth/guild" component={GuildCallbackPage} />
+								<Route exact path="/commands" component={CommandsPage} />
+								<Route exact path="/privacy" component={PrivacyPolicy} />
+								<AuthenticatedRoute path="/guilds/:guildID/:pageName?" component={DashboardRootPage} />
+								<Route exact path="/music/:guildID" component={MusicPage} />
+								<RedirectRoute path="/login" redirectUri={oauthURL.toString()} />
+								<RedirectRoute path="/join" redirectUri={serverURL} />
+								<Route component={NotFoundPage} />
+							</Switch>
+						</Router>
+					</CookieConsentProvider>
 				</ThemeProvider>
 			</StylesProvider>
 		</ServiceWorkerProvider>

@@ -18,9 +18,11 @@ import LoginIcon from '@material-ui/icons/VpnKey';
 import { oauthURL } from 'lib/util/constants';
 import { displayAvatarURL } from 'lib/util/skyraUtils';
 import { logOut, navigate, syncUser } from 'lib/util/util';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import { useGlobal } from 'reactn';
+import { CookieConsentContext } from './CookieConsent/ContextProvider';
+import { ReactComponent as CookieIcon } from './CookieIcon.svg';
 import LazyAvatar from './LazyAvatar';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -62,52 +64,53 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default () => {
 	const classes = useStyles();
+	const anchorRef = useRef<HTMLButtonElement>(null);
 	const [pack] = useGlobal('pack');
 	const [authenticated] = useGlobal('authenticated');
-	const [open, setOpen] = useState(false);
-	const anchorRef = useRef<HTMLButtonElement>(null);
+	const [popperMenuIsOpen, setPopperMenuOpen] = useState(false);
+	const { allowsCookies, dispatch } = useContext(CookieConsentContext);
 
-	const handleToggle = () => {
-		setOpen(prevOpen => !prevOpen);
+	const togglePopperMenu = () => {
+		setPopperMenuOpen(prevOpen => !prevOpen);
 	};
 
-	const handleClose = (event: React.MouseEvent<EventTarget>) => {
+	const closePopperMenu = (event: React.MouseEvent<EventTarget>) => {
 		if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
 			return;
 		}
 
-		setOpen(false);
+		setPopperMenuOpen(false);
 	};
 
 	function handleListKeyDown(event: React.KeyboardEvent) {
 		if (event.key === 'Tab') {
 			event.preventDefault();
-			setOpen(false);
+			setPopperMenuOpen(false);
 		}
 	}
 
 	// return focus to the button when we transitioned from !open -> open
-	const prevOpen = useRef(open);
+	const popperMenuPrevOpen = useRef(popperMenuIsOpen);
 
 	useEffect(() => {
-		if (prevOpen.current === true && open === false) {
+		if (popperMenuPrevOpen.current === true && popperMenuIsOpen === false) {
 			anchorRef.current?.focus();
 		}
 
-		prevOpen.current = open;
-	}, [open]);
+		popperMenuPrevOpen.current = popperMenuIsOpen;
+	}, [popperMenuIsOpen]);
 
 	return (
 		<>
 			<IconButton
 				ref={anchorRef}
 				edge="start"
-				aria-controls={open ? 'menu-popover' : undefined}
+				aria-controls={popperMenuIsOpen ? 'menu-popover' : undefined}
 				aria-haspopup="true"
 				className={classes.menuButton}
 				color="inherit"
 				aria-label="menu"
-				onClick={handleToggle}
+				onClick={togglePopperMenu}
 			>
 				<If condition={authenticated}>
 					<Then>
@@ -118,18 +121,25 @@ export default () => {
 					</Else>
 				</If>
 			</IconButton>
-			<Popper className={classes.popper} open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+			<Popper
+				className={classes.popper}
+				open={popperMenuIsOpen}
+				anchorEl={anchorRef.current}
+				role={undefined}
+				transition
+				disablePortal
+			>
 				{({ TransitionProps, placement }) => (
 					<Grow {...TransitionProps} style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}>
 						<Paper>
-							<ClickAwayListener onClickAway={handleClose}>
-								<MenuList autoFocusItem={open} id="menu-popover" onKeyDown={handleListKeyDown}>
+							<ClickAwayListener onClickAway={closePopperMenu}>
+								<MenuList autoFocusItem={popperMenuIsOpen} id="menu-popover" onKeyDown={handleListKeyDown}>
 									<If condition={authenticated}>
 										<Then>
 											<MenuItem
 												component="a"
-												onClick={(...args: Parameters<typeof handleClose>) => {
-													handleClose(...args);
+												onClick={(...args: Parameters<typeof closePopperMenu>) => {
+													closePopperMenu(...args);
 													logOut();
 												}}
 											>
@@ -139,8 +149,8 @@ export default () => {
 												<Typography variant="inherit">Logout</Typography>
 											</MenuItem>
 											<MenuItem
-												onClick={(...args: Parameters<typeof handleClose>) => {
-													handleClose(...args);
+												onClick={(...args: Parameters<typeof closePopperMenu>) => {
+													closePopperMenu(...args);
 													syncUser();
 												}}
 											>
@@ -151,7 +161,7 @@ export default () => {
 											</MenuItem>
 										</Then>
 										<Else>
-											<MenuItem onClick={navigate(oauthURL.toString())}>
+											<MenuItem disabled={!allowsCookies} onClick={navigate(oauthURL.toString())}>
 												<ListItemIcon>
 													<LoginIcon />
 												</ListItemIcon>
@@ -177,6 +187,19 @@ export default () => {
 										</ListItemIcon>
 										<Typography variant="inherit">Join our Discord</Typography>
 									</MenuItem>
+									{allowsCookies !== null && (
+										<MenuItem
+											onClick={event => {
+												closePopperMenu(event);
+												return dispatch(null);
+											}}
+										>
+											<ListItemIcon>
+												<CookieIcon />
+											</ListItemIcon>
+											<Typography variant="inherit">Update cookie consent</Typography>
+										</MenuItem>
+									)}
 								</MenuList>
 							</ClickAwayListener>
 						</Paper>

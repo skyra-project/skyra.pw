@@ -1,7 +1,7 @@
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import GeneralPage from 'components/GeneralPage';
-import { BASE_WEB_URL, history, CLIENT_ID } from 'lib/util/constants';
+import { BASE_WEB_URL, CLIENT_ID, history, LocalStorageKeys } from 'lib/util/constants';
 import { apiFetch, saveState } from 'lib/util/util';
 import React, { setGlobal, useEffect, useState } from 'reactn';
 
@@ -23,7 +23,7 @@ function DiscordAuthCallbackPage() {
 			return;
 		}
 
-		saveState('discord_pack', data);
+		saveState(LocalStorageKeys.DiscordPack, data);
 
 		setGlobal({ authenticated: true, pack: data });
 

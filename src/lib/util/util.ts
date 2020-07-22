@@ -1,7 +1,7 @@
 import { getGlobal, setGlobal } from 'reactn';
 import { FlattenedGuild, OauthFlattenedUser } from '../types/ApiData';
 import { SelfmodSliderProp, SelfmodSliderSettings } from '../types/GuildSettings';
-import { BASE_API_URL, history } from './constants';
+import { BASE_API_URL, history, LocalStorageKeys } from './constants';
 import { Time } from './skyraUtils';
 
 export function sleep(ms: number) {
@@ -59,13 +59,13 @@ export async function syncUser() {
 	if (!getGlobal().authenticated) return;
 
 	// Check if they've synced in the past 5 minutes.
-	const lastSync = loadState('last_sync') as number;
+	const lastSync = loadState(LocalStorageKeys.LastSync) as number;
 	const difference = Date.now() - lastSync;
 	if (difference < Time.Minute * 5) {
 		return;
 	}
 
-	saveState('last_sync', Date.now());
+	saveState(LocalStorageKeys.LastSync, Date.now());
 
 	const response = await apiFetch<{ user: OauthFlattenedUser }>('/oauth/user', {
 		method: 'POST',

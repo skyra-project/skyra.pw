@@ -1,5 +1,6 @@
 import Root from 'components/Root';
 import { DashboardPack } from 'lib/types/ApiData';
+import { LocalStorageKeys } from 'lib/util/constants';
 import { loadState } from 'lib/util/util';
 import { render } from 'react-dom';
 import React, { setGlobal } from 'reactn';
@@ -8,7 +9,7 @@ import './index.css';
 
 const rootElement = document.getElementById('root');
 
-const discordPack = loadState<DashboardPack>('discord_pack');
+const discordPack = loadState<DashboardPack>(LocalStorageKeys.DiscordPack);
 
 setGlobal({
 	authenticated: Boolean(discordPack) && Boolean(discordPack?.user),

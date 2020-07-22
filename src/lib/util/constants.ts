@@ -36,3 +36,9 @@ export const guildAddURL = (guildID: string) => {
 	]).toString();
 	return guildAuthURL.toString();
 };
+
+export enum LocalStorageKeys {
+	hasCookieConsent = 'allows_cookies',
+	DiscordPack = 'discord_pack',
+	LastSync = 'last_sync'
+}

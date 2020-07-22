@@ -2,9 +2,17 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Box, { BoxProps } from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Fab from '@material-ui/core/Fab';
+import Grow from '@material-ui/core/Grow';
 import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@material-ui/core/IconButton';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
@@ -12,7 +20,10 @@ import Zoom from '@material-ui/core/Zoom';
 import InviteIcon from '@material-ui/icons/Add';
 import CommandsIcon from '@material-ui/icons/Extension';
 import DiscordChatIcon from '@material-ui/icons/Forum';
+import GavelIcon from '@material-ui/icons/Gavel';
+import HomeIcon from '@material-ui/icons/Home';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import MenuIcon from '@material-ui/icons/Menu';
 import LoginIcon from '@material-ui/icons/VpnKey';
 import SkyraLogo from 'assets/skyraLogo';
 import Footer from 'components/Footer';
@@ -20,9 +31,12 @@ import MobileNavMenu from 'components/MobileNavMenu';
 import UserMenu from 'components/UserMenu';
 import { oauthURL } from 'lib/util/constants';
 import { navigate, syncUser } from 'lib/util/util';
-import React, { PropsWithChildren, useEffect } from 'react';
+import React, { PropsWithChildren, useContext, useEffect, useRef, useState } from 'react';
 import { Else, If, Then, When } from 'react-if';
+import { useLocation } from 'react-router';
 import { useGlobal } from 'reactn';
+import { CookieConsentContext } from './CookieConsent/ContextProvider';
+import { ReactComponent as CookieIcon } from './CookieIcon.svg';
 import Tooltip from './Tooltip';
 
 export interface GeneralPageProps {
@@ -55,9 +69,6 @@ const useStyles = makeStyles((theme: Theme) =>
 			right: theme.spacing(2),
 			zIndex: theme.zIndex.drawer + 2
 		},
-		menuButton: {
-			marginRight: theme.spacing(2)
-		},
 		transparantButton: {
 			background: 'transparent',
 			boxShadow: 'none',
@@ -65,6 +76,18 @@ const useStyles = makeStyles((theme: Theme) =>
 				background: theme.palette.primary.dark,
 				boxShadow: theme.shadows[1]
 			}
+		},
+		menuButton: {
+			marginRight: theme.spacing(2),
+			marginLeft: theme.spacing(2)
+		},
+		popper: {
+			marginTop: theme.spacing(1),
+			zIndex: theme.zIndex.drawer + 1
+		},
+		button: {
+			borderBottomLeftRadius: 0,
+			borderTopLeftRadius: 0
 		}
 	})
 );
@@ -95,7 +118,34 @@ const ScrollToTopButton = ({ children }: PropsWithChildren<unknown>) => {
 
 export default ({ children, loading = false, containerProps, ...props }: PropsWithChildren<GeneralPageProps>) => {
 	const classes = useStyles();
+	const anchorRef = useRef<HTMLButtonElement>(null);
 	const [authenticated] = useGlobal('authenticated');
+	const [popperMenuIsOpen, setPopperMenuOpen] = useState(false);
+	const { allowsCookies, dispatch } = useContext(CookieConsentContext);
+	const { pathname } = useLocation();
+
+	const togglePopperMenu = () => {
+		setPopperMenuOpen(prevOpen => !prevOpen);
+	};
+
+	const closePopperMenu = (event: React.MouseEvent<EventTarget>) => {
+		if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
+			return;
+		}
+
+		setPopperMenuOpen(false);
+	};
+
+	// return focus to the button when we transitioned from !open -> open
+	const popperMenuPrevOpen = useRef(popperMenuIsOpen);
+
+	useEffect(() => {
+		if (popperMenuPrevOpen.current === true && popperMenuIsOpen === false) {
+			anchorRef.current?.focus();
+		}
+
+		popperMenuPrevOpen.current = popperMenuIsOpen;
+	}, [popperMenuIsOpen]);
 
 	useEffect(() => {
 		syncUser();
@@ -157,39 +207,116 @@ export default ({ children, loading = false, containerProps, ...props }: PropsWi
 									</Typography>
 								</Button>
 							</Tooltip>
-							<Tooltip title="Click to view Skyra's commands" placement="bottom">
-								<Button
-									color="primary"
-									variant="contained"
-									classes={{ root: classes.transparantButton }}
-									onClick={navigate('/commands')}
-									startIcon={<CommandsIcon />}
-								>
-									<Typography variant="body2" color="textPrimary">
-										Commands
-									</Typography>
-								</Button>
-							</Tooltip>
 
 							<When condition={authenticated}>
 								<UserMenu />
 							</When>
 
 							<When condition={!authenticated && !loading}>
-								<Tooltip title="Click to login and manage your servers" placement="bottom">
-									<Button
-										color="primary"
-										variant="contained"
-										classes={{ root: classes.transparantButton }}
-										onClick={navigate(oauthURL.toString())}
-										startIcon={<LoginIcon />}
-									>
-										<Typography variant="body2" color="textPrimary">
-											Log In
-										</Typography>
-									</Button>
+								<Tooltip
+									title={
+										allowsCookies
+											? 'Click to login and manage your servers'
+											: [
+													'Looks like do not allow use to save cookies',
+													'We use cookies for authentication.',
+													'Please enable cookies and this button will be enabled.'
+											  ].join(' ') // eslint-disable-line no-mixed-spaces-and-tabs
+									}
+									placement={allowsCookies ? 'bottom' : 'left'}
+								>
+									<Box component="div">
+										<Button
+											color="primary"
+											variant="contained"
+											classes={{ root: classes.transparantButton }}
+											onClick={navigate(oauthURL.toString())}
+											startIcon={<LoginIcon />}
+											disabled={!allowsCookies}
+										>
+											<Typography variant="body2" color="textPrimary">
+												Log In
+											</Typography>
+										</Button>
+									</Box>
 								</Tooltip>
 							</When>
+
+							<IconButton
+								ref={anchorRef}
+								edge="start"
+								aria-controls={popperMenuIsOpen ? 'menu-popover' : undefined}
+								aria-haspopup="true"
+								className={classes.menuButton}
+								color="inherit"
+								aria-label="menu"
+								onClick={togglePopperMenu}
+							>
+								<MenuIcon />
+							</IconButton>
+							<Popper
+								className={classes.popper}
+								open={popperMenuIsOpen}
+								anchorEl={anchorRef.current}
+								role={undefined}
+								transition
+								disablePortal
+							>
+								{({ TransitionProps, placement }) => (
+									<Grow
+										{...TransitionProps}
+										style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+									>
+										<Paper>
+											<ClickAwayListener onClickAway={closePopperMenu}>
+												<MenuList autoFocusItem={popperMenuIsOpen} id="menu-popover">
+													{pathname !== '/' && (
+														<Tooltip title="Click to go back to the home page" placement="left">
+															<MenuItem onClick={navigate('/')}>
+																<ListItemIcon>
+																	<HomeIcon />
+																</ListItemIcon>
+																<Typography variant="inherit">Go back home</Typography>
+															</MenuItem>
+														</Tooltip>
+													)}
+													<Tooltip title="Click to view Skyra's commands" placement="left">
+														<MenuItem onClick={navigate('/commands')}>
+															<ListItemIcon>
+																<CommandsIcon />
+															</ListItemIcon>
+															<Typography variant="inherit">Commands</Typography>
+														</MenuItem>
+													</Tooltip>
+													<Tooltip title="Click to read how we handle your data" placement="left">
+														<MenuItem onClick={navigate('/privacy')}>
+															<ListItemIcon>
+																<GavelIcon />
+															</ListItemIcon>
+															<Typography variant="inherit">Privacy Policy</Typography>
+														</MenuItem>
+													</Tooltip>
+													{allowsCookies !== null && (
+														<Tooltip title="Click to update whether we can store cookies" placement="left">
+															<MenuItem
+																onClick={event => {
+																	closePopperMenu(event);
+																	dispatch(null);
+																}}
+															>
+																<ListItemIcon>
+																	<CookieIcon />
+																</ListItemIcon>
+																<Typography variant="inherit">Update cookie consent</Typography>
+															</MenuItem>
+														</Tooltip>
+													)}
+												</MenuList>
+											</ClickAwayListener>
+										</Paper>
+									</Grow>
+								)}
+							</Popper>
 						</Hidden>
 					</Toolbar>
 				</AppBar>
