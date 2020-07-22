@@ -1,16 +1,26 @@
 import Button from '@material-ui/core/Button';
 import Grow from '@material-ui/core/Grow';
 import Snackbar from '@material-ui/core/Snackbar';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AlertTitle from '@material-ui/lab/AlertTitle';
 import React from 'reactn';
 import { useServiceWorker } from 'ServiceWorkerContext';
 import BaseAlert from './Base';
 
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		root: {
+			zIndex: theme.zIndex.snackbar + 1
+		}
+	})
+);
+
 export default () => {
+	const classes = useStyles();
 	const sw = useServiceWorker();
 
 	return (
-		<Snackbar open={sw.assetsUpdateReady} TransitionComponent={Grow}>
+		<Snackbar open={sw.assetsUpdateReady} TransitionComponent={Grow} classes={{ root: classes.root }}>
 			<BaseAlert
 				severity="info"
 				action={
