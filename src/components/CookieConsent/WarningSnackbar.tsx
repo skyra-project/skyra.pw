@@ -7,8 +7,7 @@ import SnackbarContent from '@material-ui/core/SnackbarContent';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import { noOp } from 'lib/util/skyraUtils';
-import React, { memo } from 'react';
-import { useContext } from 'reactn';
+import React, { memo, useContext } from 'react';
 import { CookieConsentContext } from './ContextProvider';
 
 const useStyles = makeStyles((theme: Theme) =>
