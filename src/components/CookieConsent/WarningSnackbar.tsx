@@ -5,8 +5,10 @@ import Grid from '@material-ui/core/Grid';
 import Slide from '@material-ui/core/Slide';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import { noOp } from 'lib/util/skyraUtils';
+import { navigate } from 'lib/util/util';
 import React, { memo, useContext } from 'react';
 import { CookieConsentContext } from './ContextProvider';
 
@@ -56,6 +58,14 @@ const useStyles = makeStyles((theme: Theme) =>
 			'&:hover': {
 				backgroundColor: theme.palette.error.dark
 			}
+		},
+		fauxLink: {
+			color: theme.palette.primary.main,
+			cursor: 'pointer',
+			textDecoration: 'underline',
+			'&:hover': {
+				color: theme.palette.primary.dark
+			}
 		}
 	})
 );
@@ -95,12 +105,19 @@ export default memo(() => {
 			<Box className={clsx(classes.root, classes.anchorOriginBottomCenter)}>
 				<Slide appear in={allowsCookies === null} direction="up">
 					<SnackbarContent
-						message={[
-							'This site uses cookies for authentication.',
-							'If you would like to use the login feature',
-							'and manage your servers please enable the use',
-							'of cookies by clicking the button below'
-						].join(' ')}
+						message={
+							<>
+								<Typography>
+									This site uses cookies for authentication. If you would like to use the login feature and manage your
+									servers please enable the use of cookies by clicking the button below. Want to know how we handle your
+									privacy? Feel free to review{' '}
+									<span className={classes.fauxLink} onClick={navigate('/privacy')}>
+										our privacy policy
+									</span>
+									.
+								</Typography>
+							</>
+						}
 						action={<CookieAction />}
 						classes={{ root: classes.snackbarContent, message: classes.message, action: classes.action }}
 					/>
