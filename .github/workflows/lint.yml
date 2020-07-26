@@ -26,5 +26,3 @@ jobs:
               run: yarn --ignore-scripts
             - name: ESLint
               uses: icrawl/action-eslint@v1
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
