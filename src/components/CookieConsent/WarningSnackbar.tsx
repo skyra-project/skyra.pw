@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		anchorOriginBottomCenter: {
 			bottom: theme.spacing(1),
-			[theme.breakpoints.up('sm')]: {
+			[theme.breakpoints.up('md')]: {
 				bottom: theme.spacing(3),
 				left: '50%',
 				right: 'auto',
@@ -99,6 +99,8 @@ const CookieAction = memo(() => {
 export default memo(() => {
 	const { allowsCookies } = useContext(CookieConsentContext);
 	const classes = useStyles();
+
+	if (allowsCookies !== null) return null;
 
 	return (
 		<ClickAwayListener onClickAway={noOp}>
