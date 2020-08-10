@@ -6,10 +6,11 @@ import SelectBoolean from 'components/Select/SelectBoolean';
 import SelectDuration from 'components/Select/SelectDuration';
 import SimpleGrid from 'components/SimpleGrid';
 import Slider from 'components/Slider';
+import { SettingsPageProps } from 'lib/types/GuildSettings';
 import { bitwiseHas, bitwiseSet, updateSliderValueObj } from 'lib/util/util';
-import React, { Fragment } from 'react';
+import React, { Fragment, PropsWithChildren } from 'react';
 
-const NewLinesFilterPage = props => {
+export default (props: PropsWithChildren<SettingsPageProps>) => {
 	const { newlines } = props.guildSettings.selfmod;
 
 	return (
@@ -84,18 +85,27 @@ const NewLinesFilterPage = props => {
 					min={0}
 					max={60}
 				/>
-				<Typography>Threshold Duration</Typography>
+				<Typography>Threshold Duration (in seconds)</Typography>
 				<Slider
-					value={newlines.thresholdDuration}
-					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('newlines', 'thresholdDuration', value))}
+					value={newlines.thresholdDuration / 1000}
+					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('newlines', 'thresholdDuration', value, 1000))}
 					aria-labelledby="New lines selfmod filter threshold duration slider"
 					valueLabelDisplay="auto"
 					min={0}
 					max={120}
 				/>
 			</Section>
+			<Section title="Options">
+				<Typography>Maximum amount of new lines in a message before filter is applied</Typography>
+				<Slider
+					value={newlines.maximum}
+					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('newlines', 'maximum', value))}
+					aria-labelledby="New lines selfmod filter maximum lines slider"
+					valueLabelDisplay="auto"
+					min={10}
+					max={2000}
+				/>
+			</Section>
 		</Fragment>
 	);
 };
-
-export default NewLinesFilterPage;

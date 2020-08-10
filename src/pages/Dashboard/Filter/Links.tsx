@@ -109,10 +109,10 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 					min={0}
 					max={60}
 				/>
-				<Typography>Threshold Duration</Typography>
+				<Typography>Threshold Duration (in seconds)</Typography>
 				<Slider
-					value={links.thresholdDuration}
-					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('links', 'thresholdDuration', value))}
+					value={links.thresholdDuration / 1000}
+					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('links', 'thresholdDuration', value, 1000))}
 					aria-labelledby="Links selfmod filter threshold duration slider"
 					valueLabelDisplay="auto"
 					min={0}

@@ -109,10 +109,10 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 					min={0}
 					max={60}
 				/>
-				<Typography>Threshold Duration</Typography>
+				<Typography>Threshold Duration (in seconds)</Typography>
 				<Slider
-					value={filter.thresholdDuration}
-					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('filter', 'thresholdDuration', value))}
+					value={filter.thresholdDuration / 1000}
+					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('filter', 'thresholdDuration', value, 1000))}
 					aria-labelledby="Word selfmod filter threshold duration slider"
 					valueLabelDisplay="auto"
 					min={0}

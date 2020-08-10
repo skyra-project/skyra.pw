@@ -6,10 +6,11 @@ import SelectBoolean from 'components/Select/SelectBoolean';
 import SelectDuration from 'components/Select/SelectDuration';
 import SimpleGrid from 'components/SimpleGrid';
 import Slider from 'components/Slider';
+import { SettingsPageProps } from 'lib/types/GuildSettings';
 import { bitwiseHas, bitwiseSet, updateSliderValueObj } from 'lib/util/util';
-import React, { Fragment } from 'react';
+import React, { Fragment, PropsWithChildren } from 'react';
 
-const ReactionsFilterPage = props => {
+export default (props: PropsWithChildren<SettingsPageProps>) => {
 	const { reactions } = props.guildSettings.selfmod;
 
 	return (
@@ -84,10 +85,10 @@ const ReactionsFilterPage = props => {
 					min={0}
 					max={60}
 				/>
-				<Typography>Threshold Duration</Typography>
+				<Typography>Threshold Duration (in seconds)</Typography>
 				<Slider
-					value={reactions.thresholdDuration}
-					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('reactions', 'thresholdDuration', value))}
+					value={reactions.thresholdDuration / 1000}
+					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('reactions', 'thresholdDuration', value, 1000))}
 					aria-labelledby="Reactions selfmod filter threshold duration slider"
 					valueLabelDisplay="auto"
 					min={0}
@@ -97,5 +98,3 @@ const ReactionsFilterPage = props => {
 		</Fragment>
 	);
 };
-
-export default ReactionsFilterPage;

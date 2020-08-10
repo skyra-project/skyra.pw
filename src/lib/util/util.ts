@@ -137,10 +137,15 @@ export function bitwiseSet(bits: number, bit: number, toggle: boolean) {
  */
 export const parseCommandDescription = (description: string) => description.replace(/<:(\w{2,32}):[0-9]{18}>/gi, '$1');
 
-export const updateSliderValueObj = (category: keyof SelfmodSliderSettings, prop: SelfmodSliderProp, value: number | number[]) => ({
+export const updateSliderValueObj = (
+	category: keyof SelfmodSliderSettings,
+	prop: SelfmodSliderProp,
+	value: number | number[],
+	multiplier = 1
+) => ({
 	selfmod: {
 		[category]: {
-			[prop]: Array.isArray(value) ? value[0] : value
+			[prop]: Array.isArray(value) ? value[0] * multiplier : value * multiplier
 		}
 	}
 });
