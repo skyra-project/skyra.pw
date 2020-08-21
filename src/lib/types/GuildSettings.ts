@@ -33,6 +33,7 @@ export interface GuildSettings {
 }
 
 export interface Channels {
+	ignore: IgnoreChannels;
 	announcements: string;
 	greeting: string;
 	farewell: string;
@@ -45,6 +46,13 @@ export interface Channels {
 	'reaction-logs': string;
 	roles: string;
 	spam: string;
+}
+
+export interface IgnoreChannels {
+	all: string[];
+	'message-delete': string[];
+	'message-edit': string[];
+	'reaction-add': string[];
 }
 
 export interface Events {

@@ -1,10 +1,12 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import PageHeader from 'components/PageHeader';
 import Section from 'components/Section';
 import SelectChannel from 'components/Select/SelectChannel';
 import SelectChannels from 'components/Select/SelectChannels';
 import SimpleGrid from 'components/SimpleGrid';
-import { Channels, SettingsPageProps } from 'lib/types/GuildSettings';
+import { Channels, IgnoreChannels, SettingsPageProps } from 'lib/types/GuildSettings';
 import React, { PropsWithChildren } from 'react';
+import { PickByValue } from 'utility-types';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -16,6 +18,12 @@ const useStyles = makeStyles((theme: Theme) =>
 		buttonText: {
 			display: 'block',
 			textAlign: 'left'
+		},
+		sectionSpacer: {
+			marginTop: theme.spacing(10),
+			[theme.breakpoints.down('md')]: {
+				marginTop: theme.spacing(5)
+			}
 		}
 	})
 );
@@ -25,7 +33,93 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 
 	return (
 		<>
-			<Section title="Channels">
+			<PageHeader
+				title="Channels"
+				subtitle={
+					<>
+						Here you can configure all kinds of roles that will be used by Skyra. Hover over a button to get more information
+						for that specific channel.
+					</>
+				}
+			/>
+
+			<Section title="Logging Channels">
+				<SimpleGrid
+					direction="row"
+					justify="flex-start"
+					gridItemProps={{
+						xs: 12,
+						sm: 12,
+						md: 4,
+						lg: 4,
+						xl: 4
+					}}
+				>
+					{LOGGING_CHANNELS.map(({ name, description, key }, index) => (
+						<SelectChannel
+							key={index}
+							tooltipTitle={description}
+							value={props.guildSettings.channels[key]}
+							onChange={(channel: typeof props.guildSettings.channels[typeof key]) =>
+								props.patchGuildData({
+									channels: {
+										[key]: channel
+									}
+								})
+							}
+							guild={props.guildData}
+							label={name}
+							buttonProps={{
+								fullWidth: true,
+								classes: {
+									root: classes.button,
+									label: classes.buttonText
+								}
+							}}
+						/>
+					))}
+				</SimpleGrid>
+			</Section>
+			<Section title="Logging Ignore Channels" className={classes.sectionSpacer}>
+				<SimpleGrid
+					direction="row"
+					justify="flex-start"
+					gridItemProps={{
+						xs: 12,
+						sm: 12,
+						md: 4,
+						lg: 4,
+						xl: 4
+					}}
+				>
+					{IGNORE_CHANNELS.map(({ name, description, key }, index) => (
+						<SelectChannels
+							key={index}
+							tooltipTitle={description}
+							value={props.guildSettings.channels.ignore[key]}
+							onChange={(channel: typeof props.guildSettings.channels.ignore[typeof key]) =>
+								props.patchGuildData({
+									channels: {
+										ignore: {
+											[key]: channel
+										}
+									}
+								})
+							}
+							guild={props.guildData}
+							label={name}
+							buttonProps={{
+								fullWidth: true,
+								classes: {
+									root: classes.button,
+									label: classes.buttonText
+								}
+							}}
+						/>
+					))}
+				</SimpleGrid>
+			</Section>
+			<Section title="Other Channels" className={classes.sectionSpacer}>
 				<SimpleGrid
 					direction="row"
 					justify="flex-start"
@@ -100,6 +194,10 @@ const CHANNELS: Channel[] = [
 	{ name: 'Announcements', description: 'The channel for announcements', key: 'announcements' },
 	{ name: 'Greetings', description: 'The channel I will use to send greetings', key: 'greeting' },
 	{ name: 'Farewells', description: 'The channel I will use to send farewells', key: 'farewell' },
+	{ name: 'Spam', description: 'The channel for me to redirect users to when they use commands I consider spammy.', key: 'spam' }
+];
+
+const LOGGING_CHANNELS: Channel[] = [
 	{ name: 'Message Logs', description: 'The channel for (non-NSFW) message logs', key: 'message-logs' },
 	{
 		name: 'Member Logs',
@@ -126,12 +224,28 @@ const CHANNELS: Channel[] = [
 		name: 'Reaction Logs',
 		description: 'The channel for the reaction logs, same requirement as normal message logs, but will only send message reactions',
 		key: 'reaction-logs'
+	}
+];
+
+const IGNORE_CHANNELS: IgnoreChannel[] = [
+	{ name: 'All logs', description: 'Channels I should ignore for all types of logging.', key: 'all' },
+	{
+		name: 'Message delete logs',
+		description: 'Channels I should ignore when checking for deleted messages to log.',
+		key: 'message-delete'
 	},
-	{ name: 'Spam', description: 'The channel for me to redirect users to when they use commands I consider spammy.', key: 'spam' }
+	{ name: 'Message edit logs', description: 'Channels I should ignore when checking for edited messags to log.', key: 'message-edit' },
+	{ name: 'Reaction add logs', description: 'Channels I should ignore when checking for added reactions.', key: 'reaction-add' }
 ];
 
 interface Channel {
 	name: string;
-	key: keyof Channels;
+	key: keyof PickByValue<Channels, string>;
+	description: string;
+}
+
+interface IgnoreChannel {
+	name: string;
+	key: keyof IgnoreChannels;
 	description: string;
 }
