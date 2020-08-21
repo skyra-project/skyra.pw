@@ -11,6 +11,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ColorPicker from 'components/ColorPicker/ColorPicker';
 import SelectWithLabel from 'components/Formik/SelectWithLabel';
 import TextField from 'components/Formik/TextField';
+import Link from 'components/ReactMarkdown/Link';
 import Section from 'components/Section';
 import SimpleGrid from 'components/SimpleGrid';
 import { FastField, Formik, FormikConfig } from 'formik';
@@ -267,6 +268,7 @@ const CustomCommandsPage = ({
 													source={sortedCommands[index].content}
 													skipHtml
 													parserOptions={{ gfm: true }}
+													renderers={{ link: Link }}
 												/>
 											</Typography>
 										}

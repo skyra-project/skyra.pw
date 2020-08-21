@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			color: theme.palette.primary.main,
 			'&:hover': {
 				color: theme.palette.primary.dark
+			},
+			'&:visited': {
+				color: theme.palette.augmentColor({ main: theme.palette.primary.main }).dark
 			}
 		}
 	})
