@@ -263,7 +263,7 @@ const PrivacyPolicy = () => {
 						Party Sites. The links from the Services do not imply that we endorse or have reviewed the Third Party Sites. We
 						suggest contacting those sites directly for information on their privacy policies.
 					</Typography>
-					<Typography id="DATA RETENTION" variant="h2" classes={{ root: classes.header }}>
+					<Typography id="data-retention" variant="h2" classes={{ root: classes.header }}>
 						DATA RETENTION
 					</Typography>
 					<Typography component="div">
