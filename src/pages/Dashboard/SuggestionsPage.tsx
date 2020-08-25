@@ -46,14 +46,16 @@ const CONFIGURABLE_EMOJIS: Emoji[] = [
 		key: 'upvote',
 		description: 'The upvote emoji Skyra reacts with on every suggestion.',
 		defaultName: 'ArrowT',
-		defaultImage: 'https://cdn.discordapp.com/emojis/694594285487652954.png?v=1'
+		defaultImage: 'https://cdn.discordapp.com/emojis/694594285487652954.png',
+		defaultId: '694594285487652954'
 	},
 	{
 		title: 'Downvote Emoji',
 		key: 'downvote',
 		description: 'The downvote emoji Skyra reacts with on every suggestion.',
 		defaultName: 'ArrowB',
-		defaultImage: 'https://cdn.discordapp.com/emojis/694594285269680179.png?v=1'
+		defaultImage: 'https://cdn.discordapp.com/emojis/694594285269680179.png',
+		defaultId: '694594285269680179'
 	}
 ];
 
@@ -141,19 +143,30 @@ export default memo((props: PropsWithChildren<SettingsPageProps>) => {
 						xl: 4
 					}}
 				>
-					{CONFIGURABLE_EMOJIS.map(({ title, description, key, defaultImage, defaultName }, index) => (
+					{CONFIGURABLE_EMOJIS.map(({ title, description, key, defaultImage, defaultName, defaultId }, index) => (
 						<SelectEmoji
 							key={index}
 							tooltipTitle={description}
 							value={tagToId(props.guildSettings.suggestions.emojis[key])}
 							defaultImage={defaultImage}
 							defaultName={defaultName}
-							onChange={(emojiID: typeof props.guildSettings.suggestions.emojis[typeof key]) => {
-								const emojiData = findEmoji(emojiID);
+							defaultId={defaultId}
+							onChange={(emojiID: typeof props.guildSettings.suggestions.emojis[typeof key] | null) => {
+								if (emojiID) {
+									const emojiData = findEmoji(emojiID);
+									return props.patchGuildData({
+										suggestions: {
+											emojis: {
+												[key]: idToTag(emojiID, emojiData.name, emojiData.animated)
+											}
+										}
+									});
+								}
+
 								return props.patchGuildData({
 									suggestions: {
 										emojis: {
-											[key]: idToTag(emojiID, emojiData.name, emojiData.animated)
+											[key]: idToTag(defaultId, defaultName, false)
 										}
 									}
 								});
@@ -187,4 +200,5 @@ interface Emoji {
 	description: string;
 	defaultName: string;
 	defaultImage: string;
+	defaultId: string;
 }
