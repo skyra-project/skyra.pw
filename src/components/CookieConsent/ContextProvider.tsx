@@ -11,13 +11,13 @@ interface CookieConsentContext {
 
 const CookieConsentContext: Context<CookieConsentContext> = createContext({} as CookieConsentContext);
 
-const initialState = loadState(LocalStorageKeys.hasCookieConsent) as string | null;
+const initialState = loadState(LocalStorageKeys.HasCookieConsent) as string | null;
 
 const CookieConsentProvider: FC = ({ children }) => {
 	const [allowsCookies, dispatch] = useState(initialState);
 
 	useEffect(() => {
-		saveState(LocalStorageKeys.hasCookieConsent, allowsCookies);
+		saveState(LocalStorageKeys.HasCookieConsent, allowsCookies);
 	}, [allowsCookies]);
 
 	return (

@@ -38,7 +38,7 @@ export const guildAddURL = (guildID: string) => {
 };
 
 export enum LocalStorageKeys {
-	hasCookieConsent = 'allows_cookies',
+	HasCookieConsent = 'allows_cookies',
 	DiscordPack = 'discord_pack',
 	LastSync = 'last_sync'
 }

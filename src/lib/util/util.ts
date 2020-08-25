@@ -10,17 +10,18 @@ export function sleep(ms: number) {
 
 export async function logOut() {
 	await apiFetch<{ user: OauthFlattenedUser }>('/oauth/logout', { method: 'POST' });
-	localStorage.clear();
+	clearState(LocalStorageKeys.DiscordPack);
+	clearState(LocalStorageKeys.LastSync);
 	setGlobal({ pack: undefined, authenticated: false });
 	history.replace('/');
 }
 
-export const loadState = <T>(key: string): T | null => {
+export const loadState = <T>(key: LocalStorageKeys): T | null => {
 	const serializedState = localStorage.getItem(key);
 	return serializedState ? (JSON.parse(serializedState) as T) : null;
 };
 
-export const saveState = <T>(key: string, state: T): T => {
+export const saveState = <T>(key: LocalStorageKeys, state: T): T => {
 	try {
 		const serializedState = JSON.stringify(state);
 		localStorage.setItem(key, serializedState);
@@ -29,6 +30,10 @@ export const saveState = <T>(key: string, state: T): T => {
 	}
 
 	return state;
+};
+
+export const clearState = (key: LocalStorageKeys) => {
+	localStorage.removeItem(key);
 };
 
 export async function apiFetch<T>(path: string, options: RequestInit = {}) {
