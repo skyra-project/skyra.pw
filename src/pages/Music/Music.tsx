@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default () => {
 	const classes = useStyles();
-	const { guildID } = useParams();
+	const { guildID } = useParams<{ guildID: string }>();
 	const [authenticated] = useGlobal('authenticated');
 	const theme = useTheme();
 

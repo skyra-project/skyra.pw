@@ -201,7 +201,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 	const [mobileOpen, setMobileOpen] = useState(false);
 	const [hasError, setHasError] = useState(false);
 
-	const { guildID } = useParams();
+	const { guildID } = useParams<{ guildID: string }>();
 
 	const syncGuildData = useCallback(async () => {
 		setIsLoading(true);
