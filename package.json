@@ -32,7 +32,7 @@
 	"scripts": {
 		"start": "cross-env HOST=localhost.org react-scripts start",
 		"build": "react-scripts build",
-		"style": "prettier --write --loglevel=error src/**/*.{js,jsx,ts,tsx,scss}",
+		"format": "prettier --write --loglevel=error src/**/*.{js,jsx,ts,tsx,scss}",
 		"update": "yarn upgrade-interactive --latest",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
