@@ -16,10 +16,10 @@ interface LinkProps {
 	href: string;
 }
 
-export default forwardRef<HTMLLinkElement, LinkProps>(props => {
+export default forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
 	const classes = useStyles();
 	return (
-		<a href={props.href} className={classes.link}>
+		<a href={props.href} className={classes.link} ref={ref}>
 			{props.children}
 		</a>
 	);
