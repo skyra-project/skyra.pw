@@ -36,6 +36,7 @@ import SaveIconIcon from '@material-ui/icons/Save';
 import SettingsIcon from '@material-ui/icons/Settings';
 import StarIcon from '@material-ui/icons/Star';
 import Skeleton from '@material-ui/lab/Skeleton';
+import { noop } from '@sapphire/utilities';
 import SkyraLogo from 'assets/skyraLogo';
 import ErrorAlert from 'components/Alerts/Error';
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
@@ -45,7 +46,7 @@ import UserMenu from 'components/UserMenu';
 import deepMerge, { Options as DeepMergeOptions } from 'deepmerge';
 import { FlattenedGuild } from 'lib/types/ApiData';
 import { GuildSettings, SettingsPageProps } from 'lib/types/GuildSettings';
-import { noOp, Time } from 'lib/util/skyraUtils';
+import { Time } from 'lib/util/skyraUtils';
 import { apiFetch, navigate } from 'lib/util/util';
 import CustomCommandsPage from 'pages/Dashboard/CustomCommands';
 import EventsPage from 'pages/Dashboard/EventsPage';
@@ -257,7 +258,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 	};
 
 	const toggleSidebar = () => setMobileOpen(!mobileOpen);
-	const closeSidebarOnMobile = () => (isOnMobile ? toggleSidebar() : noOp());
+	const closeSidebarOnMobile = () => (isOnMobile ? toggleSidebar() : noop());
 
 	const handleSubMenu = (menuName: string) => {
 		return openSubMenus.includes(menuName)
@@ -306,7 +307,7 @@ const RootComponent = (props: PropsWithChildren<any>) => {
 			</Box>
 			{/* --------------------- */}
 
-			<Box component="div" role="presentation" onKeyDown={isOnMobile ? toggleSidebar : noOp}>
+			<Box component="div" role="presentation" onKeyDown={isOnMobile ? toggleSidebar : noop}>
 				<List style={{ overflowY: 'auto' }}>
 					<ListItem
 						onClick={closeSidebarOnMobile}

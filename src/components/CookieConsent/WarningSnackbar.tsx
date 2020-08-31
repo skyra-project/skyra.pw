@@ -6,8 +6,8 @@ import Slide from '@material-ui/core/Slide';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import { noop } from '@sapphire/utilities';
 import clsx from 'clsx';
-import { noOp } from 'lib/util/skyraUtils';
 import { navigate } from 'lib/util/util';
 import React, { memo, useContext } from 'react';
 import { CookieConsentContext } from './ContextProvider';
@@ -103,7 +103,7 @@ export default memo(() => {
 	if (allowsCookies !== null) return null;
 
 	return (
-		<ClickAwayListener onClickAway={noOp}>
+		<ClickAwayListener onClickAway={noop}>
 			<Box className={clsx(classes.root, classes.anchorOriginBottomCenter)}>
 				<Slide appear in={allowsCookies === null} direction="up">
 					<SnackbarContent
