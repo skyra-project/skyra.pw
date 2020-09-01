@@ -157,11 +157,6 @@ const ROLES: Role[] = [
 		key: 'muted'
 	},
 	{
-		name: 'Member Logs',
-		tooltip: 'The channel for member logs, once enabled, I will post all member related events there.',
-		key: 'restricted-reaction'
-	},
-	{
 		name: 'Restricted Reaction',
 		tooltip: 'The role that is used for the restrictReaction moderation command.',
 		key: 'restricted-reaction'
@@ -170,6 +165,11 @@ const ROLES: Role[] = [
 		name: 'Restricted Embed',
 		tooltip: 'The role that is used for the restrictEmbed moderation command.',
 		key: 'restricted-embed'
+	},
+	{
+		name: 'Restricted Attachment',
+		tooltip: 'The role that is used for the restrictAttachment moderation command.',
+		key: 'restricted-attachment'
 	},
 	{
 		name: 'Restricted Emoji',
