@@ -34,7 +34,7 @@ After forking/cloning this repo to a folder locally:
 Skyra Project is open source and always will be, even if we don't get donations. That said, we know there are amazing people who
 may still want to donate just to show their appreciation. Thanks you very much in advance!
 
-We accept donations through Patreon, BitCoin, Ethereum, and Litecoin. You can use the buttoms below to donate through your method of choice.
+We accept donations through Patreon, BitCoin, Ethereum, and Litecoin. You can use the buttons below to donate through your method of choice.
 
 | Donate With |         QR         |                                                                  Address                                                                  |
 | :---------: | :----------------: | :---------------------------------------------------------------------------------------------------------------------------------------: |
@@ -69,6 +69,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
