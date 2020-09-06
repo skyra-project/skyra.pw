@@ -1480,11 +1480,12 @@
   version "0.0.1"
   resolved "https://codeload.github.com/sapphire-project/utilities/tar.gz/1e1c60bedcca111f483dc4ddff2d5c167bfe0618"
 
-"@skyra/discord-components-core@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@skyra/discord-components-core/-/discord-components-core-1.3.0.tgz#7bee62277d247a9ad42f30edf1044ed13a064520"
-  integrity sha512-c3ipd41u95LcKyY68BTtycC1lhEzVFjp6IsnFrq1+bprlw+8cS4CEr4/r/ldc7mriVTdoC/G0+KYugaZ9dmjWA==
+"@skyra/discord-components-core@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@skyra/discord-components-core/-/discord-components-core-2.0.0.tgz#a9f075c43415d76b0f0d7372be5e18c880f16ef1"
+  integrity sha512-hYUAer5nsS6n7jWx3fRuuwTgHLnGxx+pdAjGPPRQRfqI8ZTyFEi7LE4Ng/9frgemJjC+tUwZGt9NMgpZWm4Rhg==
   dependencies:
+    "@stencil/core" "^2.0.3"
     clsx "^1.1.1"
     hex-to-rgba "^2.0.1"
 
@@ -1492,6 +1493,11 @@
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@skyra/discord-components-react/-/discord-components-react-2.0.0.tgz#b44a623bebe3ec676fe5c072c29b47410db9fda4"
   integrity sha512-XxCrIeOyF7SoEHROrm6r+6misbxhf9/GVRmpyr1sxsSSE5E/cenAVMEGpW8+FxuIcRVL0ChTmz6tYKBCLGYJLw==
+
+"@stencil/core@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.0.3.tgz#8719d3131362076a35b7a7c865de4720766f3f47"
+  integrity sha512-d4qLDN7HKwJEK+ljhknD8azpM4bF49Dv7h5yG3RF+SPo8uozDq3p5ZNj1MgZoRgzh04kXNyG/MKnD8H2QN5YVw==
 
 "@svgr/babel-plugin-add-jsx-attribute@^4.2.0":
   version "4.2.0"
