@@ -341,6 +341,7 @@ export default () => {
 	);
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 declare global {
 	interface WebSocket {
 		sendJSON: (data: OutgoingWebsocketMessage) => void;

@@ -96,6 +96,7 @@ declare module 'reactn/default' {
 	}
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 declare global {
 	type DiscordMessageAvatars = Record<string, string> &
 		Partial<{
