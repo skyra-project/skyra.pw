@@ -1,6 +1,6 @@
 import { createBrowserHistory, History } from 'history';
 
-export const history: History<History.PoorMansUnknown> = createBrowserHistory();
+export const history: History<History.UnknownFacade> = createBrowserHistory();
 
 export const CLIENT_ID = process.env.REACT_APP_CLIENT_ID!;
 export const BASE_WEB_URL = process.env.REACT_APP_BASE_WEB_URL!;
@@ -20,8 +20,10 @@ oauthURL.search = new URLSearchParams([
 ]).toString();
 inviteURL.search = new URLSearchParams([
 	['client_id', CLIENT_ID],
-	['permissions', '356904022'],
-	['scope', 'bot']
+	['permissions', '491121748'],
+	['scope', 'bot'],
+	['response_type', 'code'],
+	['redirect_uri', encodeURIComponent(BASE_WEB_URL)]
 ]).toString();
 
 export const guildAddURL = (guildID: string) => {
@@ -31,7 +33,7 @@ export const guildAddURL = (guildID: string) => {
 		['response_type', 'code'],
 		['scope', 'bot'],
 		['client_id', CLIENT_ID],
-		['permissions', '356904020'],
+		['permissions', '491121748'],
 		['guild_id', guildID]
 	]).toString();
 	return guildAuthURL.toString();
