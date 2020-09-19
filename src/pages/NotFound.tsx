@@ -41,8 +41,8 @@ const NotFoundPage = () => {
 				>
 					<Grid item>
 						<Typography variant={isOnMobile ? 'h5' : 'h4'} color="textPrimary" classes={{ root: classes.text }}>
-							Woaw! You just ran into a non-existing page! If you think you got here by mistake then feel free to join the
-							support server on Discord using the button below and let us know.
+							Woah! Looks like you just ran into a non-existant page. If you think you found this page by mistake then feel
+							free to join the support server on Discord using the button below and let us know.
 						</Typography>
 					</Grid>
 					<Grid item>
