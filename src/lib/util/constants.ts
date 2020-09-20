@@ -1,6 +1,6 @@
-import { createBrowserHistory, History } from 'history';
+import { createBrowserHistory } from 'history';
 
-export const history: History<History.UnknownFacade> = createBrowserHistory();
+export const history = createBrowserHistory();
 
 export const CLIENT_ID = process.env.REACT_APP_CLIENT_ID!;
 export const BASE_WEB_URL = process.env.REACT_APP_BASE_WEB_URL!;
