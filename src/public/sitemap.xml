@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+      <urlset xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
+      http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" 
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+      xmlns:xhtml="http://www.w3.org/1999/xhtml">
+      <url><loc>https://skyra.pw/404</loc>
+                
+                
+                
+                <lastmod>2020-09-20</lastmod>
+                </url><url><loc>https://skyra.pw/api/auth/signin</loc>
+                
+                
+                
+                <lastmod>2020-09-20</lastmod>
+                </url><url><loc>https://skyra.pw/api/auth/signout</loc>
+                
+                
+                
+                <lastmod>2020-09-20</lastmod>
+                </url><url><loc>https://skyra.pw/api/auth/[...nextauth]</loc>
+                
+                
+                
+                <lastmod>2020-09-20</lastmod>
+                </url></urlset>

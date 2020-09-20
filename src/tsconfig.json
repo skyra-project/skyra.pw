@@ -1,0 +1,37 @@
+{
+	"extends": "@favware/ts-config",
+	"compileOnSave": false,
+	"compilerOptions": {
+		"allowJs": true,
+		"checkJs": true,
+		"module": "ESNext",
+		"declaration": false,
+		"declarationMap": false,
+		"isolatedModules": true,
+		"resolveJsonModule": true,
+		"jsx": "preserve",
+		"noEmit": true,
+		"tsBuildInfoFile": "./.tsbuildinfo",
+		"baseUrl": ".",
+		"rootDir": ".",
+		"paths": {
+			"@contexts/*": ["config/contexts/*"],
+			"@mui/*": ["components/material/*"],
+			"@mods/*": ["components/mods/*"],
+			"@next/*": ["components/next/*"],
+			"@selects/*": ["components/selects/*"],
+			"@assets/*": ["components/assets/*"],
+			"@presentational/*": ["components/presentational/*"],
+			"@routing/*": ["components/routing/*"],
+			// "@dashboard/*": ["../backup/dashboard/*"],
+			// "@oauth/*": ["../backup/oauth/*"],
+			"@pages/*": ["components/pages/*"],
+			"@config/*": ["config/*"],
+			"@components/*": ["components/*"],
+			"@utils/*": ["utils/*"]
+		},
+		"skipLibCheck": true
+	},
+	"include": ["."],
+	"exclude": ["public/sw.js", "public/workbox*.js"]
+}

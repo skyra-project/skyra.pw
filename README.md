@@ -10,7 +10,7 @@ To run the dashboard locally, you'll need a local version of Skyra running.
 After forking/cloning this repo to a folder locally:
 
 1. Duplicate `.env.development` and rename it to `.env.development.local`
-2. Replace the value of `REACT_APP_CLIENT_ID` to your bot's ID
+2. Replace the value of `NEXT_PUBLIC_CLIENT_ID` to your bot's ID
 3. Go to the Discord developer portal: https://discord.com/developers/applications/
 4. Select your bot application and go to the `OAuth2` tab
 5. Add redirect URL's for `http://localhost:3000/oauth/callback` and `http://localhost:3000/oauth/guild`
@@ -19,7 +19,7 @@ After forking/cloning this repo to a folder locally:
 -   You have to set the CLIENT_ID, CLIENT_SECRET in Skyra's configuration to your own bot properly!
 
 7. Install dependencies with `yarn`.
-8. Run `yarn start` to start the React dev server
+8. Run `yarn dev` to start the NextJS dev server
 
 ## Links
 

@@ -1,0 +1,21 @@
+import Grid, { GridProps } from '@material-ui/core/Grid/Grid';
+import React, { Children, FC } from 'react';
+import { When } from 'react-if';
+
+interface SimpleGridProps extends GridProps {
+	gridItemProps?: GridProps;
+}
+
+const SimpleGrid: FC<SimpleGridProps> = ({ children, gridItemProps, ...props }) => (
+	<Grid spacing={1} container direction="column" justify="space-around" alignItems="flex-start" {...props}>
+		<When condition={Boolean(children)}>
+			{Children.map(children, (item, index) => (
+				<Grid item key={index} {...gridItemProps}>
+					{item}
+				</Grid>
+			))}
+		</When>
+	</Grid>
+);
+
+export default SimpleGrid;
