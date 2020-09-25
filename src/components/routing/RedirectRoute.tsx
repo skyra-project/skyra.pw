@@ -3,7 +3,6 @@ import React, { FC, useEffect } from 'react';
 
 export interface RedirectRouteProps {
 	redirectUri: string;
-	path: string;
 }
 
 const RedirectRoute: FC<RedirectRouteProps> = ({ redirectUri, children }) => {

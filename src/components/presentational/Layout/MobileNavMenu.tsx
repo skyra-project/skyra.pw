@@ -17,13 +17,13 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SyncIcon from '@material-ui/icons/Sync';
 import LoginIcon from '@material-ui/icons/VpnKey';
 import LazyAvatar from '@mui/LazyAvatar';
+import { CookieConsentContext } from '@presentational/CookieConsent/ContextProvider';
 import { oauthURL } from '@utils/constants';
 import { displayAvatarURL } from '@utils/skyraUtils';
 import { navigate } from '@utils/util';
 import React, { FC, useContext, useEffect, useRef, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import { useGlobal } from 'reactn';
-import { CookieConsentContext } from './CookieConsent/ContextProvider';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

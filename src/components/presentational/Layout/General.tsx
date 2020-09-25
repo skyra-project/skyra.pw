@@ -28,14 +28,15 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import MenuIcon from '@material-ui/icons/Menu';
 import LoginIcon from '@material-ui/icons/VpnKey';
 import Tooltip from '@mui/Tooltip';
-import Footer from '@presentational/Footer';
-import UserMenu from '@presentational/UserMenu';
+import { CookieConsentContext } from '@presentational/CookieConsent/ContextProvider';
+import Footer from '@presentational/Layout/Footer';
+import UserMenu from '@presentational/Layout/UserMenu';
 import { oauthURL } from '@utils/constants';
 import { navigate } from '@utils/util';
 import { useRouter } from 'next/router';
 import React, { FC, useContext, useEffect, useRef, useState } from 'react';
 import { Else, If, Then, When } from 'react-if';
-import { CookieConsentContext } from './CookieConsent/ContextProvider';
+import { useGlobal } from 'reactn';
 import MobileNavMenu from './MobileNavMenu';
 
 export interface GeneralPageProps {

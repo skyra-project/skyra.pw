@@ -1,6 +1,6 @@
 import features from '@assets/features';
 import { Box, Container, createStyles, Divider, Hidden, makeStyles, Theme, Typography } from '@material-ui/core';
-import GeneralPage from '@presentational/GeneralPage';
+import GeneralPage from '@presentational/Layout/General';
 import GuildCard from '@presentational/GuildCard';
 import ScrollToTop from '@routing/ScrollToTop';
 import clsx from 'clsx';

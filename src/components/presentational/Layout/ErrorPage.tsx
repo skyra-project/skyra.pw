@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ForumIcon from '@material-ui/icons/Forum';
 import HomeIcon from '@material-ui/icons/Home';
-import GeneralPage from '@presentational/GeneralPage';
+import GeneralPage from '@presentational/Layout/General';
 import { navigate } from '@utils/util';
 import React from 'react';
 

@@ -4,7 +4,7 @@ import { FlattenedGuild } from './ApiData';
 export interface SettingsPageProps {
 	guildData: FlattenedGuild;
 	guildSettings: GuildSettings;
-	guildID: string;
+	guildId: string;
 	patchGuildData: (changes?: DeepPartial<GuildSettings>) => void;
 }
 

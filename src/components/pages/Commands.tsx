@@ -11,7 +11,7 @@ import DnsIcon from '@material-ui/icons/Dns';
 import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 import LockIcon from '@material-ui/icons/Lock';
 import Tooltip from '@mui/Tooltip';
-import GeneralPage from '@presentational/GeneralPage';
+import GeneralPage from '@presentational/Layout/General';
 import ScrollToTop from '@routing/ScrollToTop';
 import { cutText } from '@sapphire/utilities';
 import { apiFetch, parseCommandDescription } from '@utils/util';

@@ -282,6 +282,6 @@ declare global {
 declare module 'reactn/default' {
 	export interface State {
 		authenticated: boolean;
-		pack: DashboardPack;
+		pack?: DashboardPack;
 	}
 }
