@@ -1,5 +1,4 @@
 import CookieIcon from '@assets/CookieIcon';
-import { useGlobalState } from '@contexts/GlobalStateContext';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -23,6 +22,7 @@ import { displayAvatarURL } from '@utils/skyraUtils';
 import { navigate } from '@utils/util';
 import React, { FC, useContext, useEffect, useRef, useState } from 'react';
 import { Else, If, Then } from 'react-if';
+import { useGlobal } from 'reactn';
 import { CookieConsentContext } from './CookieConsent/ContextProvider';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -65,7 +65,8 @@ const useStyles = makeStyles((theme: Theme) =>
 const MobileNavMenu: FC = () => {
 	const classes = useStyles();
 	const anchorRef = useRef<HTMLButtonElement>(null);
-	const { pack, authenticated } = useGlobalState();
+	const [authenticated] = useGlobal('authenticated');
+	const [pack] = useGlobal('pack');
 	const [popperMenuIsOpen, setPopperMenuOpen] = useState(false);
 	const { allowsCookies, dispatch } = useContext(CookieConsentContext);
 

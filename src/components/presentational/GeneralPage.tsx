@@ -1,6 +1,5 @@
 import CookieIcon from '@assets/CookieIcon';
 import SkyraLogo from '@assets/skyraLogo';
-import { useGlobalState } from '@contexts/GlobalStateContext';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Box, { BoxProps } from '@material-ui/core/Box';
@@ -119,7 +118,7 @@ const ScrollToTopButton: FC = ({ children }) => {
 const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containerProps, ...props }) => {
 	const classes = useStyles();
 	const anchorRef = useRef<HTMLButtonElement>(null);
-	const { authenticated } = useGlobalState();
+	const [authenticated] = useGlobal('authenticated');
 	const [popperMenuIsOpen, setPopperMenuOpen] = useState(false);
 	const { allowsCookies, dispatch } = useContext(CookieConsentContext);
 	const router = useRouter();

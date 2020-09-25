@@ -1,4 +1,3 @@
-import { useGlobalState } from '@contexts/GlobalStateContext';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -18,6 +17,7 @@ import Tooltip from '@mui/Tooltip';
 import { displayAvatarURL } from '@utils/skyraUtils';
 import { navigate } from '@utils/util';
 import React, { FC, useEffect, useRef, useState } from 'react';
+import { useGlobal } from 'reactn';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const UserMenu: FC = () => {
-	const { pack } = useGlobalState();
+	const [pack] = useGlobal('pack');
 	const [open, setOpen] = useState(false);
 
 	const classes = useStyles();

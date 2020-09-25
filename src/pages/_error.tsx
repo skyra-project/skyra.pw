@@ -1,4 +1,3 @@
-import Analytics from '@config/Analytics';
 import { createSeoProps } from '@config/next-seo.config';
 import Error from '@presentational/Error';
 import { NextPage } from 'next';
@@ -8,7 +7,6 @@ import React from 'react';
 const ErrorPage: NextPage = () => {
 	return (
 		<>
-			<Analytics />
 			<NextSeo
 				{...createSeoProps({
 					title: '500',

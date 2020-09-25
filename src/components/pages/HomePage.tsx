@@ -1,11 +1,11 @@
 import features from '@assets/features';
-import { useGlobalState } from '@contexts/GlobalStateContext';
 import { Box, Container, createStyles, Divider, Hidden, makeStyles, Theme, Typography } from '@material-ui/core';
 import GeneralPage from '@presentational/GeneralPage';
 import GuildCard from '@presentational/GuildCard';
 import ScrollToTop from '@routing/ScrollToTop';
 import clsx from 'clsx';
 import React, { FC } from 'react';
+import { useGlobal } from 'reactn';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Section = ({ name, previewContent, text }: typeof features extends Array<infer U> ? U : never) => {
 	const classes = useStyles();
-	const { authenticated } = useGlobalState();
+	const [authenticated] = useGlobal('authenticated');
 
 	return (
 		<Box
@@ -63,7 +63,8 @@ const Section = ({ name, previewContent, text }: typeof features extends Array<i
 };
 
 const HomePage: FC = () => {
-	const { authenticated, pack } = useGlobalState();
+	const [authenticated] = useGlobal('authenticated');
+	const [pack] = useGlobal('pack');
 
 	return (
 		<>

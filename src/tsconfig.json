@@ -15,7 +15,6 @@
 		"baseUrl": ".",
 		"rootDir": ".",
 		"paths": {
-			"@contexts/*": ["config/contexts/*"],
 			"@mui/*": ["components/material/*"],
 			"@mods/*": ["components/mods/*"],
 			"@next/*": ["components/next/*"],
