@@ -42,8 +42,8 @@ const Email = () => {
 	return (
 		<span>
 			{' '}
-			<a className={clsx(classes.email, classes.link)} href="mailto:skyra.project@gmail.com">
-				skyra.project@gmail.com
+			<a className={clsx(classes.email, classes.link)} href="mailto:contact@skyra.pw">
+				contact@skyra.pw
 			</a>
 		</span>
 	);
@@ -67,15 +67,12 @@ const PrivacyPolicy = () => {
 						SKYRA PRIVACY POLICY
 					</Typography>
 					<LineSpacer />
-					<Typography variant="body2">Last updated and effective: July 20, 2020</Typography>
+					<Typography variant="body2">Last updated and effective: October 4, 2020</Typography>
 					<LineSpacer />
 					<Divider />
 					<LineSpacer />
 					<Typography classes={{ root: classes.boldText }}>OWNER AND DATA CONTROLLER</Typography>
 					<Typography component="div">Skyra Project</Typography>
-					<Typography component="div">56 Calle María de Guzmán</Typography>
-					<Typography component="div">Madrid 28003</Typography>
-					<Typography component="div">Spain</Typography>
 					<LineSpacer />
 					<Typography component="div">
 						<span className={classes.boldText}>Owner contact email</span>:<Email />
@@ -144,10 +141,10 @@ const PrivacyPolicy = () => {
 						WHERE INFORMATION IS PROCESSED
 					</Typography>
 					<Typography component="div">
-						The Company is based in Spain and the Services are hosted from Germany. No matter where you are located you consent
-						to processing and transferring of your information in and to Germany, Spain, and other countries. The laws of
-						Germany, Spain, and other countries governing data collection and use may not be as comprehensive or protective as
-						the laws of the country where you live.
+						The Company is based in Spain and the Services are hosted from Germany (by netcup GmbH). No matter where you are
+						located you consent to processing and transferring of your information in and to Germany, Spain, and other
+						countries. The laws of Germany, Spain, and other countries governing data collection and use may not be as
+						comprehensive or protective as the laws of the country where you live.
 					</Typography>
 					<Typography id="our-use-of-your-information" variant="h2" classes={{ root: classes.header }}>
 						OUR USE OF YOUR INFORMATION
