@@ -1187,30 +1187,30 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@favware/eslint-config-react-app@^1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@favware/eslint-config-react-app/-/eslint-config-react-app-1.1.3.tgz#d1ad626b419757244a9ee8db1e797453a3c38eda"
-  integrity sha512-pm+bJCkTHllf8pSEqUkyxwyxOi6y1mqCI9S2rH1aqCjPBi93OsyLBQZ1+t/k47gFIU8LSYWSgCTg2h1ZB2LPmw==
+"@favware/eslint-config-react-app@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@favware/eslint-config-react-app/-/eslint-config-react-app-1.1.4.tgz#8e825f9746a3352417781b781b7077107051667a"
+  integrity sha512-qg3GyHszecJuwPZJam+1MgBrMz4IA+zH6HOF+q2rBRcr+G0utJyiTIaS/wNNPSwB0dbb6V/XT5iNPFHvaLuRXw==
   dependencies:
-    "@favware/eslint-config" "^5.1.3"
+    "@favware/eslint-config" "^5.1.4"
     eslint-plugin-import "^2.22.0"
     eslint-plugin-jsx-a11y "^6.3.1"
-    eslint-plugin-react "^7.20.6"
-    eslint-plugin-react-hooks "^4.1.0"
+    eslint-plugin-react "^7.21.2"
+    eslint-plugin-react-hooks "^4.1.2"
 
-"@favware/eslint-config@^5.1.3":
-  version "5.1.3"
-  resolved "https://registry.yarnpkg.com/@favware/eslint-config/-/eslint-config-5.1.3.tgz#e597c506e20647f1f152b3a3489c96fec764a19f"
-  integrity sha512-Hvg1RthMrOrS/cUJajW7d0dVNCksakb8dP4yqILg3R5F5jo9uKd6gaB8K7KQ9g21QTZ71Og0mrbi8+8SUitKdw==
+"@favware/eslint-config@^5.1.4":
+  version "5.1.4"
+  resolved "https://registry.yarnpkg.com/@favware/eslint-config/-/eslint-config-5.1.4.tgz#4ab0954e01078a1c0fb681bcf949ab44730ead14"
+  integrity sha512-Uh1s+Kshl0EJNgSQpu9rmPujOWOCFl7+ucdLXyZzWR338Cso2ImwOBb64leakTHKecKCF/m8PRNncnCJkDJM1g==
   dependencies:
-    "@typescript-eslint/eslint-plugin" "^4.0.1"
-    "@typescript-eslint/parser" "^4.0.1"
-    eslint "^7.8.1"
+    "@typescript-eslint/eslint-plugin" "^4.2.0"
+    "@typescript-eslint/parser" "^4.2.0"
+    eslint "^7.9.0"
 
-"@favware/ts-config@^3.0.3":
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/@favware/ts-config/-/ts-config-3.0.3.tgz#c783dc58e4a939d75b281f9c331d1782fb3e22c6"
-  integrity sha512-ak/HgwjRgPdD7g0W+7QNMMOPa2NuSUxCPgmMLpDNAJ51+6lvvhGrGhAd/Yu2f9Eq60pMQqOk0swB0e63CFMMNg==
+"@favware/ts-config@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@favware/ts-config/-/ts-config-3.0.4.tgz#a47ada9bbd9524eefdc6ea208647476388a168f3"
+  integrity sha512-vQOHMGFZ3HNCo2JYUuxNGr0jtwnYVh/qRUDC7Dj87Q0VTRZs/U1FcVNAjibvs8hRtNcLkGHe2IRDpIyl8lp0Ug==
 
 "@hapi/address@2.x.x":
   version "2.1.4"
@@ -1513,24 +1513,24 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@sapphire/utilities@^1.0.0":
+"@sapphire/utilities@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@sapphire/utilities/-/utilities-1.0.1.tgz#4f26d69a9491b521da4587a0aecb608bd6b1fff1"
   integrity sha512-UuHNfJdPj2NaNNXwTIsWnSpnRzoMCCR4W7lHbqqjoRXMMnJ81qdfN07jrmkOdO1o/dx0tEr2M3cXZ3kXLSJKhQ==
 
-"@skyra/discord-components-core@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@skyra/discord-components-core/-/discord-components-core-2.0.0.tgz#a9f075c43415d76b0f0d7372be5e18c880f16ef1"
-  integrity sha512-hYUAer5nsS6n7jWx3fRuuwTgHLnGxx+pdAjGPPRQRfqI8ZTyFEi7LE4Ng/9frgemJjC+tUwZGt9NMgpZWm4Rhg==
+"@skyra/discord-components-core@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@skyra/discord-components-core/-/discord-components-core-2.0.1.tgz#501cd03723ed48dc98b3c6401574a3aa41c61e6f"
+  integrity sha512-xr/SnehBvV0WgZLQe+vsuKvESe+TQi+OUJZsae1LiPl+1pKYokCONvlChc8ZqSmulEs3Vl1iugZWCJCcFzPSVw==
   dependencies:
     "@stencil/core" "^2.0.3"
     clsx "^1.1.1"
     hex-to-rgba "^2.0.1"
 
-"@skyra/discord-components-react@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@skyra/discord-components-react/-/discord-components-react-2.0.0.tgz#b44a623bebe3ec676fe5c072c29b47410db9fda4"
-  integrity sha512-XxCrIeOyF7SoEHROrm6r+6misbxhf9/GVRmpyr1sxsSSE5E/cenAVMEGpW8+FxuIcRVL0ChTmz6tYKBCLGYJLw==
+"@skyra/discord-components-react@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@skyra/discord-components-react/-/discord-components-react-2.0.1.tgz#c9d421caa29695d93c8e15731449b5cfc1acad51"
+  integrity sha512-6+bw1e8PXNXnxreT9Wtk5h0m3S9qcbmTmZh/0E/6quc2bnqQZsWiRL2uUardopEr7HYY9opfc2E1jI+b+dWfxw==
 
 "@stencil/core@^2.0.3":
   version "2.0.3"
@@ -1741,10 +1741,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.11.1.tgz#56af902ad157e763f9ba63d671c39cda3193c835"
   integrity sha512-oTQgnd0hblfLsJ6BvJzzSL+Inogp3lq9fGgqRkMB/ziKMgEUaFl801OncOzUmalfzt14N0oPHMK47ipl+wbTIw==
 
-"@types/node@^14.11.2":
-  version "14.11.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.11.2.tgz#2de1ed6670439387da1c9f549a2ade2b0a799256"
-  integrity sha512-jiE3QIxJ8JLNcb1Ps6rDbysDhN4xa8DJJvuC9prr6w+1tIh+QAbYyNF3tyiZNLDBIuBCf4KEcV2UvQm/V60xfA==
+"@types/node@^14.11.5":
+  version "14.11.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.11.5.tgz#fecad41c041cae7f2404ad4b2d0742fdb628b305"
+  integrity sha512-jVFzDV6NTbrLMxm4xDSIW/gKnk8rQLF9wAzLWIOg+5nU6ACrIMndeBdXci0FGtqJbP9tQvm6V39eshc96TO2wQ==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -1776,10 +1776,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-router-dom@^5.1.5":
-  version "5.1.5"
-  resolved "https://registry.yarnpkg.com/@types/react-router-dom/-/react-router-dom-5.1.5.tgz#7c334a2ea785dbad2b2dcdd83d2cf3d9973da090"
-  integrity sha512-ArBM4B1g3BWLGbaGvwBGO75GNFbLDUthrDojV2vHLih/Tq8M+tgvY1DSwkuNrPSwdp/GUL93WSEpTZs8nVyJLw==
+"@types/react-router-dom@^5.1.6":
+  version "5.1.6"
+  resolved "https://registry.yarnpkg.com/@types/react-router-dom/-/react-router-dom-5.1.6.tgz#07b14e7ab1893a837c8565634960dc398564b1fb"
+  integrity sha512-gjrxYqxz37zWEdMVvQtWPFMFj1dRDb4TGOcgyOfSXTrEXdF92L00WE3C471O3TV/RF1oskcStkXsOU0Ete4s/g==
   dependencies:
     "@types/history" "*"
     "@types/react" "*"
@@ -1808,10 +1808,10 @@
     "@types/prop-types" "*"
     csstype "^3.0.2"
 
-"@types/react@^16.9.50":
-  version "16.9.50"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.50.tgz#cb5f2c22d42de33ca1f5efc6a0959feb784a3a2d"
-  integrity sha512-kPx5YsNnKDJejTk1P+lqThwxN2PczrocwsvqXnjvVvKpFescoY62ZiM3TV7dH1T8lFhlHZF+PE5xUyimUwqEGA==
+"@types/react@^16.9.51":
+  version "16.9.51"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.51.tgz#f8aa51ffa9996f1387f63686696d9b59713d2b60"
+  integrity sha512-lQa12IyO+DMlnSZ3+AGHRUiUcpK47aakMMoBG8f7HGxJT8Yfe+WE128HIXaHOHVPReAW0oDS3KAI0JI2DDe1PQ==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
@@ -1845,7 +1845,7 @@
   resolved "https://registry.yarnpkg.com/@types/yup/-/yup-0.29.7.tgz#80c5e427a3b152e583ac2859767ccf59db0d3a16"
   integrity sha512-x3Zeh8/qLZ6fG4S1EztI1S1mLj6N1pSUV1PAj/9finZba48d3Maxtyz4WYNUY0NE76u1KSukfNLkjcRlb+O00g==
 
-"@typescript-eslint/eslint-plugin@^2.10.0", "@typescript-eslint/eslint-plugin@^4.0.1", "@typescript-eslint/eslint-plugin@^4.1.1":
+"@typescript-eslint/eslint-plugin@^2.10.0", "@typescript-eslint/eslint-plugin@^4.1.1", "@typescript-eslint/eslint-plugin@^4.2.0":
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-4.1.1.tgz#78d5b18e259b13c2f4ec41dd9105af269a161a75"
   integrity sha512-Hoxyt99EA9LMmqo/5PuWWPeWeB3mKyvibfJ1Hy5SfiUpjE8Nqp+5QNd9fOkzL66+fqvIWSIE+Ett16LGMzCGnQ==
@@ -1870,7 +1870,7 @@
     eslint-scope "^5.0.0"
     eslint-utils "^2.0.0"
 
-"@typescript-eslint/parser@^2.10.0", "@typescript-eslint/parser@^4.0.1", "@typescript-eslint/parser@^4.1.1":
+"@typescript-eslint/parser@^2.10.0", "@typescript-eslint/parser@^4.1.1", "@typescript-eslint/parser@^4.2.0":
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-4.1.1.tgz#324b4b35e314075adbc92bd8330cf3ef0c88cf3e"
   integrity sha512-NLIhmicpKGfJbdXyQBz9j48PA6hq6e+SDOoXy7Ak6bq1ebGqbgG+fR1UIDAuay6OjQdot69c/URu2uLlsP8GQQ==
@@ -2102,10 +2102,10 @@ acorn-walk@^6.0.1:
   resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-6.2.0.tgz#123cb8f3b84c2171f1f7fb252615b1c78a6b1a8c"
   integrity sha512-7evsyfH1cLOCdAzZAd43Cic04yKydNx0cF+7tiA19p1XnLLPU4dpCQOqpjqwokFe//vS0QqfqqjCS2JkiIs0cA==
 
-acorn@^5.5.3, acorn@^6.0.1, acorn@^6.0.4, acorn@^6.2.1, acorn@^6.4.1, acorn@^7.4.0:
-  version "6.4.1"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.4.1.tgz#531e58ba3f51b9dacb9a6646ca4debf5b14ca474"
-  integrity sha512-ZVA9k326Nwrj3Cj9jlh3wGFutC2ZornPNARZwsNYqQYgN0EsV2d53w5RN/co65Ohn4sUAUtb1rSUAOD6XN9idA==
+acorn@^5.5.3, acorn@^6.0.1, acorn@^6.0.4, acorn@^6.2.1, acorn@^6.4.2, acorn@^7.4.0:
+  version "6.4.2"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.4.2.tgz#35866fd710528e92de10cf06016498e47e39e1e6"
+  integrity sha512-XtGIhXwF8YM8bJhGxG5kXgjkEuNGLTkoYqVE+KMR+aspr4KGYmKYg7yUe3KghyQ9yheNwLnjmzh/7+gfDBmHCQ==
 
 address@1.1.2, address@^1.0.1:
   version "1.1.2"
@@ -4479,6 +4479,13 @@ escodegen@^1.11.0, escodegen@^1.9.1:
   optionalDependencies:
     source-map "~0.6.1"
 
+eslint-config-prettier@^6.12.0:
+  version "6.12.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-6.12.0.tgz#9eb2bccff727db1c52104f0b49e87ea46605a0d2"
+  integrity sha512-9jWPlFlgNwRUYVoujvWTQ1aMO8o6648r+K7qU7K5Jmkbyqav1fuEZC0COYpGBxyiAJb65Ra9hrmFx19xRGwXWw==
+  dependencies:
+    get-stdin "^6.0.0"
+
 eslint-config-react-app@^5.2.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/eslint-config-react-app/-/eslint-config-react-app-5.2.1.tgz#698bf7aeee27f0cea0139eaef261c7bf7dd623df"
@@ -4589,12 +4596,19 @@ eslint-plugin-jsx-a11y@^6.3.1:
     jsx-ast-utils "^2.4.1"
     language-tags "^1.0.5"
 
+eslint-plugin-prettier@^3.1.4:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-3.1.4.tgz#168ab43154e2ea57db992a2cd097c828171f75c2"
+  integrity sha512-jZDa8z76klRqo+TdGDTFJSavwbnWK2ZpqGKNZ+VvweMW516pDUMmQ2koXvxEE4JhzNvTv+radye/bWGBmA6jmg==
+  dependencies:
+    prettier-linter-helpers "^1.0.0"
+
 eslint-plugin-react-hooks@^1.6.1:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-1.7.0.tgz#6210b6d5a37205f0b92858f895a4e827020a7d04"
   integrity sha512-iXTCFcOmlWvw4+TOE8CLWj6yX1GwzT0Y6cUfHHZqWnSk144VmVIRcVGtUAzrLES7C798lmvnt02C7rxaOX1HNA==
 
-eslint-plugin-react-hooks@^4.1.0:
+eslint-plugin-react-hooks@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.1.2.tgz#2eb53731d11c95826ef7a7272303eabb5c9a271e"
   integrity sha512-ykUeqkGyUGgwTtk78C0o8UG2fzwmgJ0qxBGPp2WqRKsTwcLuVf01kTDRAtOsd4u6whX2XOC8749n2vPydP82fg==
@@ -4617,10 +4631,10 @@ eslint-plugin-react@7.19.0:
     string.prototype.matchall "^4.0.2"
     xregexp "^4.3.0"
 
-eslint-plugin-react@^7.20.6:
-  version "7.20.6"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.20.6.tgz#4d7845311a93c463493ccfa0a19c9c5d0fd69f60"
-  integrity sha512-kidMTE5HAEBSLu23CUDvj8dc3LdBU0ri1scwHBZjI41oDv4tjsWZKU7MQccFzH1QYPYhsnTF2ovh7JlcIcmxgg==
+eslint-plugin-react@^7.21.2:
+  version "7.21.3"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.21.3.tgz#71655d2af5155b19285ec929dd2cdc67a4470b52"
+  integrity sha512-OI4GwTCqyIb4ipaOEGLWdaOHCXZZydStAsBEPB2e1ZfNM37bojpgO1BoOQbFb0eLVz3QLDx7b+6kYcrxCuJfhw==
   dependencies:
     array-includes "^3.1.1"
     array.prototype.flatmap "^1.2.3"
@@ -4667,7 +4681,7 @@ eslint-visitor-keys@^2.0.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-2.0.0.tgz#21fdc8fbcd9c795cc0321f0563702095751511a8"
   integrity sha512-QudtT6av5WXels9WjIM7qz1XD1cWGvX4gGXvp/zBn9nXG02D0utdU3Em2m/QjTnrsk6bBjmCygl3rmj118msQQ==
 
-eslint@^6.6.0, eslint@^7.8.1, eslint@^7.9.0:
+eslint@^6.6.0, eslint@^7.9.0:
   version "7.9.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.9.0.tgz#522aeccc5c3a19017cf0cb46ebfd660a79acf337"
   integrity sha512-V6QyhX21+uXp4T+3nrNfI3hQNBDa/P8ga7LoQOenwrlEFXrEnUEE+ok1dMtaS3b6rmLXhT1TkTIsG75HMLbknA==
@@ -4946,6 +4960,11 @@ fast-deep-equal@^3.1.1:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
   integrity sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==
+
+fast-diff@^1.1.2:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.2.0.tgz#73ee11982d86caaf7959828d519cfe927fac5f03"
+  integrity sha512-xJuoT5+L99XlZ8twedaRf6Ax2TgQVxvgZOYoPKqZufmJib0tL2tegPBOZb1pVNgIhlqDlA0eO0c3wBvQcmzx4w==
 
 fast-glob@^2.0.2:
   version "2.2.7"
@@ -5357,6 +5376,11 @@ get-own-enumerable-property-symbols@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/get-own-enumerable-property-symbols/-/get-own-enumerable-property-symbols-3.0.2.tgz#b5fde77f22cbe35f390b4e089922c50bce6ef664"
   integrity sha512-I0UBV/XOz1XkIJHEUDMZAbzCThU/H8DxmSfmdGcKPnVhu2VfFqr34jr9777IyaTYvxjedWhqVIilEDsCdP5G6g==
+
+get-stdin@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/get-stdin/-/get-stdin-6.0.0.tgz#9e09bf712b360ab9225e812048f71fde9c89657b"
+  integrity sha512-jp4tHawyV7+fkkSKyvjuLZswblUtz+SQKzSWnBbii16BuZksJlU1wuBYXY75r+duh/llF1ur6oNwi+2ZzjKZ7g==
 
 get-stream@^4.0.0:
   version "4.1.0"
@@ -9242,6 +9266,13 @@ prepend-http@^1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
   integrity sha1-1PRWKwzjaW5BrFLQ4ALlemNdxtw=
+
+prettier-linter-helpers@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/prettier-linter-helpers/-/prettier-linter-helpers-1.0.0.tgz#d23d41fe1375646de2d0104d3454a3008802cf7b"
+  integrity sha512-GbK2cP9nraSSUF9N2XwUwqfzlAFlMNYYl+ShE/V+H8a9uNl/oUqB1w2EL54Jh0OlyRSd8RfWYJ3coVS4TROP2w==
+  dependencies:
+    fast-diff "^1.1.2"
 
 prettier@^2.1.2:
   version "2.1.2"

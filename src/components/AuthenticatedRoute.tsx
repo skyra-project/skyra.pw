@@ -14,7 +14,7 @@ const AuthenticatedRoute = ({ component, componentProps, ...rest }: Authenticate
 	return (
 		<Route
 			{...rest}
-			render={(props: any) => (authenticated ? createElement(component, { ...componentProps, ...props }) : <Redirect to="/login" />)}
+			render={(props: any) => (authenticated ? createElement(component, { ...componentProps, ...props }) : <Redirect to="/" />)}
 		/>
 	);
 };

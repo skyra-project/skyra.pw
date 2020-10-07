@@ -72,7 +72,7 @@ export default () => {
 				{authenticated && (
 					<Container>
 						<Box display="flex" flexWrap="wrap" flexDirection="row" justifyContent="center" alignItems="center">
-							{(pack.user?.guilds ?? [])
+							{(pack?.user?.guilds ?? [])
 								// Filter on mangeable servers
 								.filter(g => g.manageable)
 								// Sort by whether Skyra is in the serve ror not

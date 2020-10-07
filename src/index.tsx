@@ -92,7 +92,7 @@ interface HotNodeModule extends NodeModule {
 declare module 'reactn/default' {
 	export interface State {
 		authenticated: boolean;
-		pack: DashboardPack;
+		pack?: DashboardPack;
 	}
 }
 

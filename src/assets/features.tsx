@@ -155,7 +155,7 @@ export default [
 	{
 		name: 'Weeb',
 		text: [
-			"Skyra has many anime related commands.",
+			'Skyra has many anime related commands.',
 			"You can make Skyra slap that annoying guy that likes Ram instead of Rem or see the cutest anime cats that you just can't wait to cuddle to death.",
 			"If you're just looking for your next watch or read then Skyra has you covered by letting you look up anime and manga on kitsu.io."
 		].join(' '),

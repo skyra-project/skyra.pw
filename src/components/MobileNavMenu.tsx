@@ -114,7 +114,7 @@ export default () => {
 			>
 				<If condition={authenticated}>
 					<Then>
-						<LazyAvatar src={displayAvatarURL(pack.user, { size: 32 })} imgProps={{ height: 32, width: 32 }} alt="U" />
+						<LazyAvatar src={displayAvatarURL(pack?.user, { size: 32 })} imgProps={{ height: 32, width: 32 }} alt="U" />
 					</Then>
 					<Else>
 						<MenuIcon />
