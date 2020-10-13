@@ -70,4 +70,4 @@ export const DefaultSeo: DefaultSeoProps & KeyedObject = {
 	}
 };
 
-export const createSeoProps = (seoProps: NextSeoProps & KeyedObject) => mergeDefault(DefaultSeo, seoProps);
+export const createSeoProps = (seoProps?: NextSeoProps & KeyedObject) => mergeDefault(DefaultSeo, seoProps);

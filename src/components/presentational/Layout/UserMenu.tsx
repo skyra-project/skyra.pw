@@ -14,11 +14,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SyncIcon from '@material-ui/icons/Sync';
 import LazyAvatar from '@mui/LazyAvatar';
 import Tooltip from '@mui/Tooltip';
-import { getDiscordPack } from '@store/selectors';
 import { displayAvatarURL } from '@utils/skyraUtils';
-import { navigate } from '@utils/util';
+import { FakeDiscordUserPack, navigate } from '@utils/util';
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -55,7 +53,7 @@ const UserMenu: FC = () => {
 	const classes = useStyles();
 	const anchorRef = useRef<HTMLButtonElement>(null);
 
-	const pack = useSelector(getDiscordPack);
+	const pack = FakeDiscordUserPack;
 
 	const handleToggle = () => {
 		setOpen(prevOpen => !prevOpen);

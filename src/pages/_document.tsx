@@ -1,5 +1,6 @@
+import Box from '@material-ui/core/Box';
 import { ServerStyleSheets } from '@material-ui/core/styles';
-import Document, { DocumentContext, Head, Main, NextScript, Html } from 'next/document';
+import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
 
 export default class extends Document {
@@ -51,10 +52,10 @@ export default class extends Document {
 					<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 					<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 				</Head>
-				<body>
+				<Box component="body">
 					<Main />
 					<NextScript />
-				</body>
+				</Box>
 			</Html>
 		);
 	}

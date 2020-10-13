@@ -1,9 +1,7 @@
 import features from '@assets/features';
 import { Box, createStyles, Divider, Hidden, makeStyles, Theme, Typography } from '@material-ui/core';
-import { getAuthenticated } from '@store/selectors';
 import clsx from 'clsx';
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -34,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const HomePageSection = ({ name, previewContent, text }: typeof features extends Array<infer U> ? U : never) => {
 	const classes = useStyles();
-	const authenticated = useSelector(getAuthenticated);
+	const authenticated = false;
 
 	return (
 		<Box

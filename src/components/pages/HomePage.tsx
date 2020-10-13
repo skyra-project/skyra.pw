@@ -4,13 +4,12 @@ import GuildCard from '@presentational/GuildCard';
 import HomePageSection from '@presentational/HomePageSection';
 import GeneralPage from '@presentational/Layout/General';
 import ScrollToTop from '@routing/ScrollToTop';
-import { getAuthenticated, getDiscordPack } from '@store/selectors';
+import { FakeDiscordUserPack } from '@utils/util';
 import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
 
 const HomePage: FC = () => {
-	const pack = useSelector(getDiscordPack);
-	const authenticated = useSelector(getAuthenticated);
+	const authenticated = false;
+	const pack = FakeDiscordUserPack;
 
 	return (
 		<>

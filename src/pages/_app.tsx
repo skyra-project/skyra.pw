@@ -4,7 +4,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { StylesProvider, ThemeProvider } from '@material-ui/core/styles';
 import { CookieConsentProvider } from '@presentational/CookieConsent/ContextProvider';
 import CookieWarning from '@presentational/CookieConsent/WarningSnackbar';
-import { wrapper } from '@store/store';
 import { NextPage } from 'next';
 import { DefaultSeo } from 'next-seo';
 import { AppProps } from 'next/app';
@@ -99,124 +98,124 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 
 			<StylesProvider injectFirst>
 				<ThemeProvider theme={theme}>
-					<CssBaseline />
-					<style jsx global>{`
-						/* Overwrite Chromium browser scrollbar */
-						*::-webkit-scrollbar {
-							width: 0.45em;
-						}
-						*::-webkit-scrollbar:hover {
-							background-color: rgba(0, 0, 0, 0.09);
-						}
-						*::-webkit-scrollbar-track {
-							opacity: 0;
-							transition: all 0.5s;
-							-webkit-transition: all 0.5s;
-						}
-						*::-webkit-scrollbar-thumb {
-							background-color: rgba(113, 137, 218, 0.4);
-							border-radius: 4px;
-						}
-						*::-webkit-scrollbar-thumb:hover {
-							background-color: rgba(105, 130, 216, 0.4);
-							transition: background-color 0.5s ease;
-						}
-						*::-webkit-scrollbar-thumb:vertical {
-							border-radius: 100px;
-							-webkit-border-radius: 100px;
-						}
-						*::-webkit-scrollbar-thumb:vertical:active {
-							border-radius: 100px;
-							-webkit-border-radius: 100px;
-						}
-
-						/* Whitney font face to match Discord */
-						@font-face {
-							/* Whitney-Light */
-							font-family: Whitney;
-							font-style: light;
-							font-weight: 300;
-							src: url('/fonts/Whitney-Light.woff') format('woff');
-						}
-						@font-face {
-							/* Whitney-Normal */
-							font-family: Whitney;
-							font-style: normal;
-							font-weight: 500;
-							src: url('/fonts/Whitney-Normal.woff') format('woff');
-						}
-						@font-face {
-							/* Whitney-Medium-Regular */
-							font-family: Whitney;
-							font-style: medium;
-							font-weight: 600;
-							src: url('/fonts/Whitney-Medium-Regular.woff') format('woff');
-						}
-						@font-face {
-							/* Whitney-Medium-Extra */
-							font-family: WhitneyMedium;
-							font-style: medium;
-							font-weight: 600;
-							src: url('/fonts/Whitney-Medium-Extra.woff') format('woff');
-						}
-						@font-face {
-							/* Whitney-Bold */
-							font-family: Whitney;
-							font-style: bold;
-							font-weight: 700;
-							src: url('/fonts/Whitney-Bold.woff') format('woff');
-						}
-
-						/* Setting default CSS for Discord messages */
-						.discord-message,
-						.discord-messages {
-							font-family: Whitney, Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-						}
-
-						.discord-messages {
-							border-radius: 4px;
-						}
-
-						.chrome-picker > div:nth-child(2) > *,
-						.chrome-picker > div:nth-child(2) input {
-							font-family: Roboto, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
-								sans-serif !important;
-						}
-
-						/* Discord's CSS for rendering inline code */
-						code {
-							padding: 0.2em;
-							margin: -0.2em 0;
-							border-radius: 3px;
-							font-size: 85%;
-							font-family: Consolas, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono,
-								Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Monaco, Courier New, Courier, monospace;
-							text-indent: 0;
-							border: none;
-							white-space: pre-wrap;
-							background-color: #202225;
-						}
-
-						noscript {
-							position: absolute;
-							background-color: #16171d;
-							top: 0;
-							left: 0;
-							height: 100%;
-							width: 100%;
-						}
-
-						noscript span {
-							font-family: 'Roboto';
-							margin: 0;
-							position: absolute;
-							top: 50%;
-							left: 50%;
-							transform: translate(-50%, -50%);
-							color: white;
-						}
-					`}</style>
 					<CookieConsentProvider>
+						<CssBaseline />
+						<style jsx global>{`
+							/* Overwrite Chromium browser scrollbar */
+							*::-webkit-scrollbar {
+								width: 0.45em;
+							}
+							*::-webkit-scrollbar:hover {
+								background-color: rgba(0, 0, 0, 0.09);
+							}
+							*::-webkit-scrollbar-track {
+								opacity: 0;
+								transition: all 0.5s;
+								-webkit-transition: all 0.5s;
+							}
+							*::-webkit-scrollbar-thumb {
+								background-color: rgba(113, 137, 218, 0.4);
+								border-radius: 4px;
+							}
+							*::-webkit-scrollbar-thumb:hover {
+								background-color: rgba(105, 130, 216, 0.4);
+								transition: background-color 0.5s ease;
+							}
+							*::-webkit-scrollbar-thumb:vertical {
+								border-radius: 100px;
+								-webkit-border-radius: 100px;
+							}
+							*::-webkit-scrollbar-thumb:vertical:active {
+								border-radius: 100px;
+								-webkit-border-radius: 100px;
+							}
+
+							/* Whitney font face to match Discord */
+							@font-face {
+								/* Whitney-Light */
+								font-family: Whitney;
+								font-style: light;
+								font-weight: 300;
+								src: url('/fonts/Whitney-Light.woff') format('woff');
+							}
+							@font-face {
+								/* Whitney-Normal */
+								font-family: Whitney;
+								font-style: normal;
+								font-weight: 500;
+								src: url('/fonts/Whitney-Normal.woff') format('woff');
+							}
+							@font-face {
+								/* Whitney-Medium-Regular */
+								font-family: Whitney;
+								font-style: medium;
+								font-weight: 600;
+								src: url('/fonts/Whitney-Medium-Regular.woff') format('woff');
+							}
+							@font-face {
+								/* Whitney-Medium-Extra */
+								font-family: WhitneyMedium;
+								font-style: medium;
+								font-weight: 600;
+								src: url('/fonts/Whitney-Medium-Extra.woff') format('woff');
+							}
+							@font-face {
+								/* Whitney-Bold */
+								font-family: Whitney;
+								font-style: bold;
+								font-weight: 700;
+								src: url('/fonts/Whitney-Bold.woff') format('woff');
+							}
+
+							/* Setting default CSS for Discord messages */
+							.discord-message,
+							.discord-messages {
+								font-family: Whitney, Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+							}
+
+							.discord-messages {
+								border-radius: 4px;
+							}
+
+							.chrome-picker > div:nth-child(2) > *,
+							.chrome-picker > div:nth-child(2) input {
+								font-family: Roboto, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans',
+									'Helvetica Neue', sans-serif !important;
+							}
+
+							/* Discord's CSS for rendering inline code */
+							code {
+								padding: 0.2em;
+								margin: -0.2em 0;
+								border-radius: 3px;
+								font-size: 85%;
+								font-family: Consolas, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono,
+									Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Monaco, Courier New, Courier, monospace;
+								text-indent: 0;
+								border: none;
+								white-space: pre-wrap;
+								background-color: #202225;
+							}
+
+							noscript {
+								position: absolute;
+								background-color: #16171d;
+								top: 0;
+								left: 0;
+								height: 100%;
+								width: 100%;
+							}
+
+							noscript span {
+								font-family: 'Roboto';
+								margin: 0;
+								position: absolute;
+								top: 50%;
+								left: 50%;
+								transform: translate(-50%, -50%);
+								color: white;
+							}
+						`}</style>
 						<CookieWarning />
 						<Component {...pageProps} />
 					</CookieConsentProvider>
@@ -226,7 +225,7 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 	);
 };
 
-export default wrapper.withRedux(App);
+export default App;
 
 declare global {
 	type DiscordMessageAvatars = Record<string, string> &

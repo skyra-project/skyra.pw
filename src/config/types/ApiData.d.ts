@@ -23,8 +23,8 @@ export interface FlattenedGuild {
 	embedEnabled: boolean;
 	premiumTier: number;
 	premiumSubscriptionCount: number | null;
-	verificationLevel: number;
-	explicitContentFilter: number;
+	verificationLevel: string;
+	explicitContentFilter: string;
 	mfaLevel: number;
 	joinedTimestamp: number;
 	defaultMessageNotifications: number | 'ALL' | 'MENTIONS';
@@ -35,6 +35,7 @@ export interface FlattenedGuild {
 	emojis: FlattenedEmoji[];
 	skyraIsIn: boolean;
 	manageable: boolean;
+	permissions?: number;
 }
 
 export interface FlattenedEmoji {
@@ -71,6 +72,12 @@ export interface FlattenedGuildChannel extends FlattenedChannel {
 	name: string;
 	rawPosition: number;
 	parentID: string | null;
+	permissionOverwrites?: [string, { id: string; type: string; deny: number; allow: number }][];
+	topic?: string | null;
+	nsfw?: boolean;
+	rateLimitPerUser?: number;
+	bitrate?: number;
+	userLimit?: number;
 }
 
 export interface FlattenedNewsChannel extends FlattenedGuildChannel {

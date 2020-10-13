@@ -7,7 +7,7 @@ import React from 'react';
 const Index: NextPage = () => {
 	return (
 		<>
-			<NextSeo {...createSeoProps({ title: 'Homepage' })} />
+			<NextSeo {...createSeoProps()} />
 			<HomePage />
 		</>
 	);
