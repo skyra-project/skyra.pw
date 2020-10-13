@@ -1,4 +1,5 @@
 import { createSeoProps } from '@config/next-seo.config';
+import { FlattenedCommand } from '@config/types/ApiData';
 import { Chip, createStyles, makeStyles, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
@@ -14,9 +15,8 @@ import Tooltip from '@mui/Tooltip';
 import GeneralPage from '@presentational/Layout/General';
 import ScrollToTop from '@routing/ScrollToTop';
 import { cutText } from '@sapphire/utilities';
-import { FakeCommands } from '@utils/constants';
-import { parseCommandDescription } from '@utils/util';
-import { NextPage } from 'next';
+import { apiFetch, parseCommandDescription } from '@utils/util';
+import { InferGetServerSidePropsType, NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React, { useState } from 'react';
 import { Else, If, Then } from 'react-if';
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const CommandsPage: NextPage = () => {
+const CommandsPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ commands }) => {
 	const classes = useStyles();
 	const [loading] = useState(false);
 
@@ -77,8 +77,6 @@ const CommandsPage: NextPage = () => {
 		5: 'This command can only be run by moderators and administrators.',
 		6: 'This command can only be run by administrators.'
 	};
-
-	const commands = FakeCommands;
 
 	const categories = [...new Set(commands.map(command => command.category))];
 
@@ -177,6 +175,16 @@ const CommandsPage: NextPage = () => {
 			</GeneralPage>
 		</>
 	);
+};
+
+export const getServerSideProps = async () => {
+	const commands = await apiFetch<FlattenedCommand[]>('/commands');
+
+	return {
+		props: {
+			commands
+		}
+	};
 };
 
 export default CommandsPage;

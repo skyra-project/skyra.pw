@@ -3,7 +3,7 @@ import theme from '@config/theme';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { StylesProvider, ThemeProvider } from '@material-ui/core/styles';
 import { CookieConsentProvider } from '@presentational/CookieConsent/ContextProvider';
-import CookieWarning from '@presentational/CookieConsent/WarningSnackbar';
+// import CookieWarning from '@presentational/CookieConsent/WarningSnackbar';
 import { NextPage } from 'next';
 import { DefaultSeo } from 'next-seo';
 import { AppProps } from 'next/app';
@@ -216,7 +216,8 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 								color: white;
 							}
 						`}</style>
-						<CookieWarning />
+						{/* // TODO: Re-enable cookie warning when figuring out styling issue */}
+						{/* <CookieWarning /> */}
 						<Component {...pageProps} />
 					</CookieConsentProvider>
 				</ThemeProvider>
