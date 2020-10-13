@@ -2,8 +2,7 @@ import { FlattenedCommand } from '@config/types/ApiData';
 
 export const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 export const BASE_WEB_URL = process.env.NEXT_PUBLIC_BASE_WEB_URL;
-// TODO: Remove nullish coalescing when figured out why env vars not being loaded
-export const BASE_API_URL = process.env.NEXT_PUBLIC_BASE_API_URL ?? 'https://api.skyra.pw';
+export const BASE_API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 export const WS_URL = process.env.NEXT_PUBLIC_WS_URL;
 export const BASE_CDN_URL = 'https://cdn.skyra.pw';
 
