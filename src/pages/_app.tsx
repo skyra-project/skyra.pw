@@ -2,6 +2,8 @@ import { DefaultSeo as DefaultSeoProps } from '@config/next-seo.config';
 import theme from '@config/theme';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { StylesProvider, ThemeProvider } from '@material-ui/core/styles';
+import { CookieConsentProvider } from '@presentational/CookieConsent/ContextProvider';
+import CookieWarning from '@presentational/CookieConsent/WarningSnackbar';
 import { wrapper } from '@store/store';
 import { NextPage } from 'next';
 import { DefaultSeo } from 'next-seo';
@@ -214,7 +216,10 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 							color: white;
 						}
 					`}</style>
-					<Component {...pageProps} />
+					<CookieConsentProvider>
+						<CookieWarning />
+						<Component {...pageProps} />
+					</CookieConsentProvider>
 				</ThemeProvider>
 			</StylesProvider>
 		</>
