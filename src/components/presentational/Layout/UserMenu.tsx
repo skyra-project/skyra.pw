@@ -14,10 +14,11 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SyncIcon from '@material-ui/icons/Sync';
 import LazyAvatar from '@mui/LazyAvatar';
 import Tooltip from '@mui/Tooltip';
+import { getDiscordPack } from '@store/selectors';
 import { displayAvatarURL } from '@utils/skyraUtils';
 import { navigate } from '@utils/util';
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { useGlobal } from 'reactn';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -49,11 +50,12 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const UserMenu: FC = () => {
-	const [pack] = useGlobal('pack');
 	const [open, setOpen] = useState(false);
 
 	const classes = useStyles();
 	const anchorRef = useRef<HTMLButtonElement>(null);
+
+	const pack = useSelector(getDiscordPack);
 
 	const handleToggle = () => {
 		setOpen(prevOpen => !prevOpen);

@@ -26,6 +26,7 @@
 			"@pages/*": ["components/pages/*"],
 			"@config/*": ["config/*"],
 			"@components/*": ["components/*"],
+			"@store/*": ["store/*"],
 			"@utils/*": ["utils/*"]
 		},
 		"skipLibCheck": true

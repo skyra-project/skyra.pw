@@ -31,12 +31,13 @@ import Tooltip from '@mui/Tooltip';
 import { CookieConsentContext } from '@presentational/CookieConsent/ContextProvider';
 import Footer from '@presentational/Layout/Footer';
 import UserMenu from '@presentational/Layout/UserMenu';
+import { getAuthenticated } from '@store/selectors';
 import { oauthURL } from '@utils/constants';
 import { navigate } from '@utils/util';
 import { useRouter } from 'next/router';
 import React, { FC, useContext, useEffect, useRef, useState } from 'react';
 import { Else, If, Then, When } from 'react-if';
-import { useGlobal } from 'reactn';
+import { useSelector } from 'react-redux';
 import MobileNavMenu from './MobileNavMenu';
 
 export interface GeneralPageProps {
@@ -119,10 +120,11 @@ const ScrollToTopButton: FC = ({ children }) => {
 const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containerProps, ...props }) => {
 	const classes = useStyles();
 	const anchorRef = useRef<HTMLButtonElement>(null);
-	const [authenticated] = useGlobal('authenticated');
 	const [popperMenuIsOpen, setPopperMenuOpen] = useState(false);
 	const { allowsCookies, dispatch } = useContext(CookieConsentContext);
 	const router = useRouter();
+
+	const authenticated = useSelector(getAuthenticated);
 
 	const togglePopperMenu = () => {
 		setPopperMenuOpen(prevOpen => !prevOpen);

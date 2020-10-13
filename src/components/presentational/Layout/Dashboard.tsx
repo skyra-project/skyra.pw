@@ -248,6 +248,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId }) => {
 			: setOpenSubMenus([...openSubMenus, menuName]);
 	};
 
+	// @ts-ignore TODO
 	const componentProps: SettingsPageProps = {
 		guildSettings: deepMerge(guildSettings ?? {}, guildSettingsChanges ?? {}, mergeOptions),
 		// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
@@ -546,6 +547,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId }) => {
 		</Fragment>
 	);
 
+	// @ts-ignore TODO
 	const readyToRender =
 		guildData !== undefined &&
 		guildSettings !== undefined &&

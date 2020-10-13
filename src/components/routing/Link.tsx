@@ -51,7 +51,7 @@ export default forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
 
 		if (pathname?.startsWith('/')) {
 			return (
-				<NextComposed className={className} ref={ref} href={href} {...other}>
+				<NextComposed className={className} ref={ref} href={href} prefetch {...other}>
 					<If condition={Boolean(text)}>
 						<Then>
 							<Typography component="span" color="primary" variant="body2">

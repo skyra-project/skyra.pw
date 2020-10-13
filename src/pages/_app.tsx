@@ -1,28 +1,13 @@
 import { DefaultSeo as DefaultSeoProps } from '@config/next-seo.config';
 import theme from '@config/theme';
-import { DashboardPack } from '@config/types/ApiData';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { StylesProvider, ThemeProvider } from '@material-ui/styles';
-import { LocalStorageKeys } from '@utils/constants';
-import { loadState } from '@utils/util';
+import { StylesProvider, ThemeProvider } from '@material-ui/core/styles';
+import { wrapper } from '@store/store';
 import { NextPage } from 'next';
 import { DefaultSeo } from 'next-seo';
 import { AppProps } from 'next/app';
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import React, { useEffect } from 'react';
-import { withInit } from 'reactn';
-import addReactNDevTools from 'reactn-devtools';
-
-const NoScript = dynamic(() => import('@next/NoScript'));
-
-const discordPack = loadState<DashboardPack>(LocalStorageKeys.DiscordPack);
-const INITIAL_STATE = {
-	authenticated: Boolean(discordPack) && Boolean(discordPack?.user),
-	pack: discordPack ?? {
-		user: null
-	}
-};
 
 const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 	useEffect(() => {
@@ -58,10 +43,6 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 				}
 			}
 		};
-
-		if (process.env.NODE_ENV === 'development') {
-			addReactNDevTools();
-		}
 
 		if (process.env.NODE_ENV === 'production') {
 			console.log(
@@ -100,7 +81,6 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 				<meta httpEquiv="Pragma" content="1y" />
 				<meta httpEquiv="Cache-Control" content="1y" />
 
-				{/* Internet Explorer Meta Tags */}
 				<meta httpEquiv="Page-Enter" content="RevealTrans(Duration=2.0,Transition=2)" />
 				<meta httpEquiv="Page-Exit" content="RevealTrans(Duration=3.0,Transition=12)" />
 
@@ -113,13 +93,6 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 				<link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color={theme.palette.primary.main} />
 				<link rel="shortcut icon" href="/icons/favicon.ico" />
 				<link rel="apple-touch-startup-image" href="/icons/apple-startup.png" />
-
-				<NoScript>
-					<span>
-						<h1>Uh-oh. Seems like JavaScript isn't enabled</h1>
-						<h4>Make sure that your browser or any antivirus software isn't blocking JavaScript execution</h4>
-					</span>
-				</NoScript>
 			</Head>
 
 			<StylesProvider injectFirst>
@@ -248,7 +221,7 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 	);
 };
 
-export default withInit<typeof INITIAL_STATE, Record<PropertyKey, unknown>, AppProps>(INITIAL_STATE)(App);
+export default wrapper.withRedux(App);
 
 declare global {
 	type DiscordMessageAvatars = Record<string, string> &
@@ -276,12 +249,5 @@ declare global {
 			defaultMode: string;
 			defaultBackground: 'discord' | 'none';
 		}>;
-	}
-}
-
-declare module 'reactn/default' {
-	export interface State {
-		authenticated: boolean;
-		pack?: DashboardPack;
 	}
 }

@@ -18,12 +18,13 @@ import SyncIcon from '@material-ui/icons/Sync';
 import LoginIcon from '@material-ui/icons/VpnKey';
 import LazyAvatar from '@mui/LazyAvatar';
 import { CookieConsentContext } from '@presentational/CookieConsent/ContextProvider';
+import { getAuthenticated, getDiscordPack } from '@store/selectors';
 import { oauthURL } from '@utils/constants';
 import { displayAvatarURL } from '@utils/skyraUtils';
 import { navigate } from '@utils/util';
 import React, { FC, useContext, useEffect, useRef, useState } from 'react';
 import { Else, If, Then } from 'react-if';
-import { useGlobal } from 'reactn';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -65,10 +66,11 @@ const useStyles = makeStyles((theme: Theme) =>
 const MobileNavMenu: FC = () => {
 	const classes = useStyles();
 	const anchorRef = useRef<HTMLButtonElement>(null);
-	const [authenticated] = useGlobal('authenticated');
-	const [pack] = useGlobal('pack');
 	const [popperMenuIsOpen, setPopperMenuOpen] = useState(false);
 	const { allowsCookies, dispatch } = useContext(CookieConsentContext);
+
+	const authenticated = useSelector(getAuthenticated);
+	const pack = useSelector(getDiscordPack);
 
 	const togglePopperMenu = () => {
 		setPopperMenuOpen(prevOpen => !prevOpen);
