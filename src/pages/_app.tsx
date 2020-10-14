@@ -3,12 +3,14 @@ import theme from '@config/theme';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { StylesProvider, ThemeProvider } from '@material-ui/core/styles';
 import { CookieConsentProvider } from '@presentational/CookieConsent/ContextProvider';
-// import CookieWarning from '@presentational/CookieConsent/WarningSnackbar';
 import { NextPage } from 'next';
 import { DefaultSeo } from 'next-seo';
 import { AppProps } from 'next/app';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import React, { useEffect } from 'react';
+
+const CookieWarning = dynamic(() => import('@presentational/CookieConsent/WarningSnackbar'), { ssr: false });
 
 const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 	useEffect(() => {
@@ -216,8 +218,7 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 								color: white;
 							}
 						`}</style>
-						{/* // TODO: Re-enable cookie warning when figuring out styling issue */}
-						{/* <CookieWarning /> */}
+						<CookieWarning />
 						<Component {...pageProps} />
 					</CookieConsentProvider>
 				</ThemeProvider>
