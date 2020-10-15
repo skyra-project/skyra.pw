@@ -11,7 +11,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import DialogTitle from '@mui/DialogTitle';
 import LazyAvatar from '@mui/LazyAvatar';
-import SearchBar from '@mui/SearchBar';
+import DialogSearchBar from '@mui/DialogSearchBar';
 import Tooltip from '@mui/Tooltip';
 import { toTitleCase } from '@sapphire/utilities';
 import { Time } from '@utils/skyraUtils';
@@ -119,7 +119,7 @@ const SelectMany: FC<SelectManyProps> = ({ label, value, onChange, values, name,
 			</If>
 			<Dialog fullWidth maxWidth="xs" onClose={handleClose} open={open}>
 				<DialogTitle onClose={handleClose}>{toTitleCase(label)}</DialogTitle>
-				{values.length > 10 && <SearchBar onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} />}
+				{values.length > 10 && <DialogSearchBar onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} />}
 				<DialogContent dividers classes={{ root: classes.dialogContent }}>
 					<Virtuoso
 						totalCount={filteredValues.length}

@@ -136,12 +136,6 @@ export function bitwiseSet(bits: number, bit: number, toggle: boolean) {
 	return toggle ? bits | bit : bits & ~bit;
 }
 
-/**
- * Parses command descriptions, replacing emojis with their proper counterparts
- * @param description Command description to parse
- */
-export const parseCommandDescription = (description: string) => description.replace(/<:(\w{2,32}):[0-9]{18}>/gi, '$1');
-
 export const updateSliderValueObj = (
 	category: keyof SelfmodSliderSettings,
 	prop: SelfmodSliderProp,

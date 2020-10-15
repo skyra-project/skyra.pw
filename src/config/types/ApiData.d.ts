@@ -127,12 +127,22 @@ export interface FlattenedCommand {
 	category: string;
 	cooldown: number;
 	description: string;
+	extendedHelp: LanguageHelpDisplayOptions;
 	guarded: boolean;
 	guildOnly: boolean;
 	name: string;
 	permissionLevel: number;
 	requiredPermissions: string[];
 	usage: string;
+}
+
+export interface LanguageHelpDisplayOptions {
+	extendedHelp?: string[] | string;
+	explainedUsage?: Array<[string, string]>;
+	possibleFormats?: Array<[string, string]>;
+	examples?: string[];
+	reminder?: string[] | string;
+	multiline?: boolean;
 }
 
 export interface OauthFlattenedUser extends FlattenedUser {

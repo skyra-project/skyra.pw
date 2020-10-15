@@ -22,7 +22,7 @@ const useStyles = makeStyles(() =>
 	})
 );
 
-const SearchBar: FC<InputBaseProps> = ({ onChange }) => {
+const DialogSearchBar: FC<InputBaseProps> = ({ onChange }) => {
 	const classes = useStyles();
 
 	return (
@@ -42,4 +42,4 @@ const SearchBar: FC<InputBaseProps> = ({ onChange }) => {
 	);
 };
 
-export default SearchBar;
+export default DialogSearchBar;
