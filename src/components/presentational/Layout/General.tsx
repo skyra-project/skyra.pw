@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			marginLeft: theme.spacing(2)
 		},
 		popper: {
-			marginTop: theme.spacing(1),
+			marginTop: theme.spacing(-1),
 			zIndex: theme.zIndex.drawer + 1
 		},
 		button: {

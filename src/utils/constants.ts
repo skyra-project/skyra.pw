@@ -40,3 +40,6 @@ export enum LocalStorageKeys {
 	DiscordPack = 'discord_pack',
 	LastSync = 'last_sync'
 }
+
+export const EmojiRegexExtractId = /<?a?:\w{2,32}:(\d{17,21})>?/;
+export const EmojiRegexExtractName = /<?a?:(\w{2,32}):\d{17,21}>?/;

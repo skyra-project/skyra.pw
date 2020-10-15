@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		popper: {
 			marginTop: theme.spacing(1)
 		},
-		transparantButton: {
+		transparentButton: {
 			background: 'transparent',
 			boxShadow: 'none',
 			'&:hover': {
@@ -95,7 +95,7 @@ const UserMenu: FC = () => {
 					color="primary"
 					variant="contained"
 					onClick={handleToggle}
-					classes={{ root: classes.transparantButton }}
+					classes={{ root: classes.transparentButton }}
 				>
 					<LazyAvatar
 						imgProps={{ height: 128, width: 128 }}

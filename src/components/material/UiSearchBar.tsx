@@ -133,7 +133,7 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 			onKeyUp,
 			value = '',
 			PaperProps,
-			...inputProps
+			placeholder
 		},
 		ref
 	) => {
@@ -214,8 +214,7 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 			<Paper className={clsx(classes.root, className)} style={style} {...PaperProps}>
 				<div className={classes.searchContainer}>
 					<Input
-						{...inputProps}
-						placeholder={inputProps.placeholder}
+						placeholder={placeholder}
 						inputRef={inputRef}
 						onBlur={handleBlur}
 						value={innerValue}

@@ -4,13 +4,13 @@ import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
 
-const DisabledCommandsSettings: NextPage = () => {
+const GuildsPage: NextPage = () => {
 	return (
 		<>
-			<NextSeo {...createSeoProps({ title: 'Homepage' })} />
-			<Typography>Disabled Commands page!</Typography>
+			<NextSeo {...createSeoProps({ title: 'Guilds' })} />
+			<Typography>Guilds Page!</Typography>
 		</>
 	);
 };
 
-export default DisabledCommandsSettings;
+export default GuildsPage;
