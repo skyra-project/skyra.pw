@@ -4,13 +4,13 @@
 	"categories": ["discord", "bot", "skyra", "moderation", "automation", "kyra", "favna", "kyranet", "cyborg", "pokemon"],
 	"description": "Skyra is a multipurpose Discord bot designed to handle most tasks, helping users manage their servers easily.",
 	"dir": "auto",
-	"display": "standalone",
+	"display": "minimal-ui",
 	"lang": "en_US",
 	"name": "Skyra Dashboard",
 	"orientation": "portrait-primary",
-	"scope": "https://beta.skyra.pw",
+	"scope": "/",
 	"short_name": "Skyra",
-	"start_url": "https://beta.skyra.pw",
+	"start_url": "/",
 	"theme_color": "#1E88E5",
 	"icons": [
 		{
@@ -64,6 +64,26 @@
 			"sizes": "640x640",
 			"type": "image/png",
 			"purpose": "any maskable"
+		}
+	],
+	"shortcuts": [
+		{
+			"name": "Skyra Dashboard",
+			"short_name": "Homepage",
+			"description": "Go to Skyra's dashboard",
+			"url": "/"
+		},
+		{
+			"name": "Skyra Commands",
+			"short_name": "Commands",
+			"description": "View Skyra's commands",
+			"url": "/commands"
+		},
+		{
+			"name": "Skyra Privacy Policy",
+			"short_name": "Privacy Policy",
+			"description": "Read Skyra's Privacy Policy",
+			"url": "/privacy"
 		}
 	],
 	"splash_pages": {
