@@ -3,7 +3,7 @@ name: Continuous Delivery
 on:
   push:
     branches:
-      - main
+      - refactor/nextjs-rewrite
     paths:
       - 'src/**'
       - '.github/workflows/continuous-delivery.yml'
