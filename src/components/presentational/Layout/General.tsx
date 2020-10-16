@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			right: theme.spacing(2),
 			zIndex: theme.zIndex.drawer + 2
 		},
-		transparantButton: {
+		transparentButton: {
 			background: 'transparent',
 			boxShadow: 'none',
 			'&:hover': {
@@ -186,7 +186,7 @@ const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containe
 								<Button
 									color="primary"
 									variant="contained"
-									classes={{ root: classes.transparantButton }}
+									classes={{ root: classes.transparentButton }}
 									onClick={navigate('https://invite.skyra.pw')}
 									startIcon={<InviteIcon />}
 								>
@@ -199,7 +199,7 @@ const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containe
 								<Button
 									color="primary"
 									variant="contained"
-									classes={{ root: classes.transparantButton }}
+									classes={{ root: classes.transparentButton }}
 									onClick={navigate('https://join.skyra.pw')}
 									startIcon={<DiscordChatIcon />}
 								>
@@ -230,7 +230,7 @@ const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containe
 										<Button
 											color="primary"
 											variant="contained"
-											classes={{ root: classes.transparantButton }}
+											classes={{ root: classes.transparentButton }}
 											onClick={navigate(oauthURL.toString())}
 											startIcon={<LoginIcon />}
 											disabled={!allowsCookies}
