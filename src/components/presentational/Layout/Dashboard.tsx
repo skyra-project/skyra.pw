@@ -176,7 +176,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId }) => {
 	const theme = useTheme();
 	const isOnMobile = useMediaQuery(theme.breakpoints.down('sm'));
-	const classes = useStyles();
+	const classes = useStyles(undefined as any);
 
 	const [guildData, setGuildData] = useState<FlattenedGuild>();
 	const [guildSettings, setGuildSettings] = useState<GuildSettings>();

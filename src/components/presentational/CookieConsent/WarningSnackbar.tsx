@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const CookieAction = memo(() => {
 	const { dispatch } = useContext(CookieConsentContext);
-	const classes = useStyles();
+	const classes = useStyles(undefined as any);
 
 	return (
 		<Grid container alignContent="stretch" justify="space-between" alignItems="center" spacing={2}>
@@ -98,7 +98,7 @@ const CookieAction = memo(() => {
 
 export default memo(() => {
 	const { allowsCookies } = useContext(CookieConsentContext);
-	const classes = useStyles();
+	const classes = useStyles(undefined as any);
 
 	if (allowsCookies !== null) return null;
 
