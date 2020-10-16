@@ -9,6 +9,9 @@ build/
 dist/
 .next/
 .tsbuildinfo
+sitemap.xml
+sw.js
+workbox*.js
 
 # misc
 .DS_Store
