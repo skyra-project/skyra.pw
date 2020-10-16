@@ -1,5 +1,5 @@
 import { createSeoProps } from '@config/next-seo.config';
-import { Typography } from '@material-ui/core';
+import PrivacyPolicy from '@pages/PrivacyPolicy';
 import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
@@ -7,8 +7,8 @@ import React from 'react';
 const PrivacyPage: NextPage = () => {
 	return (
 		<>
-			<NextSeo {...createSeoProps({ title: 'Homepage' })} />
-			<Typography>Privacy Page!</Typography>
+			<NextSeo {...createSeoProps({ title: 'Privacy Policy' })} />
+			<PrivacyPolicy />
 		</>
 	);
 };

@@ -21,7 +21,10 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		header: {
 			paddingTop: theme.spacing(3),
-			paddingBottom: theme.spacing(3)
+			paddingBottom: theme.spacing(3),
+			[theme.breakpoints.down('sm')]: {
+				fontSize: theme.typography.pxToRem(30)
+			}
 		},
 		spacedText: {
 			paddingTop: theme.spacing(1),
@@ -32,6 +35,11 @@ const useStyles = makeStyles((theme: Theme) =>
 			'&:hover': {
 				color: theme.palette.primary.dark
 			}
+		},
+		privacyPolicyHeader: {
+			[theme.breakpoints.down('sm')]: {
+				fontSize: theme.typography.pxToRem(50)
+			}
 		}
 	})
 );
@@ -41,7 +49,6 @@ const Email = () => {
 
 	return (
 		<span>
-			{' '}
 			<a className={clsx(classes.email, classes.link)} href="mailto:contact@skyra.pw">
 				contact@skyra.pw
 			</a>
@@ -63,7 +70,7 @@ const PrivacyPolicy = () => {
 			<ScrollToTop />
 			<GeneralPage>
 				<Container maxWidth="lg">
-					<Typography id="skyra-privacy-policy" variant="h1" align="center">
+					<Typography id="skyra-privacy-policy" variant="h1" align="center" classes={{ root: classes.privacyPolicyHeader }}>
 						SKYRA PRIVACY POLICY
 					</Typography>
 					<LineSpacer />
@@ -75,7 +82,9 @@ const PrivacyPolicy = () => {
 					<Typography component="div">Skyra Project</Typography>
 					<LineSpacer />
 					<Typography component="div">
-						<span className={classes.boldText}>Owner contact email</span>:<Email />
+						<span className={classes.boldText}>Owner contact email</span>
+						{': '}
+						<Email />
 					</Typography>
 					<LineSpacer />
 					<Divider />
