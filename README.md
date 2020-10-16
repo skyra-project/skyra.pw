@@ -64,10 +64,11 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/gc"><img src="https://avatars2.githubusercontent.com/u/30398469?v=4?s=100" width="100px;" alt=""/><br /><sub><b>GC</b></sub></a><br /><a href="https://github.com/skyra-project/skyra.pw/issues?q=author%3Agc" title="Bug reports">🐛</a> <a href="https://github.com/skyra-project/skyra.pw/commits?author=gc" title="Code">💻</a> <a href="#content-gc" title="Content">🖋</a> <a href="#design-gc" title="Design">🎨</a> <a href="#platform-gc" title="Packaging/porting to new platform">📦</a> <a href="https://github.com/skyra-project/skyra.pw/pulls?q=is%3Apr+reviewed-by%3Agc" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/cfanoulis"><img src="https://avatars3.githubusercontent.com/u/38255093?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Charalampos Fanoulis</b></sub></a><br /><a href="#design-cfanoulis" title="Design">🎨</a> <a href="https://github.com/skyra-project/skyra.pw/commits?author=cfanoulis" title="Code">💻</a></td>
     <td align="center"><a href="https://jaczaus.me/"><img src="https://avatars3.githubusercontent.com/u/23615291?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jacz</b></sub></a><br /><a href="https://github.com/skyra-project/skyra.pw/commits?author=MrJacz" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Rexogamer"><img src="https://avatars0.githubusercontent.com/u/42586271?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ed L</b></sub></a><br /><a href="#content-Rexogamer" title="Content">🖋</a></td>
   </tr>
 </table>
 
-<!-- markdownlint-enable -->
+<!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
