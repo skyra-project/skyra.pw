@@ -13,7 +13,7 @@ COPY scripts/ scripts/
 
 RUN yarn build
 
-ENV PORT 8290
-EXPOSE 8290
+ENV PORT 8281
+EXPOSE 8281
 
-CMD [ "yarn", "start", "-p", "8290" ]
+CMD [ "yarn", "start", "-p", "8281" ]
