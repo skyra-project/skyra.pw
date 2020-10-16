@@ -35,37 +35,6 @@ jobs:
             - name: Run ESLint
               uses: icrawl/action-eslint@v1
 
-    Build:
-        name: Compiling NextJS source code
-        runs-on: ubuntu-latest
-        if: "!contains(github.event.head_commit.message, '[skip ci]')"
-        steps:
-            - name: Checkout Project
-              uses: actions/checkout@v2
-            - name: Use Node.js 14
-              uses: actions/setup-node@v1
-              with:
-                  node-version: 14
-            - name: Restore CI Cache
-              uses: actions/cache@v1
-              with:
-                  path: node_modules
-                  key: ${{ runner.os }}-14-${{ hashFiles('**/yarn.lock') }}
-            - name: Install Dependencies
-              run: yarn --frozen-lockfile
-            - name: Restore NextJS Build Cache
-              uses: actions/cache@v1
-              with:
-                  path: ${{ github.workspace }}/src/.next/cache
-                  key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.json') }}
-            - name: Compiling NextJS source code
-              run: yarn build
-            - name: Upload Build Artifact
-              uses: actions/upload-artifact@v2
-              with:
-                  name: next_bundle
-                  path: src/.next
-
     Github-Package-Registry-Docker:
         name: Publish image to Github Package Registry
         runs-on: ubuntu-latest
@@ -74,11 +43,6 @@ jobs:
         steps:
             - name: Checkout Project
               uses: actions/checkout@v2
-            - name: Download Build Artifact
-              uses: actions/download-artifact@v2
-              with:
-                  name: next_bundle
-                  path: src/.next
             - name: Publish to Github Package Registry
               uses: elgohr/Publish-Docker-Github-Action@master
               with:
@@ -96,11 +60,6 @@ jobs:
         steps:
             - name: Checkout Project
               uses: actions/checkout@v2
-            - name: Download Build Artifact
-              uses: actions/download-artifact@v2
-              with:
-                  name: next_bundle
-                  path: src/.next
             - name: Publish to Dockerhub
               uses: elgohr/Publish-Docker-Github-Action@master
               with:

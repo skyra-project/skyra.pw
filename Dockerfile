@@ -4,11 +4,10 @@ WORKDIR /workspace
 
 COPY package.json ./
 COPY yarn.lock ./
-
-RUN yarn install --frozen-lockfile --link-duplicates
-
 COPY src/ src/
 COPY scripts/ scripts/
+
+RUN yarn install --frozen-lockfile --link-duplicates
 
 RUN yarn build
 
