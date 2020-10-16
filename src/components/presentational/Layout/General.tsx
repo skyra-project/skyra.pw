@@ -215,15 +215,17 @@ const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containe
 
 							<When condition={!authenticated && !loading}>
 								<Tooltip
-									title={
-										allowsCookies
-											? 'Click to login and manage your servers'
-											: [
-													'Looks like do not allow use to save cookies',
-													'We use cookies for authentication.',
-													'Please enable cookies and this button will be enabled.'
-											  ].join(' ') // eslint-disable-line no-mixed-spaces-and-tabs
-									}
+									// TOOD: Revert Title
+									// title={
+									// 	allowsCookies
+									// 		? 'Click to login and manage your servers'
+									// 		: [
+									// 				'Looks like do not allow use to save cookies',
+									// 				'We use cookies for authentication.',
+									// 				'Please enable cookies and this button will be enabled.'
+									// 		  ].join(' ') // eslint-disable-line no-mixed-spaces-and-tabs
+									// }
+									title="Login is currently disabled while we re-work the website"
 									placement={allowsCookies ? 'bottom' : 'left'}
 								>
 									<Box component="div">
@@ -233,10 +235,11 @@ const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containe
 											classes={{ root: classes.transparentButton }}
 											onClick={navigate(oauthURL.toString())}
 											startIcon={<LoginIcon />}
-											disabled={!allowsCookies}
+											// TODO: Revert to !allowsCookies
+											disabled={true}
 										>
 											<Typography variant="body2" color="textPrimary">
-												Log In
+												Log In (Disabled in beta)
 											</Typography>
 										</Button>
 									</Box>

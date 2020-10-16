@@ -167,11 +167,12 @@ const MobileNavMenu: FC = () => {
 											</MenuItem>
 										</Then>
 										<Else>
-											<MenuItem disabled={!allowsCookies} onClick={navigate(oauthURL.toString())}>
+											{/* TODO: Revert to `!allowsCookies` */}
+											<MenuItem disabled={true} onClick={navigate(oauthURL.toString())}>
 												<ListItemIcon>
 													<LoginIcon />
 												</ListItemIcon>
-												<Typography variant="inherit">Log In</Typography>
+												<Typography variant="inherit">Log In (Disabled in beta)</Typography>
 											</MenuItem>
 										</Else>
 									</If>
