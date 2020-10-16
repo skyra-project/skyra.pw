@@ -4,7 +4,6 @@ WORKDIR /workspace
 
 COPY package.json ./
 COPY yarn.lock ./
-COPY .yarnrc .
 
 RUN yarn install --frozen-lockfile --link-duplicates
 
