@@ -1,0 +1,50 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+  push:
+    branches:
+      - refactor/nextjs-rewrite
+
+jobs:
+  Linting:
+    name: Linting
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v2
+      - name: Use Node.js 14
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Restore CI Cache
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-14-${{ hashFiles('**/yarn.lock') }}
+      - name: Install Dependencies
+        run: yarn --frozen-lockfile
+      - name: Run ESLint
+        uses: icrawl/action-eslint@v1
+
+  Build:
+    name: Compiling NextJS source code
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v2
+      - name: Use Node.js 14
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Restore CI Cache
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-14-${{ hashFiles('**/yarn.lock') }}
+      - name: Install Dependencies
+        run: yarn --frozen-lockfile
+      - name: Compiling NextJS source code
+        run: yarn build
