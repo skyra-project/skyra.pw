@@ -8,11 +8,11 @@ export const DefaultSeo: DefaultSeoProps & KeyedObject = {
 	titleTemplate: 'Skyra | %s',
 	title: 'Home',
 	description: 'Skyra is a multipurpose Discord bot designed to handle most tasks, helping users manage their servers easily.',
-	canonical: 'https://skyra.pw',
+	canonical: 'https://beta.skyra.pw',
 	additionalMetaTags: [
-		{ name: 'url', content: 'https://skyra.pw' },
-		{ name: 'identifier-URL', content: 'https://skyra.pw' },
-		{ name: 'shortlink', content: 'https://skyra.pw' },
+		{ name: 'url', content: 'https://beta.skyra.pw' },
+		{ name: 'identifier-URL', content: 'https://beta.skyra.pw' },
+		{ name: 'shortlink', content: 'https://beta.skyra.pw' },
 		{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
 		{ name: 'keywords', content: 'discord, bot, skyra, moderation, automation, kyra, favna, kyranet, cyborg, pokemon' },
 		{
@@ -45,10 +45,10 @@ export const DefaultSeo: DefaultSeoProps & KeyedObject = {
 	],
 	openGraph: {
 		title: 'Skyra Dashboard',
-		url: 'https://skyra.pw',
+		url: 'https://beta.skyra.pw',
 		images: [
 			{
-				url: 'https://skyra.pw/icons/opengraph.png',
+				url: 'https://beta.skyra.pw/icons/opengraph.png',
 				alt: 'OpenGraphImage',
 				width: 1024,
 				height: 512
