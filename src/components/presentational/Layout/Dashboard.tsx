@@ -288,7 +288,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId }) => {
 			</Box>
 			{/* --------------------- */}
 
-			<Box component="div" role="presentation" onKeyDown={isOnMobile ? toggleSidebar : noop}>
+			<Box component="div" onKeyDown={isOnMobile ? toggleSidebar : noop}>
 				<List style={{ overflowY: 'auto' }}>
 					<ListItem
 						onClick={closeSidebarOnMobile}

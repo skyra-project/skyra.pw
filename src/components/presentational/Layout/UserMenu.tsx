@@ -106,7 +106,7 @@ const UserMenu: FC = () => {
 					<ExpandMoreIcon />
 				</Button>
 			</Tooltip>
-			<Popper className={classes.popper} open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+			<Popper className={classes.popper} open={open} anchorEl={anchorRef.current} transition disablePortal>
 				{({ TransitionProps, placement }) => (
 					<Grow {...TransitionProps} style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}>
 						<Paper>

@@ -108,7 +108,7 @@ const ScrollToTopButton: FC = ({ children }) => {
 
 	return (
 		<Zoom in={trigger}>
-			<Box onClick={handleClick} role="presentation" className={classes.scrollToTopButton}>
+			<Box onClick={handleClick} className={classes.scrollToTopButton}>
 				{children}
 			</Box>
 		</Zoom>
@@ -262,7 +262,6 @@ const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containe
 								className={classes.popper}
 								open={popperMenuIsOpen}
 								anchorEl={anchorRef.current}
-								role={undefined}
 								transition
 								disablePortal
 							>
@@ -331,7 +330,7 @@ const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containe
 				<Toolbar />
 			</Box>
 
-			<Box component="main" role="content">
+			<Box component="main" role="contentinfo">
 				<If condition={loading}>
 					<Then>
 						<LinearProgress variant="query" />
@@ -342,7 +341,7 @@ const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containe
 
 			<Footer />
 
-			<Box component="span" role="scroll-to-top">
+			<Box component="span">
 				<ScrollToTopButton {...props}>
 					<Fab color="primary" size="small" aria-label="scroll back to top">
 						<KeyboardArrowUpIcon />
