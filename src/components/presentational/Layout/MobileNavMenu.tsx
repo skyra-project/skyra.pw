@@ -13,6 +13,8 @@ import InviteIcon from '@material-ui/icons/Add';
 import LogoutIcon from '@material-ui/icons/Eject';
 import CommandsIcon from '@material-ui/icons/Extension';
 import DiscordChatIcon from '@material-ui/icons/Forum';
+import GavelIcon from '@material-ui/icons/Gavel';
+import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import SyncIcon from '@material-ui/icons/Sync';
 import LoginIcon from '@material-ui/icons/VpnKey';
@@ -21,6 +23,7 @@ import { CookieConsentContext } from '@presentational/CookieConsent/ContextProvi
 import { oauthURL } from '@utils/constants';
 import { displayAvatarURL } from '@utils/skyraUtils';
 import { FakeDiscordUserPack, navigate } from '@utils/util';
+import { useRouter } from 'next/router';
 import React, { FC, useContext, useEffect, useRef, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 
@@ -69,6 +72,8 @@ const MobileNavMenu: FC = () => {
 
 	const authenticated = false;
 	const pack = FakeDiscordUserPack;
+
+	const router = useRouter();
 
 	const togglePopperMenu = () => {
 		setPopperMenuOpen(prevOpen => !prevOpen);
@@ -170,11 +175,25 @@ const MobileNavMenu: FC = () => {
 											</MenuItem>
 										</Else>
 									</If>
+									{router.pathname !== '/' && (
+										<MenuItem onClick={navigate('/')}>
+											<ListItemIcon>
+												<HomeIcon />
+											</ListItemIcon>
+											<Typography variant="inherit">Go back home</Typography>
+										</MenuItem>
+									)}
 									<MenuItem onClick={navigate('/commands')}>
 										<ListItemIcon>
 											<CommandsIcon />
 										</ListItemIcon>
 										<Typography variant="inherit">Commands</Typography>
+									</MenuItem>
+									<MenuItem onClick={navigate('/privacy')}>
+										<ListItemIcon>
+											<GavelIcon />
+										</ListItemIcon>
+										<Typography variant="inherit">Privacy Policy</Typography>
 									</MenuItem>
 									<MenuItem onClick={navigate('https://invite.skyra.pw')}>
 										<ListItemIcon>
