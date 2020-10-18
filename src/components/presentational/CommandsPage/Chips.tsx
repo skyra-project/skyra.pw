@@ -1,9 +1,11 @@
 import { FlattenedCommand } from '@config/types/ApiData';
 import Chip from '@material-ui/core/Chip';
 import { amber, deepOrange } from '@material-ui/core/colors';
+import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 import LockIcon from '@material-ui/icons/Lock';
+import { useMobileContext } from 'contexts/MobileContext';
 import DiscordIcon from 'mdi-react/DiscordIcon';
 import React, { FC, memo, useMemo } from 'react';
 
@@ -32,6 +34,7 @@ interface ChipsProps {
 
 const Chips: FC<ChipsProps> = ({ command }) => {
 	const classes = useStyles();
+	const { isMobile } = useMobileContext();
 
 	const titles = useMemo<Record<number, string>>(
 		() => ({
@@ -42,45 +45,60 @@ const Chips: FC<ChipsProps> = ({ command }) => {
 		[]
 	);
 
+	const mobileTitles = useMemo<Record<number, string>>(
+		() => ({
+			4: 'Only for staff members',
+			5: 'moderators & administrators only',
+			6: 'Only for administrators'
+		}),
+		[]
+	);
+
 	return (
-		<>
+		<Grid container spacing={1} direction="row" alignContent="center" alignItems="center" justify="flex-start">
 			{command.permissionLevel > 0 && (
-				<Chip
-					size="small"
-					label={titles[command.permissionLevel]}
-					icon={<DoubleArrowIcon />}
-					color="secondary"
-					classes={{
-						root: classes.chip,
-						iconSmall: classes.rankIcon
-					}}
-				/>
+				<Grid item xs={12} md={5}>
+					<Chip
+						size="small"
+						label={isMobile ? mobileTitles[command.permissionLevel] : titles[command.permissionLevel]}
+						icon={<DoubleArrowIcon />}
+						color="secondary"
+						classes={{
+							root: classes.chip,
+							iconSmall: classes.rankIcon
+						}}
+					/>
+				</Grid>
 			)}
 			{command.guildOnly && (
-				<Chip
-					size="small"
-					label="This command cannot be used in DMs."
-					icon={<DiscordIcon />}
-					color="secondary"
-					classes={{
-						root: classes.chip,
-						iconSmall: classes.discordIcon
-					}}
-				/>
+				<Grid item xs={12} md={5}>
+					<Chip
+						size="small"
+						label={isMobile ? 'Unusable in DMs.' : 'This command cannot be used in DMs.'}
+						icon={<DiscordIcon />}
+						color="secondary"
+						classes={{
+							root: classes.chip,
+							iconSmall: classes.discordIcon
+						}}
+					/>
+				</Grid>
 			)}
 			{command.guarded && (
-				<Chip
-					size="small"
-					label="This command cannot be disabled."
-					color="secondary"
-					icon={<LockIcon />}
-					classes={{
-						root: classes.chip,
-						iconSmall: classes.guardedIcon
-					}}
-				/>
+				<Grid item xs={12} md={5}>
+					<Chip
+						size="small"
+						label="This command cannot be disabled."
+						color="secondary"
+						icon={<LockIcon />}
+						classes={{
+							root: classes.chip,
+							iconSmall: classes.guardedIcon
+						}}
+					/>
+				</Grid>
 			)}
-		</>
+		</Grid>
 	);
 };
 
