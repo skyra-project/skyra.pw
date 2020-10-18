@@ -2,8 +2,6 @@ import { FlattenedGuild } from '@config/types/ApiData';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import { guildAddURL } from '@utils/constants';
-import { navigate } from '@utils/util';
 import React, { FC } from 'react';
 import GuildIcon from './GuildIcon';
 
@@ -20,9 +18,10 @@ const useStyles = makeStyles((theme: Theme) =>
 			maxHeight: 80,
 			background: theme.palette.secondary.main,
 			margin: theme.spacing(2),
-			'&:hover': {
-				cursor: 'pointer'
-			},
+			// TODO: Re-enable when guild pages are functional
+			// '&:hover': {
+			// 	cursor: 'pointer'
+			// },
 			[theme.breakpoints.down('xs')]: {
 				width: '100%',
 				maxWidth: 'none'
@@ -49,11 +48,13 @@ const GuildCard: FC<GuildCardProps> = ({ guild }) => {
 		<Card
 			classes={{ root: classes.card }}
 			elevation={2}
-			onClick={navigate(guild.skyraIsIn ? `/guilds/${guild.id}` : guildAddURL(guild.id))}
+			// TODO: Re-enable when guild pages are functional
+			// onClick={navigate(guild.skyraIsIn ? `/guilds/${guild.id}` : guildAddURL(guild.id))}
 		>
 			<CardHeader
 				classes={{ root: classes.headerRoot, content: classes.headerContent }}
-				subheader={!guild.skyraIsIn && 'Click to invite Skyra'}
+				// TODO: Re-enable when guild pages are functional
+				// subheader={!guild.skyraIsIn && 'Click to invite Skyra'}
 				avatar={<GuildIcon guild={guild} />}
 				title={guild.name}
 			/>

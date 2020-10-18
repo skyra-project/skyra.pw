@@ -7,7 +7,15 @@ import React from 'react';
 const OauthGuild: NextPage = () => {
 	return (
 		<>
-			<NextSeo {...createSeoProps({ title: 'Homepage' })} />
+			<NextSeo
+				{...createSeoProps({
+					title: 'OAUTH Callback',
+					additionalMetaTags: [
+						{ name: 'robots', content: 'noindex, nofollow' },
+						{ name: 'googlebot', content: 'noindex, nofollow' }
+					]
+				})}
+			/>
 			<Typography>Oauth guild page!</Typography>
 		</>
 	);

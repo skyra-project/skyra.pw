@@ -1,4 +1,6 @@
 import CookieIcon from '@assets/CookieIcon';
+import { useAuthenticated } from '@contexts/AuthenticationContext';
+import { useDiscordPack } from '@contexts/DiscordPackContext';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -22,7 +24,7 @@ import LazyAvatar from '@mui/LazyAvatar';
 import { CookieConsentContext } from '@presentational/CookieConsent/ContextProvider';
 import { oauthURL } from '@utils/constants';
 import { displayAvatarURL } from '@utils/skyraUtils';
-import { FakeDiscordUserPack, navigate } from '@utils/util';
+import { navigate } from '@utils/util';
 import { useRouter } from 'next/router';
 import React, { FC, useContext, useEffect, useRef, useState } from 'react';
 import { Else, If, Then } from 'react-if';
@@ -40,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			borderBottomLeftRadius: 0,
 			borderTopLeftRadius: 0
 		},
-		transparantButton: {
+		transparentButton: {
 			background: 'transparent',
 			boxShadow: 'none',
 			'&:hover': {
@@ -70,8 +72,8 @@ const MobileNavMenu: FC = () => {
 	const [popperMenuIsOpen, setPopperMenuOpen] = useState(false);
 	const { allowsCookies, dispatch } = useContext(CookieConsentContext);
 
-	const authenticated = false;
-	const pack = FakeDiscordUserPack;
+	const authenticated = useAuthenticated();
+	const pack = useDiscordPack();
 
 	const router = useRouter();
 
@@ -160,12 +162,11 @@ const MobileNavMenu: FC = () => {
 											</MenuItem>
 										</Then>
 										<Else>
-											{/* TODO: Revert to `!allowsCookies` */}
-											<MenuItem disabled={true} onClick={navigate(oauthURL.toString())}>
+											<MenuItem disabled={!allowsCookies} onClick={navigate(oauthURL.toString())}>
 												<ListItemIcon>
 													<LoginIcon />
 												</ListItemIcon>
-												<Typography variant="inherit">Log In (Disabled in beta)</Typography>
+												<Typography variant="inherit">Log In</Typography>
 											</MenuItem>
 										</Else>
 									</If>

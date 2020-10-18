@@ -1,64 +1,36 @@
 {
-  "extends": "@favware/ts-config",
-  "compileOnSave": false,
-  "compilerOptions": {
-    "allowJs": true,
-    "checkJs": true,
-    "module": "ESNext",
-    "declaration": false,
-    "declarationMap": false,
-    "isolatedModules": true,
-    "resolveJsonModule": true,
-    "jsx": "preserve",
-    "noEmit": true,
-    "tsBuildInfoFile": "./.tsbuildinfo",
-    "baseUrl": ".",
-    "rootDir": ".",
-    "paths": {
-      "@mui/*": [
-        "components/material/*"
-      ],
-      "@mods/*": [
-        "components/mods/*"
-      ],
-      "@next/*": [
-        "components/next/*"
-      ],
-      "@selects/*": [
-        "components/selects/*"
-      ],
-      "@assets/*": [
-        "components/assets/*"
-      ],
-      "@layout/*": [
-        "components/presentational/Layout/*"
-      ],
-      "@presentational/*": [
-        "components/presentational/*"
-      ],
-      "@routing/*": [
-        "components/routing/*"
-      ],
-      "@pages/*": [
-        "components/pages/*"
-      ],
-      "@config/*": [
-        "config/*"
-      ],
-      "@components/*": [
-        "components/*"
-      ],
-      "@utils/*": [
-        "utils/*"
-      ]
-    },
-    "skipLibCheck": true
-  },
-  "include": [
-    "."
-  ],
-  "exclude": [
-    "public/sw.js",
-    "public/workbox*.js"
-  ]
+	"extends": "@favware/ts-config",
+	"compileOnSave": false,
+	"compilerOptions": {
+		"allowJs": true,
+		"checkJs": true,
+		"module": "ESNext",
+		"declaration": false,
+		"declarationMap": false,
+		"isolatedModules": true,
+		"resolveJsonModule": true,
+		"jsx": "preserve",
+		"noEmit": true,
+		"tsBuildInfoFile": "./.tsbuildinfo",
+		"baseUrl": ".",
+		"rootDir": ".",
+		"paths": {
+			"@config/*": ["config/*"],
+			"@contexts/*": ["contexts/*"],
+			"@assets/*": ["components/assets/*"],
+			"@layout/*": ["components/presentational/Layout/*"],
+			"@mods/*": ["components/mods/*"],
+			"@mui/*": ["components/material/*"],
+			"@next/*": ["components/next/*"],
+			"@pages/*": ["components/pages/*"],
+			"@presentational/*": ["components/presentational/*"],
+			"@routing/*": ["components/routing/*"],
+			"@selects/*": ["components/selects/*"],
+			"@components/*": ["components/*"],
+			"@utils/*": ["utils/*"]
+		},
+		"skipLibCheck": true
+	},
+	"include": ["."],
+	"exclude": ["public/sw.js", "public/workbox*.js"]
 }

@@ -1,5 +1,6 @@
 import CookieIcon from '@assets/CookieIcon';
 import SkyraLogo from '@assets/skyraLogo';
+import { useAuthenticated } from '@contexts/AuthenticationContext';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Box, { BoxProps } from '@material-ui/core/Box';
@@ -17,8 +18,6 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Zoom from '@material-ui/core/Zoom';
 import InviteIcon from '@material-ui/icons/Add';
 import CommandsIcon from '@material-ui/icons/Extension';
 import DiscordChatIcon from '@material-ui/icons/Forum';
@@ -33,10 +32,12 @@ import Footer from '@presentational/Layout/Footer';
 import UserMenu from '@presentational/Layout/UserMenu';
 import { oauthURL } from '@utils/constants';
 import { navigate } from '@utils/util';
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import React, { FC, useContext, useEffect, useRef, useState } from 'react';
 import { Else, If, Then, When } from 'react-if';
 import MobileNavMenu from './MobileNavMenu';
+import ScrollToTopButton from './ScrollToTopButton';
 
 export interface GeneralPageProps {
 	loading?: boolean;
@@ -62,12 +63,6 @@ const useStyles = makeStyles((theme: Theme) =>
 			textAlign: 'left',
 			textTransform: 'unset'
 		},
-		scrollToTopButton: {
-			position: 'fixed',
-			bottom: theme.spacing(2),
-			right: theme.spacing(2),
-			zIndex: theme.zIndex.drawer + 2
-		},
 		transparentButton: {
 			background: 'transparent',
 			boxShadow: 'none',
@@ -87,33 +82,19 @@ const useStyles = makeStyles((theme: Theme) =>
 		button: {
 			borderBottomLeftRadius: 0,
 			borderTopLeftRadius: 0
+		},
+		loadingBox: {
+			display: 'flex',
+			alignContent: 'center',
+			alignItems: 'center',
+			justifyContent: 'center',
+			height: 'calc(100vh - 128px - 200px)'
+		},
+		loadingIndicator: {
+			width: '100vw'
 		}
 	})
 );
-
-const ScrollToTopButton: FC = ({ children }) => {
-	const classes = useStyles();
-	const trigger = useScrollTrigger({
-		disableHysteresis: true,
-		threshold: 100
-	});
-
-	const handleClick = () => {
-		window.scrollTo({
-			top: 0,
-			left: 0,
-			behavior: 'smooth'
-		});
-	};
-
-	return (
-		<Zoom in={trigger}>
-			<Box onClick={handleClick} className={classes.scrollToTopButton}>
-				{children}
-			</Box>
-		</Zoom>
-	);
-};
 
 const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containerProps, ...props }) => {
 	const classes = useStyles();
@@ -122,7 +103,7 @@ const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containe
 	const { allowsCookies, dispatch } = useContext(CookieConsentContext);
 	const router = useRouter();
 
-	const authenticated = false;
+	const authenticated = useAuthenticated();
 
 	const togglePopperMenu = () => {
 		setPopperMenuOpen(prevOpen => !prevOpen);
@@ -215,17 +196,15 @@ const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containe
 
 							<When condition={!authenticated && !loading}>
 								<Tooltip
-									// TOOD: Revert Title
-									// title={
-									// 	allowsCookies
-									// 		? 'Click to login and manage your servers'
-									// 		: [
-									// 				'Looks like do not allow use to save cookies',
-									// 				'We use cookies for authentication.',
-									// 				'Please enable cookies and this button will be enabled.'
-									// 		  ].join(' ') // eslint-disable-line no-mixed-spaces-and-tabs
-									// }
-									title="Login is currently disabled while we re-work the website"
+									title={
+										allowsCookies
+											? 'Click to login and manage your servers'
+											: [
+													'Looks like do not allow use to save cookies',
+													'We use cookies for authentication.',
+													'Please enable cookies and this button will be enabled.'
+											  ].join(' ') // eslint-disable-line no-mixed-spaces-and-tabs
+									}
 									placement={allowsCookies ? 'bottom' : 'left'}
 								>
 									<Box component="div">
@@ -235,11 +214,10 @@ const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containe
 											classes={{ root: classes.transparentButton }}
 											onClick={navigate(oauthURL.toString())}
 											startIcon={<LoginIcon />}
-											// TODO: Revert to !allowsCookies
-											disabled={true}
+											disabled={!allowsCookies}
 										>
 											<Typography variant="body2" color="textPrimary">
-												Log In (Disabled in beta)
+												Log In
 											</Typography>
 										</Button>
 									</Box>
@@ -330,10 +308,10 @@ const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containe
 				<Toolbar />
 			</Box>
 
-			<Box component="main" role="contentinfo">
+			<Box component="main" role="contentinfo" className={clsx({ [classes.loadingBox]: loading })}>
 				<If condition={loading}>
 					<Then>
-						<LinearProgress variant="query" />
+						<LinearProgress variant="query" classes={{ root: classes.loadingIndicator }} />
 					</Then>
 					<Else>{children}</Else>
 				</If>

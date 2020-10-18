@@ -8,7 +8,9 @@ export const MobileContextDefaults: MobileContextState = {
 	isMobile: false
 };
 
-export const MobileContext = createContext(MobileContextDefaults);
+const MobileContext = createContext(MobileContextDefaults);
+MobileContext.displayName = 'MobileContext';
+
 export const MobileContextProvider = MobileContext.Provider;
 
 export const useMobileContext = () => {

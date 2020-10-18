@@ -1,15 +1,16 @@
 import features from '@assets/features';
+import { useAuthenticated } from '@contexts/AuthenticationContext';
+import { useDiscordPack } from '@contexts/DiscordPackContext';
 import { Box, Container } from '@material-ui/core';
 import GuildCard from '@presentational/GuildCard';
 import HomePageSection from '@presentational/HomePageSection';
 import GeneralPage from '@presentational/Layout/General';
 import ScrollToTop from '@routing/ScrollToTop';
-import { FakeDiscordUserPack } from '@utils/util';
 import React, { FC } from 'react';
 
 const HomePage: FC = () => {
-	const authenticated = false;
-	const pack = FakeDiscordUserPack;
+	const authenticated = useAuthenticated();
+	const pack = useDiscordPack();
 
 	return (
 		<>

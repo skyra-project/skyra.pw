@@ -1,3 +1,4 @@
+import { useDiscordPack } from '@contexts/DiscordPackContext';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -15,7 +16,7 @@ import SyncIcon from '@material-ui/icons/Sync';
 import LazyAvatar from '@mui/LazyAvatar';
 import Tooltip from '@mui/Tooltip';
 import { displayAvatarURL } from '@utils/skyraUtils';
-import { FakeDiscordUserPack, navigate } from '@utils/util';
+import { navigate } from '@utils/util';
 import React, { FC, useEffect, useRef, useState } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -53,7 +54,7 @@ const UserMenu: FC = () => {
 	const classes = useStyles();
 	const anchorRef = useRef<HTMLButtonElement>(null);
 
-	const pack = FakeDiscordUserPack;
+	const pack = useDiscordPack();
 
 	const handleToggle = () => {
 		setOpen(prevOpen => !prevOpen);
