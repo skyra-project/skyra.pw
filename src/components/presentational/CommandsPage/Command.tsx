@@ -68,7 +68,7 @@ const Command: FC<CommandProps> = ({ command }) => {
 
 	return (
 		<Grid item className={classes.commandContainer}>
-			<Accordion defaultExpanded TransitionProps={{ unmountOnExit: true }} elevation={4} classes={{ root: classes.commandAccordion }}>
+			<Accordion TransitionProps={{ unmountOnExit: true }} elevation={4} classes={{ root: classes.commandAccordion }}>
 				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 					<Grid container direction="row" alignItems="center" justify="flex-start" alignContent="flex-start">
 						<Grid item xs={12} md={3}>
