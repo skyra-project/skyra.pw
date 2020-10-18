@@ -83,6 +83,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			borderBottomLeftRadius: 0,
 			borderTopLeftRadius: 0
 		},
+		contentBox: {
+			paddingTop: theme.spacing(16)
+		},
 		loadingBox: {
 			display: 'flex',
 			alignContent: 'center',
@@ -301,14 +304,9 @@ const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containe
 						</Hidden>
 					</Toolbar>
 				</AppBar>
-
-				{/* These toolbars are to ensure there is some offset for the content.
-			For more information see https://material-ui.com/components/app-bar/#fixed-placement */}
-				<Toolbar />
-				<Toolbar />
 			</Box>
 
-			<Box component="main" role="contentinfo" className={clsx({ [classes.loadingBox]: loading })}>
+			<Box component="main" role="contentinfo" className={clsx(classes.contentBox, { [classes.loadingBox]: loading })}>
 				<If condition={loading}>
 					<Then>
 						<LinearProgress variant="query" classes={{ root: classes.loadingIndicator }} />
