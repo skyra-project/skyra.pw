@@ -39,25 +39,29 @@
 		"react-dom": "17.0.0-rc.3",
 		"react-emoji-render": "^1.2.4",
 		"react-if": "^3.4.3",
-		"react-markdown": "^4.3.1",
+		"react-markdown": "^5.0.0",
 		"react-player": "^2.6.2",
 		"react-virtuoso": "^0.20.0",
+		"remark-gfm": "^1.0.0",
 		"yup": "^0.29.3"
 	},
 	"devDependencies": {
+		"@commitlint/cli": "^11.0.0",
+		"@commitlint/config-conventional": "^11.0.0",
 		"@favware/eslint-config-react-app": "^1.1.4",
 		"@favware/ts-config": "^3.0.4",
 		"@types/body-scroll-lock": "^2.6.1",
 		"@types/lodash": "^4.14.162",
-		"@types/node": "^14.11.10",
+		"@types/node": "^14.14.0",
 		"@types/react": "^16.9.53",
 		"@types/react-color": "^3.0.4",
 		"@types/react-dom": "^16.9.8",
 		"@types/yup": "^0.29.8",
+		"cz-conventional-changelog": "^3.3.0",
 		"eslint-config-prettier": "^6.13.0",
 		"eslint-plugin-prettier": "^3.1.4",
 		"husky": "^4.3.0",
-		"lint-staged": "^10.4.1",
+		"lint-staged": "^10.4.2",
 		"nextjs-sitemap-generator": "^1.1.0",
 		"prettier": "^2.1.2",
 		"rimraf": "3.0.2",
@@ -66,11 +70,22 @@
 	},
 	"husky": {
 		"hooks": {
+			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
 			"pre-commit": "yarn lint-staged"
 		}
 	},
 	"lint-staged": {
 		"*.{mjs,js,jsx,ts,tsx}": "eslint --fix --ext mjs,js,jsx,ts,tsx"
+	},
+	"commitlint": {
+		"extends": [
+			"@commitlint/config-conventional"
+		]
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
 	},
 	"repository": {
 		"type": "git",
