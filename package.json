@@ -39,7 +39,7 @@
 		"react-dom": "17.0.0-rc.3",
 		"react-emoji-render": "^1.2.4",
 		"react-if": "^3.4.3",
-		"react-markdown": "^4.3.1",
+		"react-markdown": "^5.0.0",
 		"react-player": "^2.6.2",
 		"react-virtuoso": "^0.20.0",
 		"yup": "^0.29.3"
