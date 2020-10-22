@@ -6,7 +6,7 @@ import Hidden from '@material-ui/core/Hidden';
 import Typography from '@material-ui/core/Typography';
 import Link from '@routing/Link';
 import { CLIENT_ID, inviteURL } from '@utils/constants';
-import React from 'react';
+import React, { memo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -89,4 +89,4 @@ const Footer = () => {
 	);
 };
 
-export default Footer;
+export default memo(Footer);

@@ -1,8 +1,9 @@
-import { FlattenedGuild } from '@config/types/ApiData';
+import { DashboardPack, FlattenedGuild, OauthFlattenedUser } from '@config/types/ApiData';
 import { SelfmodSliderProp, SelfmodSliderSettings } from '@config/types/GuildSettings';
 import Router from 'next/router';
 import { BASE_API_URL, LocalStorageKeys } from './constants';
 import isBrowser from './isBrowser';
+import { Time } from './skyraUtils';
 
 export function sleep(ms: number) {
 	return new Promise(resolve => setTimeout(resolve, ms));
@@ -59,34 +60,52 @@ export async function apiFetch<T>(path: string, options: RequestInit = {}) {
 	}
 }
 
-// export async function syncUser() {
-// 	// If they're not logged in, don't try to sync.
-// 	if (!getGlobal().authenticated) return;
+type SetPackCallback = (newPack: Partial<DashboardPack>) => void;
+type SetAuthenticatedCallback = (newAuthenticated: boolean) => void;
+type ChangeRouteCallback = (newRoute: string) => void;
 
-// 	// Check if they've synced in the past 5 minutes.
-// 	const lastSync = loadState(LocalStorageKeys.LastSync) as number;
-// 	const difference = Date.now() - lastSync;
-// 	if (difference < Time.Minute * 5) {
-// 		return;
-// 	}
+export async function logOut(setPack: SetPackCallback, setAuthenticated: SetAuthenticatedCallback, changeRoute: ChangeRouteCallback) {
+	await apiFetch<{ user: OauthFlattenedUser }>('/oauth/logout', { method: 'POST' });
+	clearState(LocalStorageKeys.DiscordPack);
+	clearState(LocalStorageKeys.LastSync);
+	setPack({ user: null });
+	setAuthenticated(false);
+	changeRoute('/');
+}
 
-// 	saveState(LocalStorageKeys.LastSync, Date.now());
+export async function syncUser(
+	authenticated: boolean,
+	setPack: SetPackCallback,
+	setAuthenticated: SetAuthenticatedCallback,
+	changeRoute: ChangeRouteCallback
+) {
+	// If they're not logged in, don't try to sync.
+	if (!authenticated) return;
 
-// 	const response = await apiFetch<{ user: OauthFlattenedUser }>('/oauth/user', {
-// 		method: 'POST',
-// 		body: JSON.stringify({
-// 			action: 'SYNC_USER'
-// 		})
-// 	}).catch(err => {
-// 		if (err.status === 401 || err.status === 403) logOut();
-// 	});
+	// Check if they've synced in the past 5 minutes.
+	const lastSync = loadState(LocalStorageKeys.LastSync) as number;
+	const difference = Date.now() - lastSync;
+	if (difference < Time.Minute * 5) {
+		return;
+	}
 
-// 	if (!response) return;
+	saveState(LocalStorageKeys.LastSync, Date.now());
 
-// 	if (response.user) {
-// 		setGlobal({ pack: response });
-// 	}
-// }
+	const response = await apiFetch<DashboardPack>('/oauth/user', {
+		method: 'POST',
+		body: JSON.stringify({
+			action: 'SYNC_USER'
+		})
+	}).catch(err => {
+		if (err.status === 401 || err.status === 403) logOut(setPack, setAuthenticated, changeRoute);
+	});
+
+	if (!response) return;
+
+	if (response.user) {
+		setPack(response);
+	}
+}
 
 export function navigate(path: string) {
 	if (path.startsWith('http') || path.startsWith('//') || path.startsWith('mailto:')) {

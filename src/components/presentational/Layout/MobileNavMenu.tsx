@@ -1,6 +1,6 @@
 import CookieIcon from '@assets/CookieIcon';
-import { useAuthenticated } from '@contexts/AuthenticationContext';
-import { useDiscordPack } from '@contexts/DiscordPackContext';
+import { setAuthenticated, useAuthenticated } from '@contexts/AuthenticationContext';
+import { mergeDiscordPack, useDiscordPack } from '@contexts/DiscordPackContext';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -24,7 +24,7 @@ import LazyAvatar from '@mui/LazyAvatar';
 import { CookieConsentContext } from '@presentational/CookieConsent/ContextProvider';
 import { oauthURL } from '@utils/constants';
 import { displayAvatarURL } from '@utils/skyraUtils';
-import { navigate } from '@utils/util';
+import { navigate, syncUser } from '@utils/util';
 import { useRouter } from 'next/router';
 import React, { FC, useContext, useEffect, useRef, useState } from 'react';
 import { Else, If, Then } from 'react-if';
@@ -74,6 +74,8 @@ const MobileNavMenu: FC = () => {
 
 	const authenticated = useAuthenticated();
 	const pack = useDiscordPack();
+	const writeAuthenticated = setAuthenticated();
+	const setPack = mergeDiscordPack();
 
 	const router = useRouter();
 
@@ -151,8 +153,7 @@ const MobileNavMenu: FC = () => {
 											<MenuItem
 												onClick={(...args: Parameters<typeof closePopperMenu>) => {
 													closePopperMenu(...args);
-													// TODO: Sync User
-													// syncUser();
+													syncUser(authenticated, setPack, writeAuthenticated, router.replace);
 												}}
 											>
 												<ListItemIcon>

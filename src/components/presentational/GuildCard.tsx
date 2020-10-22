@@ -1,7 +1,9 @@
-import { FlattenedGuild } from '@config/types/ApiData';
+import { DashboardPack, FlattenedGuild } from '@config/types/ApiData';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
+import { guildAddURL } from '@utils/constants';
+import { navigate } from '@utils/util';
 import React, { FC } from 'react';
 import GuildIcon from './GuildIcon';
 
@@ -18,10 +20,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			maxHeight: 80,
 			background: theme.palette.secondary.main,
 			margin: theme.spacing(2),
-			// TODO: Re-enable when guild pages are functional
-			// '&:hover': {
-			// 	cursor: 'pointer'
-			// },
+			'&:hover': {
+				cursor: 'pointer'
+			},
 			[theme.breakpoints.down('xs')]: {
 				width: '100%',
 				maxWidth: 'none'
@@ -48,18 +49,26 @@ const GuildCard: FC<GuildCardProps> = ({ guild }) => {
 		<Card
 			classes={{ root: classes.card }}
 			elevation={2}
-			// TODO: Re-enable when guild pages are functional
-			// onClick={navigate(guild.skyraIsIn ? `/guilds/${guild.id}` : guildAddURL(guild.id))}
+			onClick={navigate(guild.skyraIsIn ? `/guilds/${guild.id}` : guildAddURL(guild.id))}
 		>
 			<CardHeader
 				classes={{ root: classes.headerRoot, content: classes.headerContent }}
-				// TODO: Re-enable when guild pages are functional
-				// subheader={!guild.skyraIsIn && 'Click to invite Skyra'}
+				subheader={!guild.skyraIsIn && 'Click to invite Skyra'}
 				avatar={<GuildIcon guild={guild} />}
 				title={guild.name}
 			/>
 		</Card>
 	);
 };
+
+export const renderFilteredGuildCards = (pack?: DashboardPack) =>
+	(pack?.user?.guilds ?? [])
+		// Filter on mangeable servers
+		.filter(g => g.manageable)
+		// Sort by whether Skyra is in the serve ror not
+		.sort((gA, gB) => (gA.skyraIsIn === gB.skyraIsIn ? 0 : gA.skyraIsIn ? -1 : 1))
+		// Sort by name of the server
+		.sort((gA, gB) => gA.name.localeCompare(gB.name, 'en', { sensitivity: 'base' }))
+		.map((g, index) => React.cloneElement(<GuildCard guild={g} key={index} />));
 
 export default GuildCard;

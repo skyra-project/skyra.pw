@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			alignContent: 'center',
 			alignItems: 'center',
 			justifyContent: 'center',
-			height: 'calc(100vh - 128px - 200px)'
+			height: 'calc(100vh - 200px)'
 		},
 		smallerHeader1: {
 			fontSize: theme.typography.pxToRem(theme.spacing(8))

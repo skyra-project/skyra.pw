@@ -1,4 +1,5 @@
-import { useDiscordPack } from '@contexts/DiscordPackContext';
+import { setAuthenticated, useAuthenticated } from '@contexts/AuthenticationContext';
+import { mergeDiscordPack, useDiscordPack } from '@contexts/DiscordPackContext';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -16,7 +17,8 @@ import SyncIcon from '@material-ui/icons/Sync';
 import LazyAvatar from '@mui/LazyAvatar';
 import Tooltip from '@mui/Tooltip';
 import { displayAvatarURL } from '@utils/skyraUtils';
-import { navigate } from '@utils/util';
+import { navigate, syncUser } from '@utils/util';
+import { useRouter } from 'next/router';
 import React, { FC, useEffect, useRef, useState } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -54,7 +56,12 @@ const UserMenu: FC = () => {
 	const classes = useStyles();
 	const anchorRef = useRef<HTMLButtonElement>(null);
 
+	const authenticated = useAuthenticated();
 	const pack = useDiscordPack();
+	const writeAuthenticated = setAuthenticated();
+	const setPack = mergeDiscordPack();
+
+	const router = useRouter();
 
 	const handleToggle = () => {
 		setOpen(prevOpen => !prevOpen);
@@ -128,8 +135,7 @@ const UserMenu: FC = () => {
 									<MenuItem
 										onClick={(...args: Parameters<typeof handleClose>) => {
 											handleClose(...args);
-											// TODO: Sync User
-											// syncUser();
+											syncUser(authenticated, setPack, writeAuthenticated, router.replace);
 										}}
 									>
 										<ListItemIcon>
