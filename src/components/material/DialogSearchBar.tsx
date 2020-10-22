@@ -2,7 +2,7 @@ import Box from '@material-ui/core/Box';
 import InputBase, { InputBaseProps } from '@material-ui/core/InputBase';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 const useStyles = makeStyles(() =>
 	createStyles({
@@ -42,4 +42,4 @@ const DialogSearchBar: FC<InputBaseProps> = ({ onChange }) => {
 	);
 };
 
-export default DialogSearchBar;
+export default memo(DialogSearchBar);

@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import { guildAddURL } from '@utils/constants';
 import { navigate } from '@utils/util';
-import React, { FC } from 'react';
+import React, { memo } from 'react';
 import GuildIcon from './GuildIcon';
 
 interface GuildCardProps {
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const GuildCard: FC<GuildCardProps> = ({ guild }) => {
+const GuildCard = memo<GuildCardProps>(({ guild }) => {
 	const classes = useStyles();
 
 	return (
@@ -59,16 +59,14 @@ const GuildCard: FC<GuildCardProps> = ({ guild }) => {
 			/>
 		</Card>
 	);
-};
+});
 
-export const renderFilteredGuildCards = (pack?: DashboardPack) =>
+export default (pack?: DashboardPack) =>
 	(pack?.user?.guilds ?? [])
-		// Filter on mangeable servers
+		// Filter on manageable servers
 		.filter(g => g.manageable)
 		// Sort by whether Skyra is in the serve ror not
 		.sort((gA, gB) => (gA.skyraIsIn === gB.skyraIsIn ? 0 : gA.skyraIsIn ? -1 : 1))
 		// Sort by name of the server
 		.sort((gA, gB) => gA.name.localeCompare(gB.name, 'en', { sensitivity: 'base' }))
 		.map((g, index) => React.cloneElement(<GuildCard guild={g} key={index} />));
-
-export default GuildCard;

@@ -1,5 +1,5 @@
 import { FlattenedGuild } from '@config/types/ApiData';
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import SelectOne, { SelectOneProps } from './SelectOne';
 
 export interface SelectEmojiProps extends Omit<SelectOneProps, 'values' | 'name'> {
@@ -46,4 +46,4 @@ const SelectEmoji: FC<SelectEmojiProps> = ({
 	);
 };
 
-export default SelectEmoji;
+export default memo(SelectEmoji);

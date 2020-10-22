@@ -1,5 +1,5 @@
 import { createStyles, makeStyles } from '@material-ui/core';
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 const useStyles = makeStyles(() =>
 	createStyles({
@@ -40,4 +40,4 @@ const SkyraLogo: FC = props => {
 	);
 };
 
-export default SkyraLogo;
+export default memo(SkyraLogo);

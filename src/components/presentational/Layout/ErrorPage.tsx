@@ -8,7 +8,7 @@ import ForumIcon from '@material-ui/icons/Forum';
 import HomeIcon from '@material-ui/icons/Home';
 import GeneralPage from '@presentational/Layout/General';
 import { navigate } from '@utils/util';
-import React from 'react';
+import React, { memo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -63,4 +63,4 @@ const NotFoundPage = () => {
 	);
 };
 
-export default NotFoundPage;
+export default memo(NotFoundPage);

@@ -1,4 +1,6 @@
 import Avatar, { AvatarProps } from '@material-ui/core/Avatar';
-import React, { memo, PropsWithChildren } from 'react';
+import React, { FC, memo } from 'react';
 
-export default memo((props: PropsWithChildren<AvatarProps>) => <Avatar {...props} imgProps={{ ...props.imgProps, loading: 'lazy' }} />);
+const LazyAvatar: FC<AvatarProps> = props => <Avatar {...props} imgProps={{ ...props.imgProps, loading: 'lazy' }} />;
+
+export default memo(LazyAvatar);

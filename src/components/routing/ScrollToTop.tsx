@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
-import React, { Fragment, useEffect } from 'react';
+import React, { FC, Fragment, memo, useEffect } from 'react';
 
-const ScrollToTop = () => {
+const ScrollToTop: FC = () => {
 	const router = useRouter();
 
 	useEffect(() => {
@@ -11,4 +11,4 @@ const ScrollToTop = () => {
 	return <Fragment />;
 };
 
-export default ScrollToTop;
+export default memo(ScrollToTop);

@@ -1,5 +1,5 @@
 import Grid, { GridProps } from '@material-ui/core/Grid/Grid';
-import React, { Children, FC } from 'react';
+import React, { Children, FC, memo } from 'react';
 import { When } from 'react-if';
 
 interface SimpleGridProps extends GridProps {
@@ -18,4 +18,4 @@ const SimpleGrid: FC<SimpleGridProps> = ({ children, gridItemProps, ...props }) 
 	</Grid>
 );
 
-export default SimpleGrid;
+export default memo(SimpleGrid);

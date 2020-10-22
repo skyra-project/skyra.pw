@@ -3,7 +3,7 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
-import React, { PropsWithChildren } from 'react';
+import React, { memo, PropsWithChildren } from 'react';
 
 interface DialogTitleProps {
 	onClose: () => void;
@@ -33,4 +33,4 @@ const DialogTitle = ({ children, onClose }: PropsWithChildren<DialogTitleProps>)
 	);
 };
 
-export default DialogTitle;
+export default memo(DialogTitle);

@@ -26,7 +26,7 @@ import { oauthURL } from '@utils/constants';
 import { displayAvatarURL } from '@utils/skyraUtils';
 import { logOut, navigate, syncUser } from '@utils/util';
 import { useRouter } from 'next/router';
-import React, { FC, useContext, useEffect, useRef, useState } from 'react';
+import React, { FC, memo, useContext, useEffect, useRef, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -226,4 +226,4 @@ const MobileNavMenu: FC = () => {
 	);
 };
 
-export default MobileNavMenu;
+export default memo(MobileNavMenu);

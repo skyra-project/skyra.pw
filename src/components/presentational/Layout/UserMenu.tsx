@@ -17,9 +17,9 @@ import SyncIcon from '@material-ui/icons/Sync';
 import LazyAvatar from '@mui/LazyAvatar';
 import Tooltip from '@mui/Tooltip';
 import { displayAvatarURL } from '@utils/skyraUtils';
-import { logOut, navigate, syncUser } from '@utils/util';
+import { logOut, syncUser } from '@utils/util';
 import { useRouter } from 'next/router';
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, memo, useEffect, useRef, useState } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -153,4 +153,4 @@ const UserMenu: FC = () => {
 	);
 };
 
-export default UserMenu;
+export default memo(UserMenu);

@@ -1,7 +1,7 @@
 import FormControlLabel, { FormControlLabelProps } from '@material-ui/core/FormControlLabel';
 import ListItemText from '@material-ui/core/ListItemText';
 import Switch, { SwitchProps } from '@material-ui/core/Switch';
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 export interface SelectBooleanProps extends SwitchProps {
 	/** The title to show next to the Switch */
@@ -22,4 +22,4 @@ const SelectBoolean: FC<SelectBooleanProps> = ({ title, currentValue, onChange, 
 	/>
 );
 
-export default SelectBoolean;
+export default memo(SelectBoolean);

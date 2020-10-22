@@ -2,7 +2,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import MuiTextField from '@material-ui/core/TextField';
 import clsx from 'clsx';
 import { fieldToTextField, TextFieldProps } from 'formik-material-ui';
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -36,4 +36,4 @@ const TextField: FC<TextFieldProps> = ({ form, field, meta, ...props }) => {
 	);
 };
 
-export default TextField;
+export default memo(TextField);

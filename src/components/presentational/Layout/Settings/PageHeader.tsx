@@ -1,7 +1,7 @@
 import Divider from '@material-ui/core/Divider';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography, { TypographyProps } from '@material-ui/core/Typography';
-import React, { FC, ReactNode } from 'react';
+import React, { FC, memo, ReactNode } from 'react';
 
 interface PageHeaderProps {
 	/** The title of the page*/
@@ -42,4 +42,4 @@ const PageHeader: FC<PageHeaderProps> = ({ title, subtitle, TitleTypographyProps
 	);
 };
 
-export default PageHeader;
+export default memo(PageHeader);

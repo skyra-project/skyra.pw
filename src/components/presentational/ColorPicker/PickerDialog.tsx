@@ -4,7 +4,7 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
-import React, { FC, MouseEventHandler, useEffect, useRef } from 'react';
+import React, { FC, memo, MouseEventHandler, useEffect, useRef } from 'react';
 import { ChromePicker, ColorChangeHandler } from 'react-color';
 
 interface PickerDialogProps {
@@ -58,4 +58,4 @@ const PickerDialog: FC<PickerDialogProps> = ({ value, onClick, onChange }) => {
 	);
 };
 
-export default PickerDialog;
+export default memo(PickerDialog);

@@ -8,7 +8,7 @@ import MuiTextField from '@material-ui/core/TextField';
 import LazyAvatar from '@mui/LazyAvatar';
 import { REGEXP } from '@utils/Color';
 import { fieldToTextField, TextFieldProps } from 'formik-material-ui';
-import React, { ChangeEvent, FC, useCallback, useState } from 'react';
+import React, { ChangeEvent, FC, memo, useCallback, useState } from 'react';
 import PickerDialog from './PickerDialog';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -74,4 +74,4 @@ const ColorPicker: FC<Omit<TextFieldProps, 'variant'>> = ({ form: { setFieldValu
 	);
 };
 
-export default ColorPicker;
+export default memo(ColorPicker);

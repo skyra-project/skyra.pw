@@ -4,7 +4,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import CancelIcon from '@material-ui/icons/Cancel';
 import AlertTitle from '@material-ui/lab/AlertTitle';
 import { Time } from '@utils/skyraUtils';
-import React, { Dispatch, FC, ReactNode, SetStateAction } from 'react';
+import React, { Dispatch, FC, memo, ReactNode, SetStateAction } from 'react';
 import BaseAlert from './Base';
 
 /** Props to pass to the ErrorAlert component, any additional props are passed to the `Snackbar` component */
@@ -66,4 +66,4 @@ const ErrorAlert: FC<ErrorAlertProps> = ({ errorText, errorSubText = '', open = 
 	);
 };
 
-export default ErrorAlert;
+export default memo(ErrorAlert);

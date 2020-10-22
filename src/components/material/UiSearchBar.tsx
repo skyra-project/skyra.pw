@@ -29,7 +29,7 @@ import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import ClearIcon from '@material-ui/icons/Clear';
 import SearchIcon from '@material-ui/icons/Search';
 import clsx from 'clsx';
-import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, { forwardRef, memo, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 
 interface SearchBarProps extends Omit<InputProps, 'onChange'> {
 	/**
@@ -254,4 +254,4 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 	}
 );
 
-export default UiSearchBar;
+export default memo(UiSearchBar);

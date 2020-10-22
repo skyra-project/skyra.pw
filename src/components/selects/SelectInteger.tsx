@@ -1,5 +1,5 @@
 import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
-import React from 'react';
+import React, { memo } from 'react';
 
 export interface SelectIntegerProps extends StandardTextFieldProps {
 	value: number;
@@ -22,4 +22,4 @@ const SelectInteger = ({ value, label, min, max, onChange, ...props }: SelectInt
 	/>
 );
 
-export default SelectInteger;
+export default memo(SelectInteger);

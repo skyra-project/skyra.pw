@@ -2,7 +2,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
-import React, { ChangeEvent, FC, useState } from 'react';
+import React, { ChangeEvent, FC, memo, useState } from 'react';
 import Select from './Select';
 
 const unitMap: Record<string, number> = {
@@ -138,4 +138,4 @@ const SelectDuration: FC<SelectDurationProps> = ({ value, min, max, onChange }) 
 	);
 };
 
-export default SelectDuration;
+export default memo(SelectDuration);

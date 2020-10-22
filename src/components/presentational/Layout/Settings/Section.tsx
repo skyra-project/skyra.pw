@@ -1,6 +1,6 @@
 import { Box, BoxProps, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import clsx from 'clsx';
-import React, { FC, ReactNode } from 'react';
+import React, { FC, memo, ReactNode } from 'react';
 import { Else, If, Then, When } from 'react-if';
 
 export interface SectionProps extends Omit<BoxProps, 'title'> {
@@ -56,4 +56,4 @@ export const Section: FC<SectionProps> = ({ title, children, titleProps, disable
 	);
 };
 
-export default Section;
+export default memo(Section);

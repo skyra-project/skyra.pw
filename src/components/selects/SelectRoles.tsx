@@ -1,5 +1,5 @@
 import { FlattenedGuild } from '@config/types/ApiData';
-import React from 'react';
+import React, { memo } from 'react';
 import SelectMany, { SelectManyProps } from './SelectMany';
 
 interface SelectRolesProps extends Omit<SelectManyProps, 'values' | 'name'> {
@@ -21,4 +21,4 @@ const SelectRoles = ({ label, value, guild, filterEveryone, onChange, ...props }
 	/>
 );
 
-export default SelectRoles;
+export default memo(SelectRoles);

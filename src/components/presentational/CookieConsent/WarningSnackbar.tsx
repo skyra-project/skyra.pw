@@ -1,7 +1,5 @@
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grid from '@material-ui/core/Grid';
 import Slide from '@material-ui/core/Slide';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -9,7 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import { noop } from '@sapphire/utilities';
 import { navigate } from '@utils/util';
 import clsx from 'clsx';
-import React, { memo, useContext } from 'react';
+import React, { FC, memo, useContext } from 'react';
+import Actions from './Actions';
 import { CookieConsentContext } from './ContextProvider';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -52,13 +51,6 @@ const useStyles = makeStyles((theme: Theme) =>
 			paddingBottom: theme.spacing(3),
 			paddingTop: 0
 		},
-		rejectButton: {
-			backgroundColor: theme.palette.error.main,
-
-			'&:hover': {
-				backgroundColor: theme.palette.error.dark
-			}
-		},
 		fauxLink: {
 			color: theme.palette.primary.main,
 			cursor: 'pointer',
@@ -70,33 +62,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const CookieAction = memo(() => {
-	const { dispatch } = useContext(CookieConsentContext);
-	const classes = useStyles(undefined as any);
-
-	return (
-		<Grid container alignContent="stretch" justify="space-between" alignItems="center" spacing={2}>
-			<Grid item xs={6}>
-				<Button
-					fullWidth
-					variant="contained"
-					color="primary"
-					classes={{ root: classes.rejectButton }}
-					onClick={() => dispatch(false)}
-				>
-					I reject cookies
-				</Button>
-			</Grid>
-			<Grid item xs={6}>
-				<Button fullWidth variant="contained" color="primary" onClick={() => dispatch(true)}>
-					I accept cookies
-				</Button>
-			</Grid>
-		</Grid>
-	);
-});
-
-export default memo(() => {
+const WarningSnackbar: FC = () => {
 	const { allowsCookies } = useContext(CookieConsentContext);
 	const classes = useStyles(undefined as any);
 
@@ -120,11 +86,13 @@ export default memo(() => {
 								</Typography>
 							</>
 						}
-						action={<CookieAction />}
+						action={<Actions />}
 						classes={{ root: classes.snackbarContent, message: classes.message, action: classes.action }}
 					/>
 				</Slide>
 			</Box>
 		</ClickAwayListener>
 	);
-});
+};
+
+export default memo(WarningSnackbar);

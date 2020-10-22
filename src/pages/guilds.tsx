@@ -2,7 +2,7 @@ import { createSeoProps } from '@config/next-seo.config';
 import { useAuthenticated } from '@contexts/AuthenticationContext';
 import { useDiscordPack } from '@contexts/DiscordPackContext';
 import { Box, Container, createStyles, makeStyles } from '@material-ui/core';
-import { renderFilteredGuildCards } from '@presentational/GuildCard';
+import FilteredGuildCards from '@presentational/GuildCard';
 import GeneralPage from '@presentational/Layout/General';
 import ScrollToTop from '@routing/ScrollToTop';
 import { NextPage } from 'next';
@@ -35,7 +35,7 @@ const GuildsPage: NextPage = () => {
 				{authenticated && (
 					<Container classes={{ root: classes.container }}>
 						<Box display="flex" flexWrap="wrap" flexDirection="row" justifyContent="center" alignItems="center">
-							{renderFilteredGuildCards(pack)}
+							{FilteredGuildCards(pack)}
 						</Box>
 					</Container>
 				)}
