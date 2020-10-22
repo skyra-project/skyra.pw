@@ -1,7 +1,7 @@
 import SkyraLogo from '@assets/skyraLogo';
 import { FlattenedGuild } from '@config/types/ApiData';
 import { GuildSettings, SettingsPageProps } from '@config/types/GuildSettings';
-import UserMenu from '@layout/UserMenu';
+import UserMenu from '@layout/Navigation/UserMenu';
 import { useMediaQuery } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Backdrop from '@material-ui/core/Backdrop';

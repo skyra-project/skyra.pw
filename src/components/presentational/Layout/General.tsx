@@ -11,7 +11,7 @@ import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import React, { FC, useEffect } from 'react';
 import { Else, If, Then } from 'react-if';
-import NavBar from './NavBar';
+import NavBar from './Navigation/NavBar';
 import ScrollToTopButton from './ScrollToTopButton';
 
 export interface GeneralPageProps {
