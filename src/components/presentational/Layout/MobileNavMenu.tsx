@@ -24,7 +24,7 @@ import LazyAvatar from '@mui/LazyAvatar';
 import { CookieConsentContext } from '@presentational/CookieConsent/ContextProvider';
 import { oauthURL } from '@utils/constants';
 import { displayAvatarURL } from '@utils/skyraUtils';
-import { navigate, syncUser } from '@utils/util';
+import { logOut, navigate, syncUser } from '@utils/util';
 import { useRouter } from 'next/router';
 import React, { FC, useContext, useEffect, useRef, useState } from 'react';
 import { Else, If, Then } from 'react-if';
@@ -142,7 +142,7 @@ const MobileNavMenu: FC = () => {
 												component="a"
 												onClick={(...args: Parameters<typeof closePopperMenu>) => {
 													closePopperMenu(...args);
-													navigate('/api/auth/signout');
+													logOut(setPack, writeAuthenticated, router.replace);
 												}}
 											>
 												<ListItemIcon>

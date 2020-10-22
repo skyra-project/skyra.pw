@@ -17,7 +17,7 @@ import SyncIcon from '@material-ui/icons/Sync';
 import LazyAvatar from '@mui/LazyAvatar';
 import Tooltip from '@mui/Tooltip';
 import { displayAvatarURL } from '@utils/skyraUtils';
-import { navigate, syncUser } from '@utils/util';
+import { logOut, navigate, syncUser } from '@utils/util';
 import { useRouter } from 'next/router';
 import React, { FC, useEffect, useRef, useState } from 'react';
 
@@ -124,7 +124,7 @@ const UserMenu: FC = () => {
 										component="a"
 										onClick={(...args: Parameters<typeof handleClose>) => {
 											handleClose(...args);
-											navigate('/api/auth/signout');
+											logOut(setPack, writeAuthenticated, router.replace);
 										}}
 									>
 										<ListItemIcon>
