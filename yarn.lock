@@ -6131,6 +6131,13 @@ next@^9.5.5:
     webpack "4.44.1"
     webpack-sources "1.4.3"
 
+nextjs-progressbar@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/nextjs-progressbar/-/nextjs-progressbar-0.0.6.tgz#d1841df42f2342807dc6f7ad1034ddb8ec8541d4"
+  integrity sha512-9sxNpUSHOnmRV8/3yEZ9NV5c/ip2CpQ7jim3EOOZp49qIHrgNxmy/kzoulNjt50AlA7pAu/8rwgC2WpzmSMrdg==
+  dependencies:
+    nprogress "^0.2.0"
+
 nextjs-sitemap-generator@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/nextjs-sitemap-generator/-/nextjs-sitemap-generator-1.1.0.tgz#838863cd42bdab0ff1f88a1c19e3b44c03d6001e"
@@ -6222,6 +6229,11 @@ npm-run-path@^4.0.0:
   integrity sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==
   dependencies:
     path-key "^3.0.0"
+
+nprogress@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/nprogress/-/nprogress-0.2.0.tgz#cb8f34c53213d895723fcbab907e9422adbcafb1"
+  integrity sha1-y480xTIT2JVyP8urkH6UIq28r7E=
 
 object-assign@^4.0.1, object-assign@^4.1.1:
   version "4.1.1"
