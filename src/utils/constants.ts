@@ -43,3 +43,4 @@ export enum LocalStorageKeys {
 
 export const EmojiRegexExtractId = /<?a?:\w{2,32}:(\d{17,21})>?/;
 export const EmojiRegexExtractName = /<?a?:(\w{2,32}):\d{17,21}>?/;
+export const SettingsDrawerWidth = 240;
