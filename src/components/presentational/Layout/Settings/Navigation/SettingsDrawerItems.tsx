@@ -143,7 +143,7 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 					/>
 
 					{/* ------------------------------- */}
-					<ListItem disabled={!guildData && !isLoading} button onClick={() => handleSubMenu('filter')}>
+					<ListItem disabled={!guildData || isLoading} button onClick={() => handleSubMenu('filter')}>
 						<ListItemIcon>
 							<FilterListIcon />
 						</ListItemIcon>
