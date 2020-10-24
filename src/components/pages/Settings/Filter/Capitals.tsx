@@ -1,12 +1,12 @@
+import { SettingsPageProps } from '@config/types/GuildSettings';
+import Section from '@layout/Settings/Section';
 import { MenuItem, Typography } from '@material-ui/core';
-import Section from 'components/Section';
-import Select from 'components/Select/Select';
-import SelectBoolean from 'components/Select/SelectBoolean';
-import SelectDuration from 'components/Select/SelectDuration';
-import SimpleGrid from 'components/SimpleGrid';
-import Slider from 'components/Slider';
-import { SettingsPageProps } from 'lib/types/GuildSettings';
-import { bitwiseHas, bitwiseSet, updateSliderValueObj } from 'lib/util/util';
+import SimpleGrid from '@mui/SimpleGrid';
+import Slider from '@mui/Slider';
+import Select from '@selects/Select';
+import SelectBoolean from '@selects/SelectBoolean';
+import SelectDuration from '@selects/SelectDuration';
+import { bitwiseHas, bitwiseSet, updateSliderValueObj } from '@utils/util';
 import React, { Fragment, PropsWithChildren } from 'react';
 
 export default (props: PropsWithChildren<SettingsPageProps>) => {

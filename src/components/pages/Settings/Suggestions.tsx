@@ -1,11 +1,12 @@
+import { SettingsPageProps, SuggestionActions, SuggestionEmojis } from '@config/types/GuildSettings';
+import PageHeader from '@layout/Settings/PageHeader';
+import Section from '@layout/Settings/Section';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import PageHeader from 'components/PageHeader';
-import Section from 'components/Section';
-import SelectBoolean from 'components/Select/SelectBoolean';
-import SelectChannel from 'components/Select/SelectChannel';
-import SelectEmoji from 'components/Select/SelectEmoji';
-import SimpleGrid from 'components/SimpleGrid';
-import { SettingsPageProps, SuggestionActions, SuggestionEmojis } from 'lib/types/GuildSettings';
+import SimpleGrid from '@mui/SimpleGrid';
+import SelectBoolean from '@selects/SelectBoolean';
+import SelectChannel from '@selects/SelectChannel';
+import SelectEmoji from '@selects/SelectEmoji';
+import { EmojiRegexExtractId } from '@utils/constants';
 import React, { memo, PropsWithChildren, useMemo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -58,8 +59,6 @@ const CONFIGURABLE_EMOJIS: Emoji[] = [
 		defaultId: '694594285269680179'
 	}
 ];
-
-
 
 export default memo((props: PropsWithChildren<SettingsPageProps>) => {
 	const classes = useStyles();

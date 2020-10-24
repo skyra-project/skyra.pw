@@ -1,10 +1,10 @@
+import { Channels, IgnoreChannels, SettingsPageProps } from '@config/types/GuildSettings';
+import PageHeader from '@layout/Settings/PageHeader';
+import Section from '@layout/Settings/Section';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import PageHeader from 'components/PageHeader';
-import Section from 'components/Section';
-import SelectChannel from 'components/Select/SelectChannel';
-import SelectChannels from 'components/Select/SelectChannels';
-import SimpleGrid from 'components/SimpleGrid';
-import { Channels, IgnoreChannels, SettingsPageProps } from 'lib/types/GuildSettings';
+import SimpleGrid from '@mui/SimpleGrid';
+import SelectChannel from '@selects/SelectChannel';
+import SelectChannels from '@selects/SelectChannels';
 import React, { PropsWithChildren } from 'react';
 import { PickByValue } from 'utility-types';
 
@@ -37,8 +37,8 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 				title="Channels"
 				subtitle={
 					<>
-						Here you can configure all kinds of roles that will be used by Skyra. Hover over a button to get more information
-						for that specific channel.
+						Here you can configure different kinds of channels for Skyra. Hover over a button to get more information for that
+						specific channel.
 					</>
 				}
 			/>

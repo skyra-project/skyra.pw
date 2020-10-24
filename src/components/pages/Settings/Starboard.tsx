@@ -1,10 +1,10 @@
+import { SettingsPageProps } from '@config/types/GuildSettings';
+import Section from '@layout/Settings/Section';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Section from 'components/Section';
-import SelectChannel from 'components/Select/SelectChannel';
-import SelectChannels from 'components/Select/SelectChannels';
-import SelectInteger from 'components/Select/SelectInteger';
-import SimpleGrid from 'components/SimpleGrid';
-import { SettingsPageProps } from 'lib/types/GuildSettings';
+import SimpleGrid from '@mui/SimpleGrid';
+import SelectChannel from '@selects/SelectChannel';
+import SelectChannels from '@selects/SelectChannels';
+import SelectInteger from '@selects/SelectInteger';
 import React, { PropsWithChildren } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>

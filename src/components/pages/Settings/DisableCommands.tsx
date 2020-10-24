@@ -1,3 +1,6 @@
+import { FlattenedCommand } from '@config/types/ApiData';
+import { SettingsPageProps } from '@config/types/GuildSettings';
+import Section from '@layout/Settings/Section';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionActions from '@material-ui/core/AccordionActions';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
@@ -13,11 +16,8 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Section from 'components/Section';
-import SelectBoolean from 'components/Select/SelectBoolean';
-import { FlattenedCommand } from 'lib/types/ApiData';
-import { SettingsPageProps } from 'lib/types/GuildSettings';
-import { apiFetch, parseCommandDescription } from 'lib/util/util';
+import SelectBoolean from '@selects/SelectBoolean';
+import { apiFetch } from '@utils/util';
 import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -56,6 +56,12 @@ const useStyles = makeStyles((theme: Theme) =>
 		}
 	})
 );
+
+/**
+ * Parses command descriptions, replacing emojis with their proper counterparts
+ * @param description Command description to parse
+ */
+export const parseCommandDescription = (description: string) => description.replace(/<:(\w{2,32}):[0-9]{18}>/gi, '$1');
 
 export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWithChildren<SettingsPageProps>) => {
 	const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));

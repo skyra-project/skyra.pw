@@ -1,3 +1,5 @@
+import { Messages, SettingsPageProps } from '@config/types/GuildSettings';
+import Section from '@layout/Settings/Section';
 import Box from '@material-ui/core/Box';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
@@ -8,12 +10,10 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import InfoIcon from '@material-ui/icons/Info';
-import Section from 'components/Section';
-import SelectBoolean from 'components/Select/SelectBoolean';
-import SelectChannels from 'components/Select/SelectChannels';
-import SimpleGrid from 'components/SimpleGrid';
-import Tooltip from 'components/Tooltip';
-import { Messages, SettingsPageProps } from 'lib/types/GuildSettings';
+import SimpleGrid from '@mui/SimpleGrid';
+import Tooltip from '@mui/Tooltip';
+import SelectBoolean from '@selects/SelectBoolean';
+import SelectChannels from '@selects/SelectChannels';
 import React, { PropsWithChildren } from 'react';
 import { PickByValue } from 'utility-types';
 

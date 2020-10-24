@@ -1,12 +1,12 @@
+import { Roles, SettingsPageProps } from '@config/types/GuildSettings';
+import PageHeader from '@layout/Settings/PageHeader';
+import Section from '@layout/Settings/Section';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import PageHeader from 'components/PageHeader';
-import Section from 'components/Section';
-import SelectBoolean from 'components/Select/SelectBoolean';
-import SelectRole from 'components/Select/SelectRole';
-import SelectRoles from 'components/Select/SelectRoles';
-import SimpleGrid from 'components/SimpleGrid';
-import { Roles, SettingsPageProps } from 'lib/types/GuildSettings';
+import SimpleGrid from '@mui/SimpleGrid';
+import SelectBoolean from '@selects/SelectBoolean';
+import SelectRole from '@selects/SelectRole';
+import SelectRoles from '@selects/SelectRoles';
 import React, { PropsWithChildren } from 'react';
 import { PickByValue } from 'utility-types';
 

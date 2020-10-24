@@ -1,3 +1,5 @@
+import { CustomCommand, SettingsPageProps } from '@config/types/GuildSettings';
+import Section from '@layout/Settings/Section';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid/Grid';
 import IconButton from '@material-ui/core/IconButton';
@@ -8,17 +10,14 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import DeleteIcon from '@material-ui/icons/Delete';
-import ColorPicker from 'components/ColorPicker/ColorPicker';
-import SelectWithLabel from 'components/Formik/SelectWithLabel';
-import TextField from 'components/Formik/TextField';
-import Link from 'components/ReactMarkdown/Link';
-import Section from 'components/Section';
-import SimpleGrid from 'components/SimpleGrid';
+import SelectWithLabel from '@mods/Formik/SelectWithLabel';
+import TextField from '@mods/Formik/TextField';
+import GfmReactMarkdown from '@mods/ReactMarkdown/GfmReactMarkdown';
+import SimpleGrid from '@mui/SimpleGrid';
+import ColorPicker from '@presentational/ColorPicker/ColorPicker';
+import { parse, REGEXP } from '@utils/Color';
 import { FastField, Formik, FormikConfig } from 'formik';
-import { CustomCommand, SettingsPageProps } from 'lib/types/GuildSettings';
-import { parse, REGEXP } from 'lib/util/Color';
 import React, { Fragment, PropsWithChildren } from 'react';
-import ReactMarkdown from 'react-markdown';
 import { Virtuoso } from 'react-virtuoso';
 import { boolean, object, string } from 'yup';
 
@@ -264,12 +263,7 @@ const CustomCommandsPage = ({
 										}
 										secondary={
 											<Typography component="div" variant="body2">
-												<ReactMarkdown
-													source={sortedCommands[index].content}
-													skipHtml
-													parserOptions={{ gfm: true }}
-													renderers={{ link: Link }}
-												/>
+												<GfmReactMarkdown source={sortedCommands[index].content} />
 											</Typography>
 										}
 									/>

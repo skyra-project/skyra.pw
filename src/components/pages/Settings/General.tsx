@@ -1,12 +1,12 @@
+import { SettingsPageProps } from '@config/types/GuildSettings';
+import Section from '@layout/Settings/Section';
 import MenuItem from '@material-ui/core/MenuItem';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import AutoSavingForm from 'components/Formik/AutoSaveForm';
-import TextField from 'components/Formik/TextField';
-import Section from 'components/Section';
-import Select from 'components/Select/Select';
-import SimpleGrid from 'components/SimpleGrid';
+import AutoSavingForm from '@mods/Formik/AutoSaveForm';
+import TextField from '@mods/Formik/TextField';
+import SimpleGrid from '@mui/SimpleGrid';
+import Select from '@selects/Select';
 import { FastField } from 'formik';
-import { SettingsPageProps } from 'lib/types/GuildSettings';
 import React, { PropsWithChildren } from 'react';
 import { object, string } from 'yup';
 

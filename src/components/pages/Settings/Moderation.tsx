@@ -1,7 +1,7 @@
-import Section from 'components/Section';
-import SelectBoolean from 'components/Select/SelectBoolean';
-import SimpleGrid from 'components/SimpleGrid';
-import { Messages, SettingsPageProps } from 'lib/types/GuildSettings';
+import { Messages, SettingsPageProps } from '@config/types/GuildSettings';
+import Section from '@layout/Settings/Section';
+import SimpleGrid from '@mui/SimpleGrid';
+import SelectBoolean from '@selects/SelectBoolean';
 import React, { PropsWithChildren } from 'react';
 import { PickByValue } from 'utility-types';
 

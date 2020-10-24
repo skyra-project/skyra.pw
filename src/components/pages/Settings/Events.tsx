@@ -1,10 +1,10 @@
+import { Events, SettingsPageProps } from '@config/types/GuildSettings';
+import Section from '@layout/Settings/Section';
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
-import Section from 'components/Section';
-import SelectBoolean from 'components/Select/SelectBoolean';
-import SimpleGrid from 'components/SimpleGrid';
-import { Events, SettingsPageProps } from 'lib/types/GuildSettings';
+import SimpleGrid from '@mui/SimpleGrid';
+import SelectBoolean from '@selects/SelectBoolean';
 import React, { PropsWithChildren } from 'react';
-import { Link } from 'react-router-dom';
+import Link from '@routing/Link';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -56,7 +56,7 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 			<Section title="Moderation Events">
 				<Typography variant="subtitle2" color="textPrimary">
 					These events involve moderation actions and require that you setup the Moderation Logs channel on{' '}
-					<Link className={classes.link} to={`/guilds/${props.guildID}/channels`}>
+					<Link className={classes.link} href={`/guilds/${props.guildId}/channels`}>
 						the Channels page
 					</Link>
 				</Typography>
@@ -82,7 +82,7 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 			<Section title="Member Events">
 				<Typography variant="subtitle2" color="textPrimary">
 					These events involve member actions and require that you setup the Member Logs channel on{' '}
-					<Link className={classes.link} to={`/guilds/${props.guildID}/channels`}>
+					<Link className={classes.link} href={`/guilds/${props.guildId}/channels`}>
 						the Channels page
 					</Link>
 				</Typography>
@@ -109,7 +109,7 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 				<Typography variant="subtitle2" color="textPrimary">
 					These events involve message events, the channels to set up vary on the type of event and each channel can be configured
 					on{' '}
-					<Link className={classes.link} to={`/guilds/${props.guildID}/channels`}>
+					<Link className={classes.link} href={`/guilds/${props.guildId}/channels`}>
 						the Channels page
 					</Link>
 				</Typography>
