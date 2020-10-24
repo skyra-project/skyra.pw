@@ -3,6 +3,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Link from '@routing/Link';
+import clsx from 'clsx';
 import React, { forwardRef, ReactElement } from 'react';
 import { When } from 'react-if';
 
@@ -36,7 +37,13 @@ const ListItemLink = forwardRef<HTMLAnchorElement, ListItemLinkProps>(
 
 		return (
 			<Link href={href} className={classes.menuLink} ref={ref}>
-				<ListItem button dense={listItemDense} disabled={listItemDisabled} onClick={listItemOnClick} className={listItemClassName}>
+				<ListItem
+					button
+					dense={listItemDense}
+					disabled={listItemDisabled}
+					onClick={listItemOnClick}
+					className={clsx(listItemClassName, classes.menuLink)}
+				>
 					<When condition={Boolean(Icon)}>
 						<ListItemIcon>{Icon}</ListItemIcon>
 					</When>
