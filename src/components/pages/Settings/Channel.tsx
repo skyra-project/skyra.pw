@@ -6,7 +6,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import SimpleGrid from '@mui/SimpleGrid';
 import SelectChannel from '@selects/SelectChannel';
 import SelectChannels from '@selects/SelectChannels';
-import React, { PropsWithChildren } from 'react';
+import React, { FC, memo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-export default (props: PropsWithChildren<SettingsPageProps>) => {
+const Channel: FC<SettingsPageProps> = props => {
 	const classes = useStyles();
 
 	return (
@@ -178,3 +178,5 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 		</>
 	);
 };
+
+export default memo(Channel);

@@ -8,7 +8,7 @@ import SimpleGrid from '@mui/SimpleGrid';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectRole from '@selects/SelectRole';
 import SelectRoles from '@selects/SelectRoles';
-import React, { PropsWithChildren } from 'react';
+import React, { FC, memo } from 'react';
 import { PickByValue } from 'utility-types';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-export default (props: PropsWithChildren<SettingsPageProps>) => {
+const Roles: FC<SettingsPageProps> = props => {
 	const classes = useStyles();
 	const theme = useTheme();
 	const isOnMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -126,3 +126,5 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 		</>
 	);
 };
+
+export default memo(Roles);

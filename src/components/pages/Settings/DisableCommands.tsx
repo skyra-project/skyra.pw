@@ -19,7 +19,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SelectBoolean from '@selects/SelectBoolean';
 import { apiFetch } from '@utils/util';
-import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react';
+import React, { FC, memo, useCallback, useEffect, useState } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) =>
  */
 export const parseCommandDescription = (description: string) => description.replace(/<:(\w{2,32}):[0-9]{18}>/gi, '$1');
 
-export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWithChildren<SettingsPageProps>) => {
+const DisableCommands: FC<SettingsPageProps> = ({ guildSettings: { disabledCommands }, patchGuildData }) => {
 	const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 	const classes = useStyles();
 	const [expanded, setExpanded] = useState<string | false>(false);
@@ -211,3 +211,5 @@ export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWi
 		</>
 	);
 };
+
+export default memo(DisableCommands);

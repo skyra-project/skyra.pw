@@ -15,7 +15,7 @@ import SimpleGrid from '@mui/SimpleGrid';
 import Tooltip from '@mui/Tooltip';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectChannels from '@selects/SelectChannels';
-import React, { PropsWithChildren, useMemo } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-export default ({ guildData, guildSettings, patchGuildData }: PropsWithChildren<SettingsPageProps>) => {
+const Messages: FC<SettingsPageProps> = ({ guildData, guildSettings, patchGuildData }) => {
 	const classes = useStyles();
 
 	const configurableMessages = useMemo(() => CONFIGURABLE_MESSAGES(guildSettings, guildData), [guildData, guildSettings]);
@@ -153,3 +153,5 @@ export default ({ guildData, guildSettings, patchGuildData }: PropsWithChildren<
 		</>
 	);
 };
+
+export default memo(Messages);

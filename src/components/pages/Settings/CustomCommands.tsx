@@ -18,7 +18,7 @@ import SimpleGrid from '@mui/SimpleGrid';
 import ColorPicker from '@presentational/ColorPicker/ColorPicker';
 import { parse, REGEXP } from '@utils/Color';
 import { FastField, Formik, FormikConfig } from 'formik';
-import React, { Fragment, PropsWithChildren } from 'react';
+import React, { Fragment, memo, PropsWithChildren } from 'react';
 import { Virtuoso } from 'react-virtuoso';
 import { boolean, object, string } from 'yup';
 
@@ -287,4 +287,4 @@ const CustomCommandsPage = ({
 	);
 };
 
-export default CustomCommandsPage;
+export default memo(CustomCommandsPage);

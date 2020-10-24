@@ -5,7 +5,7 @@ import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import SimpleGrid from '@mui/SimpleGrid';
 import Link from '@routing/Link';
 import SelectBoolean from '@selects/SelectBoolean';
-import React, { PropsWithChildren } from 'react';
+import React, { FC, memo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-export default (props: PropsWithChildren<SettingsPageProps>) => {
+const Events: FC<SettingsPageProps> = props => {
 	const classes = useStyles();
 
 	return (
@@ -102,3 +102,5 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 		</>
 	);
 };
+
+export default memo(Events);

@@ -7,9 +7,9 @@ import Select from '@selects/Select';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectDuration from '@selects/SelectDuration';
 import { bitwiseHas, bitwiseSet, updateSliderValueObj } from '@utils/util';
-import React, { Fragment, PropsWithChildren } from 'react';
+import React, { FC, Fragment, memo } from 'react';
 
-export default (props: PropsWithChildren<SettingsPageProps>) => {
+const FilterCapitals: FC<SettingsPageProps> = props => {
 	const { capitals } = props.guildSettings.selfmod;
 
 	return (
@@ -117,3 +117,5 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 		</Fragment>
 	);
 };
+
+export default memo(FilterCapitals);

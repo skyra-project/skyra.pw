@@ -5,7 +5,7 @@ import SimpleGrid from '@mui/SimpleGrid';
 import SelectChannel from '@selects/SelectChannel';
 import SelectChannels from '@selects/SelectChannels';
 import SelectInteger from '@selects/SelectInteger';
-import React, { PropsWithChildren } from 'react';
+import React, { FC, memo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const StarboardPage = (props: PropsWithChildren<SettingsPageProps>) => {
+const StarboardPage: FC<SettingsPageProps> = props => {
 	const classes = useStyles();
 
 	return (
@@ -94,4 +94,4 @@ const StarboardPage = (props: PropsWithChildren<SettingsPageProps>) => {
 	);
 };
 
-export default StarboardPage;
+export default memo(StarboardPage);

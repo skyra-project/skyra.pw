@@ -14,7 +14,7 @@ import Select from '@selects/Select';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectDuration from '@selects/SelectDuration';
 import { bitwiseHas, bitwiseSet, removeNonAlphaNumeric, updateSliderValueObj } from '@utils/util';
-import React, { Fragment, PropsWithChildren, useState } from 'react';
+import React, { FC, Fragment, memo, useState } from 'react';
 import { When } from 'react-if';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-export default (props: PropsWithChildren<SettingsPageProps>) => {
+const FilterWords: FC<SettingsPageProps> = props => {
 	const { filter } = props.guildSettings.selfmod;
 	const [newWord, setNewWord] = useState('');
 	const classes = useStyles();
@@ -160,3 +160,5 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 		</Fragment>
 	);
 };
+
+export default memo(FilterWords);

@@ -8,7 +8,7 @@ import TextField from '@mods/Formik/TextField';
 import SimpleGrid from '@mui/SimpleGrid';
 import Select from '@selects/Select';
 import { FastField } from 'formik';
-import React, { PropsWithChildren } from 'react';
+import React, { FC, memo } from 'react';
 import { object, string } from 'yup';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-export default (props: PropsWithChildren<SettingsPageProps>) => {
+const General: FC<SettingsPageProps> = props => {
 	const classes = useStyles();
 	const validationSchema = object<GeneralSettings.Form>({
 		prefix: string()
@@ -74,3 +74,5 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 		</Section>
 	);
 };
+
+export default memo(General);
