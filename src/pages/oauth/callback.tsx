@@ -41,35 +41,34 @@ const OauthCallback: NextPage = () => {
 	const classes = useStyles();
 
 	// @ts-ignore temp
-	const finalizeAuthFlow = useCallback(
-		async (code: string | null) => {
-			const data: any = await apiFetch(`/oauth/callback`, {
-				method: 'POST',
-				body: JSON.stringify({
-					code,
-					clientId: CLIENT_ID,
-					redirectUri: `${BASE_WEB_URL}/oauth/callback`
-				})
-			});
+	const finalizeAuthFlow = useCallback(async (code: string | null) => {
+		const data: any = await apiFetch(`/oauth/callback`, {
+			method: 'POST',
+			body: JSON.stringify({
+				code,
+				clientId: CLIENT_ID,
+				redirectUri: `${BASE_WEB_URL}/oauth/callback`
+			})
+		});
 
-			if (data.error || !data.user) {
-				setError(data.error || 'Error fetching user data.');
-				return;
-			}
+		if (data.error || !data.user) {
+			setError(data.error || 'Error fetching user data.');
+			return;
+		}
 
-			saveState(LocalStorageKeys.DiscordPack, data);
+		saveState(LocalStorageKeys.DiscordPack, data);
 
-			writeAuthenticated(true);
-			mergePack(data);
+		writeAuthenticated(true);
+		mergePack(data);
 
-			router.push('/');
-		},
-		[mergePack, router, writeAuthenticated]
-	);
+		router.push('/');
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	useEffect(() => {
 		finalizeAuthFlow(router.query.code);
-	});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<>
