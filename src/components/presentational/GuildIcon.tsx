@@ -1,7 +1,7 @@
 import { FlattenedGuild } from '@config/types/ApiData';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import LazyAvatar from '@mui/LazyAvatar';
-import { displayIconURL } from '@utils/util';
+import { displayIconURL, getAcronym } from '@utils/util';
 import clsx from 'clsx';
 import React, { FC } from 'react';
 
@@ -33,7 +33,7 @@ const GuildIcon: FC<GuildIconProps> = ({ guild, sizeClass, size = 128 }) => {
 			imgProps={{ height: 256, width: 256 }}
 			src={displayIconURL(guild, { size })}
 		>
-			{guild.nameAcronym}
+			{getAcronym(guild.name)}
 		</LazyAvatar>
 	);
 };

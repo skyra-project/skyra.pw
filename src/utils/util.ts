@@ -120,6 +120,18 @@ export function displayIconURL(guild: FlattenedGuild | PublicFlattenedGuild, { f
 	return `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.${format}${`?size=${size}`}`;
 }
 
+/**
+ * Retrieves an acronym for a guild name based on Discord datamining
+ * @see https://github.com/discordjs/discord.js/pull/4104
+ * @param name The guild name to retrieve the acronym for
+ */
+export function getAcronym(name: string) {
+	return name
+		.replace(/'s /g, ' ')
+		.replace(/\w+/g, e => e[0])
+		.replace(/\s/g, '');
+}
+
 export function removeNonAlphaNumeric(str: string) {
 	return str.replace(/[^0-9a-zA-Z]/gi, '');
 }

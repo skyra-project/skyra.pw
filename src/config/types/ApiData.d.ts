@@ -28,7 +28,6 @@ export interface FlattenedGuild
 		| 'joinedTimestamp'
 		| 'mfaLevel'
 		| 'name'
-		| 'nameAcronym'
 		| 'ownerID'
 		| 'partnered'
 		| 'preferredLocale'
