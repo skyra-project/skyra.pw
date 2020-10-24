@@ -107,8 +107,8 @@ export async function syncUser(
 	}
 }
 
-export function navigate(path: string) {
-	if (path.startsWith('http') || path.startsWith('//') || path.startsWith('mailto:')) {
+export function navigate(path: string, forceSameTab = false) {
+	if (!forceSameTab && (path.startsWith('http') || path.startsWith('//') || path.startsWith('mailto:'))) {
 		return () => window.open(path, '_blank', 'noreferrer=yes');
 	}
 	return () => Router.push(path);
