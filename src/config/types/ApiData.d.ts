@@ -1,3 +1,5 @@
+import type { Guild } from 'discord.js';
+
 export interface DashboardPack {
 	user: DashboardUserPack | null;
 }
@@ -6,37 +8,48 @@ export interface DashboardUserPack extends FlattenedUser {
 	guilds?: FlattenedGuild[];
 }
 
-export interface FlattenedGuild {
-	id: string;
-	available: boolean;
+export interface FlattenedGuild
+	extends Pick<
+		Guild,
+		| 'afkChannelID'
+		| 'afkTimeout'
+		| 'applicationID'
+		| 'approximateMemberCount'
+		| 'approximatePresenceCount'
+		| 'available'
+		| 'banner'
+		| 'defaultMessageNotifications'
+		| 'description'
+		| 'embedEnabled'
+		| 'explicitContentFilter'
+		| 'features'
+		| 'icon'
+		| 'id'
+		| 'joinedTimestamp'
+		| 'mfaLevel'
+		| 'name'
+		| 'nameAcronym'
+		| 'ownerID'
+		| 'partnered'
+		| 'preferredLocale'
+		| 'premiumSubscriptionCount'
+		| 'premiumTier'
+		| 'region'
+		| 'splash'
+		| 'systemChannelID'
+		| 'vanityURLCode'
+		| 'verificationLevel'
+		| 'verified'
+	> {
 	channels: FlattenedGuildChannel[];
 	roles: FlattenedRole[];
-	name: string;
-	icon: string | null;
-	splash: string | null;
-	region: string;
-	features: GuildFeatures[];
-	applicationID: string | null;
-	afkTimeout: number;
-	afkChannelID: string | null;
-	systemChannelID: string | null;
-	embedEnabled: boolean;
-	premiumTier: number;
-	premiumSubscriptionCount: number | null;
-	verificationLevel: string;
-	explicitContentFilter: string;
-	mfaLevel: number;
-	joinedTimestamp: number;
-	defaultMessageNotifications: number | 'ALL' | 'MENTIONS';
-	vanityURLCode: string | null;
-	description: string | null;
-	banner: string | null;
-	ownerID: string;
 	emojis: FlattenedEmoji[];
 	skyraIsIn: boolean;
 	manageable: boolean;
 	permissions?: number;
 }
+
+export type PublicFlattenedGuild = Pick<FlattenedGuild, 'id' | 'name' | 'icon' | 'vanityURLCode' | 'description'>;
 
 export interface FlattenedEmoji {
 	name: string;

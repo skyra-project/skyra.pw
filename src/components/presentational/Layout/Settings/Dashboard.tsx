@@ -1,4 +1,3 @@
-import { createSeoProps } from '@config/next-seo.config';
 import { FlattenedGuild } from '@config/types/ApiData';
 import { GuildSettings, SettingsPageProps } from '@config/types/GuildSettings';
 import { useMediaQuery } from '@material-ui/core';
@@ -13,8 +12,7 @@ import { SettingsDrawerWidth } from '@utils/constants';
 import { Time } from '@utils/skyraUtils';
 import { apiFetch, navigate } from '@utils/util';
 import deepMerge, { Options as DeepMergeOptions } from 'deepmerge';
-import { NextSeo } from 'next-seo';
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, { FC, memo, PropsWithChildren, useCallback, useEffect, useState } from 'react';
 import { When } from 'react-if';
 import { DeepPartial } from 'utility-types';
 import DesktopSettingsDrawer from './Navigation/DesktopSettingsDrawer';
@@ -196,7 +194,6 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 					<Box className={classes.toolbar} />
 					<When condition={readyToRender}>
 						<>
-							<NextSeo {...createSeoProps({ title: `${guildData?.name ?? ''} Settings` })} />
 							{React.Children.map(children, child => {
 								if (React.isValidElement(child)) {
 									return React.cloneElement(child, componentProps);
@@ -219,4 +216,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 	);
 };
 
-export default DashboardLayout;
+export default memo<PropsWithChildren<DashboardLayoutProps>>(
+	DashboardLayout,
+	({ guildId: prevGuildId }, { guildId: nextGuildId }) => prevGuildId === nextGuildId
+);

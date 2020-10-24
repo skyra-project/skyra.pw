@@ -1,4 +1,4 @@
-import { DashboardPack, FlattenedGuild, OauthFlattenedUser } from '@config/types/ApiData';
+import { DashboardPack, FlattenedGuild, OauthFlattenedUser, PublicFlattenedGuild } from '@config/types/ApiData';
 import { SelfmodSliderProp, SelfmodSliderSettings } from '@config/types/GuildSettings';
 import Router from 'next/router';
 import { BASE_API_URL, LocalStorageKeys } from './constants';
@@ -114,22 +114,10 @@ export function navigate(path: string, forceSameTab = false) {
 	return () => Router.push(path);
 }
 
-export function displayIconURL(guild: FlattenedGuild, { format = 'default', size = 256 } = {}) {
+export function displayIconURL(guild: FlattenedGuild | PublicFlattenedGuild, { format = 'default', size = 256 } = {}) {
 	if (guild.icon === null) return undefined;
 	if (format === 'default') format = guild.icon.startsWith('a_') ? 'gif' : 'png';
 	return `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.${format}${`?size=${size}`}`;
-}
-
-/**
- * Retrieves an acronym for a guild name based on Discord datamining
- * @see https://github.com/discordjs/discord.js/pull/4104
- * @param name The guild name to retrieve the acronym for
- */
-export function getAcronym(name: string) {
-	return name
-		.replace(/'s /g, ' ')
-		.replace(/\w+/g, e => e[0])
-		.replace(/\s/g, '');
 }
 
 export function removeNonAlphaNumeric(str: string) {

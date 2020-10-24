@@ -1,18 +1,21 @@
 import { mergeDefault } from '@sapphire/utilities';
+import { displayIconURL } from '@utils/util';
 import { DefaultSeoProps, NextSeoProps } from 'next-seo';
 import theme from './theme';
+import { FlattenedGuild, PublicFlattenedGuild } from './types/ApiData';
 
 type KeyedObject = Record<PropertyKey, unknown>;
 
+export const BaseUrl = 'https://beta.skyra.pw';
 export const DefaultSeo: DefaultSeoProps & KeyedObject = {
 	titleTemplate: 'Skyra | %s',
 	title: 'Home',
 	description: 'Skyra is a multipurpose Discord bot designed to handle most tasks, helping users manage their servers easily.',
-	canonical: 'https://beta.skyra.pw',
+	canonical: BaseUrl,
 	additionalMetaTags: [
-		{ name: 'url', content: 'https://beta.skyra.pw' },
-		{ name: 'identifier-URL', content: 'https://beta.skyra.pw' },
-		{ name: 'shortlink', content: 'https://beta.skyra.pw' },
+		{ name: 'url', content: BaseUrl },
+		{ name: 'identifier-URL', content: BaseUrl },
+		{ name: 'shortlink', content: BaseUrl },
 		{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
 		{ name: 'keywords', content: 'discord, bot, skyra, moderation, automation, kyra, favna, kyranet, cyborg, pokemon' },
 		{
@@ -45,10 +48,10 @@ export const DefaultSeo: DefaultSeoProps & KeyedObject = {
 	],
 	openGraph: {
 		title: 'Skyra Dashboard',
-		url: 'https://beta.skyra.pw',
+		url: BaseUrl,
 		images: [
 			{
-				url: 'https://beta.skyra.pw/icons/opengraph.png',
+				url: `${BaseUrl}/icons/opengraph.png`,
 				alt: 'OpenGraphImage',
 				width: 1024,
 				height: 512
@@ -71,3 +74,26 @@ export const DefaultSeo: DefaultSeoProps & KeyedObject = {
 };
 
 export const createSeoProps = (seoProps?: NextSeoProps & KeyedObject) => mergeDefault(DefaultSeo, seoProps);
+
+export const createGuildSeoProps = (guildData: PublicFlattenedGuild | FlattenedGuild, settingsPath: string[]) =>
+	createSeoProps({
+		title: `${guildData?.name ?? 'Guild'} Settings`,
+		description: guildData.description ?? DefaultSeo.description,
+		canonical: `${BaseUrl}/guilds/${guildData.id}/${settingsPath.join('/')}`,
+		additionalMetaTags: [
+			{ name: 'url', content: `${BaseUrl}/guilds/${guildData.id}/${settingsPath.join('/')}` },
+			{ name: 'identifier-URL', content: `${BaseUrl}/guilds/${guildData.id}/${settingsPath.join('/')}` },
+			{ name: 'shortlink', content: `${BaseUrl}/guilds/${guildData.id}/${settingsPath.join('/')}` }
+		],
+		openGraph: {
+			title: `Skyra settings for ${guildData.name}`,
+			images: [
+				{
+					url: displayIconURL(guildData, { size: 256 }) ?? `${BaseUrl}/icons/opengraph.png`,
+					alt: 'OpenGraphImage',
+					width: 256,
+					height: 256
+				}
+			]
+		}
+	});
