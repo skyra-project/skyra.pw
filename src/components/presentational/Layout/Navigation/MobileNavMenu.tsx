@@ -22,9 +22,9 @@ import SyncIcon from '@material-ui/icons/Sync';
 import LoginIcon from '@material-ui/icons/VpnKey';
 import LazyAvatar from '@mui/LazyAvatar';
 import { CookieConsentContext } from '@presentational/CookieConsent/ContextProvider';
-import { oauthURL } from '@utils/constants';
+import MenuItemLink from '@routing/MenuItemLink';
 import { displayAvatarURL } from '@utils/skyraUtils';
-import { logOut, navigate, syncUser } from '@utils/util';
+import { logOut, syncUser } from '@utils/util';
 import { useRouter } from 'next/router';
 import React, { FC, memo, useContext, useEffect, useRef, useState } from 'react';
 import { Else, If, Then } from 'react-if';
@@ -159,50 +159,25 @@ const MobileNavMenu: FC = () => {
 												<ListItemIcon>
 													<SyncIcon className={classes.syncLogo} />
 												</ListItemIcon>
-												<Typography variant="inherit">Resync</Typography>
+												<Typography variant="inherit">Resync user data</Typography>
 											</MenuItem>
 										</Then>
 										<Else>
-											<MenuItem disabled={!allowsCookies} onClick={navigate(oauthURL.toString())}>
-												<ListItemIcon>
-													<LoginIcon />
-												</ListItemIcon>
-												<Typography variant="inherit">Log In</Typography>
-											</MenuItem>
+											<MenuItemLink
+												menuItemDisabled={!allowsCookies}
+												href="/privacy"
+												Icon={<LoginIcon />}
+												text="Login"
+												forceSameTab
+											/>
 										</Else>
 									</If>
-									{router.pathname !== '/' && (
-										<MenuItem onClick={navigate('/')}>
-											<ListItemIcon>
-												<HomeIcon />
-											</ListItemIcon>
-											<Typography variant="inherit">Go back home</Typography>
-										</MenuItem>
-									)}
-									<MenuItem onClick={navigate('/commands')}>
-										<ListItemIcon>
-											<CommandsIcon />
-										</ListItemIcon>
-										<Typography variant="inherit">Commands</Typography>
-									</MenuItem>
-									<MenuItem onClick={navigate('/privacy')}>
-										<ListItemIcon>
-											<GavelIcon />
-										</ListItemIcon>
-										<Typography variant="inherit">Privacy Policy</Typography>
-									</MenuItem>
-									<MenuItem onClick={navigate('https://invite.skyra.pw')}>
-										<ListItemIcon>
-											<InviteIcon />
-										</ListItemIcon>
-										<Typography variant="inherit">Add Skyra to server</Typography>
-									</MenuItem>
-									<MenuItem onClick={navigate('https://join.skyra.pw')}>
-										<ListItemIcon>
-											<DiscordChatIcon />
-										</ListItemIcon>
-										<Typography variant="inherit">Join our Discord</Typography>
-									</MenuItem>
+									{router.pathname !== '/' && <MenuItemLink href="/" Icon={<HomeIcon />} text="Go back home" />}
+									<MenuItemLink href="/commands" Icon={<CommandsIcon />} text="Commands" />
+									<MenuItemLink href="/privacy" Icon={<GavelIcon />} text="Privacy Policy" />
+									<MenuItemLink href="https://invite.skyra.pw" Icon={<InviteIcon />} text="Add Skyra to server" />
+									<MenuItemLink href="https://join.skyra.pw" Icon={<DiscordChatIcon />} text="Join our Discord" />
+
 									{allowsCookies !== null && (
 										<MenuItem
 											onClick={event => {

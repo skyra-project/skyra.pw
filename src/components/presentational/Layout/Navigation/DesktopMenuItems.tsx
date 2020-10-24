@@ -22,6 +22,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import LoginIcon from '@material-ui/icons/VpnKey';
 import Tooltip from '@mui/Tooltip';
 import { CookieConsentContext } from '@presentational/CookieConsent/ContextProvider';
+import MenuItemLink from '@routing/MenuItemLink';
 import { oauthURL } from '@utils/constants';
 import { navigate } from '@utils/util';
 import { useRouter } from 'next/router';
@@ -137,12 +138,12 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 							color="primary"
 							variant="contained"
 							classes={{ root: classes.transparentButton }}
-							onClick={navigate(oauthURL.toString())}
+							onClick={navigate(oauthURL.toString(), true)}
 							startIcon={<LoginIcon />}
 							disabled={!allowsCookies}
 						>
 							<Typography variant="body2" color="textPrimary">
-								Log In
+								Login
 							</Typography>
 						</Button>
 					</Box>
@@ -169,29 +170,14 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 								<MenuList autoFocusItem={popperMenuIsOpen} id="menu-popover">
 									{router.pathname !== '/' && (
 										<Tooltip title="Click to go back to the home page" placement="left">
-											<MenuItem onClick={navigate('/')}>
-												<ListItemIcon>
-													<HomeIcon />
-												</ListItemIcon>
-												<Typography variant="inherit">Go back home</Typography>
-											</MenuItem>
+											<MenuItemLink href="/" Icon={<HomeIcon />} text="Go back home" />
 										</Tooltip>
 									)}
 									<Tooltip title="Click to view Skyra's commands" placement="left">
-										<MenuItem onClick={navigate('/commands')}>
-											<ListItemIcon>
-												<CommandsIcon />
-											</ListItemIcon>
-											<Typography variant="inherit">Commands</Typography>
-										</MenuItem>
+										<MenuItemLink href="/commands" Icon={<CommandsIcon />} text="Commands" />
 									</Tooltip>
 									<Tooltip title="Click to read how we handle your data" placement="left">
-										<MenuItem onClick={navigate('/privacy')}>
-											<ListItemIcon>
-												<GavelIcon />
-											</ListItemIcon>
-											<Typography variant="inherit">Privacy Policy</Typography>
-										</MenuItem>
+										<MenuItemLink href="/privacy" Icon={<GavelIcon />} text="Privacy Policy" />
 									</Tooltip>
 									{allowsCookies !== null && (
 										<Tooltip title="Click to update whether we can store cookies" placement="left">

@@ -26,7 +26,7 @@ import StarIcon from '@material-ui/icons/Star';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Tooltip from '@mui/Tooltip';
 import GuildIcon from '@presentational/GuildIcon';
-import Link from '@routing/Link';
+import ListItemLink from '@routing/ListItemLink';
 import { noop } from '@sapphire/utilities';
 import { navigate } from '@utils/util';
 import React, { FC, Fragment, memo, useState } from 'react';
@@ -54,7 +54,6 @@ const useStyles = makeStyles((theme: Theme) =>
 				cursor: 'pointer'
 			}
 		},
-
 		nested: {
 			paddingLeft: theme.spacing(4)
 		},
@@ -125,33 +124,23 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 
 			<Box component="div" onKeyDown={isOnMobile ? toggleSidebar : noop}>
 				<List style={{ overflowY: 'auto' }}>
-					<ListItem
-						onClick={closeSidebarOnMobile}
-						disabled={!guildData && !isLoading}
-						component={Link}
+					<ListItemLink
+						listItemOnClick={closeSidebarOnMobile}
+						listItemDisabled={!guildData || isLoading}
 						href={`/guilds/${guildId}`}
-						button
-					>
-						<ListItemIcon>
-							<SettingsIcon />
-						</ListItemIcon>
-						<ListItemText primary="General Settings" />
-					</ListItem>
+						itemText="General Settings"
+						Icon={<SettingsIcon />}
+					/>
 
 					{/* ------------------------------- */}
 
-					<ListItem
-						onClick={closeSidebarOnMobile}
-						disabled={!guildData && !isLoading}
-						component={Link}
+					<ListItemLink
+						listItemOnClick={closeSidebarOnMobile}
+						listItemDisabled={!guildData || isLoading}
 						href={`/guilds/${guildId}/moderation`}
-						button
-					>
-						<ListItemIcon>
-							<GavelIcon />
-						</ListItemIcon>
-						<ListItemText primary="Moderation" />
-					</ListItem>
+						itemText="Moderation"
+						Icon={<GavelIcon />}
+					/>
 
 					{/* ------------------------------- */}
 					<ListItem disabled={!guildData && !isLoading} button onClick={() => handleSubMenu('filter')}>
@@ -162,221 +151,155 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 						{openSubMenus.includes('filter') ? <ExpandLess /> : <ExpandMore />}
 					</ListItem>
 					<Collapse in={openSubMenus.includes('filter')} timeout="auto" unmountOnExit>
-						<List component="div" disablePadding>
-							<ListItem
-								onClick={closeSidebarOnMobile}
-								disabled={!guildData && !isLoading}
-								dense
-								component={Link}
+						<List disablePadding>
+							<ListItemLink
+								listItemOnClick={closeSidebarOnMobile}
+								listItemDisabled={!guildData || isLoading}
+								listItemDense
+								listItemClassName={classes.nested}
 								href={`/guilds/${guildId}/filter/words`}
-								button
-								className={classes.nested}
-							>
-								<ListItemText primary="Words" />
-							</ListItem>
-							<ListItem
-								onClick={closeSidebarOnMobile}
-								disabled={!guildData && !isLoading}
-								dense
-								component={Link}
+								itemText="Words"
+							/>
+							<ListItemLink
+								listItemOnClick={closeSidebarOnMobile}
+								listItemDisabled={!guildData || isLoading}
+								listItemDense
+								listItemClassName={classes.nested}
 								href={`/guilds/${guildId}/filter/capitals`}
-								button
-								className={classes.nested}
-							>
-								<ListItemText primary="Capitals" />
-							</ListItem>
-							<ListItem
-								onClick={closeSidebarOnMobile}
-								disabled={!guildData && !isLoading}
-								dense
-								component={Link}
+								itemText="Capitals"
+							/>
+							<ListItemLink
+								listItemOnClick={closeSidebarOnMobile}
+								listItemDisabled={!guildData || isLoading}
+								listItemDense
+								listItemClassName={classes.nested}
 								href={`/guilds/${guildId}/filter/invites`}
-								button
-								className={classes.nested}
-							>
-								<ListItemText primary="Invites" />
-							</ListItem>
-							<ListItem
-								onClick={closeSidebarOnMobile}
-								disabled={!guildData && !isLoading}
-								dense
-								component={Link}
+								itemText="Invites"
+							/>
+							<ListItemLink
+								listItemOnClick={closeSidebarOnMobile}
+								listItemDisabled={!guildData || isLoading}
+								listItemDense
+								listItemClassName={classes.nested}
 								href={`/guilds/${guildId}/filter/links`}
-								button
-								className={classes.nested}
-							>
-								<ListItemText primary="Links" />
-							</ListItem>
-							<ListItem
-								onClick={closeSidebarOnMobile}
-								disabled={!guildData && !isLoading}
-								dense
-								component={Link}
+								itemText="Links"
+							/>
+							<ListItemLink
+								listItemOnClick={closeSidebarOnMobile}
+								listItemDisabled={!guildData || isLoading}
+								listItemDense
+								listItemClassName={classes.nested}
 								href={`/guilds/${guildId}/filter/messages`}
-								button
-								className={classes.nested}
-							>
-								<ListItemText primary="Message Duplication" />
-							</ListItem>
-							<ListItem
-								onClick={closeSidebarOnMobile}
-								disabled={!guildData && !isLoading}
-								dense
-								component={Link}
+								itemText="Message Duplication"
+							/>
+							<ListItemLink
+								listItemOnClick={closeSidebarOnMobile}
+								listItemDisabled={!guildData || isLoading}
+								listItemDense
+								listItemClassName={classes.nested}
 								href={`/guilds/${guildId}/filter/newlines`}
-								button
-								className={classes.nested}
-							>
-								<ListItemText primary="Line Spam" />
-							</ListItem>
-							<ListItem
-								onClick={closeSidebarOnMobile}
-								disabled={!guildData && !isLoading}
-								dense
-								component={Link}
+								itemText="Line Spam"
+							/>
+							<ListItemLink
+								listItemOnClick={closeSidebarOnMobile}
+								listItemDisabled={!guildData || isLoading}
+								listItemDense
+								listItemClassName={classes.nested}
 								href={`/guilds/${guildId}/filter/reactions`}
-								button
-								className={classes.nested}
-							>
-								<ListItemText primary="Reactions" />
-							</ListItem>
+								itemText="Reactions"
+							/>
 						</List>
 					</Collapse>
 
 					{/* ------------------------------- */}
 
-					<ListItem
-						onClick={closeSidebarOnMobile}
-						disabled={!guildData && !isLoading}
-						component={Link}
+					<ListItemLink
+						listItemOnClick={closeSidebarOnMobile}
+						listItemDisabled={!guildData || isLoading}
 						href={`/guilds/${guildId}/events`}
-						button
-					>
-						<ListItemIcon>
-							<EventIcon />
-						</ListItemIcon>
-						<ListItemText primary="Events" />
-					</ListItem>
+						itemText="Events"
+						Icon={<EventIcon />}
+					/>
 
 					{/* ------------------------------- */}
 
-					<ListItem
-						onClick={closeSidebarOnMobile}
-						disabled={!guildData && !isLoading}
-						component={Link}
+					<ListItemLink
+						listItemOnClick={closeSidebarOnMobile}
+						listItemDisabled={!guildData || isLoading}
 						href={`/guilds/${guildId}/channels`}
-						button
-					>
-						<ListItemIcon>
-							<ChannelsIcon />
-						</ListItemIcon>
-						<ListItemText primary="Channels" />
-					</ListItem>
+						itemText="Channels"
+						Icon={<ChannelsIcon />}
+					/>
 
 					{/* ------------------------------- */}
 
-					<ListItem
-						onClick={closeSidebarOnMobile}
-						disabled={!guildData && !isLoading}
-						component={Link}
+					<ListItemLink
+						listItemOnClick={closeSidebarOnMobile}
+						listItemDisabled={!guildData || isLoading}
 						href={`/guilds/${guildId}/messages`}
-						button
-					>
-						<ListItemIcon>
-							<MessagesIcon />
-						</ListItemIcon>
-						<ListItemText primary="Messages" />
-					</ListItem>
+						itemText="Messages"
+						Icon={<MessagesIcon />}
+					/>
 
 					{/* ------------------------------- */}
 
-					<ListItem
-						onClick={closeSidebarOnMobile}
-						disabled={!guildData && !isLoading}
-						component={Link}
+					<ListItemLink
+						listItemOnClick={closeSidebarOnMobile}
+						listItemDisabled={!guildData || isLoading}
 						href={`/guilds/${guildId}/roles`}
-						button
-					>
-						<ListItemIcon>
-							<RolesIcon />
-						</ListItemIcon>
-						<ListItemText primary="Roles" />
-					</ListItem>
+						itemText="Roles"
+						Icon={<RolesIcon />}
+					/>
 
 					{/* ------------------------------- */}
 
-					<ListItem
-						onClick={closeSidebarOnMobile}
-						disabled={!guildData && !isLoading}
-						component={Link}
+					<ListItemLink
+						listItemOnClick={closeSidebarOnMobile}
+						listItemDisabled={!guildData || isLoading}
 						href={`/guilds/${guildId}/disabled-commands`}
-						button
-					>
-						<ListItemIcon>
-							<InputIcon />
-						</ListItemIcon>
-						<ListItemText primary="Disable Commands" />
-					</ListItem>
+						itemText="Disable Commands"
+						Icon={<InputIcon />}
+					/>
 
 					{/* ------------------------------- */}
 
-					<ListItem
-						onClick={closeSidebarOnMobile}
-						disabled={!guildData && !isLoading}
-						component={Link}
+					<ListItemLink
+						listItemOnClick={closeSidebarOnMobile}
+						listItemDisabled={!guildData || isLoading}
 						href={`/guilds/${guildId}/custom-commands`}
-						button
-					>
-						<ListItemIcon>
-							<CustomCommandsIcon />
-						</ListItemIcon>
-						<ListItemText primary="Custom Commands" />
-					</ListItem>
+						itemText="Custom Commands"
+						Icon={<CustomCommandsIcon />}
+					/>
 
 					{/* ------------------------------- */}
 
-					<ListItem
-						onClick={closeSidebarOnMobile}
-						disabled={!guildData && !isLoading}
-						component={Link}
+					<ListItemLink
+						listItemOnClick={closeSidebarOnMobile}
+						listItemDisabled={!guildData || isLoading}
 						href={`/guilds/${guildId}/starboard`}
-						button
-					>
-						<ListItemIcon>
-							<StarIcon />
-						</ListItemIcon>
-						<ListItemText primary="Starboard" />
-					</ListItem>
+						itemText="Starboard"
+						Icon={<StarIcon />}
+					/>
 
 					{/* ------------------------------- */}
 
-					<ListItem
-						onClick={closeSidebarOnMobile}
-						disabled={!guildData && !isLoading}
-						component={Link}
+					<ListItemLink
+						listItemOnClick={closeSidebarOnMobile}
+						listItemDisabled={!guildData || isLoading}
 						href={`/guilds/${guildId}/suggestions`}
-						button
-					>
-						<ListItemIcon>
-							<FeedbackIcon />
-						</ListItemIcon>
-						<ListItemText primary="Suggestions" />
-					</ListItem>
+						itemText="Suggestions"
+						Icon={<FeedbackIcon />}
+					/>
 
 					{/* ------------------------------- */}
 
-					<ListItem
-						onClick={closeSidebarOnMobile}
-						disabled={!guildData && !isLoading}
-						component={Link}
+					<ListItemLink
+						listItemOnClick={closeSidebarOnMobile}
+						listItemDisabled={!guildData || isLoading}
 						href={`/music/${guildId}`}
-						button
-					>
-						<ListItemIcon>
-							<MusicIcon />
-						</ListItemIcon>
-						<ListItemText primary="Music" />
-					</ListItem>
+						itemText="Music"
+						Icon={<MusicIcon />}
+					/>
 				</List>
 			</Box>
 		</Fragment>

@@ -13,6 +13,8 @@ import { UrlObject } from 'url';
 interface LinkProps extends NextLinkProps {
 	/** The href to navigate to */
 	href: string | UrlObject;
+	/** Force the link to open in the same tab */
+	forceSameTab?: boolean;
 	/** Optionally text to render inside a Typography component. If not provided then this will render children */
 	text?: ReactNode;
 	/** Additional props to pass to the typography component, only used when {@link LinkProps.text} is provided */
@@ -43,15 +45,18 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
-	({ href, activeClassName = 'active', className: classNameFromProps, text, children, TextTypographyProps, ...other }, ref) => {
+	(
+		{ href, forceSameTab, activeClassName = 'active', className: classNameFromProps, text, children, TextTypographyProps, ...other },
+		ref
+	) => {
 		const router = useRouter();
 		const classes = useStyles();
 		const pathname = typeof href === 'string' ? href : href.pathname;
-		const className = clsx(classNameFromProps, classes.link, {
+		const className = clsx(classes.link, classNameFromProps, {
 			[activeClassName]: router.pathname === pathname && activeClassName
 		});
 
-		if (pathname?.startsWith('/')) {
+		if (forceSameTab || pathname?.startsWith('/')) {
 			return (
 				<NextComposed className={className} ref={ref} href={href} {...other}>
 					<If condition={Boolean(text)}>

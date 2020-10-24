@@ -141,7 +141,7 @@ const UserMenu: FC = () => {
 										<ListItemIcon>
 											<SyncIcon className={classes.syncLogo} />
 										</ListItemIcon>
-										<Typography variant="inherit">Resync</Typography>
+										<Typography variant="inherit">Resync user data</Typography>
 									</MenuItem>
 								</MenuList>
 							</ClickAwayListener>

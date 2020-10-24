@@ -97,7 +97,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 	}, [guildId]);
 
 	useEffect(() => {
-		// syncGuildData();
+		syncGuildData();
 	}, [syncGuildData]);
 
 	const submitChanges = async () => {
