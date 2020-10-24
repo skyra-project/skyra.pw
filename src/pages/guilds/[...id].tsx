@@ -1,10 +1,10 @@
 import { createSeoProps } from '@config/next-seo.config';
+import { NextSeo } from 'next-seo';
 import { useAuthenticated } from '@contexts/AuthenticationContext';
 import Dashboard from '@layout/Settings/Dashboard';
 import Typography from '@material-ui/core/Typography';
 import RedirectRoute from '@routing/RedirectRoute';
 import { NextPage } from 'next';
-import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -21,7 +21,7 @@ const GuildSettingsPage: NextPage = () => {
 
 	return (
 		<>
-			<NextSeo {...createSeoProps({ title: 'Homepage' })} />
+			<NextSeo {...createSeoProps({ title: 'Guild Settings' })} />
 			<Dashboard guildId={guildId}>
 				<Typography>Guild Settings Base page!</Typography>
 			</Dashboard>

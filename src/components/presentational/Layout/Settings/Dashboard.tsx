@@ -1,3 +1,4 @@
+import { createSeoProps } from '@config/next-seo.config';
 import { FlattenedGuild } from '@config/types/ApiData';
 import { GuildSettings, SettingsPageProps } from '@config/types/GuildSettings';
 import { useMediaQuery } from '@material-ui/core';
@@ -7,14 +8,14 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Hidden from '@material-ui/core/Hidden';
 import Slide from '@material-ui/core/Slide';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import Skeleton from '@material-ui/lab/Skeleton';
 import ErrorAlert from '@presentational/Alerts/Error';
 import { SettingsDrawerWidth } from '@utils/constants';
 import { Time } from '@utils/skyraUtils';
 import { apiFetch, navigate } from '@utils/util';
 import deepMerge, { Options as DeepMergeOptions } from 'deepmerge';
+import { NextSeo } from 'next-seo';
 import React, { FC, useCallback, useEffect, useState } from 'react';
-import { Else, If, Then } from 'react-if';
+import { When } from 'react-if';
 import { DeepPartial } from 'utility-types';
 import DesktopSettingsDrawer from './Navigation/DesktopSettingsDrawer';
 import MobileSettingsDrawer from './Navigation/MobileSettingsDrawer';
@@ -143,6 +144,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 	};
 
 	const readyToRender =
+		!isLoading &&
 		guildData !== undefined &&
 		guildSettings !== undefined &&
 		Object.keys(guildData).length !== 0 &&
@@ -192,19 +194,17 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 				</Box>
 				<Box component="main" className={classes.content}>
 					<Box className={classes.toolbar} />
-					<If condition={readyToRender}>
-						<Then>
+					<When condition={readyToRender}>
+						<>
+							<NextSeo {...createSeoProps({ title: `${guildData?.name ?? ''} Settings` })} />
 							{React.Children.map(children, child => {
 								if (React.isValidElement(child)) {
 									return React.cloneElement(child, componentProps);
 								}
 								return child;
 							})}
-						</Then>
-						<Else>
-							<Skeleton variant="rect" animation="wave" />
-						</Else>
-					</If>
+						</>
+					</When>
 					<Slide direction="up" in={Object.keys(guildSettingsChanges ?? {}).length > 0} mountOnEnter unmountOnExit>
 						<SubmitResetButtons
 							isLoading={isLoading}
