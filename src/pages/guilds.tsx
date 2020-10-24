@@ -6,7 +6,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import FilteredGuildCards from '@presentational/GuildCard';
+import { FilteredGuildCards } from '@presentational/GuildCard';
 import GeneralPage from '@presentational/Layout/General';
 import ScrollToTop from '@routing/ScrollToTop';
 import { NextPage } from 'next';

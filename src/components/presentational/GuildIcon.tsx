@@ -1,7 +1,6 @@
 import { FlattenedGuild } from '@config/types/ApiData';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import LazyAvatar from '@mui/LazyAvatar';
-import Link from '@routing/Link';
 import { displayIconURL, getAcronym } from '@utils/util';
 import clsx from 'clsx';
 import React, { FC } from 'react';
@@ -29,15 +28,13 @@ const GuildIcon: FC<GuildIconProps> = ({ guild, sizeClass, size = 128 }) => {
 	}
 
 	return (
-		<Link href={`/guilds/${guild.id}`}>
-			<LazyAvatar
-				classes={{ root: clsx(classes.avatar, sizeClass) }}
-				imgProps={{ height: 256, width: 256 }}
-				src={displayIconURL(guild, { size })}
-			>
-				{getAcronym(guild.name)}
-			</LazyAvatar>
-		</Link>
+		<LazyAvatar
+			classes={{ root: clsx(classes.avatar, sizeClass) }}
+			imgProps={{ height: 256, width: 256 }}
+			src={displayIconURL(guild, { size })}
+		>
+			{getAcronym(guild.name)}
+		</LazyAvatar>
 	);
 };
 

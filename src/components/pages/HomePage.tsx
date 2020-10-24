@@ -2,7 +2,7 @@ import features from '@assets/features';
 import { useAuthenticated } from '@contexts/AuthenticationContext';
 import { useDiscordPack } from '@contexts/DiscordPackContext';
 import { Box, Container } from '@material-ui/core';
-import FilteredGuildCards from '@presentational/GuildCard';
+import { FilteredGuildCards } from '@presentational/GuildCard';
 import HomePageSection from '@presentational/HomePageSection';
 import GeneralPage from '@presentational/Layout/General';
 import ScrollToTop from '@routing/ScrollToTop';
