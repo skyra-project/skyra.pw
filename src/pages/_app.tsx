@@ -113,7 +113,7 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 							<DiscordPackProvider>
 								<CookieConsentProvider>
 									<CssBaseline />
-									<NextNprogress color="#FF0000" startPosition={0.3} stopDelayMs={200} height={3} />
+									<NextNprogress color="#0A5699" startPosition={0.3} stopDelayMs={200} height={3} />
 									<CookieWarning />
 									<Component {...pageProps} />
 								</CookieConsentProvider>
