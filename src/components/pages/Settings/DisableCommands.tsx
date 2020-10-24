@@ -1,4 +1,5 @@
 import { FlattenedCommand } from '@config/types/ApiData';
+import { DisableCommands } from '@config/types/ConfigurableData';
 import { SettingsPageProps } from '@config/types/GuildSettings';
 import Section from '@layout/Settings/Section';
 import Accordion from '@material-ui/core/Accordion';
@@ -68,11 +69,11 @@ export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWi
 	const classes = useStyles();
 	const [expanded, setExpanded] = useState<string | false>(false);
 	const [loading, setLoading] = useState(true);
-	const [commands, setCommands] = useState<Record<string, Command>>({});
+	const [commands, setCommands] = useState<Record<string, DisableCommands.Command>>({});
 
 	const fetchCommands = useCallback(async () => {
 		const commands: FlattenedCommand[] = await apiFetch('/commands');
-		const commandsForState: Record<string, Command> = {};
+		const commandsForState: Record<string, DisableCommands.Command> = {};
 		for (const command of commands) {
 			if (command.guarded) continue;
 			commandsForState[command.name] = {
@@ -146,7 +147,7 @@ export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWi
 									variant="contained"
 									classes={{ root: classes.enableAllButton }}
 									onClick={() => {
-										const changedCommands: Record<string, Command> = {};
+										const changedCommands: Record<string, DisableCommands.Command> = {};
 										for (const command of Object.values(commands)) {
 											if (command.category !== catName) continue;
 											changedCommands[command.name] = {
@@ -168,7 +169,7 @@ export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWi
 									variant="contained"
 									classes={{ root: classes.disableAllButton }}
 									onClick={() => {
-										const changedCommands: Record<string, Command> = {};
+										const changedCommands: Record<string, DisableCommands.Command> = {};
 										for (const command of Object.values(commands)) {
 											if (command.category !== catName) continue;
 											changedCommands[command.name] = {
@@ -210,10 +211,3 @@ export default ({ guildSettings: { disabledCommands }, patchGuildData }: PropsWi
 		</>
 	);
 };
-
-interface Command {
-	name: string;
-	description: string;
-	isEnabled: boolean;
-	category: string;
-}

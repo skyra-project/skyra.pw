@@ -1,3 +1,4 @@
+import { GeneralSettings } from '@config/types/ConfigurableData';
 import { SettingsPageProps } from '@config/types/GuildSettings';
 import Section from '@layout/Settings/Section';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -10,11 +11,6 @@ import { FastField } from 'formik';
 import React, { PropsWithChildren } from 'react';
 import { object, string } from 'yup';
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-type GeneralSettingsForm = {
-	prefix: string;
-};
-
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		languageOffset: {
@@ -25,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default (props: PropsWithChildren<SettingsPageProps>) => {
 	const classes = useStyles();
-	const validationSchema = object<GeneralSettingsForm>({
+	const validationSchema = object<GeneralSettings.Form>({
 		prefix: string()
 			.required('Setting a prefix is required')
 			.min(1, 'Prefix has a minimum length of 1')
@@ -45,7 +41,7 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 					xl: 12
 				}}
 			>
-				<AutoSavingForm<GeneralSettingsForm>
+				<AutoSavingForm<GeneralSettings.Form>
 					validationSchema={validationSchema}
 					initialValues={{ prefix: props.guildSettings.prefix }}
 					onSubmit={(values, formikHelpers) => {

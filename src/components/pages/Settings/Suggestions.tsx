@@ -1,4 +1,6 @@
-import { SettingsPageProps, SuggestionActions, SuggestionEmojis } from '@config/types/GuildSettings';
+import { CONFIGURABLE_EMOJIS, CONFIGURABLE_SUGGESTION_ACTIONS } from '@config/SettingsDataEntries';
+import { Suggestions } from '@config/types/ConfigurableData';
+import { SettingsPageProps } from '@config/types/GuildSettings';
 import PageHeader from '@layout/Settings/PageHeader';
 import Section from '@layout/Settings/Section';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
@@ -7,7 +9,7 @@ import SelectBoolean from '@selects/SelectBoolean';
 import SelectChannel from '@selects/SelectChannel';
 import SelectEmoji from '@selects/SelectEmoji';
 import { EmojiRegexExtractId } from '@utils/constants';
-import React, { memo, PropsWithChildren, useMemo } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -25,44 +27,8 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const CONFIGURABLE_SUGGESTION_ACTIONS: OnAction[] = [
-	{ title: 'DM', key: 'dm', description: "If this setting is enabled, Skyra will DM the suggestion's author every time it is updated." },
-	{
-		title: 'Repost',
-		key: 'repost',
-		description:
-			"If this setting is enabled, Skyra will repost the suggestion's message every time it is updated. If it is disabled, it will edit the original message."
-	},
-	{
-		title: 'Hide Author',
-		key: 'hide-author',
-		description:
-			'This setting allows you to update suggestions anonymously. It will substitute the updater\'s name with either "An administrator" or "A moderator", according to their permission level.'
-	}
-];
-
-const CONFIGURABLE_EMOJIS: Emoji[] = [
-	{
-		title: 'Upvote Emoji',
-		key: 'upvote',
-		description: 'The upvote emoji Skyra reacts with on every suggestion.',
-		defaultName: 'ArrowT',
-		defaultImage: 'https://cdn.discordapp.com/emojis/694594285487652954.png',
-		defaultId: '694594285487652954'
-	},
-	{
-		title: 'Downvote Emoji',
-		key: 'downvote',
-		description: 'The downvote emoji Skyra reacts with on every suggestion.',
-		defaultName: 'ArrowB',
-		defaultImage: 'https://cdn.discordapp.com/emojis/694594285269680179.png',
-		defaultId: '694594285269680179'
-	}
-];
-
-export default memo((props: PropsWithChildren<SettingsPageProps>) => {
+const Suggestions: FC<SettingsPageProps> = props => {
 	const classes = useStyles();
-
 	const findEmoji = useMemo(() => (id: string) => props.guildData.emojis.find(e => e.id === id)!, [props.guildData.emojis]);
 	const tagToId = useMemo(() => (tag: string) => tag.replace(EmojiRegexExtractId, '$1'), []);
 	const idToTag = useMemo(() => (id: string, name: string, animated: boolean) => `<${animated ? 'a' : ''}:${name}:${id}>`, []);
@@ -185,19 +151,6 @@ export default memo((props: PropsWithChildren<SettingsPageProps>) => {
 			</Section>
 		</>
 	);
-});
+};
 
-interface OnAction {
-	title: string;
-	key: keyof SuggestionActions;
-	description: string;
-}
-
-interface Emoji {
-	title: string;
-	key: keyof SuggestionEmojis;
-	description: string;
-	defaultName: string;
-	defaultImage: string;
-	defaultId: string;
-}
+export default memo(Suggestions);

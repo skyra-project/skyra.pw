@@ -1,10 +1,11 @@
-import { Events, SettingsPageProps } from '@config/types/GuildSettings';
+import { CONFIGURABLE_MEMBER_EVENTS, CONFIGURABLE_MESSAGE_EVENTS, CONFIGURABLE_MODERATION_EVENTS } from '@config/SettingsDataEntries';
+import { SettingsPageProps } from '@config/types/GuildSettings';
 import Section from '@layout/Settings/Section';
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import SimpleGrid from '@mui/SimpleGrid';
+import Link from '@routing/Link';
 import SelectBoolean from '@selects/SelectBoolean';
 import React, { PropsWithChildren } from 'react';
-import Link from '@routing/Link';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -14,39 +15,6 @@ const useStyles = makeStyles((theme: Theme) =>
 		}
 	})
 );
-
-const CONFIGURABLE_MODERATION_EVENTS: Event[] = [
-	{ title: 'Ban Added', key: 'banAdd', description: 'This event posts anonymous moderation logs when a user gets banned.' },
-	{ title: 'Ban Revoked', key: 'banRemove', description: 'This event posts anonymous moderation logs when a user gets unbanned' }
-];
-
-const CONFIGURABLE_MEMBER_EVENTS: Event[] = [
-	{ title: 'Member Join', key: 'memberAdd', description: 'This event posts member logs when a user joins' },
-	{ title: 'Member Leave', key: 'memberRemove', description: 'This event posts member logs when a user leaves' },
-	{ title: 'Member Role Changes', key: 'memberRoleUpdate', description: "This events posts member logs when a member's roles change" },
-	{ title: 'Member Name Changes', key: 'memberNameUpdate', description: 'This events posts member logs when a member changes their name' }
-];
-
-const CONFIGURABLE_MESSAGE_EVENTS: Event[] = [
-	{
-		title: 'Message Edit',
-		key: 'messageEdit',
-		description:
-			'This event logs to the Message Logs channel when a message is edited. NSFW messages will be send to the NSFW Logs channel'
-	},
-	{
-		title: 'Message Delete',
-		key: 'messageDelete',
-		description:
-			'This event logs to the Message Logs channel when a message is deleted. NSFW messages will be send to the NSFW Logs channel'
-	},
-	{
-		title: 'Twemoji Reactions',
-		key: 'twemoji-reactions',
-		description:
-			'This event posts messages whenever a member reacts to a message with a twemoji, they will be send to the Reaction Logs channel'
-	}
-];
 
 export default (props: PropsWithChildren<SettingsPageProps>) => {
 	const classes = useStyles();
@@ -134,9 +102,3 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 		</>
 	);
 };
-
-interface Event {
-	title: string;
-	key: keyof Events;
-	description: string;
-}

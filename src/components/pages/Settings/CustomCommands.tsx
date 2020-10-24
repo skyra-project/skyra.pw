@@ -1,3 +1,4 @@
+import { CustomCommands } from '@config/types/ConfigurableData';
 import { CustomCommand, SettingsPageProps } from '@config/types/GuildSettings';
 import Section from '@layout/Settings/Section';
 import Button from '@material-ui/core/Button';
@@ -20,13 +21,6 @@ import { FastField, Formik, FormikConfig } from 'formik';
 import React, { Fragment, PropsWithChildren } from 'react';
 import { Virtuoso } from 'react-virtuoso';
 import { boolean, object, string } from 'yup';
-
-interface NewTagForm {
-	id: string;
-	content: string;
-	color: string;
-	embed: boolean;
-}
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -71,7 +65,7 @@ const CustomCommandsPage = ({
 	const classes = useStyles();
 	const theme = useTheme();
 
-	const validationSchema = object<NewTagForm>({
+	const validationSchema = object<CustomCommands.Form>({
 		id: string()
 			.required('A tag must have a name')
 			.max(50, 'A tag name must be 50 or less characters long.')
@@ -102,7 +96,7 @@ const CustomCommandsPage = ({
 		return [...clone, next];
 	};
 
-	const formikConfig: FormikConfig<NewTagForm> = {
+	const formikConfig: FormikConfig<CustomCommands.Form> = {
 		initialValues: {
 			id: '',
 			content: '',

@@ -1,3 +1,4 @@
+import { PUBLIC_ROLES, REMOVE_INITIAL, ROLES } from '@config/SettingsDataEntries';
 import { Roles, SettingsPageProps } from '@config/types/GuildSettings';
 import PageHeader from '@layout/Settings/PageHeader';
 import Section from '@layout/Settings/Section';
@@ -125,77 +126,3 @@ export default (props: PropsWithChildren<SettingsPageProps>) => {
 		</>
 	);
 };
-
-const REMOVE_INITIAL: Role = {
-	name: 'Remove Initial',
-	tooltip: 'Whether the claim of a public role should remove the initial one too.',
-	key: 'removeInitial'
-};
-
-const PUBLIC_ROLES: Role = {
-	name: 'Public Roles',
-	tooltip: 'The public roles, they will be given with no cost to any user using the roles command.',
-	key: 'public'
-};
-
-const ROLES: Role[] = [
-	{
-		name: 'Administrator',
-		tooltip:
-			'The administrator role, their priviledges in Skyra will be upon moderative, covering management. Defaults to anyone with the Manage Server permission.',
-		key: 'admin'
-	},
-	{ name: 'Initial', tooltip: 'The initial role, if configured, I will give it to users as soon as they join.', key: 'initial' },
-	{
-		name: 'Moderator',
-		tooltip: 'The moderator role, their priviledges will cover almost all moderation commands. Defaults to anyone who can ban members.',
-		key: 'moderator'
-	},
-	{
-		name: 'Muted',
-		tooltip: 'The muted role, if configured, I will give new muted users this role. Otherwise I will prompt you the creation of one.',
-		key: 'muted'
-	},
-	{
-		name: 'Restricted Reaction',
-		tooltip: 'The role that is used for the restrictReaction moderation command.',
-		key: 'restricted-reaction'
-	},
-	{
-		name: 'Restricted Embed',
-		tooltip: 'The role that is used for the restrictEmbed moderation command.',
-		key: 'restricted-embed'
-	},
-	{
-		name: 'Restricted Attachment',
-		tooltip: 'The role that is used for the restrictAttachment moderation command.',
-		key: 'restricted-attachment'
-	},
-	{
-		name: 'Restricted Emoji',
-		tooltip: 'The role that is used for the restrictEmoji moderation command.',
-		key: 'restricted-emoji'
-	},
-	{
-		name: 'Restricted Voice',
-		tooltip: 'The role that is used for the restrictVoice moderation command.',
-		key: 'restricted-voice'
-	},
-	{
-		name: 'DJ',
-		tooltip: "The DJ role for this server. DJs have more advanced control over Skyra's music commands.",
-		key: 'dj'
-	},
-	{
-		name: 'Subscriber',
-		tooltip:
-			'The subscriber role, this role will be mentioned every time you use the announce command. I will always keep it non-mentionable so people do not abuse mentions.',
-		key: 'subscriber'
-	}
-];
-
-interface Role {
-	name: string;
-	tooltip: string;
-	key: keyof PickByValue<Roles, string | string[] | boolean>;
-}

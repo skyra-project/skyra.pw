@@ -1,4 +1,5 @@
-import { Messages, SettingsPageProps } from '@config/types/GuildSettings';
+import { CONFIGURABLE_MESSAGES, REPLACEABLE_MATCHERS } from '@config/SettingsDataEntries';
+import { SettingsPageProps } from '@config/types/GuildSettings';
 import Section from '@layout/Settings/Section';
 import Box from '@material-ui/core/Box';
 import Hidden from '@material-ui/core/Hidden';
@@ -14,17 +15,7 @@ import SimpleGrid from '@mui/SimpleGrid';
 import Tooltip from '@mui/Tooltip';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectChannels from '@selects/SelectChannels';
-import React, { PropsWithChildren } from 'react';
-import { PickByValue } from 'utility-types';
-
-enum Matches {
-	Guild = '%GUILD%',
-	Member = '%MEMBER%',
-	MemberName = '%MEMBERNAME%',
-	MemberTag = '%MEMBERTAG%',
-	MemberCount = '%MEMBERCOUNT%',
-	Position = '%POSITION%'
-}
+import React, { PropsWithChildren, useMemo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -45,48 +36,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export default ({ guildData, guildSettings, patchGuildData }: PropsWithChildren<SettingsPageProps>) => {
 	const classes = useStyles();
 
-	const CONFIGURABLE_MESSAGES: Message[] = [
-		{
-			name: 'Join DMs',
-			key: 'join-dm',
-			placeholder: [!guildSettings.events.memberAdd ? 'You must configure Member Join on the Events page.' : null].join(' '),
-			tooltipText: 'This is the message I will send in a DM to a member when they join.'
-		},
-		{
-			name: 'Greeting',
-			key: 'greeting',
-			placeholder: [
-				!guildSettings.channels.greeting ? 'You must set up the greeting channel in channels page.' : null,
-				!guildSettings.events.memberAdd ? 'You must configure Member Join on the Events page.' : null
-			].join(' '),
-			tooltipText: `This is the message I will send to ${
-				guildData?.channels.find(c => c.id === guildSettings.channels.greeting)?.name ?? 'the configured Greeting channel'
-			} when a member joins.`
-		},
-		{
-			name: 'Farewell',
-			key: 'farewell',
-			placeholder: [
-				!guildSettings.channels.farewell ? 'You must set up the farewell channel in channels page.' : null,
-				!guildSettings.events.memberRemove ? 'You must configure Member Leave on the Events page.' : null
-			].join(' '),
-			tooltipText: `This is the message I will send to ${
-				guildData?.channels.find(c => c.id === guildSettings.channels.farewell)?.name ?? 'the configured Farewell channel'
-			} when a member leaves.`
-		}
-	];
-
-	const REPLACEABLE_MATCHERS: Matcher[] = [
-		{ matchKey: Matches.Guild, description: `I will replace this with ${guildData?.name}` },
-		{ matchKey: Matches.Member, description: `I will replace this with a mention of the member` },
-		{ matchKey: Matches.MemberName, description: `I will replace this with the username of the member` },
-		{ matchKey: Matches.MemberTag, description: `I will replace this with the unique tag of the member` },
-		{ matchKey: Matches.MemberCount, description: `I will replace this with the amount of members currently in the server` },
-		{
-			matchKey: Matches.Position,
-			description: `I will replace this with the ordinal position this member has in the server.`
-		}
-	];
+	const configurableMessages = useMemo(() => CONFIGURABLE_MESSAGES(guildSettings, guildData), [guildData, guildSettings]);
+	const replaceableMatchers = useMemo(() => REPLACEABLE_MATCHERS(guildData), [guildData]);
 
 	return (
 		<>
@@ -126,7 +77,7 @@ export default ({ guildData, guildSettings, patchGuildData }: PropsWithChildren<
 											].join(' ')}
 										</Typography>
 										<List dense disablePadding>
-											{REPLACEABLE_MATCHERS.map((matcher, index) => (
+											{replaceableMatchers.map((matcher, index) => (
 												<ListItem key={index} dense disableGutters>
 													<ListItemText
 														primary={matcher.matchKey}
@@ -157,7 +108,7 @@ export default ({ guildData, guildSettings, patchGuildData }: PropsWithChildren<
 				}}
 			>
 				<SimpleGrid direction="row" gridItemProps={{ xs: 12 }}>
-					{CONFIGURABLE_MESSAGES.map(({ key, name, placeholder, tooltipText }, index) => (
+					{configurableMessages.map(({ key, name, placeholder, tooltipText }, index) => (
 						<Tooltip title={tooltipText} placement="top-start" key={index}>
 							<TextField
 								multiline
@@ -202,15 +153,3 @@ export default ({ guildData, guildSettings, patchGuildData }: PropsWithChildren<
 		</>
 	);
 };
-
-interface Message {
-	name: string;
-	placeholder: string;
-	tooltipText: string;
-	key: keyof PickByValue<Messages, string>;
-}
-
-interface Matcher {
-	matchKey: Matches;
-	description: string;
-}
