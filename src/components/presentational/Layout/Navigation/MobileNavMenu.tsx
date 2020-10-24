@@ -23,6 +23,7 @@ import LoginIcon from '@material-ui/icons/VpnKey';
 import LazyAvatar from '@mui/LazyAvatar';
 import { CookieConsentContext } from '@presentational/CookieConsent/ContextProvider';
 import MenuItemLink from '@routing/MenuItemLink';
+import { oauthURL } from '@utils/constants';
 import { displayAvatarURL } from '@utils/skyraUtils';
 import { logOut, syncUser } from '@utils/util';
 import { useRouter } from 'next/router';
@@ -165,7 +166,7 @@ const MobileNavMenu: FC = () => {
 										<Else>
 											<MenuItemLink
 												menuItemDisabled={!allowsCookies}
-												href="/privacy"
+												href={oauthURL.toString()}
 												Icon={<LoginIcon />}
 												text="Login"
 												forceSameTab
