@@ -9,7 +9,7 @@ import SelectDuration from '@selects/SelectDuration';
 import { bitwiseHas, bitwiseSet, updateSliderValueObj } from '@utils/util';
 import React, { FC, Fragment, memo } from 'react';
 
-const FilterCapitals: FC<SettingsPageProps> = props => {
+const FilterCapitalsSettings: FC<SettingsPageProps> = props => {
 	const { capitals } = props.guildSettings.selfmod;
 
 	return (
@@ -118,4 +118,4 @@ const FilterCapitals: FC<SettingsPageProps> = props => {
 	);
 };
 
-export default memo(FilterCapitals);
+export default memo(FilterCapitalsSettings);

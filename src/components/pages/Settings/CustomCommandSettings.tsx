@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const CustomCommandsPage = ({
+const CustomCommandSettings = ({
 	patchGuildData,
 	guildSettings: { 'custom-commands': customCommands, prefix }
 }: PropsWithChildren<SettingsPageProps>) => {
@@ -287,4 +287,4 @@ const CustomCommandsPage = ({
 	);
 };
 
-export default memo(CustomCommandsPage);
+export default memo(CustomCommandSettings);

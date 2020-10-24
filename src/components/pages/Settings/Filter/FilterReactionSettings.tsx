@@ -10,7 +10,7 @@ import SelectDuration from '@selects/SelectDuration';
 import { bitwiseHas, bitwiseSet, updateSliderValueObj } from '@utils/util';
 import React, { FC, Fragment, memo } from 'react';
 
-const FilterReactions: FC<SettingsPageProps> = props => {
+const FilterReactionSettings: FC<SettingsPageProps> = props => {
 	const { reactions } = props.guildSettings.selfmod;
 
 	return (
@@ -99,4 +99,4 @@ const FilterReactions: FC<SettingsPageProps> = props => {
 	);
 };
 
-export default memo(FilterReactions);
+export default memo(FilterReactionSettings);

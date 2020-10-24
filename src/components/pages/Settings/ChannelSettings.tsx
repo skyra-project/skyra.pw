@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const Channel: FC<SettingsPageProps> = props => {
+const ChannelSettings: FC<SettingsPageProps> = props => {
 	const classes = useStyles();
 
 	return (
@@ -179,4 +179,4 @@ const Channel: FC<SettingsPageProps> = props => {
 	);
 };
 
-export default memo(Channel);
+export default memo(ChannelSettings);

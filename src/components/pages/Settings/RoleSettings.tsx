@@ -1,5 +1,5 @@
 import { PUBLIC_ROLES, REMOVE_INITIAL, ROLES } from '@config/SettingsDataEntries';
-import { Roles, SettingsPageProps } from '@config/types/GuildSettings';
+import { Roles as RoleSettings, SettingsPageProps } from '@config/types/GuildSettings';
 import PageHeader from '@layout/Settings/PageHeader';
 import Section from '@layout/Settings/Section';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const Roles: FC<SettingsPageProps> = props => {
+const RoleSettings: FC<SettingsPageProps> = props => {
 	const classes = useStyles();
 	const theme = useTheme();
 	const isOnMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -79,7 +79,7 @@ const Roles: FC<SettingsPageProps> = props => {
 							key={index}
 							label={name}
 							// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-							value={props.guildSettings.roles[settingsProp] as keyof PickByValue<Roles, string>}
+							value={props.guildSettings.roles[settingsProp] as keyof PickByValue<RoleSettings, string>}
 							onChange={r =>
 								props.patchGuildData({
 									roles: {
@@ -127,4 +127,4 @@ const Roles: FC<SettingsPageProps> = props => {
 	);
 };
 
-export default memo(Roles);
+export default memo(RoleSettings);

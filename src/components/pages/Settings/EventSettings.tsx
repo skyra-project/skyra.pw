@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const Events: FC<SettingsPageProps> = props => {
+const EventSettings: FC<SettingsPageProps> = props => {
 	const classes = useStyles();
 
 	return (
@@ -103,4 +103,4 @@ const Events: FC<SettingsPageProps> = props => {
 	);
 };
 
-export default memo(Events);
+export default memo(EventSettings);

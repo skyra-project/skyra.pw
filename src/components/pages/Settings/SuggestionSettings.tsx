@@ -1,5 +1,5 @@
 import { CONFIGURABLE_EMOJIS, CONFIGURABLE_SUGGESTION_ACTIONS } from '@config/SettingsDataEntries';
-import { Suggestions } from '@config/types/ConfigurableData';
+import { Suggestions as SuggestionSettings } from '@config/types/ConfigurableData';
 import { SettingsPageProps } from '@config/types/GuildSettings';
 import PageHeader from '@layout/Settings/PageHeader';
 import Section from '@layout/Settings/Section';
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const Suggestions: FC<SettingsPageProps> = props => {
+const SuggestionSettings: FC<SettingsPageProps> = props => {
 	const classes = useStyles();
 	const findEmoji = useMemo(() => (id: string) => props.guildData.emojis.find(e => e.id === id)!, [props.guildData.emojis]);
 	const tagToId = useMemo(() => (tag: string) => tag.replace(EmojiRegexExtractId, '$1'), []);
@@ -153,4 +153,4 @@ const Suggestions: FC<SettingsPageProps> = props => {
 	);
 };
 
-export default memo(Suggestions);
+export default memo(SuggestionSettings);

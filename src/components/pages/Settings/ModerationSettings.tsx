@@ -5,7 +5,7 @@ import SimpleGrid from '@mui/SimpleGrid';
 import SelectBoolean from '@selects/SelectBoolean';
 import React, { FC, memo } from 'react';
 
-const Moderation: FC<SettingsPageProps> = props => (
+const ModerationSettings: FC<SettingsPageProps> = props => (
 	<Section title="Punishment Settings">
 		<p>These settings affect what Skyra does when you're punishing (ban, kick, mute, etc) someone.</p>
 		<SimpleGrid>
@@ -28,4 +28,4 @@ const Moderation: FC<SettingsPageProps> = props => (
 	</Section>
 );
 
-export default memo(Moderation);
+export default memo(ModerationSettings);

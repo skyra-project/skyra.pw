@@ -10,7 +10,7 @@ import SelectDuration from '@selects/SelectDuration';
 import { bitwiseHas, bitwiseSet, updateSliderValueObj } from '@utils/util';
 import React, { FC, Fragment, memo } from 'react';
 
-const FilterNewLines: FC<SettingsPageProps> = props => {
+const FilterNewLineSettings: FC<SettingsPageProps> = props => {
 	const { newlines } = props.guildSettings.selfmod;
 
 	return (
@@ -110,4 +110,4 @@ const FilterNewLines: FC<SettingsPageProps> = props => {
 	);
 };
 
-export default memo(FilterNewLines);
+export default memo(FilterNewLineSettings);

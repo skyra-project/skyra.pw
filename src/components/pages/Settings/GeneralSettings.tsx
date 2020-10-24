@@ -1,4 +1,4 @@
-import { GeneralSettings } from '@config/types/ConfigurableData';
+import { General } from '@config/types/ConfigurableData';
 import { SettingsPageProps } from '@config/types/GuildSettings';
 import Section from '@layout/Settings/Section';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -19,9 +19,9 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const General: FC<SettingsPageProps> = props => {
+const GeneralSettings: FC<SettingsPageProps> = props => {
 	const classes = useStyles();
-	const validationSchema = object<GeneralSettings.Form>({
+	const validationSchema = object<General.Form>({
 		prefix: string()
 			.required('Setting a prefix is required')
 			.min(1, 'Prefix has a minimum length of 1')
@@ -41,7 +41,7 @@ const General: FC<SettingsPageProps> = props => {
 					xl: 12
 				}}
 			>
-				<AutoSavingForm<GeneralSettings.Form>
+				<AutoSavingForm<General.Form>
 					validationSchema={validationSchema}
 					initialValues={{ prefix: props.guildSettings.prefix }}
 					onSubmit={(values, formikHelpers) => {
@@ -75,4 +75,4 @@ const General: FC<SettingsPageProps> = props => {
 	);
 };
 
-export default memo(General);
+export default memo(GeneralSettings);

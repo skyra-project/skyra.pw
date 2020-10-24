@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const Messages: FC<SettingsPageProps> = ({ guildData, guildSettings, patchGuildData }) => {
+const MessageSettings: FC<SettingsPageProps> = ({ guildData, guildSettings, patchGuildData }) => {
 	const classes = useStyles();
 
 	const configurableMessages = useMemo(() => CONFIGURABLE_MESSAGES(guildSettings, guildData), [guildData, guildSettings]);
@@ -154,4 +154,4 @@ const Messages: FC<SettingsPageProps> = ({ guildData, guildSettings, patchGuildD
 	);
 };
 
-export default memo(Messages);
+export default memo(MessageSettings);

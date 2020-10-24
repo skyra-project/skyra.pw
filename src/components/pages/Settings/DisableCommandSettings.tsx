@@ -1,5 +1,5 @@
 import { FlattenedCommand } from '@config/types/ApiData';
-import { DisableCommands } from '@config/types/ConfigurableData';
+import { DisableCommands as DisableCommandSettings } from '@config/types/ConfigurableData';
 import { SettingsPageProps } from '@config/types/GuildSettings';
 import Section from '@layout/Settings/Section';
 import Accordion from '@material-ui/core/Accordion';
@@ -64,16 +64,16 @@ const useStyles = makeStyles((theme: Theme) =>
  */
 export const parseCommandDescription = (description: string) => description.replace(/<:(\w{2,32}):[0-9]{18}>/gi, '$1');
 
-const DisableCommands: FC<SettingsPageProps> = ({ guildSettings: { disabledCommands }, patchGuildData }) => {
+const DisableCommandSettings: FC<SettingsPageProps> = ({ guildSettings: { disabledCommands }, patchGuildData }) => {
 	const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 	const classes = useStyles();
 	const [expanded, setExpanded] = useState<string | false>(false);
 	const [loading, setLoading] = useState(true);
-	const [commands, setCommands] = useState<Record<string, DisableCommands.Command>>({});
+	const [commands, setCommands] = useState<Record<string, DisableCommandSettings.Command>>({});
 
 	const fetchCommands = useCallback(async () => {
 		const commands: FlattenedCommand[] = await apiFetch('/commands');
-		const commandsForState: Record<string, DisableCommands.Command> = {};
+		const commandsForState: Record<string, DisableCommandSettings.Command> = {};
 		for (const command of commands) {
 			if (command.guarded) continue;
 			commandsForState[command.name] = {
@@ -147,7 +147,7 @@ const DisableCommands: FC<SettingsPageProps> = ({ guildSettings: { disabledComma
 									variant="contained"
 									classes={{ root: classes.enableAllButton }}
 									onClick={() => {
-										const changedCommands: Record<string, DisableCommands.Command> = {};
+										const changedCommands: Record<string, DisableCommandSettings.Command> = {};
 										for (const command of Object.values(commands)) {
 											if (command.category !== catName) continue;
 											changedCommands[command.name] = {
@@ -169,7 +169,7 @@ const DisableCommands: FC<SettingsPageProps> = ({ guildSettings: { disabledComma
 									variant="contained"
 									classes={{ root: classes.disableAllButton }}
 									onClick={() => {
-										const changedCommands: Record<string, DisableCommands.Command> = {};
+										const changedCommands: Record<string, DisableCommandSettings.Command> = {};
 										for (const command of Object.values(commands)) {
 											if (command.category !== catName) continue;
 											changedCommands[command.name] = {
@@ -212,4 +212,4 @@ const DisableCommands: FC<SettingsPageProps> = ({ guildSettings: { disabledComma
 	);
 };
 
-export default memo(DisableCommands);
+export default memo(DisableCommandSettings);

@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const StarboardPage: FC<SettingsPageProps> = props => {
+const StarboardSettings: FC<SettingsPageProps> = props => {
 	const classes = useStyles();
 
 	return (
@@ -94,4 +94,4 @@ const StarboardPage: FC<SettingsPageProps> = props => {
 	);
 };
 
-export default memo(StarboardPage);
+export default memo(StarboardSettings);
