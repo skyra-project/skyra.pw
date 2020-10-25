@@ -10,6 +10,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Hidden from '@material-ui/core/Hidden';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import ErrorAlert from '@presentational/Alerts/Error';
+import { objectToTuples } from '@sapphire/utilities';
 import { SettingsDrawerWidth } from '@utils/constants';
 import { Time } from '@utils/skyraUtils';
 import { apiFetch, navigate } from '@utils/util';
@@ -103,7 +104,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 				method: 'POST',
 				body: JSON.stringify({
 					guild_id: guildId,
-					data: guildSettingsChanges
+					data: objectToTuples(guildSettingsChanges as any)
 				})
 			});
 
