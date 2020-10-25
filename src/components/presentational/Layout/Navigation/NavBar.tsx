@@ -16,13 +16,13 @@ const NavBar: FC<NavBarProps> = ({ loading = false }) => {
 		<Box component="nav">
 			<AppBar position="fixed">
 				<Toolbar>
-					<Hidden mdUp implementation="css">
+					<Hidden mdUp>
 						<MobileNavMenu />
 					</Hidden>
 
 					<SkyraLogoButton />
 
-					<Hidden smDown implementation="css">
+					<Hidden smDown>
 						<DesktopMenuItems loading={loading} />
 					</Hidden>
 				</Toolbar>

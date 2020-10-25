@@ -152,7 +152,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 			<Box className={classes.root}>
 				<SettingsNavBar guildData={guildData} toggleSidebar={toggleSidebar} />
 				<Box component="nav" className={classes.drawer}>
-					<Hidden smUp implementation="css">
+					<Hidden smUp>
 						<MobileSettingsDrawer
 							mobileOpen={mobileOpen}
 							guildData={guildData}
@@ -162,7 +162,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 							toggleSidebar={toggleSidebar}
 						/>
 					</Hidden>
-					<Hidden xsDown implementation="css">
+					<Hidden xsDown>
 						<DesktopSettingsDrawer
 							guildData={guildData}
 							guildId={guildId}

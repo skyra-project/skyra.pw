@@ -54,9 +54,7 @@ const HomePageSection = ({ name, previewContent, text }: typeof features extends
 				<Divider classes={{ root: classes.divider }} />
 				<Typography>{text}</Typography>
 			</div>
-			<Hidden mdDown implementation="css">
-				{previewContent}
-			</Hidden>
+			<Hidden mdDown>{previewContent}</Hidden>
 		</Box>
 	);
 };

@@ -37,7 +37,7 @@ const SkyraLogoButton: FC = () => {
 							<Typography variant="h5" component="h1">
 								Skyra
 							</Typography>
-							<Hidden smDown implementation="css">
+							<Hidden smDown>
 								<Typography variant="caption" component="h1">
 									The most advanced moderation bot
 								</Typography>
