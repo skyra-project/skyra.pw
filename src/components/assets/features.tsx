@@ -1,4 +1,5 @@
 import { Box, Paper } from '@material-ui/core';
+import Link from '@routing/Link';
 import {
 	DiscordEmbed,
 	DiscordEmbedField,
@@ -138,9 +139,38 @@ export default [
 									SPD: <strong>100</strong>, SPE: <strong>80</strong> (<i>BST</i>: <strong>600</strong>)
 								</DiscordEmbedField>
 								<DiscordEmbedField fieldTitle="External resources">
-									<a href="https://bulbapedia.bulbagarden.net/wiki/dragonite_%28Pokemon%29">Bulbapedia</a> |{' '}
-									<a href="https://www.serebii.net/pokedex-sm/149.shtml">Serebii</a> |{' '}
-									<a href="https://www.smogon.com/dex/sm/pokemon/dragonite">Smogon</a>
+									<Link
+										TextTypographyProps={{
+											style: {
+												fontFamily: 'Whitney',
+												lineHeight: 1.25
+											}
+										}}
+										href="https://bulbapedia.bulbagarden.net/wiki/dragonite_%28Pokemon%29"
+										text="Bulbapedia"
+									/>{' '}
+									|{' '}
+									<Link
+										TextTypographyProps={{
+											style: {
+												fontFamily: 'Whitney',
+												lineHeight: 1.25
+											}
+										}}
+										href="https://www.serebii.net/pokedex-swsh/dragonite"
+										text="Serebii"
+									/>{' '}
+									|{' '}
+									<Link
+										TextTypographyProps={{
+											style: {
+												fontFamily: 'Whitney',
+												lineHeight: 1.25
+											}
+										}}
+										href="https://www.smogon.com/dex/ss/pokemon/dragonite"
+										text="Smogon"
+									/>
 								</DiscordEmbedField>
 							</DiscordEmbedFields>
 							<Box component="span" slot="footer">
