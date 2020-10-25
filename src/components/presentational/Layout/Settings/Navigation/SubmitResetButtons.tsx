@@ -1,4 +1,4 @@
-import { GuildSettings } from '@config/types/GuildSettings';
+import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -9,7 +9,6 @@ import React, { FC, memo } from 'react';
 interface SubmitResetButtonsProps {
 	isLoading: boolean;
 	isOnMobile: boolean;
-	setGuildSettingsChanges(value: React.SetStateAction<GuildSettings | undefined>): void;
 	submitChanges(): Promise<void>;
 }
 
@@ -35,8 +34,9 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const SubmitResetButtons: FC<SubmitResetButtonsProps> = ({ isLoading, isOnMobile, setGuildSettingsChanges, submitChanges }) => {
+const SubmitResetButtons: FC<SubmitResetButtonsProps> = ({ isLoading, isOnMobile, submitChanges }) => {
 	const classes = useStyles();
+	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
 	return (
 		<Box component="div" className={classes.fabContainer}>

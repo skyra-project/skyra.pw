@@ -1,4 +1,5 @@
-import { SettingsPageProps } from '@config/types/GuildSettings';
+import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
@@ -32,49 +33,56 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const FilterWordSettings: FC<SettingsPageProps> = props => {
-	const { filter } = props.guildSettings.selfmod;
+const FilterWordSettings: FC = () => {
 	const [newWord, setNewWord] = useState('');
 	const classes = useStyles();
+	const { guildSettings } = useGuildSettingsContext();
+	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
 	return (
 		<Fragment>
 			<Section title="Word Filter">
 				<SimpleGrid>
 					<SelectBoolean
-						title={`Filter ${filter.enabled ? 'Enabled' : 'Disabled'}`}
-						onChange={event => props.patchGuildData({ selfmod: { filter: { enabled: event.target.checked } } })}
-						currentValue={filter.enabled}
+						title={`Filter ${guildSettings.selfmod.filter.enabled ? 'Enabled' : 'Disabled'}`}
+						onChange={event => setGuildSettingsChanges({ selfmod: { filter: { enabled: event.target.checked } } })}
+						currentValue={guildSettings.selfmod.filter.enabled}
 						description="Whether or not this system should be enabled."
 					/>
 					<SelectBoolean
-						title={`Alerts ${bitwiseHas(filter.softAction, 0b100) ? 'Enabled' : 'Disabled'}`}
+						title={`Alerts ${bitwiseHas(guildSettings.selfmod.filter.softAction, 0b100) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
-							props.patchGuildData({
-								selfmod: { filter: { softAction: bitwiseSet(filter.softAction, 0b100, event.target.checked) } }
+							setGuildSettingsChanges({
+								selfmod: {
+									filter: { softAction: bitwiseSet(guildSettings.selfmod.filter.softAction, 0b100, event.target.checked) }
+								}
 							})
 						}
-						currentValue={bitwiseHas(filter.softAction, 0b100)}
+						currentValue={bitwiseHas(guildSettings.selfmod.filter.softAction, 0b100)}
 						description="Toggle message alerts in the channel the infraction took place."
 					/>
 					<SelectBoolean
-						title={`Logs ${bitwiseHas(filter.softAction, 0b010) ? 'Enabled' : 'Disabled'}`}
+						title={`Logs ${bitwiseHas(guildSettings.selfmod.filter.softAction, 0b010) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
-							props.patchGuildData({
-								selfmod: { filter: { softAction: bitwiseSet(filter.softAction, 0b010, event.target.checked) } }
+							setGuildSettingsChanges({
+								selfmod: {
+									filter: { softAction: bitwiseSet(guildSettings.selfmod.filter.softAction, 0b010, event.target.checked) }
+								}
 							})
 						}
-						currentValue={bitwiseHas(filter.softAction, 0b010)}
+						currentValue={bitwiseHas(guildSettings.selfmod.filter.softAction, 0b010)}
 						description="Toggle message logs in the moderation logs channel."
 					/>
 					<SelectBoolean
-						title={`Deletes ${bitwiseHas(filter.softAction, 0b001) ? 'Enabled' : 'Disabled'}`}
+						title={`Deletes ${bitwiseHas(guildSettings.selfmod.filter.softAction, 0b001) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
-							props.patchGuildData({
-								selfmod: { filter: { softAction: bitwiseSet(filter.softAction, 0b001, event.target.checked) } }
+							setGuildSettingsChanges({
+								selfmod: {
+									filter: { softAction: bitwiseSet(guildSettings.selfmod.filter.softAction, 0b001, event.target.checked) }
+								}
 							})
 						}
-						currentValue={bitwiseHas(filter.softAction, 0b001)}
+						currentValue={bitwiseHas(guildSettings.selfmod.filter.softAction, 0b001)}
 						description="Toggle message deletions."
 					/>
 				</SimpleGrid>
@@ -84,8 +92,8 @@ const FilterWordSettings: FC<SettingsPageProps> = props => {
 					<Select
 						title="Action"
 						helperText="The action to perform as punishment"
-						value={filter.hardAction}
-						onChange={e => props.patchGuildData({ selfmod: { filter: { hardAction: e.target.value } } })}
+						value={guildSettings.selfmod.filter.hardAction}
+						onChange={e => setGuildSettingsChanges({ selfmod: { filter: { hardAction: e.target.value } } })}
 					>
 						<MenuItem value={0}>None</MenuItem>
 						<MenuItem value={1}>Warning</MenuItem>
@@ -95,15 +103,15 @@ const FilterWordSettings: FC<SettingsPageProps> = props => {
 						<MenuItem value={5}>Ban</MenuItem>
 					</Select>
 					<SelectDuration
-						value={filter.hardActionDuration}
+						value={guildSettings.selfmod.filter.hardActionDuration}
 						min={1000}
-						onChange={duration => props.patchGuildData({ selfmod: { filter: { hardActionDuration: duration } } })}
+						onChange={duration => setGuildSettingsChanges({ selfmod: { filter: { hardActionDuration: duration } } })}
 					/>
 				</SimpleGrid>
 				<Typography>Maximum Threshold</Typography>
 				<Slider
-					value={filter.thresholdMaximum}
-					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('filter', 'thresholdMaximum', value))}
+					value={guildSettings.selfmod.filter.thresholdMaximum}
+					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('filter', 'thresholdMaximum', value))}
 					aria-labelledby="Words selfmod filter maximum threshold slider"
 					valueLabelDisplay="auto"
 					min={0}
@@ -111,8 +119,8 @@ const FilterWordSettings: FC<SettingsPageProps> = props => {
 				/>
 				<Typography>Threshold Duration (in seconds)</Typography>
 				<Slider
-					value={filter.thresholdDuration / 1000}
-					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('filter', 'thresholdDuration', value, 1000))}
+					value={guildSettings.selfmod.filter.thresholdDuration / 1000}
+					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('filter', 'thresholdDuration', value, 1000))}
 					aria-labelledby="Word selfmod filter threshold duration slider"
 					valueLabelDisplay="auto"
 					min={0}
@@ -124,8 +132,8 @@ const FilterWordSettings: FC<SettingsPageProps> = props => {
 					onSubmit={e => {
 						e.preventDefault();
 						const word = removeNonAlphaNumeric(newWord).toLowerCase();
-						if (word.length < 3 || filter.raw.includes(word)) return;
-						props.patchGuildData({ selfmod: { filter: { raw: [...filter.raw, word] } } });
+						if (word.length < 3 || guildSettings.selfmod.filter.raw.includes(word)) return;
+						setGuildSettingsChanges({ selfmod: { filter: { raw: [...guildSettings.selfmod.filter.raw, word] } } });
 						setNewWord('');
 					}}
 				>
@@ -142,15 +150,17 @@ const FilterWordSettings: FC<SettingsPageProps> = props => {
 					</Box>
 				</form>
 
-				<When condition={filter.raw.length !== 0}>
+				<When condition={guildSettings.selfmod.filter.raw.length !== 0}>
 					<Paper classes={{ root: classes.words }}>
-						{filter.raw.map(word => (
+						{guildSettings.selfmod.filter.raw.map(word => (
 							<Chip
 								color="primary"
 								key={word}
 								label={word}
 								onDelete={() =>
-									props.patchGuildData({ selfmod: { filter: { raw: filter.raw.filter(item => item !== word) } } })
+									setGuildSettingsChanges({
+										selfmod: { filter: { raw: guildSettings.selfmod.filter.raw.filter(item => item !== word) } }
+									})
 								}
 							/>
 						))}

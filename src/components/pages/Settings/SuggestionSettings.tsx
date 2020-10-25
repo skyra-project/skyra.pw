@@ -1,6 +1,7 @@
-import { CONFIGURABLE_EMOJIS, CONFIGURABLE_SUGGESTION_ACTIONS } from '@config/SettingsDataEntries';
-import { Suggestions as SuggestionSettings } from '@config/types/ConfigurableData';
-import { SettingsPageProps } from '@config/types/GuildSettings';
+import { ConfigurableEmojis, ConfigurableSuggestionActions } from '@config/SettingsDataEntries';
+import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
+import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import PageHeader from '@layout/Settings/PageHeader';
 import Section from '@layout/Settings/Section';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
@@ -27,9 +28,13 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const SuggestionSettings: FC<SettingsPageProps> = props => {
+const SuggestionSettings: FC = () => {
 	const classes = useStyles();
-	const findEmoji = useMemo(() => (id: string) => props.guildData.emojis.find(e => e.id === id)!, [props.guildData.emojis]);
+	const { guildData } = useGuildDataContext();
+	const { guildSettings } = useGuildSettingsContext();
+	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
+
+	const findEmoji = useMemo(() => (id: string) => guildData.emojis.find(e => e.id === id)!, [guildData.emojis]);
 	const tagToId = useMemo(() => (tag: string) => tag.replace(EmojiRegexExtractId, '$1'), []);
 	const idToTag = useMemo(() => (id: string, name: string, animated: boolean) => `<${animated ? 'a' : ''}:${name}:${id}>`, []);
 
@@ -53,16 +58,16 @@ const SuggestionSettings: FC<SettingsPageProps> = props => {
 					}}
 				>
 					<SelectChannel
-						value={props.guildSettings.suggestions.channel}
+						value={guildSettings.suggestions.channel}
 						label="Suggestions Channel"
 						onChange={c =>
-							props.patchGuildData({
+							setGuildSettingsChanges({
 								suggestions: {
 									channel: c
 								}
 							})
 						}
-						guild={props.guildData}
+						guild={guildData}
 						buttonProps={{
 							fullWidth: true,
 							classes: {
@@ -76,14 +81,14 @@ const SuggestionSettings: FC<SettingsPageProps> = props => {
 
 			<Section title="Actions">
 				<SimpleGrid>
-					{CONFIGURABLE_SUGGESTION_ACTIONS.map(({ title, key, description }, index) => (
+					{ConfigurableSuggestionActions.map(({ title, key, description }, index) => (
 						<SelectBoolean
 							key={index}
 							title={title}
 							description={description}
-							currentValue={props.guildSettings.suggestions['on-action'][key]}
+							currentValue={guildSettings.suggestions['on-action'][key]}
 							onChange={event =>
-								props.patchGuildData({
+								setGuildSettingsChanges({
 									suggestions: {
 										'on-action': {
 											[key]: event.target.checked
@@ -108,18 +113,18 @@ const SuggestionSettings: FC<SettingsPageProps> = props => {
 						xl: 4
 					}}
 				>
-					{CONFIGURABLE_EMOJIS.map(({ title, description, key, defaultImage, defaultName, defaultId }, index) => (
+					{ConfigurableEmojis.map(({ title, description, key, defaultImage, defaultName, defaultId }, index) => (
 						<SelectEmoji
 							key={index}
 							tooltipTitle={description}
-							value={tagToId(props.guildSettings.suggestions.emojis[key])}
+							value={tagToId(guildSettings.suggestions.emojis[key])}
 							defaultImage={defaultImage}
 							defaultName={defaultName}
 							defaultId={defaultId}
-							onChange={(emojiID: typeof props.guildSettings.suggestions.emojis[typeof key] | null) => {
+							onChange={(emojiID: typeof guildSettings.suggestions.emojis[typeof key] | null) => {
 								if (emojiID) {
 									const emojiData = findEmoji(emojiID);
-									return props.patchGuildData({
+									return setGuildSettingsChanges({
 										suggestions: {
 											emojis: {
 												[key]: idToTag(emojiID, emojiData.name, emojiData.animated)
@@ -128,7 +133,7 @@ const SuggestionSettings: FC<SettingsPageProps> = props => {
 									});
 								}
 
-								return props.patchGuildData({
+								return setGuildSettingsChanges({
 									suggestions: {
 										emojis: {
 											[key]: idToTag(defaultId, defaultName, false)
@@ -136,7 +141,7 @@ const SuggestionSettings: FC<SettingsPageProps> = props => {
 									}
 								});
 							}}
-							guild={props.guildData}
+							guild={guildData}
 							label={title}
 							buttonProps={{
 								fullWidth: true,

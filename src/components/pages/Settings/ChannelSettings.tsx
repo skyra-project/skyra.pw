@@ -1,5 +1,12 @@
-import { CHANNELS, DISABLED_CHANNELS, IGNORE_CHANNELS, LOGGING_CHANNELS } from '@config/SettingsDataEntries';
-import { SettingsPageProps } from '@config/types/GuildSettings';
+import {
+	ConfigurableChannels,
+	ConfigurableDisabledChannels,
+	ConfigurableIgnoreChannels,
+	ConfigurableLoggingChannels
+} from '@config/SettingsDataEntries';
+import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
+import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import PageHeader from '@layout/Settings/PageHeader';
 import Section from '@layout/Settings/Section';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
@@ -28,8 +35,11 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const ChannelSettings: FC<SettingsPageProps> = props => {
+const ChannelSettings: FC = () => {
 	const classes = useStyles();
+	const { guildData } = useGuildDataContext();
+	const { guildSettings } = useGuildSettingsContext();
+	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
 	return (
 		<>
@@ -55,19 +65,19 @@ const ChannelSettings: FC<SettingsPageProps> = props => {
 						xl: 4
 					}}
 				>
-					{LOGGING_CHANNELS.map(({ name, description, key }, index) => (
+					{ConfigurableLoggingChannels.map(({ name, description, key }, index) => (
 						<SelectChannel
 							key={index}
 							tooltipTitle={description}
-							value={props.guildSettings.channels[key]}
-							onChange={(channel: typeof props.guildSettings.channels[typeof key]) =>
-								props.patchGuildData({
+							value={guildSettings.channels[key]}
+							onChange={(channel: typeof guildSettings.channels[typeof key]) =>
+								setGuildSettingsChanges({
 									channels: {
 										[key]: channel
 									}
 								})
 							}
-							guild={props.guildData}
+							guild={guildData}
 							label={name}
 							buttonProps={{
 								fullWidth: true,
@@ -92,13 +102,13 @@ const ChannelSettings: FC<SettingsPageProps> = props => {
 						xl: 4
 					}}
 				>
-					{IGNORE_CHANNELS.map(({ name, description, key }, index) => (
+					{ConfigurableIgnoreChannels.map(({ name, description, key }, index) => (
 						<SelectChannels
 							key={index}
 							tooltipTitle={description}
-							value={props.guildSettings.channels.ignore[key]}
-							onChange={(channel: typeof props.guildSettings.channels.ignore[typeof key]) =>
-								props.patchGuildData({
+							value={guildSettings.channels.ignore[key]}
+							onChange={(channel: typeof guildSettings.channels.ignore[typeof key]) =>
+								setGuildSettingsChanges({
 									channels: {
 										ignore: {
 											[key]: channel
@@ -106,7 +116,7 @@ const ChannelSettings: FC<SettingsPageProps> = props => {
 									}
 								})
 							}
-							guild={props.guildData}
+							guild={guildData}
 							label={name}
 							buttonProps={{
 								fullWidth: true,
@@ -131,19 +141,19 @@ const ChannelSettings: FC<SettingsPageProps> = props => {
 						xl: 4
 					}}
 				>
-					{CHANNELS.map(({ name, description, key }, index) => (
+					{ConfigurableChannels.map(({ name, description, key }, index) => (
 						<SelectChannel
 							key={index}
 							tooltipTitle={description}
-							value={props.guildSettings.channels[key]}
-							onChange={(channel: typeof props.guildSettings.channels[typeof key]) =>
-								props.patchGuildData({
+							value={guildSettings.channels[key]}
+							onChange={(channel: typeof guildSettings.channels[typeof key]) =>
+								setGuildSettingsChanges({
 									channels: {
 										[key]: channel
 									}
 								})
 							}
-							guild={props.guildData}
+							guild={guildData}
 							label={name}
 							buttonProps={{
 								fullWidth: true,
@@ -155,16 +165,16 @@ const ChannelSettings: FC<SettingsPageProps> = props => {
 						/>
 					))}
 					<SelectChannels
-						key={CHANNELS.length + 1}
-						tooltipTitle={DISABLED_CHANNELS.description}
-						value={props.guildSettings.disabledChannels}
-						onChange={(channels: typeof props.guildSettings.disabledChannels) =>
-							props.patchGuildData({
+						key={ConfigurableChannels.length + 1}
+						tooltipTitle={ConfigurableDisabledChannels.description}
+						value={guildSettings.disabledChannels}
+						onChange={(channels: typeof guildSettings.disabledChannels) =>
+							setGuildSettingsChanges({
 								disabledChannels: channels
 							})
 						}
-						guild={props.guildData}
-						label={DISABLED_CHANNELS.name}
+						guild={guildData}
+						label={ConfigurableDisabledChannels.name}
 						buttonProps={{
 							fullWidth: true,
 							classes: {

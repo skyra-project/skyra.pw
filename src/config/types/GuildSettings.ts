@@ -1,13 +1,3 @@
-import { DeepPartial } from 'utility-types';
-import { FlattenedGuild } from './ApiData';
-
-export interface SettingsPageProps {
-	guildData: FlattenedGuild;
-	guildSettings: GuildSettings;
-	guildId: string;
-	patchGuildData: (changes?: DeepPartial<GuildSettings>) => void;
-}
-
 export interface GuildSettings {
 	'command-autodelete': [string, number][];
 	'custom-commands': CustomCommand[];

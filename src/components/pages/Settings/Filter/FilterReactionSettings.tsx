@@ -1,4 +1,5 @@
-import { SettingsPageProps } from '@config/types/GuildSettings';
+import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
@@ -10,47 +11,60 @@ import SelectDuration from '@selects/SelectDuration';
 import { bitwiseHas, bitwiseSet, updateSliderValueObj } from '@utils/util';
 import React, { FC, Fragment, memo } from 'react';
 
-const FilterReactionSettings: FC<SettingsPageProps> = props => {
-	const { reactions } = props.guildSettings.selfmod;
+const FilterReactionSettings: FC = () => {
+	const { guildSettings } = useGuildSettingsContext();
+	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
 	return (
 		<Fragment>
 			<Section title="Reaction Filter">
 				<SimpleGrid>
 					<SelectBoolean
-						title={`Filter ${reactions.enabled ? 'Enabled' : 'Disabled'}`}
-						onChange={event => props.patchGuildData({ selfmod: { reactions: { enabled: event.target.checked } } })}
-						currentValue={reactions.enabled}
+						title={`Filter ${guildSettings.selfmod.reactions.enabled ? 'Enabled' : 'Disabled'}`}
+						onChange={event => setGuildSettingsChanges({ selfmod: { reactions: { enabled: event.target.checked } } })}
+						currentValue={guildSettings.selfmod.reactions.enabled}
 						description="Whether or not this system should be enabled."
 					/>
 					<SelectBoolean
-						title={`Alerts ${bitwiseHas(reactions.softAction, 0b100) ? 'Enabled' : 'Disabled'}`}
+						title={`Alerts ${bitwiseHas(guildSettings.selfmod.reactions.softAction, 0b100) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
-							props.patchGuildData({
-								selfmod: { reactions: { softAction: bitwiseSet(reactions.softAction, 0b100, event.target.checked) } }
+							setGuildSettingsChanges({
+								selfmod: {
+									reactions: {
+										softAction: bitwiseSet(guildSettings.selfmod.reactions.softAction, 0b100, event.target.checked)
+									}
+								}
 							})
 						}
-						currentValue={bitwiseHas(reactions.softAction, 0b100)}
+						currentValue={bitwiseHas(guildSettings.selfmod.reactions.softAction, 0b100)}
 						description="Toggle message alerts in the channel the infraction took place."
 					/>
 					<SelectBoolean
-						title={`Logs ${bitwiseHas(reactions.softAction, 0b010) ? 'Enabled' : 'Disabled'}`}
+						title={`Logs ${bitwiseHas(guildSettings.selfmod.reactions.softAction, 0b010) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
-							props.patchGuildData({
-								selfmod: { reactions: { softAction: bitwiseSet(reactions.softAction, 0b010, event.target.checked) } }
+							setGuildSettingsChanges({
+								selfmod: {
+									reactions: {
+										softAction: bitwiseSet(guildSettings.selfmod.reactions.softAction, 0b010, event.target.checked)
+									}
+								}
 							})
 						}
-						currentValue={bitwiseHas(reactions.softAction, 0b010)}
+						currentValue={bitwiseHas(guildSettings.selfmod.reactions.softAction, 0b010)}
 						description="Toggle message logs in the moderation logs channel."
 					/>
 					<SelectBoolean
-						title={`Deletes ${bitwiseHas(reactions.softAction, 0b001) ? 'Enabled' : 'Disabled'}`}
+						title={`Deletes ${bitwiseHas(guildSettings.selfmod.reactions.softAction, 0b001) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
-							props.patchGuildData({
-								selfmod: { reactions: { softAction: bitwiseSet(reactions.softAction, 0b001, event.target.checked) } }
+							setGuildSettingsChanges({
+								selfmod: {
+									reactions: {
+										softAction: bitwiseSet(guildSettings.selfmod.reactions.softAction, 0b001, event.target.checked)
+									}
+								}
 							})
 						}
-						currentValue={bitwiseHas(reactions.softAction, 0b001)}
+						currentValue={bitwiseHas(guildSettings.selfmod.reactions.softAction, 0b001)}
 						description="Toggle message deletions."
 					/>
 				</SimpleGrid>
@@ -60,8 +74,8 @@ const FilterReactionSettings: FC<SettingsPageProps> = props => {
 					<Select
 						title="Action"
 						helperText="The action to perform as punishment"
-						value={reactions.hardAction}
-						onChange={e => props.patchGuildData({ selfmod: { reactions: { hardAction: e.target.value } } })}
+						value={guildSettings.selfmod.reactions.hardAction}
+						onChange={e => setGuildSettingsChanges({ selfmod: { reactions: { hardAction: e.target.value } } })}
 					>
 						<MenuItem value={0}>None</MenuItem>
 						<MenuItem value={1}>Warning</MenuItem>
@@ -71,15 +85,15 @@ const FilterReactionSettings: FC<SettingsPageProps> = props => {
 						<MenuItem value={5}>Ban</MenuItem>
 					</Select>
 					<SelectDuration
-						value={reactions.hardActionDuration}
+						value={guildSettings.selfmod.reactions.hardActionDuration}
 						min={1000}
-						onChange={duration => props.patchGuildData({ selfmod: { reactions: { hardActionDuration: duration } } })}
+						onChange={duration => setGuildSettingsChanges({ selfmod: { reactions: { hardActionDuration: duration } } })}
 					></SelectDuration>
 				</SimpleGrid>
 				<Typography>Maximum Threshold</Typography>
 				<Slider
-					value={reactions.thresholdMaximum}
-					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('reactions', 'thresholdMaximum', value))}
+					value={guildSettings.selfmod.reactions.thresholdMaximum}
+					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('reactions', 'thresholdMaximum', value))}
 					aria-labelledby="Reactions selfmod filter maximum threshold slider"
 					valueLabelDisplay="auto"
 					min={0}
@@ -87,8 +101,8 @@ const FilterReactionSettings: FC<SettingsPageProps> = props => {
 				/>
 				<Typography>Threshold Duration (in seconds)</Typography>
 				<Slider
-					value={reactions.thresholdDuration / 1000}
-					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('reactions', 'thresholdDuration', value, 1000))}
+					value={guildSettings.selfmod.reactions.thresholdDuration / 1000}
+					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('reactions', 'thresholdDuration', value, 1000))}
 					aria-labelledby="Reactions selfmod filter threshold duration slider"
 					valueLabelDisplay="auto"
 					min={0}

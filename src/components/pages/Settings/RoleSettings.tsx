@@ -1,5 +1,8 @@
-import { PUBLIC_ROLES, REMOVE_INITIAL, ROLES } from '@config/SettingsDataEntries';
-import { Roles as RoleSettings, SettingsPageProps } from '@config/types/GuildSettings';
+import { ConfigurablePublicRoles, ConfigurableRemoveInitialRole, ConfigurableRoles } from '@config/SettingsDataEntries';
+import { Roles } from '@config/types/GuildSettings';
+import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
+import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import PageHeader from '@layout/Settings/PageHeader';
 import Section from '@layout/Settings/Section';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
@@ -30,10 +33,13 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const RoleSettings: FC<SettingsPageProps> = props => {
+const RoleSettings: FC = () => {
 	const classes = useStyles();
 	const theme = useTheme();
 	const isOnMobile = useMediaQuery(theme.breakpoints.down('sm'));
+	const { guildData } = useGuildDataContext();
+	const { guildSettings } = useGuildSettingsContext();
+	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
 	return (
 		<>
@@ -49,11 +55,11 @@ const RoleSettings: FC<SettingsPageProps> = props => {
 
 			<Section title="Toggles">
 				<SelectBoolean
-					title={REMOVE_INITIAL.name}
-					description={REMOVE_INITIAL.tooltip}
-					currentValue={props.guildSettings.roles.removeInitial}
+					title={ConfigurableRemoveInitialRole.name}
+					description={ConfigurableRemoveInitialRole.tooltip}
+					currentValue={guildSettings.roles.removeInitial}
 					onChange={event =>
-						props.patchGuildData({
+						setGuildSettingsChanges({
 							roles: {
 								removeInitial: event.target.checked
 							}
@@ -74,20 +80,20 @@ const RoleSettings: FC<SettingsPageProps> = props => {
 						xl: 4
 					}}
 				>
-					{ROLES.map(({ name, tooltip, key: settingsProp }, index) => (
+					{ConfigurableRoles.map(({ name, tooltip, key: settingsProp }, index) => (
 						<SelectRole
 							key={index}
 							label={name}
 							// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-							value={props.guildSettings.roles[settingsProp] as keyof PickByValue<RoleSettings, string>}
+							value={guildSettings.roles[settingsProp] as keyof PickByValue<Roles, string>}
 							onChange={r =>
-								props.patchGuildData({
+								setGuildSettingsChanges({
 									roles: {
 										[settingsProp]: r
 									}
 								})
 							}
-							guild={props.guildData}
+							guild={guildData}
 							tooltipTitle={tooltip}
 							filterEveryone
 							buttonProps={{
@@ -101,18 +107,18 @@ const RoleSettings: FC<SettingsPageProps> = props => {
 					))}
 					<SelectRoles
 						filterEveryone
-						key={ROLES.length + 1}
-						tooltipTitle={PUBLIC_ROLES.tooltip}
-						value={props.guildSettings.roles.public}
+						key={ConfigurableRoles.length + 1}
+						tooltipTitle={ConfigurablePublicRoles.tooltip}
+						value={guildSettings.roles.public}
 						onChange={r =>
-							props.patchGuildData({
+							setGuildSettingsChanges({
 								roles: {
 									public: r
 								}
 							})
 						}
-						guild={props.guildData}
-						label={PUBLIC_ROLES.name}
+						guild={guildData}
+						label={ConfigurablePublicRoles.name}
 						buttonProps={{
 							fullWidth: true,
 							classes: {

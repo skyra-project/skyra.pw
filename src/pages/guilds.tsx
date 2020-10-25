@@ -21,9 +21,11 @@ const useStyles = makeStyles((theme: Theme) =>
 			justifyContent: 'center',
 			alignContent: 'center',
 			alignItems: 'center',
-			height: ({ authenticated }: { authenticated: boolean }) => (authenticated ? 'unset' : 'calc(100vh - 200px - 128px)'),
-			[theme.breakpoints.up('md')]: {
+			[theme.breakpoints.up('sm')]: {
 				height: 'calc(100vh - 200px - 128px)'
+			},
+			[theme.breakpoints.down('xs')]: {
+				height: ({ authenticated }: { authenticated: boolean }) => (authenticated ? 'unset' : 'calc(100vh - 200px - 128px)')
 			}
 		},
 		notSignedInText: {

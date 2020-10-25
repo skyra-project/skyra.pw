@@ -1,5 +1,6 @@
 import { General } from '@config/types/ConfigurableData';
-import { SettingsPageProps } from '@config/types/GuildSettings';
+import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
 import MenuItem from '@material-ui/core/MenuItem';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -19,14 +20,17 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const GeneralSettings: FC<SettingsPageProps> = props => {
+const validationSchema = object<General.Form>({
+	prefix: string()
+		.required('Setting a prefix is required')
+		.min(1, 'Prefix has a minimum length of 1')
+		.max(11, 'Prefix has a maximum length of 10')
+});
+
+const GeneralSettings: FC = () => {
 	const classes = useStyles();
-	const validationSchema = object<General.Form>({
-		prefix: string()
-			.required('Setting a prefix is required')
-			.min(1, 'Prefix has a minimum length of 1')
-			.max(11, 'Prefix has a maximum length of 10')
-	});
+	const { guildSettings } = useGuildSettingsContext();
+	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
 	return (
 		<Section title="General Settings">
@@ -43,10 +47,10 @@ const GeneralSettings: FC<SettingsPageProps> = props => {
 			>
 				<AutoSavingForm<General.Form>
 					validationSchema={validationSchema}
-					initialValues={{ prefix: props.guildSettings.prefix }}
+					initialValues={{ prefix: guildSettings.prefix }}
 					onSubmit={(values, formikHelpers) => {
 						formikHelpers.setSubmitting(true);
-						props.patchGuildData({ prefix: values.prefix });
+						setGuildSettingsChanges({ prefix: values.prefix });
 
 						formikHelpers.setSubmitting(false);
 					}}
@@ -63,8 +67,8 @@ const GeneralSettings: FC<SettingsPageProps> = props => {
 					title="Language"
 					FormControlProps={{ classes: { root: classes.languageOffset } }}
 					helperText="Select the language you want for this guild"
-					value={props.guildSettings.language}
-					onChange={e => props.patchGuildData({ language: e.target.value })}
+					value={guildSettings.language}
+					onChange={e => setGuildSettingsChanges({ language: e.target.value })}
 					fullWidth
 				>
 					<MenuItem value="en-US">English</MenuItem>

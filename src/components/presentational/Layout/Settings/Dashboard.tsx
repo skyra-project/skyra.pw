@@ -1,20 +1,20 @@
 import { FlattenedGuild } from '@config/types/ApiData';
-import { GuildSettings, SettingsPageProps } from '@config/types/GuildSettings';
+import { GuildSettings } from '@config/types/GuildSettings';
+import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
+import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import { useMediaQuery } from '@material-ui/core';
 import Backdrop from '@material-ui/core/Backdrop';
 import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Hidden from '@material-ui/core/Hidden';
-import Slide from '@material-ui/core/Slide';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import ErrorAlert from '@presentational/Alerts/Error';
 import { SettingsDrawerWidth } from '@utils/constants';
 import { Time } from '@utils/skyraUtils';
 import { apiFetch, navigate } from '@utils/util';
-import deepMerge, { Options as DeepMergeOptions } from 'deepmerge';
-import React, { FC, memo, PropsWithChildren, useCallback, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { When } from 'react-if';
-import { DeepPartial } from 'utility-types';
 import DesktopSettingsDrawer from './Navigation/DesktopSettingsDrawer';
 import MobileSettingsDrawer from './Navigation/MobileSettingsDrawer';
 import SettingsNavBar from './Navigation/SettingsNavBar';
@@ -23,11 +23,6 @@ import SubmitResetButtons from './Navigation/SubmitResetButtons';
 interface DashboardLayoutProps {
 	guildId: string;
 }
-
-// Overwrite arrays when merging
-const mergeOptions: DeepMergeOptions = {
-	arrayMerge: (_, sourceArray) => sourceArray
-};
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -61,8 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		link: {
 			color: theme.palette.primary.contrastText,
 			fontWeight: 'bolder'
-		},
-		toolbar: theme.mixins.toolbar
+		}
 	})
 );
 
@@ -70,10 +64,10 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 	const theme = useTheme();
 	const isOnMobile = useMediaQuery(theme.breakpoints.down('sm'));
 	const classes = useStyles();
+	const { guildData, setGuildData } = useGuildDataContext();
+	const { guildSettings, setGuildSettings } = useGuildSettingsContext();
+	const { guildSettingsChanges, setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
-	const [guildData, setGuildData] = useState<FlattenedGuild>();
-	const [guildSettings, setGuildSettings] = useState<GuildSettings>();
-	const [guildSettingsChanges, setGuildSettingsChanges] = useState<GuildSettings>();
 	const [isLoading, setIsLoading] = useState(false);
 	const [mobileOpen, setMobileOpen] = useState(false);
 	const [hasError, setHasError] = useState(false);
@@ -93,11 +87,13 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 		} finally {
 			setIsLoading(false);
 		}
-	}, [guildId]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	useEffect(() => {
 		syncGuildData();
-	}, [syncGuildData]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const submitChanges = async () => {
 		try {
@@ -125,21 +121,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 		}
 	};
 
-	const patchGuildData = (changes?: DeepPartial<GuildSettings>) => {
-		setGuildSettingsChanges(
-			deepMerge<GuildSettings, DeepPartial<GuildSettings>>(guildSettingsChanges ?? {}, changes ?? {}, mergeOptions)
-		);
-	};
-
 	const toggleSidebar = () => setMobileOpen(!mobileOpen);
-
-	const componentProps: SettingsPageProps = {
-		guildSettings: deepMerge(guildSettings ?? {}, guildSettingsChanges ?? {}, mergeOptions),
-		// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-		guildData: guildData!,
-		guildId,
-		patchGuildData
-	};
 
 	const readyToRender =
 		!isLoading &&
@@ -191,32 +173,14 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 					</Hidden>
 				</Box>
 				<Box component="main" className={classes.content}>
-					<Box className={classes.toolbar} />
-					<When condition={readyToRender}>
-						<>
-							{React.Children.map(children, child => {
-								if (React.isValidElement(child)) {
-									return React.cloneElement(child, componentProps);
-								}
-								return child;
-							})}
-						</>
+					<When condition={readyToRender}>{children}</When>
+					<When condition={Object.keys(guildSettingsChanges ?? {}).length > 0}>
+						<SubmitResetButtons isLoading={isLoading} isOnMobile={isOnMobile} submitChanges={submitChanges} />
 					</When>
-					<Slide direction="up" in={Object.keys(guildSettingsChanges ?? {}).length > 0} mountOnEnter unmountOnExit>
-						<SubmitResetButtons
-							isLoading={isLoading}
-							isOnMobile={isOnMobile}
-							setGuildSettingsChanges={setGuildSettingsChanges}
-							submitChanges={submitChanges}
-						/>
-					</Slide>
 				</Box>
 			</Box>
 		</>
 	);
 };
 
-export default memo<PropsWithChildren<DashboardLayoutProps>>(
-	DashboardLayout,
-	({ guildId: prevGuildId }, { guildId: nextGuildId }) => prevGuildId === nextGuildId
-);
+export default DashboardLayout;

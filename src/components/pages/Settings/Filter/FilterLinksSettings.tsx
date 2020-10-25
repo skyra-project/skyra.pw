@@ -1,4 +1,5 @@
-import { SettingsPageProps } from '@config/types/GuildSettings';
+import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
@@ -32,49 +33,56 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const FilterLinksSettings: FC<SettingsPageProps> = props => {
-	const { links } = props.guildSettings.selfmod;
+const FilterLinksSettings: FC = () => {
 	const [newWord, setNewWord] = useState('');
 	const classes = useStyles();
+	const { guildSettings } = useGuildSettingsContext();
+	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
 	return (
 		<Fragment>
 			<Section title="Link Filter">
 				<SimpleGrid>
 					<SelectBoolean
-						title={`Filter ${links.enabled ? 'Enabled' : 'Disabled'}`}
-						onChange={event => props.patchGuildData({ selfmod: { links: { enabled: event.target.checked } } })}
-						currentValue={links.enabled}
+						title={`Filter ${guildSettings.selfmod.links.enabled ? 'Enabled' : 'Disabled'}`}
+						onChange={event => setGuildSettingsChanges({ selfmod: { links: { enabled: event.target.checked } } })}
+						currentValue={guildSettings.selfmod.links.enabled}
 						description="Whether or not this system should be enabled."
 					/>
 					<SelectBoolean
-						title={`Alerts ${bitwiseHas(links.softAction, 0b100) ? 'Enabled' : 'Disabled'}`}
+						title={`Alerts ${bitwiseHas(guildSettings.selfmod.links.softAction, 0b100) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
-							props.patchGuildData({
-								selfmod: { links: { softAction: bitwiseSet(links.softAction, 0b100, event.target.checked) } }
+							setGuildSettingsChanges({
+								selfmod: {
+									links: { softAction: bitwiseSet(guildSettings.selfmod.links.softAction, 0b100, event.target.checked) }
+								}
 							})
 						}
-						currentValue={bitwiseHas(links.softAction, 0b100)}
+						currentValue={bitwiseHas(guildSettings.selfmod.links.softAction, 0b100)}
 						description="Toggle message alerts in the channel the infraction took place."
 					/>
 					<SelectBoolean
-						title={`Logs ${bitwiseHas(links.softAction, 0b010) ? 'Enabled' : 'Disabled'}`}
+						title={`Logs ${bitwiseHas(guildSettings.selfmod.links.softAction, 0b010) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
-							props.patchGuildData({
-								selfmod: { links: { softAction: bitwiseSet(links.softAction, 0b010, event.target.checked) } }
+							setGuildSettingsChanges({
+								selfmod: {
+									links: { softAction: bitwiseSet(guildSettings.selfmod.links.softAction, 0b010, event.target.checked) }
+								}
 							})
 						}
-						currentValue={bitwiseHas(links.softAction, 0b010)}
+						currentValue={bitwiseHas(guildSettings.selfmod.links.softAction, 0b010)}
 						description="Toggle message logs in the moderation logs channel."
 					/>
 					<SelectBoolean
-						title={`Deletes ${bitwiseHas(links.softAction, 0b001) ? 'Enabled' : 'Disabled'}`}
+						title={`Deletes ${bitwiseHas(guildSettings.selfmod.links.softAction, 0b001) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
-							props.patchGuildData({
-								selfmod: { links: { softAction: bitwiseSet(links.softAction, 0b001, event.target.checked) } }
+							setGuildSettingsChanges({
+								selfmod: {
+									links: { softAction: bitwiseSet(guildSettings.selfmod.links.softAction, 0b001, event.target.checked) }
+								}
 							})
 						}
-						currentValue={bitwiseHas(links.softAction, 0b001)}
+						currentValue={bitwiseHas(guildSettings.selfmod.links.softAction, 0b001)}
 						description="Toggle message deletions."
 					/>
 				</SimpleGrid>
@@ -84,8 +92,8 @@ const FilterLinksSettings: FC<SettingsPageProps> = props => {
 					<Select
 						title="Action"
 						helperText="The action to perform as punishment"
-						value={links.hardAction}
-						onChange={e => props.patchGuildData({ selfmod: { links: { hardAction: e.target.value } } })}
+						value={guildSettings.selfmod.links.hardAction}
+						onChange={e => setGuildSettingsChanges({ selfmod: { links: { hardAction: e.target.value } } })}
 					>
 						<MenuItem value={0}>None</MenuItem>
 						<MenuItem value={1}>Warning</MenuItem>
@@ -95,15 +103,15 @@ const FilterLinksSettings: FC<SettingsPageProps> = props => {
 						<MenuItem value={5}>Ban</MenuItem>
 					</Select>
 					<SelectDuration
-						value={links.hardActionDuration}
+						value={guildSettings.selfmod.links.hardActionDuration}
 						min={1000}
-						onChange={duration => props.patchGuildData({ selfmod: { links: { hardActionDuration: duration } } })}
+						onChange={duration => setGuildSettingsChanges({ selfmod: { links: { hardActionDuration: duration } } })}
 					></SelectDuration>
 				</SimpleGrid>
 				<Typography>Maximum Threshold</Typography>
 				<Slider
-					value={links.thresholdMaximum}
-					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('links', 'thresholdMaximum', value))}
+					value={guildSettings.selfmod.links.thresholdMaximum}
+					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('links', 'thresholdMaximum', value))}
 					aria-labelledby="Links selfmod filter maximum threshold slider"
 					valueLabelDisplay="auto"
 					min={0}
@@ -111,8 +119,8 @@ const FilterLinksSettings: FC<SettingsPageProps> = props => {
 				/>
 				<Typography>Threshold Duration (in seconds)</Typography>
 				<Slider
-					value={links.thresholdDuration / 1000}
-					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('links', 'thresholdDuration', value, 1000))}
+					value={guildSettings.selfmod.links.thresholdDuration / 1000}
+					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('links', 'thresholdDuration', value, 1000))}
 					aria-labelledby="Links selfmod filter threshold duration slider"
 					valueLabelDisplay="auto"
 					min={0}
@@ -125,8 +133,10 @@ const FilterLinksSettings: FC<SettingsPageProps> = props => {
 						e.preventDefault();
 						try {
 							const { hostname } = new URL(/^https?:\/\//.test(newWord) ? newWord : `https://${newWord}`);
-							if (hostname.length <= 128 && !links.whitelist.includes(hostname)) {
-								props.patchGuildData({ selfmod: { links: { whitelist: [...links.whitelist, hostname] } } });
+							if (hostname.length <= 128 && !guildSettings.selfmod.links.whitelist.includes(hostname)) {
+								setGuildSettingsChanges({
+									selfmod: { links: { whitelist: [...guildSettings.selfmod.links.whitelist, hostname] } }
+								});
 								setNewWord('');
 							}
 						} catch {
@@ -147,16 +157,18 @@ const FilterLinksSettings: FC<SettingsPageProps> = props => {
 					</Box>
 				</form>
 
-				<When condition={links.whitelist.length !== 0}>
+				<When condition={guildSettings.selfmod.links.whitelist.length !== 0}>
 					<Paper classes={{ root: classes.words }}>
-						{links.whitelist.map(word => (
+						{guildSettings.selfmod.links.whitelist.map(word => (
 							<Chip
 								color="primary"
 								key={word}
 								label={word}
 								onDelete={() =>
-									props.patchGuildData({
-										selfmod: { links: { whitelist: links.whitelist.filter(item => item !== word) } }
+									setGuildSettingsChanges({
+										selfmod: {
+											links: { whitelist: guildSettings.selfmod.links.whitelist.filter(item => item !== word) }
+										}
 									})
 								}
 							/>

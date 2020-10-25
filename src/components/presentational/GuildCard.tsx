@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme: Theme) =>
 				cursor: 'pointer'
 			},
 			[theme.breakpoints.down('xs')]: {
-				width: '100%',
-				maxWidth: 'none'
+				width: '90vw',
+				maxWidth: '90vw'
 			}
 		},
 		headerRoot: {

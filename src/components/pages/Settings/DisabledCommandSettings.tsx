@@ -1,6 +1,7 @@
 import { FlattenedCommand } from '@config/types/ApiData';
-import { DisableCommands as DisableCommandSettings } from '@config/types/ConfigurableData';
-import { SettingsPageProps } from '@config/types/GuildSettings';
+import { DisableCommands } from '@config/types/ConfigurableData';
+import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionActions from '@material-ui/core/AccordionActions';
@@ -64,22 +65,24 @@ const useStyles = makeStyles((theme: Theme) =>
  */
 export const parseCommandDescription = (description: string) => description.replace(/<:(\w{2,32}):[0-9]{18}>/gi, '$1');
 
-const DisableCommandSettings: FC<SettingsPageProps> = ({ guildSettings: { disabledCommands }, patchGuildData }) => {
+const DisabledCommandSettings: FC = () => {
 	const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 	const classes = useStyles();
 	const [expanded, setExpanded] = useState<string | false>(false);
 	const [loading, setLoading] = useState(true);
-	const [commands, setCommands] = useState<Record<string, DisableCommandSettings.Command>>({});
+	const [commands, setCommands] = useState<Record<string, DisableCommands.Command>>({});
+	const { guildSettings } = useGuildSettingsContext();
+	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
 	const fetchCommands = useCallback(async () => {
 		const commands: FlattenedCommand[] = await apiFetch('/commands');
-		const commandsForState: Record<string, DisableCommandSettings.Command> = {};
+		const commandsForState: Record<string, DisableCommands.Command> = {};
 		for (const command of commands) {
 			if (command.guarded) continue;
 			commandsForState[command.name] = {
 				name: command.name,
 				description: command.description,
-				isEnabled: !disabledCommands.includes(command.name),
+				isEnabled: !guildSettings.disabledCommands.includes(command.name),
 				category: command.category
 			};
 		}
@@ -147,7 +150,7 @@ const DisableCommandSettings: FC<SettingsPageProps> = ({ guildSettings: { disabl
 									variant="contained"
 									classes={{ root: classes.enableAllButton }}
 									onClick={() => {
-										const changedCommands: Record<string, DisableCommandSettings.Command> = {};
+										const changedCommands: Record<string, DisableCommands.Command> = {};
 										for (const command of Object.values(commands)) {
 											if (command.category !== catName) continue;
 											changedCommands[command.name] = {
@@ -169,7 +172,7 @@ const DisableCommandSettings: FC<SettingsPageProps> = ({ guildSettings: { disabl
 									variant="contained"
 									classes={{ root: classes.disableAllButton }}
 									onClick={() => {
-										const changedCommands: Record<string, DisableCommandSettings.Command> = {};
+										const changedCommands: Record<string, DisableCommands.Command> = {};
 										for (const command of Object.values(commands)) {
 											if (command.category !== catName) continue;
 											changedCommands[command.name] = {
@@ -194,7 +197,7 @@ const DisableCommandSettings: FC<SettingsPageProps> = ({ guildSettings: { disabl
 									color="primary"
 									variant="contained"
 									onClick={() => {
-										patchGuildData({
+										setGuildSettingsChanges({
 											disabledCommands: Object.values(commands)
 												.filter(cmd => !cmd.isEnabled)
 												.map(cmd => cmd.name)
@@ -212,4 +215,4 @@ const DisableCommandSettings: FC<SettingsPageProps> = ({ guildSettings: { disabl
 	);
 };
 
-export default memo(DisableCommandSettings);
+export default memo(DisabledCommandSettings);

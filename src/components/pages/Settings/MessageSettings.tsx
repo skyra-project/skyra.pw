@@ -1,5 +1,7 @@
-import { CONFIGURABLE_MESSAGES, REPLACEABLE_MATCHERS } from '@config/SettingsDataEntries';
-import { SettingsPageProps } from '@config/types/GuildSettings';
+import { ConfigurableMessageKeys, ConfigurableReplaceableMatchers } from '@config/SettingsDataEntries';
+import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
+import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
 import Box from '@material-ui/core/Box';
 import Hidden from '@material-ui/core/Hidden';
@@ -33,11 +35,14 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const MessageSettings: FC<SettingsPageProps> = ({ guildData, guildSettings, patchGuildData }) => {
+const MessageSettings: FC = () => {
 	const classes = useStyles();
+	const { guildData } = useGuildDataContext();
+	const { guildSettings } = useGuildSettingsContext();
+	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
-	const configurableMessages = useMemo(() => CONFIGURABLE_MESSAGES(guildSettings, guildData), [guildData, guildSettings]);
-	const replaceableMatchers = useMemo(() => REPLACEABLE_MATCHERS(guildData), [guildData]);
+	const configurableMessages = useMemo(() => ConfigurableMessageKeys(guildSettings, guildData), [guildData, guildSettings]);
+	const replaceableMatchers = useMemo(() => ConfigurableReplaceableMatchers(guildData), [guildData]);
 
 	return (
 		<>
@@ -47,7 +52,7 @@ const MessageSettings: FC<SettingsPageProps> = ({ guildData, guildSettings, patc
 						tooltipTitle="The channels configured to not increase the point counter for users."
 						value={guildSettings.messages.ignoreChannels}
 						onChange={(channels: typeof guildSettings.messages.ignoreChannels) =>
-							patchGuildData({
+							setGuildSettingsChanges({
 								messages: {
 									ignoreChannels: channels
 								}
@@ -120,7 +125,7 @@ const MessageSettings: FC<SettingsPageProps> = ({ guildData, guildSettings, patc
 								label={name}
 								value={guildSettings.messages[key] ?? ''}
 								onChange={e =>
-									patchGuildData({
+									setGuildSettingsChanges({
 										messages: {
 											[key]: e.target.value
 										}
@@ -141,7 +146,7 @@ const MessageSettings: FC<SettingsPageProps> = ({ guildData, guildSettings, patc
 						currentValue={guildSettings.messages['announcement-embed']}
 						description="Whether announcement messages should be send in Message Embeds"
 						onChange={event =>
-							patchGuildData({
+							setGuildSettingsChanges({
 								messages: {
 									'announcement-embed': event.target.checked
 								}

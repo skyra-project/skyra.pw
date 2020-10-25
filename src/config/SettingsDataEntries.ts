@@ -2,7 +2,7 @@ import { FlattenedGuild } from './types/ApiData';
 import { Channels, Events, Messages, Moderation, Roles, Suggestions } from './types/ConfigurableData';
 import { GuildSettings } from './types/GuildSettings';
 
-export const CONFIGURABLE_SUGGESTION_ACTIONS: Suggestions.OnAction[] = [
+export const ConfigurableSuggestionActions: Suggestions.OnAction[] = [
 	{ title: 'DM', key: 'dm', description: "If this setting is enabled, Skyra will DM the suggestion's author every time it is updated." },
 	{
 		title: 'Repost',
@@ -18,7 +18,7 @@ export const CONFIGURABLE_SUGGESTION_ACTIONS: Suggestions.OnAction[] = [
 	}
 ];
 
-export const CONFIGURABLE_EMOJIS: Suggestions.Emoji[] = [
+export const ConfigurableEmojis: Suggestions.Emoji[] = [
 	{
 		title: 'Upvote Emoji',
 		key: 'upvote',
@@ -37,29 +37,29 @@ export const CONFIGURABLE_EMOJIS: Suggestions.Emoji[] = [
 	}
 ];
 
-export const REMOVE_INITIAL: Roles.Role = {
+export const ConfigurableRemoveInitialRole: Roles.Role = {
 	name: 'Remove Initial',
 	tooltip: 'Whether the claim of a public role should remove the initial one too.',
 	key: 'removeInitial'
 };
 
-export const PUBLIC_ROLES: Roles.Role = {
+export const ConfigurablePublicRoles: Roles.Role = {
 	name: 'Public Roles',
 	tooltip: 'The public roles, they will be given with no cost to any user using the roles command.',
 	key: 'public'
 };
 
-export const ROLES: Roles.Role[] = [
+export const ConfigurableRoles: Roles.Role[] = [
 	{
 		name: 'Administrator',
 		tooltip:
-			'The administrator role, their priviledges in Skyra will be upon moderative, covering management. Defaults to anyone with the Manage Server permission.',
+			'The administrator role, their privileges in Skyra will include all moderator permissions, including management. Defaults to anyone with the Manage Server permission.',
 		key: 'admin'
 	},
 	{ name: 'Initial', tooltip: 'The initial role, if configured, I will give it to users as soon as they join.', key: 'initial' },
 	{
 		name: 'Moderator',
-		tooltip: 'The moderator role, their priviledges will cover almost all moderation commands. Defaults to anyone who can ban members.',
+		tooltip: 'The moderator role, their privileges will cover almost all moderation commands. Defaults to anyone who can ban members.',
 		key: 'moderator'
 	},
 	{
@@ -105,7 +105,7 @@ export const ROLES: Roles.Role[] = [
 	}
 ];
 
-export const CONFIGURABLE_MODERATION: Moderation.Message[] = [
+export const ConfigurableModerationKeys: Moderation.Message[] = [
 	{ name: 'Hide Message', key: 'moderation-auto-delete', description: 'Will delete your message to hide the mod.' },
 	{ name: 'Message User', key: 'moderation-dm', description: "DM's the punished person with the reason/duration." },
 	{
@@ -125,7 +125,7 @@ export const CONFIGURABLE_MODERATION: Moderation.Message[] = [
 	}
 ];
 
-export const CONFIGURABLE_MESSAGES = (guildSettings: GuildSettings, guildData: FlattenedGuild): Messages.Message[] => [
+export const ConfigurableMessageKeys = (guildSettings: GuildSettings, guildData: FlattenedGuild): Messages.Message[] => [
 	{
 		name: 'Join DMs',
 		key: 'join-dm',
@@ -156,31 +156,40 @@ export const CONFIGURABLE_MESSAGES = (guildSettings: GuildSettings, guildData: F
 	}
 ];
 
-export const REPLACEABLE_MATCHERS = (guildData: FlattenedGuild): Messages.Matcher[] => [
-	{ matchKey: Messages.Matches.Guild, description: `I will replace this with ${guildData?.name}` },
-	{ matchKey: Messages.Matches.Member, description: `I will replace this with a mention of the member` },
-	{ matchKey: Messages.Matches.MemberName, description: `I will replace this with the username of the member` },
-	{ matchKey: Messages.Matches.MemberTag, description: `I will replace this with the unique tag of the member` },
-	{ matchKey: Messages.Matches.MemberCount, description: `I will replace this with the amount of members currently in the server` },
+export const ConfigurableReplaceableMatchers = (guildData: FlattenedGuild): Messages.Matcher[] => [
+	{ matchKey: Matches.Guild, description: `I will replace this with ${guildData?.name}` },
+	{ matchKey: Matches.Member, description: `I will replace this with a mention of the member` },
+	{ matchKey: Matches.MemberName, description: `I will replace this with the username of the member` },
+	{ matchKey: Matches.MemberTag, description: `I will replace this with the unique tag of the member` },
+	{ matchKey: Matches.MemberCount, description: `I will replace this with the amount of members currently in the server` },
 	{
-		matchKey: Messages.Matches.Position,
+		matchKey: Matches.Position,
 		description: `I will replace this with the ordinal position this member has in the server.`
 	}
 ];
 
-export const CONFIGURABLE_MODERATION_EVENTS: Events.Event[] = [
+export enum Matches {
+	Guild = '%GUILD%',
+	Member = '%MEMBER%',
+	MemberName = '%MEMBERNAME%',
+	MemberTag = '%MEMBERTAG%',
+	MemberCount = '%MEMBERCOUNT%',
+	Position = '%POSITION%'
+}
+
+export const ConfigurableModerationEvents: Events.Event[] = [
 	{ title: 'Ban Added', key: 'banAdd', description: 'This event posts anonymous moderation logs when a user gets banned.' },
 	{ title: 'Ban Revoked', key: 'banRemove', description: 'This event posts anonymous moderation logs when a user gets unbanned' }
 ];
 
-export const CONFIGURABLE_MEMBER_EVENTS: Events.Event[] = [
+export const ConfigurableMemberEvents: Events.Event[] = [
 	{ title: 'Member Join', key: 'memberAdd', description: 'This event posts member logs when a user joins' },
 	{ title: 'Member Leave', key: 'memberRemove', description: 'This event posts member logs when a user leaves' },
 	{ title: 'Member Role Changes', key: 'memberRoleUpdate', description: "This events posts member logs when a member's roles change" },
 	{ title: 'Member Name Changes', key: 'memberNameUpdate', description: 'This events posts member logs when a member changes their name' }
 ];
 
-export const CONFIGURABLE_MESSAGE_EVENTS: Events.Event[] = [
+export const ConfigurableMessageEvents: Events.Event[] = [
 	{
 		title: 'Message Edit',
 		key: 'messageEdit',
@@ -201,7 +210,7 @@ export const CONFIGURABLE_MESSAGE_EVENTS: Events.Event[] = [
 	}
 ];
 
-export const DISABLED_CHANNELS: Channels.Channel = {
+export const ConfigurableDisabledChannels: Channels.Channel = {
 	name: 'Disabled Channels',
 	description: [
 		'A list of channels for disabled commands, for example,',
@@ -212,14 +221,14 @@ export const DISABLED_CHANNELS: Channels.Channel = {
 	key: 'spam'
 };
 
-export const CHANNELS: Channels.Channel[] = [
+export const ConfigurableChannels: Channels.Channel[] = [
 	{ name: 'Announcements', description: 'The channel for announcements', key: 'announcements' },
 	{ name: 'Greetings', description: 'The channel I will use to send greetings', key: 'greeting' },
 	{ name: 'Farewells', description: 'The channel I will use to send farewells', key: 'farewell' },
 	{ name: 'Spam', description: 'The channel for me to redirect users to when they use commands I consider spammy.', key: 'spam' }
 ];
 
-export const LOGGING_CHANNELS: Channels.Channel[] = [
+export const ConfigurableLoggingChannels: Channels.Channel[] = [
 	{ name: 'Message Logs', description: 'The channel for (non-NSFW) message logs', key: 'message-logs' },
 	{
 		name: 'Member Logs',
@@ -239,7 +248,7 @@ export const LOGGING_CHANNELS: Channels.Channel[] = [
 	{ name: 'Image Logs', description: 'The channel I will use to re-upload all images I see.', key: 'image-logs' },
 	{
 		name: 'Prune Logs',
-		description: 'The channel for prune logs, same requirement as normal mesasge logs, but will only send prune messages.',
+		description: 'The channel for prune logs, same requirement as normal message logs, but will only send prune messages.',
 		key: 'prune-logs'
 	},
 	{
@@ -249,13 +258,13 @@ export const LOGGING_CHANNELS: Channels.Channel[] = [
 	}
 ];
 
-export const IGNORE_CHANNELS: Channels.IgnoreChannel[] = [
+export const ConfigurableIgnoreChannels: Channels.IgnoreChannel[] = [
 	{ name: 'All logs', description: 'Channels I should ignore for all types of logging.', key: 'all' },
 	{
 		name: 'Message delete logs',
 		description: 'Channels I should ignore when checking for deleted messages to log.',
 		key: 'message-delete'
 	},
-	{ name: 'Message edit logs', description: 'Channels I should ignore when checking for edited messags to log.', key: 'message-edit' },
+	{ name: 'Message edit logs', description: 'Channels I should ignore when checking for edited messages to log.', key: 'message-edit' },
 	{ name: 'Reaction add logs', description: 'Channels I should ignore when checking for added reactions.', key: 'reaction-add' }
 ];

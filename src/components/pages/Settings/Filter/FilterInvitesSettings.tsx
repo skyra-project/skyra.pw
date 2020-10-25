@@ -1,4 +1,5 @@
-import { SettingsPageProps } from '@config/types/GuildSettings';
+import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
@@ -10,47 +11,60 @@ import SelectDuration from '@selects/SelectDuration';
 import { bitwiseHas, bitwiseSet, updateSliderValueObj } from '@utils/util';
 import React, { FC, Fragment, memo } from 'react';
 
-const FilterInvitesSettings: FC<SettingsPageProps> = props => {
-	const { invites } = props.guildSettings.selfmod;
+const FilterInvitesSettings: FC = () => {
+	const { guildSettings } = useGuildSettingsContext();
+	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
 	return (
 		<Fragment>
 			<Section title="Invite Link Filter">
 				<SimpleGrid>
 					<SelectBoolean
-						title={`Filter ${invites.enabled ? 'Enabled' : 'Disabled'}`}
-						onChange={event => props.patchGuildData({ selfmod: { invites: { enabled: event.target.checked } } })}
-						currentValue={invites.enabled}
+						title={`Filter ${guildSettings.selfmod.invites.enabled ? 'Enabled' : 'Disabled'}`}
+						onChange={event => setGuildSettingsChanges({ selfmod: { invites: { enabled: event.target.checked } } })}
+						currentValue={guildSettings.selfmod.invites.enabled}
 						description="Whether or not this system should be enabled."
 					/>
 					<SelectBoolean
-						title={`Alerts ${bitwiseHas(invites.softAction, 0b100) ? 'Enabled' : 'Disabled'}`}
+						title={`Alerts ${bitwiseHas(guildSettings.selfmod.invites.softAction, 0b100) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
-							props.patchGuildData({
-								selfmod: { invites: { softAction: bitwiseSet(invites.softAction, 0b100, event.target.checked) } }
+							setGuildSettingsChanges({
+								selfmod: {
+									invites: {
+										softAction: bitwiseSet(guildSettings.selfmod.invites.softAction, 0b100, event.target.checked)
+									}
+								}
 							})
 						}
-						currentValue={bitwiseHas(invites.softAction, 0b100)}
+						currentValue={bitwiseHas(guildSettings.selfmod.invites.softAction, 0b100)}
 						description="Toggle message alerts in the channel the infraction took place."
 					/>
 					<SelectBoolean
-						title={`Logs ${bitwiseHas(invites.softAction, 0b010) ? 'Enabled' : 'Disabled'}`}
+						title={`Logs ${bitwiseHas(guildSettings.selfmod.invites.softAction, 0b010) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
-							props.patchGuildData({
-								selfmod: { invites: { softAction: bitwiseSet(invites.softAction, 0b010, event.target.checked) } }
+							setGuildSettingsChanges({
+								selfmod: {
+									invites: {
+										softAction: bitwiseSet(guildSettings.selfmod.invites.softAction, 0b010, event.target.checked)
+									}
+								}
 							})
 						}
-						currentValue={bitwiseHas(invites.softAction, 0b010)}
+						currentValue={bitwiseHas(guildSettings.selfmod.invites.softAction, 0b010)}
 						description="Toggle message logs in the moderation logs channel."
 					/>
 					<SelectBoolean
-						title={`Deletes ${bitwiseHas(invites.softAction, 0b001) ? 'Enabled' : 'Disabled'}`}
+						title={`Deletes ${bitwiseHas(guildSettings.selfmod.invites.softAction, 0b001) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
-							props.patchGuildData({
-								selfmod: { invites: { softAction: bitwiseSet(invites.softAction, 0b001, event.target.checked) } }
+							setGuildSettingsChanges({
+								selfmod: {
+									invites: {
+										softAction: bitwiseSet(guildSettings.selfmod.invites.softAction, 0b001, event.target.checked)
+									}
+								}
 							})
 						}
-						currentValue={bitwiseHas(invites.softAction, 0b001)}
+						currentValue={bitwiseHas(guildSettings.selfmod.invites.softAction, 0b001)}
 						description="Toggle message deletions."
 					/>
 				</SimpleGrid>
@@ -60,8 +74,8 @@ const FilterInvitesSettings: FC<SettingsPageProps> = props => {
 					<Select
 						title="Action"
 						helperText="The action to perform as punishment"
-						value={invites.hardAction}
-						onChange={e => props.patchGuildData({ selfmod: { invites: { hardAction: e.target.value } } })}
+						value={guildSettings.selfmod.invites.hardAction}
+						onChange={e => setGuildSettingsChanges({ selfmod: { invites: { hardAction: e.target.value } } })}
 					>
 						<MenuItem value={0}>None</MenuItem>
 						<MenuItem value={1}>Warning</MenuItem>
@@ -71,15 +85,15 @@ const FilterInvitesSettings: FC<SettingsPageProps> = props => {
 						<MenuItem value={5}>Ban</MenuItem>
 					</Select>
 					<SelectDuration
-						value={invites.hardActionDuration}
+						value={guildSettings.selfmod.invites.hardActionDuration}
 						min={1000}
-						onChange={duration => props.patchGuildData({ selfmod: { invites: { hardActionDuration: duration } } })}
+						onChange={duration => setGuildSettingsChanges({ selfmod: { invites: { hardActionDuration: duration } } })}
 					></SelectDuration>
 				</SimpleGrid>
 				<Typography>Maximum Threshold</Typography>
 				<Slider
-					value={invites.thresholdMaximum}
-					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('invites', 'thresholdMaximum', value))}
+					value={guildSettings.selfmod.invites.thresholdMaximum}
+					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('invites', 'thresholdMaximum', value))}
 					aria-labelledby="Invites selfmod filter maximum threshold slider"
 					valueLabelDisplay="auto"
 					min={0}
@@ -87,8 +101,8 @@ const FilterInvitesSettings: FC<SettingsPageProps> = props => {
 				/>
 				<Typography>Threshold Duration (in seconds)</Typography>
 				<Slider
-					value={invites.thresholdDuration / 1000}
-					onChange={(_, value) => props.patchGuildData(updateSliderValueObj('invites', 'thresholdDuration', value, 1000))}
+					value={guildSettings.selfmod.invites.thresholdDuration / 1000}
+					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('invites', 'thresholdDuration', value, 1000))}
 					aria-labelledby="Invites selfmod filter threshold duration slider"
 					valueLabelDisplay="auto"
 					min={0}

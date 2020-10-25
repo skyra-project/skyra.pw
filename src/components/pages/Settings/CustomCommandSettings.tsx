@@ -1,5 +1,7 @@
 import { CustomCommands } from '@config/types/ConfigurableData';
-import { CustomCommand, SettingsPageProps } from '@config/types/GuildSettings';
+import { CustomCommand } from '@config/types/GuildSettings';
+import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid/Grid';
@@ -18,7 +20,7 @@ import SimpleGrid from '@mui/SimpleGrid';
 import ColorPicker from '@presentational/ColorPicker/ColorPicker';
 import { parse, REGEXP } from '@utils/Color';
 import { FastField, Formik, FormikConfig } from 'formik';
-import React, { Fragment, memo, PropsWithChildren } from 'react';
+import React, { Fragment, memo } from 'react';
 import { Virtuoso } from 'react-virtuoso';
 import { boolean, object, string } from 'yup';
 
@@ -58,12 +60,11 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const CustomCommandSettings = ({
-	patchGuildData,
-	guildSettings: { 'custom-commands': customCommands, prefix }
-}: PropsWithChildren<SettingsPageProps>) => {
+const CustomCommandSettings = () => {
 	const classes = useStyles();
 	const theme = useTheme();
+	const { guildSettings } = useGuildSettingsContext();
+	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
 	const validationSchema = object<CustomCommands.Form>({
 		id: string()
@@ -108,8 +109,8 @@ const CustomCommandSettings = ({
 		onSubmit: ({ id, content, color, embed }, { setSubmitting, resetForm }) => {
 			setSubmitting(true);
 
-			patchGuildData({
-				'custom-commands': mergeCustomCommands(customCommands, {
+			setGuildSettingsChanges({
+				'custom-commands': mergeCustomCommands(guildSettings['custom-commands'], {
 					id,
 					content,
 					color: parse(color || '#1E88E5').B10.value,
@@ -126,7 +127,7 @@ const CustomCommandSettings = ({
 	const sortCommands = (firstCommand: CustomCommand, secondCommand: CustomCommand) =>
 		firstCommand.id < secondCommand.id ? -1 : firstCommand.id > secondCommand.id ? 1 : 0;
 
-	const sortedCommands = customCommands.sort(sortCommands);
+	const sortedCommands = guildSettings['custom-commands'].sort(sortCommands);
 
 	return (
 		<Fragment>
@@ -230,7 +231,7 @@ const CustomCommandSettings = ({
 						xl: 12
 					}}
 				>
-					{customCommands.length > 0 ? (
+					{guildSettings['custom-commands'].length > 0 ? (
 						<Virtuoso
 							totalCount={sortedCommands.length}
 							overscan={10}
@@ -252,7 +253,7 @@ const CustomCommandSettings = ({
 										disableTypography
 										primary={
 											<Typography variant="body1" classes={{ root: classes.tagHeader }}>
-												{prefix + sortedCommands[index].id}
+												{guildSettings.prefix + sortedCommands[index].id}
 											</Typography>
 										}
 										secondary={
@@ -265,8 +266,8 @@ const CustomCommandSettings = ({
 										<IconButton
 											edge="end"
 											onClick={() =>
-												patchGuildData({
-													'custom-commands': customCommands.filter(
+												setGuildSettingsChanges({
+													'custom-commands': guildSettings['custom-commands'].filter(
 														command => command.id !== sortedCommands[index].id
 													)
 												})

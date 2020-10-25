@@ -1,4 +1,6 @@
-import { SettingsPageProps } from '@config/types/GuildSettings';
+import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
+import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import SimpleGrid from '@mui/SimpleGrid';
@@ -21,8 +23,11 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const StarboardSettings: FC<SettingsPageProps> = props => {
+const StarboardSettings: FC = () => {
 	const classes = useStyles();
+	const { guildData } = useGuildDataContext();
+	const { guildSettings } = useGuildSettingsContext();
+	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
 	return (
 		<Section title="Starboard Settings">
@@ -38,13 +43,13 @@ const StarboardSettings: FC<SettingsPageProps> = props => {
 				}}
 			>
 				<SelectInteger
-					value={props.guildSettings.starboard.minimum}
+					value={guildSettings.starboard.minimum}
 					label="Minimum Stars"
 					min={1}
 					max={100}
 					fullWidth
 					onChange={r =>
-						props.patchGuildData({
+						setGuildSettingsChanges({
 							starboard: {
 								minimum: r.target.value
 							}
@@ -52,16 +57,16 @@ const StarboardSettings: FC<SettingsPageProps> = props => {
 					}
 				/>
 				<SelectChannel
-					value={props.guildSettings.starboard.channel}
+					value={guildSettings.starboard.channel}
 					label="Starboard Channel"
 					onChange={c =>
-						props.patchGuildData({
+						setGuildSettingsChanges({
 							starboard: {
 								channel: c
 							}
 						})
 					}
-					guild={props.guildData}
+					guild={guildData}
 					buttonProps={{
 						fullWidth: true,
 						classes: {
@@ -71,15 +76,15 @@ const StarboardSettings: FC<SettingsPageProps> = props => {
 					}}
 				/>
 				<SelectChannels
-					value={props.guildSettings.starboard.ignoreChannels}
+					value={guildSettings.starboard.ignoreChannels}
 					onChange={channels =>
-						props.patchGuildData({
+						setGuildSettingsChanges({
 							starboard: {
 								ignoreChannels: channels
 							}
 						})
 					}
-					guild={props.guildData}
+					guild={guildData}
 					label="Ignored Channels"
 					buttonProps={{
 						fullWidth: true,

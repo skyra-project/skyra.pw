@@ -54,15 +54,6 @@ export namespace Messages {
 		matchKey: Matches;
 		description: string;
 	}
-
-	export enum Matches {
-		Guild = '%GUILD%',
-		Member = '%MEMBER%',
-		MemberName = '%MEMBERNAME%',
-		MemberTag = '%MEMBERTAG%',
-		MemberCount = '%MEMBERCOUNT%',
-		Position = '%POSITION%'
-	}
 }
 
 export namespace Events {
