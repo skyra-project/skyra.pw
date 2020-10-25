@@ -3,7 +3,7 @@ import { GuildSettings } from '@config/types/GuildSettings';
 import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
-import { useMediaQuery } from '@material-ui/core';
+import { Grow, useMediaQuery } from '@material-ui/core';
 import Backdrop from '@material-ui/core/Backdrop';
 import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -152,7 +152,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 			<Box className={classes.root}>
 				<SettingsNavBar guildData={guildData} toggleSidebar={toggleSidebar} />
 				<Box component="nav" className={classes.drawer}>
-					<Hidden smUp>
+					<Hidden smUp implementation="css">
 						<MobileSettingsDrawer
 							mobileOpen={mobileOpen}
 							guildData={guildData}
@@ -162,7 +162,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 							toggleSidebar={toggleSidebar}
 						/>
 					</Hidden>
-					<Hidden xsDown>
+					<Hidden xsDown implementation="css">
 						<DesktopSettingsDrawer
 							guildData={guildData}
 							guildId={guildId}
@@ -174,9 +174,9 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 				</Box>
 				<Box component="main" className={classes.content}>
 					<When condition={readyToRender}>{children}</When>
-					<When condition={Object.keys(guildSettingsChanges ?? {}).length > 0}>
+					<Grow in={Object.keys(guildSettingsChanges ?? {}).length > 0} unmountOnExit mountOnEnter>
 						<SubmitResetButtons isLoading={isLoading} isOnMobile={isOnMobile} submitChanges={submitChanges} />
-					</When>
+					</Grow>
 				</Box>
 			</Box>
 		</>
