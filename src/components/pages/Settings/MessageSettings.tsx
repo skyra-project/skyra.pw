@@ -70,7 +70,7 @@ const MessageSettings: FC = () => {
 						<Typography variant="h5" component="span">
 							Messages I can send
 						</Typography>
-						<Hidden smDown>
+						<Hidden smDown implementation="css">
 							<Tooltip
 								title={
 									<Box p={1}>

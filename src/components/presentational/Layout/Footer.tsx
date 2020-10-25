@@ -68,14 +68,14 @@ const Footer = () => {
 	return (
 		<Box component="footer" className={classes.root}>
 			<Container maxWidth="sm">
-				<Hidden xsDown>
+				<Hidden xsDown implementation="css">
 					<Box className={classes.container}>
 						<Left />
 						<Middle />
 						<Right />
 					</Box>
 				</Hidden>
-				<Hidden smUp>
+				<Hidden smUp implementation="css">
 					<Box className={classes.container}>
 						<Box display="flex" justifyContent="space-between" width="100%" px={3}>
 							<Left />
