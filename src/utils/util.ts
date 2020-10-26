@@ -5,6 +5,10 @@ import { BASE_API_URL, LocalStorageKeys } from './constants';
 import isBrowser from './isBrowser';
 import { Time } from './skyraUtils';
 
+export function cast<T>(value: unknown): T {
+	return value as T;
+}
+
 export function sleep(ms: number) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }

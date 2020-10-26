@@ -1,26 +1,98 @@
-export interface MusicData {
-	voiceChannel: string | null;
-	song: FlattenedSong | null;
-	position: number;
-	status: number;
-	replay: boolean;
-	volume: number;
-	queue: readonly FlattenedSong[];
+import { Track, TrackInfo } from '@skyra/audio';
+
+export interface IncomingWebsocketMessage {
+	action: ServerActions;
+	data: unknown;
 }
 
-export interface FlattenedSong {
-	id: string;
-	track: string;
-	requester: string;
-	identifier: string;
-	seekable: boolean;
+export interface OutgoingWebsocketMessage {
+	action: ClientActions;
+	data?: any;
+}
+
+export interface QueueEntry {
 	author: string;
-	duration: number;
-	stream: boolean;
+	track: string;
+}
+
+export interface NP {
+	entry: NowPlayingEntry;
 	position: number;
-	title: string;
-	url: string;
-	skips: string[];
+}
+
+export interface NowPlayingEntry extends QueueEntry {
+	info: TrackInfo;
+}
+
+export interface MusicConnectEvent extends IncomingWebsocketMessage {
+	action: ServerActions.MusicConnect;
+	data: { voiceChannel: string };
+}
+
+export interface MusicVoiceChannelJoinEvent extends IncomingWebsocketMessage {
+	action: ServerActions.MusicVoiceChannelJoin;
+	data: { voiceChannel: string };
+}
+
+export interface MusicFinishEvent extends Pick<IncomingWebsocketMessage, 'action'> {
+	action: ServerActions.MusicFinish;
+}
+
+export interface MusicLeaveEvent extends Pick<IncomingWebsocketMessage, 'action'> {
+	action: ServerActions.MusicLeave;
+}
+
+export interface MusicPruneEvent extends IncomingWebsocketMessage {
+	action: ServerActions.MusicPrune;
+	data: { tracks: Track[] };
+}
+
+export interface MusicReplayUpdateEvent extends IncomingWebsocketMessage {
+	action: ServerActions.MusicReplayUpdate;
+	data: { replay: boolean };
+}
+
+export interface MusicPauseEvent extends Pick<IncomingWebsocketMessage, 'action'> {
+	action: ServerActions.MusicSongPause;
+}
+
+export interface MusicResumeEvent extends Pick<IncomingWebsocketMessage, 'action'> {
+	action: ServerActions.MusicSongResume;
+}
+
+export interface MusicSongSeekEvent extends IncomingWebsocketMessage {
+	action: ServerActions.MusicSongSeekUpdate;
+	data: { status: NP };
+}
+
+export interface MusicVolumeEvent extends IncomingWebsocketMessage {
+	action: ServerActions.MusicSongVolumeUpdate;
+	data: { volume: number };
+}
+
+export interface MusicSyncEvent extends IncomingWebsocketMessage {
+	action: ServerActions.MusicSync;
+	data: {
+		/** The Guild ID of this music session */
+		id?: string;
+		/** The tracks of the current session */
+		tracks: Track[];
+		/** The currently playing track */
+		status: NP | null;
+		/** The current volume */
+		volume?: number;
+		/** The ID of the current voice channel */
+		voiceChannel?: string | null;
+	};
+}
+
+export interface MusicVoiceChannelLeaveEvent extends Pick<IncomingWebsocketMessage, 'action'> {
+	action: ServerActions.MusicVoiceChannelLeave;
+}
+
+export interface MusicWebsocketDisconnectEvent extends IncomingWebsocketMessage {
+	action: ServerActions.MusicWebsocketDisconnect;
+	data: { id: string };
 }
 
 export enum MusicStatus {
@@ -41,40 +113,26 @@ export enum ClientActions {
 export enum MusicActions {
 	SkipSong = 'SKIP_SONG',
 	PauseSong = 'PAUSE_SONG',
-	ResumePlaying = 'RESUME_PLAYING',
+	ResumePlaying = 'RESUME_PLAYING'
+}
+
+export enum SubscriptionActions {
 	WebsocketSubscriptionName = 'MUSIC',
 	WebsocketSubscriptionAction = 'SUBSCRIBE'
 }
 
 export enum ServerActions {
-	MusicAdd = 'MUSIC_ADD',
 	MusicConnect = 'MUSIC_CONNECT',
+	MusicFinish = 'MUSIC_FINISH',
 	MusicLeave = 'MUSIC_LEAVE',
 	MusicPrune = 'MUSIC_PRUNE',
-	MusicRemove = 'MUSIC_REMOVE',
 	MusicReplayUpdate = 'MUSIC_REPLAY_UPDATE',
-	MusicShuffleQueue = 'MUSIC_SHUFFLE_QUEUE',
-	MusicSongFinish = 'MUSIC_SONG_FINISH',
 	MusicSongPause = 'MUSIC_SONG_PAUSE',
-	MusicSongPlay = 'MUSIC_SONG_PLAY',
-	MusicSongReplay = 'MUSIC_SONG_REPLAY',
 	MusicSongResume = 'MUSIC_SONG_RESUME',
 	MusicSongSeekUpdate = 'MUSIC_SONG_SEEK_UPDATE',
-	MusicSongSkip = 'MUSIC_SONG_SKIP',
 	MusicSongVolumeUpdate = 'MUSIC_SONG_VOLUME_UPDATE',
 	MusicSync = 'MUSIC_SYNC',
 	MusicVoiceChannelJoin = 'MUSIC_VOICE_CHANNEL_JOIN',
-	MusicVoiceChannelLeave = 'MUSIC_VOICE_CHANNEL_LEAVE'
-}
-
-export interface IncomingWebsocketMessage {
-	action: ServerActions;
-	data?: MusicData;
-	error?: string;
-	success?: boolean;
-}
-
-export interface OutgoingWebsocketMessage {
-	action: ClientActions;
-	data?: any;
+	MusicVoiceChannelLeave = 'MUSIC_VOICE_CHANNEL_LEAVE',
+	MusicWebsocketDisconnect = 'MUSIC_WEBSOCKET_DISCONNECT'
 }

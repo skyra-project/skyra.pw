@@ -1,3 +1,21 @@
+import {
+	ClientActions,
+	IncomingWebsocketMessage,
+	MusicActions,
+	MusicConnectEvent,
+	MusicPruneEvent,
+	MusicReplayUpdateEvent,
+	MusicSongSeekEvent,
+	MusicStatus,
+	MusicSyncEvent,
+	MusicVolumeEvent,
+	OutgoingWebsocketMessage,
+	ServerActions,
+	SubscriptionActions
+} from '@config/types/Music';
+import { useAuthenticated } from '@contexts/AuthenticationContext';
+import { useMobileContext } from '@contexts/MobileContext';
+import GeneralPage from '@layout/General';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import CardContent from '@material-ui/core/CardContent';
@@ -13,27 +31,20 @@ import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import GeneralPage from 'components/GeneralPage';
-import LazyAvatar from 'components/LazyAvatar';
-import Link from 'components/Link';
-import {
-	ClientActions,
-	IncomingWebsocketMessage,
-	MusicActions,
-	MusicData,
-	MusicStatus,
-	OutgoingWebsocketMessage,
-	ServerActions
-} from 'lib/types/Music';
-import { WS_URL } from 'lib/util/constants';
-import { getAcronym } from 'lib/util/util';
-import { useRef } from 'react';
+import LazyAvatar from '@mui/LazyAvatar';
+import Link from '@routing/Link';
+import { Track, TrackInfo } from '@skyra/audio';
+import { WS_URL } from '@utils/constants';
+import { cast, getAcronym } from '@utils/util';
+import React, { FC, memo, useEffect, useState } from 'react';
 import FlipMove from 'react-flip-move';
 import { Else, If, Then, When } from 'react-if';
 import ReactPlayer from 'react-player';
-import { useParams } from 'react-router-dom';
 import { Virtuoso } from 'react-virtuoso';
-import React, { useEffect, useGlobal, useState } from 'reactn';
+
+interface MusicPageProps {
+	guildId: string;
+}
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -72,50 +83,66 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		virtualizedRoot: {
 			margin: theme.spacing(1)
+		},
+		link: {
+			display: 'flex',
+			alignItems: 'center',
+			alignContent: 'flex-start',
+			justifyContent: 'flex-start',
+			flex: '1 1 0'
 		}
 	})
 );
 
-export default () => {
+const MusicPage: FC<MusicPageProps> = ({ guildId }) => {
 	const classes = useStyles();
-	const { guildID } = useParams<{ guildID: string }>();
-	const [authenticated] = useGlobal('authenticated');
+	const authenticated = useAuthenticated();
 	const theme = useTheme();
+	const { isMobile } = useMobileContext();
 
-	const [voiceChannel, setVoiceChannel] = useState<MusicData['voiceChannel']>(null);
-	const [song, setSong] = useState<MusicData['song']>(null);
-	const [queue, setQueue] = useState<MusicData['queue']>([]);
-	const [position, setPosition] = useState<MusicData['position']>(0);
-	const [status, setStatus] = useState<MusicData['status']>(MusicStatus.INSTANTIATED);
-	const [, setVolume] = useState<MusicData['volume']>(0);
-	const [replay, setReplay] = useState<MusicData['replay']>(false);
+	const [voiceChannel, setVoiceChannel] = useState<string | null>(null);
+	const [currentSong, setCurrentSong] = useState<TrackInfo>();
+	const [trackId, setTrackId] = useState<string>('');
+	const [queue, setQueue] = useState<Track[]>([]);
+	const [position, setPosition] = useState(0);
+	const [status, setStatus] = useState<MusicStatus>(MusicStatus.INSTANTIATED);
+	const [volume, setVolume] = useState(0);
+	const [replay, setReplay] = useState(false);
 	const [ws, setWs] = useState<WebSocket | undefined>();
 
-	const playerRef = useRef<ReactPlayer | null>(null);
+	const [player, setPlayer] = useState<ReactPlayer | undefined>();
+
+	const playerRef = (player: ReactPlayer | null | undefined) => {
+		if (player) {
+			setPlayer(player);
+		}
+	};
 
 	const skipSong = () => {
 		ws!.sendJSON({
 			action: ClientActions.MusicQueueUpdate,
 			data: {
-				guild_id: guildID,
+				guild_id: guildId,
 				music_action: MusicActions.SkipSong
 			}
 		});
 	};
+
 	const pauseSong = () => {
 		ws!.sendJSON({
 			action: ClientActions.MusicQueueUpdate,
 			data: {
-				guild_id: guildID,
+				guild_id: guildId,
 				music_action: MusicActions.PauseSong
 			}
 		});
 	};
+
 	const resumeSong = () => {
 		ws!.sendJSON({
 			action: ClientActions.MusicQueueUpdate,
 			data: {
-				guild_id: guildID,
+				guild_id: guildId,
 				music_action: MusicActions.ResumePlaying
 			}
 		});
@@ -131,9 +158,9 @@ export default () => {
 				ws.sendJSON({
 					action: ClientActions.SubscriptionUpdate,
 					data: {
-						subscription_name: MusicActions.WebsocketSubscriptionName,
-						subscription_action: MusicActions.WebsocketSubscriptionAction,
-						guild_id: guildID
+						subscription_name: SubscriptionActions.WebsocketSubscriptionName,
+						subscription_action: SubscriptionActions.WebsocketSubscriptionAction,
+						guild_id: guildId
 					}
 				});
 			};
@@ -141,92 +168,78 @@ export default () => {
 			ws.onmessage = event => {
 				const { action, data } = JSON.parse(event.data) as IncomingWebsocketMessage;
 
-				/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 				switch (action) {
-					case ServerActions.MusicAdd:
-						setQueue(data!.queue);
+					case ServerActions.MusicConnect: {
+						setVoiceChannel(cast<MusicConnectEvent['data']>(data).voiceChannel);
 						break;
+					}
 
-					case ServerActions.MusicConnect:
-						setVoiceChannel(data!.voiceChannel);
-						break;
-
-					case ServerActions.MusicLeave:
+					case ServerActions.MusicLeave: {
 						setVoiceChannel(null);
 						break;
+					}
 
-					case ServerActions.MusicPrune:
+					case ServerActions.MusicPrune: {
+						setQueue(cast<MusicPruneEvent['data']>(data).tracks);
+						break;
+					}
+
+					case ServerActions.MusicReplayUpdate: {
+						setReplay(cast<MusicReplayUpdateEvent['data']>(data).replay);
+						break;
+					}
+
+					case ServerActions.MusicFinish: {
+						setTrackId('');
 						setQueue([]);
-						break;
-
-					case ServerActions.MusicRemove:
-						setQueue(data!.queue);
-						break;
-
-					case ServerActions.MusicReplayUpdate:
-						setReplay(data!.replay);
-						break;
-
-					case ServerActions.MusicShuffleQueue:
-						setQueue(data!.queue);
-						break;
-
-					case ServerActions.MusicSongFinish:
-						setSong(null);
-						setQueue(data!.queue);
 						setPosition(0);
 						setStatus(MusicStatus.ENDED);
 						break;
+					}
 
-					case ServerActions.MusicSongPause:
+					case ServerActions.MusicSongPause: {
 						setStatus(MusicStatus.PAUSED);
 						break;
+					}
 
-					case ServerActions.MusicSongPlay:
-						setSong(data!.song);
-						setQueue(data!.queue);
-						setPosition(0);
-						break;
-
-					case ServerActions.MusicSongReplay:
-						setSong(data!.song);
-						setPosition(0);
+					case ServerActions.MusicSongResume: {
 						setStatus(MusicStatus.PLAYING);
 						break;
+					}
 
-					case ServerActions.MusicSongResume:
-						setStatus(MusicStatus.PLAYING);
-						break;
+					case ServerActions.MusicSongSeekUpdate: {
+						const newPosition = cast<MusicSongSeekEvent['data']>(data).status.position / 1000;
+						setPosition(newPosition);
 
-					case ServerActions.MusicSongSeekUpdate:
-						setPosition(data!.position);
-						break;
+						player?.seekTo(newPosition, 'seconds');
 
-					case ServerActions.MusicSongSkip:
-						setQueue(data!.queue);
 						break;
+					}
 
-					case ServerActions.MusicSongVolumeUpdate:
-						setVolume(data!.volume);
+					case ServerActions.MusicSongVolumeUpdate: {
+						setVolume(cast<MusicVolumeEvent['data']>(data).volume);
 						break;
+					}
 
-					case ServerActions.MusicSync:
-						setVoiceChannel(data!.voiceChannel);
-						setSong(data!.song);
-						setPosition(data!.position);
-						setStatus(data!.status);
-						setQueue(data!.queue);
-						break;
+					case ServerActions.MusicSync: {
+						const dt = cast<MusicSyncEvent['data']>(data);
+						if (dt.voiceChannel) setVoiceChannel(dt.voiceChannel);
+						if (dt.volume !== undefined) setVolume(dt.volume);
 
-					case ServerActions.MusicVoiceChannelJoin:
-					case ServerActions.MusicVoiceChannelLeave:
-						// These events don't need to be handled, its handled by MusicConnect
+						if (dt.status) {
+							setTrackId(dt.status.entry.track);
+							setCurrentSong(dt.status.entry.info);
+							setPosition(dt.status.position);
+						}
+
+						setQueue(dt.tracks);
+
 						break;
+					}
 				}
 			};
 		}
-	}, [guildID, ws]);
-	/* eslint-enable @typescript-eslint/no-unnecessary-type-assertion */
+	}, [guildId, ws, player]);
 
 	return (
 		<GeneralPage
@@ -239,7 +252,7 @@ export default () => {
 		>
 			<Container>
 				<Box overflow="visible" display="flex" flexDirection="column">
-					<If condition={song === null || voiceChannel === null}>
+					<If condition={trackId === '' || voiceChannel === null}>
 						<Then>
 							<Box component="div" className={classes.currentlyPlaying}>
 								<Typography variant="h2" component="h1">
@@ -249,14 +262,14 @@ export default () => {
 						</Then>
 						<Else>
 							<FlipMove staggerDelayBy={150} appearAnimation="fade" enterAnimation="fade" leaveAnimation="fade">
-								<Box component="div" className={classes.currentlyPlaying} key={song?.identifier}>
+								<Box component="div" className={classes.currentlyPlaying} key={currentSong?.identifier ?? '0'}>
 									<Box component="div">
 										<CardContent classes={{ root: classes.cardContent }}>
 											<Typography component="h5" variant="h5" data-premid="music-title">
-												{song?.title || 'Unknown Title'}
+												{currentSong?.title ?? 'Unknown Title'}
 											</Typography>
 											<Typography variant="subtitle1" color="textSecondary" data-premid="music-from">
-												{song?.author || 'Unknown Uploader'}
+												{currentSong?.author ?? 'Unknown Uploader'}
 											</Typography>
 										</CardContent>
 										<When condition={authenticated}>
@@ -285,12 +298,13 @@ export default () => {
 										<ReactPlayer
 											width="100%"
 											height="100%"
-											onStart={() => playerRef.current && playerRef.current.seekTo(position / 1000, 'seconds')}
+											onStart={() => player && player.seekTo(position, 'seconds')}
 											onReady={() => setStatus(MusicStatus.PLAYING)}
 											loop={replay}
 											ref={playerRef}
-											url={song?.url}
+											url={currentSong?.uri ?? ''}
 											playing={status === MusicStatus.PLAYING}
+											volume={volume}
 											muted
 										/>
 									</Box>
@@ -303,8 +317,8 @@ export default () => {
 						<Virtuoso
 							totalCount={queue.length}
 							className={classes.virtualizedRoot}
-							style={{ height: '510px' }}
-							overscan={400}
+							style={{ height: isMobile ? '300px' : '510px' }}
+							overscan={2}
 							ListContainer={({ listRef, style, children }) => (
 								<List ref={listRef} style={style} classes={{ root: classes.list }}>
 									{children}
@@ -316,21 +330,21 @@ export default () => {
 								</ListItem>
 							)}
 							item={index => (
-								<Link to={queue[index].url}>
+								<Link href={queue[index].info.uri} className={classes.link}>
 									<ListItemIcon>
-										<If condition={queue[index].url.includes('youtube')}>
+										<If condition={queue[index].info.uri.includes('youtube')}>
 											<Then>
 												<LazyAvatar
 													imgProps={{ height: 360, width: 480 }}
-													src={`https://img.youtube.com/vi/${queue[index].identifier}/hqdefault.jpg`}
+													src={`https://img.youtube.com/vi/${queue[index].info.identifier}/hqdefault.jpg`}
 												/>
 											</Then>
 											<Else>
-												<LazyAvatar>{getAcronym(queue[index].title)}</LazyAvatar>
+												<LazyAvatar>{getAcronym(queue[index].info.title)}</LazyAvatar>
 											</Else>
 										</If>
 									</ListItemIcon>
-									<ListItemText primary={queue[index].title} secondary={queue[index].author} />
+									<ListItemText primary={queue[index].info.title} secondary={queue[index].info.author} />
 								</Link>
 							)}
 						/>
@@ -341,7 +355,8 @@ export default () => {
 	);
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default memo(MusicPage);
+
 declare global {
 	interface WebSocket {
 		sendJSON: (data: OutgoingWebsocketMessage) => void;

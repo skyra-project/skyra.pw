@@ -1595,6 +1595,14 @@
   resolved "https://registry.yarnpkg.com/@sapphire/utilities/-/utilities-1.0.2.tgz#91f4efc7208e5e9bb65096e7ee2c21b7322a2760"
   integrity sha512-+VeSCI+M1Dd3vVbQjcDmFrS7erqWpKySrv+2qDtCTt57BQNZ+Ca406bUohN34JbJQ0rwAB3vtpCLpaWdOwaqhA==
 
+"@skyra/audio@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@skyra/audio/-/audio-1.0.0.tgz#55e5ea33ba012997794a848acb344098a7091f81"
+  integrity sha512-jDGmcxa+xXQaWRC+jnAKjokuProQovUOZDwsH4CEt9d+I068Pq6cmPz/Zk7QstuF0xPEECedGsLTWx068MrOPw==
+  dependencies:
+    backoff "^2.5.0"
+    ws "^7.3.1"
+
 "@skyra/discord-components-core@^2.0.2":
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@skyra/discord-components-core/-/discord-components-core-2.0.2.tgz#d39f2c550ba3103ad285ea694b8af52c58653501"
@@ -2405,6 +2413,13 @@ babylon@^6.18.0:
   version "6.18.0"
   resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.18.0.tgz#af2f3b88fa6f5c1e4c634d1a0f8eac4f55b395e3"
   integrity sha512-q/UEjfGJ2Cm3oKV71DJz9d25TPnq5rhBVL2Q4fA5wcC3jcrdn7+SssEybFIxwAvvP+YCsCYNKughoF33GxgycQ==
+
+backoff@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/backoff/-/backoff-2.5.0.tgz#f616eda9d3e4b66b8ca7fca79f695722c5f8e26f"
+  integrity sha1-9hbtqdPktmuMp/ynn2lXIsX44m8=
+  dependencies:
+    precond "0.2"
 
 bail@^1.0.0:
   version "1.0.5"
@@ -6778,6 +6793,11 @@ postcss@^7.0.14, postcss@^7.0.26, postcss@^7.0.32, postcss@^7.0.5, postcss@^7.0.
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
+precond@0.2:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/precond/-/precond-0.2.3.tgz#aa9591bcaa24923f1e0f4849d240f47efc1075ac"
+  integrity sha1-qpWRvKokkj8eD0hJ0kD0fvwQdaw=
+
 prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
@@ -6977,6 +6997,11 @@ react-fast-compare@^3.0.1:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
   integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
+
+react-flip-move@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/react-flip-move/-/react-flip-move-3.0.4.tgz#261f66101fbc305f9b7b28959c5cf8236413ca74"
+  integrity sha512-HyUVv9g3t/BS7Yz9HgrtYSWyRNdR2F81nkj+C5iRY675AwlqCLB5JU9mnZWg0cdVz7IM4iquoyZx70vzZv3Z8Q==
 
 react-if@^4.0.1:
   version "4.0.1"
