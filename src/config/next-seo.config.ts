@@ -4,7 +4,7 @@ import theme from './theme';
 
 type KeyedObject = Record<PropertyKey, unknown>;
 
-export const BaseUrl = 'https://beta.skyra.pw';
+export const BaseUrl = 'https://skyra.pw';
 export const DefaultSeo: DefaultSeoProps & KeyedObject = {
 	titleTemplate: 'Skyra | %s',
 	title: 'Home',

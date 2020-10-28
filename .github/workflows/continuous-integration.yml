@@ -5,8 +5,6 @@ on:
     push:
         branches-ignore:
             - main
-            # TODO: Remove refactor branch pre-merge
-            - refactor/nextjs-rewrite
 
 jobs:
     Linting:

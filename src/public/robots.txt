@@ -1,4 +1,4 @@
 # https://www.robotstxt.org/robotstxt.html
-Sitemap: https://beta.skyra.pw/sitemap.xml
+Sitemap: https://skyra.pw/sitemap.xml
 User-agent: *
 Disallow:
