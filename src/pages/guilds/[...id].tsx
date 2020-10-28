@@ -1,5 +1,3 @@
-import { createGuildSeoProps } from '@config/next-seo.config';
-import { PublicFlattenedGuild } from '@config/types/ApiData';
 import { FilterRoutes, GuildRoutes } from '@config/types/GuildRoutes';
 import { useAuthenticated } from '@contexts/AuthenticationContext';
 import Dashboard from '@layout/Settings/Dashboard';
@@ -21,9 +19,7 @@ import RoleSettings from '@pages/Settings/RoleSettings';
 import StarboardSettings from '@pages/Settings/StarboardSettings';
 import SuggestionSettings from '@pages/Settings/SuggestionSettings';
 import RedirectRoute from '@routing/RedirectRoute';
-import { apiFetch } from '@utils/util';
-import { GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from 'next';
-import { NextSeo } from 'next-seo';
+import { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -32,103 +28,81 @@ import { Case, Default, Switch } from 'react-if';
 const GuildSettingsProvider = dynamic(() => import('@contexts/Settings/GuildSettingsContext'), { ssr: false });
 const GuildSettingsChangesProvider = dynamic(() => import('@contexts/Settings/GuildSettingsChangesContext'), { ssr: false });
 const GuildDataProvider = dynamic(() => import('@contexts/Settings/GuildDataContext'), { ssr: false });
-let lastRequestedGuildId = '';
 
-const GuildSettingsPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ publicGuildData }) => {
+const GuildSettingsPage: NextPage = () => {
 	const router = useRouter();
 	const authenticated = useAuthenticated();
+
+	const [guildId, ...path] = router.query.id;
+	const joinedPath = path.join('/');
 
 	if (!authenticated) {
 		return <RedirectRoute redirectUri="/" />;
 	}
 
-	const [guildId, ...path] = router.query.id;
-	const joinedPath = path.join('/');
-
 	return (
-		<>
-			{publicGuildData && <NextSeo {...createGuildSeoProps(publicGuildData, path)} />}
-			<GuildSettingsChangesProvider>
-				<GuildSettingsProvider>
-					<GuildDataProvider>
-						<Dashboard guildId={guildId}>
-							<Switch>
-								<Case condition={joinedPath === GuildRoutes.Channels}>
-									<ChannelSettings />
-								</Case>
-								<Case condition={joinedPath === GuildRoutes.CustomCommands}>
-									<CustomCommandSettings />
-								</Case>
-								<Case condition={joinedPath === GuildRoutes.DisabledCommands}>
-									<DisabledCommandSettings />
-								</Case>
-								<Case condition={joinedPath === GuildRoutes.Events}>
-									<EventSettings />
-								</Case>
-								<Case condition={joinedPath === GuildRoutes.Messages}>
-									<MessageSettings />
-								</Case>
-								<Case condition={joinedPath === GuildRoutes.Moderation}>
-									<ModerationSettings />
-								</Case>
-								<Case condition={joinedPath === GuildRoutes.Roles}>
-									<RoleSettings />
-								</Case>
-								<Case condition={joinedPath === GuildRoutes.Starboard}>
-									<StarboardSettings />
-								</Case>
-								<Case condition={joinedPath === GuildRoutes.Suggestions}>
-									<SuggestionSettings />
-								</Case>
-								<Case condition={joinedPath === FilterRoutes.Capitals}>
-									<FilterCapitalsSettings />
-								</Case>
-								<Case condition={joinedPath === FilterRoutes.Invites}>
-									<FilterInvitesSettings />
-								</Case>
-								<Case condition={joinedPath === FilterRoutes.Links}>
-									<FilterLinksSettings />
-								</Case>
-								<Case condition={joinedPath === FilterRoutes.MessageDuplication}>
-									<FilterMessagesSettings />
-								</Case>
-								<Case condition={joinedPath === FilterRoutes.NewLines}>
-									<FilterNewLineSettings />
-								</Case>
-								<Case condition={joinedPath === FilterRoutes.Reactions}>
-									<FilterReactionSettings />
-								</Case>
-								<Case condition={joinedPath === FilterRoutes.Words}>
-									<FilterWordSettings />
-								</Case>
-								<Default>
-									<GeneralSettings />
-								</Default>
-							</Switch>
-						</Dashboard>
-					</GuildDataProvider>
-				</GuildSettingsProvider>
-			</GuildSettingsChangesProvider>
-		</>
+		<GuildSettingsChangesProvider>
+			<GuildSettingsProvider>
+				<GuildDataProvider>
+					<Dashboard guildId={guildId}>
+						<Switch>
+							<Case condition={joinedPath === GuildRoutes.Channels}>
+								<ChannelSettings />
+							</Case>
+							<Case condition={joinedPath === GuildRoutes.CustomCommands}>
+								<CustomCommandSettings />
+							</Case>
+							<Case condition={joinedPath === GuildRoutes.DisabledCommands}>
+								<DisabledCommandSettings />
+							</Case>
+							<Case condition={joinedPath === GuildRoutes.Events}>
+								<EventSettings />
+							</Case>
+							<Case condition={joinedPath === GuildRoutes.Messages}>
+								<MessageSettings />
+							</Case>
+							<Case condition={joinedPath === GuildRoutes.Moderation}>
+								<ModerationSettings />
+							</Case>
+							<Case condition={joinedPath === GuildRoutes.Roles}>
+								<RoleSettings />
+							</Case>
+							<Case condition={joinedPath === GuildRoutes.Starboard}>
+								<StarboardSettings />
+							</Case>
+							<Case condition={joinedPath === GuildRoutes.Suggestions}>
+								<SuggestionSettings />
+							</Case>
+							<Case condition={joinedPath === FilterRoutes.Capitals}>
+								<FilterCapitalsSettings />
+							</Case>
+							<Case condition={joinedPath === FilterRoutes.Invites}>
+								<FilterInvitesSettings />
+							</Case>
+							<Case condition={joinedPath === FilterRoutes.Links}>
+								<FilterLinksSettings />
+							</Case>
+							<Case condition={joinedPath === FilterRoutes.MessageDuplication}>
+								<FilterMessagesSettings />
+							</Case>
+							<Case condition={joinedPath === FilterRoutes.NewLines}>
+								<FilterNewLineSettings />
+							</Case>
+							<Case condition={joinedPath === FilterRoutes.Reactions}>
+								<FilterReactionSettings />
+							</Case>
+							<Case condition={joinedPath === FilterRoutes.Words}>
+								<FilterWordSettings />
+							</Case>
+							<Default>
+								<GeneralSettings />
+							</Default>
+						</Switch>
+					</Dashboard>
+				</GuildDataProvider>
+			</GuildSettingsProvider>
+		</GuildSettingsChangesProvider>
 	);
-};
-
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-	const [guildId] = context.query.id;
-
-	if (guildId && lastRequestedGuildId !== guildId) {
-		lastRequestedGuildId = guildId;
-		const res = await apiFetch<PublicFlattenedGuild>(`/guilds/${guildId}/publicData`);
-		return {
-			props: {
-				publicGuildData: res
-			}
-		};
-	}
-
-	return {
-		props: {}
-	};
 };
 
 export default GuildSettingsPage;

@@ -1,8 +1,6 @@
 import { mergeDefault } from '@sapphire/utilities';
-import { displayIconURL } from '@utils/util';
 import { DefaultSeoProps, NextSeoProps } from 'next-seo';
 import theme from './theme';
-import { FlattenedGuild, PublicFlattenedGuild, PublicFlattenedMusic } from './types/ApiData';
 
 type KeyedObject = Record<PropertyKey, unknown>;
 
@@ -74,55 +72,3 @@ export const DefaultSeo: DefaultSeoProps & KeyedObject = {
 };
 
 export const createSeoProps = (seoProps?: NextSeoProps & KeyedObject) => mergeDefault(DefaultSeo, seoProps);
-
-export const createGuildSeoProps = (guildData: PublicFlattenedGuild | FlattenedGuild, settingsPath: string[]) =>
-	createSeoProps({
-		title: `${guildData?.name ?? 'Guild'} Settings`,
-		description: guildData.description ?? DefaultSeo.description,
-		canonical: `${BaseUrl}/guilds/${guildData.id}/${settingsPath.join('/')}`,
-		additionalMetaTags: [
-			{ name: 'url', content: `${BaseUrl}/guilds/${guildData.id}/${settingsPath.join('/')}` },
-			{ name: 'identifier-URL', content: `${BaseUrl}/guilds/${guildData.id}/${settingsPath.join('/')}` },
-			{ name: 'shortlink', content: `${BaseUrl}/guilds/${guildData.id}/${settingsPath.join('/')}` }
-		],
-		openGraph: {
-			title: `Skyra settings for ${guildData.name}`,
-			images: [
-				{
-					url: displayIconURL(guildData, { size: 256 }) ?? `${BaseUrl}/icons/opengraph.png`,
-					alt: 'OpenGraphImage',
-					width: 256,
-					height: 256
-				}
-			]
-		}
-	});
-
-export const createGuildMusicSeoProps = (musicData: PublicFlattenedMusic) =>
-	createSeoProps({
-		title: `${musicData.guildData?.name ?? 'Guild'} Music Dashboard`,
-		description: [
-			'Jam out to the music and control it in style 🎛',
-			musicData.queueLength && `Currently ${musicData.queueLength} songs in the music queue.`,
-			musicData.currentlyPlaying && `Currently playing [${musicData.currentlyPlaying.title}](${musicData.currentlyPlaying.uri})`
-		]
-			.filter(Boolean)
-			.join('\n'),
-		canonical: `${BaseUrl}/music/${musicData.guildData.id}`,
-		additionalMetaTags: [
-			{ name: 'url', content: `${BaseUrl}/music/${musicData.guildData.id}` },
-			{ name: 'identifier-URL', content: `${BaseUrl}/music/${musicData.guildData.id}` },
-			{ name: 'shortlink', content: `${BaseUrl}/music/${musicData.guildData.id}` }
-		],
-		openGraph: {
-			title: `Skyra music dashboard for ${musicData.guildData.name}`,
-			images: [
-				{
-					url: displayIconURL(musicData.guildData, { size: 256 }) ?? `${BaseUrl}/icons/opengraph.png`,
-					alt: 'OpenGraphImage',
-					width: 256,
-					height: 256
-				}
-			]
-		}
-	});

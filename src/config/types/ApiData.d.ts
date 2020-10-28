@@ -1,4 +1,3 @@
-import type { TrackInfo } from '@skyra/audio';
 import type { Guild } from 'discord.js';
 
 export interface DashboardPack {
@@ -47,14 +46,6 @@ export interface FlattenedGuild
 	skyraIsIn: boolean;
 	manageable: boolean;
 	permissions?: number;
-}
-
-export type PublicFlattenedGuild = Pick<FlattenedGuild, 'id' | 'name' | 'icon' | 'vanityURLCode' | 'description'>;
-
-export interface PublicFlattenedMusic {
-	guildData: PublicFlattenedGuild;
-	currentlyPlaying?: TrackInfo;
-	queueLength: number;
 }
 
 export interface FlattenedEmoji {

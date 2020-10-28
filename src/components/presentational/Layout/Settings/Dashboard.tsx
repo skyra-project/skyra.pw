@@ -1,3 +1,4 @@
+import { createSeoProps } from '@config/next-seo.config';
 import { FlattenedGuild } from '@config/types/ApiData';
 import { GuildSettings } from '@config/types/GuildSettings';
 import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
@@ -14,6 +15,7 @@ import { objectToTuples } from '@sapphire/utilities';
 import { SettingsDrawerWidth } from '@utils/constants';
 import { Time } from '@utils/skyraUtils';
 import { apiFetch, navigate } from '@utils/util';
+import { NextSeo } from 'next-seo';
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { When } from 'react-if';
 import DesktopSettingsDrawer from './Navigation/DesktopSettingsDrawer';
@@ -133,6 +135,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 
 	return (
 		<>
+			<NextSeo {...createSeoProps({ title: `${guildData?.name ?? 'Guild'} Settings` })} />
 			<Backdrop className={classes.backdrop} open={isLoading} unmountOnExit mountOnEnter>
 				<CircularProgress color="inherit" />
 			</Backdrop>
