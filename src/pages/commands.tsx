@@ -8,7 +8,7 @@ import Category from '@presentational/CommandsPage/Category';
 import GeneralPage from '@presentational/Layout/General';
 import ScrollToTop from '@routing/ScrollToTop';
 import { useWindowSize } from '@utils/useWindowSize';
-import { apiFetch } from '@utils/util';
+import { ssrFetch } from '@utils/util';
 import debounce from 'lodash/debounce';
 import { InferGetStaticPropsType, NextPage } from 'next';
 import { NextSeo } from 'next-seo';
@@ -87,7 +87,7 @@ const CommandsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 };
 
 export const getStaticProps = async () => {
-	const commands = await apiFetch<FlattenedCommand[]>('/commands');
+	const commands = await ssrFetch<FlattenedCommand[]>('/commands');
 
 	return {
 		props: {
