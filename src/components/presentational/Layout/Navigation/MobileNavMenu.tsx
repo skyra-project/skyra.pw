@@ -143,7 +143,7 @@ const MobileNavMenu: FC = () => {
 												component="a"
 												onClick={(...args: Parameters<typeof closePopperMenu>) => {
 													closePopperMenu(...args);
-													logOut(setPack, writeAuthenticated, router.replace);
+													logOut(setPack, writeAuthenticated, router.push);
 												}}
 											>
 												<ListItemIcon>
@@ -154,7 +154,7 @@ const MobileNavMenu: FC = () => {
 											<MenuItem
 												onClick={(...args: Parameters<typeof closePopperMenu>) => {
 													closePopperMenu(...args);
-													syncUser(authenticated, setPack, writeAuthenticated, router.replace);
+													syncUser(authenticated, setPack, writeAuthenticated, router.push);
 												}}
 											>
 												<ListItemIcon>

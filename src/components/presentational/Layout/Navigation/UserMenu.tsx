@@ -124,7 +124,7 @@ const UserMenu: FC = () => {
 										component="a"
 										onClick={(...args: Parameters<typeof handleClose>) => {
 											handleClose(...args);
-											logOut(setPack, writeAuthenticated, router.replace);
+											logOut(setPack, writeAuthenticated, router.push);
 										}}
 									>
 										<ListItemIcon>
@@ -135,7 +135,7 @@ const UserMenu: FC = () => {
 									<MenuItem
 										onClick={(...args: Parameters<typeof handleClose>) => {
 											handleClose(...args);
-											syncUser(authenticated, setPack, writeAuthenticated, router.replace);
+											syncUser(authenticated, setPack, writeAuthenticated, router.push);
 										}}
 									>
 										<ListItemIcon>

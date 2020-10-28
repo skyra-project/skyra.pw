@@ -51,8 +51,8 @@ const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containe
 	const setPack = mergeDiscordPack();
 
 	useEffect(() => {
-		syncUser(authenticated, setPack, writeAuthenticated, router.replace);
-	}, [authenticated, router.replace, setPack, writeAuthenticated]);
+		syncUser(authenticated, setPack, writeAuthenticated, router.push);
+	}, [authenticated, router.push, setPack, writeAuthenticated]);
 
 	return (
 		<Box component="section" className={classes.container} {...containerProps}>
