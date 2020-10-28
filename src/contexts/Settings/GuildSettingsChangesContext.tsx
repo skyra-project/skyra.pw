@@ -15,9 +15,7 @@ const useGuildSettingsHook = () => {
 	const mergeGuildSettings = (changes?: DeepPartial<GuildSettings>) => {
 		if (!changes) return setGuildSettingsChanges(undefined);
 
-		setGuildSettingsChanges(
-			deepMerge<GuildSettings, DeepPartial<GuildSettings>>(guildSettingsChanges ?? {}, changes ?? {}, mergeOptions)
-		);
+		setGuildSettingsChanges(deepMerge<GuildSettings, DeepPartial<GuildSettings>>(guildSettingsChanges ?? {}, changes, mergeOptions));
 	};
 
 	return {
