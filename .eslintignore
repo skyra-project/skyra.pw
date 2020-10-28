@@ -3,6 +3,3 @@ dist/
 src/.next/
 src/public/sw.js
 src/public/workbox*
-
-# TODO: Remove once removed
-backup/
