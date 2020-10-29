@@ -1,24 +1,34 @@
 # dependencies
-/node_modules
-/.pnp
+node_modules/
+.pnp/
+package-lock.json
 .pnp.js
 
-# testing
-/coverage
-
 # production
-/build
+build/
+dist/
 .next/
 .tsbuildinfo
+sitemap.xml
+sw.js
+workbox*.js
 
 # misc
 .DS_Store
+Thumbs.db
+
+# Local env vars
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
-.idea/
 
+# IDE Settings
+.idea/
+.vs/
+
+# Log files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.log

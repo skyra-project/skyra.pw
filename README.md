@@ -10,7 +10,7 @@ To run the dashboard locally, you'll need a local version of Skyra running.
 After forking/cloning this repo to a folder locally:
 
 1. Duplicate `.env.development` and rename it to `.env.development.local`
-2. Replace the value of `REACT_APP_CLIENT_ID` to your bot's ID
+2. Replace the value of `NEXT_PUBLIC_CLIENT_ID` to your bot's ID
 3. Go to the Discord developer portal: https://discord.com/developers/applications/
 4. Select your bot application and go to the `OAuth2` tab
 5. Add redirect URL's for `http://localhost:3000/oauth/callback` and `http://localhost:3000/oauth/guild`
@@ -19,15 +19,15 @@ After forking/cloning this repo to a folder locally:
 -   You have to set the CLIENT_ID, CLIENT_SECRET in Skyra's configuration to your own bot properly!
 
 7. Install dependencies with `yarn`.
-8. Run `yarn start` to start the React dev server
+8. Run `yarn dev` to start the NextJS dev server
 
 ## Links
 
 **Skyra links**
 
--   [Skyra Invite Link](https://skyra.pw/invite)
+-   [Skyra Invite Link](https://invite.skyra.pw)
 -   [Support Server](https://join.skyra.pw)
--   [Patreon](https://www.patreon.com/kyranet)
+-   [Patreon](https://donate.skyra.pw/patreon)
 
 ## Buy us some doughnuts
 
@@ -38,8 +38,8 @@ We accept donations through Patreon, BitCoin, Ethereum, and Litecoin. You can us
 
 | Donate With |         QR         |                                                                  Address                                                                  |
 | :---------: | :----------------: | :---------------------------------------------------------------------------------------------------------------------------------------: |
-|   Patreon   | ![PatreonImage][]  |                                               [Click Here](https://www.patreon.com/kyranet)                                               |
-|   PayPal    |  ![PayPalImage][]  |                     [Click Here](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CET28NRZTDQ8L)                      |
+|   Patreon   | ![PatreonImage][]  |                                               [Click Here](https://donate.skyra.pw/patreon)                                               |
+|   PayPal    |  ![PayPalImage][]  |                                               [Click Here](https://donate.skyra.pw/paypal)                                                |
 |   BitCoin   | ![BitcoinImage][]  |         [3JNzCHMTFtxYFWBnVtDM9Tt34zFbKvdwco](bitcoin:3JNzCHMTFtxYFWBnVtDM9Tt34zFbKvdwco?amount=0.01&label=Skyra%20Discord%20Bot)          |
 |  Ethereum   | ![EthereumImage][] | [0xcB5EDB76Bc9E389514F905D9680589004C00190c](ethereum:0xcB5EDB76Bc9E389514F905D9680589004C00190c?amount=0.01&label=Skyra%20Discord%20Bot) |
 |  Litecoin   | ![LitecoinImage][] |         [MNVT1keYGMfGp7vWmcYjCS8ntU8LNvjnqM](litecoin:MNVT1keYGMfGp7vWmcYjCS8ntU8LNvjnqM?amount=0.01&label=Skyra%20Discord%20Bot)         |
@@ -64,10 +64,11 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/gc"><img src="https://avatars2.githubusercontent.com/u/30398469?v=4?s=100" width="100px;" alt=""/><br /><sub><b>GC</b></sub></a><br /><a href="https://github.com/skyra-project/skyra.pw/issues?q=author%3Agc" title="Bug reports">🐛</a> <a href="https://github.com/skyra-project/skyra.pw/commits?author=gc" title="Code">💻</a> <a href="#content-gc" title="Content">🖋</a> <a href="#design-gc" title="Design">🎨</a> <a href="#platform-gc" title="Packaging/porting to new platform">📦</a> <a href="https://github.com/skyra-project/skyra.pw/pulls?q=is%3Apr+reviewed-by%3Agc" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/cfanoulis"><img src="https://avatars3.githubusercontent.com/u/38255093?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Charalampos Fanoulis</b></sub></a><br /><a href="#design-cfanoulis" title="Design">🎨</a> <a href="https://github.com/skyra-project/skyra.pw/commits?author=cfanoulis" title="Code">💻</a></td>
     <td align="center"><a href="https://jaczaus.me/"><img src="https://avatars3.githubusercontent.com/u/23615291?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jacz</b></sub></a><br /><a href="https://github.com/skyra-project/skyra.pw/commits?author=MrJacz" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Rexogamer"><img src="https://avatars0.githubusercontent.com/u/42586271?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ed L</b></sub></a><br /><a href="#content-Rexogamer" title="Content">🖋</a></td>
   </tr>
 </table>
 
-<!-- markdownlint-enable -->
+<!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->

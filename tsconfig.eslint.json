@@ -1,9 +1,9 @@
 {
-	"extends": "./tsconfig.json",
+	"extends": "./src/tsconfig.json",
 	"compilerOptions": {
-		"isolatedModules": false,
-		"module": "CommonJS",
-		"moduleResolution": "node",
-		"baseUrl": "./"
-	}
+		"baseUrl": ".",
+		"allowJs": true,
+		"checkJs": true
+	},
+	"include": ["scripts", "src"]
 }

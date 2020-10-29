@@ -1,0 +1,68 @@
+name: Continuous Delivery
+
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - 'src/**'
+            - '.github/workflows/continuous-delivery.yml'
+            - 'scripts/sitemapGenerator.js'
+            - 'package.json'
+            - 'yarn.lock'
+            - 'Dockerfile'
+
+jobs:
+    Linting:
+        name: Linting
+        runs-on: ubuntu-latest
+        if: "!contains(github.event.head_commit.message, '[skip ci]')"
+        steps:
+            - name: Checkout Project
+              uses: actions/checkout@v2
+            - name: Use Node.js 14
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 14
+            - name: Restore CI Cache
+              uses: actions/cache@v1
+              with:
+                  path: node_modules
+                  key: ${{ runner.os }}-14-${{ hashFiles('**/yarn.lock') }}
+            - name: Install Dependencies
+              run: yarn --frozen-lockfile
+            - name: Run ESLint
+              uses: icrawl/action-eslint@v1
+
+    Github-Package-Registry-Docker:
+        name: Publish image to Github Package Registry
+        runs-on: ubuntu-latest
+        if: "!(contains(github.event.head_commit.message, '[skip ci]') || contains(github.event.head_commit.message, '[skip docker]'))"
+        needs: Linting
+        steps:
+            - name: Checkout Project
+              uses: actions/checkout@v2
+            - name: Publish to Github Package Registry
+              uses: elgohr/Publish-Docker-Github-Action@master
+              with:
+                  name: skyra-project/skyra.pw/skyra.pw
+                  username: NM-EEA-Y
+                  password: ${{ secrets.SKYRA_TOKEN }}
+                  tags: 'latest,stable,master,main'
+                  registry: docker.pkg.github.com
+
+    Dockerhub:
+        name: Publish image to Dockerhub
+        runs-on: ubuntu-latest
+        if: "!(contains(github.event.head_commit.message, '[skip ci]') || contains(github.event.head_commit.message, '[skip docker]'))"
+        needs: Linting
+        steps:
+            - name: Checkout Project
+              uses: actions/checkout@v2
+            - name: Publish to Dockerhub
+              uses: elgohr/Publish-Docker-Github-Action@master
+              with:
+                  name: skyrabot/skyra.pw
+                  username: ${{ secrets.DOCKER_USERNAME }}
+                  password: ${{ secrets.DOCKER_PASSWORD }}
+                  tags: 'latest,stable,master,main'

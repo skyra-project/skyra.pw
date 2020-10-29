@@ -3,86 +3,101 @@
 	"version": "1.0.0",
 	"private": true,
 	"license": "Apache-2.0",
+	"scripts": {
+		"dev": "next dev src -p 3000",
+		"type-check": "tsc -b src -w",
+		"prebuild": "yarn build:sitemap",
+		"build": "next build src",
+		"start": "next start src",
+		"export": "next export src",
+		"clean": "rimraf src/.next src/public/sw.js src/public/workbox* src/public/sitemap.xml",
+		"build:sitemap": "node scripts/sitemapGenerator.js",
+		"format": "prettier --write --loglevel=error src/**/*.{js,jsx,ts,tsx}",
+		"update": "yarn upgrade-interactive --latest",
+		"lint": "eslint src --ext js,jsx,ts,tsx --fix"
+	},
 	"dependencies": {
 		"@material-ui/core": "^4.11.0",
 		"@material-ui/icons": "^4.9.1",
 		"@material-ui/lab": "^4.0.0-alpha.56",
-		"@sapphire/utilities": "^1.0.1",
-		"@skyra/discord-components-core": "^2.0.1",
-		"@skyra/discord-components-react": "^2.0.1",
+		"@sapphire/utilities": "^1.0.2",
+		"@skyra/discord-components-core": "^2.0.2",
+		"@skyra/discord-components-react": "^2.0.2",
 		"body-scroll-lock": "^3.1.5",
 		"clsx": "^1.1.1",
+		"constate": "^3.1.0",
 		"deepmerge": "^4.2.2",
-		"eslint-config-prettier": "^6.12.0",
-		"eslint-plugin-prettier": "^3.1.4",
-		"formik": "^2.1.7",
+		"formik": "^2.2.1",
 		"formik-material-ui": "^3.0.0",
-		"history": "4.x",
-		"react": "^16.13.1",
-		"react-color": "^2.18.1",
-		"react-dom": "^16.13.1",
+		"lodash": "^4.17.20",
+		"mdi-react": "^7.4.0",
+		"next": "^10.0.0",
+		"next-pwa": "^3.1.5",
+		"next-seo": "^4.14.0",
+		"nextjs-progressbar": "^0.0.6",
+		"react": "17.0.1",
+		"react-color": "^2.19.3",
+		"react-dom": "17.0.1",
 		"react-emoji-render": "^1.2.4",
 		"react-flip-move": "^3.0.4",
-		"react-if": "^3.4.3",
-		"react-markdown": "^4.3.1",
+		"react-if": "^4.0.1",
+		"react-markdown": "^5.0.2",
 		"react-player": "^2.6.2",
-		"react-router-dom": "^5.2.0",
 		"react-virtuoso": "^0.20.0",
-		"reactn": "^2.2.7",
+		"remark-gfm": "^1.0.0",
 		"yup": "^0.29.3"
 	},
-	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"format": "prettier --write --loglevel=error src/**/*.{js,jsx,ts,tsx,scss}",
-		"update": "yarn upgrade-interactive --latest",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject",
-		"lint": "eslint src --ext js,jsx,ts,tsx --fix"
-	},
-	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
-	},
 	"devDependencies": {
-		"@favware/eslint-config-react-app": "^1.1.4",
+		"@commitlint/cli": "^11.0.0",
+		"@commitlint/config-conventional": "^11.0.0",
+		"@favware/eslint-config": "^6.0.2",
+		"@favware/eslint-config-react-app": "^2.0.2",
 		"@favware/ts-config": "^3.0.4",
+		"@skyra/audio": "^1.0.0",
 		"@types/body-scroll-lock": "^2.6.1",
-		"@types/history": "^4.7.8",
-		"@types/lodash": "^4.14.161",
-		"@types/node": "^14.11.8",
-		"@types/react": "^16.9.51",
+		"@types/lodash": "^4.14.163",
+		"@types/node": "^14.14.6",
+		"@types/react": "^16.9.55",
 		"@types/react-color": "^3.0.4",
-		"@types/react-dom": "^16.9.8",
-		"@types/react-router": "^5.1.8",
-		"@types/react-router-dom": "^5.1.6",
-		"@types/yup": "^0.29.8",
-		"cross-env": "^7.0.2",
+		"@types/react-dom": "^16.9.9",
+		"@types/yup": "^0.29.9",
+		"@typescript-eslint/eslint-plugin": "^4.6.0",
+		"@typescript-eslint/parser": "^4.6.0",
+		"cz-conventional-changelog": "^3.3.0",
+		"discord.js": "^12.4.1",
+		"eslint": "^7.12.1",
+		"eslint-config-prettier": "^6.15.0",
+		"eslint-plugin-import": "^2.22.1",
+		"eslint-plugin-jsx-a11y": "^6.4.1",
+		"eslint-plugin-prettier": "^3.1.4",
+		"eslint-plugin-react": "^7.21.5",
+		"eslint-plugin-react-hooks": "^4.2.0",
 		"husky": "^4.3.0",
-		"lint-staged": "^10.4.0",
+		"lint-staged": "^10.5.0",
+		"nextjs-sitemap-generator": "^1.1.0",
 		"prettier": "^2.1.2",
-		"pretty-quick": "^3.0.2",
-		"react-scripts": "^3.4.3",
-		"reactn-devtools": "^1.1.0",
-		"redux": "^4.0.5",
-		"typescript": "^4.0.3",
+		"rimraf": "3.0.2",
+		"typescript": "^4.0.5",
 		"utility-types": "^3.10.0"
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "yarn pretty-quick --staged && yarn lint-staged"
+			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+			"pre-commit": "yarn lint-staged"
 		}
 	},
 	"lint-staged": {
 		"*.{mjs,js,jsx,ts,tsx}": "eslint --fix --ext mjs,js,jsx,ts,tsx"
+	},
+	"commitlint": {
+		"extends": [
+			"@commitlint/config-conventional"
+		]
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
 	},
 	"repository": {
 		"type": "git",
@@ -96,9 +111,6 @@
 		"minimist": "^1.2.5",
 		"kind-of": "^6.0.3",
 		"lodash": "^4.17.20",
-		"@typescript-eslint/eslint-plugin": "^4.1.1",
-		"@typescript-eslint/parser": "^4.1.1",
-		"eslint": "^7.9.0",
-		"dot-prop": "^5.3.0"
+		"object-path": "^0.11.5"
 	}
 }
