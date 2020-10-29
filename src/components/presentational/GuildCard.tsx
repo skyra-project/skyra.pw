@@ -75,7 +75,7 @@ export const FilteredGuildCards = (pack?: DashboardPack) =>
 	(pack?.user?.guilds ?? [])
 		// Filter on manageable servers
 		.filter(g => g.manageable)
-		// Sort by whether Skyra is in the serve ror not
+		// Sort by whether Skyra is in the server or not
 		.sort((gA, gB) => (gA.skyraIsIn === gB.skyraIsIn ? 0 : gA.skyraIsIn ? -1 : 1))
 		// Sort by name of the server
 		.sort((gA, gB) => gA.name.localeCompare(gB.name, 'en', { sensitivity: 'base' }))
