@@ -111,3 +111,8 @@ noscript span {
 	transform: translate(-50%, -50%);
 	color: white;
 }
+
+html,
+body {
+	background-color: #16171d !important;
+}
