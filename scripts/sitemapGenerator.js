@@ -7,5 +7,5 @@ sitemap({
 	pagesDirectory: resolve(__dirname, '..', 'src', 'pages'),
 	targetDirectory: resolve(__dirname, '..', 'src', 'public'),
 	nextConfigPath: resolve(__dirname, '..', 'src', 'next.config.js'),
-	ignoredPaths: ['[...id]']
+	ignoredPaths: ['[...id]', 'join']
 });
