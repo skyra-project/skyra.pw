@@ -12,7 +12,7 @@ import Hidden from '@material-ui/core/Hidden';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import ErrorAlert from '@presentational/Alerts/Error';
 import { objectToTuples } from '@sapphire/utilities';
-import { SettingsDrawerWidth } from '@utils/constants';
+import { FetchMethods, SettingsDrawerWidth } from '@utils/constants';
 import { Time } from '@utils/skyraUtils';
 import { apiFetch, navigate } from '@utils/util';
 import { NextSeo } from 'next-seo';
@@ -103,7 +103,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 			setIsLoading(true);
 
 			const response = await apiFetch<{ newSettings: GuildSettings; error?: string }>(`/guilds/${guildId}/settings`, {
-				method: 'POST',
+				method: FetchMethods.Patch,
 				body: JSON.stringify({
 					guild_id: guildId,
 					data: objectToTuples(guildSettingsChanges as any)
