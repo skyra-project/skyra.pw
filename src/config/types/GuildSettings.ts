@@ -172,7 +172,7 @@ interface PermissionsNode {
 	deny: string[];
 }
 
-interface CustomCommand {
+export interface CustomCommand {
 	id: string;
 	embed: boolean;
 	color: number;
