@@ -1,24 +1,14 @@
-import type { PickByValue } from 'utility-types';
-import type {
-	Channels as GuildChannels,
-	Events as GuildEvents,
-	IgnoreChannels as GuildIgnoreChannels,
-	Messages as GuildMessages,
-	Roles as GuildRoles,
-	SuggestionActions,
-	SuggestionEmojis
-} from './GuildSettings';
-
 export namespace Suggestions {
 	export interface OnAction {
 		title: string;
-		key: keyof SuggestionActions;
+		// eslint-disable-next-line prettier/prettier
+		key: `suggestions.on-action.${'dm' | 'repost' | 'hide-author'}`;
 		description: string;
 	}
 
 	export interface Emoji {
 		title: string;
-		key: keyof SuggestionEmojis;
+		key: `suggestions.emojis.${'downvote' | 'upvote'}`;
 		description: string;
 		defaultName: string;
 		defaultImage: string;
@@ -30,7 +20,21 @@ export namespace Roles {
 	export interface Role {
 		name: string;
 		tooltip: string;
-		key: keyof PickByValue<GuildRoles, string | string[] | boolean>;
+		key: `roles.${
+			| 'admin'
+			| 'initial'
+			| 'moderator'
+			| 'muted'
+			| 'restricted-reaction'
+			| 'restricted-embed'
+			| 'restricted-attachment'
+			| 'restricted-emoji'
+			| 'restricted-voice'
+			| 'public'
+			| 'removeInitial'
+			| 'dj'
+			| 'subscriber'
+		}`
 	}
 }
 
@@ -38,7 +42,14 @@ export namespace Moderation {
 	export interface Message {
 		name: string;
 		description: string;
-		key: keyof PickByValue<GuildMessages, boolean>;
+		key: `messages.${
+			| 'announcement-embed'
+			| 'moderation-dm'
+			| 'moderation-reason-display'
+			| 'moderation-message-display'
+			| 'moderation-auto-delete'
+			| 'moderator-name-display'
+		}`;
 	}
 }
 
@@ -47,7 +58,7 @@ export namespace Messages {
 		name: string;
 		placeholder: string;
 		tooltipText: string;
-		key: keyof PickByValue<GuildMessages, string>;
+		key: `messages.${'farewell' | 'greeting' | 'join-dm'}`;
 	}
 
 	export interface Matcher {
@@ -59,7 +70,17 @@ export namespace Messages {
 export namespace Events {
 	export interface Event {
 		title: string;
-		key: keyof GuildEvents;
+		key: `events.${
+			| 'banAdd'
+			| 'banRemove'
+			| 'memberAdd'
+			| 'memberRemove'
+			| 'memberNameUpdate'
+			| 'memberRoleUpdate'
+			| 'messageDelete'
+			| 'messageEdit'
+			| 'twemoji-reactions'
+		}`;
 		description: string;
 	}
 }
@@ -93,13 +114,30 @@ export namespace CustomCommands {
 export namespace Channels {
 	export interface Channel {
 		name: string;
-		key: keyof PickByValue<GuildChannels, string>;
+		key: `channels.${
+			| 'announcements'
+			| 'greeting'
+			| 'farewell'
+			| 'member-logs'
+			| 'message-logs'
+			| 'moderation-logs'
+			| 'nsfw-message-logs'
+			| 'image-logs'
+			| 'prune-logs'
+			| 'reaction-logs'
+			| 'spam'
+		}`;
 		description: string;
 	}
 
 	export interface IgnoreChannel {
 		name: string;
-		key: keyof GuildIgnoreChannels;
+		key: `channels.ignore.${
+			| 'all'
+			| 'message-delete'
+			| 'message-edit'
+			| 'reaction-add'
+		}`;
 		description: string;
 	}
 }

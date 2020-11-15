@@ -2,7 +2,6 @@ import { GuildSettings } from '@config/types/GuildSettings';
 import constate from 'constate';
 import deepMerge, { Options as DeepMergeOptions } from 'deepmerge';
 import { useState } from 'react';
-import { DeepPartial } from 'utility-types';
 
 // Overwrite arrays when merging
 const mergeOptions: DeepMergeOptions = {
@@ -12,10 +11,10 @@ const mergeOptions: DeepMergeOptions = {
 const useGuildSettingsHook = () => {
 	const [guildSettingsChanges, setGuildSettingsChanges] = useState<GuildSettings>();
 
-	const mergeGuildSettings = (changes?: DeepPartial<GuildSettings>) => {
+	const mergeGuildSettings = (changes?: Partial<GuildSettings>) => {
 		if (!changes) return setGuildSettingsChanges(undefined);
 
-		setGuildSettingsChanges(deepMerge<GuildSettings, DeepPartial<GuildSettings>>(guildSettingsChanges ?? {}, changes, mergeOptions));
+		setGuildSettingsChanges(deepMerge<GuildSettings, Partial<GuildSettings>>(guildSettingsChanges ?? {}, changes, mergeOptions));
 	};
 
 	return {

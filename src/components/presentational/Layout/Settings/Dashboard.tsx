@@ -102,7 +102,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 		try {
 			setIsLoading(true);
 
-			const response = await apiFetch<{ newSettings: GuildSettings; error?: string }>(`/guilds/${guildId}/settings`, {
+			const response = await apiFetch<GuildSettings | [string] | { error: string }>(`/guilds/${guildId}/settings`, {
 				method: FetchMethods.Patch,
 				body: JSON.stringify({
 					guild_id: guildId,
@@ -110,12 +110,12 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 				})
 			});
 
-			if (!response || !response.newSettings || response.error) {
+			if (!response || Array.isArray(response) || 'error' in response || Object.keys(response).length === 0) {
 				setHasError(true);
 				setTimeout(() => setIsLoading(false), Time.Second);
 			} else {
 				setGuildSettingsChanges(undefined);
-				setGuildSettings(response.newSettings);
+				setGuildSettings(response);
 				setIsLoading(false);
 			}
 		} catch {

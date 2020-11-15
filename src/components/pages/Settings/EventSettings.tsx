@@ -41,14 +41,8 @@ const EventSettings: FC = () => {
 							key={index}
 							title={title}
 							description={description}
-							currentValue={guildSettings.events[key]}
-							onChange={event =>
-								setGuildSettingsChanges({
-									events: {
-										[key]: event.target.checked
-									}
-								})
-							}
+							currentValue={guildSettings[key]}
+							onChange={event => setGuildSettingsChanges({ [key]: event.target.checked })}
 						/>
 					))}
 				</SimpleGrid>
@@ -67,14 +61,8 @@ const EventSettings: FC = () => {
 							key={index}
 							title={title}
 							description={description}
-							currentValue={guildSettings.events[key]}
-							onChange={event =>
-								setGuildSettingsChanges({
-									events: {
-										[key]: event.target.checked
-									}
-								})
-							}
+							currentValue={guildSettings[key]}
+							onChange={event => setGuildSettingsChanges({ [key]: event.target.checked })}
 						/>
 					))}
 				</SimpleGrid>
@@ -94,14 +82,8 @@ const EventSettings: FC = () => {
 							key={index}
 							title={title}
 							description={description}
-							currentValue={guildSettings.events[key]}
-							onChange={event =>
-								setGuildSettingsChanges({
-									events: {
-										[key]: event.target.checked
-									}
-								})
-							}
+							currentValue={guildSettings[key]}
+							onChange={event => setGuildSettingsChanges({ [key]: event.target.checked })}
 						/>
 					))}
 				</SimpleGrid>

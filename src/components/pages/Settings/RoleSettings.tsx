@@ -1,5 +1,4 @@
 import { ConfigurablePublicRoles, ConfigurableRemoveInitialRole, ConfigurableRoles } from '@config/SettingsDataEntries';
-import { Roles } from '@config/types/GuildSettings';
 import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
@@ -11,8 +10,8 @@ import SimpleGrid from '@mui/SimpleGrid';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectRole from '@selects/SelectRole';
 import SelectRoles from '@selects/SelectRoles';
+import { cast } from '@utils/util';
 import React, { FC, memo } from 'react';
-import { PickByValue } from 'utility-types';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -57,12 +56,10 @@ const RoleSettings: FC = () => {
 				<SelectBoolean
 					title={ConfigurableRemoveInitialRole.name}
 					description={ConfigurableRemoveInitialRole.tooltip}
-					currentValue={guildSettings.roles.removeInitial}
+					currentValue={guildSettings['roles.removeInitial']}
 					onChange={event =>
 						setGuildSettingsChanges({
-							roles: {
-								removeInitial: event.target.checked
-							}
+							'roles.removeInitial': event.target.checked
 						})
 					}
 				/>
@@ -80,17 +77,14 @@ const RoleSettings: FC = () => {
 						xl: 4
 					}}
 				>
-					{ConfigurableRoles.map(({ name, tooltip, key: settingsProp }, index) => (
+					{ConfigurableRoles.map(({ name, tooltip, key }, index) => (
 						<SelectRole
 							key={index}
 							label={name}
-							// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-							value={guildSettings.roles[settingsProp] as keyof PickByValue<Roles, string>}
-							onChange={r =>
+							value={cast<string | null>(guildSettings[key])}
+							onChange={newRole =>
 								setGuildSettingsChanges({
-									roles: {
-										[settingsProp]: r
-									}
+									[key]: newRole
 								})
 							}
 							guild={guildData}
@@ -109,12 +103,10 @@ const RoleSettings: FC = () => {
 						filterEveryone
 						key={ConfigurableRoles.length + 1}
 						tooltipTitle={ConfigurablePublicRoles.tooltip}
-						value={guildSettings.roles.public}
-						onChange={r =>
+						value={guildSettings['roles.public']}
+						onChange={newRoles =>
 							setGuildSettingsChanges({
-								roles: {
-									public: r
-								}
+								'roles.public': newRoles
 							})
 						}
 						guild={guildData}

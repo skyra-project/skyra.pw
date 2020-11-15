@@ -14,17 +14,15 @@ const ModerationSettings: FC = () => {
 		<Section title="Punishment Settings">
 			<p>These settings affect what Skyra does when you're punishing (ban, kick, mute, etc) someone.</p>
 			<SimpleGrid>
-				{ConfigurableModerationKeys.map(setting => (
+				{ConfigurableModerationKeys.map(({ description, key, name }, index) => (
 					<SelectBoolean
-						key={setting.key}
-						title={setting.name}
-						currentValue={guildSettings.messages[setting.key]}
-						description={setting.description}
+						key={index}
+						title={name}
+						currentValue={guildSettings[key]}
+						description={description}
 						onChange={event =>
 							setGuildSettingsChanges({
-								messages: {
-									[setting.key]: event.target.checked
-								}
+								[key]: event.target.checked
 							})
 						}
 					/>

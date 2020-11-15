@@ -44,45 +44,51 @@ const FilterWordSettings: FC = () => {
 			<Section title="Word Filter">
 				<SimpleGrid>
 					<SelectBoolean
-						title={`Filter ${guildSettings.selfmod.filter.enabled ? 'Enabled' : 'Disabled'}`}
-						onChange={event => setGuildSettingsChanges({ selfmod: { filter: { enabled: event.target.checked } } })}
-						currentValue={guildSettings.selfmod.filter.enabled}
+						title={`Filter ${guildSettings['selfmod.filter.enabled'] ? 'Enabled' : 'Disabled'}`}
+						onChange={event => setGuildSettingsChanges({ 'selfmod.filter.enabled': event.target.checked })}
+						currentValue={guildSettings['selfmod.filter.enabled']}
 						description="Whether or not this system should be enabled."
 					/>
 					<SelectBoolean
-						title={`Alerts ${bitwiseHas(guildSettings.selfmod.filter.softAction, 0b100) ? 'Enabled' : 'Disabled'}`}
+						title={`Alerts ${bitwiseHas(guildSettings['selfmod.filter.softAction'], 0b100) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
 							setGuildSettingsChanges({
-								selfmod: {
-									filter: { softAction: bitwiseSet(guildSettings.selfmod.filter.softAction, 0b100, event.target.checked) }
-								}
+								'selfmod.filter.softAction': bitwiseSet(
+									guildSettings['selfmod.filter.softAction'],
+									0b100,
+									event.target.checked
+								)
 							})
 						}
-						currentValue={bitwiseHas(guildSettings.selfmod.filter.softAction, 0b100)}
+						currentValue={bitwiseHas(guildSettings['selfmod.filter.softAction'], 0b100)}
 						description="Toggle message alerts in the channel the infraction took place."
 					/>
 					<SelectBoolean
-						title={`Logs ${bitwiseHas(guildSettings.selfmod.filter.softAction, 0b010) ? 'Enabled' : 'Disabled'}`}
+						title={`Logs ${bitwiseHas(guildSettings['selfmod.filter.softAction'], 0b010) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
 							setGuildSettingsChanges({
-								selfmod: {
-									filter: { softAction: bitwiseSet(guildSettings.selfmod.filter.softAction, 0b010, event.target.checked) }
-								}
+								'selfmod.filter.softAction': bitwiseSet(
+									guildSettings['selfmod.filter.softAction'],
+									0b010,
+									event.target.checked
+								)
 							})
 						}
-						currentValue={bitwiseHas(guildSettings.selfmod.filter.softAction, 0b010)}
+						currentValue={bitwiseHas(guildSettings['selfmod.filter.softAction'], 0b010)}
 						description="Toggle message logs in the moderation logs channel."
 					/>
 					<SelectBoolean
-						title={`Deletes ${bitwiseHas(guildSettings.selfmod.filter.softAction, 0b001) ? 'Enabled' : 'Disabled'}`}
+						title={`Deletes ${bitwiseHas(guildSettings['selfmod.filter.softAction'], 0b001) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
 							setGuildSettingsChanges({
-								selfmod: {
-									filter: { softAction: bitwiseSet(guildSettings.selfmod.filter.softAction, 0b001, event.target.checked) }
-								}
+								'selfmod.filter.softAction': bitwiseSet(
+									guildSettings['selfmod.filter.softAction'],
+									0b001,
+									event.target.checked
+								)
 							})
 						}
-						currentValue={bitwiseHas(guildSettings.selfmod.filter.softAction, 0b001)}
+						currentValue={bitwiseHas(guildSettings['selfmod.filter.softAction'], 0b001)}
 						description="Toggle message deletions."
 					/>
 				</SimpleGrid>
@@ -92,8 +98,8 @@ const FilterWordSettings: FC = () => {
 					<Select
 						title="Action"
 						helperText="The action to perform as punishment"
-						value={guildSettings.selfmod.filter.hardAction}
-						onChange={e => setGuildSettingsChanges({ selfmod: { filter: { hardAction: e.target.value } } })}
+						value={guildSettings['selfmod.filter.hardAction']}
+						onChange={e => setGuildSettingsChanges({ 'selfmod.filter.hardAction': e.target.value })}
 					>
 						<MenuItem value={0}>None</MenuItem>
 						<MenuItem value={1}>Warning</MenuItem>
@@ -103,15 +109,15 @@ const FilterWordSettings: FC = () => {
 						<MenuItem value={5}>Ban</MenuItem>
 					</Select>
 					<SelectDuration
-						value={guildSettings.selfmod.filter.hardActionDuration}
+						value={guildSettings['selfmod.filter.hardActionDuration']}
 						min={1000}
-						onChange={duration => setGuildSettingsChanges({ selfmod: { filter: { hardActionDuration: duration } } })}
+						onChange={duration => setGuildSettingsChanges({ 'selfmod.filter.hardActionDuration': duration })}
 					/>
 				</SimpleGrid>
 				<Typography>Maximum Threshold</Typography>
 				<Slider
-					value={guildSettings.selfmod.filter.thresholdMaximum}
-					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('filter', 'thresholdMaximum', value))}
+					value={guildSettings['selfmod.filter.thresholdMaximum']}
+					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('selfmod.filter.thresholdMaximum', value))}
 					aria-labelledby="Words selfmod filter maximum threshold slider"
 					valueLabelDisplay="auto"
 					min={0}
@@ -119,8 +125,8 @@ const FilterWordSettings: FC = () => {
 				/>
 				<Typography>Threshold Duration (in seconds)</Typography>
 				<Slider
-					value={guildSettings.selfmod.filter.thresholdDuration / 1000}
-					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('filter', 'thresholdDuration', value, 1000))}
+					value={guildSettings['selfmod.filter.thresholdDuration'] / 1000}
+					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('selfmod.filter.thresholdDuration', value, 1000))}
 					aria-labelledby="Word selfmod filter threshold duration slider"
 					valueLabelDisplay="auto"
 					min={0}
@@ -132,8 +138,10 @@ const FilterWordSettings: FC = () => {
 					onSubmit={e => {
 						e.preventDefault();
 						const word = removeNonAlphaNumeric(newWord).toLowerCase();
-						if (word.length < 3 || guildSettings.selfmod.filter.raw.includes(word)) return;
-						setGuildSettingsChanges({ selfmod: { filter: { raw: [...guildSettings.selfmod.filter.raw, word] } } });
+						if (word.length < 3 || guildSettings['selfmod.filter.raw'].includes(word)) return;
+						setGuildSettingsChanges({
+							'selfmod.filter.raw': [...guildSettings['selfmod.filter.raw'], word]
+						});
 						setNewWord('');
 					}}
 				>
@@ -150,16 +158,16 @@ const FilterWordSettings: FC = () => {
 					</Box>
 				</form>
 
-				<When condition={guildSettings.selfmod.filter.raw.length !== 0}>
+				<When condition={guildSettings['selfmod.filter.raw'].length !== 0}>
 					<Paper classes={{ root: classes.words }}>
-						{guildSettings.selfmod.filter.raw.map(word => (
+						{guildSettings['selfmod.filter.raw'].map(word => (
 							<Chip
 								color="primary"
 								key={word}
 								label={word}
 								onDelete={() =>
 									setGuildSettingsChanges({
-										selfmod: { filter: { raw: guildSettings.selfmod.filter.raw.filter(item => item !== word) } }
+										'selfmod.filter.raw': guildSettings['selfmod.filter.raw'].filter(item => item !== word)
 									})
 								}
 							/>
