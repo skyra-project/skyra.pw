@@ -1,7 +1,7 @@
 import { DashboardPack, FlattenedGuild, OauthFlattenedUser } from '@config/types/ApiData';
-import { SelfmodSliderProp, SelfmodSliderSettings } from '@config/types/GuildSettings';
+import { GuildSettings } from '@config/types/GuildSettings';
 import Router from 'next/router';
-import { BASE_API_URL, LocalStorageKeys } from './constants';
+import { BASE_API_URL, FetchMethods, LocalStorageKeys } from './constants';
 import isBrowser from './isBrowser';
 import { Time } from './skyraUtils';
 
@@ -85,7 +85,7 @@ type SetAuthenticatedCallback = (newAuthenticated: boolean) => void;
 type ChangeRouteCallback = (newRoute: string) => void;
 
 export async function logOut(setPack: SetPackCallback, setAuthenticated: SetAuthenticatedCallback, changeRoute: ChangeRouteCallback) {
-	await apiFetch<{ user: OauthFlattenedUser }>('/oauth/logout', { method: 'POST' });
+	await apiFetch<{ user: OauthFlattenedUser }>('/oauth/logout', { method: FetchMethods.Post });
 	clearState(LocalStorageKeys.DiscordPack);
 	clearState(LocalStorageKeys.LastSync);
 	setPack({ user: null });
@@ -112,7 +112,7 @@ export async function syncUser(
 	saveState(LocalStorageKeys.LastSync, Date.now());
 
 	const response = await apiFetch<DashboardPack>('/oauth/user', {
-		method: 'POST',
+		method: FetchMethods.Post,
 		body: JSON.stringify({
 			action: 'SYNC_USER'
 		})
@@ -175,15 +175,6 @@ export function bitwiseSet(bits: number, bit: number, toggle: boolean) {
 	return toggle ? bits | bit : bits & ~bit;
 }
 
-export const updateSliderValueObj = (
-	category: keyof SelfmodSliderSettings,
-	prop: SelfmodSliderProp,
-	value: number | number[],
-	multiplier = 1
-) => ({
-	selfmod: {
-		[category]: {
-			[prop]: Array.isArray(value) ? value[0] * multiplier : value * multiplier
-		}
-	}
+export const updateSliderValueObj = (prop: keyof GuildSettings, value: number | number[], multiplier = 1) => ({
+	[prop]: Array.isArray(value) ? value[0] * multiplier : value * multiplier
 });

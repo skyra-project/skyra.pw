@@ -69,14 +69,8 @@ const ChannelSettings: FC = () => {
 						<SelectChannel
 							key={index}
 							tooltipTitle={description}
-							value={guildSettings.channels[key]}
-							onChange={(channel: typeof guildSettings.channels[typeof key]) =>
-								setGuildSettingsChanges({
-									channels: {
-										[key]: channel
-									}
-								})
-							}
+							value={guildSettings[key]}
+							onChange={(channel: typeof guildSettings[typeof key]) => setGuildSettingsChanges({ [key]: channel })}
 							guild={guildData}
 							label={name}
 							buttonProps={{
@@ -106,16 +100,8 @@ const ChannelSettings: FC = () => {
 						<SelectChannels
 							key={index}
 							tooltipTitle={description}
-							value={guildSettings.channels.ignore[key]}
-							onChange={(channel: typeof guildSettings.channels.ignore[typeof key]) =>
-								setGuildSettingsChanges({
-									channels: {
-										ignore: {
-											[key]: channel
-										}
-									}
-								})
-							}
+							value={guildSettings[key]}
+							onChange={(channel: typeof guildSettings[typeof key]) => setGuildSettingsChanges({ [key]: channel })}
 							guild={guildData}
 							label={name}
 							buttonProps={{
@@ -145,14 +131,8 @@ const ChannelSettings: FC = () => {
 						<SelectChannel
 							key={index}
 							tooltipTitle={description}
-							value={guildSettings.channels[key]}
-							onChange={(channel: typeof guildSettings.channels[typeof key]) =>
-								setGuildSettingsChanges({
-									channels: {
-										[key]: channel
-									}
-								})
-							}
+							value={guildSettings[key]}
+							onChange={(channel: typeof guildSettings[typeof key]) => setGuildSettingsChanges({ [key]: channel })}
 							guild={guildData}
 							label={name}
 							buttonProps={{

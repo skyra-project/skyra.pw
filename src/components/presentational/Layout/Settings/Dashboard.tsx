@@ -12,7 +12,7 @@ import Hidden from '@material-ui/core/Hidden';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import ErrorAlert from '@presentational/Alerts/Error';
 import { objectToTuples } from '@sapphire/utilities';
-import { SettingsDrawerWidth } from '@utils/constants';
+import { FetchMethods, SettingsDrawerWidth } from '@utils/constants';
 import { Time } from '@utils/skyraUtils';
 import { apiFetch, navigate } from '@utils/util';
 import { NextSeo } from 'next-seo';
@@ -102,20 +102,20 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 		try {
 			setIsLoading(true);
 
-			const response = await apiFetch<{ newSettings: GuildSettings; error?: string }>(`/guilds/${guildId}/settings`, {
-				method: 'POST',
+			const response = await apiFetch<GuildSettings | [string] | { error: string }>(`/guilds/${guildId}/settings`, {
+				method: FetchMethods.Patch,
 				body: JSON.stringify({
 					guild_id: guildId,
 					data: objectToTuples(guildSettingsChanges as any)
 				})
 			});
 
-			if (!response || !response.newSettings || response.error) {
+			if (!response || Array.isArray(response) || 'error' in response || Object.keys(response).length === 0) {
 				setHasError(true);
 				setTimeout(() => setIsLoading(false), Time.Second);
 			} else {
 				setGuildSettingsChanges(undefined);
-				setGuildSettings(response.newSettings);
+				setGuildSettings(response);
 				setIsLoading(false);
 			}
 		} catch {

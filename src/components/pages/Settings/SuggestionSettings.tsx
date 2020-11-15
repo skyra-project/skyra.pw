@@ -36,7 +36,7 @@ const SuggestionSettings: FC = () => {
 
 	const findEmoji = useMemo(() => (id: string) => guildData.emojis.find(e => e.id === id)!, [guildData.emojis]);
 	const tagToId = useMemo(() => (tag: string) => tag.replace(EmojiRegexExtractId, '$1'), []);
-	const idToTag = useMemo(() => (id: string, name: string, animated: boolean) => `<${animated ? 'a' : ''}:${name}:${id}>`, []);
+	const idToTag = useMemo(() => (id: string, name: string, animated: boolean) => `${animated ? 'a' : ''}:${name}:${id}`, []);
 
 	return (
 		<>
@@ -58,13 +58,11 @@ const SuggestionSettings: FC = () => {
 					}}
 				>
 					<SelectChannel
-						value={guildSettings.suggestions.channel}
+						value={guildSettings['suggestions.channel']}
 						label="Suggestions Channel"
-						onChange={c =>
+						onChange={newChannel =>
 							setGuildSettingsChanges({
-								suggestions: {
-									channel: c
-								}
+								'suggestions.channel': newChannel
 							})
 						}
 						guild={guildData}
@@ -86,14 +84,10 @@ const SuggestionSettings: FC = () => {
 							key={index}
 							title={title}
 							description={description}
-							currentValue={guildSettings.suggestions['on-action'][key]}
+							currentValue={guildSettings[key]}
 							onChange={event =>
 								setGuildSettingsChanges({
-									suggestions: {
-										'on-action': {
-											[key]: event.target.checked
-										}
-									}
+									[key]: event.target.checked
 								})
 							}
 						/>
@@ -117,28 +111,20 @@ const SuggestionSettings: FC = () => {
 						<SelectEmoji
 							key={index}
 							tooltipTitle={description}
-							value={tagToId(guildSettings.suggestions.emojis[key])}
+							value={tagToId(guildSettings[key])}
 							defaultImage={defaultImage}
 							defaultName={defaultName}
 							defaultId={defaultId}
-							onChange={(emojiID: typeof guildSettings.suggestions.emojis[typeof key] | null) => {
+							onChange={(emojiID: typeof guildSettings[typeof key] | null) => {
 								if (emojiID) {
 									const emojiData = findEmoji(emojiID);
 									return setGuildSettingsChanges({
-										suggestions: {
-											emojis: {
-												[key]: idToTag(emojiID, emojiData.name, emojiData.animated)
-											}
-										}
+										[key]: idToTag(emojiID, emojiData.name, emojiData.animated)
 									});
 								}
 
 								return setGuildSettingsChanges({
-									suggestions: {
-										emojis: {
-											[key]: idToTag(defaultId, defaultName, false)
-										}
-									}
+									[key]: idToTag(defaultId, defaultName, false)
 								});
 							}}
 							guild={guildData}

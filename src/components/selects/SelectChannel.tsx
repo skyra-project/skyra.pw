@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 import SelectOne, { SelectOneProps } from './SelectOne';
 
 export interface SelectChannelProps extends Omit<SelectOneProps, 'values' | 'name'> {
-	value: string;
+	value: string | null;
 	guild: FlattenedGuild;
 }
 

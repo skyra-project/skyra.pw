@@ -23,7 +23,7 @@ function determineUnit(ms: number) {
 }
 
 interface SelectDurationProps {
-	value: number;
+	value: number | null;
 	min: number;
 	max?: number;
 	onChange: (value: number) => void;
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const SelectDuration: FC<SelectDurationProps> = ({ value, min, max, onChange }) => {
 	const classes = useStyles();
-	const [inputDuration, inputUnit] = determineUnit(value)!;
+	const [inputDuration, inputUnit] = determineUnit(value ?? 0)!;
 	const [unit, setUnit] = useState(inputUnit);
 	const [duration, setDuration] = useState(inputDuration);
 	const [error, setError] = useState<string>('');
