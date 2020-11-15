@@ -1,16 +1,14 @@
-// TODO: When LGTM switching to TS 4.1, remove the lgtm ignore comments
-
 export namespace Suggestions {
 	export interface OnAction {
 		title: string;
 		// eslint-disable-next-line prettier/prettier
-		key: `suggestions.on-action.${'dm' | 'repost' | 'hide-author'}`; // lgtm [js/syntax-error]
+		key: `suggestions.on-action.${'dm' | 'repost' | 'hide-author'}`;
 		description: string;
 	}
 
 	export interface Emoji {
 		title: string;
-		key: `suggestions.emojis.${'downvote' | 'upvote'}`; // lgtm [js/syntax-error]
+		key: `suggestions.emojis.${'downvote' | 'upvote'}`;
 		description: string;
 		defaultName: string;
 		defaultImage: string;
@@ -22,7 +20,7 @@ export namespace Roles {
 	export interface Role {
 		name: string;
 		tooltip: string;
-		key: `roles.${ // lgtm [js/syntax-error]
+		key: `roles.${
 			| 'admin'
 			| 'initial'
 			| 'moderator'
@@ -44,7 +42,7 @@ export namespace Moderation {
 	export interface Message {
 		name: string;
 		description: string;
-		key: `messages.${ // lgtm [js/syntax-error]
+		key: `messages.${
 			| 'announcement-embed'
 			| 'moderation-dm'
 			| 'moderation-reason-display'
@@ -60,7 +58,7 @@ export namespace Messages {
 		name: string;
 		placeholder: string;
 		tooltipText: string;
-		key: `messages.${'farewell' | 'greeting' | 'join-dm'}`; // lgtm [js/syntax-error]
+		key: `messages.${'farewell' | 'greeting' | 'join-dm'}`;
 	}
 
 	export interface Matcher {
@@ -72,7 +70,7 @@ export namespace Messages {
 export namespace Events {
 	export interface Event {
 		title: string;
-		key: `events.${ // lgtm [js/syntax-error]
+		key: `events.${
 			| 'banAdd'
 			| 'banRemove'
 			| 'memberAdd'
@@ -116,7 +114,7 @@ export namespace CustomCommands {
 export namespace Channels {
 	export interface Channel {
 		name: string;
-		key: `channels.${ // lgtm [js/syntax-error]
+		key: `channels.${
 			| 'announcements'
 			| 'greeting'
 			| 'farewell'
@@ -135,7 +133,7 @@ export namespace Channels {
 
 	export interface IgnoreChannel {
 		name: string;
-		key: `channels.ignore.${ // lgtm [js/syntax-error]
+		key: `channels.ignore.${
 			| 'all'
 			| 'message-delete'
 			| 'message-edit'

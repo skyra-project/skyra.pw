@@ -1,0 +1,9 @@
+path_classifiers:
+  security:
+    - exclude: src/config/types/ConfigurableData.d.ts
+  correctness:
+    - exclude: src/config/types/ConfigurableData.d.ts
+  efficiency:
+    - exclude: src/config/types/ConfigurableData.d.ts
+  maintainability:
+    - exclude: src/config/types/ConfigurableData.d.ts
