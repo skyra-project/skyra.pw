@@ -132,9 +132,7 @@ const ChannelSettings: FC = () => {
 							key={index}
 							tooltipTitle={description}
 							value={guildSettings[key]}
-							onChange={(channel: typeof guildSettings[typeof key]) =>
-								setGuildSettingsChanges({ [`channels.${key}`]: channel })
-							}
+							onChange={(channel: typeof guildSettings[typeof key]) => setGuildSettingsChanges({ [key]: channel })}
 							guild={guildData}
 							label={name}
 							buttonProps={{

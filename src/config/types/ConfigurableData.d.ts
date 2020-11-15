@@ -118,6 +118,7 @@ export namespace Channels {
 			| 'announcements'
 			| 'greeting'
 			| 'farewell'
+			| 'greeting'
 			| 'member-logs'
 			| 'message-logs'
 			| 'moderation-logs'

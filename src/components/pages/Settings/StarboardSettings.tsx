@@ -50,7 +50,7 @@ const StarboardSettings: FC = () => {
 					fullWidth
 					onChange={event =>
 						setGuildSettingsChanges({
-							'starboard.minimum': event.target.value
+							'starboard.minimum': parseInt(event.target.value, 10)
 						})
 					}
 				/>

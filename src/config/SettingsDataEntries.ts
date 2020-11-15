@@ -239,7 +239,7 @@ export const ConfigurableDisabledChannels: Channels.Channel = {
 
 export const ConfigurableChannels: Channels.Channel[] = [
 	{ name: 'Announcements', description: 'The channel for announcements', key: 'channels.announcements' },
-	{ name: 'Greetings', description: 'The channel I will use to send greetings', key: 'channels.announcements' },
+	{ name: 'Greetings', description: 'The channel I will use to send greetings', key: 'channels.greeting' },
 	{ name: 'Farewells', description: 'The channel I will use to send farewells', key: 'channels.farewell' },
 	{ name: 'Spam', description: 'The channel for me to redirect users to when they use commands I consider spammy.', key: 'channels.spam' }
 ];
