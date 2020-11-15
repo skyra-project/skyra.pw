@@ -36,7 +36,7 @@ const SuggestionSettings: FC = () => {
 
 	const findEmoji = useMemo(() => (id: string) => guildData.emojis.find(e => e.id === id)!, [guildData.emojis]);
 	const tagToId = useMemo(() => (tag: string) => tag.replace(EmojiRegexExtractId, '$1'), []);
-	const idToTag = useMemo(() => (id: string, name: string, animated: boolean) => `<${animated ? 'a' : ''}:${name}:${id}>`, []);
+	const idToTag = useMemo(() => (id: string, name: string, animated: boolean) => `${animated ? 'a' : ''}:${name}:${id}`, []);
 
 	return (
 		<>
