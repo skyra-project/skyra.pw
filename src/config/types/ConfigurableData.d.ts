@@ -4,26 +4,26 @@ export namespace Suggestions {
 	export interface OnAction {
 		title: string;
 		// eslint-disable-next-line prettier/prettier
-		key: `suggestions.on-action.${'dm' | 'repost' | 'hide-author'}`; // lgtm [js/syntax-error]
+		key: `suggestions.on-action.${'dm' | 'repost' | 'hide-author'}`;
 		description: string;
 	}
 
 	export interface Emoji {
 		title: string;
-		key: `suggestions.emojis.${'downvote' | 'upvote'}`; // lgtm [js/syntax-error]
+		key: `suggestions.emojis.${'downvote' | 'upvote'}`;
 		description: string;
 		defaultName: string;
 		defaultImage: string;
 		defaultId: string;
-	} // lgtm [js/syntax-error]
-} // lgtm [js/syntax-error]
+	}
+}
 
 export namespace Roles {
 	export interface Role {
 		name: string;
 		tooltip: string;
-		key: `roles.${ // lgtm [js/syntax-error]
-			| 'admin' // lgtm [js/syntax-error]
+		key: `roles.${
+			| 'admin'
 			| 'initial'
 			| 'moderator'
 			| 'muted'
@@ -35,45 +35,43 @@ export namespace Roles {
 			| 'public'
 			| 'removeInitial'
 			| 'dj'
-			| 'subscriber'
-		}`
+			| 'subscriber'}`;
 	}
-} // lgtm [js/syntax-error]
+}
 
 export namespace Moderation {
 	export interface Message {
 		name: string;
 		description: string;
-		key: `messages.${ // lgtm [js/syntax-error]
-			| 'announcement-embed' // lgtm [js/syntax-error]
+		key: `messages.${
+			| 'announcement-embed'
 			| 'moderation-dm'
 			| 'moderation-reason-display'
 			| 'moderation-message-display'
 			| 'moderation-auto-delete'
-			| 'moderator-name-display'
-		}`;
+			| 'moderator-name-display'}`;
 	}
-} // lgtm [js/syntax-error]
+}
 
 export namespace Messages {
 	export interface Message {
 		name: string;
 		placeholder: string;
 		tooltipText: string;
-		key: `messages.${'farewell' | 'greeting' | 'join-dm'}`; // lgtm [js/syntax-error]
+		key: `messages.${'farewell' | 'greeting' | 'join-dm'}`;
 	}
 
 	export interface Matcher {
 		matchKey: Matches;
 		description: string;
 	}
-} // lgtm [js/syntax-error]
+}
 
 export namespace Events {
 	export interface Event {
 		title: string;
-		key: `events.${ // lgtm [js/syntax-error]
-			| 'banAdd' // lgtm [js/syntax-error]
+		key: `events.${
+			| 'banAdd'
 			| 'banRemove'
 			| 'memberAdd'
 			| 'memberRemove'
@@ -81,11 +79,10 @@ export namespace Events {
 			| 'memberRoleUpdate'
 			| 'messageDelete'
 			| 'messageEdit'
-			| 'twemoji-reactions'
-		}`;
+			| 'twemoji-reactions'}`;
 		description: string;
 	}
-} // lgtm [js/syntax-error]
+}
 
 export namespace DisableCommands {
 	export interface Command {
@@ -116,8 +113,8 @@ export namespace CustomCommands {
 export namespace Channels {
 	export interface Channel {
 		name: string;
-		key: `channels.${ // lgtm [js/syntax-error]
-			| 'announcements' // lgtm [js/syntax-error]
+		key: `channels.${
+			| 'announcements'
 			| 'greeting'
 			| 'farewell'
 			| 'greeting'
@@ -128,19 +125,13 @@ export namespace Channels {
 			| 'image-logs'
 			| 'prune-logs'
 			| 'reaction-logs'
-			| 'spam'
-		}`;
+			| 'spam'}`;
 		description: string;
 	}
 
 	export interface IgnoreChannel {
 		name: string;
-		key: `channels.ignore.${ // lgtm [js/syntax-error]
-			| 'all' // lgtm [js/syntax-error]
-			| 'message-delete'
-			| 'message-edit'
-			| 'reaction-add'
-		}`;
+		key: `channels.ignore.${'all' | 'message-delete' | 'message-edit' | 'reaction-add'}`;
 		description: string;
-	} // lgtm [js/syntax-error]
-} // lgtm [js/syntax-error]
+	}
+}
