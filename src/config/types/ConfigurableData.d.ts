@@ -1,16 +1,13 @@
-// TODO: Remove LGTM ignore comments when they start using TS 4.1
-
 export namespace Suggestions {
 	export interface OnAction {
 		title: string;
-		// eslint-disable-next-line prettier/prettier
-		key: `suggestions.on-action.${'dm' | 'repost' | 'hide-author'}`;
+		key: `suggestionsOnAction${'Dm' | 'Repost' | 'HideAuthor'}`;
 		description: string;
 	}
 
 	export interface Emoji {
 		title: string;
-		key: `suggestions.emojis.${'downvote' | 'upvote'}`;
+		key: `suggestionsEmojis${'Downvote' | 'Upvote'}`;
 		description: string;
 		defaultName: string;
 		defaultImage: string;
@@ -22,20 +19,20 @@ export namespace Roles {
 	export interface Role {
 		name: string;
 		tooltip: string;
-		key: `roles.${
-			| 'admin'
-			| 'initial'
-			| 'moderator'
-			| 'muted'
-			| 'restricted-reaction'
-			| 'restricted-embed'
-			| 'restricted-attachment'
-			| 'restricted-emoji'
-			| 'restricted-voice'
-			| 'public'
-			| 'removeInitial'
-			| 'dj'
-			| 'subscriber'}`;
+		key: `roles${
+			| 'Admin'
+			| 'Initial'
+			| 'Moderator'
+			| 'Muted'
+			| 'RestrictedReaction'
+			| 'RestrictedEmbed'
+			| 'RestrictedAttachment'
+			| 'RestrictedEmoji'
+			| 'RestrictedVoice'
+			| 'Public'
+			| 'RemoveInitial'
+			| 'Dj'
+			| 'Subscriber'}`;
 	}
 }
 
@@ -43,13 +40,13 @@ export namespace Moderation {
 	export interface Message {
 		name: string;
 		description: string;
-		key: `messages.${
-			| 'announcement-embed'
-			| 'moderation-dm'
-			| 'moderation-reason-display'
-			| 'moderation-message-display'
-			| 'moderation-auto-delete'
-			| 'moderator-name-display'}`;
+		key: `messages${
+			| 'AnnouncementEmbed'
+			| 'ModerationDm'
+			| 'ModerationReasonDisplay'
+			| 'ModerationMessageDisplay'
+			| 'ModerationAutoDelete'
+			| 'ModeratorNameDisplay'}`;
 	}
 }
 
@@ -58,7 +55,7 @@ export namespace Messages {
 		name: string;
 		placeholder: string;
 		tooltipText: string;
-		key: `messages.${'farewell' | 'greeting' | 'join-dm'}`;
+		key: `messages${'Farewell' | 'Greeting' | 'JoinDM'}`;
 	}
 
 	export interface Matcher {
@@ -70,16 +67,16 @@ export namespace Messages {
 export namespace Events {
 	export interface Event {
 		title: string;
-		key: `events.${
-			| 'banAdd'
-			| 'banRemove'
-			| 'memberAdd'
-			| 'memberRemove'
-			| 'memberNameUpdate'
-			| 'memberRoleUpdate'
-			| 'messageDelete'
-			| 'messageEdit'
-			| 'twemoji-reactions'}`;
+		key: `events${
+			| 'BanAdd'
+			| 'BanRemove'
+			| 'MemberAdd'
+			| 'MemberRemove'
+			| 'MemberNameUpdate'
+			| 'MemberRoleUpdate'
+			| 'MessageDelete'
+			| 'MessageEdit'
+			| 'TwemojiReactions'}`;
 		description: string;
 	}
 }
@@ -113,25 +110,57 @@ export namespace CustomCommands {
 export namespace Channels {
 	export interface Channel {
 		name: string;
-		key: `channels.${
-			| 'announcements'
-			| 'greeting'
-			| 'farewell'
-			| 'greeting'
-			| 'member-logs'
-			| 'message-logs'
-			| 'moderation-logs'
-			| 'nsfw-message-logs'
-			| 'image-logs'
-			| 'prune-logs'
-			| 'reaction-logs'
-			| 'spam'}`;
+		key: `channels${
+			| 'Announcements'
+			| 'Greeting'
+			| 'Farewell'
+			| 'MemberLogs'
+			| 'MessageLogs'
+			| 'ModerationLogs'
+			| 'NsfwMessageLogs'
+			| 'ImageLogs'
+			| 'PruneLogs'
+			| 'ReactionLogs'
+			| 'Spam'}`;
 		description: string;
 	}
 
 	export interface IgnoreChannel {
 		name: string;
-		key: `channels.ignore.${'all' | 'message-delete' | 'message-edit' | 'reaction-add'}`;
+		key: `channelsIgnore${'All' | 'MessageDeletes' | 'MessageEdits' | 'ReactionAdds'}`;
 		description: string;
 	}
+}
+
+export namespace Selfmod {
+	type SelfmodKeyHelper<P1 extends string[]> = `selfmod${Capitalize<P1[0]>}${P1[1] extends string
+		? Capitalize<P1[1]>
+		: ''}${P1[2] extends string ? Capitalize<P1[2]> : ''}`;
+
+	type Split<S extends string> = string extends S
+		? string[]
+		: S extends ''
+		? []
+		: S extends `${infer T}.${infer U}`
+		? [T, ...Split<U>]
+		: [S];
+
+	export type Union =
+		| SelfmodKeyHelper<Split<'capitals.thresholdDuration'>>
+		| SelfmodKeyHelper<Split<'capitals.thresholdMaximum'>>
+		| SelfmodKeyHelper<Split<'capitals.maximum'>>
+		| SelfmodKeyHelper<Split<'capitals.minimum'>>
+		| SelfmodKeyHelper<Split<'invites.thresholdMaximum'>>
+		| SelfmodKeyHelper<Split<'invites.thresholdDuration'>>
+		| SelfmodKeyHelper<Split<'links.thresholdMaximum'>>
+		| SelfmodKeyHelper<Split<'links.thresholdDuration'>>
+		| SelfmodKeyHelper<Split<'messages.thresholdMaximum'>>
+		| SelfmodKeyHelper<Split<'messages.thresholdDuration'>>
+		| SelfmodKeyHelper<Split<'newlines.thresholdMaximum'>>
+		| SelfmodKeyHelper<Split<'newlines.thresholdDuration'>>
+		| SelfmodKeyHelper<Split<'newlines.maximum'>>
+		| SelfmodKeyHelper<Split<'reactions.thresholdMaximum'>>
+		| SelfmodKeyHelper<Split<'reactions.thresholdDuration'>>
+		| SelfmodKeyHelper<Split<'filter.thresholdMaximum'>>
+		| SelfmodKeyHelper<Split<'filter.thresholdDuration'>>;
 }

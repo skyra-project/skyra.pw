@@ -20,51 +20,39 @@ const FilterNewLineSettings: FC = () => {
 			<Section title="Line Spam Filter">
 				<SimpleGrid>
 					<SelectBoolean
-						title={`Filter ${guildSettings['selfmod.newlines.enabled'] ? 'Enabled' : 'Disabled'}`}
-						onChange={event => setGuildSettingsChanges({ 'selfmod.newlines.enabled': event.target.checked })}
-						currentValue={guildSettings['selfmod.newlines.enabled']}
+						title={`Filter ${guildSettings.selfmodNewlinesEnabled ? 'Enabled' : 'Disabled'}`}
+						onChange={event => setGuildSettingsChanges({ selfmodNewlinesEnabled: event.target.checked })}
+						currentValue={guildSettings.selfmodNewlinesEnabled}
 						description="Whether or not this system should be enabled."
 					/>
 					<SelectBoolean
-						title={`Alerts ${bitwiseHas(guildSettings['selfmod.newlines.softAction'], 0b100) ? 'Enabled' : 'Disabled'}`}
+						title={`Alerts ${bitwiseHas(guildSettings.selfmodNewlinesSoftAction, 0b100) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
 							setGuildSettingsChanges({
-								'selfmod.newlines.softAction': bitwiseSet(
-									guildSettings['selfmod.newlines.softAction'],
-									0b100,
-									event.target.checked
-								)
+								selfmodNewlinesSoftAction: bitwiseSet(guildSettings.selfmodNewlinesSoftAction, 0b100, event.target.checked)
 							})
 						}
-						currentValue={bitwiseHas(guildSettings['selfmod.newlines.softAction'], 0b100)}
+						currentValue={bitwiseHas(guildSettings.selfmodNewlinesSoftAction, 0b100)}
 						description="Toggle message alerts in the channel the infraction took place."
 					/>
 					<SelectBoolean
-						title={`Logs ${bitwiseHas(guildSettings['selfmod.newlines.softAction'], 0b010) ? 'Enabled' : 'Disabled'}`}
+						title={`Logs ${bitwiseHas(guildSettings.selfmodNewlinesSoftAction, 0b010) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
 							setGuildSettingsChanges({
-								'selfmod.newlines.softAction': bitwiseSet(
-									guildSettings['selfmod.newlines.softAction'],
-									0b010,
-									event.target.checked
-								)
+								selfmodNewlinesSoftAction: bitwiseSet(guildSettings.selfmodNewlinesSoftAction, 0b010, event.target.checked)
 							})
 						}
-						currentValue={bitwiseHas(guildSettings['selfmod.newlines.softAction'], 0b010)}
+						currentValue={bitwiseHas(guildSettings.selfmodNewlinesSoftAction, 0b010)}
 						description="Toggle message logs in the moderation logs channel."
 					/>
 					<SelectBoolean
-						title={`Deletes ${bitwiseHas(guildSettings['selfmod.newlines.softAction'], 0b001) ? 'Enabled' : 'Disabled'}`}
+						title={`Deletes ${bitwiseHas(guildSettings.selfmodNewlinesSoftAction, 0b001) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
 							setGuildSettingsChanges({
-								'selfmod.newlines.softAction': bitwiseSet(
-									guildSettings['selfmod.newlines.softAction'],
-									0b001,
-									event.target.checked
-								)
+								selfmodNewlinesSoftAction: bitwiseSet(guildSettings.selfmodNewlinesSoftAction, 0b001, event.target.checked)
 							})
 						}
-						currentValue={bitwiseHas(guildSettings['selfmod.newlines.softAction'], 0b001)}
+						currentValue={bitwiseHas(guildSettings.selfmodNewlinesSoftAction, 0b001)}
 						description="Toggle message deletions."
 					/>
 				</SimpleGrid>
@@ -74,8 +62,8 @@ const FilterNewLineSettings: FC = () => {
 					<Select
 						title="Action"
 						helperText="The action to perform as punishment"
-						value={guildSettings['selfmod.newlines.hardAction']}
-						onChange={e => setGuildSettingsChanges({ 'selfmod.newlines.hardAction': e.target.value })}
+						value={guildSettings.selfmodNewlinesHardAction}
+						onChange={e => setGuildSettingsChanges({ selfmodNewlinesHardAction: e.target.value })}
 					>
 						<MenuItem value={0}>None</MenuItem>
 						<MenuItem value={1}>Warning</MenuItem>
@@ -85,15 +73,15 @@ const FilterNewLineSettings: FC = () => {
 						<MenuItem value={5}>Ban</MenuItem>
 					</Select>
 					<SelectDuration
-						value={guildSettings['selfmod.newlines.hardActionDuration']}
+						value={guildSettings.selfmodNewlinesHardActionDuration}
 						min={1000}
-						onChange={duration => setGuildSettingsChanges({ 'selfmod.newlines.hardActionDuration': duration })}
+						onChange={duration => setGuildSettingsChanges({ selfmodNewlinesHardActionDuration: duration })}
 					></SelectDuration>
 				</SimpleGrid>
 				<Typography>Maximum Threshold</Typography>
 				<Slider
-					value={guildSettings['selfmod.newlines.thresholdMaximum']}
-					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('selfmod.newlines.thresholdMaximum', value))}
+					value={guildSettings.selfmodNewlinesThresholdMaximum}
+					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('selfmodNewlinesThresholdMaximum', value))}
 					aria-labelledby="New lines selfmod filter maximum duration slider"
 					valueLabelDisplay="auto"
 					min={0}
@@ -101,10 +89,8 @@ const FilterNewLineSettings: FC = () => {
 				/>
 				<Typography>Threshold Duration (in seconds)</Typography>
 				<Slider
-					value={guildSettings['selfmod.newlines.thresholdDuration'] / 1000}
-					onChange={(_, value) =>
-						setGuildSettingsChanges(updateSliderValueObj('selfmod.newlines.thresholdDuration', value, 1000))
-					}
+					value={guildSettings.selfmodNewlinesThresholdDuration / 1000}
+					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('selfmodNewlinesThresholdDuration', value, 1000))}
 					aria-labelledby="New lines selfmod filter threshold duration slider"
 					valueLabelDisplay="auto"
 					min={0}
@@ -114,8 +100,8 @@ const FilterNewLineSettings: FC = () => {
 			<Section title="Options">
 				<Typography>Maximum amount of new lines in a message before filter is applied</Typography>
 				<Slider
-					value={guildSettings['selfmod.newlines.maximum']}
-					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('selfmod.newlines.maximum', value))}
+					value={guildSettings.selfmodNewlinesMaximum}
+					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('selfmodNewlinesMaximum', value))}
 					aria-labelledby="New lines selfmod filter maximum lines slider"
 					valueLabelDisplay="auto"
 					min={10}

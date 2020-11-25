@@ -1,5 +1,5 @@
 import { DashboardPack, FlattenedGuild, OauthFlattenedUser } from '@config/types/ApiData';
-import { GuildSettings } from '@config/types/GuildSettings';
+import { Selfmod } from '@config/types/ConfigurableData';
 import Router from 'next/router';
 import { BASE_API_URL, FetchMethods, LocalStorageKeys } from './constants';
 import isBrowser from './isBrowser';
@@ -175,6 +175,6 @@ export function bitwiseSet(bits: number, bit: number, toggle: boolean) {
 	return toggle ? bits | bit : bits & ~bit;
 }
 
-export const updateSliderValueObj = (prop: keyof GuildSettings, value: number | number[], multiplier = 1) => ({
+export const updateSliderValueObj = (prop: Selfmod.Union, value: number | number[], multiplier = 1) => ({
 	[prop]: Array.isArray(value) ? value[0] * multiplier : value * multiplier
 });

@@ -58,11 +58,11 @@ const SuggestionSettings: FC = () => {
 					}}
 				>
 					<SelectChannel
-						value={guildSettings['suggestions.channel']}
+						value={guildSettings.suggestionsChannel}
 						label="Suggestions Channel"
 						onChange={newChannel =>
 							setGuildSettingsChanges({
-								'suggestions.channel': newChannel
+								suggestionsChannel: newChannel
 							})
 						}
 						guild={guildData}

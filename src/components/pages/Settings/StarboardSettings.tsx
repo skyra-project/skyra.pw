@@ -43,23 +43,23 @@ const StarboardSettings: FC = () => {
 				}}
 			>
 				<SelectInteger
-					value={guildSettings['starboard.minimum']}
+					value={guildSettings.starboardMinimum}
 					label="Minimum Stars"
 					min={1}
 					max={100}
 					fullWidth
 					onChange={event =>
 						setGuildSettingsChanges({
-							'starboard.minimum': parseInt(event.target.value, 10)
+							starboardMinimum: parseInt(event.target.value, 10)
 						})
 					}
 				/>
 				<SelectChannel
-					value={guildSettings['starboard.channel']}
+					value={guildSettings.starboardChannel}
 					label="Starboard Channel"
 					onChange={newChannel =>
 						setGuildSettingsChanges({
-							'starboard.channel': newChannel
+							starboardChannel: newChannel
 						})
 					}
 					guild={guildData}
@@ -72,10 +72,10 @@ const StarboardSettings: FC = () => {
 					}}
 				/>
 				<SelectChannels
-					value={guildSettings['starboard.ignoreChannels']}
+					value={guildSettings.starboardIgnoreChannels}
 					onChange={newChannels =>
 						setGuildSettingsChanges({
-							'starboard.ignoreChannels': newChannels
+							starboardIgnoreChannels: newChannels
 						})
 					}
 					guild={guildData}

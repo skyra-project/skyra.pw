@@ -50,9 +50,9 @@ const MessageSettings: FC = () => {
 				<SimpleGrid>
 					<SelectChannels
 						tooltipTitle="The channels configured to not increase the point counter for users."
-						value={guildSettings['messages.ignoreChannels']}
-						onChange={(channels: typeof guildSettings['messages.ignoreChannels']) =>
-							setGuildSettingsChanges({ 'messages.ignoreChannels': channels })
+						value={guildSettings.messagesIgnoreChannels}
+						onChange={(channels: typeof guildSettings.messagesIgnoreChannels) =>
+							setGuildSettingsChanges({ messagesIgnoreChannels: channels })
 						}
 						guild={guildData}
 						label="Ignored Channels"
@@ -137,11 +137,11 @@ const MessageSettings: FC = () => {
 				<SimpleGrid>
 					<SelectBoolean
 						title="Send announcements in Message Embeds"
-						currentValue={guildSettings['messages.announcement-embed']}
+						currentValue={guildSettings.messagesAnnouncementEmbed}
 						description="Whether announcement messages should be send in Message Embeds"
 						onChange={event =>
 							setGuildSettingsChanges({
-								'messages.announcement-embed': event.target.checked
+								messagesAnnouncementEmbed: event.target.checked
 							})
 						}
 					/>

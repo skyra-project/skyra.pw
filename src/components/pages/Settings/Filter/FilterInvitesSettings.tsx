@@ -20,51 +20,39 @@ const FilterInvitesSettings: FC = () => {
 			<Section title="Invite Link Filter">
 				<SimpleGrid>
 					<SelectBoolean
-						title={`Filter ${guildSettings['selfmod.invites.enabled'] ? 'Enabled' : 'Disabled'}`}
-						onChange={event => setGuildSettingsChanges({ 'selfmod.invites.enabled': event.target.checked })}
-						currentValue={guildSettings['selfmod.invites.enabled']}
+						title={`Filter ${guildSettings.selfmodInvitesEnabled ? 'Enabled' : 'Disabled'}`}
+						onChange={event => setGuildSettingsChanges({ selfmodInvitesEnabled: event.target.checked })}
+						currentValue={guildSettings.selfmodInvitesEnabled}
 						description="Whether or not this system should be enabled."
 					/>
 					<SelectBoolean
-						title={`Alerts ${bitwiseHas(guildSettings['selfmod.invites.softAction'], 0b100) ? 'Enabled' : 'Disabled'}`}
+						title={`Alerts ${bitwiseHas(guildSettings.selfmodInvitesSoftAction, 0b100) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
 							setGuildSettingsChanges({
-								'selfmod.invites.softAction': bitwiseSet(
-									guildSettings['selfmod.invites.softAction'],
-									0b100,
-									event.target.checked
-								)
+								selfmodInvitesSoftAction: bitwiseSet(guildSettings.selfmodInvitesSoftAction, 0b100, event.target.checked)
 							})
 						}
-						currentValue={bitwiseHas(guildSettings['selfmod.invites.softAction'], 0b100)}
+						currentValue={bitwiseHas(guildSettings.selfmodInvitesSoftAction, 0b100)}
 						description="Toggle message alerts in the channel the infraction took place."
 					/>
 					<SelectBoolean
-						title={`Logs ${bitwiseHas(guildSettings['selfmod.invites.softAction'], 0b010) ? 'Enabled' : 'Disabled'}`}
+						title={`Logs ${bitwiseHas(guildSettings.selfmodInvitesSoftAction, 0b010) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
 							setGuildSettingsChanges({
-								'selfmod.invites.softAction': bitwiseSet(
-									guildSettings['selfmod.invites.softAction'],
-									0b010,
-									event.target.checked
-								)
+								selfmodInvitesSoftAction: bitwiseSet(guildSettings.selfmodInvitesSoftAction, 0b010, event.target.checked)
 							})
 						}
-						currentValue={bitwiseHas(guildSettings['selfmod.invites.softAction'], 0b010)}
+						currentValue={bitwiseHas(guildSettings.selfmodInvitesSoftAction, 0b010)}
 						description="Toggle message logs in the moderation logs channel."
 					/>
 					<SelectBoolean
-						title={`Deletes ${bitwiseHas(guildSettings['selfmod.invites.softAction'], 0b001) ? 'Enabled' : 'Disabled'}`}
+						title={`Deletes ${bitwiseHas(guildSettings.selfmodInvitesSoftAction, 0b001) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
 							setGuildSettingsChanges({
-								'selfmod.invites.softAction': bitwiseSet(
-									guildSettings['selfmod.invites.softAction'],
-									0b001,
-									event.target.checked
-								)
+								selfmodInvitesSoftAction: bitwiseSet(guildSettings.selfmodInvitesSoftAction, 0b001, event.target.checked)
 							})
 						}
-						currentValue={bitwiseHas(guildSettings['selfmod.invites.softAction'], 0b001)}
+						currentValue={bitwiseHas(guildSettings.selfmodInvitesSoftAction, 0b001)}
 						description="Toggle message deletions."
 					/>
 				</SimpleGrid>
@@ -74,8 +62,8 @@ const FilterInvitesSettings: FC = () => {
 					<Select
 						title="Action"
 						helperText="The action to perform as punishment"
-						value={guildSettings['selfmod.invites.hardAction']}
-						onChange={e => setGuildSettingsChanges({ 'selfmod.invites.hardAction': e.target.value })}
+						value={guildSettings.selfmodInvitesHardAction}
+						onChange={e => setGuildSettingsChanges({ selfmodInvitesHardAction: e.target.value })}
 					>
 						<MenuItem value={0}>None</MenuItem>
 						<MenuItem value={1}>Warning</MenuItem>
@@ -85,15 +73,15 @@ const FilterInvitesSettings: FC = () => {
 						<MenuItem value={5}>Ban</MenuItem>
 					</Select>
 					<SelectDuration
-						value={guildSettings['selfmod.invites.hardActionDuration']}
+						value={guildSettings.selfmodInvitesHardActionDuration}
 						min={1000}
-						onChange={duration => setGuildSettingsChanges({ 'selfmod.invites.hardActionDuration': duration })}
+						onChange={duration => setGuildSettingsChanges({ selfmodInvitesHardActionDuration: duration })}
 					></SelectDuration>
 				</SimpleGrid>
 				<Typography>Maximum Threshold</Typography>
 				<Slider
-					value={guildSettings['selfmod.invites.thresholdMaximum']}
-					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('selfmod.invites.thresholdMaximum', value))}
+					value={guildSettings.selfmodInvitesThresholdMaximum}
+					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('selfmodInvitesThresholdMaximum', value))}
 					aria-labelledby="Invites selfmod filter maximum threshold slider"
 					valueLabelDisplay="auto"
 					min={0}
@@ -101,8 +89,8 @@ const FilterInvitesSettings: FC = () => {
 				/>
 				<Typography>Threshold Duration (in seconds)</Typography>
 				<Slider
-					value={guildSettings['selfmod.invites.thresholdDuration'] / 1000}
-					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('selfmod.invites.thresholdDuration', value, 1000))}
+					value={guildSettings.selfmodInvitesThresholdDuration / 1000}
+					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('selfmodInvitesThresholdDuration', value, 1000))}
 					aria-labelledby="Invites selfmod filter threshold duration slider"
 					valueLabelDisplay="auto"
 					min={0}
