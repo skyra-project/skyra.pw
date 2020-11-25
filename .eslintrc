@@ -8,8 +8,5 @@
 				"no-throw-literal": 0
 			}
 		}
-	],
-	"rules": {
-		"dot-notation": "error"
-	}
+	]
 }
