@@ -20,51 +20,39 @@ const FilterMessagesSettings: FC = () => {
 			<Section title="Message Duplication Filter">
 				<SimpleGrid>
 					<SelectBoolean
-						title={`Filter ${guildSettings['selfmod.messages.enabled'] ? 'Enabled' : 'Disabled'}`}
-						onChange={event => setGuildSettingsChanges({ 'selfmod.messages.enabled': event.target.checked })}
-						currentValue={guildSettings['selfmod.messages.enabled']}
+						title={`Filter ${guildSettings.selfmodMessagesEnabled ? 'Enabled' : 'Disabled'}`}
+						onChange={event => setGuildSettingsChanges({ selfmodMessagesEnabled: event.target.checked })}
+						currentValue={guildSettings.selfmodMessagesEnabled}
 						description="Whether or not this system should be enabled."
 					/>
 					<SelectBoolean
-						title={`Alerts ${bitwiseHas(guildSettings['selfmod.messages.softAction'], 0b100) ? 'Enabled' : 'Disabled'}`}
+						title={`Alerts ${bitwiseHas(guildSettings.selfmodMessagesSoftAction, 0b100) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
 							setGuildSettingsChanges({
-								'selfmod.messages.softAction': bitwiseSet(
-									guildSettings['selfmod.messages.softAction'],
-									0b100,
-									event.target.checked
-								)
+								selfmodMessagesSoftAction: bitwiseSet(guildSettings.selfmodMessagesSoftAction, 0b100, event.target.checked)
 							})
 						}
-						currentValue={bitwiseHas(guildSettings['selfmod.messages.softAction'], 0b100)}
+						currentValue={bitwiseHas(guildSettings.selfmodMessagesSoftAction, 0b100)}
 						description="Toggle message alerts in the channel the infraction took place."
 					/>
 					<SelectBoolean
-						title={`Logs ${bitwiseHas(guildSettings['selfmod.messages.softAction'], 0b010) ? 'Enabled' : 'Disabled'}`}
+						title={`Logs ${bitwiseHas(guildSettings.selfmodMessagesSoftAction, 0b010) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
 							setGuildSettingsChanges({
-								'selfmod.messages.softAction': bitwiseSet(
-									guildSettings['selfmod.messages.softAction'],
-									0b010,
-									event.target.checked
-								)
+								selfmodMessagesSoftAction: bitwiseSet(guildSettings.selfmodMessagesSoftAction, 0b010, event.target.checked)
 							})
 						}
-						currentValue={bitwiseHas(guildSettings['selfmod.messages.softAction'], 0b010)}
+						currentValue={bitwiseHas(guildSettings.selfmodMessagesSoftAction, 0b010)}
 						description="Toggle message logs in the moderation logs channel."
 					/>
 					<SelectBoolean
-						title={`Deletes ${bitwiseHas(guildSettings['selfmod.messages.softAction'], 0b001) ? 'Enabled' : 'Disabled'}`}
+						title={`Deletes ${bitwiseHas(guildSettings.selfmodMessagesSoftAction, 0b001) ? 'Enabled' : 'Disabled'}`}
 						onChange={event =>
 							setGuildSettingsChanges({
-								'selfmod.messages.softAction': bitwiseSet(
-									guildSettings['selfmod.messages.softAction'],
-									0b001,
-									event.target.checked
-								)
+								selfmodMessagesSoftAction: bitwiseSet(guildSettings.selfmodMessagesSoftAction, 0b001, event.target.checked)
 							})
 						}
-						currentValue={bitwiseHas(guildSettings['selfmod.messages.softAction'], 0b001)}
+						currentValue={bitwiseHas(guildSettings.selfmodMessagesSoftAction, 0b001)}
 						description="Toggle message deletions."
 					/>
 				</SimpleGrid>
@@ -74,8 +62,8 @@ const FilterMessagesSettings: FC = () => {
 					<Select
 						title="Action"
 						helperText="The action to perform as punishment"
-						value={guildSettings['selfmod.messages.hardAction']}
-						onChange={e => setGuildSettingsChanges({ 'selfmod.messages.hardAction': e.target.value })}
+						value={guildSettings.selfmodMessagesHardAction}
+						onChange={e => setGuildSettingsChanges({ selfmodMessagesHardAction: e.target.value })}
 					>
 						<MenuItem value={0}>None</MenuItem>
 						<MenuItem value={1}>Warning</MenuItem>
@@ -85,15 +73,15 @@ const FilterMessagesSettings: FC = () => {
 						<MenuItem value={5}>Ban</MenuItem>
 					</Select>
 					<SelectDuration
-						value={guildSettings['selfmod.messages.hardActionDuration']}
+						value={guildSettings.selfmodMessagesHardActionDuration}
 						min={1000}
-						onChange={duration => setGuildSettingsChanges({ 'selfmod.messages.hardActionDuration': duration })}
+						onChange={duration => setGuildSettingsChanges({ selfmodMessagesHardActionDuration: duration })}
 					></SelectDuration>
 				</SimpleGrid>
 				<Typography>Maximum Threshold</Typography>
 				<Slider
-					value={guildSettings['selfmod.messages.thresholdMaximum']}
-					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('selfmod.messages.thresholdMaximum', value))}
+					value={guildSettings.selfmodMessagesThresholdMaximum}
+					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('selfmodMessagesThresholdMaximum', value))}
 					aria-labelledby="Messages selfmod filter maximum threshold slider"
 					valueLabelDisplay="auto"
 					min={0}
@@ -101,10 +89,8 @@ const FilterMessagesSettings: FC = () => {
 				/>
 				<Typography>Threshold Duration (in seconds)</Typography>
 				<Slider
-					value={guildSettings['selfmod.messages.thresholdDuration'] / 1000}
-					onChange={(_, value) =>
-						setGuildSettingsChanges(updateSliderValueObj('selfmod.messages.thresholdDuration', value, 1000))
-					}
+					value={guildSettings.selfmodMessagesThresholdDuration / 1000}
+					onChange={(_, value) => setGuildSettingsChanges(updateSliderValueObj('selfmodMessagesThresholdDuration', value, 1000))}
 					aria-labelledby="Messages selfmod filter threshold duration slider"
 					valueLabelDisplay="auto"
 					min={0}

@@ -47,7 +47,7 @@ const RoleSettings: FC = () => {
 				subtitle={
 					<>
 						Here you can configure special roles known to Skyra for your server.
-						{isOnMobile ? ' Long press' : ' Hover over'} a button to get more informatation about that particular role
+						{isOnMobile ? ' Long press' : ' Hover over'} a button to get more information about that particular role
 					</>
 				}
 			/>
@@ -56,10 +56,10 @@ const RoleSettings: FC = () => {
 				<SelectBoolean
 					title={ConfigurableRemoveInitialRole.name}
 					description={ConfigurableRemoveInitialRole.tooltip}
-					currentValue={guildSettings['roles.removeInitial']}
+					currentValue={guildSettings.rolesRemoveInitial}
 					onChange={event =>
 						setGuildSettingsChanges({
-							'roles.removeInitial': event.target.checked
+							rolesRemoveInitial: event.target.checked
 						})
 					}
 				/>
@@ -103,10 +103,10 @@ const RoleSettings: FC = () => {
 						filterEveryone
 						key={ConfigurableRoles.length + 1}
 						tooltipTitle={ConfigurablePublicRoles.tooltip}
-						value={guildSettings['roles.public']}
+						value={guildSettings.rolesPublic}
 						onChange={newRoles =>
 							setGuildSettingsChanges({
-								'roles.public': newRoles
+								rolesPublic: newRoles
 							})
 						}
 						guild={guildData}

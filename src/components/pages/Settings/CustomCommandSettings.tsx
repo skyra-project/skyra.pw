@@ -110,7 +110,7 @@ const CustomCommandSettings = () => {
 			setSubmitting(true);
 
 			setGuildSettingsChanges({
-				'custom-commands': mergeCustomCommands(guildSettings['custom-commands'], {
+				customCommands: mergeCustomCommands(guildSettings.customCommands, {
 					id,
 					content,
 					color: parse(color || '#1E88E5').B10.value,
@@ -127,7 +127,7 @@ const CustomCommandSettings = () => {
 	const sortCommands = (firstCommand: CustomCommand, secondCommand: CustomCommand) =>
 		firstCommand.id < secondCommand.id ? -1 : firstCommand.id > secondCommand.id ? 1 : 0;
 
-	const sortedCommands = guildSettings['custom-commands'].sort(sortCommands);
+	const sortedCommands = guildSettings.customCommands.sort(sortCommands);
 
 	return (
 		<Fragment>
@@ -231,10 +231,10 @@ const CustomCommandSettings = () => {
 						xl: 12
 					}}
 				>
-					{guildSettings['custom-commands'].length > 0 ? (
+					{guildSettings.customCommands.length > 0 ? (
 						<Virtuoso
 							totalCount={sortedCommands.length}
-							overscan={10}
+							overscan={3}
 							style={{ height: theme.spacing(40), width: '100%' }}
 							className={classes.virtualizedList}
 							ListContainer={({ listRef, style, children, ...props }) => (
@@ -267,7 +267,7 @@ const CustomCommandSettings = () => {
 											edge="end"
 											onClick={() =>
 												setGuildSettingsChanges({
-													'custom-commands': guildSettings['custom-commands'].filter(
+													customCommands: guildSettings.customCommands.filter(
 														command => command.id !== sortedCommands[index].id
 													)
 												})
