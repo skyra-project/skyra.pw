@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		searchBar: {
 			marginBottom: theme.spacing(1),
-			position: 'fixed',
+			position: 'sticky',
 			zIndex: theme.zIndex.appBar - 1,
 			top: theme.spacing(9),
 			[theme.breakpoints.down('sm')]: {
@@ -57,7 +57,23 @@ const CommandsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 
 	return (
 		<>
-			<NextSeo {...createSeoProps({ title: 'Commands' })} />
+			<NextSeo
+				{...createSeoProps({
+					title: 'Commands',
+					description:
+						"Want to know what Skyra can do? You've come to the right place here. Get information about every command available in Skyra on this page. ",
+					openGraph: {
+						title: 'Skyra Commands'
+					},
+					additionalMetaTags: [
+						{
+							name: 'summary',
+							content:
+								"Want to know what Skyra can do? You've come to the right place here. Get information about every command available in Skyra on this page. "
+						}
+					]
+				})}
+			/>
 			<ScrollToTop />
 			<GeneralPage>
 				<Container>
