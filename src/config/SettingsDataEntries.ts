@@ -43,7 +43,7 @@ export const ConfigurableEmojis: Suggestions.Emoji[] = [
 
 export const ConfigurableRemoveInitialRole: Roles.Role = {
 	name: 'Remove Initial',
-	tooltip: 'Whether the claim of a public role should remove the initial one too.',
+	tooltip: 'Whether claiming a public role should remove the initial role at the same time.',
 	key: 'rolesRemoveInitial'
 };
 
@@ -51,7 +51,7 @@ export const ConfigurableRoles: Roles.Role[] = [
 	{
 		name: 'Administrator',
 		tooltip:
-			'The administrator role, their privileges in Skyra will include all moderator permissions, including management. Defaults to anyone with the Manage Server permission.',
+			'The administrator roles. Administrators have access to all moderation and management commands. Defaults to anyone with the "Manage Server" permission.',
 		key: 'rolesAdmin'
 	},
 	{
@@ -61,7 +61,7 @@ export const ConfigurableRoles: Roles.Role[] = [
 	},
 	{
 		name: 'Moderator',
-		tooltip: 'The moderator role, their privileges will cover almost all moderation commands. Defaults to anyone who can ban members.',
+		tooltip: 'The moderator roles. Moderators have access to almost all moderation commands. Defaults to anyone who can ban members',
 		key: 'rolesModerator'
 	},
 	{
@@ -96,7 +96,7 @@ export const ConfigurableRoles: Roles.Role[] = [
 	},
 	{
 		name: 'DJ',
-		tooltip: "The DJ role for this server. DJs have more advanced control over Skyra's music commands.",
+		tooltip: "The DJ roles for this server. DJs have more advanced control over Skyra's music commands",
 		key: 'rolesDj'
 	},
 	{
@@ -107,7 +107,7 @@ export const ConfigurableRoles: Roles.Role[] = [
 	},
 	{
 		name: 'Public Roles',
-		tooltip: 'The public roles, they will be given with no cost to any user using the roles command.',
+		tooltip: 'The public roles. These can be claimed by any user using the "roles" command.',
 		key: 'rolesPublic'
 	}
 ];
