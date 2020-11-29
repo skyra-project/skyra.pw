@@ -94,9 +94,9 @@ const RoleSettings: FC = () => {
 						};
 
 						return Array.isArray(guildSettings[key]) ? (
-							<SelectRole
+							<SelectRoles
 								{...props}
-								value={cast<string | null>(guildSettings[key])}
+								value={cast<string[]>(guildSettings[key])}
 								onChange={newRole =>
 									setGuildSettingsChanges({
 										[key]: newRole
@@ -104,9 +104,9 @@ const RoleSettings: FC = () => {
 								}
 							/>
 						) : (
-							<SelectRoles
+							<SelectRole
 								{...props}
-								value={cast<string[]>(guildSettings[key])}
+								value={cast<string | null>(guildSettings[key])}
 								onChange={newRole =>
 									setGuildSettingsChanges({
 										[key]: newRole
