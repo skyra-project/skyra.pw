@@ -47,12 +47,6 @@ export const ConfigurableRemoveInitialRole: Roles.Role = {
 	key: 'rolesRemoveInitial'
 };
 
-export const ConfigurablePublicRoles: Roles.Role = {
-	name: 'Public Roles',
-	tooltip: 'The public roles, they will be given with no cost to any user using the roles command.',
-	key: 'rolesPublic'
-};
-
 export const ConfigurableRoles: Roles.Role[] = [
 	{
 		name: 'Administrator',
@@ -110,6 +104,11 @@ export const ConfigurableRoles: Roles.Role[] = [
 		tooltip:
 			'The subscriber role, this role will be mentioned every time you use the announce command. I will always keep it non-mentionable so people do not abuse mentions.',
 		key: 'rolesSubscriber'
+	},
+	{
+		name: 'Public Roles',
+		tooltip: 'The public roles, they will be given with no cost to any user using the roles command.',
+		key: 'rolesPublic'
 	}
 ];
 

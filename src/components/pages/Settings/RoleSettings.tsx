@@ -1,4 +1,4 @@
-import { ConfigurablePublicRoles, ConfigurableRemoveInitialRole, ConfigurableRoles } from '#config/SettingsDataEntries';
+import { ConfigurableRemoveInitialRole, ConfigurableRoles } from '#config/SettingsDataEntries';
 import { useGuildDataContext } from '#contexts/Settings/GuildDataContext';
 import { useGuildSettingsChangesContext } from '#contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '#contexts/Settings/GuildSettingsContext';
@@ -77,48 +77,44 @@ const RoleSettings: FC = () => {
 						xl: 4
 					}}
 				>
-					{ConfigurableRoles.map(({ name, tooltip, key }, index) => (
-						<SelectRole
-							key={index}
-							label={name}
-							value={cast<string | null>(guildSettings[key])}
-							onChange={newRole =>
-								setGuildSettingsChanges({
-									[key]: newRole
-								})
-							}
-							guild={guildData}
-							tooltipTitle={tooltip}
-							filterEveryone
-							buttonProps={{
+					{ConfigurableRoles.map(({ name, tooltip, key }, index) => {
+						const props = {
+							key: index,
+							label: name,
+							guild: guildData,
+							tooltipTitle: tooltip,
+							filterEveryone: true,
+							buttonProps: {
 								fullWidth: true,
 								classes: {
 									root: classes.button,
 									label: classes.buttonText
 								}
-							}}
-						/>
-					))}
-					<SelectRoles
-						filterEveryone
-						key={ConfigurableRoles.length + 1}
-						tooltipTitle={ConfigurablePublicRoles.tooltip}
-						value={guildSettings.rolesPublic}
-						onChange={newRoles =>
-							setGuildSettingsChanges({
-								rolesPublic: newRoles
-							})
-						}
-						guild={guildData}
-						label={ConfigurablePublicRoles.name}
-						buttonProps={{
-							fullWidth: true,
-							classes: {
-								root: classes.button,
-								label: classes.buttonText
 							}
-						}}
-					/>
+						};
+
+						return Array.isArray(guildSettings[key]) ? (
+							<SelectRole
+								{...props}
+								value={cast<string | null>(guildSettings[key])}
+								onChange={newRole =>
+									setGuildSettingsChanges({
+										[key]: newRole
+									})
+								}
+							/>
+						) : (
+							<SelectRoles
+								{...props}
+								value={cast<string[]>(guildSettings[key])}
+								onChange={newRole =>
+									setGuildSettingsChanges({
+										[key]: newRole
+									})
+								}
+							/>
+						);
+					})}
 				</SimpleGrid>
 			</Section>
 		</>
