@@ -1,5 +1,9 @@
-import { setAuthenticated, useAuthenticated } from '@contexts/AuthenticationContext';
-import { mergeDiscordPack, useDiscordPack } from '@contexts/DiscordPackContext';
+import { setAuthenticated, useAuthenticated } from '#contexts/AuthenticationContext';
+import { mergeDiscordPack, useDiscordPack } from '#contexts/DiscordPackContext';
+import LazyAvatar from '#mui/LazyAvatar';
+import Tooltip from '#mui/Tooltip';
+import { displayAvatarURL } from '#utils/skyraUtils';
+import { logOut, syncUser } from '#utils/util';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -14,10 +18,6 @@ import Typography from '@material-ui/core/Typography';
 import LogoutIcon from '@material-ui/icons/Eject';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SyncIcon from '@material-ui/icons/Sync';
-import LazyAvatar from '@mui/LazyAvatar';
-import Tooltip from '@mui/Tooltip';
-import { displayAvatarURL } from '@utils/skyraUtils';
-import { logOut, syncUser } from '@utils/util';
 import { useRouter } from 'next/router';
 import React, { FC, memo, useEffect, useRef, useState } from 'react';
 

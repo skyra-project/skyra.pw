@@ -1,11 +1,11 @@
-import features from '@assets/features';
-import { useAuthenticated } from '@contexts/AuthenticationContext';
-import { useDiscordPack } from '@contexts/DiscordPackContext';
+import features from '#assets/features';
+import { useAuthenticated } from '#contexts/AuthenticationContext';
+import { useDiscordPack } from '#contexts/DiscordPackContext';
+import { FilteredGuildCards } from '#presentational/GuildCard';
+import HomePageSection from '#presentational/HomePageSection';
+import GeneralPage from '#presentational/Layout/General';
+import ScrollToTop from '#routing/ScrollToTop';
 import { Box, Container } from '@material-ui/core';
-import { FilteredGuildCards } from '@presentational/GuildCard';
-import HomePageSection from '@presentational/HomePageSection';
-import GeneralPage from '@presentational/Layout/General';
-import ScrollToTop from '@routing/ScrollToTop';
 import React, { FC } from 'react';
 
 const HomePage: FC = () => {

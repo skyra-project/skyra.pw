@@ -1,4 +1,4 @@
-import SelectBoolean, { SelectBooleanProps } from '@selects/SelectBoolean';
+import SelectBoolean, { SelectBooleanProps } from '#selects/SelectBoolean';
 import { fieldToSwitch, SwitchProps } from 'formik-material-ui';
 import React, { FC, memo } from 'react';
 

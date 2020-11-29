@@ -1,9 +1,9 @@
-import { createSeoProps } from '@config/next-seo.config';
-import { setAuthenticated } from '@contexts/AuthenticationContext';
-import { mergeDiscordPack } from '@contexts/DiscordPackContext';
-import GeneralLayout from '@layout/General';
-import { BASE_WEB_URL, CLIENT_ID, FetchMethods, LocalStorageKeys } from '@utils/constants';
-import { apiFetch, saveState } from '@utils/util';
+import { createSeoProps } from '#config/next-seo.config';
+import { setAuthenticated } from '#contexts/AuthenticationContext';
+import { mergeDiscordPack } from '#contexts/DiscordPackContext';
+import GeneralLayout from '#layout/General';
+import { BASE_WEB_URL, CLIENT_ID, FetchMethods, LocalStorageKeys } from '#utils/constants';
+import { apiFetch, saveState } from '#utils/util';
 import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';

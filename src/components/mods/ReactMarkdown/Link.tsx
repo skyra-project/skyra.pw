@@ -1,6 +1,6 @@
+import RouterLink from '#routing/Link';
 import { Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import RouterLink from '@routing/Link';
 import React, { forwardRef } from 'react';
 
 interface LinkProps {

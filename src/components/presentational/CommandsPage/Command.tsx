@@ -1,4 +1,6 @@
-import { FlattenedCommand } from '@config/types/ApiData';
+import { FlattenedCommand } from '#config/types/ApiData';
+import Chips from '#presentational/CommandsPage/Chips';
+import { reactStringReplace } from '#utils/reactStringReplace';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionActions from '@material-ui/core/AccordionActions';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
@@ -11,8 +13,6 @@ import CodeIcon from '@material-ui/icons/CodeTwoTone';
 import CreateIcon from '@material-ui/icons/CreateTwoTone';
 import ExamplesIcon from '@material-ui/icons/EmojiObjects';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Chips from '@presentational/CommandsPage/Chips';
-import { reactStringReplace } from '@utils/reactStringReplace';
 import ReminderIcon from 'mdi-react/BellAlertIcon';
 import HelpRhombusIcon from 'mdi-react/HelpRhombusIcon';
 import React, { FC, memo } from 'react';

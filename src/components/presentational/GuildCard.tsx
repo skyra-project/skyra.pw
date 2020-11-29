@@ -1,9 +1,9 @@
-import { DashboardPack, FlattenedGuild } from '@config/types/ApiData';
+import { DashboardPack, FlattenedGuild } from '#config/types/ApiData';
+import Link from '#routing/Link';
+import { guildAddURL } from '#utils/constants';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import Link from '@routing/Link';
-import { guildAddURL } from '@utils/constants';
 import React, { memo } from 'react';
 import GuildIcon from './GuildIcon';
 

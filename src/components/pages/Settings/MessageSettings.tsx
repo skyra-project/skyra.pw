@@ -1,8 +1,12 @@
-import { ConfigurableMessageKeys, ConfigurableReplaceableMatchers } from '@config/SettingsDataEntries';
-import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
-import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
-import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
-import Section from '@layout/Settings/Section';
+import { ConfigurableMessageKeys, ConfigurableReplaceableMatchers } from '#config/SettingsDataEntries';
+import { useGuildDataContext } from '#contexts/Settings/GuildDataContext';
+import { useGuildSettingsChangesContext } from '#contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '#contexts/Settings/GuildSettingsContext';
+import Section from '#layout/Settings/Section';
+import SimpleGrid from '#mui/SimpleGrid';
+import Tooltip from '#mui/Tooltip';
+import SelectBoolean from '#selects/SelectBoolean';
+import SelectChannels from '#selects/SelectChannels';
 import Box from '@material-ui/core/Box';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,10 +17,6 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import InfoIcon from '@material-ui/icons/Info';
-import SimpleGrid from '@mui/SimpleGrid';
-import Tooltip from '@mui/Tooltip';
-import SelectBoolean from '@selects/SelectBoolean';
-import SelectChannels from '@selects/SelectChannels';
 import React, { FC, memo, useMemo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>

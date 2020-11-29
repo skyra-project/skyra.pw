@@ -1,12 +1,12 @@
-import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
-import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
-import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
-import Section from '@layout/Settings/Section';
+import { useGuildDataContext } from '#contexts/Settings/GuildDataContext';
+import { useGuildSettingsChangesContext } from '#contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '#contexts/Settings/GuildSettingsContext';
+import Section from '#layout/Settings/Section';
+import SimpleGrid from '#mui/SimpleGrid';
+import SelectChannel from '#selects/SelectChannel';
+import SelectChannels from '#selects/SelectChannels';
+import SelectInteger from '#selects/SelectInteger';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import SimpleGrid from '@mui/SimpleGrid';
-import SelectChannel from '@selects/SelectChannel';
-import SelectChannels from '@selects/SelectChannels';
-import SelectInteger from '@selects/SelectInteger';
 import React, { FC, memo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>

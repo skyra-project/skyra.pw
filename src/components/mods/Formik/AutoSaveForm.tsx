@@ -1,4 +1,4 @@
-import { Time } from '@utils/skyraUtils';
+import { Time } from '#utils/skyraUtils';
 import { Form, Formik } from 'formik';
 import React, { PropsWithChildren } from 'react';
 import AutoSave, { AutoSavingFormProps } from './AutoSave';

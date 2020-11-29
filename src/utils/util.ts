@@ -1,5 +1,5 @@
-import { DashboardPack, FlattenedGuild, OauthFlattenedUser } from '@config/types/ApiData';
-import { Selfmod } from '@config/types/ConfigurableData';
+import { DashboardPack, FlattenedGuild, OauthFlattenedUser } from '#config/types/ApiData';
+import { Selfmod } from '#config/types/ConfigurableData';
 import Router from 'next/router';
 import { BASE_API_URL, FetchMethods, LocalStorageKeys } from './constants';
 import isBrowser from './isBrowser';

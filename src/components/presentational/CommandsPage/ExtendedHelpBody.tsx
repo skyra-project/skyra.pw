@@ -1,5 +1,5 @@
-import GfmReactMarkdown from '@mods/ReactMarkdown/GfmReactMarkdown';
-import { EmojiRegexExtractName } from '@utils/constants';
+import GfmReactMarkdown from '#mods/ReactMarkdown/GfmReactMarkdown';
+import { EmojiRegexExtractName } from '#utils/constants';
 import React, { FC, memo } from 'react';
 
 interface ExtendedHelpBodyProps {

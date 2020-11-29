@@ -1,13 +1,13 @@
-import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
-import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
-import Section from '@layout/Settings/Section';
+import { useGuildSettingsChangesContext } from '#contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '#contexts/Settings/GuildSettingsContext';
+import Section from '#layout/Settings/Section';
+import SimpleGrid from '#mui/SimpleGrid';
+import Select from '#selects/Select';
+import SelectBoolean from '#selects/SelectBoolean';
+import SelectDuration from '#selects/SelectDuration';
+import { bitwiseHas, bitwiseSet, updateSliderValueObj } from '#utils/util';
 import { MenuItem, Typography } from '@material-ui/core';
 import Slider from '@material-ui/core/Slider';
-import SimpleGrid from '@mui/SimpleGrid';
-import Select from '@selects/Select';
-import SelectBoolean from '@selects/SelectBoolean';
-import SelectDuration from '@selects/SelectDuration';
-import { bitwiseHas, bitwiseSet, updateSliderValueObj } from '@utils/util';
 import React, { FC, Fragment, memo } from 'react';
 
 const FilterCapitalsSettings: FC = () => {

@@ -1,11 +1,11 @@
-import '@config/globals.css';
-import { DefaultSeo as DefaultSeoProps } from '@config/next-seo.config';
-import theme from '@config/theme';
-import { MobileContextProvider } from '@contexts/MobileContext';
+import '#config/globals.css';
+import { DefaultSeo as DefaultSeoProps } from '#config/next-seo.config';
+import theme from '#config/theme';
+import { MobileContextProvider } from '#contexts/MobileContext';
+import { CookieConsentProvider } from '#presentational/CookieConsent/ContextProvider';
 import { useMediaQuery } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { StylesProvider, ThemeProvider } from '@material-ui/core/styles';
-import { CookieConsentProvider } from '@presentational/CookieConsent/ContextProvider';
+import { ThemeProvider } from '@material-ui/core/styles';
 import { NextPage } from 'next';
 import { DefaultSeo } from 'next-seo';
 import { AppProps } from 'next/app';
@@ -14,16 +14,16 @@ import Head from 'next/head';
 import NextNprogress from 'nextjs-progressbar';
 import React, { useEffect } from 'react';
 
-const CookieWarning = dynamic(() => import('@presentational/CookieConsent/WarningSnackbar'), { ssr: false });
-const AuthenticatedProvider = dynamic(() => import('@contexts/AuthenticationContext'), { ssr: false });
-const DiscordPackProvider = dynamic(() => import('@contexts/DiscordPackContext'), { ssr: false });
+const CookieWarning = dynamic(() => import('#presentational/CookieConsent/WarningSnackbar'), { ssr: false });
+const AuthenticatedProvider = dynamic(() => import('#contexts/AuthenticationContext'), { ssr: false });
+const DiscordPackProvider = dynamic(() => import('#contexts/DiscordPackContext'), { ssr: false });
 
 const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 	useEffect(() => {
 		// Remove the server-side injected CSS.
 		const jssStyles = document.querySelector('#jss-server-side');
 		if (jssStyles) {
-			jssStyles.parentElement?.removeChild(jssStyles);
+			jssStyles.parentElement!.removeChild(jssStyles);
 		}
 
 		window.$discordMessage = {
@@ -106,22 +106,20 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 				<link rel="apple-touch-startup-image" href="/icons/apple-startup.png" />
 			</Head>
 
-			<StylesProvider injectFirst>
-				<ThemeProvider theme={theme}>
-					<MobileContextProvider value={{ isMobile }}>
-						<AuthenticatedProvider>
-							<DiscordPackProvider>
-								<CookieConsentProvider>
-									<CssBaseline />
-									<NextNprogress color="#0A5699" startPosition={0.3} stopDelayMs={200} height={3} />
-									<CookieWarning />
-									<Component {...pageProps} />
-								</CookieConsentProvider>
-							</DiscordPackProvider>
-						</AuthenticatedProvider>
-					</MobileContextProvider>
-				</ThemeProvider>
-			</StylesProvider>
+			<ThemeProvider theme={theme}>
+				<MobileContextProvider value={{ isMobile }}>
+					<AuthenticatedProvider>
+						<DiscordPackProvider>
+							<CookieConsentProvider>
+								<CssBaseline />
+								<NextNprogress color="#0A5699" startPosition={0.3} stopDelayMs={200} height={3} />
+								<CookieWarning />
+								<Component {...pageProps} />
+							</CookieConsentProvider>
+						</DiscordPackProvider>
+					</AuthenticatedProvider>
+				</MobileContextProvider>
+			</ThemeProvider>
 		</>
 	);
 };

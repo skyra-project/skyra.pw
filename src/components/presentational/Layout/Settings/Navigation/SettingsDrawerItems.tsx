@@ -1,5 +1,9 @@
-import SkyraLogo from '@assets/skyraLogo';
-import { FlattenedGuild } from '@config/types/ApiData';
+import SkyraLogo from '#assets/skyraLogo';
+import { FlattenedGuild } from '#config/types/ApiData';
+import Tooltip from '#mui/Tooltip';
+import GuildIcon from '#presentational/GuildIcon';
+import ListItemLink from '#routing/ListItemLink';
+import { navigate } from '#utils/util';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
 import Divider from '@material-ui/core/Divider';
@@ -24,11 +28,7 @@ import MusicIcon from '@material-ui/icons/MusicNote';
 import SettingsIcon from '@material-ui/icons/Settings';
 import StarIcon from '@material-ui/icons/Star';
 import Skeleton from '@material-ui/lab/Skeleton';
-import Tooltip from '@mui/Tooltip';
-import GuildIcon from '@presentational/GuildIcon';
-import ListItemLink from '@routing/ListItemLink';
 import { noop } from '@sapphire/utilities';
-import { navigate } from '@utils/util';
 import React, { FC, Fragment, memo, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 

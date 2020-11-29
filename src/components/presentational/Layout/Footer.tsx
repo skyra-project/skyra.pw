@@ -1,11 +1,11 @@
-import SkyraLogo from '@assets/skyraLogo';
+import SkyraLogo from '#assets/skyraLogo';
+import Link from '#routing/Link';
+import { CLIENT_ID, inviteURL } from '#utils/constants';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Hidden from '@material-ui/core/Hidden';
 import Typography from '@material-ui/core/Typography';
-import Link from '@routing/Link';
-import { CLIENT_ID, inviteURL } from '@utils/constants';
 import React, { memo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>

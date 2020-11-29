@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { DashboardUserPack } from '@config/types/ApiData';
+import { DashboardUserPack } from '#config/types/ApiData';
 
 export enum Time {
 	Millisecond = 1,

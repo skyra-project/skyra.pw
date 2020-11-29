@@ -1,12 +1,12 @@
-import { setAuthenticated, useAuthenticated } from '@contexts/AuthenticationContext';
-import { mergeDiscordPack } from '@contexts/DiscordPackContext';
+import { setAuthenticated, useAuthenticated } from '#contexts/AuthenticationContext';
+import { mergeDiscordPack } from '#contexts/DiscordPackContext';
+import Footer from '#presentational/Layout/Footer';
+import { syncUser } from '#utils/util';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Box, { BoxProps } from '@material-ui/core/Box';
 import Fab from '@material-ui/core/Fab';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import Footer from '@presentational/Layout/Footer';
-import { syncUser } from '@utils/util';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import React, { FC, useEffect } from 'react';

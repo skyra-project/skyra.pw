@@ -1,12 +1,12 @@
 // Copyright (c) 2017 LoicMahieu. All rights reserved. MIT license.
 // Source: https://github.com/LoicMahieu/material-ui-color-picker
 
+import LazyAvatar from '#mui/LazyAvatar';
+import { REGEXP } from '#utils/Color';
 import { useMediaQuery } from '@material-ui/core';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import MuiTextField from '@material-ui/core/TextField';
-import LazyAvatar from '@mui/LazyAvatar';
-import { REGEXP } from '@utils/Color';
 import { fieldToTextField, TextFieldProps } from 'formik-material-ui';
 import React, { ChangeEvent, FC, memo, useCallback, useState } from 'react';
 import PickerDialog from './PickerDialog';

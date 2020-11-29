@@ -1,5 +1,6 @@
-import { FlattenedGuild } from '@config/types/ApiData';
-import UserMenu from '@layout/Navigation/UserMenu';
+import { FlattenedGuild } from '#config/types/ApiData';
+import UserMenu from '#layout/Navigation/UserMenu';
+import { SettingsDrawerWidth } from '#utils/constants';
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
 import IconButton from '@material-ui/core/IconButton';
@@ -8,7 +9,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
 import Skeleton from '@material-ui/lab/Skeleton';
-import { SettingsDrawerWidth } from '@utils/constants';
 import React, { FC, memo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>

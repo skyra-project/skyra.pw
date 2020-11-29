@@ -12,10 +12,14 @@ import {
 	OutgoingWebsocketMessage,
 	ServerActions,
 	SubscriptionActions
-} from '@config/types/Music';
-import { useAuthenticated } from '@contexts/AuthenticationContext';
-import { useMobileContext } from '@contexts/MobileContext';
-import GeneralPage from '@layout/General';
+} from '#config/types/Music';
+import { useAuthenticated } from '#contexts/AuthenticationContext';
+import { useMobileContext } from '#contexts/MobileContext';
+import GeneralPage from '#layout/General';
+import LazyAvatar from '#mui/LazyAvatar';
+import Link from '#routing/Link';
+import { WS_URL } from '#utils/constants';
+import { cast, getAcronym } from '#utils/util';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import CardContent from '@material-ui/core/CardContent';
@@ -31,11 +35,7 @@ import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import LazyAvatar from '@mui/LazyAvatar';
-import Link from '@routing/Link';
 import { Track, TrackInfo } from '@skyra/audio';
-import { WS_URL } from '@utils/constants';
-import { cast, getAcronym } from '@utils/util';
 import React, { FC, memo, useEffect, useState } from 'react';
 import FlipMove from 'react-flip-move';
 import { Else, If, Then, When } from 'react-if';

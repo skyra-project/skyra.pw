@@ -1,6 +1,6 @@
-import { DashboardPack } from '@config/types/ApiData';
-import { LocalStorageKeys } from '@utils/constants';
-import { loadState } from '@utils/util';
+import { DashboardPack } from '#config/types/ApiData';
+import { LocalStorageKeys } from '#utils/constants';
+import { loadState } from '#utils/util';
 import constate from 'constate';
 import { useState } from 'react';
 
