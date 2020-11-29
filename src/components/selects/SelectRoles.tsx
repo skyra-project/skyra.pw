@@ -2,7 +2,7 @@ import { FlattenedGuild } from '#config/types/ApiData';
 import React, { memo } from 'react';
 import SelectMany, { SelectManyProps } from './SelectMany';
 
-interface SelectRolesProps extends Omit<SelectManyProps, 'values' | 'name'> {
+export interface SelectRolesProps extends Omit<SelectManyProps, 'values' | 'name'> {
 	guild: FlattenedGuild;
 	filterEveryone: boolean;
 }

@@ -1,4 +1,4 @@
-import { ConfigurablePublicRoles, ConfigurableRemoveInitialRole, ConfigurableRoles } from '#config/SettingsDataEntries';
+import { ConfigurableRemoveInitialRole, ConfigurableRoles } from '#config/SettingsDataEntries';
 import { useGuildDataContext } from '#contexts/Settings/GuildDataContext';
 import { useGuildSettingsChangesContext } from '#contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '#contexts/Settings/GuildSettingsContext';
@@ -6,8 +6,8 @@ import PageHeader from '#layout/Settings/PageHeader';
 import Section from '#layout/Settings/Section';
 import SimpleGrid from '#mui/SimpleGrid';
 import SelectBoolean from '#selects/SelectBoolean';
-import SelectRole from '#selects/SelectRole';
-import SelectRoles from '#selects/SelectRoles';
+import SelectRole, { SelectRoleProps } from '#selects/SelectRole';
+import SelectRoles, { SelectRolesProps } from '#selects/SelectRoles';
 import { cast } from '#utils/util';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -31,6 +31,8 @@ const useStyles = makeStyles((theme: Theme) =>
 		}
 	})
 );
+
+type SelectCommonProps = Omit<SelectRoleProps, 'value' | 'onChange'> & Omit<SelectRolesProps, 'value' | 'onChange'> & { key: number };
 
 const RoleSettings: FC = () => {
 	const classes = useStyles();
@@ -77,48 +79,44 @@ const RoleSettings: FC = () => {
 						xl: 4
 					}}
 				>
-					{ConfigurableRoles.map(({ name, tooltip, key }, index) => (
-						<SelectRole
-							key={index}
-							label={name}
-							value={cast<string | null>(guildSettings[key])}
-							onChange={newRole =>
-								setGuildSettingsChanges({
-									[key]: newRole
-								})
-							}
-							guild={guildData}
-							tooltipTitle={tooltip}
-							filterEveryone
-							buttonProps={{
+					{ConfigurableRoles.map(({ name, tooltip, key }, index) => {
+						const props: SelectCommonProps = {
+							key: index,
+							label: name,
+							guild: guildData,
+							tooltipTitle: tooltip,
+							filterEveryone: true,
+							buttonProps: {
 								fullWidth: true,
 								classes: {
 									root: classes.button,
 									label: classes.buttonText
 								}
-							}}
-						/>
-					))}
-					<SelectRoles
-						filterEveryone
-						key={ConfigurableRoles.length + 1}
-						tooltipTitle={ConfigurablePublicRoles.tooltip}
-						value={guildSettings.rolesPublic}
-						onChange={newRoles =>
-							setGuildSettingsChanges({
-								rolesPublic: newRoles
-							})
-						}
-						guild={guildData}
-						label={ConfigurablePublicRoles.name}
-						buttonProps={{
-							fullWidth: true,
-							classes: {
-								root: classes.button,
-								label: classes.buttonText
 							}
-						}}
-					/>
+						};
+
+						return Array.isArray(guildSettings[key]) ? (
+							<SelectRoles
+								{...props}
+								value={cast<string[]>(guildSettings[key])}
+								onChange={newRole =>
+									setGuildSettingsChanges({
+										[key]: newRole
+									})
+								}
+							/>
+						) : (
+							<SelectRole
+								{...props}
+								value={cast<string | null>(guildSettings[key])}
+								onChange={newRole =>
+									setGuildSettingsChanges({
+										[key]: newRole
+									})
+								}
+							/>
+						);
+					})}
 				</SimpleGrid>
 			</Section>
 		</>
