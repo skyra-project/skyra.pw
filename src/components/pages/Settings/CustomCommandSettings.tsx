@@ -1,3 +1,4 @@
+import useChristmasStyles from '#components/christmas/UseChristmasStyles';
 import { CustomCommands } from '#config/types/ConfigurableData';
 import { CustomCommand } from '#config/types/GuildSettings';
 import { useGuildSettingsChangesContext } from '#contexts/Settings/GuildSettingsChangesContext';
@@ -19,6 +20,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import DeleteIcon from '@material-ui/icons/Delete';
+import clsx from 'clsx';
 import { FastField, Formik, FormikConfig } from 'formik';
 import React, { CSSProperties, forwardRef, Fragment, memo, useMemo } from 'react';
 import { Virtuoso } from 'react-virtuoso';
@@ -58,6 +60,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const CustomCommandSettings = () => {
+	const christmasClasses = useChristmasStyles();
+
 	const classes = useStyles();
 	const theme = useTheme();
 	const { guildSettings } = useGuildSettingsContext();
@@ -221,7 +225,9 @@ const CustomCommandSettings = () => {
 								/>
 								<Button
 									fullWidth
-									classes={{ root: classes.button }}
+									classes={{
+										root: clsx(classes.button, christmasClasses.backgroundColor, christmasClasses.backgroundColorHover)
+									}}
 									onClick={submitForm}
 									color="primary"
 									variant="contained"

@@ -1,4 +1,6 @@
+import useChristmasStyles from '#components/christmas/UseChristmasStyles';
 import { FlattenedGuild } from '#config/types/ApiData';
+import clsx from 'clsx';
 import React, { memo } from 'react';
 import SelectOne, { SelectOneProps } from './SelectOne';
 
@@ -9,6 +11,8 @@ export interface SelectRoleProps extends Omit<SelectOneProps, 'values' | 'name'>
 }
 
 const SelectRole = ({ label, value, guild, filterEveryone, onChange, ...props }: SelectRoleProps) => {
+	const christmasClasses = useChristmasStyles();
+
 	let name;
 	const role = guild.roles.find(c => c.id === value);
 	if (role) name = role.name;
@@ -23,6 +27,10 @@ const SelectRole = ({ label, value, guild, filterEveryone, onChange, ...props }:
 				.filter(r => (filterEveryone ? r.id !== guild.id : r.name))
 				.sort((r1, r2) => r2.rawPosition - r1.rawPosition)
 				.map(r => ({ name: r.name, value: r.id }))}
+			buttonProps={{
+				className: clsx(christmasClasses.backgroundColor, christmasClasses.backgroundColorHover),
+				...props.buttonProps
+			}}
 		/>
 	);
 };

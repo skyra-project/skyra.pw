@@ -1,4 +1,6 @@
+import useChristmasStyles from '#components/christmas/UseChristmasStyles';
 import { FlattenedGuild } from '#config/types/ApiData';
+import clsx from 'clsx';
 import React, { FC, memo } from 'react';
 import SelectOne, { SelectOneProps } from './SelectOne';
 
@@ -23,6 +25,8 @@ const SelectEmoji: FC<SelectEmojiProps> = ({
 	tooltipTitle,
 	...props
 }) => {
+	const christmasClasses = useChristmasStyles();
+
 	let name = defaultName;
 	let image = defaultImage;
 
@@ -42,6 +46,10 @@ const SelectEmoji: FC<SelectEmojiProps> = ({
 			tooltipTitle={tooltipTitle}
 			imageInName={image}
 			values={values}
+			buttonProps={{
+				className: clsx(christmasClasses.backgroundColor, christmasClasses.backgroundColorHover),
+				...props.buttonProps
+			}}
 		/>
 	);
 };

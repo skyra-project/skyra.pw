@@ -14,6 +14,7 @@ import Head from 'next/head';
 import NextNprogress from 'nextjs-progressbar';
 import React, { useEffect } from 'react';
 
+const Snowfall = dynamic(() => import('react-snowfall'), { ssr: false });
 const CookieWarning = dynamic(() => import('#presentational/CookieConsent/WarningSnackbar'), { ssr: false });
 const AuthenticatedProvider = dynamic(() => import('#contexts/AuthenticationContext'), { ssr: false });
 const DiscordPackProvider = dynamic(() => import('#contexts/DiscordPackContext'), { ssr: false });
@@ -114,6 +115,7 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 								<CssBaseline />
 								<NextNprogress color="#0A5699" startPosition={0.3} stopDelayMs={200} height={3} />
 								<CookieWarning />
+								<Snowfall />
 								<Component {...pageProps} />
 							</CookieConsentProvider>
 						</DiscordPackProvider>
