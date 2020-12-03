@@ -198,9 +198,14 @@ export const ConfigurableMemberEvents: Events.Event[] = [
 		description: "This events posts member logs when a member's roles change"
 	},
 	{
-		title: 'Member Name Changes',
-		key: 'eventsMemberNameUpdate',
-		description: 'This events posts member logs when a member changes their name'
+		title: 'Member Nickname Changes',
+		key: 'eventsMemberNickNameUpdate',
+		description: 'This events posts member logs when a member changes their nickname'
+	},
+	{
+		title: 'Member Username Changes',
+		key: 'eventsMemberUserNameUpdate',
+		description: 'This events posts member logs when a member changes their username'
 	}
 ];
 
