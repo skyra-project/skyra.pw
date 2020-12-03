@@ -19,7 +19,8 @@ export interface GuildSettings {
 	eventsBanAdd: boolean;
 	eventsBanRemove: boolean;
 	eventsMemberAdd: boolean;
-	eventsMemberNameUpdate: boolean;
+	eventsMemberNickNameUpdate: boolean;
+	eventsMemberUserNameUpdate: boolean;
 	eventsMemberRemove: boolean;
 	eventsMemberRoleUpdate: boolean;
 	eventsMessageDelete: boolean;
