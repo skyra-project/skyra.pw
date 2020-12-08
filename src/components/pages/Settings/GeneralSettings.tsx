@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const validationSchema = object<General.Form>({
+const validationSchema = object<General.Form>().shape<General.Form>({
 	prefix: string()
 		.required('Setting a prefix is required')
 		.min(1, 'Prefix has a minimum length of 1')
