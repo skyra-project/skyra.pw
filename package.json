@@ -45,7 +45,7 @@
 		"react-player": "^2.7.0",
 		"react-virtuoso": "^0.20.3",
 		"remark-gfm": "^1.0.0",
-		"yup": "0.31.1"
+		"yup": "0.32.6"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^11.0.0",
