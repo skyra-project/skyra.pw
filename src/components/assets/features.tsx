@@ -55,8 +55,8 @@ export default [
 	{
 		name: 'Fun',
 		text: [
-			'Skyra can brighten up your server with many commands aimed at just adding fun, social interaction to your server.',
-			'She can create a random blurb of text using markov, roll a magic eightball, generate memes and much much more!'
+			'Skyra can brighten up your server with many commands for adding fun and social interaction to your server.',
+			'She can create a random blurb of text using markov, roll a magic eightball, generate memes, and much much more!'
 		].join(' '),
 		previewContent: (
 			<Paper elevation={8}>
@@ -77,8 +77,8 @@ export default [
 		name: 'Tools',
 		text: [
 			'Skyra gives you many useful tools at your fingertips.',
-			'From searching YouTube or Wikipedia to looking up games on IGDB or the Nintendo eShop or movies on TheMovieDatabase.',
-			"She can also create polls, quote messages, get full size versions of users' avatars and more!"
+			'From searching YouTube or Wikipedia, to looking up games on IGDB or the Nintendo eShop, or even movies on TheMovieDatabase.',
+			"She can also create polls, quote messages, get full size versions of users' avatars, and more!"
 		].join(' '),
 		previewContent: (
 			<Paper elevation={8}>
@@ -186,8 +186,8 @@ export default [
 		name: 'Weeb',
 		text: [
 			'Skyra has many anime related commands.',
-			"You can make Skyra slap that annoying guy that likes Ram instead of Rem or see the cutest anime cats that you just can't wait to cuddle to death.",
-			"If you're just looking for your next watch or read then Skyra has you covered by letting you look up anime and manga on kitsu.io."
+			"You can make Skyra slap that annoying guy that likes Ram instead of Rem, or see the cutest anime cats that you just can't wait to cuddle to death.",
+			"If you're just looking for your next watch or read, then Skyra has you covered by letting you look up anime and manga on kitsu.io."
 		].join(' '),
 		previewContent: (
 			<Paper elevation={8}>
