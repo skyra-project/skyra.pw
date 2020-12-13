@@ -17,9 +17,9 @@ oauthURL.search = new URLSearchParams([
 inviteURL.search = new URLSearchParams([
 	['client_id', CLIENT_ID],
 	['permissions', '491121748'],
-	['scope', 'bot'],
+	['redirect_uri', BASE_WEB_URL],
 	['response_type', 'code'],
-	['redirect_uri', encodeURIComponent(BASE_WEB_URL)]
+	['scope', 'bot']
 ]).toString();
 
 export const guildAddURL = (guildID: string) => {
