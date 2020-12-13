@@ -20,8 +20,9 @@ import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/sty
 import Typography from '@material-ui/core/Typography';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { FastField, Formik, FormikConfig } from 'formik';
-import React, { Fragment, memo } from 'react';
+import React, { CSSProperties, forwardRef, Fragment, memo, useMemo } from 'react';
 import { Virtuoso } from 'react-virtuoso';
+import type { Components } from 'react-virtuoso/dist/interfaces';
 import { boolean, object, string } from 'yup';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -52,10 +53,6 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		virtualizedList: {
 			margin: theme.spacing(1)
-		},
-		virtualizedListContainer: {
-			margin: 0,
-			padding: 0
 		}
 	})
 );
@@ -128,6 +125,23 @@ const CustomCommandSettings = () => {
 		firstCommand.id < secondCommand.id ? -1 : firstCommand.id > secondCommand.id ? 1 : 0;
 
 	const sortedCommands = guildSettings.customCommands.sort(sortCommands);
+
+	const VirtuosoComponents = useMemo<Components>(
+		() => ({
+			List: forwardRef<HTMLDivElement, { style: CSSProperties }>(({ style, children }, listRef) => (
+				<List style={{ ...style, width: '100%', margin: 0, padding: 0 }} ref={listRef} component="nav">
+					{children}
+				</List>
+			)),
+
+			Item: ({ children, ...props }) => (
+				<ListItem {...props} button style={{ margin: 0 }}>
+					{children}
+				</ListItem>
+			)
+		}),
+		[]
+	);
 
 	return (
 		<Fragment>
@@ -237,17 +251,8 @@ const CustomCommandSettings = () => {
 							overscan={3}
 							style={{ height: theme.spacing(40), width: '100%' }}
 							className={classes.virtualizedList}
-							ListContainer={({ listRef, style, children, ...props }) => (
-								<List component="nav" {...props} ref={listRef} style={style} className={classes.virtualizedListContainer}>
-									{children}
-								</List>
-							)}
-							ItemContainer={({ children, ...props }) => (
-								<ListItem {...props} style={{ margin: 0 }}>
-									{children}
-								</ListItem>
-							)}
-							item={index => (
+							components={VirtuosoComponents}
+							itemContent={index => (
 								<>
 									<ListItemText
 										disableTypography

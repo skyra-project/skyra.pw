@@ -4,21 +4,21 @@ import LazyAvatar from '#mui/LazyAvatar';
 import Tooltip from '#mui/Tooltip';
 import { Time } from '#utils/skyraUtils';
 import { sleep } from '#utils/util';
-import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core';
+import { createStyles, List, makeStyles, Theme, useTheme } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import { toTitleCase } from '@sapphire/utilities';
-import React, { ChangeEvent, FC, Fragment, useState } from 'react';
+import React, { ChangeEvent, CSSProperties, FC, forwardRef, Fragment, useCallback, useMemo, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import { Virtuoso } from 'react-virtuoso';
+import { Components } from 'react-virtuoso/dist/interfaces';
 import { SelectOneProps } from './SelectOne';
 
 export interface SelectManyProps extends SelectOneProps {
@@ -41,10 +41,6 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		virtualizedList: {
 			margin: theme.spacing(1)
-		},
-		virtualizedListContainer: {
-			margin: 0,
-			padding: 0
 		}
 	})
 );
@@ -72,18 +68,38 @@ const SelectMany: FC<SelectManyProps> = ({ label, value, onChange, values, name,
 		setSearch('');
 	};
 
-	const handleToggle = (value: string) => () => {
-		const currentIndex = checked.indexOf(value);
-		const newChecked = [...checked];
+	const handleToggle = useCallback(
+		(value: string) => () => {
+			const currentIndex = checked.indexOf(value);
+			const newChecked = [...checked];
 
-		if (currentIndex === -1) {
-			newChecked.push(value);
-		} else {
-			newChecked.splice(currentIndex, 1);
-		}
+			if (currentIndex === -1) {
+				newChecked.push(value);
+			} else {
+				newChecked.splice(currentIndex, 1);
+			}
 
-		setChecked(newChecked);
-	};
+			setChecked(newChecked);
+		},
+		[checked]
+	);
+
+	const VirtuosoComponents = useMemo<Components>(
+		() => ({
+			List: forwardRef<HTMLDivElement, { style: CSSProperties }>(({ style, children }, listRef) => (
+				<List style={{ ...style, width: '100%', margin: 0, padding: 0 }} ref={listRef} component="nav">
+					{children}
+				</List>
+			)),
+
+			Item: ({ children, ...props }) => (
+				<ListItem {...props} button style={{ margin: 0 }} onClick={handleToggle(filteredValues[props['data-index']].value)}>
+					{children}
+				</ListItem>
+			)
+		}),
+		[filteredValues, handleToggle]
+	);
 
 	return (
 		<Fragment>
@@ -126,22 +142,8 @@ const SelectMany: FC<SelectManyProps> = ({ label, value, onChange, values, name,
 						overscan={30}
 						style={{ height: theme.spacing(50), width: '100%' }}
 						className={classes.virtualizedList}
-						ListContainer={({ listRef, style, children, ...props }) => (
-							<List component="nav" {...props} ref={listRef} style={style} className={classes.virtualizedListContainer}>
-								{children}
-							</List>
-						)}
-						ItemContainer={({ children, ...props }) => (
-							<ListItem
-								{...props}
-								style={{ margin: 0 }}
-								button
-								onClick={handleToggle(filteredValues[props['data-index']].value)}
-							>
-								{children}
-							</ListItem>
-						)}
-						item={index => (
+						components={VirtuosoComponents}
+						itemContent={index => (
 							<>
 								<ListItemIcon>
 									<Checkbox

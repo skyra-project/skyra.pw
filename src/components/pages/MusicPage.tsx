@@ -36,11 +36,12 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import { Track, TrackInfo } from '@skyra/audio';
-import React, { FC, memo, useEffect, useState } from 'react';
+import React, { CSSProperties, FC, forwardRef, memo, useEffect, useMemo, useState } from 'react';
 import FlipMove from 'react-flip-move';
 import { Else, If, Then, When } from 'react-if';
 import ReactPlayer from 'react-player';
 import { Virtuoso } from 'react-virtuoso';
+import type { Components } from 'react-virtuoso/dist/interfaces';
 
 interface MusicPageProps {
 	guildId: string;
@@ -75,11 +76,6 @@ const useStyles = makeStyles((theme: Theme) =>
 		cardPlayPauseIcon: {
 			height: 38,
 			width: 38
-		},
-		list: {
-			width: '100%',
-			margin: 0,
-			padding: 0
 		},
 		virtualizedRoot: {
 			margin: theme.spacing(1)
@@ -241,6 +237,23 @@ const MusicPage: FC<MusicPageProps> = ({ guildId }) => {
 		}
 	}, [guildId, ws, player]);
 
+	const VirtuosoComponents = useMemo<Components>(
+		() => ({
+			List: forwardRef<HTMLDivElement, { style: CSSProperties }>(({ style, children }, listRef) => (
+				<List style={{ ...style, width: '100%', margin: 0, padding: 0 }} ref={listRef} component="nav">
+					{children}
+				</List>
+			)),
+
+			Item: ({ children, ...props }) => (
+				<ListItem {...props} button style={{ margin: 0 }}>
+					{children}
+				</ListItem>
+			)
+		}),
+		[]
+	);
+
 	return (
 		<GeneralPage
 			containerProps={{
@@ -319,17 +332,8 @@ const MusicPage: FC<MusicPageProps> = ({ guildId }) => {
 							className={classes.virtualizedRoot}
 							style={{ height: isMobile ? '300px' : '510px' }}
 							overscan={2}
-							ListContainer={({ listRef, style, children }) => (
-								<List ref={listRef} style={style} classes={{ root: classes.list }}>
-									{children}
-								</List>
-							)}
-							ItemContainer={({ children, ...props }) => (
-								<ListItem {...props} button style={{ margin: 0 }}>
-									{children}
-								</ListItem>
-							)}
-							item={index => (
+							components={VirtuosoComponents}
+							itemContent={index => (
 								<Link href={queue[index].info.uri} className={classes.link}>
 									<ListItemIcon>
 										<If condition={queue[index].info.uri.includes('youtube')}>

@@ -14,9 +14,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import { toTitleCase } from '@sapphire/utilities';
-import React, { ChangeEvent, Fragment, ReactNode, useState } from 'react';
+import React, { ChangeEvent, CSSProperties, forwardRef, Fragment, ReactNode, useCallback, useMemo, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import { Virtuoso } from 'react-virtuoso';
+import type { Components } from 'react-virtuoso/dist/interfaces';
 
 export interface SelectOneProps {
 	label: string;
@@ -63,7 +64,7 @@ export default function SelectOne({ label, onChange, values, name = 'None', imag
 	const classes = useStyles();
 	const theme = useTheme();
 
-	const handleClose = async () => {
+	const handleClose = useCallback(async () => {
 		// Close the dialog
 		setOpen(!open);
 
@@ -72,12 +73,37 @@ export default function SelectOne({ label, onChange, values, name = 'None', imag
 
 		// Clear the search
 		setSearch('');
-	};
+	}, [open]);
 
 	const filteredValues = values.filter(({ name, value }) => {
 		if (!search) return true;
 		return `${name} ${value}`.toLowerCase().includes(search.toLowerCase());
 	});
+
+	const VirtuosoComponents = useMemo<Components>(
+		() => ({
+			List: forwardRef<HTMLDivElement, { style: CSSProperties }>(({ style, children }, listRef) => (
+				<List style={{ ...style, width: '100%', margin: 0, padding: 0 }} ref={listRef} component="nav">
+					{children}
+				</List>
+			)),
+
+			Item: ({ children, ...props }) => (
+				<ListItem
+					{...props}
+					button
+					style={{ margin: 0 }}
+					onClick={() => {
+						onChange(filteredValues[props['data-index']].value);
+						handleClose();
+					}}
+				>
+					{children}
+				</ListItem>
+			)
+		}),
+		[filteredValues, handleClose, onChange]
+	);
 
 	return (
 		<Fragment>
@@ -120,25 +146,8 @@ export default function SelectOne({ label, onChange, values, name = 'None', imag
 						overscan={30}
 						style={{ height: theme.spacing(50), width: '100%' }}
 						className={classes.virtualizedList}
-						ListContainer={({ listRef, style, children, ...props }) => (
-							<List component="nav" {...props} ref={listRef} style={style} className={classes.virtualizedListContainer}>
-								{children}
-							</List>
-						)}
-						ItemContainer={({ children, ...props }) => (
-							<ListItem
-								{...props}
-								style={{ margin: 0 }}
-								button
-								onClick={() => {
-									onChange(filteredValues[props['data-index']].value);
-									handleClose();
-								}}
-							>
-								{children}
-							</ListItem>
-						)}
-						item={index => (
+						components={VirtuosoComponents}
+						itemContent={index => (
 							<>
 								<ListItemText primary={filteredValues[index].name} />
 								{filteredValues[index].iconUrl && (

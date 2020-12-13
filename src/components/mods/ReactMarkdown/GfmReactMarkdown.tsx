@@ -14,7 +14,6 @@ interface GfmReactMarkdownProps {
 
 const GfmReactMarkdown: FC<GfmReactMarkdownProps> = ({ source }) => (
 	<ReactMarkdown
-		source={source}
 		plugins={[gfm]}
 		renderers={{
 			link: Link,
@@ -26,7 +25,9 @@ const GfmReactMarkdown: FC<GfmReactMarkdownProps> = ({ source }) => (
 			inlineCode: InlineCode
 		}}
 		escapeHtml={false}
-	/>
+	>
+		{source}
+	</ReactMarkdown>
 );
 
 export default GfmReactMarkdown;
