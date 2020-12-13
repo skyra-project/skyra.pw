@@ -1,3 +1,4 @@
+import useChristmasStyles from '#components/christmas/UseChristmasStyles';
 import { useGuildSettingsChangesContext } from '#contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '#contexts/Settings/GuildSettingsContext';
 import Section from '#layout/Settings/Section';
@@ -15,6 +16,7 @@ import Paper from '@material-ui/core/Paper';
 import Slider from '@material-ui/core/Slider';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import clsx from 'clsx';
 import React, { FC, Fragment, memo, useState } from 'react';
 import { When } from 'react-if';
 
@@ -34,6 +36,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const FilterLinksSettings: FC = () => {
+	const christmasClasses = useChristmasStyles();
+
 	const [newWord, setNewWord] = useState('');
 	const classes = useStyles();
 	const { guildSettings } = useGuildSettingsContext();
@@ -145,7 +149,12 @@ const FilterLinksSettings: FC = () => {
 							value={newWord}
 							onChange={e => setNewWord(e.target.value)}
 						/>
-						<Button type="submit" variant="contained" color="primary">
+						<Button
+							type="submit"
+							variant="contained"
+							color="primary"
+							classes={{ root: clsx(christmasClasses.backgroundColor, christmasClasses.backgroundColorHover) }}
+						>
 							Confirm
 						</Button>
 					</Box>
