@@ -55,7 +55,7 @@ export default [
 	{
 		name: 'Fun',
 		text: [
-			'Skyra can brighten up your server with many commands aimed at just adding fun, social interaction to your server',
+			'Skyra can brighten up your server with many commands aimed at just adding fun, social interaction to your server.',
 			'She can create a random blurb of text using markov, roll a magic eightball, generate memes and much much more!'
 		].join(' '),
 		previewContent: (
