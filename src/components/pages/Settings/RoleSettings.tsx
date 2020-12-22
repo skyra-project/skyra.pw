@@ -59,7 +59,7 @@ const RoleSettings: FC = () => {
 					title={ConfigurableRemoveInitialRole.name}
 					description={ConfigurableRemoveInitialRole.tooltip}
 					currentValue={guildSettings.rolesRemoveInitial}
-					onChange={event =>
+					onChange={(event) =>
 						setGuildSettingsChanges({
 							rolesRemoveInitial: event.target.checked
 						})
@@ -99,7 +99,7 @@ const RoleSettings: FC = () => {
 							<SelectRoles
 								{...props}
 								value={cast<string[]>(guildSettings[key])}
-								onChange={newRole =>
+								onChange={(newRole) =>
 									setGuildSettingsChanges({
 										[key]: newRole
 									})
@@ -109,7 +109,7 @@ const RoleSettings: FC = () => {
 							<SelectRole
 								{...props}
 								value={cast<string | null>(guildSettings[key])}
-								onChange={newRole =>
+								onChange={(newRole) =>
 									setGuildSettingsChanges({
 										[key]: newRole
 									})

@@ -147,7 +147,7 @@ export const ConfigurableMessageKeys = (guildSettings: GuildSettings, guildData:
 			!guildSettings.eventsMemberAdd ? 'You must configure Member Join on the Events page.' : null
 		].join(' '),
 		tooltipText: `This is the message I will send to ${
-			guildData?.channels.find(c => c.id === guildSettings.channelsGreeting)?.name ?? 'the configured Greeting channel'
+			guildData?.channels.find((c) => c.id === guildSettings.channelsGreeting)?.name ?? 'the configured Greeting channel'
 		} when a member joins.`
 	},
 	{
@@ -158,7 +158,7 @@ export const ConfigurableMessageKeys = (guildSettings: GuildSettings, guildData:
 			!guildSettings.eventsMemberRemove ? 'You must configure Member Leave on the Events page.' : null
 		].join(' '),
 		tooltipText: `This is the message I will send to ${
-			guildData?.channels.find(c => c.id === guildSettings.channelsFarewell)?.name ?? 'the configured Farewell channel'
+			guildData?.channels.find((c) => c.id === guildSettings.channelsFarewell)?.name ?? 'the configured Farewell channel'
 		} when a member leaves.`
 	}
 ];
@@ -213,20 +213,17 @@ export const ConfigurableMessageEvents: Events.Event[] = [
 	{
 		title: 'Message Edit',
 		key: 'eventsMessageEdit',
-		description:
-			'This event logs to the Message Logs channel when a message is edited. NSFW messages will be send to the NSFW Logs channel'
+		description: 'This event logs to the Message Logs channel when a message is edited. NSFW messages will be send to the NSFW Logs channel'
 	},
 	{
 		title: 'Message Delete',
 		key: 'eventsMessageDelete',
-		description:
-			'This event logs to the Message Logs channel when a message is deleted. NSFW messages will be send to the NSFW Logs channel'
+		description: 'This event logs to the Message Logs channel when a message is deleted. NSFW messages will be send to the NSFW Logs channel'
 	},
 	{
 		title: 'Twemoji Reactions',
 		key: 'eventsTwemojiReactions',
-		description:
-			'This event posts messages whenever a member reacts to a message with a twemoji, they will be send to the Reaction Logs channel'
+		description: 'This event posts messages whenever a member reacts to a message with a twemoji, they will be send to the Reaction Logs channel'
 	}
 ];
 

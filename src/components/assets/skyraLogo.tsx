@@ -19,7 +19,7 @@ const useStyles = makeStyles(() =>
 	})
 );
 
-const SkyraLogo: FC = props => {
+const SkyraLogo: FC = (props) => {
 	const classes = useStyles();
 
 	return (

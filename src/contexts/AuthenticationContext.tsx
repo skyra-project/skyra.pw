@@ -14,8 +14,8 @@ const useAuthenticatedState = () => {
 
 export const [AuthenticatedProvider, useAuthenticated, setAuthenticated] = constate(
 	useAuthenticatedState,
-	value => value.authenticated,
-	value => value.setAuthenticated
+	(value) => value.authenticated,
+	(value) => value.setAuthenticated
 );
 
 export default AuthenticatedProvider;

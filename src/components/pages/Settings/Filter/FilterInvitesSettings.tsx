@@ -21,13 +21,13 @@ const FilterInvitesSettings: FC = () => {
 				<SimpleGrid>
 					<SelectBoolean
 						title={`Filter ${guildSettings.selfmodInvitesEnabled ? 'Enabled' : 'Disabled'}`}
-						onChange={event => setGuildSettingsChanges({ selfmodInvitesEnabled: event.target.checked })}
+						onChange={(event) => setGuildSettingsChanges({ selfmodInvitesEnabled: event.target.checked })}
 						currentValue={guildSettings.selfmodInvitesEnabled}
 						description="Whether or not this system should be enabled."
 					/>
 					<SelectBoolean
 						title={`Alerts ${bitwiseHas(guildSettings.selfmodInvitesSoftAction, 0b100) ? 'Enabled' : 'Disabled'}`}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
 								selfmodInvitesSoftAction: bitwiseSet(guildSettings.selfmodInvitesSoftAction, 0b100, event.target.checked)
 							})
@@ -37,7 +37,7 @@ const FilterInvitesSettings: FC = () => {
 					/>
 					<SelectBoolean
 						title={`Logs ${bitwiseHas(guildSettings.selfmodInvitesSoftAction, 0b010) ? 'Enabled' : 'Disabled'}`}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
 								selfmodInvitesSoftAction: bitwiseSet(guildSettings.selfmodInvitesSoftAction, 0b010, event.target.checked)
 							})
@@ -47,7 +47,7 @@ const FilterInvitesSettings: FC = () => {
 					/>
 					<SelectBoolean
 						title={`Deletes ${bitwiseHas(guildSettings.selfmodInvitesSoftAction, 0b001) ? 'Enabled' : 'Disabled'}`}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
 								selfmodInvitesSoftAction: bitwiseSet(guildSettings.selfmodInvitesSoftAction, 0b001, event.target.checked)
 							})
@@ -63,7 +63,7 @@ const FilterInvitesSettings: FC = () => {
 						title="Action"
 						helperText="The action to perform as punishment"
 						value={guildSettings.selfmodInvitesHardAction}
-						onChange={e => setGuildSettingsChanges({ selfmodInvitesHardAction: e.target.value })}
+						onChange={(e) => setGuildSettingsChanges({ selfmodInvitesHardAction: e.target.value })}
 					>
 						<MenuItem value={0}>None</MenuItem>
 						<MenuItem value={1}>Warning</MenuItem>
@@ -75,7 +75,7 @@ const FilterInvitesSettings: FC = () => {
 					<SelectDuration
 						value={guildSettings.selfmodInvitesHardActionDuration}
 						min={1000}
-						onChange={duration => setGuildSettingsChanges({ selfmodInvitesHardActionDuration: duration })}
+						onChange={(duration) => setGuildSettingsChanges({ selfmodInvitesHardActionDuration: duration })}
 					></SelectDuration>
 				</SimpleGrid>
 				<Typography>Maximum Threshold</Typography>

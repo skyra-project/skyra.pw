@@ -42,7 +42,7 @@ const EventSettings: FC = () => {
 							title={title}
 							description={description}
 							currentValue={guildSettings[key]}
-							onChange={event => setGuildSettingsChanges({ [key]: event.target.checked })}
+							onChange={(event) => setGuildSettingsChanges({ [key]: event.target.checked })}
 						/>
 					))}
 				</SimpleGrid>
@@ -62,7 +62,7 @@ const EventSettings: FC = () => {
 							title={title}
 							description={description}
 							currentValue={guildSettings[key]}
-							onChange={event => setGuildSettingsChanges({ [key]: event.target.checked })}
+							onChange={(event) => setGuildSettingsChanges({ [key]: event.target.checked })}
 						/>
 					))}
 				</SimpleGrid>
@@ -70,8 +70,7 @@ const EventSettings: FC = () => {
 
 			<Section title="Message Events">
 				<Typography variant="subtitle2" color="textPrimary">
-					These events involve message events, the channels to set up vary on the type of event and each channel can be configured
-					on{' '}
+					These events involve message events, the channels to set up vary on the type of event and each channel can be configured on{' '}
 					<Link className={classes.link} href={`/guilds/${guildId}/channels`}>
 						the Channels page
 					</Link>
@@ -83,7 +82,7 @@ const EventSettings: FC = () => {
 							title={title}
 							description={description}
 							currentValue={guildSettings[key]}
-							onChange={event => setGuildSettingsChanges({ [key]: event.target.checked })}
+							onChange={(event) => setGuildSettingsChanges({ [key]: event.target.checked })}
 						/>
 					))}
 				</SimpleGrid>

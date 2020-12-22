@@ -28,19 +28,17 @@ const useStyles = makeStyles(() =>
 	})
 );
 
-const MenuItemLink = forwardRef<HTMLAnchorElement, MenuItemLinkProps>(
-	({ href, text, forceSameTab = false, menuItemDisabled = false, Icon }, ref) => {
-		const classes = useStyles();
+const MenuItemLink = forwardRef<HTMLAnchorElement, MenuItemLinkProps>(({ href, text, forceSameTab = false, menuItemDisabled = false, Icon }, ref) => {
+	const classes = useStyles();
 
-		return (
-			<Link href={href} forceSameTab={forceSameTab} className={classes.menuLink} ref={ref}>
-				<MenuItem disabled={menuItemDisabled}>
-					<ListItemIcon>{Icon}</ListItemIcon>
-					<Typography variant="inherit">{text}</Typography>
-				</MenuItem>
-			</Link>
-		);
-	}
-);
+	return (
+		<Link href={href} forceSameTab={forceSameTab} className={classes.menuLink} ref={ref}>
+			<MenuItem disabled={menuItemDisabled}>
+				<ListItemIcon>{Icon}</ListItemIcon>
+				<Typography variant="inherit">{text}</Typography>
+			</MenuItem>
+		</Link>
+	);
+});
 
 export default memo(MenuItemLink, () => true);

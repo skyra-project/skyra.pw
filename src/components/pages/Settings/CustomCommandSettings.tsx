@@ -75,9 +75,7 @@ const CustomCommandSettings = () => {
 				excludeEmptyString: true,
 				message: 'A tag name may not have a grave accent nor invisible characters.'
 			}),
-		content: string()
-			.required('A custom command must have content to send')
-			.max(1950, 'Custom command length cannot exceed 1950 characters'),
+		content: string().required('A custom command must have content to send').max(1950, 'Custom command length cannot exceed 1950 characters'),
 		color: string()
 			.required()
 			.default('#1E88E5')
@@ -88,7 +86,7 @@ const CustomCommandSettings = () => {
 
 	const mergeCustomCommands = (prev: CustomCommand[], next: CustomCommand) => {
 		const clone = prev.slice();
-		const prevEntry = clone.find(command => command.id === next.id);
+		const prevEntry = clone.find((command) => command.id === next.id);
 
 		if (prevEntry !== undefined) {
 			clone[clone.indexOf(prevEntry)] = next;
@@ -164,14 +162,7 @@ const CustomCommandSettings = () => {
 					<Formik {...formikConfig}>
 						{({ submitForm }) => (
 							<>
-								<Grid
-									spacing={4}
-									container
-									direction="row"
-									justify="space-between"
-									alignContent="stretch"
-									alignItems="flex-end"
-								>
+								<Grid spacing={4} container direction="row" justify="space-between" alignContent="stretch" alignItems="flex-end">
 									<Grid item xs={12} sm={12} md={8} lg={8}>
 										<FastField
 											component={TextField}
@@ -258,7 +249,7 @@ const CustomCommandSettings = () => {
 							style={{ height: theme.spacing(40), width: '100%' }}
 							className={classes.virtualizedList}
 							components={VirtuosoComponents}
-							itemContent={index => (
+							itemContent={(index) => (
 								<>
 									<ListItemText
 										disableTypography
@@ -279,7 +270,7 @@ const CustomCommandSettings = () => {
 											onClick={() =>
 												setGuildSettingsChanges({
 													customCommands: guildSettings.customCommands.filter(
-														command => command.id !== sortedCommands[index].id
+														(command) => command.id !== sortedCommands[index].id
 													)
 												})
 											}

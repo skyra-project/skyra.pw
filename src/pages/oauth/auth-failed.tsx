@@ -45,18 +45,11 @@ const AuthFailedPage: NextPage = () => {
 			/>
 			<GeneralPage>
 				<Container maxWidth="md" classes={{ root: classes.container }}>
-					<Grid
-						container
-						direction="column"
-						justify="center"
-						alignContent="stretch"
-						alignItems="center"
-						classes={{ root: classes.root }}
-					>
+					<Grid container direction="column" justify="center" alignContent="stretch" alignItems="center" classes={{ root: classes.root }}>
 						<Grid item>
 							<Typography variant={isOnMobile ? 'h5' : 'h4'} color="textPrimary" classes={{ root: classes.text }}>
-								Well that's very odd. It looks like the authentication failed! Our best recommendation is to try again. If
-								that still fails then please join the support server.
+								Well that's very odd. It looks like the authentication failed! Our best recommendation is to try again. If that still
+								fails then please join the support server.
 							</Typography>
 						</Grid>
 						<Grid item>

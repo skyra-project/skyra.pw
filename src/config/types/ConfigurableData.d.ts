@@ -134,17 +134,11 @@ export namespace Channels {
 }
 
 export namespace Selfmod {
-	type SelfmodKeyHelper<P1 extends string[]> = `selfmod${Capitalize<P1[0]>}${P1[1] extends string
-		? Capitalize<P1[1]>
-		: ''}${P1[2] extends string ? Capitalize<P1[2]> : ''}`;
+	type SelfmodKeyHelper<P1 extends string[]> = `selfmod${Capitalize<P1[0]>}${P1[1] extends string ? Capitalize<P1[1]> : ''}${P1[2] extends string
+		? Capitalize<P1[2]>
+		: ''}`;
 
-	type Split<S extends string> = string extends S
-		? string[]
-		: S extends ''
-		? []
-		: S extends `${infer T}.${infer U}`
-		? [T, ...Split<U>]
-		: [S];
+	type Split<S extends string> = string extends S ? string[] : S extends '' ? [] : S extends `${infer T}.${infer U}` ? [T, ...Split<U>] : [S];
 
 	export type Union =
 		| SelfmodKeyHelper<Split<'capitals.thresholdDuration'>>

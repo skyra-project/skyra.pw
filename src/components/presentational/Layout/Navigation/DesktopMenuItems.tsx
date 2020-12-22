@@ -65,7 +65,7 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 	const authenticated = useAuthenticated();
 
 	const togglePopperMenu = () => {
-		setPopperMenuOpen(prevOpen => !prevOpen);
+		setPopperMenuOpen((prevOpen) => !prevOpen);
 	};
 
 	const closePopperMenu = (event: React.MouseEvent<EventTarget>) => {
@@ -182,7 +182,7 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 									{allowsCookies !== null && (
 										<Tooltip title="Click to update whether we can store cookies" placement="left">
 											<MenuItem
-												onClick={event => {
+												onClick={(event) => {
 													closePopperMenu(event);
 													dispatch(null);
 												}}

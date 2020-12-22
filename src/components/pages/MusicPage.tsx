@@ -148,7 +148,7 @@ const MusicPage: FC<MusicPageProps> = ({ guildId }) => {
 		if (!ws) setWs(new WebSocket(WS_URL));
 
 		if (ws) {
-			ws.sendJSON = data => ws.send(JSON.stringify(data));
+			ws.sendJSON = (data) => ws.send(JSON.stringify(data));
 
 			ws.onopen = () => {
 				ws.sendJSON({
@@ -161,7 +161,7 @@ const MusicPage: FC<MusicPageProps> = ({ guildId }) => {
 				});
 			};
 
-			ws.onmessage = event => {
+			ws.onmessage = (event) => {
 				const { action, data } = JSON.parse(event.data) as IncomingWebsocketMessage;
 
 				switch (action) {
@@ -333,7 +333,7 @@ const MusicPage: FC<MusicPageProps> = ({ guildId }) => {
 							style={{ height: isMobile ? '300px' : '510px' }}
 							overscan={2}
 							components={VirtuosoComponents}
-							itemContent={index => (
+							itemContent={(index) => (
 								<Link href={queue[index].info.uri} className={classes.link}>
 									<ListItemIcon>
 										<If condition={queue[index].info.uri.includes('youtube')}>

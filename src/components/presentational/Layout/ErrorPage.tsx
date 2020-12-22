@@ -31,18 +31,11 @@ const NotFoundPage = () => {
 	return (
 		<GeneralPage>
 			<Container maxWidth="md">
-				<Grid
-					container
-					direction="column"
-					justify="center"
-					alignContent="stretch"
-					alignItems="center"
-					classes={{ root: classes.root }}
-				>
+				<Grid container direction="column" justify="center" alignContent="stretch" alignItems="center" classes={{ root: classes.root }}>
 					<Grid item>
 						<Typography variant={isOnMobile ? 'h5' : 'h4'} color="textPrimary" classes={{ root: classes.text }}>
-							Woah! Looks like you just ran into a non-existant page. If you think you found this page by mistake then feel
-							free to join the support server on Discord using the button below and let us know.
+							Woah! Looks like you just ran into a non-existant page. If you think you found this page by mistake then feel free to join
+							the support server on Discord using the button below and let us know.
 						</Typography>
 					</Grid>
 					<Grid item>

@@ -76,9 +76,9 @@ const WarningSnackbar: FC = () => {
 						message={
 							<>
 								<Typography>
-									This site uses cookies for authentication. If you would like to use the login feature and manage your
-									servers please enable the use of cookies by clicking the button below. Want to know how we handle your
-									privacy? Feel free to review{' '}
+									This site uses cookies for authentication. If you would like to use the login feature and manage your servers
+									please enable the use of cookies by clicking the button below. Want to know how we handle your privacy? Feel free
+									to review{' '}
 									<span className={classes.fauxLink} onClick={navigate('/privacy')}>
 										our privacy policy
 									</span>

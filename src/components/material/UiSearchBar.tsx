@@ -70,7 +70,7 @@ interface SearchBarProps extends Omit<InputProps, 'onChange'> {
 	PaperProps?: PaperProps;
 }
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		root: {
 			height: theme.spacing(6),
@@ -146,7 +146,7 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 		}, [value]);
 
 		const handleFocus = useCallback(
-			e => {
+			(e) => {
 				if (onFocus) {
 					onFocus(e);
 				}
@@ -155,8 +155,8 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 		);
 
 		const handleBlur = useCallback(
-			e => {
-				setInnerValue(v => v.trim());
+			(e) => {
+				setInnerValue((v) => v.trim());
 				if (onBlur) {
 					onBlur(e);
 				}
@@ -165,7 +165,7 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 		);
 
 		const handleInput = useCallback(
-			e => {
+			(e) => {
 				setInnerValue(e.target.value);
 				if (onChange) {
 					onChange(e.target.value);
@@ -188,7 +188,7 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 		}, [onRequestSearch, innerValue]);
 
 		const handleKeyUp = useCallback(
-			e => {
+			(e) => {
 				if (e.charCode === 13 || e.key === 'Enter') {
 					handleRequestSearch();
 				} else if (cancelOnEscape && (e.charCode === 27 || e.key === 'Escape')) {

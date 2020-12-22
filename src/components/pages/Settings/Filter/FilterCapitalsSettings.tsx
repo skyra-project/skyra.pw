@@ -20,13 +20,13 @@ const FilterCapitalsSettings: FC = () => {
 				<SimpleGrid>
 					<SelectBoolean
 						title={`Filter ${guildSettings.selfmodCapitalsEnabled ? 'Enabled' : 'Disabled'}`}
-						onChange={event => setGuildSettingsChanges({ selfmodCapitalsEnabled: event.target.checked })}
+						onChange={(event) => setGuildSettingsChanges({ selfmodCapitalsEnabled: event.target.checked })}
 						currentValue={guildSettings.selfmodCapitalsEnabled}
 						description="Whether or not this system should be enabled."
 					/>
 					<SelectBoolean
 						title={`Alerts ${bitwiseHas(guildSettings.selfmodCapitalsSoftAction, 0b100) ? 'Enabled' : 'Disabled'}`}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
 								selfmodCapitalsSoftAction: bitwiseSet(guildSettings.selfmodCapitalsSoftAction, 0b100, event.target.checked)
 							})
@@ -36,7 +36,7 @@ const FilterCapitalsSettings: FC = () => {
 					/>
 					<SelectBoolean
 						title={`Logs ${bitwiseHas(guildSettings.selfmodCapitalsSoftAction, 0b010) ? 'Enabled' : 'Disabled'}`}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
 								selfmodCapitalsSoftAction: bitwiseSet(guildSettings.selfmodCapitalsSoftAction, 0b010, event.target.checked)
 							})
@@ -46,7 +46,7 @@ const FilterCapitalsSettings: FC = () => {
 					/>
 					<SelectBoolean
 						title={`Deletes ${bitwiseHas(guildSettings.selfmodCapitalsSoftAction, 0b001) ? 'Enabled' : 'Disabled'}`}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
 								selfmodCapitalsSoftAction: bitwiseSet(guildSettings.selfmodCapitalsSoftAction, 0b001, event.target.checked)
 							})
@@ -62,7 +62,7 @@ const FilterCapitalsSettings: FC = () => {
 						title="Action"
 						helperText="The action to perform as punishment"
 						value={guildSettings.selfmodCapitalsHardAction}
-						onChange={e => setGuildSettingsChanges({ selfmodCapitalsHardAction: e.target.value })}
+						onChange={(e) => setGuildSettingsChanges({ selfmodCapitalsHardAction: e.target.value })}
 					>
 						<MenuItem value={0}>None</MenuItem>
 						<MenuItem value={1}>Warning</MenuItem>
@@ -74,7 +74,7 @@ const FilterCapitalsSettings: FC = () => {
 					<SelectDuration
 						value={guildSettings.selfmodCapitalsHardActionDuration}
 						min={1000}
-						onChange={duration => setGuildSettingsChanges({ selfmodCapitalsHardActionDuration: duration })}
+						onChange={(duration) => setGuildSettingsChanges({ selfmodCapitalsHardActionDuration: duration })}
 					></SelectDuration>
 				</SimpleGrid>
 				<Typography>Maximum Threshold</Typography>

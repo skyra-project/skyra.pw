@@ -19,17 +19,7 @@ interface SelectProps extends MSelectProps {
 	onChange: (...args: any[]) => void;
 }
 
-const Select: FC<SelectProps> = ({
-	title,
-	onChange,
-	value,
-	children,
-	error,
-	fullWidth = false,
-	helperText = '',
-	FormControlProps,
-	...props
-}) => {
+const Select: FC<SelectProps> = ({ title, onChange, value, children, error, fullWidth = false, helperText = '', FormControlProps, ...props }) => {
 	const inputLabel = useRef<HTMLLabelElement>(null);
 	const [labelWidth, setLabelWidth] = useState(0);
 
@@ -44,14 +34,7 @@ const Select: FC<SelectProps> = ({
 			<InputLabel id={`label-for-${title}-select`} ref={inputLabel}>
 				{title}
 			</InputLabel>
-			<MSelect
-				{...props}
-				labelId={`label-for-${title}-select`}
-				value={value}
-				onChange={onChange}
-				labelWidth={labelWidth}
-				fullWidth={fullWidth}
-			>
+			<MSelect {...props} labelId={`label-for-${title}-select`} value={value} onChange={onChange} labelWidth={labelWidth} fullWidth={fullWidth}>
 				{children}
 			</MSelect>
 			<FormHelperText>{helperText}</FormHelperText>

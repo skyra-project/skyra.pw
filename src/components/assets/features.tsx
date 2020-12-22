@@ -64,9 +64,9 @@ export default [
 					<DiscordMessage profile="kyra">Skyra, markov</DiscordMessage>
 					<DiscordMessage profile="skyra">
 						<DiscordEmbed slot="embeds" color="#FF9D01">
-							Big mama is beyond Merlin's powers I'm basing this though i like it, and calls <code>renderToString()</code> and
-							throw if I'd add test to them are down to go that can be <i>reviewed</i> by myself and its loaded from google
-							them the client due to send the avatar in actually did automod stuff need to the dice! You rolled the id wdym
+							Big mama is beyond Merlin's powers I'm basing this though i like it, and calls <code>renderToString()</code> and throw if
+							I'd add test to them are down to go that can be <i>reviewed</i> by myself and its loaded from google them the client due
+							to send the avatar in actually did automod stuff need to the dice! You rolled the id wdym
 						</DiscordEmbed>
 					</DiscordMessage>
 				</DiscordMessages>
@@ -135,8 +135,8 @@ export default [
 									<code>Dratini</code> → <code>Dragonair</code> (30) → <strong>Dragonite (55)</strong>
 								</DiscordEmbedField>
 								<DiscordEmbedField fieldTitle="Base Stats">
-									HP: <strong>91</strong>, ATK: <strong>134</strong>, DEF: <strong>95</strong>, SPA: <strong>100</strong>,
-									SPD: <strong>100</strong>, SPE: <strong>80</strong> (<i>BST</i>: <strong>600</strong>)
+									HP: <strong>91</strong>, ATK: <strong>134</strong>, DEF: <strong>95</strong>, SPA: <strong>100</strong>, SPD:{' '}
+									<strong>100</strong>, SPE: <strong>80</strong> (<i>BST</i>: <strong>600</strong>)
 								</DiscordEmbedField>
 								<DiscordEmbedField fieldTitle="External resources">
 									<Link
@@ -232,11 +232,10 @@ export default [
 							<br />
 							<strong>Canonical title:</strong> Fate/Zero
 							<br />
-							With the promise of granting any wish, the omnipotent Holy Grail triggered three wars in the past, each too
-							cruel and fierce to leave a victor. In spite of that, the wealthy Einzbern family is confident that the Fourth
-							Holy Grail War will be different; namely, with a vessel of the Holy Grail now in their grasp. Solely for this
-							reason, the much hated "Magus Killer" Kiritsugu Emiya is hired by the Einzberns, with marriage to their only
-							daughter Irisviel as binding contract.
+							With the promise of granting any wish, the omnipotent Holy Grail triggered three wars in the past, each too cruel and
+							fierce to leave a victor. In spite of that, the wealthy Einzbern family is confident that the Fourth Holy Grail War will
+							be different; namely, with a vessel of the Holy Grail now in their grasp. Solely for this reason, the much hated "Magus
+							Killer" Kiritsugu Emiya is hired by the Einzberns, with marriage to their only daughter Irisviel as binding contract.
 							<Box component="span" slot="footer">
 								1/10 - © kitsu.io
 							</Box>

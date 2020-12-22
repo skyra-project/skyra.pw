@@ -100,7 +100,7 @@ const DisabledCommandSettings: FC = () => {
 		setExpanded(isExpanded ? panel : false);
 	};
 
-	const categories = [...new Set(Object.values(commands).map(command => command.category))];
+	const categories = [...new Set(Object.values(commands).map((command) => command.category))];
 
 	return (
 		<>
@@ -125,14 +125,14 @@ const DisabledCommandSettings: FC = () => {
 							<AccordionDetails>
 								<Grid container spacing={1} direction="row" justify="flex-start" alignItems="center" alignContent="center">
 									{Object.values(commands)
-										.filter(command => command.category === catName)
+										.filter((command) => command.category === catName)
 										.map((cmd, idx) => (
 											<Grid item key={idx} xs={12} md={6} lg={4} xl={3}>
 												<SelectBoolean
 													title={cmd.name}
 													description={parseCommandDescription(cmd.description)}
 													currentValue={cmd.isEnabled}
-													onChange={event => {
+													onChange={(event) => {
 														return setCommands({
 															...commands,
 															[cmd.name]: { ...cmd, isEnabled: event.target.checked }
@@ -199,8 +199,8 @@ const DisabledCommandSettings: FC = () => {
 									onClick={() => {
 										setGuildSettingsChanges({
 											disabledCommands: Object.values(commands)
-												.filter(cmd => !cmd.isEnabled)
-												.map(cmd => cmd.name)
+												.filter((cmd) => !cmd.isEnabled)
+												.map((cmd) => cmd.name)
 										});
 									}}
 								>

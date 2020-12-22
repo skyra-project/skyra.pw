@@ -48,7 +48,7 @@ const StarboardSettings: FC = () => {
 					min={1}
 					max={100}
 					fullWidth
-					onChange={event =>
+					onChange={(event) =>
 						setGuildSettingsChanges({
 							starboardMinimum: parseInt(event.target.value, 10)
 						})
@@ -57,7 +57,7 @@ const StarboardSettings: FC = () => {
 				<SelectChannel
 					value={guildSettings.starboardChannel}
 					label="Starboard Channel"
-					onChange={newChannel =>
+					onChange={(newChannel) =>
 						setGuildSettingsChanges({
 							starboardChannel: newChannel
 						})
@@ -73,7 +73,7 @@ const StarboardSettings: FC = () => {
 				/>
 				<SelectChannels
 					value={guildSettings.starboardIgnoreChannels}
-					onChange={newChannels =>
+					onChange={(newChannels) =>
 						setGuildSettingsChanges({
 							starboardIgnoreChannels: newChannels
 						})

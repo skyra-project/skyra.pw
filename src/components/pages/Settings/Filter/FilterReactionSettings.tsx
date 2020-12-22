@@ -21,19 +21,15 @@ const FilterReactionSettings: FC = () => {
 				<SimpleGrid>
 					<SelectBoolean
 						title={`Filter ${guildSettings.selfmodReactionsEnabled ? 'Enabled' : 'Disabled'}`}
-						onChange={event => setGuildSettingsChanges({ selfmodReactionsEnabled: event.target.checked })}
+						onChange={(event) => setGuildSettingsChanges({ selfmodReactionsEnabled: event.target.checked })}
 						currentValue={guildSettings.selfmodReactionsEnabled}
 						description="Whether or not this system should be enabled."
 					/>
 					<SelectBoolean
 						title={`Alerts ${bitwiseHas(guildSettings.selfmodReactionsSoftAction, 0b100) ? 'Enabled' : 'Disabled'}`}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
-								selfmodReactionsSoftAction: bitwiseSet(
-									guildSettings.selfmodReactionsSoftAction,
-									0b100,
-									event.target.checked
-								)
+								selfmodReactionsSoftAction: bitwiseSet(guildSettings.selfmodReactionsSoftAction, 0b100, event.target.checked)
 							})
 						}
 						currentValue={bitwiseHas(guildSettings.selfmodReactionsSoftAction, 0b100)}
@@ -41,13 +37,9 @@ const FilterReactionSettings: FC = () => {
 					/>
 					<SelectBoolean
 						title={`Logs ${bitwiseHas(guildSettings.selfmodReactionsSoftAction, 0b010) ? 'Enabled' : 'Disabled'}`}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
-								selfmodReactionsSoftAction: bitwiseSet(
-									guildSettings.selfmodReactionsSoftAction,
-									0b010,
-									event.target.checked
-								)
+								selfmodReactionsSoftAction: bitwiseSet(guildSettings.selfmodReactionsSoftAction, 0b010, event.target.checked)
 							})
 						}
 						currentValue={bitwiseHas(guildSettings.selfmodReactionsSoftAction, 0b010)}
@@ -55,13 +47,9 @@ const FilterReactionSettings: FC = () => {
 					/>
 					<SelectBoolean
 						title={`Deletes ${bitwiseHas(guildSettings.selfmodReactionsSoftAction, 0b001) ? 'Enabled' : 'Disabled'}`}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
-								selfmodReactionsSoftAction: bitwiseSet(
-									guildSettings.selfmodReactionsSoftAction,
-									0b001,
-									event.target.checked
-								)
+								selfmodReactionsSoftAction: bitwiseSet(guildSettings.selfmodReactionsSoftAction, 0b001, event.target.checked)
 							})
 						}
 						currentValue={bitwiseHas(guildSettings.selfmodReactionsSoftAction, 0b001)}
@@ -75,7 +63,7 @@ const FilterReactionSettings: FC = () => {
 						title="Action"
 						helperText="The action to perform as punishment"
 						value={guildSettings.selfmodReactionsHardAction}
-						onChange={e => setGuildSettingsChanges({ selfmodReactionsHardAction: e.target.value })}
+						onChange={(e) => setGuildSettingsChanges({ selfmodReactionsHardAction: e.target.value })}
 					>
 						<MenuItem value={0}>None</MenuItem>
 						<MenuItem value={1}>Warning</MenuItem>
@@ -87,7 +75,7 @@ const FilterReactionSettings: FC = () => {
 					<SelectDuration
 						value={guildSettings.selfmodReactionsHardActionDuration}
 						min={1000}
-						onChange={duration => setGuildSettingsChanges({ selfmodReactionsHardActionDuration: duration })}
+						onChange={(duration) => setGuildSettingsChanges({ selfmodReactionsHardActionDuration: duration })}
 					></SelectDuration>
 				</SimpleGrid>
 				<Typography>Maximum Threshold</Typography>

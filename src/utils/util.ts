@@ -5,13 +5,8 @@ import { BASE_API_URL, FetchMethods, LocalStorageKeys } from './constants';
 import isBrowser from './isBrowser';
 import { Time } from './skyraUtils';
 
-export function cast<T>(value: unknown): T {
-	return value as T;
-}
-
-export function sleep(ms: number) {
-	return new Promise(resolve => setTimeout(resolve, ms));
-}
+export const cast = <T>(value: unknown): T => value as T;
+export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const loadState = <T>(key: LocalStorageKeys): T | null => {
 	if (isBrowser) {
@@ -116,7 +111,7 @@ export async function syncUser(
 		body: JSON.stringify({
 			action: 'SYNC_USER'
 		})
-	}).catch(err => {
+	}).catch((err) => {
 		if (err.status === 401 || err.status === 403) logOut(setPack, setAuthenticated, changeRoute);
 	});
 
@@ -148,7 +143,7 @@ export function displayIconURL(guild: FlattenedGuild, { format = 'default', size
 export function getAcronym(name: string) {
 	return name
 		.replace(/'s /g, ' ')
-		.replace(/\w+/g, e => e[0])
+		.replace(/\w+/g, (e) => e[0])
 		.replace(/\s/g, '');
 }
 

@@ -55,9 +55,7 @@ const GuildsPage: NextPage = () => {
 						) : (
 							<Typography variant="h1" classes={{ root: classes.notSignedInText }}>
 								Sorry, you are not logged in and can therefore not view this page. Please{' '}
-								{isMobile
-									? 'open the menu button at the top left then click "Login"'
-									: 'click the "Login" button at the top right'}{' '}
+								{isMobile ? 'open the menu button at the top left then click "Login"' : 'click the "Login" button at the top right'}{' '}
 								to login with Discord
 							</Typography>
 						)}

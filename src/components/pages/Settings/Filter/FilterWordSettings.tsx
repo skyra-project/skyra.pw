@@ -49,13 +49,13 @@ const FilterWordSettings: FC = () => {
 				<SimpleGrid>
 					<SelectBoolean
 						title={`Filter ${guildSettings.selfmodFilterEnabled ? 'Enabled' : 'Disabled'}`}
-						onChange={event => setGuildSettingsChanges({ selfmodFilterEnabled: event.target.checked })}
+						onChange={(event) => setGuildSettingsChanges({ selfmodFilterEnabled: event.target.checked })}
 						currentValue={guildSettings.selfmodFilterEnabled}
 						description="Whether or not this system should be enabled."
 					/>
 					<SelectBoolean
 						title={`Alerts ${bitwiseHas(guildSettings.selfmodFilterSoftAction, 0b100) ? 'Enabled' : 'Disabled'}`}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
 								selfmodFilterSoftAction: bitwiseSet(guildSettings.selfmodFilterSoftAction, 0b100, event.target.checked)
 							})
@@ -65,7 +65,7 @@ const FilterWordSettings: FC = () => {
 					/>
 					<SelectBoolean
 						title={`Logs ${bitwiseHas(guildSettings.selfmodFilterSoftAction, 0b010) ? 'Enabled' : 'Disabled'}`}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
 								selfmodFilterSoftAction: bitwiseSet(guildSettings.selfmodFilterSoftAction, 0b010, event.target.checked)
 							})
@@ -75,7 +75,7 @@ const FilterWordSettings: FC = () => {
 					/>
 					<SelectBoolean
 						title={`Deletes ${bitwiseHas(guildSettings.selfmodFilterSoftAction, 0b001) ? 'Enabled' : 'Disabled'}`}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
 								selfmodFilterSoftAction: bitwiseSet(guildSettings.selfmodFilterSoftAction, 0b001, event.target.checked)
 							})
@@ -91,7 +91,7 @@ const FilterWordSettings: FC = () => {
 						title="Action"
 						helperText="The action to perform as punishment"
 						value={guildSettings.selfmodFilterHardAction}
-						onChange={e => setGuildSettingsChanges({ selfmodFilterHardAction: e.target.value })}
+						onChange={(e) => setGuildSettingsChanges({ selfmodFilterHardAction: e.target.value })}
 					>
 						<MenuItem value={0}>None</MenuItem>
 						<MenuItem value={1}>Warning</MenuItem>
@@ -103,7 +103,7 @@ const FilterWordSettings: FC = () => {
 					<SelectDuration
 						value={guildSettings.selfmodFilterHardActionDuration}
 						min={1000}
-						onChange={duration => setGuildSettingsChanges({ selfmodFilterHardActionDuration: duration })}
+						onChange={(duration) => setGuildSettingsChanges({ selfmodFilterHardActionDuration: duration })}
 					/>
 				</SimpleGrid>
 				<Typography>Maximum Threshold</Typography>
@@ -127,7 +127,7 @@ const FilterWordSettings: FC = () => {
 			</Section>
 			<Section title="Filtered Words">
 				<form
-					onSubmit={e => {
+					onSubmit={(e) => {
 						e.preventDefault();
 						const word = removeNonAlphaNumeric(newWord).toLowerCase();
 						if (word.length < 3 || guildSettings.selfmodFilterRaw.includes(word)) return;
@@ -142,7 +142,7 @@ const FilterWordSettings: FC = () => {
 							classes={{ root: classes.textField }}
 							label="Add Word"
 							value={newWord}
-							onChange={e => setNewWord(e.target.value)}
+							onChange={(e) => setNewWord(e.target.value)}
 						/>
 						<Button
 							type="submit"
@@ -157,14 +157,14 @@ const FilterWordSettings: FC = () => {
 
 				<When condition={guildSettings.selfmodFilterRaw.length !== 0}>
 					<Paper classes={{ root: classes.words }}>
-						{guildSettings.selfmodFilterRaw.map(word => (
+						{guildSettings.selfmodFilterRaw.map((word) => (
 							<Chip
 								color="primary"
 								key={word}
 								label={word}
 								onDelete={() =>
 									setGuildSettingsChanges({
-										selfmodFilterRaw: guildSettings.selfmodFilterRaw.filter(item => item !== word)
+										selfmodFilterRaw: guildSettings.selfmodFilterRaw.filter((item) => item !== word)
 									})
 								}
 							/>

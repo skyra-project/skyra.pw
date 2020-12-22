@@ -32,11 +32,9 @@ interface CategoryProps {
 const Category: FC<CategoryProps> = ({ categoryName, commands, searchValue }) => {
 	const classes = useStyles();
 
-	const filterCommands = useCallback((command: FlattenedCommand) => command.name.toLowerCase().includes(searchValue.toLowerCase()), [
-		searchValue
-	]);
+	const filterCommands = useCallback((command: FlattenedCommand) => command.name.toLowerCase().includes(searchValue.toLowerCase()), [searchValue]);
 
-	const filteredCategory = commands.filter(command => command.category === categoryName).filter(filterCommands);
+	const filteredCategory = commands.filter((command) => command.category === categoryName).filter(filterCommands);
 
 	if (!filteredCategory.length) return null;
 

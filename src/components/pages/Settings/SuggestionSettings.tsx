@@ -34,16 +34,13 @@ const SuggestionSettings: FC = () => {
 	const { guildSettings } = useGuildSettingsContext();
 	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
-	const findEmoji = useMemo(() => (id: string) => guildData.emojis.find(e => e.id === id)!, [guildData.emojis]);
+	const findEmoji = useMemo(() => (id: string) => guildData.emojis.find((e) => e.id === id)!, [guildData.emojis]);
 	const tagToId = useMemo(() => (tag: string) => tag.replace(EmojiRegexExtractId, '$1'), []);
 	const idToTag = useMemo(() => (id: string, name: string, animated: boolean) => `${animated ? 'a' : ''}:${name}:${id}`, []);
 
 	return (
 		<>
-			<PageHeader
-				title="Suggestion system"
-				subtitle="Here you can configure what Skyra will do with suggestions people make in your server"
-			/>
+			<PageHeader title="Suggestion system" subtitle="Here you can configure what Skyra will do with suggestions people make in your server" />
 
 			<Section title="Channel">
 				<SimpleGrid
@@ -60,7 +57,7 @@ const SuggestionSettings: FC = () => {
 					<SelectChannel
 						value={guildSettings.suggestionsChannel}
 						label="Suggestions Channel"
-						onChange={newChannel =>
+						onChange={(newChannel) =>
 							setGuildSettingsChanges({
 								suggestionsChannel: newChannel
 							})
@@ -85,7 +82,7 @@ const SuggestionSettings: FC = () => {
 							title={title}
 							description={description}
 							currentValue={guildSettings[key]}
-							onChange={event =>
+							onChange={(event) =>
 								setGuildSettingsChanges({
 									[key]: event.target.checked
 								})

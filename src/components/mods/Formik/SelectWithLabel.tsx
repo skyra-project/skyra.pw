@@ -7,7 +7,7 @@ const SelectWithLabel: FC<SwitchProps & Omit<SelectBooleanProps, 'onChange' | 'c
 		currentValue={field.value}
 		{...props}
 		{...fieldToSwitch({ form, field, meta })}
-		onChange={event => form.setFieldValue(field.name, event.target.checked)}
+		onChange={(event) => form.setFieldValue(field.name, event.target.checked)}
 	/>
 );
 

@@ -21,13 +21,13 @@ const FilterMessagesSettings: FC = () => {
 				<SimpleGrid>
 					<SelectBoolean
 						title={`Filter ${guildSettings.selfmodMessagesEnabled ? 'Enabled' : 'Disabled'}`}
-						onChange={event => setGuildSettingsChanges({ selfmodMessagesEnabled: event.target.checked })}
+						onChange={(event) => setGuildSettingsChanges({ selfmodMessagesEnabled: event.target.checked })}
 						currentValue={guildSettings.selfmodMessagesEnabled}
 						description="Whether or not this system should be enabled."
 					/>
 					<SelectBoolean
 						title={`Alerts ${bitwiseHas(guildSettings.selfmodMessagesSoftAction, 0b100) ? 'Enabled' : 'Disabled'}`}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
 								selfmodMessagesSoftAction: bitwiseSet(guildSettings.selfmodMessagesSoftAction, 0b100, event.target.checked)
 							})
@@ -37,7 +37,7 @@ const FilterMessagesSettings: FC = () => {
 					/>
 					<SelectBoolean
 						title={`Logs ${bitwiseHas(guildSettings.selfmodMessagesSoftAction, 0b010) ? 'Enabled' : 'Disabled'}`}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
 								selfmodMessagesSoftAction: bitwiseSet(guildSettings.selfmodMessagesSoftAction, 0b010, event.target.checked)
 							})
@@ -47,7 +47,7 @@ const FilterMessagesSettings: FC = () => {
 					/>
 					<SelectBoolean
 						title={`Deletes ${bitwiseHas(guildSettings.selfmodMessagesSoftAction, 0b001) ? 'Enabled' : 'Disabled'}`}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
 								selfmodMessagesSoftAction: bitwiseSet(guildSettings.selfmodMessagesSoftAction, 0b001, event.target.checked)
 							})
@@ -63,7 +63,7 @@ const FilterMessagesSettings: FC = () => {
 						title="Action"
 						helperText="The action to perform as punishment"
 						value={guildSettings.selfmodMessagesHardAction}
-						onChange={e => setGuildSettingsChanges({ selfmodMessagesHardAction: e.target.value })}
+						onChange={(e) => setGuildSettingsChanges({ selfmodMessagesHardAction: e.target.value })}
 					>
 						<MenuItem value={0}>None</MenuItem>
 						<MenuItem value={1}>Warning</MenuItem>
@@ -75,7 +75,7 @@ const FilterMessagesSettings: FC = () => {
 					<SelectDuration
 						value={guildSettings.selfmodMessagesHardActionDuration}
 						min={1000}
-						onChange={duration => setGuildSettingsChanges({ selfmodMessagesHardActionDuration: duration })}
+						onChange={(duration) => setGuildSettingsChanges({ selfmodMessagesHardActionDuration: duration })}
 					></SelectDuration>
 				</SimpleGrid>
 				<Typography>Maximum Threshold</Typography>

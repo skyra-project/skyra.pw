@@ -120,7 +120,7 @@ const MessageSettings: FC = () => {
 								}}
 								label={name}
 								value={guildSettings[key] ?? ''}
-								onChange={e =>
+								onChange={(e) =>
 									setGuildSettingsChanges({
 										[key]: e.target.value
 									})
@@ -139,7 +139,7 @@ const MessageSettings: FC = () => {
 						title="Send announcements in Message Embeds"
 						currentValue={guildSettings.messagesAnnouncementEmbed}
 						description="Whether announcement messages should be send in Message Embeds"
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
 								messagesAnnouncementEmbed: event.target.checked
 							})

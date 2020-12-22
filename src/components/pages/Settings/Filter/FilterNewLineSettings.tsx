@@ -21,13 +21,13 @@ const FilterNewLineSettings: FC = () => {
 				<SimpleGrid>
 					<SelectBoolean
 						title={`Filter ${guildSettings.selfmodNewlinesEnabled ? 'Enabled' : 'Disabled'}`}
-						onChange={event => setGuildSettingsChanges({ selfmodNewlinesEnabled: event.target.checked })}
+						onChange={(event) => setGuildSettingsChanges({ selfmodNewlinesEnabled: event.target.checked })}
 						currentValue={guildSettings.selfmodNewlinesEnabled}
 						description="Whether or not this system should be enabled."
 					/>
 					<SelectBoolean
 						title={`Alerts ${bitwiseHas(guildSettings.selfmodNewlinesSoftAction, 0b100) ? 'Enabled' : 'Disabled'}`}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
 								selfmodNewlinesSoftAction: bitwiseSet(guildSettings.selfmodNewlinesSoftAction, 0b100, event.target.checked)
 							})
@@ -37,7 +37,7 @@ const FilterNewLineSettings: FC = () => {
 					/>
 					<SelectBoolean
 						title={`Logs ${bitwiseHas(guildSettings.selfmodNewlinesSoftAction, 0b010) ? 'Enabled' : 'Disabled'}`}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
 								selfmodNewlinesSoftAction: bitwiseSet(guildSettings.selfmodNewlinesSoftAction, 0b010, event.target.checked)
 							})
@@ -47,7 +47,7 @@ const FilterNewLineSettings: FC = () => {
 					/>
 					<SelectBoolean
 						title={`Deletes ${bitwiseHas(guildSettings.selfmodNewlinesSoftAction, 0b001) ? 'Enabled' : 'Disabled'}`}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
 								selfmodNewlinesSoftAction: bitwiseSet(guildSettings.selfmodNewlinesSoftAction, 0b001, event.target.checked)
 							})
@@ -63,7 +63,7 @@ const FilterNewLineSettings: FC = () => {
 						title="Action"
 						helperText="The action to perform as punishment"
 						value={guildSettings.selfmodNewlinesHardAction}
-						onChange={e => setGuildSettingsChanges({ selfmodNewlinesHardAction: e.target.value })}
+						onChange={(e) => setGuildSettingsChanges({ selfmodNewlinesHardAction: e.target.value })}
 					>
 						<MenuItem value={0}>None</MenuItem>
 						<MenuItem value={1}>Warning</MenuItem>
@@ -75,7 +75,7 @@ const FilterNewLineSettings: FC = () => {
 					<SelectDuration
 						value={guildSettings.selfmodNewlinesHardActionDuration}
 						min={1000}
-						onChange={duration => setGuildSettingsChanges({ selfmodNewlinesHardActionDuration: duration })}
+						onChange={(duration) => setGuildSettingsChanges({ selfmodNewlinesHardActionDuration: duration })}
 					></SelectDuration>
 				</SimpleGrid>
 				<Typography>Maximum Threshold</Typography>

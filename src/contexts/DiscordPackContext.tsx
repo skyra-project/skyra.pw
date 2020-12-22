@@ -17,8 +17,8 @@ const useDiscordPackState = () => {
 
 export const [DiscordPackProvider, useDiscordPack, mergeDiscordPack] = constate(
 	useDiscordPackState,
-	value => value.pack,
-	value => value.mergePack
+	(value) => value.pack,
+	(value) => value.mergePack
 );
 
 export default DiscordPackProvider;

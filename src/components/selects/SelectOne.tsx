@@ -147,16 +147,12 @@ export default function SelectOne({ label, onChange, values, name = 'None', imag
 						style={{ height: theme.spacing(50), width: '100%' }}
 						className={classes.virtualizedList}
 						components={VirtuosoComponents}
-						itemContent={index => (
+						itemContent={(index) => (
 							<>
 								<ListItemText primary={filteredValues[index].name} />
 								{filteredValues[index].iconUrl && (
 									<ListItemSecondaryAction>
-										<LazyAvatar
-											alt={filteredValues[index].value}
-											src={filteredValues[index].iconUrl}
-											variant="square"
-										/>
+										<LazyAvatar alt={filteredValues[index].value} src={filteredValues[index].iconUrl} variant="square" />
 									</ListItemSecondaryAction>
 								)}
 							</>

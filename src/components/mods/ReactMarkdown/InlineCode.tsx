@@ -25,13 +25,7 @@ const InlineCode = forwardRef<HTMLSpanElement>(({ children }, ref) => {
 	const classes = useStyles();
 
 	return (
-		<Typography
-			ref={ref}
-			component="span"
-			color="textPrimary"
-			variant="body2"
-			classes={{ root: clsx(classes.brokenWordText, classes.code) }}
-		>
+		<Typography ref={ref} component="span" color="textPrimary" variant="body2" classes={{ root: clsx(classes.brokenWordText, classes.code) }}>
 			{children}
 		</Typography>
 	);

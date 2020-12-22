@@ -64,7 +64,7 @@ const UserMenu: FC = () => {
 	const router = useRouter();
 
 	const handleToggle = () => {
-		setOpen(prevOpen => !prevOpen);
+		setOpen((prevOpen) => !prevOpen);
 	};
 
 	const handleClose = (event: React.MouseEvent<EventTarget>) => {

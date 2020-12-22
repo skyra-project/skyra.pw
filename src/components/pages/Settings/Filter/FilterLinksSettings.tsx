@@ -49,13 +49,13 @@ const FilterLinksSettings: FC = () => {
 				<SimpleGrid>
 					<SelectBoolean
 						title={`Filter ${guildSettings.selfmodLinksEnabled ? 'Enabled' : 'Disabled'}`}
-						onChange={event => setGuildSettingsChanges({ selfmodLinksEnabled: event.target.checked })}
+						onChange={(event) => setGuildSettingsChanges({ selfmodLinksEnabled: event.target.checked })}
 						currentValue={guildSettings.selfmodLinksEnabled}
 						description="Whether or not this system should be enabled."
 					/>
 					<SelectBoolean
 						title={`Alerts ${bitwiseHas(guildSettings.selfmodLinksSoftAction, 0b100) ? 'Enabled' : 'Disabled'}`}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
 								selfmodLinksSoftAction: bitwiseSet(guildSettings.selfmodLinksSoftAction, 0b100, event.target.checked)
 							})
@@ -65,7 +65,7 @@ const FilterLinksSettings: FC = () => {
 					/>
 					<SelectBoolean
 						title={`Logs ${bitwiseHas(guildSettings.selfmodLinksSoftAction, 0b010) ? 'Enabled' : 'Disabled'}`}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
 								selfmodLinksSoftAction: bitwiseSet(guildSettings.selfmodLinksSoftAction, 0b010, event.target.checked)
 							})
@@ -75,7 +75,7 @@ const FilterLinksSettings: FC = () => {
 					/>
 					<SelectBoolean
 						title={`Deletes ${bitwiseHas(guildSettings.selfmodLinksSoftAction, 0b001) ? 'Enabled' : 'Disabled'}`}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
 								selfmodLinksSoftAction: bitwiseSet(guildSettings.selfmodLinksSoftAction, 0b001, event.target.checked)
 							})
@@ -91,7 +91,7 @@ const FilterLinksSettings: FC = () => {
 						title="Action"
 						helperText="The action to perform as punishment"
 						value={guildSettings.selfmodLinksHardAction}
-						onChange={e => setGuildSettingsChanges({ selfmodLinksHardAction: e.target.value })}
+						onChange={(e) => setGuildSettingsChanges({ selfmodLinksHardAction: e.target.value })}
 					>
 						<MenuItem value={0}>None</MenuItem>
 						<MenuItem value={1}>Warning</MenuItem>
@@ -103,7 +103,7 @@ const FilterLinksSettings: FC = () => {
 					<SelectDuration
 						value={guildSettings.selfmodLinksHardActionDuration}
 						min={1000}
-						onChange={duration => setGuildSettingsChanges({ selfmodLinksHardActionDuration: duration })}
+						onChange={(duration) => setGuildSettingsChanges({ selfmodLinksHardActionDuration: duration })}
 					></SelectDuration>
 				</SimpleGrid>
 				<Typography>Maximum Threshold</Typography>
@@ -127,7 +127,7 @@ const FilterLinksSettings: FC = () => {
 			</Section>
 			<Section title="Options">
 				<form
-					onSubmit={e => {
+					onSubmit={(e) => {
 						e.preventDefault();
 						try {
 							const { hostname } = new URL(/^https?:\/\//.test(newWord) ? newWord : `https://${newWord}`);
@@ -147,7 +147,7 @@ const FilterLinksSettings: FC = () => {
 							classes={{ root: classes.textField }}
 							label="Add Link"
 							value={newWord}
-							onChange={e => setNewWord(e.target.value)}
+							onChange={(e) => setNewWord(e.target.value)}
 						/>
 						<Button
 							type="submit"
@@ -162,14 +162,14 @@ const FilterLinksSettings: FC = () => {
 
 				<When condition={guildSettings.selfmodLinksWhitelist.length !== 0}>
 					<Paper classes={{ root: classes.words }}>
-						{guildSettings.selfmodLinksWhitelist.map(word => (
+						{guildSettings.selfmodLinksWhitelist.map((word) => (
 							<Chip
 								color="primary"
 								key={word}
 								label={word}
 								onDelete={() =>
 									setGuildSettingsChanges({
-										selfmodLinksWhitelist: guildSettings.selfmodLinksWhitelist.filter(item => item !== word)
+										selfmodLinksWhitelist: guildSettings.selfmodLinksWhitelist.filter((item) => item !== word)
 									})
 								}
 							/>

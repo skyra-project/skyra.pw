@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react';
 
-const CookieIcon: FC = props => (
+const CookieIcon: FC = (props) => (
 	<svg width="24" height="24" viewBox="0 0 24 24" {...props}>
 		<path
 			fill="#ffffff"

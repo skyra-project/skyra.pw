@@ -14,27 +14,17 @@ export interface SelectEmojiProps extends Omit<SelectOneProps, 'values' | 'name'
 
 const getEmojiUrl = (id: string, animated: boolean) => `https://cdn.discordapp.com/emojis/${id}.${animated ? 'gif' : 'png'}?v=1`;
 
-const SelectEmoji: FC<SelectEmojiProps> = ({
-	label,
-	value,
-	guild,
-	defaultImage,
-	defaultName,
-	defaultId,
-	onChange,
-	tooltipTitle,
-	...props
-}) => {
+const SelectEmoji: FC<SelectEmojiProps> = ({ label, value, guild, defaultImage, defaultName, defaultId, onChange, tooltipTitle, ...props }) => {
 	const christmasClasses = useChristmasStyles();
 
 	let name = defaultName;
 	let image = defaultImage;
 
-	const emoji = guild.emojis.find(e => e.id === value);
+	const emoji = guild.emojis.find((e) => e.id === value);
 	if (emoji) name = emoji.name;
 	if (emoji) image = getEmojiUrl(emoji.id, emoji.animated);
 
-	const values = guild.emojis.filter(e => e.available).map(e => ({ name: e.name, value: e.id, iconUrl: getEmojiUrl(e.id, e.animated) }));
+	const values = guild.emojis.filter((e) => e.available).map((e) => ({ name: e.name, value: e.id, iconUrl: getEmojiUrl(e.id, e.animated) }));
 	values.unshift({ name: defaultName, value: defaultId, iconUrl: defaultImage });
 
 	return (

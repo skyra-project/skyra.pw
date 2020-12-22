@@ -21,10 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const validationSchema = object<General.Form>().shape<General.Form>({
-	prefix: string()
-		.required('Setting a prefix is required')
-		.min(1, 'Prefix has a minimum length of 1')
-		.max(11, 'Prefix has a maximum length of 10')
+	prefix: string().required('Setting a prefix is required').min(1, 'Prefix has a minimum length of 1').max(11, 'Prefix has a maximum length of 10')
 });
 
 const GeneralSettings: FC = () => {
@@ -68,7 +65,7 @@ const GeneralSettings: FC = () => {
 					FormControlProps={{ classes: { root: classes.languageOffset } }}
 					helperText="Select the language you want for this guild"
 					value={guildSettings.language}
-					onChange={e => setGuildSettingsChanges({ language: e.target.value })}
+					onChange={(e) => setGuildSettingsChanges({ language: e.target.value })}
 					fullWidth
 				>
 					<MenuItem value="en-US">English</MenuItem>

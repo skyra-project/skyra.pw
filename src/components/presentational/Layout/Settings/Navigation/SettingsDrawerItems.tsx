@@ -87,7 +87,7 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 
 	const handleSubMenu = (menuName: string) => {
 		return openSubMenus.includes(menuName)
-			? setOpenSubMenus(openSubMenus.filter(item => item !== menuName))
+			? setOpenSubMenus(openSubMenus.filter((item) => item !== menuName))
 			: setOpenSubMenus([...openSubMenus, menuName]);
 	};
 

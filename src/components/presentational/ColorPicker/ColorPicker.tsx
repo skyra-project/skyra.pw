@@ -67,9 +67,7 @@ const ColorPicker: FC<Omit<TextFieldProps, 'variant'>> = ({ form: { setFieldValu
 					readOnly: isMobile ? 'readonly' : undefined
 				}}
 			/>
-			{showPicker && (
-				<PickerDialog value={field.value} onClick={togglePicker} onChange={color => setFieldValue(field.name, color.hex)} />
-			)}
+			{showPicker && <PickerDialog value={field.value} onClick={togglePicker} onChange={(color) => setFieldValue(field.name, color.hex)} />}
 		</>
 	);
 };

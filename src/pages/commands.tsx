@@ -38,7 +38,7 @@ const CommandsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 	const [searchValue, setSearchValue] = useState('');
 	const [commandsBoxWidth, setCommandsBoxWidth] = useState(500);
 
-	const categories = useMemo(() => [...new Set(commands.map(command => command.category))], [commands]);
+	const categories = useMemo(() => [...new Set(commands.map((command) => command.category))], [commands]);
 
 	const handleSearch = debounce((value: string) => {
 		setSearchValue(value);
@@ -81,7 +81,7 @@ const CommandsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 						value={searchValue}
 						onChange={handleSearch}
 						onCancelSearch={() => setSearchValue('')}
-						onRequestSearch={newValue => setSearchValue(newValue ?? '')}
+						onRequestSearch={(newValue) => setSearchValue(newValue ?? '')}
 						placeholder="Search a command..."
 						className={classes.searchBar}
 						PaperProps={{

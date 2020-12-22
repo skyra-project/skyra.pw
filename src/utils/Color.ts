@@ -57,7 +57,7 @@ function HEX(input: string) {
 	if (raw.length === 3)
 		raw = raw
 			.split('')
-			.map(char => char + char)
+			.map((char) => char + char)
 			.join('');
 	return new Resolver.HEX(raw.substring(0, 2), raw.substring(2, 4), raw.substring(4, 6));
 }

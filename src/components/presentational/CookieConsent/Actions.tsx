@@ -23,13 +23,7 @@ const Actions: FC = () => {
 	return (
 		<Grid container alignContent="stretch" justify="space-between" alignItems="center" spacing={2}>
 			<Grid item xs={6}>
-				<Button
-					fullWidth
-					variant="contained"
-					color="primary"
-					classes={{ root: classes.rejectButton }}
-					onClick={() => dispatch(false)}
-				>
+				<Button fullWidth variant="contained" color="primary" classes={{ root: classes.rejectButton }} onClick={() => dispatch(false)}>
 					I reject cookies
 				</Button>
 			</Grid>

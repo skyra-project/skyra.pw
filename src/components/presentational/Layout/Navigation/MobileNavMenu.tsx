@@ -81,7 +81,7 @@ const MobileNavMenu: FC = () => {
 	const router = useRouter();
 
 	const togglePopperMenu = () => {
-		setPopperMenuOpen(prevOpen => !prevOpen);
+		setPopperMenuOpen((prevOpen) => !prevOpen);
 	};
 
 	const closePopperMenu = (event: React.MouseEvent<EventTarget>) => {
@@ -181,7 +181,7 @@ const MobileNavMenu: FC = () => {
 
 									{allowsCookies !== null && (
 										<MenuItem
-											onClick={event => {
+											onClick={(event) => {
 												closePopperMenu(event);
 												return dispatch(null);
 											}}

@@ -43,13 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const ErrorAlert: FC<ErrorAlertProps> = ({ errorText, errorSubText = '', open = false, setOpen = (...args: any[]) => args, ...props }) => {
 	const classes = useStyles();
 	return (
-		<Snackbar
-			autoHideDuration={Time.Second * 10}
-			open={open}
-			TransitionComponent={Grow}
-			classes={{ root: classes.snackbar }}
-			{...props}
-		>
+		<Snackbar autoHideDuration={Time.Second * 10} open={open} TransitionComponent={Grow} classes={{ root: classes.snackbar }} {...props}>
 			<BaseAlert
 				severity="error"
 				classes={{ root: classes.paper }}

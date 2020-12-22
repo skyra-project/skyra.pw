@@ -13,7 +13,7 @@ const SelectChannel = ({ label, value, guild, onChange, tooltipTitle, ...props }
 	const christmasClasses = useChristmasStyles();
 
 	let name;
-	const channel = guild.channels.find(c => c.id === value);
+	const channel = guild.channels.find((c) => c.id === value);
 	if (channel) name = channel.name;
 
 	return (
@@ -24,9 +24,9 @@ const SelectChannel = ({ label, value, guild, onChange, tooltipTitle, ...props }
 			onChange={onChange}
 			tooltipTitle={tooltipTitle}
 			values={guild.channels
-				.filter(c => c.type === 'text' || c.type === 'store' || c.type === 'news')
+				.filter((c) => c.type === 'text' || c.type === 'store' || c.type === 'news')
 				.sort((c1, c2) => c1.rawPosition - c2.rawPosition)
-				.map(c => ({ name: c.name, value: c.id }))}
+				.map((c) => ({ name: c.name, value: c.id }))}
 			buttonProps={{
 				className: clsx(christmasClasses.backgroundColor, christmasClasses.backgroundColorHover),
 				...props.buttonProps

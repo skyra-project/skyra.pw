@@ -143,24 +143,15 @@ const SelectMany: FC<SelectManyProps> = ({ label, value, onChange, values, name,
 						style={{ height: theme.spacing(50), width: '100%' }}
 						className={classes.virtualizedList}
 						components={VirtuosoComponents}
-						itemContent={index => (
+						itemContent={(index) => (
 							<>
 								<ListItemIcon>
-									<Checkbox
-										edge="start"
-										checked={checked.includes(filteredValues[index].value)}
-										tabIndex={-1}
-										color="primary"
-									/>
+									<Checkbox edge="start" checked={checked.includes(filteredValues[index].value)} tabIndex={-1} color="primary" />
 								</ListItemIcon>
 								<ListItemText primary={filteredValues[index].name} />
 								{filteredValues[index].iconUrl && (
 									<ListItemSecondaryAction>
-										<LazyAvatar
-											alt={filteredValues[index].value}
-											src={filteredValues[index].iconUrl}
-											variant="square"
-										/>
+										<LazyAvatar alt={filteredValues[index].value} src={filteredValues[index].iconUrl} variant="square" />
 									</ListItemSecondaryAction>
 								)}
 							</>

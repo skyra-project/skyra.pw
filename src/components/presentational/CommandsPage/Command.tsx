@@ -59,7 +59,7 @@ const resolveMultilineString = (str: string | string[], multiline: boolean): str
 		? resolveMultilineString(str.join(multiline ? '\n' : ' '), multiline)
 		: str
 				.split('\n')
-				.map(line => line.trim())
+				.map((line) => line.trim())
 				.join(multiline ? '\n\n' : ' ');
 };
 
@@ -104,10 +104,7 @@ const Command: FC<CommandProps> = ({ command }) => {
 								</Grid>
 								<Grid item>
 									<ExtendedHelpBody
-										body={resolveMultilineString(
-											command.extendedHelp.extendedHelp,
-											command.extendedHelp.multiline ?? false
-										)}
+										body={resolveMultilineString(command.extendedHelp.extendedHelp, command.extendedHelp.multiline ?? false)}
 									/>
 								</Grid>
 							</>
@@ -120,9 +117,7 @@ const Command: FC<CommandProps> = ({ command }) => {
 								</Grid>
 								<Grid item>
 									<ExtendedHelpBody
-										body={command.extendedHelp.explainedUsage
-											.map(([arg, desc]) => `- **${arg}**: ${desc}\n`)
-											.join('\n')}
+										body={command.extendedHelp.explainedUsage.map(([arg, desc]) => `- **${arg}**: ${desc}\n`).join('\n')}
 									/>
 								</Grid>
 							</>
@@ -135,9 +130,7 @@ const Command: FC<CommandProps> = ({ command }) => {
 								</Grid>
 								<Grid item>
 									<ExtendedHelpBody
-										body={command.extendedHelp.possibleFormats
-											.map(([type, example]) => `- **${type}**: ${example}\n`)
-											.join('\n')}
+										body={command.extendedHelp.possibleFormats.map(([type, example]) => `- **${type}**: ${example}\n`).join('\n')}
 									/>
 								</Grid>
 							</>
@@ -151,7 +144,7 @@ const Command: FC<CommandProps> = ({ command }) => {
 								<Grid item>
 									<ExtendedHelpBody
 										body={command.extendedHelp.examples
-											.map(example => `- Skyra, ${command.name}${example ? ` *${example}*` : ''}\n`)
+											.map((example) => `- Skyra, ${command.name}${example ? ` *${example}*` : ''}\n`)
 											.join('\n')}
 									/>
 								</Grid>
@@ -165,10 +158,7 @@ const Command: FC<CommandProps> = ({ command }) => {
 								</Grid>
 								<Grid item>
 									<ExtendedHelpBody
-										body={resolveMultilineString(
-											command.extendedHelp.reminder,
-											command.extendedHelp.multiline ?? false
-										)}
+										body={resolveMultilineString(command.extendedHelp.reminder, command.extendedHelp.multiline ?? false)}
 									/>
 								</Grid>
 							</>

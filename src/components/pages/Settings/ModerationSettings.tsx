@@ -20,7 +20,7 @@ const ModerationSettings: FC = () => {
 						title={name}
 						currentValue={guildSettings[key]}
 						description={description}
-						onChange={event =>
+						onChange={(event) =>
 							setGuildSettingsChanges({
 								[key]: event.target.checked
 							})
