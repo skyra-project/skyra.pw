@@ -22,7 +22,7 @@ import Typography from '@material-ui/core/Typography';
 import DeleteIcon from '@material-ui/icons/Delete';
 import clsx from 'clsx';
 import { FastField, Formik, FormikConfig } from 'formik';
-import React, { CSSProperties, forwardRef, Fragment, memo, useMemo } from 'react';
+import React, { forwardRef, Fragment, memo, useMemo } from 'react';
 import { Virtuoso } from 'react-virtuoso';
 import type { Components } from 'react-virtuoso/dist/interfaces';
 import { boolean, object, string } from 'yup';
@@ -130,7 +130,7 @@ const CustomCommandSettings = () => {
 
 	const VirtuosoComponents = useMemo<Components>(
 		() => ({
-			List: forwardRef<HTMLDivElement, { style: CSSProperties }>(({ style, children }, listRef) => (
+			List: forwardRef(({ style, children }, listRef) => (
 				<List style={{ ...style, width: '100%', margin: 0, padding: 0 }} ref={listRef} component="nav">
 					{children}
 				</List>

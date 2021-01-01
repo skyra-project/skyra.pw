@@ -36,7 +36,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import { Track, TrackInfo } from '@skyra/audio';
-import React, { CSSProperties, FC, forwardRef, memo, useEffect, useMemo, useState } from 'react';
+import React, { FC, forwardRef, memo, useEffect, useMemo, useState } from 'react';
 import FlipMove from 'react-flip-move';
 import { Else, If, Then, When } from 'react-if';
 import ReactPlayer from 'react-player';
@@ -239,7 +239,7 @@ const MusicPage: FC<MusicPageProps> = ({ guildId }) => {
 
 	const VirtuosoComponents = useMemo<Components>(
 		() => ({
-			List: forwardRef<HTMLDivElement, { style: CSSProperties }>(({ style, children }, listRef) => (
+			List: forwardRef(({ style, children }, listRef) => (
 				<List style={{ ...style, width: '100%', margin: 0, padding: 0 }} ref={listRef} component="nav">
 					{children}
 				</List>

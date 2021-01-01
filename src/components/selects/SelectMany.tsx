@@ -15,7 +15,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import { toTitleCase } from '@sapphire/utilities';
-import React, { ChangeEvent, CSSProperties, FC, forwardRef, Fragment, useCallback, useMemo, useState } from 'react';
+import React, { ChangeEvent, FC, forwardRef, Fragment, useCallback, useMemo, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import { Virtuoso } from 'react-virtuoso';
 import { Components } from 'react-virtuoso/dist/interfaces';
@@ -86,7 +86,7 @@ const SelectMany: FC<SelectManyProps> = ({ label, value, onChange, values, name,
 
 	const VirtuosoComponents = useMemo<Components>(
 		() => ({
-			List: forwardRef<HTMLDivElement, { style: CSSProperties }>(({ style, children }, listRef) => (
+			List: forwardRef(({ style, children }, listRef) => (
 				<List style={{ ...style, width: '100%', margin: 0, padding: 0 }} ref={listRef} component="nav">
 					{children}
 				</List>

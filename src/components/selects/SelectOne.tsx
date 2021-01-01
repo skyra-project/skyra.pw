@@ -14,7 +14,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import { toTitleCase } from '@sapphire/utilities';
-import React, { ChangeEvent, CSSProperties, forwardRef, Fragment, ReactNode, useCallback, useMemo, useState } from 'react';
+import React, { ChangeEvent, forwardRef, Fragment, ReactNode, useCallback, useMemo, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import { Virtuoso } from 'react-virtuoso';
 import type { Components } from 'react-virtuoso/dist/interfaces';
@@ -82,7 +82,7 @@ export default function SelectOne({ label, onChange, values, name = 'None', imag
 
 	const VirtuosoComponents = useMemo<Components>(
 		() => ({
-			List: forwardRef<HTMLDivElement, { style: CSSProperties }>(({ style, children }, listRef) => (
+			List: forwardRef(({ style, children }, listRef) => (
 				<List style={{ ...style, width: '100%', margin: 0, padding: 0 }} ref={listRef} component="nav">
 					{children}
 				</List>
