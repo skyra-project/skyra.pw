@@ -43,7 +43,6 @@
 		"react-if": "^4.0.1",
 		"react-markdown": "^5.0.3",
 		"react-player": "^2.7.2",
-		"react-snowfall": "^1.0.2",
 		"react-virtuoso": "^1.2.3",
 		"remark-gfm": "^1.0.0",
 		"yup": "0.31.1"

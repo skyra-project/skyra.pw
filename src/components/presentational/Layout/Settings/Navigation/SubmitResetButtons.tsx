@@ -1,11 +1,9 @@
-import useChristmasStyles from '#components/christmas/UseChristmasStyles';
 import { useGuildSettingsChangesContext } from '#contexts/Settings/GuildSettingsChangesContext';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/DeleteForever';
 import SaveIconIcon from '@material-ui/icons/Save';
-import clsx from 'clsx';
 import React, { FC, memo } from 'react';
 
 interface SubmitResetButtonsProps {
@@ -37,8 +35,6 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const SubmitResetButtons: FC<SubmitResetButtonsProps> = ({ isLoading, isOnMobile, submitChanges }) => {
-	const christmasClasses = useChristmasStyles();
-
 	const classes = useStyles();
 	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
@@ -55,14 +51,7 @@ const SubmitResetButtons: FC<SubmitResetButtonsProps> = ({ isLoading, isOnMobile
 				<DeleteIcon className={classes.saveIcon} />
 				Reset
 			</Button>
-			<Button
-				disabled={isLoading}
-				onClick={submitChanges}
-				color="primary"
-				variant="contained"
-				size={isOnMobile ? 'small' : 'large'}
-				classes={{ root: clsx(christmasClasses.backgroundColor, christmasClasses.backgroundColorHover) }}
-			>
+			<Button disabled={isLoading} onClick={submitChanges} color="primary" variant="contained" size={isOnMobile ? 'small' : 'large'}>
 				<SaveIconIcon className={classes.saveIcon} />
 				Save
 			</Button>

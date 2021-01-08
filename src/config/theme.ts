@@ -1,13 +1,13 @@
-import { red } from '@material-ui/core/colors';
+import { blue } from '@material-ui/core/colors';
 import { createMuiTheme } from '@material-ui/core/styles';
 
 export default createMuiTheme({
 	palette: {
 		type: 'dark',
 		primary: {
-			main: red[600],
-			light: red[400],
-			dark: red[800],
+			main: blue[600],
+			light: blue[400],
+			dark: blue[800],
 			contrastText: '#FFFFFF'
 		},
 		secondary: {
