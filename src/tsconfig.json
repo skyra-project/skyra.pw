@@ -1,10 +1,10 @@
 {
-	"extends": "@favware/ts-config",
+	"extends": "@sapphire/ts-config",
 	"compileOnSave": false,
 	"compilerOptions": {
 		"allowJs": true,
 		"checkJs": true,
-		"module": "ESNext",
+		"lib": ["ESNext", "DOM"],
 		"declaration": false,
 		"declarationMap": false,
 		"isolatedModules": true,
