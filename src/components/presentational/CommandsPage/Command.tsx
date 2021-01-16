@@ -1,4 +1,4 @@
-import { FlattenedCommand } from '#config/types/ApiData';
+import type { FlattenedCommand } from '#config/types/ApiData';
 import Chips from '#presentational/CommandsPage/Chips';
 import { reactStringReplace } from '#utils/reactStringReplace';
 import Accordion from '@material-ui/core/Accordion';

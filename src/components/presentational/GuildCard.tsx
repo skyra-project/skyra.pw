@@ -1,4 +1,4 @@
-import { DashboardPack, FlattenedGuild } from '#config/types/ApiData';
+import type { DashboardPack, FlattenedGuild } from '#config/types/ApiData';
 import Link from '#routing/Link';
 import { guildAddURL } from '#utils/constants';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';

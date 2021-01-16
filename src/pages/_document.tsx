@@ -4,7 +4,22 @@ import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/do
 import React from 'react';
 
 export default class extends Document {
-	static async getInitialProps(ctx: DocumentContext) {
+	public render() {
+		return (
+			<Html lang="en">
+				<Head>
+					<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+					<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+				</Head>
+				<Box component="body" margin={0}>
+					<Main />
+					<NextScript />
+				</Box>
+			</Html>
+		);
+	}
+
+	public static async getInitialProps(ctx: DocumentContext) {
 		// Resolution order
 		//
 		// On the server:
@@ -43,20 +58,5 @@ export default class extends Document {
 			// Styles fragment is rendered after the app and page rendering finish.
 			styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement()]
 		};
-	}
-
-	render() {
-		return (
-			<Html lang="en">
-				<Head>
-					<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-					<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-				</Head>
-				<Box component="body" margin={0}>
-					<Main />
-					<NextScript />
-				</Box>
-			</Html>
-		);
 	}
 }

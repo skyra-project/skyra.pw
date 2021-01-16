@@ -2,7 +2,7 @@
 import { Typography } from '@material-ui/core';
 import NextLink from 'next/link';
 import React, { forwardRef, PropsWithChildren } from 'react';
-import { UrlObject } from 'url';
+import type { UrlObject } from 'url';
 
 interface NextComposedProps {
 	as?: string | UrlObject;

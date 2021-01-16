@@ -1,4 +1,4 @@
-import { FlattenedGuild } from '#config/types/ApiData';
+import type { FlattenedGuild } from '#config/types/ApiData';
 import React, { memo } from 'react';
 import SelectOne, { SelectOneProps } from './SelectOne';
 
@@ -9,6 +9,7 @@ export interface SelectRoleProps extends Omit<SelectOneProps, 'values' | 'name'>
 }
 
 const SelectRole = ({ label, value, guild, filterEveryone, onChange, ...props }: SelectRoleProps) => {
+	// eslint-disable-next-line @typescript-eslint/init-declarations
 	let name;
 	const role = guild.roles.find((c) => c.id === value);
 	if (role) name = role.name;

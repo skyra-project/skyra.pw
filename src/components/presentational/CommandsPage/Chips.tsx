@@ -1,4 +1,4 @@
-import { FlattenedCommand } from '#config/types/ApiData';
+import type { FlattenedCommand } from '#config/types/ApiData';
 import Chip from '@material-ui/core/Chip';
 import { amber, deepOrange } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';

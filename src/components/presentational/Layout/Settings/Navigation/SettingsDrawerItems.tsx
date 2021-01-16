@@ -1,5 +1,5 @@
 import SkyraLogo from '#assets/skyraLogo';
-import { FlattenedGuild } from '#config/types/ApiData';
+import type { FlattenedGuild } from '#config/types/ApiData';
 import Tooltip from '#mui/Tooltip';
 import GuildIcon from '#presentational/GuildIcon';
 import ListItemLink from '#routing/ListItemLink';

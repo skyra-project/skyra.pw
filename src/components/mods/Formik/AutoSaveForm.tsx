@@ -12,7 +12,8 @@ export interface AutoSavingFormProps<T extends Record<string, unknown>> {
 	/** The timeout in milliseconds between submits, @default 1000 */
 	submitDebounceMs?: number;
 	/** The onSubmit handler for this form */
-	onSubmit(values: T, formikHelpers: FormikHelpers<T>): void | Promise<any>;
+	// eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+	onSubmit(values: T, formikHelpers: FormikHelpers<T>): Promise<any> | void;
 }
 
 function AutoSavingForm<T extends Record<string, unknown>>({

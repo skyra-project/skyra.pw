@@ -1,4 +1,4 @@
-import { FlattenedGuild } from '#config/types/ApiData';
+import type { FlattenedGuild } from '#config/types/ApiData';
 import constate from 'constate';
 import { useState } from 'react';
 

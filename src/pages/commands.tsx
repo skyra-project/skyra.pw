@@ -1,5 +1,5 @@
 import { createSeoProps } from '#config/next-seo.config';
-import { FlattenedCommand } from '#config/types/ApiData';
+import type { FlattenedCommand } from '#config/types/ApiData';
 import UiSearchBar from '#mui/UiSearchBar';
 import Category from '#presentational/CommandsPage/Category';
 import GeneralPage from '#presentational/Layout/General';
@@ -10,7 +10,7 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import debounce from 'lodash/debounce';
-import { InferGetStaticPropsType, NextPage } from 'next';
+import type { InferGetStaticPropsType, NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React, { useCallback, useMemo, useState } from 'react';
 

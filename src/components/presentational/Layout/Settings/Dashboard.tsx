@@ -1,6 +1,6 @@
 import { createSeoProps } from '#config/next-seo.config';
-import { FlattenedGuild } from '#config/types/ApiData';
-import { GuildSettings } from '#config/types/GuildSettings';
+import type { FlattenedGuild } from '#config/types/ApiData';
+import type { GuildSettings } from '#config/types/GuildSettings';
 import { useGuildDataContext } from '#contexts/Settings/GuildDataContext';
 import { useGuildSettingsChangesContext } from '#contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '#contexts/Settings/GuildSettingsContext';
@@ -94,7 +94,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 	}, []);
 
 	useEffect(() => {
-		syncGuildData();
+		void syncGuildData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

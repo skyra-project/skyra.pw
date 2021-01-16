@@ -1,5 +1,5 @@
-import { DashboardPack, FlattenedGuild, OauthFlattenedUser } from '#config/types/ApiData';
-import { Selfmod } from '#config/types/ConfigurableData';
+import type { DashboardPack, FlattenedGuild, OauthFlattenedUser } from '#config/types/ApiData';
+import type { Selfmod } from '#config/types/ConfigurableData';
 import Router from 'next/router';
 import { BASE_API_URL, FetchMethods, LocalStorageKeys } from './constants';
 import isBrowser from './isBrowser';
@@ -112,7 +112,7 @@ export async function syncUser(
 			action: 'SYNC_USER'
 		})
 	}).catch((err) => {
-		if (err.status === 401 || err.status === 403) logOut(setPack, setAuthenticated, changeRoute);
+		if (err.status === 401 || err.status === 403) void logOut(setPack, setAuthenticated, changeRoute);
 	});
 
 	if (!response) return;

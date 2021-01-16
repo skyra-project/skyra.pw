@@ -1,4 +1,4 @@
-import { FlattenedCommand } from '#config/types/ApiData';
+import type { FlattenedCommand } from '#config/types/ApiData';
 import Command from '#presentational/CommandsPage/Command';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';

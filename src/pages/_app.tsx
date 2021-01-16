@@ -6,9 +6,9 @@ import { CookieConsentProvider } from '#presentational/CookieConsent/ContextProv
 import { useMediaQuery } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
-import { NextPage } from 'next';
+import type { NextPage } from 'next';
 import { DefaultSeo } from 'next-seo';
-import { AppProps } from 'next/app';
+import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import NextNprogress from 'nextjs-progressbar';

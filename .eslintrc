@@ -16,6 +16,7 @@
 	},
 	"rules": {
 		"@typescript-eslint/naming-convention": "off",
+		"@typescript-eslint/no-throw-literal": "off",
 		"no-extra-label": "warn",
 		"no-iterator": "warn",
 		"no-label-var": "warn",
@@ -123,10 +124,16 @@
 	},
 	"overrides": [
 		{
-			"files": ["src/lib/structures/color/*.ts"],
+			"files": ["src/utils/structures/color/*.ts"],
 			"rules": {
-				"import/first": 0,
-				"no-throw-literal": 0
+				"import/first": "off",
+				"@typescript-eslint/no-throw-literal": "off"
+			}
+		},
+		{
+			"files": ["src/next-env.d.ts"],
+			"rules": {
+				"spaced-comment": "off"
 			}
 		}
 	]

@@ -1,5 +1,5 @@
-import { CustomCommands } from '#config/types/ConfigurableData';
-import { CustomCommand } from '#config/types/GuildSettings';
+import type { CustomCommands } from '#config/types/ConfigurableData';
+import type { CustomCommand } from '#config/types/GuildSettings';
 import { useGuildSettingsChangesContext } from '#contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '#contexts/Settings/GuildSettingsContext';
 import Section from '#layout/Settings/Section';
@@ -243,7 +243,8 @@ const CustomCommandSettings = () => {
 										disableTypography
 										primary={
 											<Typography variant="body1" classes={{ root: classes.tagHeader }}>
-												{guildSettings.prefix + sortedCommands[index].id}
+												{guildSettings.prefix}
+												{sortedCommands[index].id}
 											</Typography>
 										}
 										secondary={

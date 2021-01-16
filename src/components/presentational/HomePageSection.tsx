@@ -1,4 +1,4 @@
-import features from '#assets/features';
+import type features from '#assets/features';
 import { useAuthenticated } from '#contexts/AuthenticationContext';
 import { Box, createStyles, Divider, Hidden, makeStyles, Theme, Typography } from '@material-ui/core';
 import clsx from 'clsx';

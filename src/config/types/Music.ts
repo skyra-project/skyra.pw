@@ -1,4 +1,4 @@
-import { Track, TrackInfo } from '@skyra/audio';
+import type { Track, TrackInfo } from '@skyra/audio';
 
 export interface IncomingWebsocketMessage {
 	action: ServerActions;

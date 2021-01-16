@@ -1,6 +1,6 @@
-import { FlattenedGuild } from './types/ApiData';
-import { Channels, Events, Messages, Moderation, Roles, Suggestions } from './types/ConfigurableData';
-import { GuildSettings } from './types/GuildSettings';
+import type { FlattenedGuild } from './types/ApiData';
+import type { Channels, Events, Messages, Moderation, Roles, Suggestions } from './types/ConfigurableData';
+import type { GuildSettings } from './types/GuildSettings';
 
 export const ConfigurableSuggestionActions: Suggestions.OnAction[] = [
 	{
@@ -136,15 +136,15 @@ export const ConfigurableMessageKeys = (guildSettings: GuildSettings, guildData:
 	{
 		name: 'Join DMs',
 		key: 'messagesJoinDM',
-		placeholder: [!guildSettings.eventsMemberAdd ? 'You must configure Member Join on the Events page.' : null].join(' '),
+		placeholder: [guildSettings.eventsMemberAdd ? null : 'You must configure Member Join on the Events page.'].join(' '),
 		tooltipText: 'This is the message I will send in a DM to a member when they join.'
 	},
 	{
 		name: 'Greeting',
 		key: 'messagesGreeting',
 		placeholder: [
-			!guildSettings.channelsGreeting ? 'You must set up the greeting channel in channels page.' : null,
-			!guildSettings.eventsMemberAdd ? 'You must configure Member Join on the Events page.' : null
+			guildSettings.channelsGreeting ? null : 'You must set up the greeting channel in channels page.',
+			guildSettings.eventsMemberAdd ? null : 'You must configure Member Join on the Events page.'
 		].join(' '),
 		tooltipText: `This is the message I will send to ${
 			guildData?.channels.find((c) => c.id === guildSettings.channelsGreeting)?.name ?? 'the configured Greeting channel'
@@ -154,14 +154,23 @@ export const ConfigurableMessageKeys = (guildSettings: GuildSettings, guildData:
 		name: 'Farewell',
 		key: 'messagesFarewell',
 		placeholder: [
-			!guildSettings.channelsFarewell ? 'You must set up the farewell channel in channels page.' : null,
-			!guildSettings.eventsMemberRemove ? 'You must configure Member Leave on the Events page.' : null
+			guildSettings.channelsFarewell ? null : 'You must set up the farewell channel in channels page.',
+			guildSettings.eventsMemberRemove ? null : 'You must configure Member Leave on the Events page.'
 		].join(' '),
 		tooltipText: `This is the message I will send to ${
 			guildData?.channels.find((c) => c.id === guildSettings.channelsFarewell)?.name ?? 'the configured Farewell channel'
 		} when a member leaves.`
 	}
 ];
+
+export enum Matches {
+	Guild = '%GUILD%',
+	Member = '%MEMBER%',
+	MemberName = '%MEMBERNAME%',
+	MemberTag = '%MEMBERTAG%',
+	MemberCount = '%MEMBERCOUNT%',
+	Position = '%POSITION%'
+}
 
 export const ConfigurableReplaceableMatchers = (guildData: FlattenedGuild): Messages.Matcher[] => [
 	{ matchKey: Matches.Guild, description: `I will replace this with ${guildData?.name}` },
@@ -174,15 +183,6 @@ export const ConfigurableReplaceableMatchers = (guildData: FlattenedGuild): Mess
 		description: `I will replace this with the ordinal position this member has in the server.`
 	}
 ];
-
-export enum Matches {
-	Guild = '%GUILD%',
-	Member = '%MEMBER%',
-	MemberName = '%MEMBERNAME%',
-	MemberTag = '%MEMBERTAG%',
-	MemberCount = '%MEMBERCOUNT%',
-	Position = '%POSITION%'
-}
 
 export const ConfigurableModerationEvents: Events.Event[] = [
 	{ title: 'Ban Added', key: 'eventsBanAdd', description: 'This event posts anonymous moderation logs when a user gets banned.' },

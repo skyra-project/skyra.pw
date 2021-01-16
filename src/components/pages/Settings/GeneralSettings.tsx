@@ -1,4 +1,4 @@
-import { General } from '#config/types/ConfigurableData';
+import type { General } from '#config/types/ConfigurableData';
 import { useGuildSettingsChangesContext } from '#contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '#contexts/Settings/GuildSettingsContext';
 import Section from '#layout/Settings/Section';

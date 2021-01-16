@@ -1,5 +1,5 @@
-import { FlattenedCommand } from '#config/types/ApiData';
-import { DisableCommands } from '#config/types/ConfigurableData';
+import type { FlattenedCommand } from '#config/types/ApiData';
+import type { DisableCommands } from '#config/types/ConfigurableData';
 import { useGuildSettingsChangesContext } from '#contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '#contexts/Settings/GuildSettingsContext';
 import Section from '#layout/Settings/Section';
@@ -92,7 +92,7 @@ const DisabledCommandSettings: FC = () => {
 	}, []);
 
 	useEffect(() => {
-		fetchCommands();
+		void fetchCommands();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

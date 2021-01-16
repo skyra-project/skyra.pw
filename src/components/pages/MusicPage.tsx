@@ -35,7 +35,7 @@ import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import { Track, TrackInfo } from '@skyra/audio';
+import type { Track, TrackInfo } from '@skyra/audio';
 import React, { FC, forwardRef, memo, useEffect, useMemo, useState } from 'react';
 import FlipMove from 'react-flip-move';
 import { Else, If, Then, When } from 'react-if';

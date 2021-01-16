@@ -1,6 +1,6 @@
 import { createSeoProps } from '#config/next-seo.config';
 import PrivacyPolicy from '#pages/PrivacyPolicy';
-import { NextPage } from 'next';
+import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
 

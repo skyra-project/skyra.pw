@@ -1,4 +1,4 @@
-import { FlattenedGuild } from '#config/types/ApiData';
+import type { FlattenedGuild } from '#config/types/ApiData';
 import React, { memo } from 'react';
 import SelectOne, { SelectOneProps } from './SelectOne';
 
@@ -8,6 +8,7 @@ export interface SelectChannelProps extends Omit<SelectOneProps, 'values' | 'nam
 }
 
 const SelectChannel = ({ label, value, guild, onChange, tooltipTitle, ...props }: SelectChannelProps) => {
+	// eslint-disable-next-line @typescript-eslint/init-declarations
 	let name;
 	const channel = guild.channels.find((c) => c.id === value);
 	if (channel) name = channel.name;

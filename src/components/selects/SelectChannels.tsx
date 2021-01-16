@@ -1,4 +1,4 @@
-import { FlattenedGuild } from '#config/types/ApiData';
+import type { FlattenedGuild } from '#config/types/ApiData';
 import React, { memo, PropsWithChildren } from 'react';
 import SelectMany, { SelectManyProps } from './SelectMany';
 

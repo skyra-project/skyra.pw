@@ -23,7 +23,7 @@ const CookieConsentProvider: FC = ({ children }) => {
 	return (
 		<CookieConsentContext.Provider
 			value={{
-				allowsCookies: allowsCookies !== null ? Boolean(allowsCookies) : null,
+				allowsCookies: allowsCookies === null ? null : Boolean(allowsCookies),
 				dispatch
 			}}
 		>

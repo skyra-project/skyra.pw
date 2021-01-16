@@ -18,8 +18,8 @@ import { toTitleCase } from '@sapphire/utilities';
 import React, { ChangeEvent, FC, forwardRef, Fragment, useCallback, useMemo, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import { Virtuoso } from 'react-virtuoso';
-import { Components } from 'react-virtuoso/dist/interfaces';
-import { SelectOneProps } from './SelectOne';
+import type { Components } from 'react-virtuoso/dist/interfaces';
+import type { SelectOneProps } from './SelectOne';
 
 export interface SelectManyProps extends SelectOneProps {
 	value: string[];
@@ -165,7 +165,7 @@ const SelectMany: FC<SelectManyProps> = ({ label, value, onChange, values, name,
 					<Button
 						onClick={() => {
 							onChange(checked);
-							handleClose();
+							void handleClose();
 						}}
 						color="primary"
 					>

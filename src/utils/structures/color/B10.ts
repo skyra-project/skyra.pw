@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-/* eslint-disable import/first */
-import { ColorHandler } from './index';
+import type { ColorHandler } from './index';
 
 export class B10 implements ColorHandler {
 	public value: number;

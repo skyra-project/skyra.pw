@@ -1,4 +1,4 @@
-import { FlattenedGuild } from '#config/types/ApiData';
+import type { FlattenedGuild } from '#config/types/ApiData';
 import LazyAvatar from '#mui/LazyAvatar';
 import { displayIconURL, getAcronym } from '#utils/util';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';

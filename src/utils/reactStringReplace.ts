@@ -26,7 +26,7 @@ import escapeRegExp from 'lodash/escapeRegExp';
 import flatten from 'lodash/flatten';
 import isRegExp from 'lodash/isRegExp';
 import isString from 'lodash/isString';
-import { ReactNode, ReactNodeArray } from 'react';
+import type { ReactNode, ReactNodeArray } from 'react';
 
 type replaceCb = (match: string, index: number, offset: number) => ReactNode;
 
@@ -73,7 +73,7 @@ function replaceString(str: string | ReactNodeArray, match: RegExp | string, fn:
 	const result: any[] = str.split(re);
 
 	// Apply fn to all odd elements
-	for (let i = 1, length = result.length; i < length; i += 2) {
+	for (let i = 1, { length } = result; i < length; i += 2) {
 		curCharLen = result[i].length;
 		curCharStart += result[i - 1].length;
 		result[i] = fn(result[i], i, curCharStart);
@@ -85,10 +85,5 @@ function replaceString(str: string | ReactNodeArray, match: RegExp | string, fn:
 
 export function reactStringReplace(source: string | string[], match: RegExp | string, fn: replaceCb): ReactNodeArray {
 	if (!Array.isArray(source)) source = [source];
-
-	return flatten(
-		source.map(function (x) {
-			return isString(x) ? replaceString(x, match, fn) : x;
-		})
-	);
+	return flatten(source.map((x) => (isString(x) ? replaceString(x, match, fn) : x)));
 }

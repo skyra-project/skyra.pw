@@ -1,7 +1,7 @@
 import { createSeoProps } from '#config/next-seo.config';
 import GeneralPage from '#layout/General';
 import RedirectRoute from '#routing/RedirectRoute';
-import { NextPage } from 'next';
+import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';

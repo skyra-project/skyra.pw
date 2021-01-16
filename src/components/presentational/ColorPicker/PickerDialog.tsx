@@ -37,10 +37,10 @@ const PickerDialog: FC<PickerDialogProps> = ({ value, onClick, onChange }) => {
 	const scrollLockRef = useRef<ChromePicker>(null);
 
 	useEffect(() => {
-		if (scrollLockRef.current !== null) {
-			disableBodyScroll((scrollLockRef.current as unknown) as HTMLElement);
-		} else {
+		if (scrollLockRef.current === null) {
 			enableBodyScroll((scrollLockRef.current as unknown) as HTMLElement);
+		} else {
+			disableBodyScroll((scrollLockRef.current as unknown) as HTMLElement);
 		}
 
 		return () => {

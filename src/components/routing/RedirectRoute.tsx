@@ -9,7 +9,7 @@ const RedirectRoute: FC<RedirectRouteProps> = ({ redirectUri, children }) => {
 	const router = useRouter();
 
 	useEffect(() => {
-		router.replace(redirectUri);
+		void router.replace(redirectUri);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

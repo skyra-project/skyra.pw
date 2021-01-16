@@ -27,7 +27,7 @@ const AutoSave: FC<AutoSaveProps> = ({ submitDebounceMs = Time.Second }) => {
 
 	useEffect(() => {
 		if (formik.dirty) {
-			debouncedSubmit();
+			void debouncedSubmit();
 		}
 	}, [debouncedSubmit, formik.dirty, formik.values]);
 

@@ -1,4 +1,4 @@
-import { FlattenedGuild } from '#config/types/ApiData';
+import type { FlattenedGuild } from '#config/types/ApiData';
 import UserMenu from '#layout/Navigation/UserMenu';
 import { SettingsDrawerWidth } from '#utils/constants';
 import AppBar from '@material-ui/core/AppBar';

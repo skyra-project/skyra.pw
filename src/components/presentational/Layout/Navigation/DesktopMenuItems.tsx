@@ -80,7 +80,7 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 	const popperMenuPrevOpen = useRef(popperMenuIsOpen);
 
 	useEffect(() => {
-		if (popperMenuPrevOpen.current === true && popperMenuIsOpen === false) {
+		if (popperMenuPrevOpen.current && !popperMenuIsOpen) {
 			anchorRef.current?.focus();
 		}
 

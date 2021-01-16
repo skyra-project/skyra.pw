@@ -95,7 +95,7 @@ export default function SelectOne({ label, onChange, values, name = 'None', imag
 					style={{ margin: 0 }}
 					onClick={() => {
 						onChange(filteredValues[props['data-index']].value);
-						handleClose();
+						void handleClose();
 					}}
 				>
 					{children}
@@ -163,7 +163,7 @@ export default function SelectOne({ label, onChange, values, name = 'None', imag
 					<Button
 						onClick={() => {
 							onChange(null);
-							handleClose();
+							void handleClose();
 						}}
 						color="primary"
 					>

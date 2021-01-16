@@ -19,7 +19,7 @@ import RoleSettings from '#pages/Settings/RoleSettings';
 import StarboardSettings from '#pages/Settings/StarboardSettings';
 import SuggestionSettings from '#pages/Settings/SuggestionSettings';
 import RedirectRoute from '#routing/RedirectRoute';
-import { NextPage } from 'next';
+import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React from 'react';

@@ -103,7 +103,7 @@ const MobileNavMenu: FC = () => {
 	const popperMenuPrevOpen = useRef(popperMenuIsOpen);
 
 	useEffect(() => {
-		if (popperMenuPrevOpen.current === true && popperMenuIsOpen === false) {
+		if (popperMenuPrevOpen.current && !popperMenuIsOpen) {
 			anchorRef.current?.focus();
 		}
 

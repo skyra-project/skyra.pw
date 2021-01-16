@@ -145,7 +145,7 @@ const ChannelSettings: FC = () => {
 						/>
 					))}
 					<SelectChannels
-						key={ConfigurableChannels.length + 1}
+						key={(ConfigurableChannels.length as number) + 1}
 						tooltipTitle={ConfigurableDisabledChannels.description}
 						value={guildSettings.disabledChannels}
 						onChange={(channels: typeof guildSettings.disabledChannels) =>

@@ -4,7 +4,7 @@ import { mergeDiscordPack } from '#contexts/DiscordPackContext';
 import GeneralLayout from '#layout/General';
 import { BASE_WEB_URL, CLIENT_ID, FetchMethods, LocalStorageKeys } from '#utils/constants';
 import { apiFetch, saveState } from '#utils/util';
-import { NextPage } from 'next';
+import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -47,7 +47,7 @@ const OauthCallback: NextPage = () => {
 	}, []);
 
 	useEffect(() => {
-		finalizeAuthFlow(router.query.code);
+		void finalizeAuthFlow(router.query.code);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
