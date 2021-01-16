@@ -11,7 +11,7 @@
 		"start": "next start src",
 		"export": "next export src",
 		"clean": "rimraf src/.next src/public/sw.js src/public/workbox* src/public/sitemap.xml",
-		"build:sitemap": "node scripts/sitemapGenerator.js",
+		"build:sitemap": "node scripts/sitemapGenerator.mjs",
 		"format": "prettier --write --loglevel=error src/**/*.{js,jsx,ts,tsx}",
 		"update": "yarn upgrade-interactive --latest",
 		"lint": "eslint src --ext js,jsx,ts,tsx --fix"
