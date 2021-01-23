@@ -19,7 +19,8 @@ import RoleSettings from '#pages/Settings/RoleSettings';
 import StarboardSettings from '#pages/Settings/StarboardSettings';
 import SuggestionSettings from '#pages/Settings/SuggestionSettings';
 import RedirectRoute from '#routing/RedirectRoute';
-import type { NextPage } from 'next';
+import { ssrFetch } from '#utils/util';
+import type { InferGetServerSidePropsType, NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -29,7 +30,7 @@ const GuildSettingsProvider = dynamic(() => import('#contexts/Settings/GuildSett
 const GuildSettingsChangesProvider = dynamic(() => import('#contexts/Settings/GuildSettingsChangesContext'), { ssr: false });
 const GuildDataProvider = dynamic(() => import('#contexts/Settings/GuildDataContext'), { ssr: false });
 
-const GuildSettingsPage: NextPage = () => {
+const GuildSettingsPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ languages }) => {
 	const router = useRouter();
 	const authenticated = useAuthenticated();
 
@@ -95,7 +96,7 @@ const GuildSettingsPage: NextPage = () => {
 								<FilterWordSettings />
 							</Case>
 							<Default>
-								<GeneralSettings />
+								<GeneralSettings languages={languages} />
 							</Default>
 						</Switch>
 					</Dashboard>
@@ -103,6 +104,16 @@ const GuildSettingsPage: NextPage = () => {
 			</GuildSettingsProvider>
 		</GuildSettingsChangesProvider>
 	);
+};
+
+export const getServerSideProps = async () => {
+	const languages = await ssrFetch<string[]>('/languages');
+
+	return {
+		props: {
+			languages
+		}
+	};
 };
 
 export default GuildSettingsPage;
