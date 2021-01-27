@@ -98,7 +98,7 @@ export async function syncUser(
 	if (!authenticated) return;
 
 	// Check if they've synced in the past 5 minutes.
-	const lastSync = loadState(LocalStorageKeys.LastSync) as number;
+	const lastSync = loadState<number>(LocalStorageKeys.LastSync)!;
 	const difference = Date.now() - lastSync;
 	if (difference < Time.Minute * 5) {
 		return;

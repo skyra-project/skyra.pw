@@ -72,7 +72,7 @@ const GuildCard = memo<GuildCardProps>(({ guild }) => {
 });
 
 export const FilteredGuildCards = (pack?: DashboardPack) =>
-	(pack?.user?.guilds ?? [])
+	(pack?.guilds ?? [])
 		// Filter on manageable servers
 		.filter((g) => g.manageable)
 		// Sort by whether Skyra is in the server or not
