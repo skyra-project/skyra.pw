@@ -26,7 +26,7 @@ const OauthCallback: NextPage = () => {
 		}
 
 		try {
-			await apiFetch(`/oauth/callback`, {
+			await apiFetch<LoginData>(`/oauth/callback`, {
 				method: FetchMethods.Post,
 				body: JSON.stringify({
 					code,
