@@ -1,10 +1,7 @@
 import type { Guild } from 'discord.js';
 
 export interface DashboardPack {
-	user: DashboardUserPack | null;
-}
-
-export interface DashboardUserPack extends FlattenedUser {
+	user: FlattenedUser | null;
 	guilds?: FlattenedGuild[];
 }
 
@@ -115,12 +112,15 @@ export interface FlattenedDMChannel extends FlattenedChannel {
 }
 
 export interface FlattenedUser {
-	id: string;
-	bot: boolean;
-	username: string;
-	discriminator: string;
 	avatar: string | null;
-	avatarURL: string | null;
+	discriminator: string;
+	flags: number;
+	id: string;
+	locale: string;
+	mfa_enabled: boolean;
+	premium_type: number;
+	public_flags: number;
+	username: string;
 }
 
 export interface FlattenedMember {
