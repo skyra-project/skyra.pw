@@ -26,7 +26,7 @@ const OauthCallback: NextPage = () => {
 		}
 
 		try {
-			await apiFetch<LoginData>(`/oauth/callback`, {
+			const loginData = await apiFetch<LoginData>(`/oauth/callback`, {
 				method: FetchMethods.Post,
 				body: JSON.stringify({
 					code,
@@ -38,7 +38,8 @@ const OauthCallback: NextPage = () => {
 			const data = await apiFetch<DashboardPack>('/oauth/user', {
 				method: FetchMethods.Post,
 				body: JSON.stringify({
-					action: 'SYNC_USER'
+					action: 'SYNC_USER',
+					oauthGuilds: loginData.guilds
 				})
 			});
 
