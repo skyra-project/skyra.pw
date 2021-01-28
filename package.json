@@ -51,7 +51,7 @@
 		"@commitlint/cli": "^11.0.0",
 		"@commitlint/config-conventional": "^11.0.0",
 		"@sapphire/eslint-config": "^2.1.1",
-		"@sapphire/plugin-api": "^1.5.1",
+		"@sapphire/plugin-api": "^1.5.2",
 		"@sapphire/prettier-config": "^1.0.6",
 		"@sapphire/ts-config": "^2.0.0",
 		"@skyra/audio": "^1.0.2",
