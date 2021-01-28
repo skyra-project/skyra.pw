@@ -1,5 +1,5 @@
 import { createSeoProps } from '#config/next-seo.config';
-import type { FlattenedGuild } from '#config/types/ApiData';
+import type { TransformedLoginData } from '#config/types/ApiData';
 import type { GuildSettings } from '#config/types/GuildSettings';
 import { useGuildDataContext } from '#contexts/Settings/GuildDataContext';
 import { useGuildSettingsChangesContext } from '#contexts/Settings/GuildSettingsChangesContext';
@@ -18,6 +18,7 @@ import { objectToTuples } from '@sapphire/utilities';
 import { NextSeo } from 'next-seo';
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { When } from 'react-if';
+import type { ValuesType } from 'utility-types';
 import DesktopSettingsDrawer from './Navigation/DesktopSettingsDrawer';
 import MobileSettingsDrawer from './Navigation/MobileSettingsDrawer';
 import SettingsNavBar from './Navigation/SettingsNavBar';
@@ -79,7 +80,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 		setIsLoading(true);
 		try {
 			const [guildData, guildSettings] = await Promise.all([
-				apiFetch<FlattenedGuild>(`/guilds/${guildId}`),
+				apiFetch<ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>>(`/guilds/${guildId}`),
 				apiFetch<GuildSettings>(`/guilds/${guildId}/settings`)
 			]);
 

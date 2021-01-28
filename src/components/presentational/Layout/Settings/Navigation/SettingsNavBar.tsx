@@ -1,4 +1,4 @@
-import type { FlattenedGuild } from '#config/types/ApiData';
+import type { TransformedLoginData } from '#config/types/ApiData';
 import UserMenu from '#layout/Navigation/UserMenu';
 import { SettingsDrawerWidth } from '#utils/constants';
 import AppBar from '@material-ui/core/AppBar';
@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
 import Skeleton from '@material-ui/lab/Skeleton';
 import React, { FC, memo } from 'react';
+import type { ValuesType } from 'utility-types';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface SettingsNavBarProps {
-	guildData: FlattenedGuild | undefined;
+	guildData: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>> | undefined;
 	toggleSidebar(): void;
 }
 

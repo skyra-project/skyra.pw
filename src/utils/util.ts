@@ -1,6 +1,7 @@
-import type { DashboardPack, FlattenedGuild, OauthFlattenedUser } from '#config/types/ApiData';
+import type { TransformedLoginData } from '#config/types/ApiData';
 import type { Selfmod } from '#config/types/ConfigurableData';
 import Router from 'next/router';
+import type { ValuesType } from 'utility-types';
 import { BASE_API_URL, FetchMethods, LocalStorageKeys } from './constants';
 import isBrowser from './isBrowser';
 import { Time } from './skyraUtils';
@@ -75,12 +76,12 @@ export async function ssrFetch<T>(path: string) {
 	}
 }
 
-type SetPackCallback = (newPack: Partial<DashboardPack>) => void;
+type SetPackCallback = (newPack: Partial<TransformedLoginData>) => void;
 type SetAuthenticatedCallback = (newAuthenticated: boolean) => void;
 type ChangeRouteCallback = (newRoute: string) => void;
 
 export async function logOut(setPack: SetPackCallback, setAuthenticated: SetAuthenticatedCallback, changeRoute: ChangeRouteCallback) {
-	await apiFetch<{ user: OauthFlattenedUser }>('/oauth/logout', { method: FetchMethods.Post });
+	await apiFetch('/oauth/logout', { method: FetchMethods.Post });
 	clearState(LocalStorageKeys.DiscordPack);
 	clearState(LocalStorageKeys.LastSync);
 	setPack({ user: null });
@@ -106,7 +107,7 @@ export async function syncUser(
 
 	saveState(LocalStorageKeys.LastSync, Date.now());
 
-	const response = await apiFetch<DashboardPack>('/oauth/user', {
+	const response = await apiFetch<TransformedLoginData>('/oauth/user', {
 		method: FetchMethods.Post,
 		body: JSON.stringify({
 			action: 'SYNC_USER'
@@ -129,7 +130,7 @@ export function navigate(path: string, forceSameTab = false) {
 	return () => Router.push(path);
 }
 
-export function displayIconURL(guild: FlattenedGuild, { format = 'default', size = 256 } = {}) {
+export function displayIconURL(guild: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>, { format = 'default', size = 256 } = {}) {
 	if (guild.icon === null) return undefined;
 	if (format === 'default') format = guild.icon.startsWith('a_') ? 'gif' : 'png';
 	return `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.${format}${`?size=${size}`}`;

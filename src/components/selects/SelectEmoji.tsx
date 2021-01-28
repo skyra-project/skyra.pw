@@ -1,16 +1,17 @@
-import type { FlattenedGuild } from '#config/types/ApiData';
+import type { TransformedLoginData } from '#config/types/ApiData';
+import type { Suggestions } from '#config/types/ConfigurableData';
 import React, { FC, memo } from 'react';
+import type { ValuesType } from 'utility-types';
 import SelectOne, { SelectOneProps } from './SelectOne';
 
-export interface SelectEmojiProps extends Omit<SelectOneProps, 'values' | 'name'> {
+export interface SelectEmojiProps
+	extends Omit<SelectOneProps, 'values' | 'name'>,
+		Pick<Suggestions.Emoji, 'defaultName' | 'defaultImage' | 'defaultId'> {
 	value: string;
-	guild: FlattenedGuild;
-	defaultName: string;
-	defaultImage: string;
-	defaultId: string;
+	guild: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>;
 }
 
-const getEmojiUrl = (id: string, animated: boolean) => `https://cdn.discordapp.com/emojis/${id}.${animated ? 'gif' : 'png'}?v=1`;
+const getEmojiUrl = (id: string, animated: boolean) => `https://cdn.discordapp.com/emojis/${id}.${animated ? 'gif' : 'png'}`;
 
 const SelectEmoji: FC<SelectEmojiProps> = ({ label, value, guild, defaultImage, defaultName, defaultId, onChange, tooltipTitle, ...props }) => {
 	let name = defaultName;

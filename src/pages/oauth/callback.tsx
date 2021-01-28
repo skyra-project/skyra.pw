@@ -1,11 +1,10 @@
 import { createSeoProps } from '#config/next-seo.config';
-import type { DashboardPack } from '#config/types/ApiData';
+import type { TransformedLoginData } from '#config/types/ApiData';
 import { setAuthenticated } from '#contexts/AuthenticationContext';
 import { mergeDiscordPack } from '#contexts/DiscordPackContext';
 import GeneralLayout from '#layout/General';
 import { BASE_WEB_URL, CLIENT_ID, FetchMethods, LocalStorageKeys } from '#utils/constants';
 import { apiFetch, saveState } from '#utils/util';
-import type { RESTGetAPICurrentUserConnectionsResult, RESTGetAPICurrentUserGuildsResult, RESTGetAPICurrentUserResult } from 'discord-api-types/v8';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
@@ -26,19 +25,12 @@ const OauthCallback: NextPage = () => {
 		}
 
 		try {
-			await apiFetch<LoginData>(`/oauth/callback`, {
+			const data = await apiFetch<TransformedLoginData>(`/oauth/callback`, {
 				method: FetchMethods.Post,
 				body: JSON.stringify({
 					code,
 					clientId: CLIENT_ID,
 					redirectUri: `${BASE_WEB_URL}/oauth/callback`
-				})
-			});
-
-			const data = await apiFetch<DashboardPack>('/oauth/user', {
-				method: FetchMethods.Post,
-				body: JSON.stringify({
-					action: 'SYNC_USER'
 				})
 			});
 
@@ -83,10 +75,4 @@ declare module 'querystring' {
 	interface ParsedUrlQuery {
 		code: string | null;
 	}
-}
-
-interface LoginData {
-	user?: RESTGetAPICurrentUserResult | null;
-	guilds?: RESTGetAPICurrentUserGuildsResult | null;
-	connections?: RESTGetAPICurrentUserConnectionsResult | null;
 }

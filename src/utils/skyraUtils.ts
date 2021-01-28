@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { FlattenedUser } from '#config/types/ApiData';
+import type { RESTGetAPICurrentUserResult } from 'discord-api-types/v8';
 
 export enum Time {
 	Millisecond = 1,
@@ -30,7 +30,7 @@ export enum Time {
  * @param user The API User to get the avatar for
  * @param options Extra options for the avatar URL
  */
-export function displayAvatarURL(user: FlattenedUser | null | undefined, { format = 'default', size = 256 } = {}) {
+export function displayAvatarURL(user: RESTGetAPICurrentUserResult | null | undefined, { format = 'default', size = 256 } = {}) {
 	if (!user) return `https://cdn.discordapp.com/embed/avatars/${Math.floor(Math.random() * 4) + 1}.png`;
 	if (user.avatar === null) return `https://cdn.discordapp.com/embed/avatars/${user.discriminator}.png`;
 	if (format === 'default') format = user.avatar.startsWith('a_') ? 'gif' : 'png';
