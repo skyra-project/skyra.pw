@@ -1,12 +1,13 @@
-import type { FlattenedGuild } from '#config/types/ApiData';
+import type { TransformedLoginData } from '#config/types/ApiData';
 import LazyAvatar from '#mui/LazyAvatar';
 import { displayIconURL, getAcronym } from '#utils/util';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import React, { FC } from 'react';
+import type { ValuesType } from 'utility-types';
 
 interface GuildIconProps {
-	guild?: FlattenedGuild;
+	guild?: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>;
 	size?: number;
 	sizeClass?: string;
 }

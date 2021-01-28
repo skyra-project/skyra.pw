@@ -1,9 +1,10 @@
-import type { FlattenedGuild } from '#config/types/ApiData';
+import type { TransformedLoginData } from '#config/types/ApiData';
 import React, { memo } from 'react';
+import type { ValuesType } from 'utility-types';
 import SelectMany, { SelectManyProps } from './SelectMany';
 
 export interface SelectRolesProps extends Omit<SelectManyProps, 'values' | 'name'> {
-	guild: FlattenedGuild;
+	guild: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>;
 	filterEveryone: boolean;
 }
 

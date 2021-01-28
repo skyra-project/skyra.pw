@@ -1,5 +1,5 @@
 import SkyraLogo from '#assets/skyraLogo';
-import type { FlattenedGuild } from '#config/types/ApiData';
+import type { TransformedLoginData } from '#config/types/ApiData';
 import Tooltip from '#mui/Tooltip';
 import GuildIcon from '#presentational/GuildIcon';
 import ListItemLink from '#routing/ListItemLink';
@@ -31,9 +31,10 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { noop } from '@sapphire/utilities';
 import React, { FC, Fragment, memo, useState } from 'react';
 import { Else, If, Then } from 'react-if';
+import type { ValuesType } from 'utility-types';
 
 export interface SettingsDrawerItemsProps {
-	guildData: FlattenedGuild | undefined;
+	guildData: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>> | undefined;
 	guildId: string;
 	isOnMobile: boolean;
 	isLoading: boolean;

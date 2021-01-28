@@ -1,14 +1,15 @@
-import type { DashboardPack, FlattenedGuild } from '#config/types/ApiData';
+import type { TransformedLoginData } from '#config/types/ApiData';
 import Link from '#routing/Link';
 import { guildAddURL } from '#utils/constants';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import React, { memo } from 'react';
+import type { ValuesType } from 'utility-types';
 import GuildIcon from './GuildIcon';
 
 interface GuildCardProps {
-	guild: FlattenedGuild;
+	guild: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -71,8 +72,8 @@ const GuildCard = memo<GuildCardProps>(({ guild }) => {
 	);
 });
 
-export const FilteredGuildCards = (pack?: DashboardPack) =>
-	(pack?.guilds ?? [])
+export const FilteredGuildCards = (pack?: TransformedLoginData) =>
+	(pack?.transformedGuilds ?? [])
 		// Filter on manageable servers
 		.filter((g) => g.manageable)
 		// Sort by whether Skyra is in the server or not

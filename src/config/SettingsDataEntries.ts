@@ -1,4 +1,5 @@
-import type { FlattenedGuild } from './types/ApiData';
+import type { ValuesType } from 'utility-types';
+import type { TransformedLoginData } from './types/ApiData';
 import type { Channels, Events, Messages, Moderation, Roles, Suggestions } from './types/ConfigurableData';
 import type { GuildSettings } from './types/GuildSettings';
 
@@ -132,7 +133,10 @@ export const ConfigurableModerationKeys: Moderation.Message[] = [
 	}
 ];
 
-export const ConfigurableMessageKeys = (guildSettings: GuildSettings, guildData: FlattenedGuild): Messages.Message[] => [
+export const ConfigurableMessageKeys = (
+	guildSettings: GuildSettings,
+	guildData: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>
+): Messages.Message[] => [
 	{
 		name: 'Join DMs',
 		key: 'messagesJoinDM',
@@ -172,7 +176,9 @@ export enum Matches {
 	Position = '%POSITION%'
 }
 
-export const ConfigurableReplaceableMatchers = (guildData: FlattenedGuild): Messages.Matcher[] => [
+export const ConfigurableReplaceableMatchers = (
+	guildData: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>
+): Messages.Matcher[] => [
 	{ matchKey: Matches.Guild, description: `I will replace this with ${guildData?.name}` },
 	{ matchKey: Matches.Member, description: `I will replace this with a mention of the member` },
 	{ matchKey: Matches.MemberName, description: `I will replace this with the username of the member` },

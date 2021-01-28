@@ -6,7 +6,8 @@
 		"ecmaFeatures": {
 			"jsx": true
 		},
-		"jsx": true
+		"jsx": true,
+		"warnOnUnsupportedTypeScriptVersion": false
 	},
 	"plugins": ["import", "jsx-a11y", "react", "react-hooks"],
 	"settings": {
