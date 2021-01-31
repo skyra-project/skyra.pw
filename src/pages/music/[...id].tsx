@@ -1,7 +1,7 @@
-import { createSeoProps } from '#config/next-seo.config';
-import { useAuthenticated } from '#contexts/AuthenticationContext';
-import MusicPage from '#pages/MusicPage';
-import RedirectRoute from '#routing/RedirectRoute';
+import { createSeoProps } from '@config/next-seo.config';
+import { useAuthenticated } from '@contexts/AuthenticationContext';
+import MusicPage from '@pages/MusicPage';
+import RedirectRoute from '@routing/RedirectRoute';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';

@@ -1,7 +1,7 @@
-import type { TransformedLoginData } from '#config/types/ApiData';
-import { LocalStorageKeys } from '#utils/constants';
-import { loadState } from '#utils/util';
+import type { TransformedLoginData } from '@config/types/ApiData';
 import { mergeDefault } from '@sapphire/utilities';
+import { LocalStorageKeys } from '@utils/constants';
+import { loadState } from '@utils/util';
 import constate from 'constate';
 import { useCallback, useState } from 'react';
 

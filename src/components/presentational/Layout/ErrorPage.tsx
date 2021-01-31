@@ -1,5 +1,3 @@
-import GeneralPage from '#presentational/Layout/General';
-import { navigate } from '#utils/util';
 import { ButtonGroup, createStyles, makeStyles, Theme, useMediaQuery, useTheme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -8,6 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ForumIcon from '@material-ui/icons/Forum';
 import HomeIcon from '@material-ui/icons/Home';
+import GeneralPage from '@presentational/Layout/General';
+import { navigate } from '@utils/util';
 import React, { memo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>

@@ -1,8 +1,8 @@
-import NextComposed from '#next/NextComposed';
 import MuiLink from '@material-ui/core/Link';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import type { CSSProperties } from '@material-ui/core/styles/withStyles';
 import Typography, { TypographyProps } from '@material-ui/core/Typography';
+import NextComposed from '@next/NextComposed';
 import clsx from 'clsx';
 import type { LinkProps as NextLinkProps } from 'next/link';
 import { useRouter } from 'next/router';

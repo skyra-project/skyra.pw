@@ -1,16 +1,16 @@
-import { ConfigurableRemoveInitialRole, ConfigurableRoles } from '#config/SettingsDataEntries';
-import { useGuildDataContext } from '#contexts/Settings/GuildDataContext';
-import { useGuildSettingsChangesContext } from '#contexts/Settings/GuildSettingsChangesContext';
-import { useGuildSettingsContext } from '#contexts/Settings/GuildSettingsContext';
-import PageHeader from '#layout/Settings/PageHeader';
-import Section from '#layout/Settings/Section';
-import SimpleGrid from '#mui/SimpleGrid';
-import SelectBoolean from '#selects/SelectBoolean';
-import SelectRole, { SelectRoleProps } from '#selects/SelectRole';
-import SelectRoles, { SelectRolesProps } from '#selects/SelectRoles';
-import { cast } from '#utils/util';
+import { ConfigurableRemoveInitialRole, ConfigurableRoles } from '@config/SettingsDataEntries';
+import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
+import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
+import PageHeader from '@layout/Settings/PageHeader';
+import Section from '@layout/Settings/Section';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import SimpleGrid from '@mui/SimpleGrid';
+import SelectBoolean from '@selects/SelectBoolean';
+import SelectRole, { SelectRoleProps } from '@selects/SelectRole';
+import SelectRoles, { SelectRolesProps } from '@selects/SelectRoles';
+import { cast } from '@utils/util';
 import React, { FC, memo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>

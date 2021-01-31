@@ -1,5 +1,4 @@
-import type { FlattenedCommand } from '#config/types/ApiData';
-import Command from '#presentational/CommandsPage/Command';
+import type { FlattenedCommand } from '@config/types/ApiData';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -7,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Command from '@presentational/CommandsPage/Command';
 import React, { FC, memo, useCallback } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>

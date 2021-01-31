@@ -1,5 +1,5 @@
-import { LocalStorageKeys } from '#utils/constants';
-import { loadState, saveState } from '#utils/util';
+import { LocalStorageKeys } from '@utils/constants';
+import { loadState, saveState } from '@utils/util';
 import React, { Context, createContext, Dispatch, FC, useEffect, useState } from 'react';
 
 interface CookieConsentContext {

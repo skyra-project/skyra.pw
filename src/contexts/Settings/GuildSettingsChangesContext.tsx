@@ -1,4 +1,4 @@
-import type { GuildSettings } from '#config/types/GuildSettings';
+import type { GuildSettings } from '@config/types/GuildSettings';
 import constate from 'constate';
 import deepMerge, { Options as DeepMergeOptions } from 'deepmerge';
 import { useState } from 'react';

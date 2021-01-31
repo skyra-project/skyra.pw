@@ -1,8 +1,8 @@
-import Link from '#routing/Link';
 import { createStyles, makeStyles } from '@material-ui/core';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+import Link from '@routing/Link';
 import React, { forwardRef, memo, ReactElement } from 'react';
 
 export interface MenuItemLinkProps {

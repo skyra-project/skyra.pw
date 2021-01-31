@@ -3,16 +3,16 @@ import {
 	ConfigurableDisabledChannels,
 	ConfigurableIgnoreChannels,
 	ConfigurableLoggingChannels
-} from '#config/SettingsDataEntries';
-import { useGuildDataContext } from '#contexts/Settings/GuildDataContext';
-import { useGuildSettingsChangesContext } from '#contexts/Settings/GuildSettingsChangesContext';
-import { useGuildSettingsContext } from '#contexts/Settings/GuildSettingsContext';
-import PageHeader from '#layout/Settings/PageHeader';
-import Section from '#layout/Settings/Section';
-import SimpleGrid from '#mui/SimpleGrid';
-import SelectChannel from '#selects/SelectChannel';
-import SelectChannels from '#selects/SelectChannels';
+} from '@config/SettingsDataEntries';
+import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
+import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
+import PageHeader from '@layout/Settings/PageHeader';
+import Section from '@layout/Settings/Section';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import SimpleGrid from '@mui/SimpleGrid';
+import SelectChannel from '@selects/SelectChannel';
+import SelectChannels from '@selects/SelectChannels';
 import React, { FC, memo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>

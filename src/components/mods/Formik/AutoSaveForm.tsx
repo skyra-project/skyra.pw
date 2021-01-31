@@ -1,4 +1,4 @@
-import { Time } from '#utils/skyraUtils';
+import { Time } from '@utils/skyraUtils';
 import { Form, Formik, FormikHelpers } from 'formik';
 import React, { PropsWithChildren } from 'react';
 import type { ObjectSchema } from 'yup';

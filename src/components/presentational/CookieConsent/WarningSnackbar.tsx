@@ -1,4 +1,3 @@
-import { navigate } from '#utils/util';
 import Box from '@material-ui/core/Box';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Slide from '@material-ui/core/Slide';
@@ -6,6 +5,7 @@ import SnackbarContent from '@material-ui/core/SnackbarContent';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { noop } from '@sapphire/utilities';
+import { navigate } from '@utils/util';
 import clsx from 'clsx';
 import React, { FC, memo, useContext } from 'react';
 import Actions from './Actions';

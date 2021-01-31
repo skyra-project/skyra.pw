@@ -1,14 +1,14 @@
-import { useGuildSettingsChangesContext } from '#contexts/Settings/GuildSettingsChangesContext';
-import { useGuildSettingsContext } from '#contexts/Settings/GuildSettingsContext';
-import Section from '#layout/Settings/Section';
-import SimpleGrid from '#mui/SimpleGrid';
-import Select from '#selects/Select';
-import SelectBoolean from '#selects/SelectBoolean';
-import SelectDuration from '#selects/SelectDuration';
-import { bitwiseHas, bitwiseSet, updateSliderValueObj } from '#utils/util';
+import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
+import Section from '@layout/Settings/Section';
 import MenuItem from '@material-ui/core/MenuItem';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
+import SimpleGrid from '@mui/SimpleGrid';
+import Select from '@selects/Select';
+import SelectBoolean from '@selects/SelectBoolean';
+import SelectDuration from '@selects/SelectDuration';
+import { bitwiseHas, bitwiseSet, updateSliderValueObj } from '@utils/util';
 import React, { FC, Fragment, memo } from 'react';
 
 const FilterNewLineSettings: FC = () => {

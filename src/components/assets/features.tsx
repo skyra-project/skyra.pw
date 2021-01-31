@@ -1,5 +1,5 @@
-import Link from '#routing/Link';
 import { Box, Paper } from '@material-ui/core';
+import Link from '@routing/Link';
 import {
 	DiscordEmbed,
 	DiscordEmbedField,

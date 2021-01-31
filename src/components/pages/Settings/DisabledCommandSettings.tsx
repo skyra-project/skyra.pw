@@ -1,10 +1,8 @@
-import type { FlattenedCommand } from '#config/types/ApiData';
-import type { DisableCommands } from '#config/types/ConfigurableData';
-import { useGuildSettingsChangesContext } from '#contexts/Settings/GuildSettingsChangesContext';
-import { useGuildSettingsContext } from '#contexts/Settings/GuildSettingsContext';
-import Section from '#layout/Settings/Section';
-import SelectBoolean from '#selects/SelectBoolean';
-import { apiFetch } from '#utils/util';
+import type { FlattenedCommand } from '@config/types/ApiData';
+import type { DisableCommands } from '@config/types/ConfigurableData';
+import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
+import Section from '@layout/Settings/Section';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionActions from '@material-ui/core/AccordionActions';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
@@ -20,6 +18,8 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import SelectBoolean from '@selects/SelectBoolean';
+import { apiFetch } from '@utils/util';
 import React, { FC, memo, useCallback, useEffect, useState } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>

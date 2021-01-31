@@ -1,6 +1,6 @@
-import { SettingsDrawerWidth } from '#utils/constants';
 import Drawer from '@material-ui/core/Drawer';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { SettingsDrawerWidth } from '@utils/constants';
 import React, { FC, memo } from 'react';
 import SettingsDrawerItems, { SettingsDrawerItemsProps } from './SettingsDrawerItems';
 

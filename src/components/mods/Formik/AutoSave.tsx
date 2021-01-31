@@ -1,4 +1,4 @@
-import { Time } from '#utils/skyraUtils';
+import { Time } from '@utils/skyraUtils';
 import { useFormikContext } from 'formik';
 import debounce from 'lodash/debounce';
 import React, { FC, Fragment, memo, useCallback, useEffect } from 'react';

@@ -1,15 +1,15 @@
-import { ConfigurableEmojis, ConfigurableSuggestionActions } from '#config/SettingsDataEntries';
-import { useGuildDataContext } from '#contexts/Settings/GuildDataContext';
-import { useGuildSettingsChangesContext } from '#contexts/Settings/GuildSettingsChangesContext';
-import { useGuildSettingsContext } from '#contexts/Settings/GuildSettingsContext';
-import PageHeader from '#layout/Settings/PageHeader';
-import Section from '#layout/Settings/Section';
-import SimpleGrid from '#mui/SimpleGrid';
-import SelectBoolean from '#selects/SelectBoolean';
-import SelectChannel from '#selects/SelectChannel';
-import SelectEmoji from '#selects/SelectEmoji';
-import { EmojiRegexExtractId } from '#utils/constants';
+import { ConfigurableEmojis, ConfigurableSuggestionActions } from '@config/SettingsDataEntries';
+import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
+import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
+import PageHeader from '@layout/Settings/PageHeader';
+import Section from '@layout/Settings/Section';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import SimpleGrid from '@mui/SimpleGrid';
+import SelectBoolean from '@selects/SelectBoolean';
+import SelectChannel from '@selects/SelectChannel';
+import SelectEmoji from '@selects/SelectEmoji';
+import { EmojiRegexExtractId } from '@utils/constants';
 import React, { FC, memo, useMemo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>

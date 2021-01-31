@@ -1,11 +1,6 @@
-import { useGuildSettingsChangesContext } from '#contexts/Settings/GuildSettingsChangesContext';
-import { useGuildSettingsContext } from '#contexts/Settings/GuildSettingsContext';
-import Section from '#layout/Settings/Section';
-import SimpleGrid from '#mui/SimpleGrid';
-import Select from '#selects/Select';
-import SelectBoolean from '#selects/SelectBoolean';
-import SelectDuration from '#selects/SelectDuration';
-import { bitwiseHas, bitwiseSet, updateSliderValueObj } from '#utils/util';
+import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
+import Section from '@layout/Settings/Section';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -15,6 +10,11 @@ import Paper from '@material-ui/core/Paper';
 import Slider from '@material-ui/core/Slider';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import SimpleGrid from '@mui/SimpleGrid';
+import Select from '@selects/Select';
+import SelectBoolean from '@selects/SelectBoolean';
+import SelectDuration from '@selects/SelectDuration';
+import { bitwiseHas, bitwiseSet, updateSliderValueObj } from '@utils/util';
 import React, { FC, Fragment, memo, useState } from 'react';
 import { When } from 'react-if';
 

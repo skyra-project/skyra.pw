@@ -1,5 +1,5 @@
-import type { TransformedLoginData } from '#config/types/ApiData';
-import type { Selfmod } from '#config/types/ConfigurableData';
+import type { TransformedLoginData } from '@config/types/ApiData';
+import type { Selfmod } from '@config/types/ConfigurableData';
 import Router from 'next/router';
 import type { ValuesType } from 'utility-types';
 import { BASE_API_URL, FetchMethods, LocalStorageKeys } from './constants';

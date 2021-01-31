@@ -1,4 +1,4 @@
-import type { TransformedLoginData } from '#config/types/ApiData';
+import type { TransformedLoginData } from '@config/types/ApiData';
 import constate from 'constate';
 import { useState } from 'react';
 import type { ValuesType } from 'utility-types';

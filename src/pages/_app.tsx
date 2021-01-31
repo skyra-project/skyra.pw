@@ -1,11 +1,11 @@
-import '#config/globals.css';
-import { DefaultSeo as DefaultSeoProps } from '#config/next-seo.config';
-import theme from '#config/theme';
-import { MobileContextProvider } from '#contexts/MobileContext';
-import { CookieConsentProvider } from '#presentational/CookieConsent/ContextProvider';
+import '@config/globals.css';
+import { DefaultSeo as DefaultSeoProps } from '@config/next-seo.config';
+import theme from '@config/theme';
+import { MobileContextProvider } from '@contexts/MobileContext';
 import { useMediaQuery } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
+import { CookieConsentProvider } from '@presentational/CookieConsent/ContextProvider';
 import type { NextPage } from 'next';
 import { DefaultSeo } from 'next-seo';
 import type { AppProps } from 'next/app';
@@ -14,9 +14,9 @@ import Head from 'next/head';
 import NextNprogress from 'nextjs-progressbar';
 import React, { useEffect } from 'react';
 
-const CookieWarning = dynamic(() => import('#presentational/CookieConsent/WarningSnackbar'), { ssr: false });
-const AuthenticatedProvider = dynamic(() => import('#contexts/AuthenticationContext'), { ssr: false });
-const DiscordPackProvider = dynamic(() => import('#contexts/DiscordPackContext'), { ssr: false });
+const CookieWarning = dynamic(() => import('@presentational/CookieConsent/WarningSnackbar'), { ssr: false });
+const AuthenticatedProvider = dynamic(() => import('@contexts/AuthenticationContext'), { ssr: false });
+const DiscordPackProvider = dynamic(() => import('@contexts/DiscordPackContext'), { ssr: false });
 
 const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 	useEffect(() => {

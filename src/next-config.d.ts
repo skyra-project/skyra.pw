@@ -1,5 +1,53 @@
 declare module 'next-pwa' {
-	interface NextPwaOptions extends Record<string, unknown> {
+	interface NextConfigOptions {
+		target: 'server' | 'serverless' | 'experimental-serverless-trace';
+		env: never[];
+		webpack: never;
+		webpackDevMiddleware: never;
+		distDir: '.next' | string;
+		assetPrefix: string;
+		configOrigin: 'default' | string;
+		useFileSystemPublicRoutes: boolean;
+		pageExtensions: ('tsx' | 'ts' | 'jsx' | 'js' | string)[];
+		poweredByHeader: boolean;
+		compress: boolean;
+		reactStrictMode: boolean;
+		i18n: Partial<{
+			locales: string[];
+			defaultLocale: string;
+			domains?: DomainLocales;
+			localeDetection?: false;
+		}>;
+
+		headers: () => Promise<Header[]>;
+		rewrites: () => Promise<Rewrite[]>;
+		redirects: () => Promise<Redirect[]>;
+
+		trailingSlash: boolean;
+
+		future: Partial<{
+			strictPostcssConfiguration: boolean;
+			excludeDefaultMomentLocales: boolean;
+			webpack5: boolean;
+		}>;
+
+		experimental: Partial<{
+			cpus: number;
+			plugins: boolean;
+			profiling: boolean;
+			sprFlushToDisk: boolean;
+			reactMode: 'legacy' | 'blocking' | 'concurrent';
+			workerThreads: boolean;
+			pageEnv: boolean;
+			optimizeFonts: boolean;
+			optimizeImages: boolean;
+			optimizeCss: boolean;
+			scrollRestoration: boolean;
+			scriptLoader: boolean;
+		}>;
+	}
+
+	interface NextPwaOptions extends Partial<NextConfigOptions> {
 		pwa: {
 			dest: string;
 			/**

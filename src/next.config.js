@@ -14,5 +14,8 @@ module.exports = withPWA({
 				destination: '/'
 			}
 		];
+	},
+	future: {
+		webpack5: true
 	}
 });

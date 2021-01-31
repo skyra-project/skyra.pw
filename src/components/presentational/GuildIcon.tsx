@@ -1,7 +1,7 @@
-import type { TransformedLoginData } from '#config/types/ApiData';
-import LazyAvatar from '#mui/LazyAvatar';
-import { displayIconURL, getAcronym } from '#utils/util';
+import type { TransformedLoginData } from '@config/types/ApiData';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import LazyAvatar from '@mui/LazyAvatar';
+import { displayIconURL, getAcronym } from '@utils/util';
 import clsx from 'clsx';
 import React, { FC } from 'react';
 import type { ValuesType } from 'utility-types';

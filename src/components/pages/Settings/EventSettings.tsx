@@ -1,11 +1,11 @@
-import { ConfigurableMemberEvents, ConfigurableMessageEvents, ConfigurableModerationEvents } from '#config/SettingsDataEntries';
-import { useGuildSettingsChangesContext } from '#contexts/Settings/GuildSettingsChangesContext';
-import { useGuildSettingsContext } from '#contexts/Settings/GuildSettingsContext';
-import Section from '#layout/Settings/Section';
-import SimpleGrid from '#mui/SimpleGrid';
-import Link from '#routing/Link';
-import SelectBoolean from '#selects/SelectBoolean';
+import { ConfigurableMemberEvents, ConfigurableMessageEvents, ConfigurableModerationEvents } from '@config/SettingsDataEntries';
+import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
+import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
+import Section from '@layout/Settings/Section';
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import SimpleGrid from '@mui/SimpleGrid';
+import Link from '@routing/Link';
+import SelectBoolean from '@selects/SelectBoolean';
 import { useRouter } from 'next/router';
 import React, { FC, memo } from 'react';
 
