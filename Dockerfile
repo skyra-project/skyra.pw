@@ -7,7 +7,7 @@ COPY yarn.lock ./
 COPY src/ src/
 COPY scripts/ scripts/
 
-RUN yarn install --frozen-lockfile --link-duplicates
+RUN yarn install --frozen-lockfile --link-duplicates --ignore-scripts --non-interactive
 
 RUN yarn build
 
