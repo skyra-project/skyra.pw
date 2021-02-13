@@ -1,3 +1,4 @@
+import { createSeoProps } from '@config/next-seo.config';
 import { useAuthenticated } from '@contexts/AuthenticationContext';
 import { useDiscordPack } from '@contexts/DiscordPackContext';
 import { useMobileContext } from '@contexts/MobileContext';
@@ -44,7 +45,7 @@ const GuildsPage: NextPage = () => {
 
 	return (
 		<>
-			<NextSeo title="Guilds" />
+			<NextSeo {...createSeoProps({ title: 'Guilds' })} />
 			<ScrollToTop />
 			<GeneralPage>
 				<Container classes={{ root: classes.container }}>

@@ -1,3 +1,4 @@
+import { createSeoProps } from '@config/next-seo.config';
 import type { FlattenedCommand } from '@config/types/ApiData';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
@@ -57,18 +58,21 @@ const CommandsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 	return (
 		<>
 			<NextSeo
-				title="Commands"
-				description="Want to know what Skyra can do? You've come to the right place here. Get information about every command available in Skyra on this page."
-				openGraph={{
-					title: 'Skyra Commands'
-				}}
-				additionalMetaTags={[
-					{
-						name: 'summary',
-						content:
-							"Want to know what Skyra can do? You've come to the right place here. Get information about every command available in Skyra on this page."
-					}
-				]}
+				{...createSeoProps({
+					title: 'Commands',
+					description:
+						"Want to know what Skyra can do? You've come to the right place here. Get information about every command available in Skyra on this page. ",
+					openGraph: {
+						title: 'Skyra Commands'
+					},
+					additionalMetaTags: [
+						{
+							name: 'summary',
+							content:
+								"Want to know what Skyra can do? You've come to the right place here. Get information about every command available in Skyra on this page. "
+						}
+					]
+				})}
 			/>
 			<ScrollToTop />
 			<GeneralPage>

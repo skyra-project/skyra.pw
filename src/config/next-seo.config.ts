@@ -1,5 +1,5 @@
-import type { DefaultSeoProps } from 'next-seo';
-import type { AdditionalRobotsProps } from 'next-seo/lib/types';
+import { mergeDefault } from '@sapphire/utilities';
+import type { DefaultSeoProps, NextSeoProps } from 'next-seo';
 import theme from './theme';
 
 type KeyedObject = Record<PropertyKey, unknown>;
@@ -71,12 +71,16 @@ export const DefaultSeo: DefaultSeoProps & KeyedObject = {
 	}
 };
 
-export const robotBlockingPageProps: AdditionalRobotsProps = {
-	nosnippet: true,
-	notranslate: true,
-	noimageindex: true,
-	noarchive: true,
-	maxSnippet: -1,
-	maxImagePreview: 'none',
-	maxVideoPreview: -1
+export const createSeoProps = (seoProps?: NextSeoProps & KeyedObject) => mergeDefault(DefaultSeo, seoProps);
+
+export const robotBlockingPageProps: Pick<NextSeoProps, 'robotsProps'> = {
+	robotsProps: {
+		nosnippet: true,
+		notranslate: true,
+		noimageindex: true,
+		noarchive: true,
+		maxSnippet: -1,
+		maxImagePreview: 'none',
+		maxVideoPreview: -1
+	}
 };

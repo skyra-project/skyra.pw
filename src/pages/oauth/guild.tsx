@@ -1,4 +1,4 @@
-import { robotBlockingPageProps } from '@config/next-seo.config';
+import { createSeoProps, robotBlockingPageProps } from '@config/next-seo.config';
 import GeneralPage from '@layout/General';
 import RedirectRoute from '@routing/RedirectRoute';
 import type { NextPage } from 'next';
@@ -18,10 +18,14 @@ const OauthGuild: NextPage = () => {
 	return (
 		<>
 			<NextSeo
-				title="OAUTH Callback"
-				robotsProps={{
+				{...createSeoProps({
+					title: 'OAUTH Callback',
+					additionalMetaTags: [
+						{ name: 'robots', content: 'noindex, nofollow' },
+						{ name: 'googlebot', content: 'noindex, nofollow' }
+					],
 					...robotBlockingPageProps
-				}}
+				})}
 				noindex
 				nofollow
 			/>
