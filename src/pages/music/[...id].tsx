@@ -1,4 +1,3 @@
-import { createSeoProps } from '@config/next-seo.config';
 import { useAuthenticated } from '@contexts/AuthenticationContext';
 import MusicPage from '@pages/MusicPage';
 import RedirectRoute from '@routing/RedirectRoute';
@@ -19,7 +18,19 @@ const MusicDashboard: NextPage = () => {
 
 	return (
 		<>
-			<NextSeo {...createSeoProps({ title: 'Music Dashboard' })} />
+			<NextSeo
+				title="Music Dashboard"
+				description="Jam out to Skyra's music and feel like a real DJ!."
+				openGraph={{
+					title: 'Skyra Commands'
+				}}
+				additionalMetaTags={[
+					{
+						name: 'summary',
+						content: "Jam out to Skyra's music and feel like a real DJ!."
+					}
+				]}
+			/>
 			<MusicPage guildId={guildId} />
 		</>
 	);

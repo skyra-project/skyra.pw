@@ -1,4 +1,3 @@
-import { createSeoProps } from '@config/next-seo.config';
 import type { TransformedLoginData } from '@config/types/ApiData';
 import type { GuildSettings } from '@config/types/GuildSettings';
 import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
@@ -136,7 +135,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 
 	return (
 		<>
-			<NextSeo {...createSeoProps({ title: `${guildData?.name ?? 'Guild'} Settings` })} />
+			<NextSeo title={`${guildData?.name ?? 'Guild'} Settings`} />
 			<Backdrop className={classes.backdrop} open={isLoading} unmountOnExit mountOnEnter>
 				<CircularProgress color="inherit" />
 			</Backdrop>

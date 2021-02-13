@@ -1,4 +1,4 @@
-import { createSeoProps } from '@config/next-seo.config';
+import { robotBlockingPageProps } from '@config/next-seo.config';
 import RedirectRoute from '@routing/RedirectRoute';
 import { serverURL } from '@utils/constants';
 import type { NextPage } from 'next';
@@ -8,13 +8,12 @@ import React from 'react';
 const JoinPage: NextPage = () => (
 	<>
 		<NextSeo
-			{...createSeoProps({
-				title: 'Join support server',
-				additionalMetaTags: [
-					{ name: 'robots', content: 'noindex, nofollow' },
-					{ name: 'googlebot', content: 'noindex, nofollow' }
-				]
-			})}
+			title="Join support server"
+			robotsProps={{
+				...robotBlockingPageProps
+			}}
+			noindex
+			nofollow
 		/>
 		<RedirectRoute redirectUri={serverURL} />
 	</>
