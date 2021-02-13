@@ -20,7 +20,7 @@ import StarboardSettings from '@pages/Settings/StarboardSettings';
 import SuggestionSettings from '@pages/Settings/SuggestionSettings';
 import RedirectRoute from '@routing/RedirectRoute';
 import { ssrFetch } from '@utils/util';
-import type { InferGetServerSidePropsType, NextPage } from 'next';
+import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -30,7 +30,7 @@ const GuildSettingsProvider = dynamic(() => import('@contexts/Settings/GuildSett
 const GuildSettingsChangesProvider = dynamic(() => import('@contexts/Settings/GuildSettingsChangesContext'), { ssr: false });
 const GuildDataProvider = dynamic(() => import('@contexts/Settings/GuildDataContext'), { ssr: false });
 
-const GuildSettingsPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ languages }) => {
+const GuildSettingsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ languages }) => {
 	const router = useRouter();
 	const authenticated = useAuthenticated();
 
@@ -106,8 +106,22 @@ const GuildSettingsPage: NextPage<InferGetServerSidePropsType<typeof getServerSi
 	);
 };
 
-export const getServerSideProps = async () => {
+// eslint-disable-next-line @typescript-eslint/require-await
+export const getStaticPaths: GetStaticPaths = async () => {
+	return {
+		paths: [], // indicates that no page needs be created at build time
+		fallback: 'blocking' // indicates the type of fallback
+	};
+};
+
+export const getStaticProps: GetStaticProps<{ languages: string[] }> = async () => {
 	const languages = await ssrFetch<string[]>('/languages');
+
+	if (!languages) {
+		return {
+			notFound: true
+		};
+	}
 
 	return {
 		props: {
