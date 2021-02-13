@@ -1,16 +1,17 @@
 import { robotBlockingPageProps } from '@config/SEO/DefaultSeoProps';
-import SeoHead from '@config/SEO/SeoHeader';
+import mergeSeoProps from '@config/SEO/MergeSeoProps';
 import type { TransformedLoginData } from '@config/types/ApiData';
 import { setAuthenticated } from '@contexts/AuthenticationContext';
 import { mergeDiscordPack } from '@contexts/DiscordPackContext';
 import GeneralLayout from '@layout/General';
 import { BASE_WEB_URL, CLIENT_ID, FetchMethods, LocalStorageKeys } from '@utils/constants';
 import { apiFetch, saveState } from '@utils/util';
-import type { NextPage } from 'next';
+import type { InferGetStaticPropsType, NextPage } from 'next';
+import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 
-const OauthCallback: NextPage = () => {
+const OauthCallback: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ seoTags }) => {
 	const [loading, setLoading] = useState(false);
 	const mergePack = mergeDiscordPack();
 	const writeAuthenticated = setAuthenticated();
@@ -55,19 +56,24 @@ const OauthCallback: NextPage = () => {
 
 	return (
 		<>
-			<SeoHead
-				additionalSeoProps={{
-					title: 'OAUTH Callback',
-					description: 'Woops, the authentication failed :(',
-					nofollow: true,
-					noindex: true,
-					robotsProps: robotBlockingPageProps
-				}}
-			/>
+			<NextSeo {...seoTags} />
 			<GeneralLayout loading={loading} />
 		</>
 	);
 };
+
+export async function getStaticProps() {
+	const seoTags = mergeSeoProps({
+		title: 'OAUTH Callback',
+		nofollow: true,
+		noindex: true,
+		robotsProps: robotBlockingPageProps
+	});
+
+	return {
+		props: { seoTags } // will be passed to the page component as props
+	};
+}
 
 export default OauthCallback;
 

@@ -136,6 +136,12 @@
 			"rules": {
 				"spaced-comment": "off"
 			}
+		},
+		{
+			"files": ["src/pages/**/*.tsx", "src/next.config.js"],
+			"rules": {
+				"@typescript-eslint/require-await": "off"
+			}
 		}
 	]
 }

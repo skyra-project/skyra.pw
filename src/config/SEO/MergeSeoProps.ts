@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
+import type { NextSeoProps } from 'next-seo';
 import DefaultSeoProps from './DefaultSeoProps';
-import type { SeoProps } from './Seo';
 
-export const mergeSeoProps = (additionalSeoProps?: SeoProps) => deepmerge(DefaultSeoProps, additionalSeoProps ?? {});
+export const mergeSeoProps = (additionalSeoProps?: NextSeoProps) => deepmerge(additionalSeoProps ?? {}, DefaultSeoProps);
 export default mergeSeoProps;

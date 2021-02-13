@@ -1,4 +1,4 @@
-import SeoHead from '@config/SEO/SeoHeader';
+import mergeSeoProps from '@config/SEO/MergeSeoProps';
 import type { FlattenedCommand } from '@config/types/ApiData';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
@@ -11,6 +11,7 @@ import { useWindowSize } from '@utils/useWindowSize';
 import { ssrFetch } from '@utils/util';
 import debounce from 'lodash/debounce';
 import type { InferGetStaticPropsType, NextPage } from 'next';
+import { NextSeo } from 'next-seo';
 import React, { useCallback, useMemo, useState } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const CommandsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ commands }) => {
+const CommandsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ commands, seoTags }) => {
 	const classes = useStyles();
 	const [searchValue, setSearchValue] = useState('');
 	const [commandsBoxWidth, setCommandsBoxWidth] = useState(500);
@@ -56,23 +57,7 @@ const CommandsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 
 	return (
 		<>
-			<SeoHead
-				additionalSeoProps={{
-					title: 'Commands',
-					description:
-						"Want to know what Skyra can do? You've come to the right place here. Get information about every command available in Skyra on this page. ",
-					openGraph: {
-						title: 'Skyra Commands'
-					},
-					additionalMetaTags: [
-						{
-							name: 'summary',
-							content:
-								"Want to know what Skyra can do? You've come to the right place here. Get information about every command available in Skyra on this page. "
-						}
-					]
-				}}
-			/>
+			<NextSeo {...seoTags} />
 			<ScrollToTop />
 			<GeneralPage>
 				<Container>
@@ -103,10 +88,26 @@ const CommandsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 
 export const getStaticProps = async () => {
 	const commands = await ssrFetch<FlattenedCommand[]>('/commands');
+	const seoTags = mergeSeoProps({
+		title: 'Commands',
+		description:
+			"Want to know what Skyra can do? You've come to the right place here. Get information about every command available in Skyra on this page. ",
+		openGraph: {
+			title: 'Skyra Commands'
+		},
+		additionalMetaTags: [
+			{
+				name: 'summary',
+				content:
+					"Want to know what Skyra can do? You've come to the right place here. Get information about every command available in Skyra on this page. "
+			}
+		]
+	});
 
 	return {
 		props: {
-			commands
+			commands,
+			seoTags
 		}
 	};
 };

@@ -1,8 +1,9 @@
 import theme from '@config/theme';
-import type { AdditionalRobotsProps, SeoProps } from './Seo';
+import type { DefaultSeoProps as DefaultSeoPropsType } from 'next-seo';
+import type { AdditionalRobotsProps } from 'next-seo/lib/types';
 
 export const BaseUrl = 'https://skyra.pw';
-export const DefaultSeoProps: SeoProps = {
+export const DefaultSeoProps: DefaultSeoPropsType = {
 	titleTemplate: 'Skyra | %s',
 	title: 'Home',
 	description: 'Skyra is a multipurpose Discord bot designed to handle most tasks, helping users manage their servers easily.',

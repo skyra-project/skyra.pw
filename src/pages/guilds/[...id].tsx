@@ -106,7 +106,6 @@ const GuildSettingsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 	);
 };
 
-// eslint-disable-next-line @typescript-eslint/require-await
 export const getStaticPaths: GetStaticPaths = async () => {
 	return {
 		paths: [], // indicates that no page needs be created at build time
