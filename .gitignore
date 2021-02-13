@@ -12,6 +12,7 @@ dist/
 sitemap.xml
 sw.js
 workbox*.js
+local.Dockerfile
 
 # misc
 .DS_Store
