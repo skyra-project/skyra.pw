@@ -1,4 +1,4 @@
-import { createSeoProps } from '@config/next-seo.config';
+import SeoHead from '@config/SEO/SeoHeader';
 import type { FlattenedCommand } from '@config/types/ApiData';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
@@ -11,7 +11,6 @@ import { useWindowSize } from '@utils/useWindowSize';
 import { ssrFetch } from '@utils/util';
 import debounce from 'lodash/debounce';
 import type { InferGetStaticPropsType, NextPage } from 'next';
-import { NextSeo } from 'next-seo';
 import React, { useCallback, useMemo, useState } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -57,8 +56,8 @@ const CommandsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 
 	return (
 		<>
-			<NextSeo
-				{...createSeoProps({
+			<SeoHead
+				additionalSeoProps={{
 					title: 'Commands',
 					description:
 						"Want to know what Skyra can do? You've come to the right place here. Get information about every command available in Skyra on this page. ",
@@ -72,7 +71,7 @@ const CommandsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 								"Want to know what Skyra can do? You've come to the right place here. Get information about every command available in Skyra on this page. "
 						}
 					]
-				})}
+				}}
 			/>
 			<ScrollToTop />
 			<GeneralPage>

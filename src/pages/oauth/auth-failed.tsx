@@ -1,4 +1,4 @@
-import { createSeoProps } from '@config/next-seo.config';
+import SeoHead from '@config/SEO/SeoHeader';
 import { ButtonGroup, createStyles, makeStyles, Theme, useMediaQuery, useTheme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -10,7 +10,6 @@ import HomeIcon from '@material-ui/icons/Home';
 import GeneralPage from '@presentational/Layout/General';
 import { navigate } from '@utils/util';
 import type { NextPage } from 'next';
-import { NextSeo } from 'next-seo';
 import React from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -37,11 +36,11 @@ const AuthFailedPage: NextPage = () => {
 
 	return (
 		<>
-			<NextSeo
-				{...createSeoProps({
+			<SeoHead
+				additionalSeoProps={{
 					title: 'Authentication Failed',
 					description: 'Woops, the authentication failed :('
-				})}
+				}}
 			/>
 			<GeneralPage>
 				<Container maxWidth="md" classes={{ root: classes.container }}>

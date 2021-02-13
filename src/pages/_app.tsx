@@ -1,5 +1,6 @@
 import '@config/globals.css';
-import { DefaultSeo as DefaultSeoProps } from '@config/next-seo.config';
+// import DefaultSeoProps from '@config/SEO/DefaultSeoProps';
+// import BuildSeoTags from '@config/SEO/SeoGenerator';
 import theme from '@config/theme';
 import { MobileContextProvider } from '@contexts/MobileContext';
 import { useMediaQuery } from '@material-ui/core';
@@ -7,8 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { CookieConsentProvider } from '@presentational/CookieConsent/ContextProvider';
 import type { NextPage } from 'next';
-import { DefaultSeo } from 'next-seo';
-import { AppProps, Container } from 'next/app';
+import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import NextNprogress from 'nextjs-progressbar';
@@ -83,7 +83,7 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 	const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
 	return (
-		<Container>
+		<>
 			<Head>
 				<meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
 				<meta httpEquiv="X-UA-Compatible" content="ie=edge" />
@@ -103,8 +103,8 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 				<link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color={theme.palette.primary.main} />
 				<link rel="shortcut icon" href="/icons/favicon.ico" />
 				<link rel="apple-touch-startup-image" href="/icons/apple-startup.png" />
+				{/* {BuildSeoTags(DefaultSeoProps)} */}
 			</Head>
-			<DefaultSeo {...DefaultSeoProps} />
 
 			<ThemeProvider theme={theme}>
 				<MobileContextProvider value={{ isMobile }}>
@@ -120,7 +120,7 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 					</AuthenticatedProvider>
 				</MobileContextProvider>
 			</ThemeProvider>
-		</Container>
+		</>
 	);
 };
 

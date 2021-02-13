@@ -1,24 +1,20 @@
-import { createSeoProps, robotBlockingPageProps } from '@config/next-seo.config';
+import { robotBlockingPageProps } from '@config/SEO/DefaultSeoProps';
+import SeoHead from '@config/SEO/SeoHeader';
 import Error from '@presentational/Layout/ErrorPage';
 import type { NextPage } from 'next';
-import { NextSeo } from 'next-seo';
 import React from 'react';
 
 const Page404: NextPage = () => {
 	return (
 		<>
-			<NextSeo
-				{...createSeoProps({
+			<SeoHead
+				additionalSeoProps={{
 					title: '404',
 					description: "How'd you get here?",
-					additionalMetaTags: [
-						{ name: 'robots', content: 'noindex, nofollow' },
-						{ name: 'googlebot', content: 'noindex, nofollow' }
-					],
-					...robotBlockingPageProps
-				})}
-				noindex
-				nofollow
+					nofollow: true,
+					noindex: true,
+					robotsProps: robotBlockingPageProps
+				}}
 			/>
 			<Error />
 		</>

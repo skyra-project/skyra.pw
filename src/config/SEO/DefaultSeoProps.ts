@@ -1,11 +1,8 @@
-import { mergeDefault } from '@sapphire/utilities';
-import type { DefaultSeoProps, NextSeoProps } from 'next-seo';
-import theme from './theme';
-
-type KeyedObject = Record<PropertyKey, unknown>;
+import theme from '@config/theme';
+import type { AdditionalRobotsProps, SeoProps } from './Seo';
 
 export const BaseUrl = 'https://skyra.pw';
-export const DefaultSeo: DefaultSeoProps & KeyedObject = {
+export const DefaultSeoProps: SeoProps = {
 	titleTemplate: 'Skyra | %s',
 	title: 'Home',
 	description: 'Skyra is a multipurpose Discord bot designed to handle most tasks, helping users manage their servers easily.',
@@ -70,17 +67,14 @@ export const DefaultSeo: DefaultSeoProps & KeyedObject = {
 		cardType: 'summary'
 	}
 };
-
-export const createSeoProps = (seoProps?: NextSeoProps & KeyedObject) => mergeDefault(DefaultSeo, seoProps);
-
-export const robotBlockingPageProps: Pick<NextSeoProps, 'robotsProps'> = {
-	robotsProps: {
-		nosnippet: true,
-		notranslate: true,
-		noimageindex: true,
-		noarchive: true,
-		maxSnippet: -1,
-		maxImagePreview: 'none',
-		maxVideoPreview: -1
-	}
+export const robotBlockingPageProps: AdditionalRobotsProps = {
+	nosnippet: true,
+	notranslate: true,
+	noimageindex: true,
+	noarchive: true,
+	maxSnippet: -1,
+	maxImagePreview: 'none',
+	maxVideoPreview: -1
 };
+
+export default DefaultSeoProps;

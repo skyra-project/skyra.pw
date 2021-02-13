@@ -1,8 +1,8 @@
 import type { TransformedLoginData } from '@config/types/ApiData';
-import { mergeDefault } from '@sapphire/utilities';
 import { LocalStorageKeys } from '@utils/constants';
 import { loadState } from '@utils/util';
 import constate from 'constate';
+import deepmerge from 'deepmerge';
 import { useCallback, useState } from 'react';
 
 const discordPack = loadState<TransformedLoginData>(LocalStorageKeys.DiscordPack);
@@ -10,7 +10,7 @@ const discordPack = loadState<TransformedLoginData>(LocalStorageKeys.DiscordPack
 const useDiscordPackState = () => {
 	const [pack, setPack] = useState<TransformedLoginData>(discordPack ?? { user: null });
 
-	const mergePack = useCallback((newPack: Partial<TransformedLoginData>) => setPack(mergeDefault(pack, newPack)), [pack]);
+	const mergePack = useCallback((newPack: Partial<TransformedLoginData>) => setPack(deepmerge(pack, newPack)), [pack]);
 
 	return { pack, mergePack };
 };

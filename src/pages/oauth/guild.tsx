@@ -1,8 +1,8 @@
-import { createSeoProps, robotBlockingPageProps } from '@config/next-seo.config';
+import { robotBlockingPageProps } from '@config/SEO/DefaultSeoProps';
+import SeoHead from '@config/SEO/SeoHeader';
 import GeneralPage from '@layout/General';
 import RedirectRoute from '@routing/RedirectRoute';
 import type { NextPage } from 'next';
-import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
@@ -17,17 +17,14 @@ const OauthGuild: NextPage = () => {
 
 	return (
 		<>
-			<NextSeo
-				{...createSeoProps({
+			<SeoHead
+				additionalSeoProps={{
 					title: 'OAUTH Callback',
-					additionalMetaTags: [
-						{ name: 'robots', content: 'noindex, nofollow' },
-						{ name: 'googlebot', content: 'noindex, nofollow' }
-					],
-					...robotBlockingPageProps
-				})}
-				noindex
-				nofollow
+					description: 'Woops, the authentication failed :(',
+					nofollow: true,
+					noindex: true,
+					robotsProps: robotBlockingPageProps
+				}}
 			/>
 			<GeneralPage loading={!guildId}>{guildId && <RedirectRoute redirectUri={`/guilds/${guildId}`} />}</GeneralPage>
 		</>

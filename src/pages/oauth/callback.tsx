@@ -1,4 +1,5 @@
-import { createSeoProps, robotBlockingPageProps } from '@config/next-seo.config';
+import { robotBlockingPageProps } from '@config/SEO/DefaultSeoProps';
+import SeoHead from '@config/SEO/SeoHeader';
 import type { TransformedLoginData } from '@config/types/ApiData';
 import { setAuthenticated } from '@contexts/AuthenticationContext';
 import { mergeDiscordPack } from '@contexts/DiscordPackContext';
@@ -6,7 +7,6 @@ import GeneralLayout from '@layout/General';
 import { BASE_WEB_URL, CLIENT_ID, FetchMethods, LocalStorageKeys } from '@utils/constants';
 import { apiFetch, saveState } from '@utils/util';
 import type { NextPage } from 'next';
-import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 
@@ -55,17 +55,14 @@ const OauthCallback: NextPage = () => {
 
 	return (
 		<>
-			<NextSeo
-				{...createSeoProps({
+			<SeoHead
+				additionalSeoProps={{
 					title: 'OAUTH Callback',
-					additionalMetaTags: [
-						{ name: 'robots', content: 'noindex, nofollow' },
-						{ name: 'googlebot', content: 'noindex, nofollow' }
-					],
-					...robotBlockingPageProps
-				})}
-				noindex
-				nofollow
+					description: 'Woops, the authentication failed :(',
+					nofollow: true,
+					noindex: true,
+					robotsProps: robotBlockingPageProps
+				}}
 			/>
 			<GeneralLayout loading={loading} />
 		</>

@@ -1,4 +1,4 @@
-import { createSeoProps } from '@config/next-seo.config';
+import SeoHead from '@config/SEO/SeoHeader';
 import { useAuthenticated } from '@contexts/AuthenticationContext';
 import { useDiscordPack } from '@contexts/DiscordPackContext';
 import { useMobileContext } from '@contexts/MobileContext';
@@ -10,7 +10,6 @@ import { FilteredGuildCards } from '@presentational/GuildCard';
 import GeneralPage from '@presentational/Layout/General';
 import ScrollToTop from '@routing/ScrollToTop';
 import type { NextPage } from 'next';
-import { NextSeo } from 'next-seo';
 import React from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -45,7 +44,11 @@ const GuildsPage: NextPage = () => {
 
 	return (
 		<>
-			<NextSeo {...createSeoProps({ title: 'Guilds' })} />
+			<SeoHead
+				additionalSeoProps={{
+					title: 'Guilds'
+				}}
+			/>
 			<ScrollToTop />
 			<GeneralPage>
 				<Container classes={{ root: classes.container }}>
