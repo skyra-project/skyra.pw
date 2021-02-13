@@ -1,4 +1,4 @@
-import { createSeoProps } from '@config/next-seo.config';
+import { createSeoProps, robotBlockingPageProps } from '@config/next-seo.config';
 import GeneralPage from '@layout/General';
 import RedirectRoute from '@routing/RedirectRoute';
 import type { NextPage } from 'next';
@@ -23,8 +23,11 @@ const OauthGuild: NextPage = () => {
 					additionalMetaTags: [
 						{ name: 'robots', content: 'noindex, nofollow' },
 						{ name: 'googlebot', content: 'noindex, nofollow' }
-					]
+					],
+					...robotBlockingPageProps
 				})}
+				noindex
+				nofollow
 			/>
 			<GeneralPage loading={!guildId}>{guildId && <RedirectRoute redirectUri={`/guilds/${guildId}`} />}</GeneralPage>
 		</>

@@ -1,4 +1,4 @@
-import { createSeoProps } from '@config/next-seo.config';
+import { createSeoProps, robotBlockingPageProps } from '@config/next-seo.config';
 import type { TransformedLoginData } from '@config/types/ApiData';
 import { setAuthenticated } from '@contexts/AuthenticationContext';
 import { mergeDiscordPack } from '@contexts/DiscordPackContext';
@@ -61,8 +61,11 @@ const OauthCallback: NextPage = () => {
 					additionalMetaTags: [
 						{ name: 'robots', content: 'noindex, nofollow' },
 						{ name: 'googlebot', content: 'noindex, nofollow' }
-					]
+					],
+					...robotBlockingPageProps
 				})}
+				noindex
+				nofollow
 			/>
 			<GeneralLayout loading={loading} />
 		</>

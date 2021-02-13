@@ -72,3 +72,15 @@ export const DefaultSeo: DefaultSeoProps & KeyedObject = {
 };
 
 export const createSeoProps = (seoProps?: NextSeoProps & KeyedObject) => mergeDefault(DefaultSeo, seoProps);
+
+export const robotBlockingPageProps: Pick<NextSeoProps, 'robotsProps'> = {
+	robotsProps: {
+		nosnippet: true,
+		notranslate: true,
+		noimageindex: true,
+		noarchive: true,
+		maxSnippet: -1,
+		maxImagePreview: 'none',
+		maxVideoPreview: -1
+	}
+};

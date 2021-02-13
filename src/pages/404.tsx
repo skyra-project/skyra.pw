@@ -1,4 +1,4 @@
-import { createSeoProps } from '@config/next-seo.config';
+import { createSeoProps, robotBlockingPageProps } from '@config/next-seo.config';
 import Error from '@presentational/Layout/ErrorPage';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
@@ -14,8 +14,11 @@ const Page404: NextPage = () => {
 					additionalMetaTags: [
 						{ name: 'robots', content: 'noindex, nofollow' },
 						{ name: 'googlebot', content: 'noindex, nofollow' }
-					]
+					],
+					...robotBlockingPageProps
 				})}
+				noindex
+				nofollow
 			/>
 			<Error />
 		</>
