@@ -7,13 +7,14 @@ import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 import LockIcon from '@material-ui/icons/Lock';
 import { useMobileContext } from 'contexts/MobileContext';
 import DiscordIcon from 'mdi-react/DiscordIcon';
-import React, { FC, memo, useMemo } from 'react';
+import React, { FC, memo, useCallback, useMemo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		chip: {
 			padding: theme.spacing(0.2),
-			marginLeft: theme.spacing(1)
+			marginLeft: theme.spacing(1),
+			width: '100%'
 		},
 		rankIcon: {
 			transform: 'rotate(-90deg)',
@@ -32,32 +33,42 @@ interface ChipsProps {
 	command: FlattenedCommand;
 }
 
+const GuildOnlyPreconditions = ['Administrator', 'DJ', 'GuildOnly', 'Moderator', 'NewsOnly', 'NSFW', 'TextOnly'];
+
 const Chips: FC<ChipsProps> = ({ command }) => {
 	const classes = useStyles();
 	const { isMobile } = useMobileContext();
 
 	const titles = useMemo<Record<number, string>>(
 		() => ({
-			4: 'This command can only be run by staff members.',
-			5: 'This command can only be run by moderators and administrators.',
-			6: 'This command can only be run by administrators.'
+			4: 'This can only be ran by staff members.',
+			5: 'This can only be ran by moderators and administrators.',
+			6: 'This can only be ran by administrators.'
 		}),
 		[]
 	);
 
 	const mobileTitles = useMemo<Record<number, string>>(
 		() => ({
-			4: 'Only for staff members',
-			5: 'moderators & administrators only',
-			6: 'Only for administrators'
+			4: 'Staff members only',
+			5: 'Moderators & administrators only',
+			6: 'Administrators only'
 		}),
 		[]
 	);
 
+	const isGuildOnly = useCallback(() => {
+		return command.preconditions.entries
+			.flatMap((preconditionEntry) => preconditionEntry.entries)
+			.filter(Boolean)
+			.map((entry) => entry.name)
+			.some((predicate) => GuildOnlyPreconditions.includes(predicate));
+	}, [command.preconditions.entries]);
+
 	return (
 		<Grid container spacing={1} direction="row" alignContent="center" alignItems="center" justify="flex-start">
 			{command.permissionLevel > 0 && (
-				<Grid item xs={12} md={5}>
+				<Grid item xs={12} md={5} lg={4}>
 					<Chip
 						size="small"
 						label={isMobile ? mobileTitles[command.permissionLevel] : titles[command.permissionLevel]}
@@ -70,11 +81,11 @@ const Chips: FC<ChipsProps> = ({ command }) => {
 					/>
 				</Grid>
 			)}
-			{command.guildOnly && (
-				<Grid item xs={12} md={5}>
+			{isGuildOnly() && (
+				<Grid item xs={12} md={5} lg={4}>
 					<Chip
 						size="small"
-						label={isMobile ? 'Unusable in DMs.' : 'This command cannot be used in DMs.'}
+						label={isMobile ? 'Usable in servers only.' : 'This can only be used in servers.'}
 						icon={<DiscordIcon />}
 						color="secondary"
 						classes={{
@@ -85,7 +96,7 @@ const Chips: FC<ChipsProps> = ({ command }) => {
 				</Grid>
 			)}
 			{command.guarded && (
-				<Grid item xs={12} md={5}>
+				<Grid item xs={12} md={5} lg={4}>
 					<Chip
 						size="small"
 						label="This command cannot be disabled."

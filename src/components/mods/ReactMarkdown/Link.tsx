@@ -15,6 +15,8 @@ const useStyles = makeStyles(() =>
 	})
 );
 
+const SkyraPwPathRegex = /<?https:\/\/skyra\.pw(?<path>\/[a-z]+)?>?/;
+
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(({ href, children }, ref) => {
 	const classes = useStyles();
 
@@ -26,6 +28,18 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(({ href, children }, ref) 
 				{children}
 				{']'}
 			</Typography>
+		);
+	}
+
+	// If the link starts with a / then it is an internal link
+	if (href.startsWith('https://skyra.pw')) {
+		return (
+			<RouterLink
+				href={href.endsWith('pw') ? '/' : SkyraPwPathRegex.exec(href)?.groups?.path ?? href}
+				ref={ref}
+				text={children}
+				TextTypographyProps={{ classes: { root: classes.brokenWordText } }}
+			/>
 		);
 	}
 

@@ -13,6 +13,7 @@ import ExamplesIcon from '@material-ui/icons/EmojiObjects';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Chips from '@presentational/CommandsPage/Chips';
 import { reactStringReplace } from '@utils/reactStringReplace';
+import clsx from 'clsx';
 import ReminderIcon from 'mdi-react/BellAlertIcon';
 import HelpRhombusIcon from 'mdi-react/HelpRhombusIcon';
 import React, { FC, memo } from 'react';
@@ -54,13 +55,13 @@ interface CommandProps {
 	command: FlattenedCommand;
 }
 
-const resolveMultilineString = (str: string | string[], multiline: boolean): string => {
+const resolveMultilineString = (str: string | string[]): string => {
 	return Array.isArray(str)
-		? resolveMultilineString(str.join(multiline ? '\n' : ' '), multiline)
+		? resolveMultilineString(str.join('\n'))
 		: str
 				.split('\n')
 				.map((line) => line.trim())
-				.join(multiline ? '\n\n' : ' ');
+				.join('\n');
 };
 
 const Command: FC<CommandProps> = ({ command }) => {
@@ -90,22 +91,26 @@ const Command: FC<CommandProps> = ({ command }) => {
 				</AccordionSummary>
 				<AccordionDetails>
 					<Grid container direction="column">
-						<Grid item>
-							<ExtendedHelpSectionHeader icon={<CreateIcon />} header="Command Usage" />
-						</Grid>
-						<Grid item>
-							<ExtendedHelpBody body={`\`s!${command.usage}\``} />
-						</Grid>
+						{command.extendedHelp.usages && (
+							<>
+								<Grid item>
+									<ExtendedHelpSectionHeader icon={<CreateIcon />} header="Command Usage" />
+								</Grid>
+								<Grid item>
+									{command.extendedHelp.usages.map((usage, key) => (
+										<ExtendedHelpBody key={key} body={`\`Skyra, ${command.name} ${usage}\``} />
+									))}
+								</Grid>
+							</>
+						)}
 
 						{command.extendedHelp.extendedHelp && (
 							<>
-								<Grid item classes={{ root: classes.extendedHelpGrid }}>
+								<Grid item classes={{ root: clsx({ [classes.extendedHelpGrid]: Boolean(command.extendedHelp.usages) }) }}>
 									<ExtendedHelpSectionHeader icon={<HelpRhombusIcon />} header="Extended Help" />
 								</Grid>
 								<Grid item>
-									<ExtendedHelpBody
-										body={resolveMultilineString(command.extendedHelp.extendedHelp, command.extendedHelp.multiline ?? false)}
-									/>
+									<ExtendedHelpBody body={command.extendedHelp.extendedHelp} />
 								</Grid>
 							</>
 						)}
@@ -117,7 +122,9 @@ const Command: FC<CommandProps> = ({ command }) => {
 								</Grid>
 								<Grid item>
 									<ExtendedHelpBody
-										body={command.extendedHelp.explainedUsage.map(([arg, desc]) => `- **${arg}**: ${desc}\n`).join('\n')}
+										body={command.extendedHelp.explainedUsage
+											.map(([arg, desc]) => `- **${arg}**: ${resolveMultilineString(desc)}`)
+											.join('\n')}
 									/>
 								</Grid>
 							</>
@@ -130,7 +137,7 @@ const Command: FC<CommandProps> = ({ command }) => {
 								</Grid>
 								<Grid item>
 									<ExtendedHelpBody
-										body={command.extendedHelp.possibleFormats.map(([type, example]) => `- **${type}**: ${example}\n`).join('\n')}
+										body={command.extendedHelp.possibleFormats.map(([type, example]) => `- **${type}**: ${example}`).join('\n')}
 									/>
 								</Grid>
 							</>
@@ -144,7 +151,7 @@ const Command: FC<CommandProps> = ({ command }) => {
 								<Grid item>
 									<ExtendedHelpBody
 										body={command.extendedHelp.examples
-											.map((example) => `- Skyra, ${command.name}${example ? ` *${example}*` : ''}\n`)
+											.map((example) => `- Skyra, ${command.name}${example ? ` *${example}*` : ''}`)
 											.join('\n')}
 									/>
 								</Grid>
@@ -157,9 +164,7 @@ const Command: FC<CommandProps> = ({ command }) => {
 									<ExtendedHelpSectionHeader icon={<ReminderIcon />} header="Reminder" />
 								</Grid>
 								<Grid item>
-									<ExtendedHelpBody
-										body={resolveMultilineString(command.extendedHelp.reminder, command.extendedHelp.multiline ?? false)}
-									/>
+									<ExtendedHelpBody body={command.extendedHelp.reminder} />
 								</Grid>
 							</>
 						)}

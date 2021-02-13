@@ -133,26 +133,39 @@ interface FlattenedMember {
 }
 
 export interface FlattenedCommand {
-	bucket: number;
 	category: string;
-	cooldown: number;
 	description: string;
-	extendedHelp: LanguageHelpDisplayOptions;
+	extendedHelp: ExtendedHelp;
 	guarded: boolean;
-	guildOnly: boolean;
 	name: string;
 	permissionLevel: number;
-	requiredPermissions: string[];
-	usage: string;
+	preconditions: Preconditions;
 }
 
-interface LanguageHelpDisplayOptions {
-	extendedHelp?: string[] | string;
-	explainedUsage?: Array<[string, string]>;
-	possibleFormats?: Array<[string, string]>;
-	examples?: string[];
-	reminder?: string[] | string;
-	multiline?: boolean;
+export interface Preconditions {
+	entries: PreconditionsEntry[];
+	runCondition: number;
+	mode: number;
+}
+
+export interface PreconditionsEntry {
+	entries: PreconditionEntryEntry[];
+	runCondition: number;
+	mode: number;
+}
+
+export interface PreconditionEntryEntry {
+	context: unknown;
+	name: string;
+}
+
+interface ExtendedHelp {
+	usages?: string[];
+	extendedHelp?: string;
+	explainedUsage?: [string, string][];
+	possibleFormats?: [string, string][];
+	examples?: (null | string)[];
+	reminder?: string;
 }
 
 interface PartialOauthFlattenedGuild extends Omit<FlattenedGuild, 'joinedTimestamp' | 'ownerID' | 'region' | 'features'> {
