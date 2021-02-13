@@ -1,4 +1,3 @@
-import mergeSeoProps from '@config/SEO/MergeSeoProps';
 import type { FlattenedCommand } from '@config/types/ApiData';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
@@ -33,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const CommandsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ commands, seoTags }) => {
+const CommandsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ commands }) => {
 	const classes = useStyles();
 	const [searchValue, setSearchValue] = useState('');
 	const [commandsBoxWidth, setCommandsBoxWidth] = useState(500);
@@ -57,7 +56,20 @@ const CommandsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 
 	return (
 		<>
-			<NextSeo {...seoTags} />
+			<NextSeo
+				title="Commands"
+				description="Want to know what Skyra can do? You've come to the right place here. Get information about every command available in Skyra on this page."
+				openGraph={{
+					title: 'Skyra Commands'
+				}}
+				additionalMetaTags={[
+					{
+						name: 'summary',
+						content:
+							"Want to know what Skyra can do? You've come to the right place here. Get information about every command available in Skyra on this page."
+					}
+				]}
+			/>
 			<ScrollToTop />
 			<GeneralPage>
 				<Container>
@@ -88,26 +100,10 @@ const CommandsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 
 export const getStaticProps = async () => {
 	const commands = await ssrFetch<FlattenedCommand[]>('/commands');
-	const seoTags = mergeSeoProps({
-		title: 'Commands',
-		description:
-			"Want to know what Skyra can do? You've come to the right place here. Get information about every command available in Skyra on this page. ",
-		openGraph: {
-			title: 'Skyra Commands'
-		},
-		additionalMetaTags: [
-			{
-				name: 'summary',
-				content:
-					"Want to know what Skyra can do? You've come to the right place here. Get information about every command available in Skyra on this page. "
-			}
-		]
-	});
 
 	return {
 		props: {
-			commands,
-			seoTags
+			commands
 		}
 	};
 };

@@ -1,4 +1,3 @@
-import mergeSeoProps from '@config/SEO/MergeSeoProps';
 import { useAuthenticated } from '@contexts/AuthenticationContext';
 import { useDiscordPack } from '@contexts/DiscordPackContext';
 import { useMobileContext } from '@contexts/MobileContext';
@@ -9,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import { FilteredGuildCards } from '@presentational/GuildCard';
 import GeneralPage from '@presentational/Layout/General';
 import ScrollToTop from '@routing/ScrollToTop';
-import type { InferGetStaticPropsType, NextPage } from 'next';
+import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
 
@@ -37,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const GuildsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ seoTags }) => {
+const GuildsPage: NextPage = () => {
 	const authenticated = useAuthenticated();
 	const classes = useStyles({ authenticated });
 	const pack = useDiscordPack();
@@ -45,7 +44,7 @@ const GuildsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ 
 
 	return (
 		<>
-			<NextSeo {...seoTags} />
+			<NextSeo title="Guilds" />
 			<ScrollToTop />
 			<GeneralPage>
 				<Container classes={{ root: classes.container }}>
@@ -65,15 +64,5 @@ const GuildsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ 
 		</>
 	);
 };
-
-export async function getStaticProps() {
-	const seoTags = mergeSeoProps({
-		title: 'Guilds'
-	});
-
-	return {
-		props: { seoTags } // will be passed to the page component as props
-	};
-}
 
 export default GuildsPage;

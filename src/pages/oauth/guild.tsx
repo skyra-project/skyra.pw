@@ -1,13 +1,12 @@
 import { robotBlockingPageProps } from '@config/SEO/DefaultSeoProps';
-import mergeSeoProps from '@config/SEO/MergeSeoProps';
 import GeneralPage from '@layout/General';
 import RedirectRoute from '@routing/RedirectRoute';
-import type { InferGetStaticPropsType, NextPage } from 'next';
+import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
-const OauthGuild: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ seoTags }) => {
+const OauthGuild: NextPage = () => {
 	const [guildId, setGuildId] = useState<string | null>(null);
 	const router = useRouter();
 
@@ -18,24 +17,11 @@ const OauthGuild: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ 
 
 	return (
 		<>
-			<NextSeo {...seoTags} />
+			<NextSeo title="OAUTH Callback" nofollow noindex robotsProps={robotBlockingPageProps} />
 			<GeneralPage loading={!guildId}>{guildId && <RedirectRoute redirectUri={`/guilds/${guildId}`} />}</GeneralPage>
 		</>
 	);
 };
-
-export async function getStaticProps() {
-	const seoTags = mergeSeoProps({
-		title: 'OAUTH Callback',
-		nofollow: true,
-		noindex: true,
-		robotsProps: robotBlockingPageProps
-	});
-
-	return {
-		props: { seoTags } // will be passed to the page component as props
-	};
-}
 
 export default OauthGuild;
 

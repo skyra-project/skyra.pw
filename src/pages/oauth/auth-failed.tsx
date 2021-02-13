@@ -1,4 +1,3 @@
-import mergeSeoProps from '@config/SEO/MergeSeoProps';
 import { ButtonGroup, createStyles, makeStyles, Theme, useMediaQuery, useTheme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -9,7 +8,7 @@ import ForumIcon from '@material-ui/icons/Forum';
 import HomeIcon from '@material-ui/icons/Home';
 import GeneralPage from '@presentational/Layout/General';
 import { navigate } from '@utils/util';
-import type { InferGetStaticPropsType, NextPage } from 'next';
+import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
 
@@ -30,14 +29,14 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const AuthFailedPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ seoTags }) => {
+const AuthFailedPage: NextPage = () => {
 	const classes = useStyles();
 	const theme = useTheme();
 	const isOnMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
 	return (
 		<>
-			<NextSeo {...seoTags} />
+			<NextSeo title="Authentication Failed" description="Woops, the authentication failed :(" />
 			<GeneralPage>
 				<Container maxWidth="md" classes={{ root: classes.container }}>
 					<Grid container direction="column" justify="center" alignContent="stretch" alignItems="center" classes={{ root: classes.root }}>
@@ -65,16 +64,5 @@ const AuthFailedPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> =
 		</>
 	);
 };
-
-export async function getStaticProps() {
-	const seoTags = mergeSeoProps({
-		title: 'Authentication Failed',
-		description: 'Woops, the authentication failed :('
-	});
-
-	return {
-		props: { seoTags } // will be passed to the page component as props
-	};
-}
 
 export default AuthFailedPage;
