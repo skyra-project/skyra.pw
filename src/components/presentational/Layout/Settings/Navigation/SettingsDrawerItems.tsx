@@ -29,6 +29,7 @@ import GuildIcon from '@presentational/GuildIcon';
 import ListItemLink from '@routing/ListItemLink';
 import { noop } from '@sapphire/utilities';
 import { navigate } from '@utils/util';
+import { useRouter } from 'next/router';
 import React, { FC, Fragment, memo, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import type { ValuesType } from 'utility-types';
@@ -82,6 +83,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId, isOnMobile, toggleSidebar, isLoading }) => {
 	const classes = useStyles();
+	const router = useRouter();
 	const [openSubMenus, setOpenSubMenus] = useState<string[]>([]);
 
 	const closeSidebarOnMobile = () => (isOnMobile ? toggleSidebar() : noop());
@@ -151,7 +153,7 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 						<ListItemText primary="Filters" />
 						{openSubMenus.includes('filter') ? <ExpandLess /> : <ExpandMore />}
 					</ListItem>
-					<Collapse in={openSubMenus.includes('filter')} timeout="auto" unmountOnExit>
+					<Collapse in={openSubMenus.includes('filter') || router.asPath.split('/')?.[3] === 'filter'} timeout="auto" unmountOnExit>
 						<List disablePadding>
 							<ListItemLink
 								listItemOnClick={closeSidebarOnMobile}
