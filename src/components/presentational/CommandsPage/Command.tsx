@@ -55,13 +55,13 @@ interface CommandProps {
 	command: FlattenedCommand;
 }
 
-const resolveMultilineString = (str: string | string[]): string => {
+const resolveMultilineString = (str: string | string[], multiline = false): string => {
 	return Array.isArray(str)
-		? resolveMultilineString(str.join('\n'))
+		? resolveMultilineString(str.join(multiline ? '\n' : ' '), multiline)
 		: str
 				.split('\n')
 				.map((line) => line.trim())
-				.join('\n');
+				.join(multiline ? '\n\n' : ' ');
 };
 
 const Command: FC<CommandProps> = ({ command }) => {
@@ -110,7 +110,7 @@ const Command: FC<CommandProps> = ({ command }) => {
 									<ExtendedHelpSectionHeader icon={<HelpRhombusIcon />} header="Extended Help" />
 								</Grid>
 								<Grid item>
-									<ExtendedHelpBody body={command.extendedHelp.extendedHelp} />
+									<ExtendedHelpBody body={resolveMultilineString(command.extendedHelp.extendedHelp, true)} />
 								</Grid>
 							</>
 						)}
