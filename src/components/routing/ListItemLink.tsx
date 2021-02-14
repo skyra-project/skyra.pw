@@ -4,6 +4,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Link from '@routing/Link';
 import clsx from 'clsx';
+import { useRouter } from 'next/router';
 import React, { forwardRef, ReactElement } from 'react';
 import { When } from 'react-if';
 
@@ -27,6 +28,9 @@ const useStyles = makeStyles(() =>
 			'&:visited': {
 				color: 'inherit'
 			}
+		},
+		menuLinkHighlight: {
+			backgroundColor: 'rgba(150, 150, 150, 0.3)'
 		}
 	})
 );
@@ -34,6 +38,7 @@ const useStyles = makeStyles(() =>
 const ListItemLink = forwardRef<HTMLAnchorElement, ListItemLinkProps>(
 	({ href, itemText, listItemDense = false, listItemDisabled = false, listItemOnClick, listItemClassName, Icon }, ref) => {
 		const classes = useStyles();
+		const router = useRouter();
 
 		return (
 			<Link href={href} className={classes.menuLink} ref={ref}>
@@ -42,7 +47,7 @@ const ListItemLink = forwardRef<HTMLAnchorElement, ListItemLinkProps>(
 					dense={listItemDense}
 					disabled={listItemDisabled}
 					onClick={listItemOnClick}
-					className={clsx(listItemClassName, classes.menuLink)}
+					className={clsx(listItemClassName, classes.menuLink, { [classes.menuLinkHighlight]: href === router.asPath })}
 				>
 					<When condition={Boolean(Icon)}>
 						<ListItemIcon>{Icon}</ListItemIcon>
