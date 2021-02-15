@@ -59,7 +59,7 @@ export async function apiFetch<T>(path: string, options: RequestInit = {}) {
 			return jsonResponse as T;
 		}
 	} catch (err) {
-		throw new Error(err);
+		throw err;
 	}
 }
 
