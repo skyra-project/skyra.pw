@@ -41,25 +41,22 @@ export async function apiFetch<T>(path: string, options: RequestInit = {}) {
 	if (process.env.NODE_ENV === 'development') {
 		await sleep(1000);
 	}
-	try {
-		const response = await fetch(`${BASE_API_URL}${path}`, {
-			...options,
-			credentials: 'include',
-			headers: {
-				...options.headers,
-				'Content-Type': 'application/json'
-			}
-		});
 
-		const jsonResponse = await response.json();
-
-		if (jsonResponse.error) {
-			throw response;
-		} else {
-			return jsonResponse as T;
+	const response = await fetch(`${BASE_API_URL}${path}`, {
+		...options,
+		credentials: 'include',
+		headers: {
+			...options.headers,
+			'Content-Type': 'application/json'
 		}
-	} catch (err) {
-		throw err;
+	});
+
+	const jsonResponse = await response.json();
+
+	if (jsonResponse.error) {
+		throw response;
+	} else {
+		return jsonResponse as T;
 	}
 }
 
