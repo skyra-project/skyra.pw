@@ -80,13 +80,23 @@ type SetPackCallback = (newPack: Partial<TransformedLoginData>) => void;
 type SetAuthenticatedCallback = (newAuthenticated: boolean) => void;
 type ChangeRouteCallback = (newRoute: string) => void;
 
-export async function logOut(setPack: SetPackCallback, setAuthenticated: SetAuthenticatedCallback, changeRoute: ChangeRouteCallback) {
-	await apiFetch('/oauth/logout', { method: FetchMethods.Post });
-	clearState(LocalStorageKeys.DiscordPack);
-	clearState(LocalStorageKeys.LastSync);
-	setPack({ user: null });
-	setAuthenticated(false);
-	changeRoute('/');
+export async function logOut(
+	setPack: SetPackCallback,
+	setAuthenticated: SetAuthenticatedCallback,
+	changeRoute: ChangeRouteCallback,
+	callLogout = true
+) {
+	try {
+		if (callLogout) {
+			await apiFetch('/oauth/logout', { method: FetchMethods.Post });
+		}
+	} finally {
+		clearState(LocalStorageKeys.DiscordPack);
+		clearState(LocalStorageKeys.LastSync);
+		setPack({ user: null });
+		setAuthenticated(false);
+		changeRoute('/');
+	}
 }
 
 export async function syncUser(
@@ -113,7 +123,7 @@ export async function syncUser(
 			action: 'SYNC_USER'
 		})
 	}).catch((err) => {
-		if (err.status === 401 || err.status === 403) void logOut(setPack, setAuthenticated, changeRoute);
+		if (err.status === 401) void logOut(setPack, setAuthenticated, changeRoute, false);
 	});
 
 	if (!response) return;
