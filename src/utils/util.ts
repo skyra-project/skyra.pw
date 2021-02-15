@@ -41,22 +41,25 @@ export async function apiFetch<T>(path: string, options: RequestInit = {}) {
 	if (process.env.NODE_ENV === 'development') {
 		await sleep(1000);
 	}
+	try {
+		const response = await fetch(`${BASE_API_URL}${path}`, {
+			...options,
+			credentials: 'include',
+			headers: {
+				...options.headers,
+				'Content-Type': 'application/json'
+			}
+		});
 
-	const response = await fetch(`${BASE_API_URL}${path}`, {
-		...options,
-		credentials: 'include',
-		headers: {
-			...options.headers,
-			'Content-Type': 'application/json'
+		const jsonResponse = await response.json();
+
+		if (jsonResponse.error) {
+			throw response;
+		} else {
+			return jsonResponse as T;
 		}
-	});
-
-	const jsonResponse = await response.json();
-
-	if (jsonResponse.error) {
-		throw response;
-	} else {
-		return jsonResponse as T;
+	} catch (err) {
+		throw new Error(err);
 	}
 }
 
@@ -80,23 +83,16 @@ type SetPackCallback = (newPack: Partial<TransformedLoginData>) => void;
 type SetAuthenticatedCallback = (newAuthenticated: boolean) => void;
 type ChangeRouteCallback = (newRoute: string) => void;
 
-export async function logOut(
-	setPack: SetPackCallback,
-	setAuthenticated: SetAuthenticatedCallback,
-	changeRoute: ChangeRouteCallback,
-	callLogout = true
-) {
-	try {
-		if (callLogout) {
-			await apiFetch('/oauth/logout', { method: FetchMethods.Post });
-		}
-	} finally {
-		clearState(LocalStorageKeys.DiscordPack);
-		clearState(LocalStorageKeys.LastSync);
-		setPack({ user: null });
-		setAuthenticated(false);
-		changeRoute('/');
-	}
+export async function logOut() {
+	await apiFetch('/oauth/logout', { method: FetchMethods.Post });
+}
+
+export function clearData(setPack: SetPackCallback, setAuthenticated: SetAuthenticatedCallback, changeRoute: ChangeRouteCallback) {
+	clearState(LocalStorageKeys.DiscordPack);
+	clearState(LocalStorageKeys.LastSync);
+	setPack({ user: null });
+	setAuthenticated(false);
+	changeRoute('/');
 }
 
 export async function syncUser(
@@ -123,7 +119,7 @@ export async function syncUser(
 			action: 'SYNC_USER'
 		})
 	}).catch((err) => {
-		if (err.status === 401) void logOut(setPack, setAuthenticated, changeRoute, false);
+		if (err.status === 401) clearData(setPack, setAuthenticated, changeRoute);
 	});
 
 	if (!response) return;

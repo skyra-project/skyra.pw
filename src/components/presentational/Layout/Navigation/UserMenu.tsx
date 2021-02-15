@@ -17,7 +17,7 @@ import SyncIcon from '@material-ui/icons/Sync';
 import LazyAvatar from '@mui/LazyAvatar';
 import Tooltip from '@mui/Tooltip';
 import { displayAvatarURL } from '@utils/skyraUtils';
-import { logOut, syncUser } from '@utils/util';
+import { clearData, logOut, syncUser } from '@utils/util';
 import { useRouter } from 'next/router';
 import React, { FC, memo, useEffect, useRef, useState } from 'react';
 
@@ -122,9 +122,10 @@ const UserMenu: FC = () => {
 								<MenuList autoFocusItem={open} id="logout-popover" onKeyDown={handleListKeyDown}>
 									<MenuItem
 										component="a"
-										onClick={(...args: Parameters<typeof handleClose>) => {
+										onClick={async (...args: Parameters<typeof handleClose>) => {
 											handleClose(...args);
-											logOut(setPack, writeAuthenticated, router.push);
+											await logOut();
+											clearData(setPack, writeAuthenticated, router.push);
 										}}
 									>
 										<ListItemIcon>
