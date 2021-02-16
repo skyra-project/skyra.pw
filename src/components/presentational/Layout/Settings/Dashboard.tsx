@@ -1,5 +1,7 @@
 import type { TransformedLoginData } from '@config/types/ApiData';
 import type { GuildSettings } from '@config/types/GuildSettings';
+import { setAuthenticated } from '@contexts/AuthenticationContext';
+import { mergeDiscordPack } from '@contexts/DiscordPackContext';
 import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
@@ -13,8 +15,9 @@ import ErrorAlert from '@presentational/Alerts/Error';
 import { objectToTuples } from '@sapphire/utilities';
 import { FetchMethods, SettingsDrawerWidth } from '@utils/constants';
 import { Time } from '@utils/skyraUtils';
-import { apiFetch, navigate } from '@utils/util';
+import { apiFetch, clearData } from '@utils/util';
 import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { When } from 'react-if';
 import type { ValuesType } from 'utility-types';
@@ -70,10 +73,13 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 	const { guildData, setGuildData } = useGuildDataContext();
 	const { guildSettings, setGuildSettings } = useGuildSettingsContext();
 	const { guildSettingsChanges, setGuildSettingsChanges } = useGuildSettingsChangesContext();
+	const writeAuthenticated = setAuthenticated();
+	const setPack = mergeDiscordPack();
 
 	const [isLoading, setIsLoading] = useState(false);
 	const [mobileOpen, setMobileOpen] = useState(false);
 	const [hasError, setHasError] = useState(false);
+	const router = useRouter();
 
 	const syncGuildData = useCallback(async () => {
 		setIsLoading(true);
@@ -86,7 +92,11 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 			setGuildData(guildData);
 			setGuildSettings(guildSettings);
 		} catch (err) {
-			navigate('/404')();
+			if (err?.status === 401) {
+				clearData(setPack, writeAuthenticated, router.push);
+			} else {
+				void router.push('/404');
+			}
 		} finally {
 			setIsLoading(false);
 		}
@@ -118,9 +128,13 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 				setGuildSettings(response);
 				setIsLoading(false);
 			}
-		} catch {
+		} catch (error) {
 			setHasError(true);
 			setTimeout(() => setIsLoading(false), Time.Second);
+
+			if (error?.status === 401) {
+				clearData(setPack, writeAuthenticated, router.push);
+			}
 		}
 	};
 

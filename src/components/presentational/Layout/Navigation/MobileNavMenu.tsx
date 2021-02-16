@@ -25,7 +25,7 @@ import { CookieConsentContext } from '@presentational/CookieConsent/ContextProvi
 import MenuItemLink from '@routing/MenuItemLink';
 import { oauthURL } from '@utils/constants';
 import { displayAvatarURL } from '@utils/skyraUtils';
-import { logOut, syncUser } from '@utils/util';
+import { clearData, logOut, syncUser } from '@utils/util';
 import { useRouter } from 'next/router';
 import React, { FC, memo, useContext, useEffect, useRef, useState } from 'react';
 import { Else, If, Then } from 'react-if';
@@ -141,9 +141,10 @@ const MobileNavMenu: FC = () => {
 										<Then>
 											<MenuItem
 												component="a"
-												onClick={(...args: Parameters<typeof closePopperMenu>) => {
+												onClick={async (...args: Parameters<typeof closePopperMenu>) => {
 													closePopperMenu(...args);
-													logOut(setPack, writeAuthenticated, router.push);
+													await logOut();
+													clearData(setPack, writeAuthenticated, router.push);
 												}}
 											>
 												<ListItemIcon>
