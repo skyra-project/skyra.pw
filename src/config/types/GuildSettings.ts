@@ -180,7 +180,6 @@ export interface CustomCommand {
 	embed: boolean;
 	color: number;
 	content: string;
-	args: string[];
 }
 
 type CommandAutoDelete = readonly [string, number];
