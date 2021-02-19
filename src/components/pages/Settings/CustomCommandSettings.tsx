@@ -109,8 +109,7 @@ const CustomCommandSettings = () => {
 					id,
 					content,
 					color: parse(color || '#1E88E5').B10.value,
-					embed,
-					args: []
+					embed
 				})
 			});
 
