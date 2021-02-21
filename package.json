@@ -21,7 +21,7 @@
 		"@material-ui/core": "^4.11.3",
 		"@material-ui/icons": "^4.11.2",
 		"@material-ui/lab": "4.0.0-alpha.57",
-		"@sapphire/utilities": "^1.4.4",
+		"@sapphire/utilities": "^1.4.5",
 		"@skyra/discord-components-core": "^2.0.2",
 		"@skyra/discord-components-react": "^2.0.2",
 		"body-scroll-lock": "^3.1.5",
@@ -33,9 +33,9 @@
 		"formik-material-ui": "^3.0.1",
 		"lodash": "^4.17.20",
 		"mdi-react": "^7.4.0",
-		"next": "^10.0.6",
+		"next": "^10.0.7",
 		"next-pwa": "^5.0.5",
-		"next-seo": "^4.19.0",
+		"next-seo": "^4.20.0",
 		"nextjs-progressbar": "^0.0.7",
 		"react": "17.0.1",
 		"react-color": "^2.19.3",
@@ -44,7 +44,7 @@
 		"react-flip-move": "^3.0.4",
 		"react-if": "^4.0.1",
 		"react-markdown": "^5.0.3",
-		"react-player": "^2.8.2",
+		"react-player": "^2.9.0",
 		"react-virtuoso": "^1.5.6",
 		"remark-gfm": "^1.0.0",
 		"yup": "0.31.1"
@@ -52,20 +52,20 @@
 	"devDependencies": {
 		"@commitlint/cli": "^11.0.0",
 		"@commitlint/config-conventional": "^11.0.0",
-		"@sapphire/eslint-config": "^2.1.1",
-		"@sapphire/plugin-api": "^2.0.2",
-		"@sapphire/prettier-config": "^1.0.6",
-		"@sapphire/ts-config": "^2.0.0",
+		"@sapphire/eslint-config": "^2.1.2",
+		"@sapphire/plugin-api": "^2.0.3",
+		"@sapphire/prettier-config": "^1.0.7",
+		"@sapphire/ts-config": "^2.0.1",
 		"@skyra/audio": "^1.0.2",
 		"@types/body-scroll-lock": "^2.6.1",
 		"@types/lodash": "^4.14.168",
-		"@types/node": "^14.14.27",
+		"@types/node": "^14.14.31",
 		"@types/react": "^17.0.2",
 		"@types/react-color": "^3.0.4",
 		"@types/react-dom": "^17.0.1",
 		"@types/yup": "^0.29.11",
-		"@typescript-eslint/eslint-plugin": "^4.15.0",
-		"@typescript-eslint/parser": "^4.15.0",
+		"@typescript-eslint/eslint-plugin": "^4.15.1",
+		"@typescript-eslint/parser": "^4.15.1",
 		"cz-conventional-changelog": "^3.3.0",
 		"discord-api-types": "^0.12.1",
 		"discord.js": "^12.5.1",
@@ -84,7 +84,7 @@
 		"rimraf": "3.0.2",
 		"typescript": "4.2.0-beta",
 		"utility-types": "^3.10.0",
-		"webpack": "^5.21.2"
+		"webpack": "^5.23.0"
 	},
 	"lint-staged": {
 		"*.{mjs,js,jsx,ts,tsx}": "eslint --fix --ext mjs,js,jsx,ts,tsx"
@@ -112,7 +112,7 @@
 		"kind-of": "^6.0.3",
 		"lodash": "^4.17.20",
 		"object-path": "^0.11.5",
-		"webpack": "^5.21.2"
+		"webpack": "^5.23.0"
 	},
 	"prettier": "@sapphire/prettier-config"
 }
