@@ -7549,10 +7549,10 @@ type-fest@^0.8.1:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
 
-typescript@4.2.1-rc:
-  version "4.2.1-rc"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.2.1-rc.tgz#57adcda3eda7a63226c7472e9f42b9aee1de2fcc"
-  integrity sha512-R2lWNtsP12ZLGMPl5r96nieXhMmWhfEMtmvUMKjix0smn1TD4wgHvKf3t4zz2spJnT8pktUptPQniKnTL1ZPJA==
+typescript@4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.2.2.tgz#1450f020618f872db0ea17317d16d8da8ddb8c4c"
+  integrity sha512-tbb+NVrLfnsJy3M59lsDgrzWIflR4d4TIUjz+heUnHZwdF7YsrMTKoRERiIvI2lvBG95dfpLxB21WZhys1bgaQ==
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"
