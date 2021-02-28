@@ -11,7 +11,7 @@ export interface SelectEmojiProps
 	guild: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>;
 }
 
-const getEmojiUrl = (id: string, animated: boolean) => `https://cdn.discordapp.com/emojis/${id}.${animated ? 'gif' : 'png'}`;
+const getEmojiUrl = (id: string, animated: boolean) => `https://cdn.discordapp.com/emojis/${id}.${animated ? 'gif' : 'png'}` as const;
 
 const SelectEmoji: FC<SelectEmojiProps> = ({ label, value, guild, defaultImage, defaultName, defaultId, onChange, tooltipTitle, ...props }) => {
 	let name = defaultName;
