@@ -45,7 +45,7 @@
 		"react-if": "^4.0.1",
 		"react-markdown": "^5.0.3",
 		"react-player": "^2.9.0",
-		"react-virtuoso": "^1.5.9",
+		"react-virtuoso": "^1.5.10",
 		"remark-gfm": "^1.0.0",
 		"yup": "0.31.1"
 	},
@@ -69,7 +69,7 @@
 		"cz-conventional-changelog": "^3.3.0",
 		"discord-api-types": "^0.12.1",
 		"discord.js": "^12.5.1",
-		"eslint": "^7.20.0",
+		"eslint": "^7.21.0",
 		"eslint-config-prettier": "^8.1.0",
 		"eslint-plugin-import": "^2.22.1",
 		"eslint-plugin-jsx-a11y": "^6.4.1",
