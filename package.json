@@ -15,7 +15,7 @@
 		"format": "prettier --write --loglevel=error src/**/*.{js,jsx,ts,tsx}",
 		"update": "yarn upgrade-interactive --latest",
 		"lint": "eslint src --ext js,jsx,ts,tsx --fix",
-		"postinstall": "husky install .github/husky"
+		"prepare": "husky install .github/husky"
 	},
 	"dependencies": {
 		"@material-ui/core": "^4.11.3",
