@@ -29,14 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			width: '100vw'
 		},
 		contentBox: {
-			paddingTop: theme.spacing(16),
-			[theme.breakpoints.up('sm')]: {
-				display: 'flex',
-				alignContent: 'center',
-				alignItems: 'center',
-				justifyContent: 'center',
-				height: 'calc(100vh - 200px)'
-			}
+			paddingTop: theme.spacing(16)
 		},
 		loadingBox: {
 			display: 'flex',
