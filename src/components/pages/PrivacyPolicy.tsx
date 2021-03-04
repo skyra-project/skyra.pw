@@ -1,9 +1,9 @@
+import GeneralPage from '@layout/General';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import GeneralPage from '@presentational/Layout/General';
 import ScrollToTop from '@routing/ScrollToTop';
 import clsx from 'clsx';
 import React from 'react';

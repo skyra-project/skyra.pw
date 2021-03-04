@@ -1,11 +1,12 @@
 import { setAuthenticated, useAuthenticated } from '@contexts/AuthenticationContext';
 import { mergeDiscordPack } from '@contexts/DiscordPackContext';
+import Footer from '@layout/Footer';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Box, { BoxProps } from '@material-ui/core/Box';
 import Fab from '@material-ui/core/Fab';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import Footer from '@presentational/Layout/Footer';
+import CookieWarning from '@presentational/CookieConsent/WarningSnackbar';
 import { syncUser } from '@utils/util';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
@@ -55,28 +56,31 @@ const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containe
 	}, [authenticated, router.push, setPack, writeAuthenticated]);
 
 	return (
-		<Box component="section" className={classes.container} {...containerProps}>
-			<NavBar loading={loading} />
+		<>
+			<Box component="section" className={classes.container} {...containerProps}>
+				<NavBar loading={loading} />
 
-			<Box component="main" role="contentinfo" className={clsx(classes.contentBox, { [classes.loadingBox]: loading })}>
-				<If condition={loading}>
-					<Then>
-						<LinearProgress variant="query" classes={{ root: classes.loadingIndicator }} />
-					</Then>
-					<Else>{children}</Else>
-				</If>
+				<Box component="main" role="contentinfo" className={clsx(classes.contentBox, { [classes.loadingBox]: loading })}>
+					<If condition={loading}>
+						<Then>
+							<LinearProgress variant="query" classes={{ root: classes.loadingIndicator }} />
+						</Then>
+						<Else>{children}</Else>
+					</If>
+				</Box>
+
+				<Footer />
+
+				<Box component="span">
+					<ScrollToTopButton {...props}>
+						<Fab color="primary" size="small" aria-label="scroll back to top">
+							<KeyboardArrowUpIcon />
+						</Fab>
+					</ScrollToTopButton>
+				</Box>
+				<CookieWarning />
 			</Box>
-
-			<Footer />
-
-			<Box component="span">
-				<ScrollToTopButton {...props}>
-					<Fab color="primary" size="small" aria-label="scroll back to top">
-						<KeyboardArrowUpIcon />
-					</Fab>
-				</ScrollToTopButton>
-			</Box>
-		</Box>
+		</>
 	);
 };
 

@@ -1,10 +1,10 @@
 import type { FlattenedCommand } from '@config/types/ApiData';
+import GeneralPage from '@layout/General';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import UiSearchBar from '@mui/UiSearchBar';
 import Category from '@presentational/CommandsPage/Category';
-import GeneralPage from '@presentational/Layout/General';
 import ScrollToTop from '@routing/ScrollToTop';
 import { useWindowSize } from '@utils/useWindowSize';
 import { ssrFetch } from '@utils/util';

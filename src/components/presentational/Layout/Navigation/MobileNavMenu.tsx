@@ -1,5 +1,6 @@
 import CookieIcon from '@assets/CookieIcon';
 import { setAuthenticated, useAuthenticated } from '@contexts/AuthenticationContext';
+import { setCookieConsent, useCookieConsent } from '@contexts/CookieContext';
 import { mergeDiscordPack, useDiscordPack } from '@contexts/DiscordPackContext';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -21,13 +22,12 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SyncIcon from '@material-ui/icons/Sync';
 import LoginIcon from '@material-ui/icons/VpnKey';
 import LazyAvatar from '@mui/LazyAvatar';
-import { CookieConsentContext } from '@presentational/CookieConsent/ContextProvider';
 import MenuItemLink from '@routing/MenuItemLink';
 import { oauthURL } from '@utils/constants';
 import { displayAvatarURL } from '@utils/skyraUtils';
 import { clearData, logOut, syncUser } from '@utils/util';
 import { useRouter } from 'next/router';
-import React, { FC, memo, useContext, useEffect, useRef, useState } from 'react';
+import React, { FC, memo, useEffect, useRef, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -71,7 +71,8 @@ const MobileNavMenu: FC = () => {
 	const classes = useStyles();
 	const anchorRef = useRef<HTMLButtonElement>(null);
 	const [popperMenuIsOpen, setPopperMenuOpen] = useState(false);
-	const { allowsCookies, dispatch } = useContext(CookieConsentContext);
+	const allowsCookies = useCookieConsent();
+	const writeAllowsCookies = setCookieConsent();
 
 	const authenticated = useAuthenticated();
 	const pack = useDiscordPack();
@@ -184,7 +185,7 @@ const MobileNavMenu: FC = () => {
 										<MenuItem
 											onClick={(event) => {
 												closePopperMenu(event);
-												return dispatch(null);
+												return writeAllowsCookies(null);
 											}}
 										>
 											<ListItemIcon>

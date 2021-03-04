@@ -1,5 +1,6 @@
 import CookieIcon from '@assets/CookieIcon';
 import { useAuthenticated } from '@contexts/AuthenticationContext';
+import { setCookieConsent, useCookieConsent } from '@contexts/CookieContext';
 import UserMenu from '@layout/Navigation/UserMenu';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
@@ -21,12 +22,11 @@ import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import LoginIcon from '@material-ui/icons/VpnKey';
 import Tooltip from '@mui/Tooltip';
-import { CookieConsentContext } from '@presentational/CookieConsent/ContextProvider';
 import MenuItemLink from '@routing/MenuItemLink';
 import { oauthURL } from '@utils/constants';
 import { navigate } from '@utils/util';
 import { useRouter } from 'next/router';
-import React, { FC, memo, useContext, useEffect, useRef, useState } from 'react';
+import React, { FC, memo, useEffect, useRef, useState } from 'react';
 import { When } from 'react-if';
 
 export interface DesktopMenuItemsProps {
@@ -59,7 +59,8 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 
 	const anchorRef = useRef<HTMLButtonElement>(null);
 	const [popperMenuIsOpen, setPopperMenuOpen] = useState(false);
-	const { allowsCookies, dispatch } = useContext(CookieConsentContext);
+	const allowsCookies = useCookieConsent();
+	const writeAllowsCookies = setCookieConsent();
 	const router = useRouter();
 
 	const authenticated = useAuthenticated();
@@ -184,7 +185,7 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 											<MenuItem
 												onClick={(event) => {
 													closePopperMenu(event);
-													dispatch(null);
+													writeAllowsCookies(null);
 												}}
 											>
 												<ListItemIcon>

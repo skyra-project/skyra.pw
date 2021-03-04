@@ -1,3 +1,4 @@
+import { useCookieConsent } from '@contexts/CookieContext';
 import Box from '@material-ui/core/Box';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Slide from '@material-ui/core/Slide';
@@ -5,11 +6,11 @@ import SnackbarContent from '@material-ui/core/SnackbarContent';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { noop } from '@sapphire/utilities';
+import isBrowser from '@utils/isBrowser';
 import { navigate } from '@utils/util';
 import clsx from 'clsx';
-import React, { FC, memo, useContext } from 'react';
+import React, { FC, memo } from 'react';
 import Actions from './Actions';
-import { CookieConsentContext } from './ContextProvider';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -63,10 +64,10 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const WarningSnackbar: FC = () => {
-	const { allowsCookies } = useContext(CookieConsentContext);
+	const allowsCookies = useCookieConsent();
 	const classes = useStyles();
 
-	if (allowsCookies !== null) return null;
+	if (allowsCookies !== null || !isBrowser) return null;
 
 	return (
 		<ClickAwayListener onClickAway={noop}>
