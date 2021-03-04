@@ -50,3 +50,11 @@ export enum FetchMethods {
 export const EmojiRegexExtractId = /<?a?:\w{2,32}:(\d{17,21})>?/gim;
 export const EmojiRegexExtractName = /<?a?:(\w{2,32}):\d{17,21}>?/gim;
 export const SettingsDrawerWidth = 240;
+
+/**
+ * Regex that matches the OAUTH2 `code` in the Discord callback URL
+ * @raw `/\?code=(?<code>[A-Za-z0-9]+)/i`
+ * @remark The regex is case insensitive
+ * @remark Capture group 1 is the code. It is named `code`.
+ */
+export const CodeMatchRegex = /\?code=(?<code>[A-Za-z0-9]+)/i;
