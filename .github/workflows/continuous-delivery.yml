@@ -11,6 +11,7 @@ on:
       - 'package.json'
       - 'yarn.lock'
       - 'Dockerfile'
+  workflow_dispatch:
 
 jobs:
   pre_ci:
