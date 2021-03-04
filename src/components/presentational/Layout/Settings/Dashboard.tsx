@@ -35,7 +35,8 @@ const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
 			display: 'flex',
-			height: '100vh'
+			height: '100vh',
+			width: '100vw'
 		},
 		drawer: {
 			[theme.breakpoints.up('sm')]: {
