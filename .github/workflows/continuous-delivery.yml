@@ -59,14 +59,56 @@ jobs:
       - name: Run ESLint
         run: yarn lint --fix=false
 
+  Building:
+    name: Linting
+    runs-on: ubuntu-latest
+    if: "!contains(needs.pre_ci.outputs.commit_message, '[skip ci]')"
+    needs: pre_ci
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v2
+      - name: Use Node.js 14
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - name: Restore CI Cache
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-14-${{ hashFiles('**/yarn.lock') }}
+      - name: Install Dependencies
+        run: yarn --frozen-lockfile
+      - name: Run NextJS Build
+        run: yarn build
+      - name: Store .next folder
+        uses: actions/upload-artifact@v2
+        with:
+          name: nextfolder
+          path: src/.next/
+      - name: Store public folder
+        uses: actions/upload-artifact@v2
+        with:
+          name: publicfolder
+          path: src/public/
+
   Github-Package-Registry-Docker:
     name: Publish image to Github Package Registry
     runs-on: ubuntu-latest
     if: "!(contains(needs.pre_ci.outputs.commit_message, '[skip ci]') || contains(needs.pre_ci.outputs.commit_message, '[skip docker]'))"
-    needs: [pre_ci, Linting]
+    needs: [pre_ci, Linting, Building]
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
+      - name: Download .next folder
+        uses: actions/download-artifact@v2
+        with:
+          name: nextfolder
+          path: src/.next/
+      - name: Download public folder
+        uses: actions/download-artifact@v2
+        with:
+          name: publicfolder
+          path: src/public/
       - name: Publish to Github Package Registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
@@ -80,10 +122,20 @@ jobs:
     name: Publish image to Dockerhub
     runs-on: ubuntu-latest
     if: "!(contains(needs.pre_ci.outputs.commit_message, '[skip ci]') || contains(needs.pre_ci.outputs.commit_message, '[skip docker]'))"
-    needs: [pre_ci, Linting]
+    needs: [pre_ci, Linting, Building]
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
+      - name: Download .next folder
+        uses: actions/download-artifact@v2
+        with:
+          name: nextfolder
+          path: src/.next/
+      - name: Download public folder
+        uses: actions/download-artifact@v2
+        with:
+          name: publicfolder
+          path: src/public/
       - name: Publish to Dockerhub
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
