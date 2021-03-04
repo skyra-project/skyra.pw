@@ -60,7 +60,7 @@ const CommandsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 				title="Commands"
 				description="Want to know what Skyra can do? You've come to the right place here. Get information about every command available in Skyra on this page."
 				openGraph={{
-					title: 'Skyra Commands'
+					title: "Skyra's Commands"
 				}}
 				additionalMetaTags={[
 					{

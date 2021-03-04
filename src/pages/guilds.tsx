@@ -44,7 +44,19 @@ const GuildsPage: NextPage = () => {
 
 	return (
 		<>
-			<NextSeo title="Guilds" />
+			<NextSeo
+				title="Guilds"
+				description="Quickly access all the servers that have Skyra Discord bot in it and that you can manage through this dashboard"
+				openGraph={{
+					title: 'Your Skyra servers'
+				}}
+				additionalMetaTags={[
+					{
+						name: 'summary',
+						content: 'Quickly access all the servers that have Skyra Discord bot in it and that you can manage through this dashboard'
+					}
+				]}
+			/>
 			<ScrollToTop />
 			<GeneralPage>
 				<Container classes={{ root: classes.container }}>

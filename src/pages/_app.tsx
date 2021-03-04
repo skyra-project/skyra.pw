@@ -15,8 +15,8 @@ import NextNprogress from 'nextjs-progressbar';
 import React, { useEffect } from 'react';
 
 const CookieWarning = dynamic(() => import('@presentational/CookieConsent/WarningSnackbar'), { ssr: false });
-const AuthenticatedProvider = dynamic(() => import('@contexts/AuthenticationContext'), { ssr: false });
-const DiscordPackProvider = dynamic(() => import('@contexts/DiscordPackContext'), { ssr: false });
+const AuthenticatedProvider = dynamic(() => import('@contexts/AuthenticationContext'));
+const DiscordPackProvider = dynamic(() => import('@contexts/DiscordPackContext'));
 
 const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 	useEffect(() => {

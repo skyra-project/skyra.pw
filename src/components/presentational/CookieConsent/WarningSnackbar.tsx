@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const WarningSnackbar: FC = () => {
 	const { allowsCookies } = useContext(CookieConsentContext);
-	const classes = useStyles(undefined as any);
+	const classes = useStyles();
 
 	if (allowsCookies !== null) return null;
 
