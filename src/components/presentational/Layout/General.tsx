@@ -25,10 +25,18 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'flex',
 			flexDirection: 'column',
 			justifyContent: 'space-between',
-			height: '100vh'
+			height: '100vh',
+			width: '100vw'
 		},
 		contentBox: {
-			paddingTop: theme.spacing(16)
+			paddingTop: theme.spacing(16),
+			[theme.breakpoints.up('sm')]: {
+				display: 'flex',
+				alignContent: 'center',
+				alignItems: 'center',
+				justifyContent: 'center',
+				height: 'calc(100vh - 200px)'
+			}
 		},
 		loadingBox: {
 			display: 'flex',
