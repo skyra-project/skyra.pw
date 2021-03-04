@@ -6,7 +6,6 @@ import Box, { BoxProps } from '@material-ui/core/Box';
 import Fab from '@material-ui/core/Fab';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import CookieWarning from '@presentational/CookieConsent/WarningSnackbar';
 import { syncUser } from '@utils/util';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
@@ -78,7 +77,6 @@ const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containe
 						</Fab>
 					</ScrollToTopButton>
 				</Box>
-				<CookieWarning />
 			</Box>
 		</>
 	);
