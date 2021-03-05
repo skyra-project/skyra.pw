@@ -3,7 +3,7 @@ import DefaultSeoProps from '@config/SEO/DefaultSeoProps';
 import theme from '@config/theme';
 import { MobileContextProvider } from '@contexts/MobileContext';
 import { useMediaQuery } from '@material-ui/core';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CookieWarning from '@presentational/CookieConsent/WarningSnackbar';
 import type { NextPage } from 'next';
@@ -111,10 +111,11 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 					<AuthenticatedProvider>
 						<DiscordPackProvider>
 							<CookieConsentProvider>
-								<CssBaseline />
-								<Component {...pageProps} />
-								<NextNprogress color="#0A5699" startPosition={0.3} stopDelayMs={200} height={3} />
-								<CookieWarning />
+								<ScopedCssBaseline>
+									<Component {...pageProps} />
+									<NextNprogress color="#0A5699" startPosition={0.3} stopDelayMs={200} height={3} />
+									<CookieWarning />
+								</ScopedCssBaseline>
 							</CookieConsentProvider>
 						</DiscordPackProvider>
 					</AuthenticatedProvider>
