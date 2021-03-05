@@ -60,7 +60,7 @@ jobs:
         run: yarn lint --fix=false
 
   Building:
-    name: Linting
+    name: Building
     runs-on: ubuntu-latest
     if: "!contains(needs.pre_ci.outputs.commit_message, '[skip ci]')"
     needs: pre_ci
