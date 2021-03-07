@@ -240,7 +240,7 @@ const MusicPage: FC<MusicPageProps> = ({ guildId }) => {
 	const VirtuosoComponents = useMemo<Components>(
 		() => ({
 			List: forwardRef(({ style, children }, listRef) => (
-				<List style={{ ...style, width: '100%', margin: 0, padding: 0 }} ref={listRef} component="nav">
+				<List style={{ ...style, width: '100%' }} ref={listRef} component="nav">
 					{children}
 				</List>
 			)),
