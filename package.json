@@ -33,7 +33,7 @@
 		"formik-material-ui": "^3.0.1",
 		"lodash": "^4.17.21",
 		"mdi-react": "^7.4.0",
-		"next": "^10.0.7",
+		"next": "^10.0.8",
 		"next-pwa": "^5.0.5",
 		"next-seo": "^4.20.0",
 		"nextjs-progressbar": "^0.0.7",
