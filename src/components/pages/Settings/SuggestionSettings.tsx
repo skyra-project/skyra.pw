@@ -32,7 +32,7 @@ const SuggestionSettings: FC = () => {
 	const classes = useStyles();
 	const { guildData } = useGuildDataContext();
 	const { guildSettings } = useGuildSettingsContext();
-	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
+	const { guildSettingsChanges, setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
 	const findEmoji = useMemo(() => (id: string) => guildData.emojis.find((e) => e.id === id)!, [guildData.emojis]);
 	const tagToId = useMemo(() => (tag: string) => tag.replace(EmojiRegexExtractId, '$1'), []);
@@ -57,13 +57,17 @@ const SuggestionSettings: FC = () => {
 					<SelectChannel
 						value={guildSettings.suggestionsChannel}
 						label="Suggestions Channel"
+						onReset={() => {
+							Reflect.deleteProperty(guildSettingsChanges, 'suggestionsChannel');
+							setGuildSettingsChanges(guildSettingsChanges);
+						}}
 						onChange={(newChannel) =>
 							setGuildSettingsChanges({
 								suggestionsChannel: newChannel
 							})
 						}
 						guild={guildData}
-						buttonProps={{
+						ButtonProps={{
 							fullWidth: true,
 							classes: {
 								root: classes.button,
@@ -112,6 +116,10 @@ const SuggestionSettings: FC = () => {
 							defaultImage={defaultImage}
 							defaultName={defaultName}
 							defaultId={defaultId}
+							onReset={() => {
+								Reflect.deleteProperty(guildSettingsChanges, key);
+								setGuildSettingsChanges(guildSettingsChanges);
+							}}
 							onChange={(emojiID: typeof guildSettings[typeof key] | null) => {
 								if (emojiID) {
 									const emojiData = findEmoji(emojiID);
@@ -126,7 +134,7 @@ const SuggestionSettings: FC = () => {
 							}}
 							guild={guildData}
 							label={title}
-							buttonProps={{
+							ButtonProps={{
 								fullWidth: true,
 								classes: {
 									root: classes.button,

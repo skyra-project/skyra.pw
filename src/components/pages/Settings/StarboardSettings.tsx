@@ -27,7 +27,7 @@ const StarboardSettings: FC = () => {
 	const classes = useStyles();
 	const { guildData } = useGuildDataContext();
 	const { guildSettings } = useGuildSettingsContext();
-	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
+	const { guildSettingsChanges, setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
 	return (
 		<Section title="Starboard Settings">
@@ -57,13 +57,17 @@ const StarboardSettings: FC = () => {
 				<SelectChannel
 					value={guildSettings.starboardChannel}
 					label="Starboard Channel"
+					onReset={() => {
+						Reflect.deleteProperty(guildSettingsChanges, 'starboardChannel');
+						setGuildSettingsChanges(guildSettingsChanges);
+					}}
 					onChange={(newChannel) =>
 						setGuildSettingsChanges({
 							starboardChannel: newChannel
 						})
 					}
 					guild={guildData}
-					buttonProps={{
+					ButtonProps={{
 						fullWidth: true,
 						classes: {
 							root: classes.button,
@@ -73,6 +77,10 @@ const StarboardSettings: FC = () => {
 				/>
 				<SelectChannels
 					value={guildSettings.starboardIgnoreChannels}
+					onReset={() => {
+						Reflect.deleteProperty(guildSettingsChanges, 'starboardIgnoreChannels');
+						setGuildSettingsChanges(guildSettingsChanges);
+					}}
 					onChange={(newChannels) =>
 						setGuildSettingsChanges({
 							starboardIgnoreChannels: newChannels
@@ -80,7 +88,7 @@ const StarboardSettings: FC = () => {
 					}
 					guild={guildData}
 					label="Ignored Channels"
-					buttonProps={{
+					ButtonProps={{
 						fullWidth: true,
 						classes: {
 							root: classes.button,

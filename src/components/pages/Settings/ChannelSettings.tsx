@@ -39,7 +39,7 @@ const ChannelSettings: FC = () => {
 	const classes = useStyles();
 	const { guildData } = useGuildDataContext();
 	const { guildSettings } = useGuildSettingsContext();
-	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
+	const { guildSettingsChanges, setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
 	return (
 		<>
@@ -70,10 +70,16 @@ const ChannelSettings: FC = () => {
 							key={index}
 							tooltipTitle={description}
 							value={guildSettings[key]}
-							onChange={(channel: typeof guildSettings[typeof key]) => setGuildSettingsChanges({ [key]: channel })}
+							onReset={() => {
+								Reflect.deleteProperty(guildSettingsChanges, key);
+								setGuildSettingsChanges(guildSettingsChanges);
+							}}
+							onChange={(channel: typeof guildSettings[typeof key]) => {
+								return setGuildSettingsChanges({ [key]: channel });
+							}}
 							guild={guildData}
 							label={name}
-							buttonProps={{
+							ButtonProps={{
 								fullWidth: true,
 								classes: {
 									root: classes.button,
@@ -101,10 +107,14 @@ const ChannelSettings: FC = () => {
 							key={index}
 							tooltipTitle={description}
 							value={guildSettings[key]}
+							onReset={() => {
+								Reflect.deleteProperty(guildSettingsChanges, key);
+								setGuildSettingsChanges(guildSettingsChanges);
+							}}
 							onChange={(channel: typeof guildSettings[typeof key]) => setGuildSettingsChanges({ [key]: channel })}
 							guild={guildData}
 							label={name}
-							buttonProps={{
+							ButtonProps={{
 								fullWidth: true,
 								classes: {
 									root: classes.button,
@@ -132,10 +142,14 @@ const ChannelSettings: FC = () => {
 							key={index}
 							tooltipTitle={description}
 							value={guildSettings[key]}
+							onReset={() => {
+								Reflect.deleteProperty(guildSettingsChanges, key);
+								setGuildSettingsChanges(guildSettingsChanges);
+							}}
 							onChange={(channel: typeof guildSettings[typeof key]) => setGuildSettingsChanges({ [key]: channel })}
 							guild={guildData}
 							label={name}
-							buttonProps={{
+							ButtonProps={{
 								fullWidth: true,
 								classes: {
 									root: classes.button,
@@ -148,6 +162,10 @@ const ChannelSettings: FC = () => {
 						key={(ConfigurableChannels.length as number) + 1}
 						tooltipTitle={ConfigurableDisabledChannels.description}
 						value={guildSettings.disabledChannels}
+						onReset={() => {
+							Reflect.deleteProperty(guildSettingsChanges, 'disabledChannels');
+							setGuildSettingsChanges(guildSettingsChanges);
+						}}
 						onChange={(channels: typeof guildSettings.disabledChannels) =>
 							setGuildSettingsChanges({
 								disabledChannels: channels
@@ -155,7 +173,7 @@ const ChannelSettings: FC = () => {
 						}
 						guild={guildData}
 						label={ConfigurableDisabledChannels.name}
-						buttonProps={{
+						ButtonProps={{
 							fullWidth: true,
 							classes: {
 								root: classes.button,

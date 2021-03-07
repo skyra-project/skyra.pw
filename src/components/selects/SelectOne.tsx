@@ -20,18 +20,30 @@ import { Virtuoso } from 'react-virtuoso';
 import type { Components } from 'react-virtuoso/dist/interfaces';
 
 export interface SelectOneProps {
+	/** The label to show on the button */
 	label: string;
+	/** The name of the current value */
 	name: ReactNode;
+	/** Array of values */
 	values: {
+		/** The name of the guild settings */
 		name: string;
+		/** The value of the guild setting */
 		value: string;
+		/** Optional iconUrl to be shown next to the key (i.e. for emojis) */
 		iconUrl?: string;
 	}[];
+	/** Content to be shown as a tooltip when hovering over the button */
 	tooltipTitle?: string;
-	buttonProps?: MButtonProps;
+	/** Additional properties to apply to the {@link Material-UI Button} */
+	ButtonProps?: MButtonProps;
+	/** Whether to append an image to the end of the button, next to the value of the key */
 	imageInName?: string;
+	/** The callback to trigger when changing the key */
 
 	onChange(...args: any[]): void;
+	/** The callback to trigger when resetting the key */
+	onReset(): void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -58,7 +70,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-export default function SelectOne({ label, onChange, values, name = 'None', imageInName, tooltipTitle, buttonProps }: SelectOneProps) {
+export default function SelectOne({ label, values, name = 'None', imageInName, tooltipTitle, ButtonProps, onReset, onChange }: SelectOneProps) {
 	const [open, setOpen] = useState(false);
 	const [search, setSearch] = useState('');
 	const classes = useStyles();
@@ -110,7 +122,7 @@ export default function SelectOne({ label, onChange, values, name = 'None', imag
 			<If condition={Boolean(tooltipTitle)}>
 				<Then>
 					<Tooltip title={tooltipTitle ?? ''} placement="top">
-						<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...buttonProps}>
+						<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...ButtonProps}>
 							{label}: {name}{' '}
 							{imageInName && (
 								<LazyAvatar
@@ -124,7 +136,7 @@ export default function SelectOne({ label, onChange, values, name = 'None', imag
 					</Tooltip>
 				</Then>
 				<Else>
-					<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...buttonProps}>
+					<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...ButtonProps}>
 						{label}: {name}{' '}
 						{imageInName && (
 							<LazyAvatar
@@ -162,7 +174,7 @@ export default function SelectOne({ label, onChange, values, name = 'None', imag
 				<DialogActions classes={{ root: classes.dialogActions }}>
 					<Button
 						onClick={() => {
-							onChange(null);
+							onReset();
 							void handleClose();
 						}}
 						color="primary"

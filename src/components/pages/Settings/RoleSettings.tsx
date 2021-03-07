@@ -40,7 +40,7 @@ const RoleSettings: FC = () => {
 	const isOnMobile = useMediaQuery(theme.breakpoints.down('sm'));
 	const { guildData } = useGuildDataContext();
 	const { guildSettings } = useGuildSettingsContext();
-	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
+	const { guildSettingsChanges, setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
 	return (
 		<>
@@ -86,12 +86,16 @@ const RoleSettings: FC = () => {
 							guild: guildData,
 							tooltipTitle: tooltip,
 							filterEveryone: true,
-							buttonProps: {
+							ButtonProps: {
 								fullWidth: true,
 								classes: {
 									root: classes.button,
 									label: classes.buttonText
 								}
+							},
+							onReset: () => {
+								Reflect.deleteProperty(guildSettingsChanges, key);
+								setGuildSettingsChanges(guildSettingsChanges);
 							}
 						};
 

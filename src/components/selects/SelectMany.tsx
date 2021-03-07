@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const SelectMany: FC<SelectManyProps> = ({ label, value, onChange, values, name, imageInName, tooltipTitle, buttonProps }) => {
+const SelectMany: FC<SelectManyProps> = ({ label, value, onChange, values, name, imageInName, tooltipTitle, ButtonProps: buttonProps }) => {
 	const [open, setOpen] = useState(false);
 	const [checked, setChecked] = useState(value);
 	const [search, setSearch] = useState('');

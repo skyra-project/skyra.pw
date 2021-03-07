@@ -39,7 +39,7 @@ const MessageSettings: FC = () => {
 	const classes = useStyles();
 	const { guildData } = useGuildDataContext();
 	const { guildSettings } = useGuildSettingsContext();
-	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
+	const { guildSettingsChanges, setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
 	const configurableMessages = useMemo(() => ConfigurableMessageKeys(guildSettings, guildData), [guildData, guildSettings]);
 	const replaceableMatchers = useMemo(() => ConfigurableReplaceableMatchers(guildData), [guildData]);
@@ -51,6 +51,10 @@ const MessageSettings: FC = () => {
 					<SelectChannels
 						tooltipTitle="The channels configured to not increase the point counter for users."
 						value={guildSettings.messagesIgnoreChannels}
+						onReset={() => {
+							Reflect.deleteProperty(guildSettingsChanges, 'messagesIgnoreChannels');
+							setGuildSettingsChanges(guildSettingsChanges);
+						}}
 						onChange={(channels: typeof guildSettings.messagesIgnoreChannels) =>
 							setGuildSettingsChanges({ messagesIgnoreChannels: channels })
 						}
