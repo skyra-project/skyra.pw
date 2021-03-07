@@ -12,7 +12,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Hidden from '@material-ui/core/Hidden';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import ErrorAlert from '@presentational/Alerts/Error';
-import CookieWarning from '@presentational/CookieConsent/WarningSnackbar';
 import { objectToTuples } from '@sapphire/utilities';
 import { FetchMethods, SettingsDrawerWidth } from '@utils/constants';
 import { Time } from '@utils/skyraUtils';
@@ -151,7 +150,6 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 	return (
 		<>
 			<NextSeo title={`${guildData?.name ?? 'Guild'} Settings`} />
-			<CookieWarning />
 			<Backdrop className={classes.backdrop} open={isLoading} unmountOnExit mountOnEnter>
 				<CircularProgress color="inherit" />
 			</Backdrop>
