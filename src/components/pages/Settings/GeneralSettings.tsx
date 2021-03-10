@@ -50,7 +50,7 @@ const GeneralSettings: FC<GeneralSettingsProps> = ({ languages }) => {
 			'ro-RO': ['Română', 'Romanian'],
 			'ru-RU': ['Pусский', 'Russian'],
 			'sl-SI': ['Slovenščina', 'Slovenian'],
-			'tr-TR': ['Türk', 'Turkish']
+			'tr-TR': ['Türkçe', 'Turkish']
 		};
 
 		return supportedLanguagesMap[langKey] ?? [langKey];
