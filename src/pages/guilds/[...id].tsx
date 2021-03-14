@@ -1,6 +1,7 @@
 import { FilterRoutes, GuildRoutes } from '@config/types/GuildRoutes';
 import { useAuthenticated } from '@contexts/AuthenticationContext';
 import Dashboard from '@layout/Settings/Dashboard';
+import BirthdaySettings from '@pages/Settings/BirthdaySettings';
 import ChannelSettings from '@pages/Settings/ChannelSettings';
 import CustomCommandSettings from '@pages/Settings/CustomCommandSettings';
 import DisabledCommandSettings from '@pages/Settings/DisabledCommandSettings';
@@ -47,6 +48,9 @@ const GuildSettingsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 				<GuildDataProvider>
 					<Dashboard guildId={guildId}>
 						<Switch>
+							<Case condition={joinedPath === GuildRoutes.Birthdays}>
+								<BirthdaySettings />
+							</Case>
 							<Case condition={joinedPath === GuildRoutes.Channels}>
 								<ChannelSettings />
 							</Case>

@@ -1,5 +1,6 @@
 import SkyraLogo from '@assets/skyraLogo';
 import type { TransformedLoginData } from '@config/types/ApiData';
+import { FilterRoutes, GuildRoutes } from '@config/types/GuildRoutes';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
 import Divider from '@material-ui/core/Divider';
@@ -9,6 +10,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import CakeIcon from '@material-ui/icons/Cake';
 import EventIcon from '@material-ui/icons/EventNote';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
@@ -140,7 +142,15 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 					<ListItemLink
 						listItemOnClick={closeSidebarOnMobile}
 						listItemDisabled={!guildData || isLoading}
-						href={`/guilds/${guildId}/moderation`}
+						href={`/guilds/${guildId}/${GuildRoutes.Birthdays}`}
+						itemText="Birthdays"
+						Icon={<CakeIcon />}
+					/>
+
+					<ListItemLink
+						listItemOnClick={closeSidebarOnMobile}
+						listItemDisabled={!guildData || isLoading}
+						href={`/guilds/${guildId}/${GuildRoutes.Moderation}`}
 						itemText="Moderation"
 						Icon={<GavelIcon />}
 					/>
@@ -160,7 +170,7 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 								listItemDisabled={!guildData || isLoading}
 								listItemDense
 								listItemClassName={classes.nested}
-								href={`/guilds/${guildId}/filter/words`}
+								href={`/guilds/${guildId}/${FilterRoutes.Words}`}
 								itemText="Words"
 							/>
 							<ListItemLink
@@ -168,7 +178,7 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 								listItemDisabled={!guildData || isLoading}
 								listItemDense
 								listItemClassName={classes.nested}
-								href={`/guilds/${guildId}/filter/capitals`}
+								href={`/guilds/${guildId}/${FilterRoutes.Capitals}`}
 								itemText="Capitals"
 							/>
 							<ListItemLink
@@ -176,7 +186,7 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 								listItemDisabled={!guildData || isLoading}
 								listItemDense
 								listItemClassName={classes.nested}
-								href={`/guilds/${guildId}/filter/invites`}
+								href={`/guilds/${guildId}/${FilterRoutes.Invites}`}
 								itemText="Invites"
 							/>
 							<ListItemLink
@@ -184,7 +194,7 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 								listItemDisabled={!guildData || isLoading}
 								listItemDense
 								listItemClassName={classes.nested}
-								href={`/guilds/${guildId}/filter/links`}
+								href={`/guilds/${guildId}/${FilterRoutes.Links}`}
 								itemText="Links"
 							/>
 							<ListItemLink
@@ -192,7 +202,7 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 								listItemDisabled={!guildData || isLoading}
 								listItemDense
 								listItemClassName={classes.nested}
-								href={`/guilds/${guildId}/filter/messages`}
+								href={`/guilds/${guildId}/${FilterRoutes.MessageDuplication}`}
 								itemText="Message Duplication"
 							/>
 							<ListItemLink
@@ -200,7 +210,7 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 								listItemDisabled={!guildData || isLoading}
 								listItemDense
 								listItemClassName={classes.nested}
-								href={`/guilds/${guildId}/filter/newlines`}
+								href={`/guilds/${guildId}/${FilterRoutes.NewLines}`}
 								itemText="Line Spam"
 							/>
 							<ListItemLink
@@ -208,7 +218,7 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 								listItemDisabled={!guildData || isLoading}
 								listItemDense
 								listItemClassName={classes.nested}
-								href={`/guilds/${guildId}/filter/reactions`}
+								href={`/guilds/${guildId}/${FilterRoutes.Reactions}`}
 								itemText="Reactions"
 							/>
 						</List>
@@ -219,17 +229,7 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 					<ListItemLink
 						listItemOnClick={closeSidebarOnMobile}
 						listItemDisabled={!guildData || isLoading}
-						href={`/guilds/${guildId}/events`}
-						itemText="Events"
-						Icon={<EventIcon />}
-					/>
-
-					{/* ------------------------------- */}
-
-					<ListItemLink
-						listItemOnClick={closeSidebarOnMobile}
-						listItemDisabled={!guildData || isLoading}
-						href={`/guilds/${guildId}/channels`}
+						href={`/guilds/${guildId}/${GuildRoutes.Channels}`}
 						itemText="Channels"
 						Icon={<ChannelsIcon />}
 					/>
@@ -239,7 +239,17 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 					<ListItemLink
 						listItemOnClick={closeSidebarOnMobile}
 						listItemDisabled={!guildData || isLoading}
-						href={`/guilds/${guildId}/messages`}
+						href={`/guilds/${guildId}/${GuildRoutes.Events}`}
+						itemText="Events"
+						Icon={<EventIcon />}
+					/>
+
+					{/* ------------------------------- */}
+
+					<ListItemLink
+						listItemOnClick={closeSidebarOnMobile}
+						listItemDisabled={!guildData || isLoading}
+						href={`/guilds/${guildId}/${GuildRoutes.Messages}`}
 						itemText="Messages"
 						Icon={<MessagesIcon />}
 					/>
@@ -249,7 +259,7 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 					<ListItemLink
 						listItemOnClick={closeSidebarOnMobile}
 						listItemDisabled={!guildData || isLoading}
-						href={`/guilds/${guildId}/roles`}
+						href={`/guilds/${guildId}/${GuildRoutes.Roles}`}
 						itemText="Roles"
 						Icon={<RolesIcon />}
 					/>
@@ -259,27 +269,7 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 					<ListItemLink
 						listItemOnClick={closeSidebarOnMobile}
 						listItemDisabled={!guildData || isLoading}
-						href={`/guilds/${guildId}/disabled-commands`}
-						itemText="Disable Commands"
-						Icon={<InputIcon />}
-					/>
-
-					{/* ------------------------------- */}
-
-					<ListItemLink
-						listItemOnClick={closeSidebarOnMobile}
-						listItemDisabled={!guildData || isLoading}
-						href={`/guilds/${guildId}/custom-commands`}
-						itemText="Custom Commands"
-						Icon={<CustomCommandsIcon />}
-					/>
-
-					{/* ------------------------------- */}
-
-					<ListItemLink
-						listItemOnClick={closeSidebarOnMobile}
-						listItemDisabled={!guildData || isLoading}
-						href={`/guilds/${guildId}/starboard`}
+						href={`/guilds/${guildId}/${GuildRoutes.Starboard}`}
 						itemText="Starboard"
 						Icon={<StarIcon />}
 					/>
@@ -289,7 +279,27 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 					<ListItemLink
 						listItemOnClick={closeSidebarOnMobile}
 						listItemDisabled={!guildData || isLoading}
-						href={`/guilds/${guildId}/suggestions`}
+						href={`/guilds/${guildId}/${GuildRoutes.DisabledCommands}`}
+						itemText="Disable Commands"
+						Icon={<InputIcon />}
+					/>
+
+					{/* ------------------------------- */}
+
+					<ListItemLink
+						listItemOnClick={closeSidebarOnMobile}
+						listItemDisabled={!guildData || isLoading}
+						href={`/guilds/${guildId}/${GuildRoutes.CustomCommands}`}
+						itemText="Custom Commands"
+						Icon={<CustomCommandsIcon />}
+					/>
+
+					{/* ------------------------------- */}
+
+					<ListItemLink
+						listItemOnClick={closeSidebarOnMobile}
+						listItemDisabled={!guildData || isLoading}
+						href={`/guilds/${guildId}/${GuildRoutes.Suggestions}`}
 						itemText="Suggestions"
 						Icon={<FeedbackIcon />}
 					/>

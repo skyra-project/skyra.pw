@@ -1,4 +1,7 @@
 export interface GuildSettings {
+	birthdayChannel: string | null;
+	birthdayMessage: string | null;
+	birthdayRole: string | null;
 	channelsAnnouncements: string | null;
 	channelsFarewell: string | null;
 	channelsGreeting: string | null;
@@ -16,16 +19,21 @@ export interface GuildSettings {
 	channelsSpam: string | null;
 	commandAutoDelete: CommandAutoDelete[];
 	customCommands: CustomCommand[];
+	disabledChannels: string[];
+	disabledCommands: string[];
+	disabledCommandsChannels: DisabledCommandChannel[];
+	disableNaturalPrefix: boolean;
 	eventsBanAdd: boolean;
 	eventsBanRemove: boolean;
 	eventsMemberAdd: boolean;
 	eventsMemberNickNameUpdate: boolean;
-	eventsMemberUserNameUpdate: boolean;
 	eventsMemberRemove: boolean;
 	eventsMemberRoleUpdate: boolean;
+	eventsMemberUserNameUpdate: boolean;
 	eventsMessageDelete: boolean;
 	eventsMessageEdit: boolean;
 	eventsTwemojiReactions: boolean;
+	language: string;
 	messagesAnnouncementEmbed: boolean;
 	messagesFarewell: string | null;
 	messagesGreeting: string | null;
@@ -47,6 +55,7 @@ export interface GuildSettings {
 	notificationsStreamsTwitchStreamers: NotificationsStreamTwitch[];
 	permissionsRoles: PermissionsNode[];
 	permissionsUsers: PermissionsNode[];
+	prefix: string;
 	reactionRoles: ReactionRole[];
 	rolesAdmin: string[];
 	rolesAuto: RolesAuto[];
@@ -152,6 +161,7 @@ export interface GuildSettings {
 	starboardIgnoreChannels: string[];
 	starboardMinimum: number;
 	starboardSelfStar: boolean;
+	stickyRoles: StickyRole[];
 	suggestionsChannel: string | null;
 	suggestionsEmojisDownvote: string;
 	suggestionsEmojisUpvote: string;
@@ -160,13 +170,6 @@ export interface GuildSettings {
 	suggestionsOnActionRepost: boolean;
 	triggerAlias: TriggerAlias[];
 	triggerIncludes: TriggerIncludes[];
-	disabledChannels: string[];
-	disabledCommands: string[];
-	disabledCommandsChannels: DisabledCommandChannel[];
-	disableNaturalPrefix: boolean;
-	language: 'en-US' | 'es-ES';
-	prefix: string;
-	stickyRoles: StickyRole[];
 }
 
 interface PermissionsNode {

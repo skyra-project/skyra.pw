@@ -93,6 +93,11 @@ code {
 	background-color: #202225;
 }
 
+code.white {
+	color: rgb(46, 51, 56);
+	background-color: rgb(242, 243, 245);
+}
+
 noscript {
 	position: absolute;
 	background-color: #16171d;
