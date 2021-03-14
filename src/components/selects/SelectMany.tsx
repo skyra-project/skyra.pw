@@ -160,7 +160,7 @@ const SelectMany: FC<SelectManyProps> = ({ label, value, onChange, values, name,
 				</DialogContent>
 				<DialogActions classes={{ root: classes.dialogActions }}>
 					<Button onClick={() => setChecked([])} color="primary">
-						Reset
+						Clear selected
 					</Button>
 					<Button
 						onClick={() => {

@@ -1,3 +1,4 @@
+import { useMobileContext } from '@contexts/MobileContext';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -36,6 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const SubmitResetButtons: FC<SubmitResetButtonsProps> = ({ isLoading, isOnMobile, submitChanges }) => {
 	const classes = useStyles();
+	const { isMobile } = useMobileContext();
 	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
 	return (
@@ -49,11 +51,11 @@ const SubmitResetButtons: FC<SubmitResetButtonsProps> = ({ isLoading, isOnMobile
 				size={isOnMobile ? 'small' : 'large'}
 			>
 				<DeleteIcon className={classes.saveIcon} />
-				Reset
+				{isMobile ? 'Reset' : 'Reset changes'}
 			</Button>
 			<Button disabled={isLoading} onClick={submitChanges} color="primary" variant="contained" size={isOnMobile ? 'small' : 'large'}>
 				<SaveIconIcon className={classes.saveIcon} />
-				Save
+				{isMobile ? 'Save' : 'Save changes'}
 			</Button>
 		</Box>
 	);

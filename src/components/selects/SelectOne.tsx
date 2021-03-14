@@ -179,7 +179,7 @@ export default function SelectOne({ label, values, name = 'None', imageInName, t
 						}}
 						color="primary"
 					>
-						Reset
+						Remove setting
 					</Button>
 				</DialogActions>
 			</Dialog>
