@@ -1,5 +1,6 @@
 import type { TransformedLoginData } from '@config/types/ApiData';
 import type { Selfmod } from '@config/types/ConfigurableData';
+import type { GuildSettings } from '@config/types/GuildSettings';
 import Router from 'next/router';
 import type { ValuesType } from 'utility-types';
 import { BASE_API_URL, FetchMethods, LocalStorageKeys } from './constants';
@@ -177,3 +178,20 @@ export function bitwiseSet(bits: number, bit: number, toggle: boolean) {
 export const updateSliderValueObj = (prop: Selfmod.Union, value: number | number[], multiplier = 1) => ({
 	[prop]: Array.isArray(value) ? value[0] * multiplier : value * multiplier
 });
+
+export const handleResetKey = (
+	guildSettingsChanges: GuildSettings | undefined,
+	setGuildSettingsChanges: (changes?: Partial<GuildSettings> | undefined) => void,
+	key: keyof GuildSettings
+) => {
+	// If there are pre-existing "guildSettingsChanges" and the key exists in that object then remove it from the "guildSettingsChanges"
+	if (guildSettingsChanges && key in guildSettingsChanges) {
+		Reflect.deleteProperty(guildSettingsChanges, key);
+	} else if (guildSettingsChanges) {
+		Reflect.set(guildSettingsChanges, key, null);
+	} else {
+		guildSettingsChanges = ({ [key]: null } as unknown) as typeof guildSettingsChanges;
+	}
+
+	setGuildSettingsChanges(guildSettingsChanges);
+};

@@ -51,10 +51,7 @@ const MessageSettings: FC = () => {
 					<SelectChannels
 						tooltipTitle="The channels configured to not increase the point counter for users."
 						value={guildSettings.messagesIgnoreChannels}
-						onReset={() => {
-							Reflect.deleteProperty(guildSettingsChanges, 'messagesIgnoreChannels');
-							setGuildSettingsChanges(guildSettingsChanges);
-						}}
+						onReset={() => handleResetKey(guildSettingsChanges, setGuildSettingsChanges, 'messagesIgnoreChannels')}
 						onChange={(channels: typeof guildSettings.messagesIgnoreChannels) =>
 							setGuildSettingsChanges({ messagesIgnoreChannels: channels })
 						}

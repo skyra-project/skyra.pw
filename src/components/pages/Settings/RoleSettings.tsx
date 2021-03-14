@@ -10,7 +10,7 @@ import SimpleGrid from '@mui/SimpleGrid';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectRole, { SelectRoleProps } from '@selects/SelectRole';
 import SelectRoles, { SelectRolesProps } from '@selects/SelectRoles';
-import { cast } from '@utils/util';
+import { cast, handleResetKey } from '@utils/util';
 import React, { FC, memo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -93,10 +93,7 @@ const RoleSettings: FC = () => {
 									label: classes.buttonText
 								}
 							},
-							onReset: () => {
-								Reflect.deleteProperty(guildSettingsChanges, key);
-								setGuildSettingsChanges(guildSettingsChanges);
-							}
+							onReset: () => handleResetKey(guildSettingsChanges, setGuildSettingsChanges, key)
 						};
 
 						return Array.isArray(guildSettings[key]) ? (

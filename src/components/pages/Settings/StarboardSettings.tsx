@@ -7,6 +7,7 @@ import SimpleGrid from '@mui/SimpleGrid';
 import SelectChannel from '@selects/SelectChannel';
 import SelectChannels from '@selects/SelectChannels';
 import SelectInteger from '@selects/SelectInteger';
+import { handleResetKey } from '@utils/util';
 import React, { FC, memo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -57,10 +58,7 @@ const StarboardSettings: FC = () => {
 				<SelectChannel
 					value={guildSettings.starboardChannel}
 					label="Starboard Channel"
-					onReset={() => {
-						Reflect.deleteProperty(guildSettingsChanges, 'starboardChannel');
-						setGuildSettingsChanges(guildSettingsChanges);
-					}}
+					onReset={() => handleResetKey(guildSettingsChanges, setGuildSettingsChanges, 'starboardChannel')}
 					onChange={(newChannel) =>
 						setGuildSettingsChanges({
 							starboardChannel: newChannel
@@ -77,10 +75,7 @@ const StarboardSettings: FC = () => {
 				/>
 				<SelectChannels
 					value={guildSettings.starboardIgnoreChannels}
-					onReset={() => {
-						Reflect.deleteProperty(guildSettingsChanges, 'starboardIgnoreChannels');
-						setGuildSettingsChanges(guildSettingsChanges);
-					}}
+					onReset={() => handleResetKey(guildSettingsChanges, setGuildSettingsChanges, 'starboardIgnoreChannels')}
 					onChange={(newChannels) =>
 						setGuildSettingsChanges({
 							starboardIgnoreChannels: newChannels

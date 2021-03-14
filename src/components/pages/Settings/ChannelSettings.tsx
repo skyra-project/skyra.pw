@@ -13,6 +13,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import SimpleGrid from '@mui/SimpleGrid';
 import SelectChannel from '@selects/SelectChannel';
 import SelectChannels from '@selects/SelectChannels';
+import { handleResetKey } from '@utils/util';
 import React, { FC, memo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -70,10 +71,7 @@ const ChannelSettings: FC = () => {
 							key={index}
 							tooltipTitle={description}
 							value={guildSettings[key]}
-							onReset={() => {
-								Reflect.deleteProperty(guildSettingsChanges, key);
-								setGuildSettingsChanges(guildSettingsChanges);
-							}}
+							onReset={() => handleResetKey(guildSettingsChanges, setGuildSettingsChanges, key)}
 							onChange={(channel: typeof guildSettings[typeof key]) => {
 								return setGuildSettingsChanges({ [key]: channel });
 							}}
@@ -107,10 +105,7 @@ const ChannelSettings: FC = () => {
 							key={index}
 							tooltipTitle={description}
 							value={guildSettings[key]}
-							onReset={() => {
-								Reflect.deleteProperty(guildSettingsChanges, key);
-								setGuildSettingsChanges(guildSettingsChanges);
-							}}
+							onReset={() => handleResetKey(guildSettingsChanges, setGuildSettingsChanges, key)}
 							onChange={(channel: typeof guildSettings[typeof key]) => setGuildSettingsChanges({ [key]: channel })}
 							guild={guildData}
 							label={name}
@@ -142,10 +137,7 @@ const ChannelSettings: FC = () => {
 							key={index}
 							tooltipTitle={description}
 							value={guildSettings[key]}
-							onReset={() => {
-								Reflect.deleteProperty(guildSettingsChanges, key);
-								setGuildSettingsChanges(guildSettingsChanges);
-							}}
+							onReset={() => handleResetKey(guildSettingsChanges, setGuildSettingsChanges, key)}
 							onChange={(channel: typeof guildSettings[typeof key]) => setGuildSettingsChanges({ [key]: channel })}
 							guild={guildData}
 							label={name}
@@ -162,10 +154,7 @@ const ChannelSettings: FC = () => {
 						key={(ConfigurableChannels.length as number) + 1}
 						tooltipTitle={ConfigurableDisabledChannels.description}
 						value={guildSettings.disabledChannels}
-						onReset={() => {
-							Reflect.deleteProperty(guildSettingsChanges, 'disabledChannels');
-							setGuildSettingsChanges(guildSettingsChanges);
-						}}
+						onReset={() => handleResetKey(guildSettingsChanges, setGuildSettingsChanges, 'disabledChannels')}
 						onChange={(channels: typeof guildSettings.disabledChannels) =>
 							setGuildSettingsChanges({
 								disabledChannels: channels

@@ -10,6 +10,7 @@ import SelectBoolean from '@selects/SelectBoolean';
 import SelectChannel from '@selects/SelectChannel';
 import SelectEmoji from '@selects/SelectEmoji';
 import { EmojiRegexExtractId } from '@utils/constants';
+import { handleResetKey } from '@utils/util';
 import React, { FC, memo, useMemo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -57,10 +58,7 @@ const SuggestionSettings: FC = () => {
 					<SelectChannel
 						value={guildSettings.suggestionsChannel}
 						label="Suggestions Channel"
-						onReset={() => {
-							Reflect.deleteProperty(guildSettingsChanges, 'suggestionsChannel');
-							setGuildSettingsChanges(guildSettingsChanges);
-						}}
+						onReset={() => handleResetKey(guildSettingsChanges, setGuildSettingsChanges, 'suggestionsChannel')}
 						onChange={(newChannel) =>
 							setGuildSettingsChanges({
 								suggestionsChannel: newChannel
@@ -116,10 +114,7 @@ const SuggestionSettings: FC = () => {
 							defaultImage={defaultImage}
 							defaultName={defaultName}
 							defaultId={defaultId}
-							onReset={() => {
-								Reflect.deleteProperty(guildSettingsChanges, key);
-								setGuildSettingsChanges(guildSettingsChanges);
-							}}
+							onReset={() => handleResetKey(guildSettingsChanges, setGuildSettingsChanges, key)}
 							onChange={(emojiID: typeof guildSettings[typeof key] | null) => {
 								if (emojiID) {
 									const emojiData = findEmoji(emojiID);
