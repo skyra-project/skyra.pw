@@ -6,6 +6,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import SimpleGrid from '@mui/SimpleGrid';
 import Tooltip from '@mui/Tooltip';
+import { isNullish } from '@sapphire/utilities';
 import SelectChannel from '@selects/SelectChannel';
 import SelectRole from '@selects/SelectRole';
 import { cast, handleResetKey } from '@utils/util';
@@ -105,7 +106,11 @@ const BirthdaySettings: FC = () => {
 					<TextField
 						multiline
 						fullWidth
-						helperText={guildSettings.birthdayChannel ? null : 'You must set up the birthday channel as well!'}
+						helperText={
+							isNullish(guildSettings.birthdayChannel) && guildSettings.birthdayMessage
+								? 'You must set up the birthday channel as well!'
+								: null
+						}
 						FormHelperTextProps={{
 							error: true
 						}}
