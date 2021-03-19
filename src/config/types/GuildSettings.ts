@@ -154,7 +154,7 @@ export interface GuildSettings {
 	socialAchieve: boolean;
 	socialAchieveMessage: string | null;
 	socialEnabled: boolean;
-	socialIgnoreChannels: string[];
+	socialIgnoredChannels: string[];
 	socialMultiplier: number;
 	starboardChannel: string | null;
 	starboardEmoji: string;
