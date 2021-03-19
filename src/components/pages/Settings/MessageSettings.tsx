@@ -17,6 +17,7 @@ import SimpleGrid from '@mui/SimpleGrid';
 import Tooltip from '@mui/Tooltip';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectChannels from '@selects/SelectChannels';
+import { handleResetKey } from '@utils/util';
 import React, { FC, memo, useMemo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
