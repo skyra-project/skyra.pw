@@ -127,9 +127,9 @@ const FilterLinksSettings: FC = () => {
 						e.preventDefault();
 						try {
 							const { hostname } = new URL(/^https?:\/\//.test(newWord) ? newWord : `https://${newWord}`);
-							if (hostname.length <= 128 && !guildSettings.selfmodLinksWhitelist.includes(hostname)) {
+							if (hostname.length <= 128 && !guildSettings.selfmodLinksAllowed.includes(hostname)) {
 								setGuildSettingsChanges({
-									selfmodLinksWhitelist: [...guildSettings.selfmodLinksWhitelist, hostname]
+									selfmodLinksAllowed: [...guildSettings.selfmodLinksAllowed, hostname]
 								});
 								setNewWord('');
 							}
@@ -151,16 +151,16 @@ const FilterLinksSettings: FC = () => {
 					</Box>
 				</form>
 
-				<When condition={guildSettings.selfmodLinksWhitelist.length !== 0}>
+				<When condition={guildSettings.selfmodLinksAllowed.length !== 0}>
 					<Paper classes={{ root: classes.words }}>
-						{guildSettings.selfmodLinksWhitelist.map((word) => (
+						{guildSettings.selfmodLinksAllowed.map((word) => (
 							<Chip
 								color="primary"
 								key={word}
 								label={word}
 								onDelete={() =>
 									setGuildSettingsChanges({
-										selfmodLinksWhitelist: guildSettings.selfmodLinksWhitelist.filter((item) => item !== word)
+										selfmodLinksAllowed: guildSettings.selfmodLinksAllowed.filter((item) => item !== word)
 									})
 								}
 							/>

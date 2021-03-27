@@ -118,7 +118,7 @@ export interface GuildSettings {
 	selfmodLinksSoftAction: number;
 	selfmodLinksThresholdDuration: number;
 	selfmodLinksThresholdMaximum: number;
-	selfmodLinksWhitelist: string[];
+	selfmodLinksAllowed: string[];
 	selfmodMessagesEnabled: boolean;
 	selfmodMessagesHardAction: number;
 	selfmodMessagesHardActionDuration: number | null;
@@ -140,7 +140,7 @@ export interface GuildSettings {
 	selfmodNewlinesThresholdMaximum: number;
 	selfmodRaid: boolean;
 	selfmodRaidthreshold: number;
-	selfmodReactionsBlacklist: string[];
+	selfmodReactionsBlocked: string[];
 	selfmodReactionsEnabled: boolean;
 	selfmodReactionsHardAction: number;
 	selfmodReactionsHardActionDuration: number | null;
@@ -150,7 +150,7 @@ export interface GuildSettings {
 	selfmodReactionsSoftAction: number;
 	selfmodReactionsThresholdDuration: number;
 	selfmodReactionsThresholdMaximum: number;
-	selfmodReactionsWhitelist: string[];
+	selfmodReactionsAllowed: string[];
 	socialAchieve: boolean;
 	socialAchieveMessage: string | null;
 	socialEnabled: boolean;
