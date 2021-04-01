@@ -74,7 +74,7 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 				'font-size: 18px; font-weight: bold; color: red;'
 			);
 			console.log(
-				'%cIf you do understand exactly what you are doing, you should join the Skyra Development team https://join.skyra.pw',
+				'%cIf you do understand exactly what you are doing, you should join the Skyra Project team https://join.skyra.pw',
 				'font-size: 16px;'
 			);
 		}
