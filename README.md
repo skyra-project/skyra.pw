@@ -66,6 +66,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/cfanoulis"><img src="https://avatars3.githubusercontent.com/u/38255093?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Charalampos Fanoulis</b></sub></a><br /><a href="#design-cfanoulis" title="Design">🎨</a> <a href="https://github.com/skyra-project/skyra.pw/commits?author=cfanoulis" title="Code">💻</a></td>
     <td align="center"><a href="https://jaczaus.me/"><img src="https://avatars3.githubusercontent.com/u/23615291?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jacz</b></sub></a><br /><a href="https://github.com/skyra-project/skyra.pw/commits?author=MrJacz" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/Rexogamer"><img src="https://avatars0.githubusercontent.com/u/42586271?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ed L</b></sub></a><br /><a href="#content-Rexogamer" title="Content">🖋</a></td>
+    <td align="center"><a href="https://www.abstraq.me"><img src="https://avatars.githubusercontent.com/u/42789460?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Josh</b></sub></a><br /><a href="https://github.com/skyra-project/skyra.pw/commits?author=abstraq" title="Code">💻</a></td>
   </tr>
 </table>
 
