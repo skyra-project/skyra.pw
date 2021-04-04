@@ -1,3 +1,4 @@
+import React from 'react';
 import type { ValuesType } from 'utility-types';
 import type { TransformedLoginData } from './types/ApiData';
 import type { Channels, Events, Messages, Moderation, Roles, Suggestions } from './types/ConfigurableData';
@@ -133,41 +134,7 @@ export const ConfigurableModerationKeys: Moderation.Message[] = [
 	}
 ];
 
-export const ConfigurableMessageKeys = (
-	guildSettings: GuildSettings,
-	guildData: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>
-): Messages.Message[] => [
-	{
-		name: 'Join DMs',
-		key: 'messagesJoinDM',
-		placeholder: [guildSettings.eventsMemberAdd ? null : 'You must configure Member Join on the Events page.'].join(' '),
-		tooltipText: 'This is the message I will send in a DM to a member when they join.'
-	},
-	{
-		name: 'Greeting',
-		key: 'messagesGreeting',
-		placeholder: [
-			guildSettings.channelsGreeting ? null : 'You must set up the greeting channel in channels page.',
-			guildSettings.eventsMemberAdd ? null : 'You must configure Member Join on the Events page.'
-		].join(' '),
-		tooltipText: `This is the message I will send to ${
-			guildData?.channels.find((c) => c.id === guildSettings.channelsGreeting)?.name ?? 'the configured Greeting channel'
-		} when a member joins.`
-	},
-	{
-		name: 'Farewell',
-		key: 'messagesFarewell',
-		placeholder: [
-			guildSettings.channelsFarewell ? null : 'You must set up the farewell channel in channels page.',
-			guildSettings.eventsMemberRemove ? null : 'You must configure Member Leave on the Events page.'
-		].join(' '),
-		tooltipText: `This is the message I will send to ${
-			guildData?.channels.find((c) => c.id === guildSettings.channelsFarewell)?.name ?? 'the configured Farewell channel'
-		} when a member leaves.`
-	}
-];
-
-export enum Matches {
+enum Matches {
 	Guild = '%GUILD%',
 	Member = '%MEMBER%',
 	MemberName = '%MEMBERNAME%',
@@ -176,17 +143,82 @@ export enum Matches {
 	Position = '%POSITION%'
 }
 
-export const ConfigurableReplaceableMatchers = (
+const ConfigurableReplaceableMatchers = (guildData: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>) => ({
+	[Matches.Guild]: (
+		<>
+			Will be replaced with the name of this server, which is: <code className="white">{guildData?.name}</code>
+		</>
+	),
+	[Matches.Member]: `Will be replaced with a mention of the member`,
+	[Matches.MemberName]: `Will be replaced with the username of the member`,
+	[Matches.MemberTag]: (
+		<>
+			Will be replaced with the unique tag of the member (for example <code className="white">user#0000</code>)
+		</>
+	),
+	[Matches.MemberCount]: `Will be replaced with the amount of members currently in the server`,
+	[Matches.Position]: (
+		<>
+			Will be replaced with the ordinal position this member has in the server. (for example{' '}
+			<code className="white">{`${Matches.Position} member`}</code> for <code className="white">20th member</code>)
+		</>
+	)
+});
+
+const generateTooltipText = (header: string, guildData: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>) => {
+	const matchersData = ConfigurableReplaceableMatchers(guildData);
+	return (
+		<>
+			{header}
+			<br />
+			The following will be replaced with the respective values:
+			<br />- <code className="white">{`${Matches.Guild}`}</code>: {matchersData[Matches.Guild]}
+			<br />- <code className="white">{`${Matches.Member}`}</code>: {matchersData[Matches.Member]}
+			<br />- <code className="white">{`${Matches.MemberCount}`}</code>: {matchersData[Matches.MemberCount]}
+			<br />- <code className="white">{`${Matches.MemberName}`}</code>: {matchersData[Matches.MemberName]}
+			<br />- <code className="white">{`${Matches.MemberTag}`}</code>: {matchersData[Matches.MemberTag]}
+			<br />- <code className="white">{`${Matches.Position}`}</code>: {matchersData[Matches.Position]}
+		</>
+	);
+};
+
+export const ConfigurableMessageKeys = (
+	guildSettings: GuildSettings,
 	guildData: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>
-): Messages.Matcher[] => [
-	{ matchKey: Matches.Guild, description: `I will replace this with ${guildData?.name}` },
-	{ matchKey: Matches.Member, description: `I will replace this with a mention of the member` },
-	{ matchKey: Matches.MemberName, description: `I will replace this with the username of the member` },
-	{ matchKey: Matches.MemberTag, description: `I will replace this with the unique tag of the member` },
-	{ matchKey: Matches.MemberCount, description: `I will replace this with the amount of members currently in the server` },
+): Messages.Message[] => [
 	{
-		matchKey: Matches.Position,
-		description: `I will replace this with the ordinal position this member has in the server.`
+		name: 'Join DMs',
+		key: 'messagesJoinDM',
+		placeholder: [guildSettings.eventsMemberAdd ? null : 'You must configure Member Join on the Events page.'].join(' '),
+		tooltipText: generateTooltipText('This is the message I will send in a DM to a member when they join.', guildData)
+	},
+	{
+		name: 'Greeting',
+		key: 'messagesGreeting',
+		placeholder: [
+			guildSettings.channelsGreeting ? null : 'You must set up the greeting channel in channels page.',
+			guildSettings.eventsMemberAdd ? null : 'You must configure Member Join on the Events page.'
+		].join(' '),
+		tooltipText: generateTooltipText(
+			`This is the message I will send to ${
+				guildData?.channels.find((c) => c.id === guildSettings.channelsGreeting)?.name ?? 'the configured Greeting channel'
+			} when a member joins.`,
+			guildData
+		)
+	},
+	{
+		name: 'Farewell',
+		key: 'messagesFarewell',
+		placeholder: [
+			guildSettings.channelsFarewell ? null : 'You must set up the farewell channel in channels page.',
+			guildSettings.eventsMemberRemove ? null : 'You must configure Member Leave on the Events page.'
+		].join(' '),
+		tooltipText: generateTooltipText(
+			`This is the message I will send to ${
+				guildData?.channels.find((c) => c.id === guildSettings.channelsFarewell)?.name ?? 'the configured Farewell channel'
+			} when a member leaves.`,
+			guildData
+		)
 	}
 ];
 

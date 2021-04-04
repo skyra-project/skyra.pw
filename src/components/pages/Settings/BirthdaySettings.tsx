@@ -81,24 +81,16 @@ const BirthdaySettings: FC = () => {
 				<Tooltip
 					title={
 						<>
-							{/* prettier-ignore */}
 							A personalized message that will be sent to the channel
 							<br />
-							{/* prettier-ignore */}
 							The following will be replaced with the respective values:
-							<br />
-							{/* prettier-ignore */}- <code className="white">{'{age}'}</code>: will be replaced with the user's new age.
-							<br />
-							{/* prettier-ignore */}- <code className="white">{'{age.ordinal}'}</code>: will be replaced with the ordinal version of
-							the user's age (for example <code className="white">{'{age.ordinal} birthday'}</code> for{' '}
-							<code className="white">18th birthday</code>)<br />
-							{/* prettier-ignore */}- <code className="white">{'{user}'}</code>: will be replaced with a mention of the user.
-							<br />
-							{/* prettier-ignore */}- <code className="white">{'{user.name}'}</code>: will be replaced with just the username of the
-							user.
-							<br />
-							{/* prettier-ignore */}- <code className="white">{'{user.tag}'}</code>: will be replaced with the username + tag (for
-							example <code className="white">user#0000</code>){/* prettier-ignore */}
+							<br />- <code className="white">{'{age}'}</code>: will be replaced with the user's new age.
+							<br />- <code className="white">{'{age.ordinal}'}</code>: will be replaced with the ordinal version of the user's age (for
+							example <code className="white">{'{age.ordinal} birthday'}</code> for <code className="white">18th birthday</code>)<br />-{' '}
+							<code className="white">{'{user}'}</code>: will be replaced with a mention of the user.
+							<br />- <code className="white">{'{user.name}'}</code>: will be replaced with just the username of the user.
+							<br />- <code className="white">{'{user.tag}'}</code>: will be replaced with the username + tag (for example{' '}
+							<code className="white">user#0000</code>)
 						</>
 					}
 					placement="top-start"

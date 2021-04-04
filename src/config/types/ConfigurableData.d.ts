@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 export namespace Suggestions {
 	export interface OnAction {
 		title: string;
@@ -54,13 +56,8 @@ export namespace Messages {
 	export interface Message {
 		name: string;
 		placeholder: string;
-		tooltipText: string;
+		tooltipText: NonNullable<ReactNode>;
 		key: `messages${'Farewell' | 'Greeting' | 'JoinDM'}`;
-	}
-
-	export interface Matcher {
-		matchKey: Matches;
-		description: string;
 	}
 }
 
