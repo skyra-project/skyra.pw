@@ -4,6 +4,7 @@ import Fab from '@material-ui/core/Fab';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Zoom from '@material-ui/core/Zoom';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import Tooltip from '@mui/Tooltip';
 import React, { FC, memo, PropsWithChildren } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -34,11 +35,13 @@ const ScrollToTopButton: FC = () => {
 
 	return (
 		<Zoom in={trigger}>
-			<Box onClick={handleClick} className={classes.scrollToTopButton}>
-				<Fab color="primary" size="small" aria-label="scroll back to top">
-					<KeyboardArrowUpIcon />
-				</Fab>
-			</Box>
+			<Tooltip title="Click to scroll to the top of the page">
+				<Box onClick={handleClick} className={classes.scrollToTopButton}>
+					<Fab color="primary" size="small" aria-label="scroll back to top">
+						<KeyboardArrowUpIcon />
+					</Fab>
+				</Box>
+			</Tooltip>
 		</Zoom>
 	);
 };
