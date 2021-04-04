@@ -151,18 +151,20 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 				</Tooltip>
 			</When>
 
-			<IconButton
-				ref={anchorRef}
-				edge="start"
-				aria-controls={popperMenuIsOpen ? 'menu-popover' : undefined}
-				aria-haspopup="true"
-				className={classes.menuButton}
-				color="inherit"
-				aria-label="menu"
-				onClick={togglePopperMenu}
-			>
-				<MenuIcon />
-			</IconButton>
+			<Tooltip title="Open to view more pages and options">
+				<IconButton
+					ref={anchorRef}
+					edge="start"
+					aria-controls={popperMenuIsOpen ? 'menu-popover' : undefined}
+					aria-haspopup="true"
+					className={classes.menuButton}
+					color="inherit"
+					aria-label="menu"
+					onClick={togglePopperMenu}
+				>
+					<MenuIcon />
+				</IconButton>
+			</Tooltip>
 			<Popper className={classes.popper} open={popperMenuIsOpen} anchorEl={anchorRef.current} transition disablePortal>
 				{({ TransitionProps, placement }) => (
 					<Grow {...TransitionProps} style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}>
