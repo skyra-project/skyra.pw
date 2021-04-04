@@ -3,9 +3,7 @@ import { mergeDiscordPack } from '@contexts/DiscordPackContext';
 import Footer from '@layout/Footer';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Box, { BoxProps } from '@material-ui/core/Box';
-import Fab from '@material-ui/core/Fab';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { syncUser } from '@utils/util';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
@@ -43,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containerProps, ...props }) => {
+const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containerProps }) => {
 	const classes = useStyles();
 	const router = useRouter();
 	const authenticated = useAuthenticated();
@@ -71,11 +69,7 @@ const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containe
 				<Footer />
 
 				<Box component="span">
-					<ScrollToTopButton {...props}>
-						<Fab color="primary" size="small" aria-label="scroll back to top">
-							<KeyboardArrowUpIcon />
-						</Fab>
-					</ScrollToTopButton>
+					<ScrollToTopButton />
 				</Box>
 			</Box>
 		</>

@@ -1,7 +1,9 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
+import Fab from '@material-ui/core/Fab';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Zoom from '@material-ui/core/Zoom';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import React, { FC, memo, PropsWithChildren } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -15,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const ScrollToTopButton: FC = ({ children }) => {
+const ScrollToTopButton: FC = () => {
 	const classes = useStyles();
 	const trigger = useScrollTrigger({
 		disableHysteresis: true,
@@ -33,7 +35,9 @@ const ScrollToTopButton: FC = ({ children }) => {
 	return (
 		<Zoom in={trigger}>
 			<Box onClick={handleClick} className={classes.scrollToTopButton}>
-				{children}
+				<Fab color="primary" size="small" aria-label="scroll back to top">
+					<KeyboardArrowUpIcon />
+				</Fab>
 			</Box>
 		</Zoom>
 	);
