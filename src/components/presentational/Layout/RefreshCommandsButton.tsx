@@ -9,7 +9,7 @@ import Tooltip from '@mui/Tooltip';
 import { ExpirableLocalStorageStructure, LocalStorageKeys } from '@utils/constants';
 import { Time } from '@utils/skyraUtils';
 import { apiFetch, saveState } from '@utils/util';
-import React, { FC, memo, PropsWithChildren, SetStateAction, useMemo, useState } from 'react';
+import React, { FC, memo, PropsWithChildren, SetStateAction, useCallback, useMemo, useState } from 'react';
 
 interface RefreshCommandsButtonProps {
 	setCommands: (value: SetStateAction<FlattenedCommand[]>) => void;
@@ -36,7 +36,7 @@ const RefreshCommandsButton: FC<RefreshCommandsButtonProps> = ({ setCommands }) 
 
 	const classes = useStyles({ scrollTrigger: trigger });
 
-	const handleClick = async () => {
+	const handleClick = useCallback(async () => {
 		try {
 			setDisabled(true);
 
@@ -53,7 +53,7 @@ const RefreshCommandsButton: FC<RefreshCommandsButtonProps> = ({ setCommands }) 
 				setDisabled(true);
 			}
 		}
-	};
+	}, [setCommands]);
 
 	const componentCode = useMemo(
 		() => (
@@ -75,7 +75,7 @@ const RefreshCommandsButton: FC<RefreshCommandsButtonProps> = ({ setCommands }) 
 				</Box>
 			</Tooltip>
 		),
-		[]
+		[classes.refreshCommandsButton, disabled, handleClick]
 	);
 
 	return (
