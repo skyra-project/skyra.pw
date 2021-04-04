@@ -183,6 +183,7 @@ export interface CustomCommand {
 	embed: boolean;
 	color: number;
 	content: string;
+	aliases: never[];
 }
 
 type CommandAutoDelete = readonly [string, number];
