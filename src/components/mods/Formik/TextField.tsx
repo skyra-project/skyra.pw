@@ -9,6 +9,9 @@ const useStyles = makeStyles((theme: Theme) =>
 		errorLabel: {
 			position: 'absolute',
 			top: theme.spacing(6.5)
+		},
+		autoHeight: {
+			height: 'auto'
 		}
 	})
 );
@@ -27,6 +30,7 @@ const TextField: FC<TextFieldProps> = ({ form, field, meta, ...props }) => {
 			variant="standard"
 			{...fieldToTextField({ form, field, meta })}
 			{...props}
+			classes={{ root: clsx(props.classes?.root, classes.autoHeight) }}
 			FormHelperTextProps={{
 				classes: {
 					error: clsx(classes.errorLabel, props.FormHelperTextProps?.classes?.error)
