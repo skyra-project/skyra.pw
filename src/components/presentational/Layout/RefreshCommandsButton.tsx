@@ -9,7 +9,7 @@ import Tooltip from '@mui/Tooltip';
 import { ExpirableLocalStorageStructure, LocalStorageKeys } from '@utils/constants';
 import { Time } from '@utils/skyraUtils';
 import { apiFetch, saveState } from '@utils/util';
-import React, { FC, memo, PropsWithChildren, SetStateAction, useState } from 'react';
+import React, { FC, memo, PropsWithChildren, SetStateAction, useMemo, useState } from 'react';
 
 interface RefreshCommandsButtonProps {
 	setCommands: (value: SetStateAction<FlattenedCommand[]>) => void;
@@ -38,43 +38,50 @@ const RefreshCommandsButton: FC<RefreshCommandsButtonProps> = ({ setCommands }) 
 
 	const handleClick = async () => {
 		try {
+			setDisabled(true);
+
 			const commandsData = await apiFetch<FlattenedCommand[]>('/commands');
 			setCommands(commandsData);
 			saveState<ExpirableLocalStorageStructure<FlattenedCommand[]>>(LocalStorageKeys.Commands, {
 				expire: Date.now() + Time.Day * 6,
 				data: commandsData
 			});
+
+			setDisabled(false);
 		} catch (err) {
-			if (err.status === 429) {
+			if (err.status >= 400) {
 				setDisabled(true);
 			}
 		}
 	};
 
-	const componentCode = () => (
-		<Tooltip
-			title={
-				<>
-					Click to force refresh commands
-					<br />
-					<br />
-					<strong>Note:</strong> If this button is not clickable (greyed out) then you've ran into a rate limit. You can try refreshing
-					again at a later time. We do release on a weekly schedule so you only need to refresh once every 6 or 7 days.
-				</>
-			}
-		>
-			<Box onClick={handleClick} className={classes.refreshCommandsButton}>
-				<Fab color="primary" size="small" aria-label="scroll back to top" disabled={disabled}>
-					<CachedIcon />
-				</Fab>
-			</Box>
-		</Tooltip>
+	const componentCode = useMemo(
+		() => (
+			<Tooltip
+				title={
+					<>
+						Click to force refresh commands
+						<br />
+						<br />
+						<strong>Note:</strong> If this button is not clickable (greyed out) then you've ran into a rate limit. You can try refreshing
+						again at a later time. We do release on a weekly schedule so you only need to refresh once every 6 or 7 days.
+					</>
+				}
+			>
+				<Box className={classes.refreshCommandsButton}>
+					<Fab onClick={handleClick} color="primary" size="small" aria-label="scroll back to top" disabled={disabled}>
+						<CachedIcon />
+					</Fab>
+				</Box>
+			</Tooltip>
+		),
+		[]
 	);
 
 	return (
 		<>
-			<Zoom in={trigger}>{componentCode()}</Zoom>
-			<Zoom in={!trigger}>{componentCode()}</Zoom>
+			<Zoom in={trigger}>{componentCode}</Zoom>
+			<Zoom in={!trigger}>{componentCode}</Zoom>
 		</>
 	);
 };
