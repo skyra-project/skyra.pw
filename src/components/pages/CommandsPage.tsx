@@ -5,14 +5,14 @@ import Container from '@material-ui/core/Container';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import UiSearchBar from '@mui/UiSearchBar';
 import Category from '@presentational/CommandsPage/Category';
+import Loading from '@presentational/Loading';
 import ScrollToTop from '@routing/ScrollToTop';
+import { ExpirableLocalStorageStructure, LocalStorageKeys } from '@utils/constants';
+import { Time } from '@utils/skyraUtils';
 import { useWindowSize } from '@utils/useWindowSize';
+import { apiFetch, loadState, saveState } from '@utils/util';
 import debounce from 'lodash/debounce';
-import React, { FC, useCallback, useMemo, useState } from 'react';
-
-interface CommandsPageProps {
-	commands: FlattenedCommand[];
-}
+import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -33,10 +33,35 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const CommandsPage: FC<CommandsPageProps> = ({ commands }) => {
+const CommandsPage: FC = () => {
 	const classes = useStyles();
 	const [searchValue, setSearchValue] = useState('');
 	const [commandsBoxWidth, setCommandsBoxWidth] = useState(500);
+	const [commands, setCommands] = useState<FlattenedCommand[]>([]);
+	const [loading, setLoading] = useState(false);
+
+	const fetchCommands = useCallback(async () => {
+		setLoading(true);
+
+		const commandsFromLocalStorage = loadState<ExpirableLocalStorageStructure<FlattenedCommand[]>>(LocalStorageKeys.Commands);
+		if (commandsFromLocalStorage && (process.env.NODE_ENV === 'development' || commandsFromLocalStorage.expire > Date.now())) {
+			setCommands(commandsFromLocalStorage.data);
+		} else {
+			const commandsData = await apiFetch<FlattenedCommand[]>('/commands');
+			setCommands(commandsData);
+			saveState<ExpirableLocalStorageStructure<FlattenedCommand[]>>(LocalStorageKeys.Commands, {
+				expire: Date.now() + Time.Day * 6,
+				data: commandsData
+			});
+		}
+
+		setLoading(false);
+	}, []);
+
+	useEffect(() => {
+		void fetchCommands();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const categories = useMemo(() => [...new Set(commands.map((command) => command.category))], [commands]);
 
@@ -57,6 +82,7 @@ const CommandsPage: FC<CommandsPageProps> = ({ commands }) => {
 
 	return (
 		<>
+			<Loading loading={loading} />
 			<ScrollToTop />
 			<GeneralPage>
 				<Container>

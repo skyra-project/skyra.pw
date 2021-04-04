@@ -7,10 +7,8 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionActions from '@material-ui/core/AccordionActions';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
-import Backdrop from '@material-ui/core/Backdrop';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { green } from '@material-ui/core/colors';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
@@ -18,16 +16,16 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Loading from '@presentational/Loading';
 import SelectBoolean from '@selects/SelectBoolean';
-import { apiFetch } from '@utils/util';
 import React, { FC, memo, useCallback, useEffect, useState } from 'react';
+
+interface DisabledCommandSettingsProps {
+	commands: FlattenedCommand[];
+}
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
-		backdrop: {
-			zIndex: theme.zIndex.drawer + 1,
-			color: theme.palette.primary.contrastText
-		},
 		accordions: {
 			marginTop: theme.spacing(3)
 		},
@@ -65,17 +63,17 @@ const useStyles = makeStyles((theme: Theme) =>
  */
 export const parseCommandDescription = (description: string) => description.replace(/<:(\w{2,32}):[0-9]{18}>/gi, '$1');
 
-const DisabledCommandSettings: FC = () => {
+const DisabledCommandSettings: FC<DisabledCommandSettingsProps> = ({ commands }) => {
 	const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 	const classes = useStyles();
 	const [expanded, setExpanded] = useState<string | false>(false);
 	const [loading, setLoading] = useState(true);
-	const [commands, setCommands] = useState<Record<string, DisableCommands.Command>>({});
+	const [localCommands, setLocalCommands] = useState<Record<string, DisableCommands.Command>>({});
 	const { guildSettings } = useGuildSettingsContext();
 	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
-	const fetchCommands = useCallback(async () => {
-		const commands: FlattenedCommand[] = await apiFetch('/commands');
+	const parseCommandsToLocalCommands = useCallback(() => {
+		setLoading(true);
 		const commandsForState: Record<string, DisableCommands.Command> = {};
 		for (const command of commands) {
 			if (command.guarded) continue;
@@ -86,27 +84,22 @@ const DisabledCommandSettings: FC = () => {
 				category: command.category
 			};
 		}
-		setCommands(commandsForState);
+		setLocalCommands(commandsForState);
 		setLoading(false);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
+	}, [commands, guildSettings.disabledCommands]);
 	useEffect(() => {
-		void fetchCommands();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+		parseCommandsToLocalCommands();
+	}, [parseCommandsToLocalCommands]);
 
 	const handleToggleAccordion = (panel: string) => (_: React.ChangeEvent<unknown>, isExpanded: boolean) => {
 		setExpanded(isExpanded ? panel : false);
 	};
 
-	const categories = [...new Set(Object.values(commands).map((command) => command.category))];
+	const categories = [...new Set(Object.values(localCommands).map((command) => command.category))];
 
 	return (
 		<>
-			<Backdrop className={classes.backdrop} open={loading} unmountOnExit mountOnEnter>
-				<CircularProgress color="primary" />
-			</Backdrop>
+			<Loading loading={loading} />
 			<Section title="Commands">
 				<Typography variant="subtitle2" color="textPrimary">
 					On this page you can disable commands on your server
@@ -124,7 +117,7 @@ const DisabledCommandSettings: FC = () => {
 							</AccordionSummary>
 							<AccordionDetails>
 								<Grid container spacing={1} direction="row" justify="flex-start" alignItems="center" alignContent="center">
-									{Object.values(commands)
+									{Object.values(localCommands)
 										.filter((command) => command.category === catName)
 										.map((cmd, idx) => (
 											<Grid item key={idx} xs={12} md={6} lg={4} xl={3}>
@@ -133,8 +126,8 @@ const DisabledCommandSettings: FC = () => {
 													description={parseCommandDescription(cmd.description)}
 													currentValue={cmd.isEnabled}
 													onChange={(event) => {
-														return setCommands({
-															...commands,
+														return setLocalCommands({
+															...localCommands,
 															[cmd.name]: { ...cmd, isEnabled: event.target.checked }
 														});
 													}}
@@ -151,7 +144,7 @@ const DisabledCommandSettings: FC = () => {
 									classes={{ root: classes.enableAllButton }}
 									onClick={() => {
 										const changedCommands: Record<string, DisableCommands.Command> = {};
-										for (const command of Object.values(commands)) {
+										for (const command of Object.values(localCommands)) {
 											if (command.category !== catName) continue;
 											changedCommands[command.name] = {
 												...command,
@@ -159,8 +152,8 @@ const DisabledCommandSettings: FC = () => {
 											};
 										}
 
-										return setCommands({
-											...commands,
+										return setLocalCommands({
+											...localCommands,
 											...changedCommands
 										});
 									}}
@@ -173,7 +166,7 @@ const DisabledCommandSettings: FC = () => {
 									classes={{ root: classes.disableAllButton }}
 									onClick={() => {
 										const changedCommands: Record<string, DisableCommands.Command> = {};
-										for (const command of Object.values(commands)) {
+										for (const command of Object.values(localCommands)) {
 											if (command.category !== catName) continue;
 											changedCommands[command.name] = {
 												...command,
@@ -181,15 +174,20 @@ const DisabledCommandSettings: FC = () => {
 											};
 										}
 
-										return setCommands({
-											...commands,
+										return setLocalCommands({
+											...localCommands,
 											...changedCommands
 										});
 									}}
 								>
 									{matches ? 'Disable' : 'Disable all'}
 								</Button>
-								<Button size="small" variant="contained" classes={{ root: classes.cancelButton }} onClick={fetchCommands}>
+								<Button
+									size="small"
+									variant="contained"
+									classes={{ root: classes.cancelButton }}
+									onClick={parseCommandsToLocalCommands}
+								>
 									Reset
 								</Button>
 								<Button
@@ -198,7 +196,7 @@ const DisabledCommandSettings: FC = () => {
 									variant="contained"
 									onClick={() => {
 										setGuildSettingsChanges({
-											disabledCommands: Object.values(commands)
+											disabledCommands: Object.values(localCommands)
 												.filter((cmd) => !cmd.isEnabled)
 												.map((cmd) => cmd.name)
 										});

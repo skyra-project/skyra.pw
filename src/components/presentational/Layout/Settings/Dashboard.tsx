@@ -6,12 +6,11 @@ import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import { Grow, useMediaQuery } from '@material-ui/core';
-import Backdrop from '@material-ui/core/Backdrop';
 import Box from '@material-ui/core/Box';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Hidden from '@material-ui/core/Hidden';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import ErrorAlert from '@presentational/Alerts/Error';
+import Loading from '@presentational/Loading';
 import { objectToTuples } from '@sapphire/utilities';
 import { FetchMethods, SettingsDrawerWidth } from '@utils/constants';
 import { Time } from '@utils/skyraUtils';
@@ -54,10 +53,6 @@ const useStyles = makeStyles((theme: Theme) =>
 			[theme.breakpoints.down('sm')]: {
 				marginTop: 56
 			}
-		},
-		backdrop: {
-			zIndex: theme.zIndex.drawer + 1,
-			color: '#fff'
 		},
 		link: {
 			color: theme.palette.primary.contrastText,
@@ -150,9 +145,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 	return (
 		<>
 			<NextSeo title={`${guildData?.name ?? 'Guild'} Settings`} />
-			<Backdrop className={classes.backdrop} open={isLoading} unmountOnExit mountOnEnter>
-				<CircularProgress color="inherit" />
-			</Backdrop>
+			<Loading loading={isLoading} />
 			<ErrorAlert
 				open={hasError}
 				setOpen={setHasError}

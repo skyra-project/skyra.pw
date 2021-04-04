@@ -61,22 +61,6 @@ export async function apiFetch<T>(path: string, options: RequestInit = {}) {
 	}
 }
 
-export async function ssrFetch<T>(path: string) {
-	const response = await fetch(`${process.env.SSR_API_URL}${path}`, {
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	});
-
-	const jsonResponse = await response.json();
-
-	if (jsonResponse.error) {
-		throw response;
-	} else {
-		return jsonResponse as T;
-	}
-}
-
 type SetPackCallback = (newPack: Partial<TransformedLoginData>) => void;
 type SetAuthenticatedCallback = (newAuthenticated: boolean) => void;
 type ChangeRouteCallback = (newRoute: string) => void;

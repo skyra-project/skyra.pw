@@ -35,10 +35,17 @@ export const guildAddURL = (guildID: string) => {
 	return guildAuthURL.toString();
 };
 
+export interface ExpirableLocalStorageStructure<T> {
+	expire: number;
+	data: T;
+}
+
 export enum LocalStorageKeys {
 	HasCookieConsent = 'allows_cookies',
 	DiscordPack = 'discord_pack',
-	LastSync = 'last_sync'
+	LastSync = 'last_sync',
+	Commands = 'commands',
+	Languages = 'languages'
 }
 
 export enum FetchMethods {

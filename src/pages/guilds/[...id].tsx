@@ -1,3 +1,4 @@
+import type { FlattenedCommand } from '@config/types/ApiData';
 import { FilterRoutes, GuildRoutes } from '@config/types/GuildRoutes';
 import { useAuthenticated } from '@contexts/AuthenticationContext';
 import Dashboard from '@layout/Settings/Dashboard';
@@ -19,23 +20,63 @@ import ModerationSettings from '@pages/Settings/ModerationSettings';
 import RoleSettings from '@pages/Settings/RoleSettings';
 import StarboardSettings from '@pages/Settings/StarboardSettings';
 import SuggestionSettings from '@pages/Settings/SuggestionSettings';
+import Loading from '@presentational/Loading';
 import RedirectRoute from '@routing/RedirectRoute';
-import { ssrFetch } from '@utils/util';
-import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
+import { ExpirableLocalStorageStructure, LocalStorageKeys } from '@utils/constants';
+import { Time } from '@utils/skyraUtils';
+import { apiFetch, loadState, saveState } from '@utils/util';
+import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Case, Default, Switch } from 'react-if';
 
 const GuildSettingsProvider = dynamic(() => import('@contexts/Settings/GuildSettingsContext'));
 const GuildSettingsChangesProvider = dynamic(() => import('@contexts/Settings/GuildSettingsChangesContext'));
 const GuildDataProvider = dynamic(() => import('@contexts/Settings/GuildDataContext'));
 
-const GuildSettingsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ languages }) => {
+const GuildSettingsPage: NextPage = () => {
 	const router = useRouter();
 	const authenticated = useAuthenticated();
+	const [loading, setLoading] = useState(true);
+	const [commands, setCommands] = useState<FlattenedCommand[]>([]);
+	const [languages, setLanguages] = useState<string[]>([]);
 
-	const [guildId, ...path] = router.query.id;
+	const fetchCommandsAndLanguages = useCallback(async () => {
+		setLoading(true);
+
+		const commandsFromLocalStorage = loadState<ExpirableLocalStorageStructure<FlattenedCommand[]>>(LocalStorageKeys.Commands);
+		if (commandsFromLocalStorage && (process.env.NODE_ENV === 'development' || commandsFromLocalStorage.expire > Date.now())) {
+			setCommands(commandsFromLocalStorage.data);
+		} else {
+			const commandsData = await apiFetch<FlattenedCommand[]>('/commands');
+			setCommands(commandsData);
+			saveState<ExpirableLocalStorageStructure<FlattenedCommand[]>>(LocalStorageKeys.Commands, {
+				expire: Date.now() + Time.Day * 6,
+				data: commandsData
+			});
+		}
+
+		const languagesFromLocalStorage = loadState<ExpirableLocalStorageStructure<string[]>>(LocalStorageKeys.Languages);
+		if (languagesFromLocalStorage && (process.env.NODE_ENV === 'development' || languagesFromLocalStorage.expire > Date.now())) {
+			setLanguages(languagesFromLocalStorage.data);
+		} else {
+			const languagesData = await apiFetch<string[]>('/languages');
+			setLanguages(languagesData);
+			saveState<ExpirableLocalStorageStructure<string[]>>(LocalStorageKeys.Languages, {
+				expire: Date.now() + Time.Day * 6,
+				data: languagesData
+			});
+		}
+
+		setLoading(false);
+	}, []);
+
+	useEffect(() => {
+		void fetchCommandsAndLanguages();
+	}, [fetchCommandsAndLanguages]);
+
+	const [guildId, ...path] = router.query.id ?? ['', ['']];
 	const joinedPath = path.join('/');
 
 	if (!authenticated) {
@@ -46,6 +87,7 @@ const GuildSettingsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 		<GuildSettingsChangesProvider>
 			<GuildSettingsProvider>
 				<GuildDataProvider>
+					<Loading loading={loading} />
 					<Dashboard guildId={guildId}>
 						<Switch>
 							<Case condition={joinedPath === GuildRoutes.Birthdays}>
@@ -58,7 +100,7 @@ const GuildSettingsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 								<CustomCommandSettings />
 							</Case>
 							<Case condition={joinedPath === GuildRoutes.DisabledCommands}>
-								<DisabledCommandSettings />
+								<DisabledCommandSettings commands={commands} />
 							</Case>
 							<Case condition={joinedPath === GuildRoutes.Events}>
 								<EventSettings />
@@ -108,29 +150,6 @@ const GuildSettingsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 			</GuildSettingsProvider>
 		</GuildSettingsChangesProvider>
 	);
-};
-
-export const getStaticPaths: GetStaticPaths = async () => {
-	return {
-		paths: [], // indicates that no page needs be created at build time
-		fallback: 'blocking' // indicates the type of fallback
-	};
-};
-
-export const getStaticProps: GetStaticProps<{ languages: string[] }> = async () => {
-	const languages = await ssrFetch<string[]>('/languages');
-
-	if (!languages) {
-		return {
-			notFound: true
-		};
-	}
-
-	return {
-		props: {
-			languages
-		}
-	};
 };
 
 export default GuildSettingsPage;

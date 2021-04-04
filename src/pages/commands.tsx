@@ -1,11 +1,9 @@
-import type { FlattenedCommand } from '@config/types/ApiData';
 import PageContent from '@pages/CommandsPage';
-import { ssrFetch } from '@utils/util';
-import type { InferGetStaticPropsType, NextPage } from 'next';
+import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
 
-const CommandsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ commands }) => {
+const CommandsPage: NextPage = () => {
 	return (
 		<>
 			<NextSeo
@@ -23,19 +21,9 @@ const CommandsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 				]}
 			/>
 
-			<PageContent commands={commands} />
+			<PageContent />
 		</>
 	);
-};
-
-export const getStaticProps = async () => {
-	const commands = await ssrFetch<FlattenedCommand[]>('/commands');
-
-	return {
-		props: {
-			commands
-		}
-	};
 };
 
 export default CommandsPage;
