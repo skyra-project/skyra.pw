@@ -2,6 +2,7 @@ import type { FlattenedCommand } from '@config/types/ApiData';
 import type { DisableCommands } from '@config/types/ConfigurableData';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
+import RefreshCommandsButton from '@layout/RefreshCommandsButton';
 import Section from '@layout/Settings/Section';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionActions from '@material-ui/core/AccordionActions';
@@ -18,10 +19,11 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Loading from '@presentational/Loading';
 import SelectBoolean from '@selects/SelectBoolean';
-import React, { FC, memo, useCallback, useEffect, useState } from 'react';
+import React, { FC, memo, SetStateAction, useCallback, useEffect, useState } from 'react';
 
 interface DisabledCommandSettingsProps {
 	commands: FlattenedCommand[];
+	setCommands: (value: SetStateAction<FlattenedCommand[]>) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -63,7 +65,7 @@ const useStyles = makeStyles((theme: Theme) =>
  */
 export const parseCommandDescription = (description: string) => description.replace(/<:(\w{2,32}):[0-9]{18}>/gi, '$1');
 
-const DisabledCommandSettings: FC<DisabledCommandSettingsProps> = ({ commands }) => {
+const DisabledCommandSettings: FC<DisabledCommandSettingsProps> = ({ commands, setCommands }) => {
 	const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 	const classes = useStyles();
 	const [expanded, setExpanded] = useState<string | false>(false);
@@ -100,6 +102,7 @@ const DisabledCommandSettings: FC<DisabledCommandSettingsProps> = ({ commands })
 	return (
 		<>
 			<Loading loading={loading} />
+			<RefreshCommandsButton setCommands={setCommands} />
 			<Section title="Commands">
 				<Typography variant="subtitle2" color="textPrimary">
 					On this page you can disable commands on your server

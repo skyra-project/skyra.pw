@@ -1,5 +1,6 @@
 import type { FlattenedCommand } from '@config/types/ApiData';
 import GeneralPage from '@layout/General';
+import RefreshCommandsButton from '@layout/RefreshCommandsButton';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -82,6 +83,7 @@ const CommandsPage: FC = () => {
 	return (
 		<>
 			<Loading loading={loading} />
+			<RefreshCommandsButton setCommands={setCommands} />
 			<GeneralPage>
 				<Container>
 					<UiSearchBar

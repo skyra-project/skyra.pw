@@ -100,7 +100,7 @@ const GuildSettingsPage: NextPage = () => {
 								<CustomCommandSettings />
 							</Case>
 							<Case condition={joinedPath === GuildRoutes.DisabledCommands}>
-								<DisabledCommandSettings commands={commands} />
+								<DisabledCommandSettings setCommands={setCommands} commands={commands} />
 							</Case>
 							<Case condition={joinedPath === GuildRoutes.Events}>
 								<EventSettings />
