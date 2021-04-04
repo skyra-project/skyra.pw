@@ -163,8 +163,8 @@ export interface GuildSettings {
 	starboardSelfStar: boolean;
 	stickyRoles: StickyRole[];
 	suggestionsChannel: string | null;
-	suggestionsEmojisDownvote: string;
-	suggestionsEmojisUpvote: string;
+	suggestionsEmojisDownVote: string;
+	suggestionsEmojisUpVote: string;
 	suggestionsOnActionDm: boolean;
 	suggestionsOnActionHideAuthor: boolean;
 	suggestionsOnActionRepost: boolean;

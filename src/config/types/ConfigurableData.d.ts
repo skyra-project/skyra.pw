@@ -7,7 +7,7 @@ export namespace Suggestions {
 
 	export interface Emoji {
 		title: string;
-		key: `suggestionsEmojis${'Downvote' | 'Upvote'}`;
+		key: `suggestionsEmojis${'DownVote' | 'UpVote'}`;
 		description: string;
 		defaultName: string;
 		defaultImage: `https://cdn.discordapp.com/emojis/${string}.${'gif' | 'png'}`;

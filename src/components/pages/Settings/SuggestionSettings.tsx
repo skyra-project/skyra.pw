@@ -106,38 +106,44 @@ const SuggestionSettings: FC = () => {
 						xl: 4
 					}}
 				>
-					{ConfigurableEmojis.map(({ title, description, key, defaultImage, defaultName, defaultId }, index) => (
-						<SelectEmoji
-							key={index}
-							tooltipTitle={description}
-							value={tagToId(guildSettings[key])}
-							defaultImage={defaultImage}
-							defaultName={defaultName}
-							defaultId={defaultId}
-							onReset={() => handleResetKey(guildSettingsChanges, setGuildSettingsChanges, key)}
-							onChange={(emojiID: typeof guildSettings[typeof key] | null) => {
-								if (emojiID) {
-									const emojiData = findEmoji(emojiID);
-									return setGuildSettingsChanges({
-										[key]: idToTag(emojiID, emojiData.name, emojiData.animated)
-									});
-								}
+					{ConfigurableEmojis.map(({ title, description, key, defaultImage, defaultName, defaultId }, index) => {
+						console.group();
+						console.log(guildSettings);
+						console.log(key);
+						console.groupEnd();
+						return (
+							<SelectEmoji
+								key={index}
+								tooltipTitle={description}
+								value={tagToId(guildSettings[key])}
+								defaultImage={defaultImage}
+								defaultName={defaultName}
+								defaultId={defaultId}
+								onReset={() => handleResetKey(guildSettingsChanges, setGuildSettingsChanges, key)}
+								onChange={(emojiID: typeof guildSettings[typeof key] | null) => {
+									if (emojiID) {
+										const emojiData = findEmoji(emojiID);
+										return setGuildSettingsChanges({
+											[key]: idToTag(emojiID, emojiData.name, emojiData.animated)
+										});
+									}
 
-								return setGuildSettingsChanges({
-									[key]: idToTag(defaultId, defaultName, false)
-								});
-							}}
-							guild={guildData}
-							label={title}
-							ButtonProps={{
-								fullWidth: true,
-								classes: {
-									root: classes.button,
-									label: classes.buttonText
-								}
-							}}
-						/>
-					))}
+									return setGuildSettingsChanges({
+										[key]: idToTag(defaultId, defaultName, false)
+									});
+								}}
+								guild={guildData}
+								label={title}
+								ButtonProps={{
+									fullWidth: true,
+									classes: {
+										root: classes.button,
+										label: classes.buttonText
+									}
+								}}
+							/>
+						);
+					})}
 				</SimpleGrid>
 			</Section>
 		</>
