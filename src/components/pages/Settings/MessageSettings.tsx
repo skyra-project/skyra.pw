@@ -3,7 +3,6 @@ import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import SimpleGrid from '@mui/SimpleGrid';
 import Tooltip from '@mui/Tooltip';
@@ -12,24 +11,7 @@ import SelectChannels from '@selects/SelectChannels';
 import { handleResetKey } from '@utils/util';
 import React, { FC, memo, useMemo } from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		sectionHeader: {
-			display: 'flex',
-			alignContent: 'center',
-			alignItems: 'center'
-		},
-		primaryItemText: {
-			fontWeight: theme.typography.fontWeightBold
-		},
-		secondaryItemText: {
-			color: theme.palette.primary.contrastText
-		}
-	})
-);
-
 const MessageSettings: FC = () => {
-	const classes = useStyles();
 	const { guildData } = useGuildDataContext();
 	const { guildSettings } = useGuildSettingsContext();
 	const { guildSettingsChanges, setGuildSettingsChanges } = useGuildSettingsChangesContext();
@@ -53,13 +35,7 @@ const MessageSettings: FC = () => {
 				</SimpleGrid>
 			</Section>
 
-			<Section
-				title="Messages I can send"
-				disableTypography
-				titleProps={{
-					className: classes.sectionHeader
-				}}
-			>
+			<Section title="Messages I can send">
 				<SimpleGrid direction="row" gridItemProps={{ xs: 12 }}>
 					{configurableMessages.map(({ key, name, placeholder, tooltipText }, index) => (
 						<Tooltip title={tooltipText} placement="top-start" key={index}>
