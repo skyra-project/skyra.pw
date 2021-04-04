@@ -4,7 +4,6 @@ import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import ScrollToTop from '@routing/ScrollToTop';
 import clsx from 'clsx';
 import React from 'react';
 
@@ -67,7 +66,6 @@ const PrivacyPolicy = () => {
 
 	return (
 		<>
-			<ScrollToTop />
 			<GeneralPage>
 				<Container maxWidth="lg">
 					<Typography id="skyra-privacy-policy" variant="h1" align="center" classes={{ root: classes.privacyPolicyHeader }}>

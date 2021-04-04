@@ -6,7 +6,6 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import UiSearchBar from '@mui/UiSearchBar';
 import Category from '@presentational/CommandsPage/Category';
 import Loading from '@presentational/Loading';
-import ScrollToTop from '@routing/ScrollToTop';
 import { ExpirableLocalStorageStructure, LocalStorageKeys } from '@utils/constants';
 import { Time } from '@utils/skyraUtils';
 import { useWindowSize } from '@utils/useWindowSize';
@@ -83,7 +82,6 @@ const CommandsPage: FC = () => {
 	return (
 		<>
 			<Loading loading={loading} />
-			<ScrollToTop />
 			<GeneralPage>
 				<Container>
 					<UiSearchBar

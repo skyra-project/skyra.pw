@@ -5,7 +5,6 @@ import GeneralPage from '@layout/General';
 import { Box, Container } from '@material-ui/core';
 import { FilteredGuildCards } from '@presentational/GuildCard';
 import HomePageSection from '@presentational/HomePageSection';
-import ScrollToTop from '@routing/ScrollToTop';
 import React, { FC } from 'react';
 
 const HomePage: FC = () => {
@@ -14,7 +13,6 @@ const HomePage: FC = () => {
 
 	return (
 		<>
-			<ScrollToTop />
 			<GeneralPage>
 				{authenticated && (
 					<Container>

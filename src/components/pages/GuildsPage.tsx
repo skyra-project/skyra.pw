@@ -7,7 +7,6 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import { FilteredGuildCards } from '@presentational/GuildCard';
-import ScrollToTop from '@routing/ScrollToTop';
 import type { NextPage } from 'next';
 import React from 'react';
 
@@ -43,7 +42,6 @@ const GuildsPage: NextPage = () => {
 
 	return (
 		<>
-			<ScrollToTop />
 			<GeneralPage>
 				<Container classes={{ root: classes.container }}>
 					<Box display="flex" flexWrap="wrap" flexDirection="row" justifyContent="center" alignItems="center">
