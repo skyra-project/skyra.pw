@@ -43,7 +43,6 @@ export interface GuildSettings {
 	eventsMessageDelete: boolean;
 	eventsMessageEdit: boolean;
 	eventsTwemojiReactions: boolean;
-	id: string;
 	language: string;
 	messagesAnnouncementEmbed: boolean;
 	messagesAutoDeleteIgnoredAll: boolean;
