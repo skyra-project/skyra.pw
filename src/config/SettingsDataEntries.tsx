@@ -284,32 +284,82 @@ export const ConfigurableChannels: Channels.Channel[] = [
 ];
 
 export const ConfigurableLoggingChannels: Channels.Channel[] = [
-	{ name: 'Message Logs', description: 'The channel for (non-NSFW) message logs', key: 'channelsMessageLogs' },
+	{ name: 'Message Logs', description: 'The channel for (non-NSFW) message logs', key: 'channelsLogsMessage' },
 	{
 		name: 'Member Logs',
 		description: 'The channel for member logs, once enabled, I will post all member related events there.',
-		key: 'channelsMemberLogs'
+		key: 'channelsLogsMember'
 	},
 	{
 		name: 'Moderation Logs',
 		description: 'The channel for moderation logs, once enabled, I will post all my moderation cases there.',
-		key: 'channelsModerationLogs'
+		key: 'channelsLogsModeration'
 	},
 	{
 		name: 'NSFW Logs',
 		description: 'The channel for NSFW message logs, same requirement as normal message logs, but will only send NSFW messages.',
-		key: 'channelsNsfwMessageLogs'
+		key: 'channelsLogsNsfwMessage'
 	},
-	{ name: 'Image Logs', description: 'The channel I will use to re-upload all images I see.', key: 'channelsImageLogs' },
+	{ name: 'Image Logs', description: 'The channel I will use to re-upload all images I see.', key: 'channelsLogsImage' },
 	{
 		name: 'Prune Logs',
 		description: 'The channel for prune logs, same requirement as normal message logs, but will only send prune messages.',
-		key: 'channelsPruneLogs'
+		key: 'channelsLogsPrune'
 	},
 	{
 		name: 'Reaction Logs',
 		description: 'The channel for the reaction logs, same requirement as normal message logs, but will only send message reactions',
-		key: 'channelsReactionLogs'
+		key: 'channelsLogsReaction'
+	},
+	{
+		name: 'Channel Create Logs',
+		description: "The channel for channel create logs, if set, I will notify the channel's creation.",
+		key: 'channelsLogsChannelCreate'
+	},
+	{
+		name: 'Channel Update Logs',
+		description: 'The channel for channel update logs, if set, I will notify update in the channels and their changes.',
+		key: 'channelsLogsChannelUpdate'
+	},
+	{
+		name: 'Channel Delete Logs',
+		description: 'The channel for channel create logs, if set, I will notify when a channel is deleted.',
+		key: 'channelsLogsChannelDelete'
+	},
+	{
+		name: 'Emoji Create Logs',
+		description: "The channel for emoji create logs, if set, I will notify the emoji's creation.",
+		key: 'channelsLogsEmojiCreate'
+	},
+	{
+		name: 'Emoji Update Logs',
+		description: 'The channel for emoji update logs, if set, I will notify any update in the emojis and their changes.',
+		key: 'channelsLogsEmojiUpdate'
+	},
+	{
+		name: 'Emoji Delete Logs',
+		description: 'The channel for emoji create logs, if set, I will notify when a emoji is deleted.',
+		key: 'channelsLogsEmojiDelete'
+	},
+	{
+		name: 'Role Create Logs',
+		description: "The channel for role create logs, if set, I will notify the role's creation.",
+		key: 'channelsLogsRoleCreate'
+	},
+	{
+		name: 'Role Update Logs',
+		description: 'The channel for role update logs, if set, I will notify any update in the roles and their changes.',
+		key: 'channelsLogsRoleUpdate'
+	},
+	{
+		name: 'Role Delete Logs',
+		description: 'The channel for role create logs, if set, I will notify when a role is deleted.',
+		key: 'channelsLogsRoleDelete'
+	},
+	{
+		name: 'Server Update Logs',
+		description: 'The channel for server update logs, if set, I will notify any update in the server and its changes.',
+		key: 'channelsLogsServerUpdate'
 	}
 ];
 

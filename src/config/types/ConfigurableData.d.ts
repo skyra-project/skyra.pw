@@ -108,18 +108,26 @@ export namespace CustomCommands {
 export namespace Channels {
 	export interface Channel {
 		name: string;
-		key: `channels${
-			| 'Announcements'
-			| 'Greeting'
-			| 'Farewell'
-			| 'MemberLogs'
-			| 'MessageLogs'
-			| 'ModerationLogs'
-			| 'NsfwMessageLogs'
-			| 'ImageLogs'
-			| 'PruneLogs'
-			| 'ReactionLogs'
-			| 'Spam'}`;
+		key:
+			| `channels${'Announcements' | 'Greeting' | 'Farewell' | 'Spam'}`
+			| `channelsLogs${
+					| 'ChannelCreate'
+					| 'ChannelDelete'
+					| 'ChannelUpdate'
+					| 'EmojiCreate'
+					| 'EmojiDelete'
+					| 'EmojiUpdate'
+					| 'Image'
+					| 'Member'
+					| 'Message'
+					| 'Moderation'
+					| 'NsfwMessage'
+					| 'Prune'
+					| 'Reaction'
+					| 'RoleCreate'
+					| 'RoleDelete'
+					| 'RoleUpdate'
+					| 'ServerUpdate'}`;
 		description: string;
 	}
 
