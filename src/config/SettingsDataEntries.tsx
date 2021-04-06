@@ -12,7 +12,7 @@ export const ConfigurableSuggestionActions: Suggestions.OnAction[] = [
 	},
 	{
 		title: 'Repost',
-		key: 'suggestionsOnActionRepost',
+		key: 'suggestionsOnActionRePost',
 		description:
 			"If this setting is enabled, Skyra will repost the suggestion's message every time it is updated. If it is disabled, it will edit the original message."
 	},
@@ -284,32 +284,86 @@ export const ConfigurableChannels: Channels.Channel[] = [
 ];
 
 export const ConfigurableLoggingChannels: Channels.Channel[] = [
-	{ name: 'Message Logs', description: 'The channel for (non-NSFW) message logs', key: 'channelsMessageLogs' },
+	{ name: 'Message Logs', description: 'The channel for (non-NSFW) message logs', key: 'channelsLogsMessage' },
 	{
 		name: 'Member Logs',
 		description: 'The channel for member logs, once enabled, I will post all member related events there.',
-		key: 'channelsMemberLogs'
+		key: 'channelsLogsMember'
 	},
 	{
 		name: 'Moderation Logs',
 		description: 'The channel for moderation logs, once enabled, I will post all my moderation cases there.',
-		key: 'channelsModerationLogs'
+		key: 'channelsLogsModeration'
 	},
 	{
 		name: 'NSFW Logs',
 		description: 'The channel for NSFW message logs, same requirement as normal message logs, but will only send NSFW messages.',
-		key: 'channelsNsfwMessageLogs'
+		key: 'channelsLogsNsfwMessage'
 	},
-	{ name: 'Image Logs', description: 'The channel I will use to re-upload all images I see.', key: 'channelsImageLogs' },
+	{ name: 'Image Logs', description: 'The channel I will use to re-upload all images I see.', key: 'channelsLogsImage' },
 	{
 		name: 'Prune Logs',
 		description: 'The channel for prune logs, same requirement as normal message logs, but will only send prune messages.',
-		key: 'channelsPruneLogs'
+		key: 'channelsLogsPrune'
 	},
 	{
 		name: 'Reaction Logs',
 		description: 'The channel for the reaction logs, same requirement as normal message logs, but will only send message reactions',
-		key: 'channelsReactionLogs'
+		key: 'channelsLogsReaction'
+	},
+	{
+		name: 'Channel Create Logs',
+		description: 'The channel for channel creation logs, if set, I will send a message when another channel is created.',
+		key: 'channelsLogsChannelCreate'
+	},
+	{
+		name: 'Channel Update Logs',
+		description:
+			'The channel for channel update logs, if set, I will send a message to this channel when any channel (including this one) gets updated in any way. This message will contain the changes made to the channel.',
+		key: 'channelsLogsChannelUpdate'
+	},
+	{
+		name: 'Channel Delete Logs',
+		description: 'The channel for channel deletion logs, if set, I will send a message to this channel when another channel is deleted.',
+		key: 'channelsLogsChannelDelete'
+	},
+	{
+		name: 'Emoji Create Logs',
+		description: 'The channel for emoji creation logs, if set, I will send a message when an emoji has been created.',
+		key: 'channelsLogsEmojiCreate'
+	},
+	{
+		name: 'Emoji Update Logs',
+		description:
+			'The channel for emoji update logs, if set, I send a message when an emoji is updated in any way. This message will contain the changes made to the emoji.',
+		key: 'channelsLogsEmojiUpdate'
+	},
+	{
+		name: 'Emoji Delete Logs',
+		description: 'The channel for emoji deletion logs, if set, I will send a message when an emoji is deleted.',
+		key: 'channelsLogsEmojiDelete'
+	},
+	{
+		name: 'Role Create Logs',
+		description: 'The channel for role creation logs, if set, I send a message when a new role is craeted.',
+		key: 'channelsLogsRoleCreate'
+	},
+	{
+		name: 'Role Update Logs',
+		description:
+			'The channel for role update logs, if set, I send a message when a role is updated in any way. This message will contain the changes made to the role.',
+		key: 'channelsLogsRoleUpdate'
+	},
+	{
+		name: 'Role Delete Logs',
+		description: 'The channel for role deletion logs, if set, I send a message when a role is deleted.',
+		key: 'channelsLogsRoleDelete'
+	},
+	{
+		name: 'Server Update Logs',
+		description:
+			'The channel for server update logs, if set, I send a message when the server is updated in any way. This message will contain the changes made to the server.',
+		key: 'channelsLogsServerUpdate'
 	}
 ];
 
