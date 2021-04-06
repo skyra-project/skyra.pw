@@ -313,12 +313,13 @@ export const ConfigurableLoggingChannels: Channels.Channel[] = [
 	},
 	{
 		name: 'Channel Create Logs',
-		description: "The channel for channel creation logs, if set, I will send a message when another channel is created.",
+		description: 'The channel for channel creation logs, if set, I will send a message when another channel is created.',
 		key: 'channelsLogsChannelCreate'
 	},
 	{
 		name: 'Channel Update Logs',
-		description: 'The channel for channel update logs, if set, I will send a message to this channel when any channel (including this one) gets updated in any way. This message will contain the changes made to the channel.',
+		description:
+			'The channel for channel update logs, if set, I will send a message to this channel when any channel (including this one) gets updated in any way. This message will contain the changes made to the channel.',
 		key: 'channelsLogsChannelUpdate'
 	},
 	{
@@ -328,12 +329,13 @@ export const ConfigurableLoggingChannels: Channels.Channel[] = [
 	},
 	{
 		name: 'Emoji Create Logs',
-		description: "The channel for emoji creation logs, if set, I will send a message when an emoji has been created.",
+		description: 'The channel for emoji creation logs, if set, I will send a message when an emoji has been created.',
 		key: 'channelsLogsEmojiCreate'
 	},
 	{
 		name: 'Emoji Update Logs',
-		description: 'The channel for emoji update logs, if set, I send a message when an emoji is updated in any way. This message will contain the changes made to the emoji.',
+		description:
+			'The channel for emoji update logs, if set, I send a message when an emoji is updated in any way. This message will contain the changes made to the emoji.',
 		key: 'channelsLogsEmojiUpdate'
 	},
 	{
@@ -343,12 +345,13 @@ export const ConfigurableLoggingChannels: Channels.Channel[] = [
 	},
 	{
 		name: 'Role Create Logs',
-		description: "The channel for role creation logs, if set, I send a message when a new role is craeted.",
+		description: 'The channel for role creation logs, if set, I send a message when a new role is craeted.',
 		key: 'channelsLogsRoleCreate'
 	},
 	{
 		name: 'Role Update Logs',
-		description: 'The channel for role update logs, if set, I send a message when a role is updated in any way. This message will contain the changes made to the role.',
+		description:
+			'The channel for role update logs, if set, I send a message when a role is updated in any way. This message will contain the changes made to the role.',
 		key: 'channelsLogsRoleUpdate'
 	},
 	{
@@ -358,7 +361,8 @@ export const ConfigurableLoggingChannels: Channels.Channel[] = [
 	},
 	{
 		name: 'Server Update Logs',
-		description: 'The channel for server update logs, if set, I send a message when the server is updated in any way. This message will contain the changes made to the server.',
+		description:
+			'The channel for server update logs, if set, I send a message when the server is updated in any way. This message will contain the changes made to the server.',
 		key: 'channelsLogsServerUpdate'
 	}
 ];
