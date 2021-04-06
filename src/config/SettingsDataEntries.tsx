@@ -313,52 +313,52 @@ export const ConfigurableLoggingChannels: Channels.Channel[] = [
 	},
 	{
 		name: 'Channel Create Logs',
-		description: "The channel for channel create logs, if set, I will notify the channel's creation.",
+		description: "The channel for channel creation logs, if set, I will send a message when another channel is created.",
 		key: 'channelsLogsChannelCreate'
 	},
 	{
 		name: 'Channel Update Logs',
-		description: 'The channel for channel update logs, if set, I will notify update in the channels and their changes.',
+		description: 'The channel for channel update logs, if set, I will send a message to this channel when any channel (including this one) gets updated in any way. This message will contain the changes made to the channel.',
 		key: 'channelsLogsChannelUpdate'
 	},
 	{
 		name: 'Channel Delete Logs',
-		description: 'The channel for channel create logs, if set, I will notify when a channel is deleted.',
+		description: 'The channel for channel deletion logs, if set, I will send a message to this channel when another channel is deleted.',
 		key: 'channelsLogsChannelDelete'
 	},
 	{
 		name: 'Emoji Create Logs',
-		description: "The channel for emoji create logs, if set, I will notify the emoji's creation.",
+		description: "The channel for emoji creation logs, if set, I will send a message when an emoji has been created.",
 		key: 'channelsLogsEmojiCreate'
 	},
 	{
 		name: 'Emoji Update Logs',
-		description: 'The channel for emoji update logs, if set, I will notify any update in the emojis and their changes.',
+		description: 'The channel for emoji update logs, if set, I send a message when an emoji is updated in any way. This message will contain the changes made to the emoji.',
 		key: 'channelsLogsEmojiUpdate'
 	},
 	{
 		name: 'Emoji Delete Logs',
-		description: 'The channel for emoji create logs, if set, I will notify when a emoji is deleted.',
+		description: 'The channel for emoji deletion logs, if set, I will send a message when an emoji is deleted.',
 		key: 'channelsLogsEmojiDelete'
 	},
 	{
 		name: 'Role Create Logs',
-		description: "The channel for role create logs, if set, I will notify the role's creation.",
+		description: "The channel for role creation logs, if set, I send a message when a new role is craeted.",
 		key: 'channelsLogsRoleCreate'
 	},
 	{
 		name: 'Role Update Logs',
-		description: 'The channel for role update logs, if set, I will notify any update in the roles and their changes.',
+		description: 'The channel for role update logs, if set, I send a message when a role is updated in any way. This message will contain the changes made to the role.',
 		key: 'channelsLogsRoleUpdate'
 	},
 	{
 		name: 'Role Delete Logs',
-		description: 'The channel for role create logs, if set, I will notify when a role is deleted.',
+		description: 'The channel for role deletion logs, if set, I send a message when a role is deleted.',
 		key: 'channelsLogsRoleDelete'
 	},
 	{
 		name: 'Server Update Logs',
-		description: 'The channel for server update logs, if set, I will notify any update in the server and its changes.',
+		description: 'The channel for server update logs, if set, I send a message when the server is updated in any way. This message will contain the changes made to the server.',
 		key: 'channelsLogsServerUpdate'
 	}
 ];
