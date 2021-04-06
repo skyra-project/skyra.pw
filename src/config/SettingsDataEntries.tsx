@@ -12,7 +12,7 @@ export const ConfigurableSuggestionActions: Suggestions.OnAction[] = [
 	},
 	{
 		title: 'Repost',
-		key: 'suggestionsOnActionRepost',
+		key: 'suggestionsOnActionRePost',
 		description:
 			"If this setting is enabled, Skyra will repost the suggestion's message every time it is updated. If it is disabled, it will edit the original message."
 	},

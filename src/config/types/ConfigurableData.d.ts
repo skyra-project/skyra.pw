@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 export namespace Suggestions {
 	export interface OnAction {
 		title: string;
-		key: `suggestionsOnAction${'Dm' | 'Repost' | 'HideAuthor'}`;
+		key: `suggestionsOnAction${'Dm' | 'RePost' | 'HideAuthor'}`;
 		description: string;
 	}
 
