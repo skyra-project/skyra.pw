@@ -25,10 +25,13 @@ import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
+import ClearIcon from '@material-ui/icons/Clear';
 import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import ShuffleIcon from '@material-ui/icons/Shuffle';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import LazyAvatar from '@mui/LazyAvatar';
@@ -140,6 +143,27 @@ const MusicPage: FC<MusicPageProps> = ({ guildId }) => {
 			data: {
 				guild_id: guildId,
 				music_action: MusicActions.ResumePlaying
+			}
+		});
+	};
+
+	const shuffleQueue = () => {
+		ws!.sendJSON({
+			action: ClientActions.MusicQueueUpdate,
+			data: {
+				guild_id: guildId,
+				music_action: MusicActions.ShuffleTracks
+			}
+		});
+	};
+
+	const removeSong = (index: number) => {
+		ws!.sendJSON({
+			action: ClientActions.MusicQueueUpdate,
+			data: {
+				guild_id: guildId,
+				music_action: MusicActions.DeleteSong,
+				track_position: index
 			}
 		});
 	};
@@ -291,12 +315,12 @@ const MusicPage: FC<MusicPageProps> = ({ guildId }) => {
 											</IconButton>
 											<If condition={status === MusicStatus.PLAYING}>
 												<Then>
-													<IconButton onClick={pauseSong}>
+													<IconButton onClick={pauseSong} aria-label="pause">
 														<PauseIcon className={classes.cardPlayPauseIcon} />
 													</IconButton>
 												</Then>
 												<Else>
-													<IconButton onClick={resumeSong}>
+													<IconButton onClick={resumeSong} aria-label="play">
 														<PlayArrowIcon className={classes.cardPlayPauseIcon} />
 													</IconButton>
 												</Else>
@@ -304,6 +328,10 @@ const MusicPage: FC<MusicPageProps> = ({ guildId }) => {
 
 											<IconButton onClick={skipSong} aria-label={theme.direction === 'rtl' ? 'previous' : 'next'}>
 												{theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
+											</IconButton>
+
+											<IconButton onClick={shuffleQueue}>
+												<ShuffleIcon className={classes.cardPlayPauseIcon} />
 											</IconButton>
 										</When>
 									</Box>
@@ -334,22 +362,29 @@ const MusicPage: FC<MusicPageProps> = ({ guildId }) => {
 							overscan={2}
 							components={VirtuosoComponents}
 							itemContent={(index) => (
-								<Link href={queue[index].info.uri} className={classes.link}>
-									<ListItemIcon>
-										<If condition={queue[index].info.uri.includes('youtube')}>
-											<Then>
-												<LazyAvatar
-													imgProps={{ height: 360, width: 480 }}
-													src={`https://img.youtube.com/vi/${queue[index].info.identifier}/hqdefault.jpg`}
-												/>
-											</Then>
-											<Else>
-												<LazyAvatar>{getAcronym(queue[index].info.title)}</LazyAvatar>
-											</Else>
-										</If>
-									</ListItemIcon>
-									<ListItemText primary={queue[index].info.title} secondary={queue[index].info.author} />
-								</Link>
+								<>
+									<Link href={queue[index].info.uri} className={classes.link}>
+										<ListItemIcon>
+											<If condition={queue[index].info.uri.includes('youtube')}>
+												<Then>
+													<LazyAvatar
+														imgProps={{ height: 360, width: 480 }}
+														src={`https://img.youtube.com/vi/${queue[index].info.identifier}/hqdefault.jpg`}
+													/>
+												</Then>
+												<Else>
+													<LazyAvatar>{getAcronym(queue[index].info.title)}</LazyAvatar>
+												</Else>
+											</If>
+										</ListItemIcon>
+										<ListItemText primary={queue[index].info.title} secondary={queue[index].info.author} />
+									</Link>
+									<ListItemSecondaryAction>
+										<IconButton edge="end" aria-label="remove song" onClick={() => removeSong(index)}>
+											<ClearIcon />
+										</IconButton>
+									</ListItemSecondaryAction>
+								</>
 							)}
 						/>
 					</When>
