@@ -111,7 +111,13 @@ export enum ClientActions {
 }
 
 export enum MusicActions {
+	Clear = 'CLEAR',
+	ClearTracks = 'CLEAR_TRACKS',
+	ShuffleTracks = 'SHUFFLE_TRACKS',
+	SetVolume = 'SET_VOLUME',
 	SkipSong = 'SKIP_SONG',
+	AddSong = 'ADD_SONG',
+	DeleteSong = 'DELETE_SONG',
 	PauseSong = 'PAUSE_SONG',
 	ResumePlaying = 'RESUME_PLAYING'
 }

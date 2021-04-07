@@ -25,13 +25,20 @@ import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
+import ClearIcon from '@material-ui/icons/Clear';
+import DeleteSweepIcon from '@material-ui/icons/DeleteSweep';
 import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import ShuffleIcon from '@material-ui/icons/Shuffle';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
+import VolumeDownIcon from '@material-ui/icons/VolumeDown';
+import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import LazyAvatar from '@mui/LazyAvatar';
+import SimpleGrid from '@mui/SimpleGrid';
 import Link from '@routing/Link';
 import type { Track, TrackInfo } from '@skyra/audio';
 import { WS_URL } from '@utils/constants';
@@ -77,6 +84,11 @@ const useStyles = makeStyles((theme: Theme) =>
 			height: 38,
 			width: 38
 		},
+		cardDeleteIcon: {
+			height: 38,
+			width: 38,
+			color: theme.palette.error.main
+		},
 		virtualizedRoot: {
 			margin: theme.spacing(1)
 		},
@@ -114,6 +126,17 @@ const MusicPage: FC<MusicPageProps> = ({ guildId }) => {
 		}
 	};
 
+	const changeVolume = (volume: number) => {
+		ws!.sendJSON({
+			action: ClientActions.MusicQueueUpdate,
+			data: {
+				guild_id: guildId,
+				music_action: MusicActions.SetVolume,
+				volume
+			}
+		});
+	};
+
 	const skipSong = () => {
 		ws!.sendJSON({
 			action: ClientActions.MusicQueueUpdate,
@@ -140,6 +163,37 @@ const MusicPage: FC<MusicPageProps> = ({ guildId }) => {
 			data: {
 				guild_id: guildId,
 				music_action: MusicActions.ResumePlaying
+			}
+		});
+	};
+
+	const clearQueue = () => {
+		ws!.sendJSON({
+			action: ClientActions.MusicQueueUpdate,
+			data: {
+				guild_id: guildId,
+				music_action: MusicActions.ClearTracks
+			}
+		});
+	};
+
+	const shuffleQueue = () => {
+		ws!.sendJSON({
+			action: ClientActions.MusicQueueUpdate,
+			data: {
+				guild_id: guildId,
+				music_action: MusicActions.ShuffleTracks
+			}
+		});
+	};
+
+	const removeSong = (index: number) => {
+		ws!.sendJSON({
+			action: ClientActions.MusicQueueUpdate,
+			data: {
+				guild_id: guildId,
+				music_action: MusicActions.DeleteSong,
+				track_position: index
 			}
 		});
 	};
@@ -286,25 +340,65 @@ const MusicPage: FC<MusicPageProps> = ({ guildId }) => {
 											</Typography>
 										</CardContent>
 										<When condition={authenticated}>
-											<IconButton disabled aria-label={theme.direction === 'rtl' ? 'next' : 'previous'}>
-												{theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
-											</IconButton>
-											<If condition={status === MusicStatus.PLAYING}>
-												<Then>
-													<IconButton onClick={pauseSong}>
-														<PauseIcon className={classes.cardPlayPauseIcon} />
-													</IconButton>
-												</Then>
-												<Else>
-													<IconButton onClick={resumeSong}>
-														<PlayArrowIcon className={classes.cardPlayPauseIcon} />
-													</IconButton>
-												</Else>
-											</If>
+											<SimpleGrid
+												direction="row"
+												justify="center"
+												alignItems="center"
+												gridItemProps={{
+													xs: 4,
+													sm: 4,
+													md: true,
+													lg: true,
+													xl: true
+												}}
+											>
+												<IconButton disabled aria-label={theme.direction === 'rtl' ? 'next' : 'previous'}>
+													{theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
+												</IconButton>
+												<If condition={status === MusicStatus.PLAYING}>
+													<Then>
+														<IconButton onClick={pauseSong} aria-label="pause">
+															<PauseIcon className={classes.cardPlayPauseIcon} />
+														</IconButton>
+													</Then>
+													<Else>
+														<IconButton onClick={resumeSong} aria-label="play">
+															<PlayArrowIcon className={classes.cardPlayPauseIcon} />
+														</IconButton>
+													</Else>
+												</If>
 
-											<IconButton onClick={skipSong} aria-label={theme.direction === 'rtl' ? 'previous' : 'next'}>
-												{theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
-											</IconButton>
+												<IconButton onClick={skipSong} aria-label={theme.direction === 'rtl' ? 'previous' : 'next'}>
+													{theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
+												</IconButton>
+
+												<IconButton
+													disabled={volume <= 0}
+													aria-label="decrease volume"
+													onClick={() => changeVolume(Math.max(volume - 10, 0))}
+												>
+													<VolumeDownIcon className={classes.cardPlayPauseIcon} />
+												</IconButton>
+												<Typography color="textSecondary" data-premid="music-volume">
+													{volume}%
+												</Typography>
+
+												<IconButton
+													disabled={volume >= 300}
+													aria-label="increase volume"
+													onClick={() => changeVolume(Math.min(volume + 10, 300))}
+												>
+													<VolumeUpIcon className={classes.cardPlayPauseIcon} />
+												</IconButton>
+
+												<IconButton onClick={shuffleQueue}>
+													<ShuffleIcon className={classes.cardPlayPauseIcon} />
+												</IconButton>
+
+												<IconButton onClick={clearQueue}>
+													<DeleteSweepIcon className={classes.cardDeleteIcon} />
+												</IconButton>
+											</SimpleGrid>
 										</When>
 									</Box>
 									<Box className={classes.videoContainer}>
@@ -334,22 +428,29 @@ const MusicPage: FC<MusicPageProps> = ({ guildId }) => {
 							overscan={2}
 							components={VirtuosoComponents}
 							itemContent={(index) => (
-								<Link href={queue[index].info.uri} className={classes.link}>
-									<ListItemIcon>
-										<If condition={queue[index].info.uri.includes('youtube')}>
-											<Then>
-												<LazyAvatar
-													imgProps={{ height: 360, width: 480 }}
-													src={`https://img.youtube.com/vi/${queue[index].info.identifier}/hqdefault.jpg`}
-												/>
-											</Then>
-											<Else>
-												<LazyAvatar>{getAcronym(queue[index].info.title)}</LazyAvatar>
-											</Else>
-										</If>
-									</ListItemIcon>
-									<ListItemText primary={queue[index].info.title} secondary={queue[index].info.author} />
-								</Link>
+								<>
+									<Link href={queue[index].info.uri} className={classes.link}>
+										<ListItemIcon>
+											<If condition={queue[index].info.uri.includes('youtube')}>
+												<Then>
+													<LazyAvatar
+														imgProps={{ height: 360, width: 480 }}
+														src={`https://img.youtube.com/vi/${queue[index].info.identifier}/hqdefault.jpg`}
+													/>
+												</Then>
+												<Else>
+													<LazyAvatar>{getAcronym(queue[index].info.title)}</LazyAvatar>
+												</Else>
+											</If>
+										</ListItemIcon>
+										<ListItemText primary={queue[index].info.title} secondary={queue[index].info.author} />
+									</Link>
+									<ListItemSecondaryAction>
+										<IconButton edge="end" aria-label="remove song" onClick={() => removeSong(index)}>
+											<ClearIcon />
+										</IconButton>
+									</ListItemSecondaryAction>
+								</>
 							)}
 						/>
 					</When>
