@@ -76,8 +76,6 @@ export const FilteredGuildCards = (pack?: TransformedLoginData) =>
 	(pack?.transformedGuilds ?? [])
 		// Filter on manageable servers
 		.filter((g) => g.manageable)
-		// Sort by whether Skyra is in the server or not
-		.sort((gA, gB) => (gA.skyraIsIn === gB.skyraIsIn ? 0 : gA.skyraIsIn ? -1 : 1))
-		// Sort by name of the server
-		.sort((gA, gB) => gA.name.localeCompare(gB.name, 'en', { sensitivity: 'base' }))
+		// Sort by whether Skyra is in the server or not, or sort by the name of the server
+		.sort((gA, gB) => (gA.skyraIsIn === gB.skyraIsIn ? gA.name.localeCompare(gB.name, 'en', { sensitivity: 'base' }) : gA.skyraIsIn ? -1 : 1))
 		.map((g, index) => React.cloneElement(<GuildCard guild={g} key={index} />));
