@@ -59,7 +59,7 @@ jobs:
       - name: Run ESLint
         run: yarn lint --fix=false
 
-  Build:
+  Building:
     name: Compiling TypeScript
     runs-on: ubuntu-latest
     if: "!contains(needs.pre_ci.outputs.commit_message, '[skip ci]')"
