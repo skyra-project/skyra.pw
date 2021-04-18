@@ -50,7 +50,7 @@ jobs:
         with:
           node-version: 14
       - name: Restore NodeJS Cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v2.1.5
         with:
           path: node_modules
           key: ${{ runner.os }}-15-${{ hashFiles('**/yarn.lock') }}
@@ -72,12 +72,12 @@ jobs:
         with:
           node-version: 15
       - name: Restore NodeJS Cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v2.1.5
         with:
           path: node_modules
           key: ${{ runner.os }}-15-${{ hashFiles('**/yarn.lock') }}
       - name: Restore NextJS Cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v2.1.5
         with:
           path: ${{ github.workspace }}/src/.next/cache
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}
