@@ -1,0 +1,12 @@
+version: '2.4'
+
+services:
+  skyra.pw:
+    image: skyrabot/skyra.pw:latest
+    container_name: skyra.pw
+    restart: 'no'
+    tty: true
+    env_file:
+      - ./src/.env.production
+    ports:
+      - '8281:8281'

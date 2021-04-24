@@ -1,0 +1,11 @@
+{
+	"files.eol": "\n",
+	"typescript.tsdk": "node_modules\\typescript\\lib",
+	"css.validate": false,
+	"editor.quickSuggestions": {
+		"other": true,
+		"comments": false,
+		"strings": true
+	},
+	"tailwindCSS.validate": true
+}

@@ -1,0 +1,10 @@
+{
+	"recommendations": [
+		"bradlc.vscode-tailwindcss",
+		"coenraads.bracket-pair-colorizer-2",
+		"dbaeumer.vscode-eslint",
+		"esbenp.prettier-vscode",
+		"lacroixdavid1.vscode-format-context-menu",
+		"msjsdiag.debugger-for-chrome"
+	]
+}

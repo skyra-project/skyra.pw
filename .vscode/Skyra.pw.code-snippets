@@ -1,0 +1,34 @@
+{
+	"FunctionalComponent": {
+		"scope": "typescriptreact",
+		"prefix": "funcom",
+		"body": [
+			"import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';",
+			"import React, { FC, memo, useMemo, useState, useEffect } from 'react';",
+			"",
+			"const useStyles = makeStyles((theme: Theme) =>",
+			"\tcreateStyles({",
+			"",
+			"\t})",
+			");",
+			"",
+			"interface ${TM_FILENAME_BASE/(.{1})/${1:/upcase}/}Props {",
+			"",
+			"}",
+			"",
+            "const ${TM_FILENAME_BASE/(.{1})/${1:/upcase}/}: FC<${TM_FILENAME_BASE/(.{1})/${1:/upcase}/}Props> = (props) => {",
+            "\tconst classes = useStyles();",
+            "",
+            "\treturn (",
+            "\t\t<>",
+            "\t\t\t",
+            "\t\t</>",
+            "\t);",
+			"};",
+			"",
+            "export default ${TM_FILENAME_BASE/(.{1})/${1:/upcase}/};",
+            ""
+		],
+		"description": "Creates a functional component skeleton"
+	}
+}

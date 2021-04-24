@@ -1,0 +1,9 @@
+{
+	"extends": "./src/tsconfig.json",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"allowJs": true,
+		"checkJs": true
+	},
+	"include": ["scripts", "src", "postcss.config.js", "tailwind.config.js"]
+}
