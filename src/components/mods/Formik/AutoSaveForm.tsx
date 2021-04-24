@@ -1,14 +1,14 @@
 import { Time } from '@utils/skyraUtils';
 import { Form, Formik, FormikHelpers } from 'formik';
 import React, { PropsWithChildren } from 'react';
-import type { ObjectSchema } from 'yup';
+import type { ObjectShape, OptionalObjectSchema, TypeOfShape } from 'yup/lib/object';
 import AutoSave from './AutoSave';
 
-export interface AutoSavingFormProps<T extends Record<string, unknown>> {
+export interface AutoSavingFormProps<T extends ObjectShape> {
 	/** The initial values for this form */
 	initialValues: T;
 	/** The `yup` validation schema for this form */
-	validationSchema: ObjectSchema<T | undefined>;
+	validationSchema: OptionalObjectSchema<T, T, TypeOfShape<T>>;
 	/** The timeout in milliseconds between submits, @default 1000 */
 	submitDebounceMs?: number;
 	/** The onSubmit handler for this form */
@@ -16,7 +16,7 @@ export interface AutoSavingFormProps<T extends Record<string, unknown>> {
 	onSubmit(values: T, formikHelpers: FormikHelpers<T>): Promise<any> | void;
 }
 
-function AutoSavingForm<T extends Record<string, unknown>>({
+function AutoSavingForm<T extends ObjectShape>({
 	initialValues,
 	onSubmit,
 	validationSchema,

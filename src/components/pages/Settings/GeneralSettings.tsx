@@ -1,4 +1,3 @@
-import type { General } from '@config/types/ConfigurableData';
 import { useMobileContext } from '@contexts/MobileContext';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
@@ -26,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const validationSchema = object<General.Form>().shape<General.Form>({
+const validationSchema = object({
 	prefix: string().required('Setting a prefix is required').min(1, 'Prefix has a minimum length of 1').max(11, 'Prefix has a maximum length of 10')
 });
 
@@ -69,7 +68,7 @@ const GeneralSettings: FC<GeneralSettingsProps> = ({ languages }) => {
 					xl: 12
 				}}
 			>
-				<AutoSavingForm<General.Form>
+				<AutoSavingForm
 					validationSchema={validationSchema}
 					initialValues={{ prefix: guildSettings.prefix }}
 					onSubmit={(values, formikHelpers) => {

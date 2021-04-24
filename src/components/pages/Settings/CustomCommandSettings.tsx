@@ -63,7 +63,7 @@ const CustomCommandSettings = () => {
 	const { guildSettings } = useGuildSettingsContext();
 	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
-	const validationSchema = object<CustomCommands.Form>().shape<CustomCommands.Form>({
+	const validationSchema = object({
 		id: string()
 			.required('A tag must have a name')
 			.max(50, 'A tag name must be 50 or less characters long.')
