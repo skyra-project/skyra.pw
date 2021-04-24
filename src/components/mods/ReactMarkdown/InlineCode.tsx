@@ -2,6 +2,7 @@ import { Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import React, { forwardRef } from 'react';
+import type { CodeComponent } from 'react-markdown/src/ast-to-react';
 
 const useStyles = makeStyles(() =>
 	createStyles({
@@ -21,14 +22,18 @@ const useStyles = makeStyles(() =>
 	})
 );
 
-const InlineCode = forwardRef<HTMLSpanElement>(({ children }, ref) => {
+const InlineCode: CodeComponent = forwardRef<HTMLSpanElement, Parameters<CodeComponent>[0]>(({ inline, children }, ref) => {
 	const classes = useStyles();
 
-	return (
-		<Typography ref={ref} component="span" color="textPrimary" variant="body2" classes={{ root: clsx(classes.brokenWordText, classes.code) }}>
-			{children}
-		</Typography>
-	);
+	if (inline) {
+		return (
+			<Typography ref={ref} component="span" color="textPrimary" variant="body2" classes={{ root: clsx(classes.brokenWordText, classes.code) }}>
+				{children}
+			</Typography>
+		);
+	}
+
+	return <>{children}</>;
 });
 
 export default InlineCode;

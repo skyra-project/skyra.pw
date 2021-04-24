@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
-import ReactMarkdown from 'react-markdown/with-html';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import rehypeSanitize from 'rehype-sanitize';
 import gfm from 'remark-gfm';
 import Image from './Image';
 import InlineCode from './InlineCode';
@@ -15,16 +17,16 @@ interface GfmReactMarkdownProps {
 const GfmReactMarkdown: FC<GfmReactMarkdownProps> = ({ source }) => (
 	<ReactMarkdown
 		plugins={[gfm]}
-		renderers={{
-			link: Link,
-			linkReference: Link,
-			image: Image,
+		rehypePlugins={[rehypeRaw, rehypeSanitize]}
+		components={{
+			a: Link,
+			img: Image,
 			strong: Strong,
-			list: List,
-			listItem: ListItem,
-			inlineCode: InlineCode
+			ol: List,
+			ul: List,
+			li: ListItem,
+			code: InlineCode
 		}}
-		escapeHtml={false}
 	>
 		{source}
 	</ReactMarkdown>

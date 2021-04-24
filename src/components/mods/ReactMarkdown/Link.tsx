@@ -1,7 +1,9 @@
 import { Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import RouterLink from '@routing/Link';
+import { cast } from '@utils/util';
 import React, { forwardRef } from 'react';
+import type { NormalComponent } from 'react-markdown/src/ast-to-react';
 
 interface LinkProps {
 	href: string;
@@ -17,8 +19,9 @@ const useStyles = makeStyles(() =>
 
 const SkyraPwPathRegex = /<?https:\/\/skyra\.pw(?<path>\/[a-z]+)?>?/;
 
-const Link = forwardRef<HTMLAnchorElement, LinkProps>(({ href, children }, ref) => {
+const Link = forwardRef<HTMLAnchorElement, Parameters<NormalComponent>[0]>(({ children, ...props }, ref) => {
 	const classes = useStyles();
+	const { href } = cast<LinkProps>(props);
 
 	// If there is no href then this is actually referring to an optional argument so we parse it literally
 	if (!href) {
