@@ -3,6 +3,7 @@ version: '2.4'
 services:
   skyra.pw:
     image: skyrabot/skyra.pw:latest
+    build: .
     container_name: skyra.pw
     restart: 'no'
     tty: true
