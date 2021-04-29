@@ -11,7 +11,6 @@ export interface MenuItemLinkProps {
 	href: string;
 	/** Force the link to open in the same tab */
 	forceSameTab?: boolean;
-	menuItemDisabled?: boolean;
 }
 
 const useStyles = makeStyles(() =>
@@ -28,12 +27,12 @@ const useStyles = makeStyles(() =>
 	})
 );
 
-const MenuItemLink = forwardRef<HTMLAnchorElement, MenuItemLinkProps>(({ href, text, forceSameTab = false, menuItemDisabled = false, Icon }, ref) => {
+const MenuItemLink = forwardRef<HTMLAnchorElement, MenuItemLinkProps>(({ href, text, forceSameTab = false, Icon }, ref) => {
 	const classes = useStyles();
 
 	return (
 		<Link href={href} forceSameTab={forceSameTab} className={classes.menuLink} ref={ref}>
-			<MenuItem disabled={menuItemDisabled}>
+			<MenuItem>
 				<ListItemIcon>{Icon}</ListItemIcon>
 				<Typography variant="inherit">{text}</Typography>
 			</MenuItem>

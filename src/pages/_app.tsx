@@ -5,7 +5,8 @@ import { MobileContextProvider } from '@contexts/MobileContext';
 import { useMediaQuery } from '@material-ui/core';
 import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
-import CookieWarning from '@presentational/CookieConsent/WarningSnackbar';
+import { LocalStorageKeys } from '@utils/constants';
+import { clearState } from '@utils/util';
 import type { NextPage } from 'next';
 import { DefaultSeo } from 'next-seo';
 import type { AppProps } from 'next/app';
@@ -14,7 +15,6 @@ import Head from 'next/head';
 import NextNprogress from 'nextjs-progressbar';
 import React, { useEffect } from 'react';
 
-const CookieConsentProvider = dynamic(() => import('@contexts/CookieContext'));
 const DiscordPackProvider = dynamic(() => import('@contexts/DiscordPackContext'));
 const AuthenticatedProvider = dynamic(() => import('@contexts/AuthenticationContext'));
 
@@ -78,6 +78,9 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 				'font-size: 16px;'
 			);
 		}
+
+		// Clear the old cookie consent local storage key
+		clearState(LocalStorageKeys.HasCookieConsent);
 	}, []);
 
 	const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -110,13 +113,10 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 				<MobileContextProvider value={{ isMobile }}>
 					<AuthenticatedProvider>
 						<DiscordPackProvider>
-							<CookieConsentProvider>
-								<ScopedCssBaseline>
-									<Component {...pageProps} />
-									<NextNprogress color="#0A5699" startPosition={0.3} stopDelayMs={200} height={3} />
-									<CookieWarning />
-								</ScopedCssBaseline>
-							</CookieConsentProvider>
+							<ScopedCssBaseline>
+								<Component {...pageProps} />
+								<NextNprogress color="#0A5699" startPosition={0.3} stopDelayMs={200} height={3} />
+							</ScopedCssBaseline>
 						</DiscordPackProvider>
 					</AuthenticatedProvider>
 				</MobileContextProvider>

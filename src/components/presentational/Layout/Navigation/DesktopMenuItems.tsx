@@ -1,6 +1,4 @@
-import CookieIcon from '@assets/CookieIcon';
 import { useAuthenticated } from '@contexts/AuthenticationContext';
-import { setCookieConsent, useCookieConsent } from '@contexts/CookieContext';
 import UserMenu from '@layout/Navigation/UserMenu';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
@@ -8,8 +6,6 @@ import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import IconButton from '@material-ui/core/IconButton';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
@@ -59,8 +55,6 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 
 	const anchorRef = useRef<HTMLButtonElement>(null);
 	const [popperMenuIsOpen, setPopperMenuOpen] = useState(false);
-	const allowsCookies = useCookieConsent();
-	const writeAllowsCookies = setCookieConsent();
 	const router = useRouter();
 
 	const authenticated = useAuthenticated();
@@ -122,18 +116,7 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 			</When>
 
 			<When condition={!authenticated && !loading}>
-				<Tooltip
-					title={
-						allowsCookies
-							? 'Click to login and manage your servers'
-							: [
-									'Looks like do not allow use to save cookies',
-									'We use cookies for authentication.',
-									'Please enable cookies and this button will be enabled.'
-							  ].join(' ') // eslint-disable-line no-mixed-spaces-and-tabs
-					}
-					placement={allowsCookies ? 'bottom' : 'left'}
-				>
+				<Tooltip title="Click to login and manage your servers" placement="bottom">
 					<Box component="div">
 						<Button
 							color="primary"
@@ -141,7 +124,6 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 							classes={{ root: classes.transparentButton }}
 							onClick={navigate(oauthURL.toString(), true)}
 							startIcon={<LoginIcon />}
-							disabled={!allowsCookies}
 						>
 							<Typography variant="body2" color="textPrimary">
 								Login
@@ -182,21 +164,6 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 									<Tooltip title="Click to read how we handle your data" placement="left">
 										<MenuItemLink href="/privacy" Icon={<GavelIcon />} text="Privacy Policy" />
 									</Tooltip>
-									{allowsCookies !== null && (
-										<Tooltip title="Click to update whether we can store cookies" placement="left">
-											<MenuItem
-												onClick={(event) => {
-													closePopperMenu(event);
-													writeAllowsCookies(null);
-												}}
-											>
-												<ListItemIcon>
-													<CookieIcon />
-												</ListItemIcon>
-												<Typography variant="inherit">Update cookie consent</Typography>
-											</MenuItem>
-										</Tooltip>
-									)}
 								</MenuList>
 							</ClickAwayListener>
 						</Paper>

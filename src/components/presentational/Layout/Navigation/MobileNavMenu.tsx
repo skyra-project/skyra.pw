@@ -1,6 +1,4 @@
-import CookieIcon from '@assets/CookieIcon';
 import { setAuthenticated, useAuthenticated } from '@contexts/AuthenticationContext';
-import { setCookieConsent, useCookieConsent } from '@contexts/CookieContext';
 import { mergeDiscordPack, useDiscordPack } from '@contexts/DiscordPackContext';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -71,8 +69,6 @@ const MobileNavMenu: FC = () => {
 	const classes = useStyles();
 	const anchorRef = useRef<HTMLButtonElement>(null);
 	const [popperMenuIsOpen, setPopperMenuOpen] = useState(false);
-	const allowsCookies = useCookieConsent();
-	const writeAllowsCookies = setCookieConsent();
 
 	const authenticated = useAuthenticated();
 	const pack = useDiscordPack();
@@ -166,13 +162,7 @@ const MobileNavMenu: FC = () => {
 											</MenuItem>
 										</Then>
 										<Else>
-											<MenuItemLink
-												menuItemDisabled={!allowsCookies}
-												href={oauthURL.toString()}
-												Icon={<LoginIcon />}
-												text="Login"
-												forceSameTab
-											/>
+											<MenuItemLink href={oauthURL.toString()} Icon={<LoginIcon />} text="Login" forceSameTab />
 										</Else>
 									</If>
 									{router.pathname !== '/' && <MenuItemLink href="/" Icon={<HomeIcon />} text="Go back home" />}
@@ -180,20 +170,6 @@ const MobileNavMenu: FC = () => {
 									<MenuItemLink href="/privacy" Icon={<GavelIcon />} text="Privacy Policy" />
 									<MenuItemLink href="https://invite.skyra.pw" Icon={<InviteIcon />} text="Add Skyra to server" />
 									<MenuItemLink href="https://join.skyra.pw" Icon={<DiscordChatIcon />} text="Join our Discord" />
-
-									{allowsCookies !== null && (
-										<MenuItem
-											onClick={(event) => {
-												closePopperMenu(event);
-												return writeAllowsCookies(null);
-											}}
-										>
-											<ListItemIcon>
-												<CookieIcon />
-											</ListItemIcon>
-											<Typography variant="inherit">Update cookie consent</Typography>
-										</MenuItem>
-									)}
 								</MenuList>
 							</ClickAwayListener>
 						</Paper>
