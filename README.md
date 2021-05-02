@@ -1,7 +1,5 @@
 # Skyra.PW [![Discord](https://discord.com/api/guilds/254360814063058944/embed.png)](https://join.skyra.pw)
 
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/skyra-project/skyra.pw.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/skyra-project/skyra.pw/alerts/)
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/skyra-project/skyra.pw.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/skyra-project/skyra.pw/context:javascript)
 [![Docker Pulls](https://img.shields.io/docker/pulls/skyrabot/skyra.pw?logo=docker&logoColor=white)](https://hub.docker.com/r/skyrabot/skyra.pw)
 
 ## Set-Up
