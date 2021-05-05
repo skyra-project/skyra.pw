@@ -1,0 +1,9 @@
+src/components/
+src/config/
+src/contexts/
+src/pages/
+src/utils/
+src/next-config.d.ts
+src/next-env.d.ts
+src/tsconfig.json
+src/.tsbuildinfo

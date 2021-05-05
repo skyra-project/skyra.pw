@@ -1,4 +1,6 @@
-FROM node:14-alpine
+FROM --platform=linux/amd64 node:16-alpine
+
+RUN apk add --no-cache dumb-init
 
 WORKDIR /workspace
 
@@ -13,4 +15,6 @@ RUN yarn install --frozen-lockfile --link-duplicates --ignore-scripts --non-inte
 ENV PORT 8281
 EXPOSE 8281
 
-CMD [ "yarn", "start", "-p", "8281" ]
+USER node
+
+CMD [ "dumb-init", "yarn", "start", "-p", "8281" ]
