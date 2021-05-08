@@ -1,11 +1,21 @@
 {
 	"files.eol": "\n",
-	"typescript.tsdk": "node_modules\\typescript\\lib",
+	"scss.validate": false,
 	"css.validate": false,
 	"editor.quickSuggestions": {
-		"other": true,
-		"comments": false,
 		"strings": true
 	},
-	"tailwindCSS.validate": true
+	"tailwindCSS.validate": true,
+	"editor.autoClosingQuotes": "always",
+	"tailwindCSS.experimental.classRegex": [
+		"tw`([^`]*)", // tw`...`
+		"tw=\"([^\"]*)", // <div tw="..." />
+		"tw={\"([^\"}]*)", // <div tw={"..."} />
+		"tw\\.\\w+`([^`]*)", // tw.xxx`...`
+		"tw\\(.*?\\)`([^`]*)" // tw(Component)`...`
+	],
+	"tailwindCSS.includeLanguages": {
+		"typescript": "javascript",
+		"typescriptreact": "javascript"
+	}
 }
