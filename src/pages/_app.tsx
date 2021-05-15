@@ -126,32 +126,3 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 };
 
 export default App;
-
-declare global {
-	type DiscordMessageAvatars = Record<string, string> &
-		Partial<{
-			blue: string;
-			gray: string;
-			green: string;
-			orange: string;
-			red: string;
-		}>;
-
-	type DiscordMessageProfile = Partial<{
-		author: string;
-		avatar: string;
-		bot: boolean;
-		verified: boolean;
-		roleColor: string;
-	}>;
-
-	interface Window {
-		$discordMessage: Partial<{
-			avatars: DiscordMessageAvatars;
-			profiles: Record<string, DiscordMessageProfile>;
-			defaultTheme: string;
-			defaultMode: string;
-			defaultBackground: 'discord' | 'none';
-		}>;
-	}
-}

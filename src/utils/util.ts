@@ -174,7 +174,7 @@ export const handleResetKey = (
 	} else if (guildSettingsChanges) {
 		Reflect.set(guildSettingsChanges, key, null);
 	} else {
-		guildSettingsChanges = ({ [key]: null } as unknown) as typeof guildSettingsChanges;
+		guildSettingsChanges = { [key]: null } as unknown as typeof guildSettingsChanges;
 	}
 
 	setGuildSettingsChanges(guildSettingsChanges);

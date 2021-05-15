@@ -38,9 +38,9 @@ const PickerDialog: FC<PickerDialogProps> = ({ value, onClick, onChange }) => {
 
 	useEffect(() => {
 		if (scrollLockRef.current === null) {
-			enableBodyScroll((scrollLockRef.current as unknown) as HTMLElement);
+			enableBodyScroll(scrollLockRef.current as unknown as HTMLElement);
 		} else {
-			disableBodyScroll((scrollLockRef.current as unknown) as HTMLElement);
+			disableBodyScroll(scrollLockRef.current as unknown as HTMLElement);
 		}
 
 		return () => {
