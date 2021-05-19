@@ -1369,7 +1369,7 @@
     tslib "^2.2.0"
     ws "^7.4.5"
 
-"@skyra/discord-components-core@^2.0.7-alpha.1":
+"@skyra/discord-components-core@^2.0.7-alpha.0", "@skyra/discord-components-core@latest":
   version "2.0.7-alpha.1"
   resolved "https://registry.yarnpkg.com/@skyra/discord-components-core/-/discord-components-core-2.0.7-alpha.1.tgz#a8c38cea1a864dc95770f71f643451b2ddf1c005"
   integrity sha512-WNQerVW5EQbnJQ6AVL8iWka+YNNGLO9iukNsP6BzKujKsn0rPyv7b0xEMQD5+m1UuDh3QLGzEIfCKriKhMvNPg==
@@ -1378,19 +1378,10 @@
     clsx "^1.1.1"
     hex-to-rgba "^2.0.1"
 
-"@skyra/discord-components-core@latest":
+"@skyra/discord-components-react@^2.0.6":
   version "2.0.6"
-  resolved "https://registry.yarnpkg.com/@skyra/discord-components-core/-/discord-components-core-2.0.6.tgz#7259826b29edcc3eb029f491ac6345e037dc3d40"
-  integrity sha512-PY/GqzcIL/MwrIq68hWbiQ1Y/CSJFbnFoMmOd6OL2vvEXKzJwo7ihaWpBTDeuvl+Dnz1WR5y/43J/QmUJfmxog==
-  dependencies:
-    "@stencil/core" "^2.5.2"
-    clsx "^1.1.1"
-    hex-to-rgba "^2.0.1"
-
-"@skyra/discord-components-react@^2.0.7-alpha.1":
-  version "2.0.7-alpha.1"
-  resolved "https://registry.yarnpkg.com/@skyra/discord-components-react/-/discord-components-react-2.0.7-alpha.1.tgz#dfc2417f40844b6db26ca1778462e4a73a720298"
-  integrity sha512-K4jFlbo6FVhBtADK9EGlLweu8425s6HMUDjHwp/5/uUilwEycGei8jaYmwF3edCven69OBEC0uHDyhsswot51Q==
+  resolved "https://registry.yarnpkg.com/@skyra/discord-components-react/-/discord-components-react-2.0.6.tgz#65b04e871b9a824e0394cd740a1f554994971c35"
+  integrity sha512-cUm9zkqomntRTNkjQWYaIgGnlUowPWBFP0+T4e7yrpE3DYY4eysadYF/lpuJMIVwADSD1qf5kpAwKq1Dv063Vw==
   dependencies:
     "@skyra/discord-components-core" latest
 
