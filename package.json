@@ -10,7 +10,7 @@
 		"build": "next build src",
 		"start": "next start src",
 		"export": "next export src",
-		"clean": "rimraf src/.next src/public/sw.js src/public/workbox* src/public/sitemap.xml",
+		"clean": "node scripts/clean.mjs",
 		"build:sitemap": "node scripts/sitemapGenerator.mjs",
 		"format": "prettier --write --loglevel=error src/**/*.{js,jsx,ts,tsx}",
 		"update": "yarn upgrade-interactive --latest",
@@ -79,7 +79,6 @@
 		"nextjs-sitemap-generator": "^1.3.1",
 		"prettier": "^2.3.0",
 		"pretty-quick": "^3.1.0",
-		"rimraf": "3.0.2",
 		"typescript": "4.2.4",
 		"utility-types": "^3.10.0",
 		"webpack": "^5.37.0"
