@@ -1369,7 +1369,16 @@
     tslib "^2.2.0"
     ws "^7.4.5"
 
-"@skyra/discord-components-core@^2.0.6", "@skyra/discord-components-core@latest":
+"@skyra/discord-components-core@^2.0.7-alpha.0":
+  version "2.0.7-alpha.0"
+  resolved "https://registry.yarnpkg.com/@skyra/discord-components-core/-/discord-components-core-2.0.7-alpha.0.tgz#ad3860481ae58fe6ec7a2c20d62896aee80d2e86"
+  integrity sha512-ambSSif8ZQMwybMzDo5V+exFWFCRymCvcitokWdDXfpXfmoYY4vM07kllBypt4L1kog5HGl4NMf2Gj+i95mA4w==
+  dependencies:
+    "@stencil/core" "^2.5.2"
+    clsx "^1.1.1"
+    hex-to-rgba "^2.0.1"
+
+"@skyra/discord-components-core@latest":
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/@skyra/discord-components-core/-/discord-components-core-2.0.6.tgz#7259826b29edcc3eb029f491ac6345e037dc3d40"
   integrity sha512-PY/GqzcIL/MwrIq68hWbiQ1Y/CSJFbnFoMmOd6OL2vvEXKzJwo7ihaWpBTDeuvl+Dnz1WR5y/43J/QmUJfmxog==
