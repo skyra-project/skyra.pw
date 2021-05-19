@@ -5,6 +5,8 @@ import { MobileContextProvider } from '@contexts/MobileContext';
 import { useMediaQuery } from '@material-ui/core';
 import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
+// Import just as a type because the GlobalThis type augment
+import type {} from '@skyra/discord-components-core';
 import { LocalStorageKeys } from '@utils/constants';
 import { clearState } from '@utils/util';
 import type { NextPage } from 'next';
