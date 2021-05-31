@@ -5252,10 +5252,10 @@ next@^10.2.3:
     vm-browserify "1.1.2"
     watchpack "2.1.1"
 
-nextjs-progressbar@^0.0.9:
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/nextjs-progressbar/-/nextjs-progressbar-0.0.9.tgz#ac0ae5734cde5806f6ffd6fbc18ac90178c4ba89"
-  integrity sha512-t7bsQOIE09lY25AL+zS3GMhSX4bCgdosuJ+1aG4EOpzHSAxY3zfY4PKncilWT5fdcbbyo/iM//KKN79psgpZXw==
+nextjs-progressbar@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/nextjs-progressbar/-/nextjs-progressbar-0.0.10.tgz#f64e05c781657501aa255502e06d5d1a3626dcf3"
+  integrity sha512-TDN9xQti3NfzOAGjpFZlZ6fn0qkSMRyj0RJPuhRNbFq9XwngZr6b7XW+eSJrNmvfWNw55LfCyNQ/nyDTa3NJag==
   dependencies:
     nprogress "^0.2.0"
 
