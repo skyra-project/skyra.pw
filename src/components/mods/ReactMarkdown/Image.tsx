@@ -1,6 +1,6 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { cast } from '@utils/util';
-import NextImage from 'next/image';
+import NextImage, { ImageProps as NextImageProps } from 'next/image';
 import React, { forwardRef, memo } from 'react';
 import type { NormalComponent } from 'react-markdown/src/ast-to-react';
 
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface ImageProps {
-	src: string;
+	src: Exclude<NextImageProps['src'], string>;
 }
 
 const Image = forwardRef<HTMLImageElement, Parameters<NormalComponent>[0]>((props, ref) => {
