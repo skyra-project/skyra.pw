@@ -1,4 +1,4 @@
-import { ConfigurableMemberEvents, ConfigurableMessageEvents, ConfigurableModerationEvents } from '@config/SettingsDataEntries';
+import { ConfigurableMessageEvents, ConfigurableModerationEvents } from '@config/SettingsDataEntries';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
@@ -37,26 +37,6 @@ const EventSettings: FC = () => {
 				</Typography>
 				<SimpleGrid>
 					{ConfigurableModerationEvents.map(({ title, key, description }, index) => (
-						<SelectBoolean
-							key={index}
-							title={title}
-							description={description}
-							currentValue={guildSettings[key]}
-							onChange={(event) => setGuildSettingsChanges({ [key]: event.target.checked })}
-						/>
-					))}
-				</SimpleGrid>
-			</Section>
-
-			<Section title="Member Events">
-				<Typography variant="subtitle2" color="textPrimary">
-					These events involve member actions and require that you setup the Member Logs channel on{' '}
-					<Link className={classes.link} href={`/guilds/${guildId}/channels`}>
-						the Channels page
-					</Link>
-				</Typography>
-				<SimpleGrid>
-					{ConfigurableMemberEvents.map(({ title, key, description }, index) => (
 						<SelectBoolean
 							key={index}
 							title={title}

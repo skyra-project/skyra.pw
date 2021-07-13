@@ -189,16 +189,13 @@ export const ConfigurableMessageKeys = (
 	{
 		name: 'Join DMs',
 		key: 'messagesJoinDM',
-		placeholder: [guildSettings.eventsMemberAdd ? null : 'You must configure Member Join on the Events page.'].join(' '),
+		placeholder: '',
 		tooltipText: generateTooltipText('This is the message I will send in a DM to a member when they join.', guildData)
 	},
 	{
 		name: 'Greeting',
 		key: 'messagesGreeting',
-		placeholder: [
-			guildSettings.channelsGreeting ? null : 'You must set up the greeting channel in channels page.',
-			guildSettings.eventsMemberAdd ? null : 'You must configure Member Join on the Events page.'
-		].join(' '),
+		placeholder: guildSettings.channelsGreeting ? '' : 'You must set up the greeting channel in channels page.',
 		tooltipText: generateTooltipText(
 			`This is the message I will send to ${
 				guildData?.channels.find((c) => c.id === guildSettings.channelsGreeting)?.name ?? 'the configured Greeting channel'
@@ -209,10 +206,7 @@ export const ConfigurableMessageKeys = (
 	{
 		name: 'Farewell',
 		key: 'messagesFarewell',
-		placeholder: [
-			guildSettings.channelsFarewell ? null : 'You must set up the farewell channel in channels page.',
-			guildSettings.eventsMemberRemove ? null : 'You must configure Member Leave on the Events page.'
-		].join(' '),
+		placeholder: guildSettings.channelsFarewell ? '' : 'You must set up the farewell channel in channels page.',
 		tooltipText: generateTooltipText(
 			`This is the message I will send to ${
 				guildData?.channels.find((c) => c.id === guildSettings.channelsFarewell)?.name ?? 'the configured Farewell channel'
@@ -227,37 +221,7 @@ export const ConfigurableModerationEvents: Events.Event[] = [
 	{ title: 'Ban Revoked', key: 'eventsBanRemove', description: 'This event posts anonymous moderation logs when a user gets unbanned' }
 ];
 
-export const ConfigurableMemberEvents: Events.Event[] = [
-	{ title: 'Member Join', key: 'eventsMemberAdd', description: 'This event posts member logs when a user joins' },
-	{ title: 'Member Leave', key: 'eventsMemberRemove', description: 'This event posts member logs when a user leaves' },
-	{
-		title: 'Member Role Changes',
-		key: 'eventsMemberRoleUpdate',
-		description: "This events posts member logs when a member's roles change"
-	},
-	{
-		title: 'Member Nickname Changes',
-		key: 'eventsMemberNickNameUpdate',
-		description: 'This events posts member logs when a member changes their nickname'
-	},
-	{
-		title: 'Member Username Changes',
-		key: 'eventsMemberUserNameUpdate',
-		description: 'This events posts member logs when a member changes their username'
-	}
-];
-
 export const ConfigurableMessageEvents: Events.Event[] = [
-	{
-		title: 'Message Edit',
-		key: 'eventsMessageEdit',
-		description: 'This event logs to the Message Logs channel when a message is edited. NSFW messages will be send to the NSFW Logs channel'
-	},
-	{
-		title: 'Message Delete',
-		key: 'eventsMessageDelete',
-		description: 'This event logs to the Message Logs channel when a message is deleted. NSFW messages will be send to the NSFW Logs channel'
-	},
 	{
 		title: 'Twemoji Reactions',
 		key: 'eventsTwemojiReactions',
@@ -284,21 +248,55 @@ export const ConfigurableChannels: Channels.Channel[] = [
 ];
 
 export const ConfigurableLoggingChannels: Channels.Channel[] = [
-	{ name: 'Message Logs', description: 'The channel for (non-NSFW) message logs', key: 'channelsLogsMessage' },
 	{
-		name: 'Member Logs',
-		description: 'The channel for member logs, once enabled, I will post all member related events there.',
-		key: 'channelsLogsMember'
+		name: 'Member Add Logs',
+		description: 'The channel I will use to notify when a member joins.',
+		key: 'channelsLogsMemberAdd'
+	},
+	{
+		name: 'Member Remove Logs',
+		description: 'The channel I will use to notify when a member leaves.',
+		key: 'channelsLogsMemberRemove'
+	},
+	{
+		name: 'Member Nickname Update Logs',
+		description: 'The channel I will use to notify when a member changes their nickname.',
+		key: 'channelsLogsMemberNickNameUpdate'
+	},
+	{
+		name: 'Member Username Update Logs',
+		description: 'The channel I will use to notify when a member changes their username.',
+		key: 'channelsLogsMemberUserNameUpdate'
+	},
+	{
+		name: 'Member Role Logs',
+		description: "The channel I will use to notify when a member's roles have been changed.",
+		key: 'channelsLogsMemberRoleUpdate'
+	},
+	{
+		name: 'Message Delete Logs',
+		description: 'The channel I will use to notify when a message has been deleted.',
+		key: 'channelsLogsMessageDelete'
+	},
+	{
+		name: 'NSFW Message Delete Logs',
+		description: 'The channel I will use to notify when a message has been deleted, if sent in a NSFW channel.',
+		key: 'channelsLogsMessageDeleteNsfw'
+	},
+	{
+		name: 'Message Update Logs',
+		description: 'The channel I will use to notify when a message has been updated.',
+		key: 'channelsLogsMessageUpdate'
+	},
+	{
+		name: 'NSFW Message Update Logs',
+		description: 'The channel I will use to notify when a message has been updated, if sent in a NSFW channel.',
+		key: 'channelsLogsMessageUpdateNsfw'
 	},
 	{
 		name: 'Moderation Logs',
 		description: 'The channel for moderation logs, once enabled, I will post all my moderation cases there.',
 		key: 'channelsLogsModeration'
-	},
-	{
-		name: 'NSFW Logs',
-		description: 'The channel for NSFW message logs, same requirement as normal message logs, but will only send NSFW messages.',
-		key: 'channelsLogsNsfwMessage'
 	},
 	{ name: 'Image Logs', description: 'The channel I will use to re-upload all images I see.', key: 'channelsLogsImage' },
 	{
