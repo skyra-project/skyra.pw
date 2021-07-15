@@ -249,47 +249,47 @@ export const ConfigurableChannels: Channels.Channel[] = [
 export const ConfigurableLoggingChannels: Channels.Channel[] = [
 	{
 		name: 'Member Add Logs',
-		description: 'The channel I will use to notify when a member joins.',
+		description: 'The channel I will send a message to when a member joins.',
 		key: 'channelsLogsMemberAdd'
 	},
 	{
 		name: 'Member Remove Logs',
-		description: 'The channel I will use to notify when a member leaves.',
+		description: 'The channel I will send a message to when a member leaves, is kicked, or is banned.',
 		key: 'channelsLogsMemberRemove'
 	},
 	{
 		name: 'Member Nickname Update Logs',
-		description: 'The channel I will use to notify when a member changes their nickname.',
+		description: 'The channel I will send a message to when a member changes their nickname.',
 		key: 'channelsLogsMemberNickNameUpdate'
 	},
 	{
 		name: 'Member Username Update Logs',
-		description: 'The channel I will use to notify when a member changes their username.',
+		description: 'The channel I will send a message to when a member changes their username.',
 		key: 'channelsLogsMemberUserNameUpdate'
 	},
 	{
 		name: 'Member Role Logs',
-		description: "The channel I will use to notify when a member's roles have been changed.",
+		description: 'The channel I will send a message to when a member gets or loses a role.',
 		key: 'channelsLogsMemberRolesUpdate'
 	},
 	{
 		name: 'Message Delete Logs',
-		description: 'The channel I will use to notify when a message has been deleted.',
+		description: 'The channel I will send a message to when a message has been deleted.',
 		key: 'channelsLogsMessageDelete'
 	},
 	{
 		name: 'NSFW Message Delete Logs',
-		description: 'The channel I will use to notify when a message has been deleted, if sent in a NSFW channel.',
+		description: 'The channel I will send a message to when a message from an NSFW channel has been deleted.',
 		key: 'channelsLogsMessageDeleteNsfw'
 	},
 	{
 		name: 'Message Update Logs',
-		description: 'The channel I will use to notify when a message has been updated.',
+		description: 'The channel I will send a message to when a message has been updated.',
 		key: 'channelsLogsMessageUpdate'
 	},
 	{
 		name: 'NSFW Message Update Logs',
-		description: 'The channel I will use to notify when a message has been updated, if sent in a NSFW channel.',
+		description: 'The channel I will send a message to when a message from an NSFW channel has been updated.',
 		key: 'channelsLogsMessageUpdateNsfw'
 	},
 	{
