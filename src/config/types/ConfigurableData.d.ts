@@ -55,7 +55,7 @@ export namespace Moderation {
 export namespace Messages {
 	export interface Message {
 		name: string;
-		placeholder: string;
+		placeholder?: string;
 		tooltipText: NonNullable<ReactNode>;
 		key: `messages${'Farewell' | 'Greeting' | 'JoinDM'}`;
 	}
@@ -64,17 +64,7 @@ export namespace Messages {
 export namespace Events {
 	export interface Event {
 		title: string;
-		key: `events${
-			| 'BanAdd'
-			| 'BanRemove'
-			| 'MemberAdd'
-			| 'MemberRemove'
-			| 'MemberNickNameUpdate'
-			| 'MemberUserNameUpdate'
-			| 'MemberRoleUpdate'
-			| 'MessageDelete'
-			| 'MessageEdit'
-			| 'TwemojiReactions'}`;
+		key: `events${'BanAdd' | 'BanRemove' | 'TwemojiReactions'}`;
 		description: string;
 	}
 }
@@ -118,10 +108,16 @@ export namespace Channels {
 					| 'EmojiDelete'
 					| 'EmojiUpdate'
 					| 'Image'
-					| 'Member'
-					| 'Message'
+					| 'MemberAdd'
+					| 'MemberRemove'
+					| 'MemberNickNameUpdate'
+					| 'MemberUserNameUpdate'
+					| 'MemberRolesUpdate'
+					| 'MessageDelete'
+					| 'MessageDeleteNsfw'
+					| 'MessageUpdate'
+					| 'MessageUpdateNsfw'
 					| 'Moderation'
-					| 'NsfwMessage'
 					| 'Prune'
 					| 'Reaction'
 					| 'RoleCreate'
