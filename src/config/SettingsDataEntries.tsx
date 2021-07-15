@@ -189,13 +189,12 @@ export const ConfigurableMessageKeys = (
 	{
 		name: 'Join DMs',
 		key: 'messagesJoinDM',
-		placeholder: '',
 		tooltipText: generateTooltipText('This is the message I will send in a DM to a member when they join.', guildData)
 	},
 	{
 		name: 'Greeting',
 		key: 'messagesGreeting',
-		placeholder: guildSettings.channelsGreeting ? '' : 'You must set up the greeting channel in channels page.',
+		placeholder: guildSettings.channelsGreeting ? undefined : 'You must set up the greeting channel in channels page.',
 		tooltipText: generateTooltipText(
 			`This is the message I will send to ${
 				guildData?.channels.find((c) => c.id === guildSettings.channelsGreeting)?.name ?? 'the configured Greeting channel'
@@ -206,7 +205,7 @@ export const ConfigurableMessageKeys = (
 	{
 		name: 'Farewell',
 		key: 'messagesFarewell',
-		placeholder: guildSettings.channelsFarewell ? '' : 'You must set up the farewell channel in channels page.',
+		placeholder: guildSettings.channelsFarewell ? undefined : 'You must set up the farewell channel in channels page.',
 		tooltipText: generateTooltipText(
 			`This is the message I will send to ${
 				guildData?.channels.find((c) => c.id === guildSettings.channelsFarewell)?.name ?? 'the configured Farewell channel'
@@ -271,7 +270,7 @@ export const ConfigurableLoggingChannels: Channels.Channel[] = [
 	{
 		name: 'Member Role Logs',
 		description: "The channel I will use to notify when a member's roles have been changed.",
-		key: 'channelsLogsMemberRoleUpdate'
+		key: 'channelsLogsMemberRolesUpdate'
 	},
 	{
 		name: 'Message Delete Logs',

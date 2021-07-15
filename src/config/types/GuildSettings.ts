@@ -20,7 +20,7 @@ export interface GuildSettings {
 	channelsLogsMemberRemove: string | null;
 	channelsLogsMemberNickNameUpdate: string | null;
 	channelsLogsMemberUserNameUpdate: string | null;
-	channelsLogsMemberRoleUpdate: string | null;
+	channelsLogsMemberRolesUpdate: string | null;
 	channelsLogsMessageDelete: string | null;
 	channelsLogsMessageDeleteNsfw: string | null;
 	channelsLogsMessageUpdate: string | null;

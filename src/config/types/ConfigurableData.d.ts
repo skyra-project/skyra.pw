@@ -55,7 +55,7 @@ export namespace Moderation {
 export namespace Messages {
 	export interface Message {
 		name: string;
-		placeholder: string;
+		placeholder?: string;
 		tooltipText: NonNullable<ReactNode>;
 		key: `messages${'Farewell' | 'Greeting' | 'JoinDM'}`;
 	}
@@ -112,7 +112,7 @@ export namespace Channels {
 					| 'MemberRemove'
 					| 'MemberNickNameUpdate'
 					| 'MemberUserNameUpdate'
-					| 'MemberRoleUpdate'
+					| 'MemberRolesUpdate'
 					| 'MessageDelete'
 					| 'MessageDeleteNsfw'
 					| 'MessageUpdate'
