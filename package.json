@@ -58,7 +58,7 @@
 		"@sapphire/eslint-config": "^3.2.2",
 		"@sapphire/plugin-api": "^2.2.0",
 		"@sapphire/prettier-config": "^1.1.6",
-		"@sapphire/ts-config": "^2.3.2",
+		"@sapphire/ts-config": "^3.0.0",
 		"@skyra/audio": "^1.2.1",
 		"@types/body-scroll-lock": "^2.6.2",
 		"@types/lodash": "^4.14.171",
