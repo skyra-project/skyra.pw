@@ -52,8 +52,8 @@
 		"yup": "^0.32.9"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^12.1.4",
-		"@commitlint/config-conventional": "^12.1.4",
+		"@commitlint/cli": "^13.1.0",
+		"@commitlint/config-conventional": "^13.1.0",
 		"@next/eslint-plugin-next": "^11.0.1",
 		"@sapphire/eslint-config": "^3.2.2",
 		"@sapphire/plugin-api": "^2.2.0",
