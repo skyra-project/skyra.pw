@@ -6,7 +6,9 @@ import {
 	DiscordEmbedFields,
 	DiscordMention,
 	DiscordMessage,
-	DiscordMessages
+	DiscordMessages,
+	DiscordReaction,
+	DiscordReactions
 } from '@skyra/discord-components-react';
 import React from 'react';
 import { Twemoji } from 'react-emoji-render';
@@ -31,7 +33,7 @@ export default [
 						<DiscordEmbed
 							slot="embeds"
 							color="#FFD54F"
-							authorImage="/avatars/favna.png"
+							authorImage="/avatars/favna.gif"
 							authorName="Favna#0001"
 							footerImage="/avatars/skyra.png"
 							timestamp={new Date()}
@@ -96,6 +98,11 @@ export default [
 							embedTitle="Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film"
 							image="https://cdn.skyra.pw/dashboard/bigbuckbunny.jpg"
 						></DiscordEmbed>
+						<DiscordReactions slot="reactions">
+							<DiscordReaction name="◀" emoji="/twemojis/left_arrow.svg" count={1} />
+							<DiscordReaction name="⏹" emoji="/twemojis/stop_button.svg" count={1} />
+							<DiscordReaction name="▶" emoji="/twemojis/right_arrow.svg" count={1} />
+						</DiscordReactions>
 					</DiscordMessage>
 				</DiscordMessages>
 			</Paper>
@@ -177,69 +184,72 @@ export default [
 								1/3
 							</Box>
 						</DiscordEmbed>
+						<DiscordReactions slot="reactions">
+							<DiscordReaction name="🔢" emoji="/twemojis/input_numbers.svg" count={1} />
+							<DiscordReaction name="⏪" emoji="/twemojis/fast_reverse.svg" count={1} />
+							<DiscordReaction name="◀" emoji="/twemojis/left_arrow.svg" count={1} />
+							<DiscordReaction name="▶" emoji="/twemojis/right_arrow.svg" count={1} />
+							<DiscordReaction name="⏩" emoji="/twemojis/fast_forward.svg" count={1} />
+							<DiscordReaction name="⏹" emoji="/twemojis/stop_button.svg" count={1} />
+						</DiscordReactions>
 					</DiscordMessage>
 				</DiscordMessages>
 			</Paper>
 		)
 	},
 	{
-		name: 'Weeb',
+		name: 'Anime',
 		text: [
 			'Skyra has many anime related commands.',
 			"You can make Skyra slap that annoying guy that likes Ram instead of Rem, or see the cutest anime cats that you just can't wait to cuddle to death.",
-			"If you're just looking for your next watch or read, then Skyra has you covered by letting you look up anime and manga on kitsu.io."
+			"If you're just looking for your next watch or read, then Skyra has you covered by letting you look up anime and manga on anilist.co and kitsu.io."
 		].join(' '),
 		previewContent: (
 			<Paper elevation={8}>
 				<DiscordMessages>
-					<DiscordMessage profile="favna">Skyra, anime Fate/Zero</DiscordMessage>
+					<DiscordMessage profile="favna">Skyra, anime Pokemon</DiscordMessage>
 					<DiscordMessage profile="skyra">
 						<DiscordEmbed
 							slot="embeds"
 							color="#80C33E"
-							embedTitle="Fate/Zero"
-							url="https://kitsu.io/anime/6028"
-							thumbnail="https://media.kitsu.io/anime/poster_images/6028/original.jpg?1492613350"
+							embedTitle="Pokémon"
+							url="https://anilist.co/anime/527"
+							image="https://img.anili.st/media/527"
 						>
-							<DiscordEmbedFields slot="fields">
-								<DiscordEmbedField inline fieldTitle="Type" inlineIndex={1}>
-									<Twemoji text="📺 TV" />
-								</DiscordEmbedField>
-								<DiscordEmbedField inline fieldTitle="Score" inlineIndex={2}>
-									82.63%
-								</DiscordEmbedField>
-								<DiscordEmbedField inline fieldTitle="Episode(s)" inlineIndex={3}>
-									13
-								</DiscordEmbedField>
-								<DiscordEmbedField inline fieldTitle="Episode length" inlineIndex={1}>
-									28 minutes
-								</DiscordEmbedField>
-								<DiscordEmbedField inline fieldTitle="Age rating" inlineIndex={2}>
-									R
-								</DiscordEmbedField>
-								<DiscordEmbedField inline fieldTitle="First air date" inlineIndex={3}>
-									October 2nd 2011
-								</DiscordEmbedField>
-								<DiscordEmbedField fieldTitle="Watch it here">
-									<strong>
-										<a href="https://kitsu.io/anime/6028">Fate/Zero</a>
-									</strong>
-								</DiscordEmbedField>
-							</DiscordEmbedFields>
-							<strong>English title:</strong> Fate/Zero
+							<strong>Romanized name:</strong> Pocket Monsters
 							<br />
-							<strong>Japanese title:</strong> フェイト/ゼロ
+							<strong>English name:</strong> Pokémon
 							<br />
-							<strong>Canonical title:</strong> Fate/Zero
+							<strong>Native name:</strong> ポケットモンスター
 							<br />
-							With the promise of granting any wish, the omnipotent Holy Grail triggered three wars in the past, each too cruel and
-							fierce to leave a victor. In spite of that, the wealthy Einzbern family is confident that the Fourth Holy Grail War will
-							be different; namely, with a vessel of the Holy Grail now in their grasp. Solely for this reason, the much hated "Magus
-							Killer" Kiritsugu Emiya is hired by the Einzberns, with marriage to their only daughter Irisviel as binding contract.
+							<strong>Country of origin:</strong> JP
+							<br />
+							<strong>Amount of episodes:</strong> 276
+							<br />
+							<strong>Episode length:</strong> 24 minutes
+							<br />
+							<strong>Includes adult content:</strong> No
+							<br />
+							<strong>External links:</strong> <a href="https://www.netflix.com/title/70297439">Netflix</a> and{' '}
+							<a href="https://watch.pokemon.com/en-us/season.html?id=pokemon-indigo-league-vol-1">Official Site</a>
+							<br />
+							<br />A young boy named Satoshi embarks on a journey to become a "Pokémon Master" with his first Pokémon, Pikachu. Joining
+							him on his travels are Takeshi, a girl-obsessed Rock Pokemon Trainer, and Kasumi, a tomboyish Water Pokémon Trainer who
+							may have a crush on him. Satoshi and Co. end up traveling through various regions, including Kanto, the Orange Islands,
+							and Johto, and then enter the Pokémon League competitions there. Along the way, they run into many confrontations with
+							Musashi, Kojirou,...
 							<Box component="span" slot="footer">
-								1/10 - © kitsu.io
+								1/10
 							</Box>
 						</DiscordEmbed>
+						<DiscordReactions slot="reactions">
+							<DiscordReaction name="🔢" emoji="/twemojis/input_numbers.svg" count={1} />
+							<DiscordReaction name="⏪" emoji="/twemojis/fast_reverse.svg" count={1} />
+							<DiscordReaction name="◀" emoji="/twemojis/left_arrow.svg" count={1} />
+							<DiscordReaction name="▶" emoji="/twemojis/right_arrow.svg" count={1} />
+							<DiscordReaction name="⏩" emoji="/twemojis/fast_forward.svg" count={1} />
+							<DiscordReaction name="⏹" emoji="/twemojis/stop_button.svg" count={1} />
+						</DiscordReactions>
 					</DiscordMessage>
 				</DiscordMessages>
 			</Paper>

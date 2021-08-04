@@ -31,7 +31,7 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 		window.$discordMessage = {
 			avatars: {
 				default: 'blue',
-				favna: '/avatars/favna.png',
+				favna: '/avatars/favna.gif',
 				skyra: '/avatars/skyra.png'
 			},
 			profiles: {
@@ -44,12 +44,12 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 				},
 				favna: {
 					author: 'Favna',
-					avatar: '/avatars/favna.png',
+					avatar: '/avatars/favna.gif',
 					roleColor: '#FF0000'
 				},
 				kyra: {
 					author: 'Kyra',
-					avatar: '/avatars/kyra.png',
+					avatar: '/avatars/kyra.gif',
 					roleColor: '#FF9D01'
 				}
 			}
