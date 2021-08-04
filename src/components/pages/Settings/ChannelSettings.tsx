@@ -57,7 +57,7 @@ const ChannelSettings: FC = () => {
 			<Section title="Logging Channels">
 				<SimpleGrid
 					direction="row"
-					justify="flex-start"
+					justifyContent="flex-start"
 					gridItemProps={{
 						xs: 12,
 						sm: 12,
@@ -91,7 +91,7 @@ const ChannelSettings: FC = () => {
 			<Section title="Logging Ignore Channels" className={classes.sectionSpacer}>
 				<SimpleGrid
 					direction="row"
-					justify="flex-start"
+					justifyContent="flex-start"
 					gridItemProps={{
 						xs: 12,
 						sm: 12,
@@ -123,7 +123,7 @@ const ChannelSettings: FC = () => {
 			<Section title="Other Channels" className={classes.sectionSpacer}>
 				<SimpleGrid
 					direction="row"
-					justify="flex-start"
+					justifyContent="flex-start"
 					gridItemProps={{
 						xs: 12,
 						sm: 12,

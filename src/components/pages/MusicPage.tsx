@@ -342,7 +342,7 @@ const MusicPage: FC<MusicPageProps> = ({ guildId }) => {
 										<When condition={authenticated}>
 											<SimpleGrid
 												direction="row"
-												justify="center"
+												justifyContent="center"
 												alignItems="center"
 												gridItemProps={{
 													xs: 4,

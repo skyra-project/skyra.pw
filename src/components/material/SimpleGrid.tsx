@@ -7,7 +7,7 @@ interface SimpleGridProps extends GridProps {
 }
 
 const SimpleGrid: FC<SimpleGridProps> = ({ children, gridItemProps, ...props }) => (
-	<Grid spacing={1} container direction="column" justify="space-around" alignItems="flex-start" {...props}>
+	<Grid spacing={1} container direction="column" justifyContent="space-around" alignItems="flex-start" {...props}>
 		<When condition={Boolean(children)}>
 			{Children.map(children, (item, index) => (
 				<Grid item key={index} {...gridItemProps}>

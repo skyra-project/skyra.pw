@@ -57,7 +57,7 @@ const FilterCapitalsSettings: FC = () => {
 				</SimpleGrid>
 			</Section>
 			<Section title="Punishments">
-				<SimpleGrid direction="row" justify="flex-start">
+				<SimpleGrid direction="row" justifyContent="flex-start">
 					<Select
 						title="Action"
 						helperText="The action to perform as punishment"

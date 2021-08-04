@@ -46,7 +46,7 @@ const SuggestionSettings: FC = () => {
 			<Section title="Channel">
 				<SimpleGrid
 					direction="row"
-					justify="flex-start"
+					justifyContent="flex-start"
 					gridItemProps={{
 						xs: 12,
 						sm: 12,
@@ -97,7 +97,7 @@ const SuggestionSettings: FC = () => {
 			<Section title="Emojis">
 				<SimpleGrid
 					direction="row"
-					justify="flex-start"
+					justifyContent="flex-start"
 					gridItemProps={{
 						xs: 12,
 						sm: 12,

@@ -39,7 +39,14 @@ const AuthFailedPage: NextPage = () => {
 			<NextSeo title="Authentication Failed" description="Woops, the authentication failed :(" />
 			<GeneralPage>
 				<Container maxWidth="md" classes={{ root: classes.container }}>
-					<Grid container direction="column" justify="center" alignContent="stretch" alignItems="center" classes={{ root: classes.root }}>
+					<Grid
+						container
+						direction="column"
+						justifyContent="center"
+						alignContent="stretch"
+						alignItems="center"
+						classes={{ root: classes.root }}
+					>
 						<Grid item>
 							<Typography variant={isOnMobile ? 'h5' : 'h4'} color="textPrimary" classes={{ root: classes.text }}>
 								Well that's very odd. It looks like the authentication failed! Our best recommendation is to try again. If that still

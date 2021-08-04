@@ -53,7 +53,7 @@ const BirthdaySettings: FC = () => {
 
 			<SimpleGrid
 				direction="row"
-				justify="flex-start"
+				justifyContent="flex-start"
 				gridItemProps={{
 					xs: 12,
 					sm: 12,

@@ -70,7 +70,7 @@ const RoleSettings: FC = () => {
 			<Section title="Configurable Roles">
 				<SimpleGrid
 					direction="row"
-					justify="flex-start"
+					justifyContent="flex-start"
 					gridItemProps={{
 						xs: 12,
 						sm: 12,

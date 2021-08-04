@@ -146,7 +146,7 @@ const CustomCommandSettings = () => {
 			<Section title="Add Command">
 				<SimpleGrid
 					direction="row"
-					justify="flex-start"
+					justifyContent="flex-start"
 					gridItemProps={{
 						xs: 12,
 						sm: 12,
@@ -158,7 +158,14 @@ const CustomCommandSettings = () => {
 					<Formik {...formikConfig}>
 						{({ submitForm }) => (
 							<>
-								<Grid spacing={4} container direction="row" justify="space-between" alignContent="stretch" alignItems="flex-end">
+								<Grid
+									spacing={4}
+									container
+									direction="row"
+									justifyContent="space-between"
+									alignContent="stretch"
+									alignItems="flex-end"
+								>
 									<Grid item xs={12} sm={12} md={8} lg={8}>
 										<FastField
 											component={TextField}
@@ -221,7 +228,7 @@ const CustomCommandSettings = () => {
 			<Section title="Registered Custom Commands" className={classes.bottomSection}>
 				<SimpleGrid
 					direction="row"
-					justify="flex-start"
+					justifyContent="flex-start"
 					gridItemProps={{
 						xs: 12,
 						sm: 12,

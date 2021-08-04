@@ -66,7 +66,7 @@ const Chips: FC<ChipsProps> = ({ command }) => {
 	}, [command.preconditions.entries]);
 
 	return (
-		<Grid container spacing={1} direction="row" alignContent="center" alignItems="center" justify="flex-start">
+		<Grid container spacing={1} direction="row" alignContent="center" alignItems="center" justifyContent="flex-start">
 			{command.permissionLevel > 0 && (
 				<Grid item xs={12} md={5} lg={4}>
 					<Chip

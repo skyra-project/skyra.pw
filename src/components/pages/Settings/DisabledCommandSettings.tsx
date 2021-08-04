@@ -119,7 +119,7 @@ const DisabledCommandSettings: FC<DisabledCommandSettingsProps> = ({ commands, s
 								<Typography variant="body1">{catName}</Typography>
 							</AccordionSummary>
 							<AccordionDetails>
-								<Grid container spacing={1} direction="row" justify="flex-start" alignItems="center" alignContent="center">
+								<Grid container spacing={1} direction="row" justifyContent="flex-start" alignItems="center" alignContent="center">
 									{Object.values(localCommands)
 										.filter((command) => command.category === catName)
 										.map((cmd, idx) => (
