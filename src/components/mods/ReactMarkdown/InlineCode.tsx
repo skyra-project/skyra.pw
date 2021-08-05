@@ -22,7 +22,7 @@ const useStyles = makeStyles(() =>
 	})
 );
 
-const InlineCode: CodeComponent = forwardRef<HTMLSpanElement, Parameters<CodeComponent>[0]>(({ inline, children }, ref) => {
+const InlineCode = forwardRef<HTMLSpanElement, Parameters<CodeComponent>[0]>(({ inline, children }, ref) => {
 	const classes = useStyles();
 
 	if (inline) {

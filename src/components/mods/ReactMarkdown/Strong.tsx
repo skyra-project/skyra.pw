@@ -2,6 +2,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import React, { forwardRef, ReactNodeArray } from 'react';
+import type { NormalComponents } from 'react-markdown/src/ast-to-react';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const Strong = forwardRef<HTMLSpanElement>(({ children }, ref) => {
+const Strong = forwardRef<HTMLSpanElement, Parameters<Exclude<NormalComponents['strong'], 'strong'>>[0]>(({ children }, ref) => {
 	const classes = useStyles();
 	return (
 		<Typography

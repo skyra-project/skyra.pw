@@ -1,6 +1,7 @@
 import MuiList from '@material-ui/core/List';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React, { forwardRef } from 'react';
+import type { NormalComponents } from 'react-markdown/src/ast-to-react';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -12,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const List = forwardRef<HTMLUListElement>(({ children }, ref) => {
+const List = forwardRef<HTMLUListElement, Parameters<Exclude<NormalComponents['li'], 'li'>>[0]>(({ children }, ref) => {
 	const classes = useStyles();
 	return (
 		<MuiList classes={{ root: classes.list }} ref={ref} dense disablePadding>

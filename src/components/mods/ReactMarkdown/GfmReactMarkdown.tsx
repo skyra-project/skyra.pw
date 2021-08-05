@@ -19,13 +19,13 @@ const GfmReactMarkdown: FC<GfmReactMarkdownProps> = ({ source }) => (
 		plugins={[gfm]}
 		rehypePlugins={[rehypeRaw, rehypeSanitize]}
 		components={{
-			a: Link,
-			img: Image,
-			strong: Strong,
-			ol: List,
-			ul: List,
-			li: ListItem,
-			code: InlineCode
+			a: Link as any,
+			img: Image as any,
+			strong: Strong as any,
+			ol: List as any,
+			ul: List as any,
+			li: ListItem as any,
+			code: InlineCode as any
 		}}
 	>
 		{source}
