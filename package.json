@@ -43,7 +43,7 @@
 		"react-emoji-render": "^1.2.4",
 		"react-flip-move": "^3.0.4",
 		"react-if": "^4.0.1",
-		"react-markdown": "6.0.3",
+		"react-markdown": "7.0.0",
 		"react-player": "^2.9.0",
 		"react-virtuoso": "^1.10.4",
 		"rehype-raw": "5.1.0",
