@@ -1,8 +1,5 @@
 <template>
-	<div
-		id="container"
-		class="min-h-full grid grid-layout bg-gray-50 dark:bg-gray-800 dark:text-gray-100 lg:custom-scroll"
-	>
+	<div id="container" class="min-h-full grid grid-layout bg-gray-50 dark:bg-gray-800 dark:text-gray-100 lg:custom-scroll">
 		<app-navbar />
 		<div>
 			<div>
@@ -14,8 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import AppFooter from "./components/sections/app-footer.vue";
-import AppNavbar from "./components/sections/app-navbar.vue";
+import AppFooter from './components/sections/app-footer.vue';
+import AppNavbar from './components/sections/app-navbar.vue';
 // import { useStore } from './store';
 
 // const store = useStore();

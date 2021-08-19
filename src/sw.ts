@@ -9,7 +9,7 @@ setCacheNameDetails({
 	prefix: 'skyra',
 	suffix: 'v1',
 	precache: 'precache',
-	runtime: 'runtime',
+	runtime: 'runtime'
 });
 
 precacheAndRoute(self.__WB_MANIFEST);
@@ -22,12 +22,12 @@ const defaultStrategy = new StaleWhileRevalidate({
 		new ExpirationPlugin({
 			maxEntries: 50,
 			maxAgeSeconds: 60 * 60 * 24,
-			purgeOnQuotaError: true,
+			purgeOnQuotaError: true
 		}),
 		new CacheableResponsePlugin({
-			statuses: [0, 200],
-		}),
-	],
+			statuses: [0, 200]
+		})
+	]
 });
 
 setDefaultHandler((args) => {
@@ -45,10 +45,10 @@ registerRoute(
 			new ExpirationPlugin({
 				maxEntries: 50,
 				maxAgeSeconds: 60 * 60 * 24,
-				purgeOnQuotaError: true,
-			}),
-		],
-	}),
+				purgeOnQuotaError: true
+			})
+		]
+	})
 );
 
 declare const self: ServiceWorkerGlobalScope;

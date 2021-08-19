@@ -3,5 +3,5 @@ import routes from 'virtual:generated-pages';
 
 export default createRouter({
 	history: createWebHistory(),
-	routes,
+	routes
 });

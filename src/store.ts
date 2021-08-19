@@ -10,7 +10,7 @@ export const key: InjectionKey<Store<State>> = Symbol('skyra');
 export const store = createStore<State>({
 	state: {
 		theme: 'light'
-	},
+	}
 });
 
 export function useStore() {

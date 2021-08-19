@@ -4,23 +4,19 @@
 	"private": true,
 	"license": "Apache-2.0",
 	"scripts": {
-		"dev": "next dev src -p 3000",
-		"typecheck": "tsc -b src -w",
-		"prebuild": "yarn build:sitemap",
-		"build": "next build src",
-		"start": "next start src",
-		"export": "next export src",
-		"lint": "next lint src --fix",
-		"clean": "node scripts/clean.mjs",
-		"build:sitemap": "node scripts/sitemapGenerator.mjs",
+		"build": "vue-tsc --noEmit && vite build",
+		"dev": "vite --port 3333 --open",
 		"format": "prettier --write --loglevel=error src/**/*.{js,jsx,ts,tsx}",
-		"update": "yarn upgrade-interactive --latest",
-		"prepare": "husky install .github/husky"
+		"lint": "eslint src --ext .ts,.vue --fix",
+		"test:lint": "eslint src --ext .ts,.vue",
+		"prepare": "husky install .github/husky",
+		"serve": "vite preview",
+		"typecheck": "tsc -b src -w",
+		"update": "yarn upgrade-interactive --latest"
 	},
 	"dependencies": {
 		"@sapphire/utilities": "^2.0.1",
 		"@skyra/discord-components-core": "^2.7.1",
-		"@skyra/discord-components-react": "^2.7.1",
 		"@vueuse/core": "^5.0.2",
 		"@vueuse/head": "^0.6.0",
 		"focus-visible": "^5.2.0",
@@ -36,8 +32,6 @@
 		"@commitlint/cli": "^13.1.0",
 		"@commitlint/config-conventional": "^13.1.0",
 		"@iconify/json": "^1.1.358",
-		"@next/eslint-plugin-next": "^11.1.0",
-		"@sapphire/eslint-config": "^3.2.3",
 		"@sapphire/plugin-api": "^2.2.0",
 		"@sapphire/prettier-config": "^1.1.6",
 		"@sapphire/ts-config": "^3.0.0",
@@ -54,6 +48,11 @@
 		"cz-conventional-changelog": "^3.3.0",
 		"discord-api-types": "^0.22.0",
 		"discord.js": "^13.1.0",
+		"eslint": "^7.31.0",
+		"eslint-config-marine": "^9.0.6",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-prettier": "^3.4.0",
+		"eslint-plugin-vue": "^7.15.0",
 		"husky": "^7.0.1",
 		"lint-staged": "^11.1.2",
 		"postcss": "^8.3.2",
@@ -105,5 +104,26 @@
 		"object-path": "^0.11.5",
 		"webpack": "^5.50.0"
 	},
+	"eslintConfig": {
+		"root": true,
+		"extends": [
+			"marine/prettier/node",
+			"marine/prettier/vue"
+		],
+		"parserOptions": {
+			"project": "./tsconfig.eslint.json"
+		}
+	},
+	"postcss": {
+		"plugins": {
+			"tailwindcss": {},
+			"postcss-focus-visible": {},
+			"autoprefixer": {}
+		}
+	},
+	"browserslist": [
+		"> 1%",
+		"last 2 versions"
+	],
 	"prettier": "@sapphire/prettier-config"
 }
