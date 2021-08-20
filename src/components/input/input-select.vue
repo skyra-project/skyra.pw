@@ -1,9 +1,5 @@
 <template>
-	<select
-		class="border border-gray-300 text-gray-800 p-2 my-2 rounded-md focus:outline-none focus:ring-2 ring-blue-200"
-		:value="value"
-		@input="$emit('update:value', getValue($event))"
-	>
+	<select class="text-gray-800 rounded-md" :value="value" @input="$emit('update:value', getValue($event))">
 		<option v-for="option in options" :key="option.name" :value="option.value">{{ option.name }}</option>
 	</select>
 </template>

@@ -1,10 +1,5 @@
 <template>
-	<input
-		type="range"
-		class="border w-full app border-gray-300 p-2 my-2 rounded-md focus:outline-none"
-		:value="value"
-		@change="$emit('update:value', getValue($event))"
-	/>
+	<input type="range" :value="value" @change="$emit('update:value', getValue($event))" />
 </template>
 
 <script setup lang="ts">
