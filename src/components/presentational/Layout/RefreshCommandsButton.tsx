@@ -49,7 +49,7 @@ const RefreshCommandsButton: FC<RefreshCommandsButtonProps> = ({ setCommands }) 
 
 			setDisabled(false);
 		} catch (err) {
-			if (err.status >= 400) {
+			if ((err as any).status >= 400) {
 				setDisabled(true);
 			}
 		}
