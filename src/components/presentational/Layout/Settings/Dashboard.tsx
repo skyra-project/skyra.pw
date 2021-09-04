@@ -127,7 +127,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 			setHasError(true);
 			setTimeout(() => setIsLoading(false), Time.Second);
 
-			if (error?.status === 401) {
+			if ((error as any)?.status === 401) {
 				clearData(setPack, writeAuthenticated, router.push);
 			}
 		}
