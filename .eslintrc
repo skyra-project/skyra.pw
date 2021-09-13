@@ -16,6 +16,7 @@
 		}
 	},
 	"rules": {
+		"@next/next/no-document-import-in-page": "off",
 		"@typescript-eslint/naming-convention": "off",
 		"@typescript-eslint/no-throw-literal": "off",
 		"no-extra-label": "warn",

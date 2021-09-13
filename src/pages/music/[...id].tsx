@@ -14,7 +14,7 @@ const MusicDashboard: NextPage = () => {
 		return <RedirectRoute redirectUri="/" />;
 	}
 
-	const [guildId] = router.query.id;
+	const [guildId] = router.query.id ?? [''];
 
 	return (
 		<>
@@ -31,7 +31,7 @@ const MusicDashboard: NextPage = () => {
 					}
 				]}
 			/>
-			<MusicPage guildId={guildId} />
+			{guildId && <MusicPage guildId={guildId} />}
 		</>
 	);
 };
