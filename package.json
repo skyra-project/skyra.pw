@@ -47,7 +47,7 @@
 		"react-player": "^2.9.0",
 		"react-virtuoso": "^1.11.1",
 		"rehype-raw": "5.1.0",
-		"rehype-sanitize": "4.0.0",
+		"rehype-sanitize": "5.0.0",
 		"remark-gfm": "1.0.0",
 		"yup": "^0.32.9"
 	},
