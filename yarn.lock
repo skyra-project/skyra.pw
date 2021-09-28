@@ -1495,7 +1495,16 @@
     tslib "^2.3.0"
     ws "^7.5.0"
 
-"@skyra/discord-components-core@^2.8.1", "@skyra/discord-components-core@^2.9.0":
+"@skyra/discord-components-core@^2.10.0":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@skyra/discord-components-core/-/discord-components-core-2.10.0.tgz#f39a96825e656b8509d0a35d1816f11446f50f6c"
+  integrity sha512-XFL0NgL9fUpVWS9ig+m93qzvzbeF5zL+rQ7Xza1P/3UcNG9w6Psf3WYIv8Iq65NPsiIST404HGoiP6uqmm0Bzw==
+  dependencies:
+    "@stencil/core" "^2.8.0"
+    clsx "^1.1.1"
+    hex-to-rgba "^2.0.1"
+
+"@skyra/discord-components-core@^2.8.1":
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/@skyra/discord-components-core/-/discord-components-core-2.9.0.tgz#bf9ad180bc44399fb58291635171374a80827b59"
   integrity sha512-7c2hhwmq83vAYqM+TOyzDqrDNi0m7b0Msq2M5khugNA0zkXcGkfHOXM2EFMDZwvhXCU+IZlm2DvP2doznXTJlA==
@@ -1504,17 +1513,22 @@
     clsx "^1.1.1"
     hex-to-rgba "^2.0.1"
 
-"@skyra/discord-components-react@^2.8.1":
-  version "2.9.0"
-  resolved "https://registry.yarnpkg.com/@skyra/discord-components-react/-/discord-components-react-2.9.0.tgz#8d273a68fd6c61cfb8f9deb30d2ce717873f89af"
-  integrity sha512-dv+1Mwe58hXQCWEREMjvtN/oFTmj3q0ug086nrpH0EBF2Mzl4GKaxixIyuWl2RQV8v3zgdp/bG7YFQM9IK4//w==
+"@skyra/discord-components-react@^2.10.0":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@skyra/discord-components-react/-/discord-components-react-2.10.0.tgz#31d473dfb6230284521a5787a1117181dd3233b6"
+  integrity sha512-N7Y7rIYF5Z/5XlWZbQTTtLS9rOdaMg/elx82Olpp+uiQRpKzTDuSXg68+Tp7duQBqA88fymE5Q6aReG0oFJBGg==
   dependencies:
-    "@skyra/discord-components-core" "^2.9.0"
+    "@skyra/discord-components-core" "^2.10.0"
 
 "@stencil/core@^2.7.1":
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.8.0.tgz#87d950fbbf050dce1566f32ca48c98007239472b"
   integrity sha512-WazFGUMnbumg8ePNvej8cIOEcxvuZ0ugKQkkE1xFbDYcl7DgJd62MiG+bIqCcQlIdLEfhjAdoixxlFdJgrgjyA==
+
+"@stencil/core@^2.8.0":
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.8.1.tgz#21b15c115d9a5e2f56379774fcbd9bc947bf336f"
+  integrity sha512-iv9J6oLO/lv7/aO45M05yw3pp1J7olY400vlOZgdMVs3s5zHfalY1ZPYM0KyqU4+7DZuadKYbd0aQZ/g2PInZw==
 
 "@surma/rollup-plugin-off-main-thread@^1.4.1":
   version "1.4.2"
