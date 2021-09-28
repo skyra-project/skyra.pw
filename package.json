@@ -107,7 +107,7 @@
 		"url": "https://github.com/skyra-project/skyra.pw/issues"
 	},
 	"resolutions": {
-		"acorn": "^8.4.1",
+		"acorn": "^8.5.0",
 		"minimist": "^1.2.5",
 		"kind-of": "^6.0.3",
 		"lodash": "^4.17.21",
