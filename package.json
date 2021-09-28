@@ -111,7 +111,7 @@
 		"minimist": "^1.2.5",
 		"kind-of": "^6.0.3",
 		"lodash": "^4.17.21",
-		"object-path": "^0.11.5",
+		"object-path": "^0.11.8",
 		"webpack": "^5.51.1"
 	},
 	"prettier": "@sapphire/prettier-config"
