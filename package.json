@@ -84,7 +84,7 @@
 		"pretty-quick": "^3.1.1",
 		"typescript": "4.4.3",
 		"utility-types": "^3.10.0",
-		"webpack": "^5.55.0"
+		"webpack": "^5.55.1"
 	},
 	"lint-staged": {
 		"*.{mjs,js,jsx,ts,tsx}": "eslint --fix --ext mjs,js,jsx,ts,tsx"
@@ -112,7 +112,7 @@
 		"kind-of": "^6.0.3",
 		"lodash": "^4.17.21",
 		"object-path": "^0.11.8",
-		"webpack": "^5.55.0"
+		"webpack": "^5.55.1"
 	},
 	"prettier": "@sapphire/prettier-config"
 }
