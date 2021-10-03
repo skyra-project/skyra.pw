@@ -1460,23 +1460,23 @@
     tslib "^2.3.1"
     ws "^8.2.2"
 
-"@skyra/discord-components-core@^2.10.0":
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/@skyra/discord-components-core/-/discord-components-core-2.10.0.tgz#f39a96825e656b8509d0a35d1816f11446f50f6c"
-  integrity sha512-XFL0NgL9fUpVWS9ig+m93qzvzbeF5zL+rQ7Xza1P/3UcNG9w6Psf3WYIv8Iq65NPsiIST404HGoiP6uqmm0Bzw==
+"@skyra/discord-components-core@^2.11.2":
+  version "2.11.2"
+  resolved "https://registry.yarnpkg.com/@skyra/discord-components-core/-/discord-components-core-2.11.2.tgz#c5b3e90d655c34daad84247cf45a956180136af4"
+  integrity sha512-V6bHO20w9vVrwZEsIMrTLG+lrO2ExH7snIHTbllRv2y21hfFuV8HZt2dF58lB7oHFkpABVnMrYZ04X+GcXOYDw==
   dependencies:
-    "@stencil/core" "^2.8.0"
+    "@stencil/core" "^2.8.1"
     clsx "^1.1.1"
     hex-to-rgba "^2.0.1"
 
-"@skyra/discord-components-react@^2.10.0":
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/@skyra/discord-components-react/-/discord-components-react-2.10.0.tgz#31d473dfb6230284521a5787a1117181dd3233b6"
-  integrity sha512-N7Y7rIYF5Z/5XlWZbQTTtLS9rOdaMg/elx82Olpp+uiQRpKzTDuSXg68+Tp7duQBqA88fymE5Q6aReG0oFJBGg==
+"@skyra/discord-components-react@^2.11.2":
+  version "2.11.2"
+  resolved "https://registry.yarnpkg.com/@skyra/discord-components-react/-/discord-components-react-2.11.2.tgz#fbfb2d9faf9446d0720317b71eb36b9face9250a"
+  integrity sha512-m1+ur//5Dlcko3mHUj93g519KOVu64E9fpbT71NWic9JOk5mB4vb0+KPPLNJa4zu0mNsm6yU4wb7CAQHDijzLg==
   dependencies:
-    "@skyra/discord-components-core" "^2.10.0"
+    "@skyra/discord-components-core" "^2.11.2"
 
-"@stencil/core@^2.8.0":
+"@stencil/core@^2.8.1":
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.8.1.tgz#21b15c115d9a5e2f56379774fcbd9bc947bf336f"
   integrity sha512-iv9J6oLO/lv7/aO45M05yw3pp1J7olY400vlOZgdMVs3s5zHfalY1ZPYM0KyqU4+7DZuadKYbd0aQZ/g2PInZw==
@@ -7684,10 +7684,10 @@ webpack-sources@^3.2.0:
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-3.2.1.tgz#251a7d9720d75ada1469ca07dbb62f3641a05b6d"
   integrity sha512-t6BMVLQ0AkjBOoRTZgqrWm7xbXMBzD+XDq2EZ96+vMfn3qKgsvdXZhbPZ4ElUOpdv4u+iiGe+w3+J75iy/bYGA==
 
-webpack@^5.55.1:
-  version "5.55.1"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.55.1.tgz#426ebe54c15fa57f7b242590f65fd182382b5998"
-  integrity sha512-EYp9lwaOOAs+AA/KviNZ7bQiITHm4bXQvyTPewD2+f5YGjv6sfiClm40yeX5FgBMxh5bxcB6LryiFoP09B97Ug==
+webpack@^5.56.0:
+  version "5.56.0"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.56.0.tgz#91a04de09c85765002818678538c319b6e461324"
+  integrity sha512-pJ7esw2AGkpZL0jqsEAKnDEfRZdrc9NVjAWA+d1mFkwj68ng9VQ6+Wnrl+kS5dlDHvrat5ASK5vd7wp6I7f53Q==
   dependencies:
     "@types/eslint-scope" "^3.7.0"
     "@types/estree" "^0.0.50"
