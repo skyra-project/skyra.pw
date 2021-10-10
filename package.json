@@ -48,7 +48,7 @@
 		"react-virtuoso": "^2.2.2",
 		"rehype-raw": "5.1.0",
 		"rehype-sanitize": "4.0.0",
-		"remark-gfm": "1.0.0",
+		"remark-gfm": "3.0.0",
 		"yup": "^0.32.9"
 	},
 	"devDependencies": {
