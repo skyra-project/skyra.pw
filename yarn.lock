@@ -1446,11 +1446,6 @@
     tslib "^2.3.0"
     typescript "^4.3.5"
 
-"@sapphire/utilities@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@sapphire/utilities/-/utilities-2.0.1.tgz#c436c5b2b72679c89a40abe46d2f9301d03e63e2"
-  integrity sha512-KgJsgQ1cnfVKqscrMX4GH29mIVhVQkF8kSTIRCB+hgCCRfIvUU5peE4g/cegnesPS5eMiQqV+NWk7cNwhjextQ==
-
 "@sapphire/utilities@^2.1.0-next.54bbaf87.0":
   version "2.1.0-pr-159.fae7a606.0"
   resolved "https://registry.yarnpkg.com/@sapphire/utilities/-/utilities-2.1.0-pr-159.fae7a606.0.tgz#ceba7a08bc96ed18b2636e5dcad57f13e394e609"
@@ -1460,6 +1455,11 @@
   version "3.0.0-pr-160.676f855.0"
   resolved "https://registry.yarnpkg.com/@sapphire/utilities/-/utilities-3.0.0-pr-160.676f855.0.tgz#9165d68de8845751a2276f6a53c2dbdc293a1c2e"
   integrity sha512-g2Qi+E6rai2WXaDyRCazqWLsOkxF0o103uzo9/+l3utgu4R4xZ7yz5/vfOcla9dQAapX7KlYHrWZENShaFQWjA==
+
+"@sapphire/utilities@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@sapphire/utilities/-/utilities-3.0.2.tgz#d471041d871a37186df31e52476d87328065a6e5"
+  integrity sha512-LD5BjfKU6b/SEpQq+vMNhneOujgoe4EabL/3I5XThej0dbngWf90d7ET9VQnFVfe0qQbGin+MEu9f2im9WYSzw==
 
 "@sindresorhus/is@^4.0.1":
   version "4.2.0"
