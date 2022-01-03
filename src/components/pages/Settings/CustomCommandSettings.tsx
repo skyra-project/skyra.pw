@@ -82,7 +82,7 @@ const CustomCommandSettings = () => {
 
 	const mergeCustomCommands = (prev: CustomCommand[], next: CustomCommand) => {
 		const clone = prev.slice();
-		const prevEntry = clone.find((command) => command.id === next.id);
+		const prevEntry = clone.find((command) => command.id.toLowerCase() === next.id.toLowerCase());
 
 		if (prevEntry !== undefined) {
 			clone[clone.indexOf(prevEntry)] = next;
@@ -106,7 +106,7 @@ const CustomCommandSettings = () => {
 
 			setGuildSettingsChanges({
 				customCommands: mergeCustomCommands(guildSettings.customCommands, {
-					id,
+					id: id.toLowerCase(),
 					content,
 					color: parse(color || '#1E88E5').B10.value,
 					embed,
@@ -120,7 +120,7 @@ const CustomCommandSettings = () => {
 	};
 
 	const sortCommands = (firstCommand: CustomCommand, secondCommand: CustomCommand) =>
-		firstCommand.id < secondCommand.id ? -1 : firstCommand.id > secondCommand.id ? 1 : 0;
+		firstCommand.id.toLowerCase() < secondCommand.id.toLowerCase() ? -1 : firstCommand.id.toLowerCase() > secondCommand.id.toLowerCase() ? 1 : 0;
 
 	const sortedCommands = guildSettings.customCommands.sort(sortCommands);
 
@@ -251,7 +251,7 @@ const CustomCommandSettings = () => {
 										primary={
 											<Typography variant="body1" classes={{ root: classes.tagHeader }}>
 												{guildSettings.prefix}
-												{sortedCommands[index].id}
+												{sortedCommands[index].id.toLowerCase()}
 											</Typography>
 										}
 										secondary={
@@ -266,7 +266,7 @@ const CustomCommandSettings = () => {
 											onClick={() =>
 												setGuildSettingsChanges({
 													customCommands: guildSettings.customCommands.filter(
-														(command) => command.id !== sortedCommands[index].id
+														(command) => command.id.toLowerCase() !== sortedCommands[index].id.toLowerCase()
 													)
 												})
 											}
