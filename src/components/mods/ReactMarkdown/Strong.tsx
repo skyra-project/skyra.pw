@@ -11,7 +11,7 @@ const useStyles = makeStyles(() =>
 			alignItems: 'center',
 			alignContent: 'center',
 			justifyContent: 'flex-start',
-			fontWeight: 'bold'
+			fontWeight: 'bolder'
 		},
 		inlineText: {
 			display: 'inline'

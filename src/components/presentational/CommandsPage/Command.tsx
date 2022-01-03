@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		commandHeading: {
 			fontSize: theme.typography.pxToRem(20),
-			fontWeight: theme.typography.fontWeightRegular
+			fontWeight: 'bolder'
 		},
 		commandSubHeading: {
 			fontSize: theme.typography.pxToRem(15),

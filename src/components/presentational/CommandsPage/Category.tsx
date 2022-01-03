@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		categoryHeading: {
 			fontSize: theme.typography.pxToRem(20),
-			fontWeight: theme.typography.fontWeightRegular
+			fontWeight: 'bolder'
 		}
 	})
 );
