@@ -1,20 +1,26 @@
-FROM --platform=linux/amd64 node:17-alpine
+FROM node:17-alpine as runner
 
 RUN apk add --no-cache dumb-init
 
 WORKDIR /workspace
 
+ENV HUSKY=0
+ENV CI=true
+
 COPY --chown=node:node package.json ./
 COPY --chown=node:node yarn.lock ./
+COPY --chown=node:node .yarnrc.yml .
 COPY --chown=node:node src/ src/
-
-ENV NODE_ENV production
-
-RUN yarn install --frozen-lockfile --link-duplicates --ignore-scripts --non-interactive --production
+COPY --chown=node:node .yarn/ .yarn/
 
 ENV PORT 8281
-EXPOSE 8281
+ENV NODE_ENV="production"
+ENV NODE_OPTIONS="--enable-source-maps"
+
+RUN yarn workspaces focus --all --production
+RUN chown node:node /workspace
 
 USER node
 
-CMD [ "dumb-init", "yarn", "start", "-p", "8281" ]
+ENTRYPOINT ["dumb-init", "--"]
+CMD [ "yarn", "start", "-p", "8281" ]
