@@ -1,17 +1,17 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import React, { forwardRef, ReactNodeArray } from 'react';
 import type { NormalComponents } from 'react-markdown/src/ast-to-react';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
 	createStyles({
 		strongText: {
 			display: 'flex',
 			alignItems: 'center',
 			alignContent: 'center',
 			justifyContent: 'flex-start',
-			fontWeight: theme.typography.fontWeightBold
+			fontWeight: 'bold'
 		},
 		inlineText: {
 			display: 'inline'
