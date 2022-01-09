@@ -2072,7 +2072,7 @@ __metadata:
     "@sapphire/utilities": ^3.1.0
     "@skyra/audio": ^2.0.0
     "@skyra/discord-components-core": ^2.13.0
-    "@skyra/discord-components-react": ^2.13.0
+    "@skyra/discord-components-react": ^3.0.1
     "@types/body-scroll-lock": ^3.1.0
     "@types/lodash": ^4.14.178
     "@types/node": ^17.0.7
@@ -2151,16 +2151,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@skyra/discord-components-react@npm:^2.13.0":
-  version: 2.13.0
-  resolution: "@skyra/discord-components-react@npm:2.13.0"
+"@skyra/discord-components-core@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@skyra/discord-components-core@npm:3.0.1"
   dependencies:
-    "@skyra/discord-components-core": ^2.13.0
+    "@stencil/core": ^2.12.1
+    clsx: ^1.1.1
+    hex-to-rgba: ^2.0.1
+  checksum: dfea50b12114401e159571cbe0afeb4a98c04a305c26b3b31b83a8174cc44187ffdc01a654b8de9ba61721515e9b7a736f5889c07b3fd6b27e151eca3c491e09
+  languageName: node
+  linkType: hard
+
+"@skyra/discord-components-react@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@skyra/discord-components-react@npm:3.0.1"
+  dependencies:
+    "@skyra/discord-components-core": ^3.0.1
     tslib: ^2.3.1
   peerDependencies:
     react: 16.8.x || 17.x
     react-dom: 16.8.x || 17.x
-  checksum: 5f263a8ca6038ce4ea2288fae8539180f4c28b31ac89bccd7473a1418d83b3837f0d568262448f64b85df765aab3e1a6596436e7ee8fe21112bedc021bc344ff
+  checksum: ea1aae3204dce641fc5f73ff8777cfc58e7a9de22711b9d81acaa69d7824b08e8a7cb94ce9eb8feeaa30cd3986283eb1830c8e0dddf31c48364ef103f9e2e894
   languageName: node
   linkType: hard
 
@@ -2170,6 +2181,15 @@ __metadata:
   bin:
     stencil: bin/stencil
   checksum: 246789f258a7f6886de55877a684da2c3a3a81e953ae390be6c1c7502ea38a7244097da441962f78ef323439b838b242426b8a2aff2b6f0c76baeae0f58aa9d9
+  languageName: node
+  linkType: hard
+
+"@stencil/core@npm:^2.12.1":
+  version: 2.12.1
+  resolution: "@stencil/core@npm:2.12.1"
+  bin:
+    stencil: bin/stencil
+  checksum: acbd781a8073eb155cabad9375fda080ee38cb642f63fda2ae8c09811f996c6282ff84cd60f7796827e31fbce4eccc3c17f2041d9c5fec2df08947ebf8bcb0ac
   languageName: node
   linkType: hard
 
