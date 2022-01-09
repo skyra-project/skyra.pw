@@ -1998,9 +1998,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/plugin-api@npm:^3.1.2":
-  version: 3.1.2
-  resolution: "@sapphire/plugin-api@npm:3.1.2"
+"@sapphire/plugin-api@npm:^3.1.3":
+  version: 3.1.3
+  resolution: "@sapphire/plugin-api@npm:3.1.3"
   dependencies:
     "@types/node-fetch": 2.5.12
     "@types/psl": ^1.1.0
@@ -2008,7 +2008,7 @@ __metadata:
     node-fetch: 2.6.6
     psl: ^1.8.0
     tslib: ^2.3.1
-  checksum: a53636948a3d05d277a15a927c89d41c4c7d35efe0d018b0eb7fc037aa996ee3ac324910956ca9b21ca050469dfad18204732d98bf73d536b977f15107e51213
+  checksum: 7898aa9088c28f9d592467667b48d202539fa7ad615b441c7084be74c6dd294ceee33f49db15e54d481f05b28165234a470f1ec0b73f32e14513b05aef1cdc45
   languageName: node
   linkType: hard
 
@@ -2066,7 +2066,7 @@ __metadata:
     "@next/eslint-plugin-next": ^11.1.3
     "@sapphire/discord.js-utilities": ^4.1.5
     "@sapphire/eslint-config": ^4.0.8
-    "@sapphire/plugin-api": ^3.1.2
+    "@sapphire/plugin-api": ^3.1.3
     "@sapphire/prettier-config": ^1.2.7
     "@sapphire/ts-config": ^3.1.6
     "@sapphire/utilities": ^3.1.0
