@@ -1,14 +1,17 @@
-import { Box, Paper } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import Link from '@routing/Link';
 import {
+	DiscordActionRow,
+	DiscordAttachments,
+	DiscordButton,
 	DiscordEmbed,
+	DiscordEmbedDescription,
 	DiscordEmbedField,
 	DiscordEmbedFields,
+	DiscordEmbedFooter,
 	DiscordMention,
 	DiscordMessage,
-	DiscordMessages,
-	DiscordReaction,
-	DiscordReactions
+	DiscordMessages
 } from '@skyra/discord-components-react';
 import React from 'react';
 import { Twemoji } from 'react-emoji-render';
@@ -30,24 +33,19 @@ export default [
 						Skyra, mute <DiscordMention>Kyra</DiscordMention> 10m Spamming.
 					</DiscordMessage>
 					<DiscordMessage profile="skyra">
-						<DiscordEmbed
-							slot="embeds"
-							color="#FFD54F"
-							authorImage="/avatars/favna.gif"
-							authorName="Favna#0001"
-							footerImage="/avatars/skyra.png"
-							timestamp={new Date()}
-						>
-							<strong>{heavyRightPointingArrow} Type</strong>: Temporary Mute
-							<br />
-							<strong>{heavyRightPointingArrow} User</strong>: Kyra#0001 (242043489611808769)
-							<br />
-							<strong>{heavyRightPointingArrow} Reason</strong>: Spamming.
-							<br />
-							<strong>{heavyRightPointingArrow} Expires In</strong>: 10 minutes
-							<Box component="span" slot="footer">
+						<DiscordEmbed slot="embeds" color="#FFD54F" authorImage="/avatars/favna.gif" authorName="Favna#0001">
+							<DiscordEmbedDescription slot="description">
+								<strong>{heavyRightPointingArrow} Type</strong>: Temporary Mute
+								<br />
+								<strong>{heavyRightPointingArrow} User</strong>: Kyra#0001 (242043489611808769)
+								<br />
+								<strong>{heavyRightPointingArrow} Reason</strong>: Spamming.
+								<br />
+								<strong>{heavyRightPointingArrow} Expires In</strong>: 10 minutes
+							</DiscordEmbedDescription>
+							<DiscordEmbedFooter slot="footer" footerImage="/avatars/skyra.png" timestamp={new Date()}>
 								Case 11
-							</Box>
+							</DiscordEmbedFooter>
 						</DiscordEmbed>
 					</DiscordMessage>
 				</DiscordMessages>
@@ -66,9 +64,11 @@ export default [
 					<DiscordMessage profile="kyra">Skyra, markov</DiscordMessage>
 					<DiscordMessage profile="skyra">
 						<DiscordEmbed slot="embeds" color="#FF9D01">
-							Big mama is beyond Merlin's powers I'm basing this though i like it, and calls <code>renderToString()</code> and throw if
-							I'd add test to them are down to go that can be <i>reviewed</i> by myself and its loaded from google them the client due
-							to send the avatar in actually did automod stuff need to the dice! You rolled the id wdym
+							<DiscordEmbedDescription slot="description">
+								Big mama is beyond Merlin's powers I'm basing this though i like it, and calls <code>renderToString()</code> and throw
+								if I'd add test to them are down to go that can be <i>reviewed</i> by myself and its loaded from google them the
+								client due to send the avatar in actually did automod stuff need to the dice! You rolled the id wdym
+							</DiscordEmbedDescription>
 						</DiscordEmbed>
 					</DiscordMessage>
 				</DiscordMessages>
@@ -98,11 +98,15 @@ export default [
 							embedTitle="Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film"
 							image="https://cdn.skyra.pw/dashboard/bigbuckbunny.jpg"
 						></DiscordEmbed>
-						<DiscordReactions slot="reactions">
-							<DiscordReaction name="◀" emoji="/twemojis/left_arrow.svg" count={1} />
-							<DiscordReaction name="⏹" emoji="/twemojis/stop_button.svg" count={1} />
-							<DiscordReaction name="▶" emoji="/twemojis/right_arrow.svg" count={1} />
-						</DiscordReactions>
+						<DiscordAttachments slot="components">
+							<DiscordActionRow>
+								<DiscordButton type="primary" emoji="/twemojis/fast_reverse.svg" emojiName="⏪" />
+								<DiscordButton type="primary" emoji="/twemojis/left_arrow.svg" emojiName="◀️" />
+								<DiscordButton type="primary" emoji="/twemojis/right_arrow.svg" emojiName="▶️" />
+								<DiscordButton type="primary" emoji="/twemojis/fast_forward.svg" emojiName="⏩" />
+								<DiscordButton type="destructive" emoji="/twemojis/stop_button.svg" emojiName="⏹" />
+							</DiscordActionRow>
+						</DiscordAttachments>
 					</DiscordMessage>
 				</DiscordMessages>
 			</Paper>
@@ -180,18 +184,17 @@ export default [
 									/>
 								</DiscordEmbedField>
 							</DiscordEmbedFields>
-							<Box component="span" slot="footer">
-								1/3
-							</Box>
+							<DiscordEmbedFooter slot="footer">1/3</DiscordEmbedFooter>
 						</DiscordEmbed>
-						<DiscordReactions slot="reactions">
-							<DiscordReaction name="🔢" emoji="/twemojis/input_numbers.svg" count={1} />
-							<DiscordReaction name="⏪" emoji="/twemojis/fast_reverse.svg" count={1} />
-							<DiscordReaction name="◀" emoji="/twemojis/left_arrow.svg" count={1} />
-							<DiscordReaction name="▶" emoji="/twemojis/right_arrow.svg" count={1} />
-							<DiscordReaction name="⏩" emoji="/twemojis/fast_forward.svg" count={1} />
-							<DiscordReaction name="⏹" emoji="/twemojis/stop_button.svg" count={1} />
-						</DiscordReactions>
+						<DiscordAttachments slot="components">
+							<DiscordActionRow>
+								<DiscordButton type="primary" emoji="/twemojis/fast_reverse.svg" emojiName="⏪" />
+								<DiscordButton type="primary" emoji="/twemojis/left_arrow.svg" emojiName="◀️" />
+								<DiscordButton type="primary" emoji="/twemojis/right_arrow.svg" emojiName="▶️" />
+								<DiscordButton type="primary" emoji="/twemojis/fast_forward.svg" emojiName="⏩" />
+								<DiscordButton type="destructive" emoji="/twemojis/stop_button.svg" emojiName="⏹" />
+							</DiscordActionRow>
+						</DiscordAttachments>
 					</DiscordMessage>
 				</DiscordMessages>
 			</Paper>
@@ -216,40 +219,41 @@ export default [
 							url="https://anilist.co/anime/527"
 							image="https://img.anili.st/media/527"
 						>
-							<strong>Romanized name:</strong> Pocket Monsters
-							<br />
-							<strong>English name:</strong> Pokémon
-							<br />
-							<strong>Native name:</strong> ポケットモンスター
-							<br />
-							<strong>Country of origin:</strong> JP
-							<br />
-							<strong>Amount of episodes:</strong> 276
-							<br />
-							<strong>Episode length:</strong> 24 minutes
-							<br />
-							<strong>Includes adult content:</strong> No
-							<br />
-							<strong>External links:</strong> <a href="https://www.netflix.com/title/70297439">Netflix</a> and{' '}
-							<a href="https://watch.pokemon.com/en-us/season.html?id=pokemon-indigo-league-vol-1">Official Site</a>
-							<br />
-							<br />A young boy named Satoshi embarks on a journey to become a "Pokémon Master" with his first Pokémon, Pikachu. Joining
-							him on his travels are Takeshi, a girl-obsessed Rock Pokemon Trainer, and Kasumi, a tomboyish Water Pokémon Trainer who
-							may have a crush on him. Satoshi and Co. end up traveling through various regions, including Kanto, the Orange Islands,
-							and Johto, and then enter the Pokémon League competitions there. Along the way, they run into many confrontations with
-							Musashi, Kojirou,...
-							<Box component="span" slot="footer">
-								1/10
-							</Box>
+							<DiscordEmbedDescription slot="description">
+								<strong>Romanized name:</strong> Pocket Monsters
+								<br />
+								<strong>English name:</strong> Pokémon
+								<br />
+								<strong>Native name:</strong> ポケットモンスター
+								<br />
+								<strong>Country of origin:</strong> JP
+								<br />
+								<strong>Amount of episodes:</strong> 276
+								<br />
+								<strong>Episode length:</strong> 24 minutes
+								<br />
+								<strong>Includes adult content:</strong> No
+								<br />
+								<strong>External links:</strong> <a href="https://www.netflix.com/title/70297439">Netflix</a> and{' '}
+								<a href="https://watch.pokemon.com/en-us/season.html?id=pokemon-indigo-league-vol-1">Official Site</a>
+								<br />
+								<br />A young boy named Satoshi embarks on a journey to become a "Pokémon Master" with his first Pokémon, Pikachu.
+								Joining him on his travels are Takeshi, a girl-obsessed Rock Pokemon Trainer, and Kasumi, a tomboyish Water Pokémon
+								Trainer who may have a crush on him. Satoshi and Co. end up traveling through various regions, including Kanto, the
+								Orange Islands, and Johto, and then enter the Pokémon League competitions there. Along the way, they run into many
+								confrontations with Musashi, Kojirou,...
+							</DiscordEmbedDescription>
+							<DiscordEmbedFooter slot="footer">1/10</DiscordEmbedFooter>
 						</DiscordEmbed>
-						<DiscordReactions slot="reactions">
-							<DiscordReaction name="🔢" emoji="/twemojis/input_numbers.svg" count={1} />
-							<DiscordReaction name="⏪" emoji="/twemojis/fast_reverse.svg" count={1} />
-							<DiscordReaction name="◀" emoji="/twemojis/left_arrow.svg" count={1} />
-							<DiscordReaction name="▶" emoji="/twemojis/right_arrow.svg" count={1} />
-							<DiscordReaction name="⏩" emoji="/twemojis/fast_forward.svg" count={1} />
-							<DiscordReaction name="⏹" emoji="/twemojis/stop_button.svg" count={1} />
-						</DiscordReactions>
+						<DiscordAttachments slot="components">
+							<DiscordActionRow>
+								<DiscordButton type="primary" emoji="/twemojis/fast_reverse.svg" emojiName="⏪" />
+								<DiscordButton type="primary" emoji="/twemojis/left_arrow.svg" emojiName="◀️" />
+								<DiscordButton type="primary" emoji="/twemojis/right_arrow.svg" emojiName="▶️" />
+								<DiscordButton type="primary" emoji="/twemojis/fast_forward.svg" emojiName="⏩" />
+								<DiscordButton type="destructive" emoji="/twemojis/stop_button.svg" emojiName="⏹" />
+							</DiscordActionRow>
+						</DiscordAttachments>
 					</DiscordMessage>
 				</DiscordMessages>
 			</Paper>
