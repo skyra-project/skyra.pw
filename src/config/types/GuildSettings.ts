@@ -1,10 +1,4 @@
 export interface GuildSettings {
-	birthdayChannel: string | null;
-	birthdayMessage: string | null;
-	birthdayRole: string | null;
-	channelsAnnouncements: string | null;
-	channelsFarewell: string | null;
-	channelsGreeting: string | null;
 	channelsIgnoreAll: string[];
 	channelsIgnoreMessageDeletes: string[];
 	channelsIgnoreMessageEdits: string[];
@@ -32,7 +26,6 @@ export interface GuildSettings {
 	channelsLogsRoleDelete: string | null;
 	channelsLogsRoleUpdate: string | null;
 	channelsLogsServerUpdate: string | null;
-	channelsSpam: string | null;
 	commandAutoDelete: CommandAutoDelete[];
 	customCommands: CustomCommand[];
 	disabledChannels: string[];
@@ -43,15 +36,11 @@ export interface GuildSettings {
 	eventsBanRemove: boolean;
 	eventsTwemojiReactions: boolean;
 	language: string;
-	messagesAnnouncementEmbed: boolean;
 	messagesAutoDeleteIgnoredAll: boolean;
 	messagesAutoDeleteIgnoredChannels: string[];
 	messagesAutoDeleteIgnoredCommands: string[];
 	messagesAutoDeleteIgnoredRoles: string[];
-	messagesFarewell: string | null;
-	messagesGreeting: string | null;
 	messagesIgnoreChannels: string[];
-	messagesJoinDM: string | null;
 	messagesModerationAutoDelete: boolean;
 	messagesModerationDm: boolean;
 	messagesModerationMessageDisplay: boolean;
@@ -85,7 +74,6 @@ export interface GuildSettings {
 	rolesRestrictedEmoji: string | null;
 	rolesRestrictedReaction: string | null;
 	rolesRestrictedVoice: string | null;
-	rolesSubscriber: string | null;
 	rolesUniqueRoleSets: UniqueRoleSet[];
 	selfmodAttachmentsEnabled: boolean;
 	selfmodAttachmentsHardAction: number;
@@ -170,12 +158,6 @@ export interface GuildSettings {
 	socialIgnoredChannels: string[];
 	socialIgnoredRoles: string[];
 	socialMultiplier: number;
-	starboardChannel: string | null;
-	starboardEmoji: string;
-	starboardIgnoreChannels: string[];
-	starboardMaximumAge: number | null;
-	starboardMinimum: number;
-	starboardSelfStar: boolean;
 	stickyRoles: StickyRole[];
 	suggestionsChannel: string | null;
 	suggestionsEmojisDownVote: string;

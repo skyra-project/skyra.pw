@@ -1,5 +1,3 @@
-import type { ReactNode } from 'react';
-
 export namespace Suggestions {
 	export interface OnAction {
 		description: string;
@@ -38,8 +36,7 @@ export namespace Roles {
 			| 'RestrictedVoice'
 			| 'Public'
 			| 'RemoveInitial'
-			| 'Dj'
-			| 'Subscriber'}`;
+			| 'Dj'}`;
 
 		name: string;
 
@@ -51,27 +48,9 @@ export namespace Moderation {
 	export interface Message {
 		description: string;
 
-		key: `messages${
-			| 'AnnouncementEmbed'
-			| 'ModerationDm'
-			| 'ModerationReasonDisplay'
-			| 'ModerationMessageDisplay'
-			| 'ModerationAutoDelete'
-			| 'ModeratorNameDisplay'}`;
+		key: `messages${'ModerationDm' | 'ModerationReasonDisplay' | 'ModerationMessageDisplay' | 'ModerationAutoDelete' | 'ModeratorNameDisplay'}`;
 
 		name: string;
-	}
-}
-
-export namespace Messages {
-	export interface Message {
-		key: `messages${'Farewell' | 'Greeting' | 'JoinDM'}`;
-
-		name: string;
-
-		placeholder?: string;
-
-		tooltipText: NonNullable<ReactNode>;
 	}
 }
 
@@ -119,7 +98,6 @@ export namespace Channels {
 		description: string;
 
 		key:
-			| `channels${'Announcements' | 'Greeting' | 'Farewell' | 'Spam'}`
 			| `channelsLogs${
 					| 'ChannelCreate'
 					| 'ChannelDelete'

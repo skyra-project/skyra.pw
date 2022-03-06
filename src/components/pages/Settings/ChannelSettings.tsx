@@ -1,9 +1,4 @@
-import {
-	ConfigurableChannels,
-	ConfigurableDisabledChannels,
-	ConfigurableIgnoreChannels,
-	ConfigurableLoggingChannels
-} from '@config/SettingsDataEntries';
+import { ConfigurableIgnoreChannels, ConfigurableLoggingChannels } from '@config/SettingsDataEntries';
 import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
@@ -118,58 +113,6 @@ const ChannelSettings: FC = () => {
 							}}
 						/>
 					))}
-				</SimpleGrid>
-			</Section>
-			<Section title="Other Channels" className={classes.sectionSpacer}>
-				<SimpleGrid
-					direction="row"
-					justifyContent="flex-start"
-					gridItemProps={{
-						xs: 12,
-						sm: 12,
-						md: 4,
-						lg: 4,
-						xl: 4
-					}}
-				>
-					{ConfigurableChannels.map(({ name, description, key }, index) => (
-						<SelectChannel
-							key={index}
-							tooltipTitle={description}
-							value={guildSettings[key]}
-							onReset={() => handleResetKey(guildSettingsChanges, setGuildSettingsChanges, key)}
-							onChange={(channel: typeof guildSettings[typeof key]) => setGuildSettingsChanges({ [key]: channel })}
-							guild={guildData}
-							label={name}
-							ButtonProps={{
-								fullWidth: true,
-								classes: {
-									root: classes.button,
-									label: classes.buttonText
-								}
-							}}
-						/>
-					))}
-					<SelectChannels
-						key={(ConfigurableChannels.length as number) + 1}
-						tooltipTitle={ConfigurableDisabledChannels.description}
-						value={guildSettings.disabledChannels}
-						onReset={() => handleResetKey(guildSettingsChanges, setGuildSettingsChanges, 'disabledChannels')}
-						onChange={(channels: typeof guildSettings.disabledChannels) =>
-							setGuildSettingsChanges({
-								disabledChannels: channels
-							})
-						}
-						guild={guildData}
-						label={ConfigurableDisabledChannels.name}
-						ButtonProps={{
-							fullWidth: true,
-							classes: {
-								root: classes.button,
-								label: classes.buttonText
-							}
-						}}
-					/>
 				</SimpleGrid>
 			</Section>
 		</>

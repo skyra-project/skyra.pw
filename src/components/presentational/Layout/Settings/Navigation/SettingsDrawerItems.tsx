@@ -10,7 +10,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import CakeIcon from '@material-ui/icons/Cake';
 import EventIcon from '@material-ui/icons/EventNote';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
@@ -24,7 +23,6 @@ import InputIcon from '@material-ui/icons/Input';
 import MessagesIcon from '@material-ui/icons/Message';
 import MusicIcon from '@material-ui/icons/MusicNote';
 import SettingsIcon from '@material-ui/icons/Settings';
-import StarIcon from '@material-ui/icons/Star';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Tooltip from '@mui/Tooltip';
 import GuildIcon from '@presentational/GuildIcon';
@@ -135,16 +133,6 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 						href={`/guilds/${guildId}`}
 						itemText="General Settings"
 						Icon={<SettingsIcon />}
-					/>
-
-					{/* ------------------------------- */}
-
-					<ListItemLink
-						listItemOnClick={closeSidebarOnMobile}
-						listItemDisabled={!guildData || isLoading}
-						href={`/guilds/${guildId}/${GuildRoutes.Birthdays}`}
-						itemText="Birthdays"
-						Icon={<CakeIcon />}
 					/>
 
 					<ListItemLink
@@ -262,16 +250,6 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 						href={`/guilds/${guildId}/${GuildRoutes.Roles}`}
 						itemText="Roles"
 						Icon={<RolesIcon />}
-					/>
-
-					{/* ------------------------------- */}
-
-					<ListItemLink
-						listItemOnClick={closeSidebarOnMobile}
-						listItemDisabled={!guildData || isLoading}
-						href={`/guilds/${guildId}/${GuildRoutes.Starboard}`}
-						itemText="Starboard"
-						Icon={<StarIcon />}
 					/>
 
 					{/* ------------------------------- */}
