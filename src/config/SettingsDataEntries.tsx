@@ -1,8 +1,4 @@
-import React from 'react';
-import type { ValuesType } from 'utility-types';
-import type { TransformedLoginData } from './types/ApiData';
-import type { Channels, Events, Messages, Moderation, Roles, Suggestions } from './types/ConfigurableData';
-import type { GuildSettings } from './types/GuildSettings';
+import type { Channels, Events, Moderation, Roles, Suggestions } from './types/ConfigurableData';
 
 export const ConfigurableSuggestionActions: Suggestions.OnAction[] = [
 	{
@@ -102,12 +98,6 @@ export const ConfigurableRoles: Roles.Role[] = [
 		key: 'rolesDj'
 	},
 	{
-		name: 'Subscriber',
-		tooltip:
-			'The subscriber role, this role will be mentioned every time you use the announce command. I will always keep it non-mentionable so people do not abuse mentions.',
-		key: 'rolesSubscriber'
-	},
-	{
 		name: 'Public Roles',
 		tooltip: 'The public roles. These can be claimed by any user using the "roles" command.',
 		key: 'rolesPublic'
@@ -134,87 +124,6 @@ export const ConfigurableModerationKeys: Moderation.Message[] = [
 	}
 ];
 
-enum Matches {
-	Guild = '%GUILD%',
-	Member = '%MEMBER%',
-	MemberName = '%MEMBERNAME%',
-	MemberTag = '%MEMBERTAG%',
-	MemberCount = '%MEMBERCOUNT%',
-	Position = '%POSITION%'
-}
-
-const ConfigurableReplaceableMatchers = (guildData: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>) => ({
-	[Matches.Guild]: (
-		<>
-			Will be replaced with the name of this server, which is: <code className="white">{guildData?.name}</code>
-		</>
-	),
-	[Matches.Member]: `Will be replaced with a mention of the member`,
-	[Matches.MemberName]: `Will be replaced with the username of the member`,
-	[Matches.MemberTag]: (
-		<>
-			Will be replaced with the unique tag of the member (for example <code className="white">user#0000</code>)
-		</>
-	),
-	[Matches.MemberCount]: `Will be replaced with the amount of members currently in the server`,
-	[Matches.Position]: (
-		<>
-			Will be replaced with the ordinal position this member has in the server. (for example{' '}
-			<code className="white">{`${Matches.Position} member`}</code> for <code className="white">20th member</code>)
-		</>
-	)
-});
-
-const generateTooltipText = (header: string, guildData: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>) => {
-	const matchersData = ConfigurableReplaceableMatchers(guildData);
-	return (
-		<>
-			{header}
-			<br />
-			The following will be replaced with the respective values:
-			<br />- <code className="white">{`${Matches.Guild}`}</code>: {matchersData[Matches.Guild]}
-			<br />- <code className="white">{`${Matches.Member}`}</code>: {matchersData[Matches.Member]}
-			<br />- <code className="white">{`${Matches.MemberCount}`}</code>: {matchersData[Matches.MemberCount]}
-			<br />- <code className="white">{`${Matches.MemberName}`}</code>: {matchersData[Matches.MemberName]}
-			<br />- <code className="white">{`${Matches.MemberTag}`}</code>: {matchersData[Matches.MemberTag]}
-			<br />- <code className="white">{`${Matches.Position}`}</code>: {matchersData[Matches.Position]}
-		</>
-	);
-};
-
-export const ConfigurableMessageKeys = (
-	guildSettings: GuildSettings,
-	guildData: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>
-): Messages.Message[] => [
-	{
-		name: 'Join DMs',
-		key: 'messagesJoinDM',
-		tooltipText: generateTooltipText('This is the message I will send in a DM to a member when they join.', guildData)
-	},
-	{
-		name: 'Greeting',
-		key: 'messagesGreeting',
-		placeholder: guildSettings.channelsGreeting ? undefined : 'You must set up the greeting channel in channels page.',
-		tooltipText: generateTooltipText(
-			`This is the message I will send to ${
-				guildData?.channels.find((c) => c.id === guildSettings.channelsGreeting)?.name ?? 'the configured Greeting channel'
-			} when a member joins.`,
-			guildData
-		)
-	},
-	{
-		name: 'Farewell',
-		key: 'messagesFarewell',
-		placeholder: guildSettings.channelsFarewell ? undefined : 'You must set up the farewell channel in channels page.',
-		tooltipText: generateTooltipText(
-			`This is the message I will send to ${
-				guildData?.channels.find((c) => c.id === guildSettings.channelsFarewell)?.name ?? 'the configured Farewell channel'
-			} when a member leaves.`,
-			guildData
-		)
-	}
-];
-
 export const ConfigurableModerationEvents: Events.Event[] = [
 	{ title: 'Ban Added', key: 'eventsBanAdd', description: 'This event posts anonymous moderation logs when a user gets banned.' },
 	{ title: 'Ban Revoked', key: 'eventsBanRemove', description: 'This event posts anonymous moderation logs when a user gets unbanned' }
@@ -226,24 +135,6 @@ export const ConfigurableMessageEvents: Events.Event[] = [
 		key: 'eventsTwemojiReactions',
 		description: 'This event posts messages whenever a member reacts to a message with a twemoji, they will be send to the Reaction Logs channel'
 	}
-];
-
-export const ConfigurableDisabledChannels: Channels.Channel = {
-	name: 'Disabled Channels',
-	description: [
-		'A list of channels for disabled commands, for example,',
-		'setting up a channel called general will forbid all users',
-		'from using my commands there. Moderators+ override this',
-		'purposedly to allow them to moderate without switching channels.'
-	].join(' '),
-	key: 'channelsSpam'
-};
-
-export const ConfigurableChannels: Channels.Channel[] = [
-	{ name: 'Announcements', description: 'The channel for announcements', key: 'channelsAnnouncements' },
-	{ name: 'Greetings', description: 'The channel I will use to send greetings', key: 'channelsGreeting' },
-	{ name: 'Farewells', description: 'The channel I will use to send farewells', key: 'channelsFarewell' },
-	{ name: 'Spam', description: 'The channel for me to redirect users to when they use commands I consider spammy.', key: 'channelsSpam' }
 ];
 
 export const ConfigurableLoggingChannels: Channels.Channel[] = [

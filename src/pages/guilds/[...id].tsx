@@ -2,7 +2,6 @@ import type { FlattenedCommand } from '@config/types/ApiData';
 import { FilterRoutes, GuildRoutes } from '@config/types/GuildRoutes';
 import { useAuthenticated } from '@contexts/AuthenticationContext';
 import Dashboard from '@layout/Settings/Dashboard';
-import BirthdaySettings from '@pages/Settings/BirthdaySettings';
 import ChannelSettings from '@pages/Settings/ChannelSettings';
 import CustomCommandSettings from '@pages/Settings/CustomCommandSettings';
 import DisabledCommandSettings from '@pages/Settings/DisabledCommandSettings';
@@ -18,7 +17,6 @@ import GeneralSettings from '@pages/Settings/GeneralSettings';
 import MessageSettings from '@pages/Settings/MessageSettings';
 import ModerationSettings from '@pages/Settings/ModerationSettings';
 import RoleSettings from '@pages/Settings/RoleSettings';
-import StarboardSettings from '@pages/Settings/StarboardSettings';
 import SuggestionSettings from '@pages/Settings/SuggestionSettings';
 import Loading from '@presentational/Loading';
 import RedirectRoute from '@routing/RedirectRoute';
@@ -90,9 +88,6 @@ const GuildSettingsPage: NextPage = () => {
 					<Loading loading={loading} />
 					<Dashboard guildId={guildId}>
 						<Switch>
-							<Case condition={joinedPath === GuildRoutes.Birthdays}>
-								<BirthdaySettings />
-							</Case>
 							<Case condition={joinedPath === GuildRoutes.Channels}>
 								<ChannelSettings />
 							</Case>
@@ -113,9 +108,6 @@ const GuildSettingsPage: NextPage = () => {
 							</Case>
 							<Case condition={joinedPath === GuildRoutes.Roles}>
 								<RoleSettings />
-							</Case>
-							<Case condition={joinedPath === GuildRoutes.Starboard}>
-								<StarboardSettings />
 							</Case>
 							<Case condition={joinedPath === GuildRoutes.Suggestions}>
 								<SuggestionSettings />

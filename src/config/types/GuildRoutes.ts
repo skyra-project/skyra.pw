@@ -1,5 +1,4 @@
 export enum GuildRoutes {
-	Birthdays = 'birthdays',
 	Channels = 'channels',
 	CustomCommands = 'custom-commands',
 	DisabledCommands = 'disabled-commands',
@@ -7,7 +6,6 @@ export enum GuildRoutes {
 	Messages = 'messages',
 	Moderation = 'moderation',
 	Roles = 'roles',
-	Starboard = 'starboard',
 	Suggestions = 'suggestions'
 }
 
