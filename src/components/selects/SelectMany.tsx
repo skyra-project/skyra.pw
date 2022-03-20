@@ -14,7 +14,7 @@ import LazyAvatar from '@mui/LazyAvatar';
 import Tooltip from '@mui/Tooltip';
 import { toTitleCase } from '@sapphire/utilities';
 import { Time } from '@utils/skyraUtils';
-import { sleep } from '@utils/util';
+import { AnyRef, sleep } from '@utils/util';
 import React, { ChangeEvent, FC, forwardRef, Fragment, useCallback, useMemo, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import { Virtuoso } from 'react-virtuoso';
@@ -87,7 +87,7 @@ const SelectMany: FC<SelectManyProps> = ({ label, value, onChange, values, name,
 	const VirtuosoComponents = useMemo<Components>(
 		() => ({
 			List: forwardRef(({ style, children }, listRef) => (
-				<List style={{ ...style, width: '100%' }} ref={listRef} component="nav">
+				<List style={{ ...style, width: '100%' }} ref={listRef as AnyRef} component="nav">
 					{children}
 				</List>
 			)),

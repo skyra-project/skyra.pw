@@ -19,6 +19,7 @@ import GfmReactMarkdown from '@mods/ReactMarkdown/GfmReactMarkdown';
 import SimpleGrid from '@mui/SimpleGrid';
 import ColorPicker from '@presentational/ColorPicker/ColorPicker';
 import { parse, REGEXP } from '@utils/Color';
+import type { AnyRef } from '@utils/util';
 import { FastField, Formik, FormikConfig } from 'formik';
 import React, { forwardRef, Fragment, memo, useMemo } from 'react';
 import { Virtuoso } from 'react-virtuoso';
@@ -127,7 +128,7 @@ const CustomCommandSettings = () => {
 	const VirtuosoComponents = useMemo<Components>(
 		() => ({
 			List: forwardRef(({ style, children }, listRef) => (
-				<List style={{ ...style, width: '100%' }} ref={listRef} component="nav">
+				<List style={{ ...style, width: '100%' }} ref={listRef as AnyRef} component="nav">
 					{children}
 				</List>
 			)),
