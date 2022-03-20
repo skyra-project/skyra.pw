@@ -88,6 +88,10 @@
 		"utility-types": "^3.10.0",
 		"webpack": "^5.70.0"
 	},
+	"resolutions": {
+		"@types/react": "^17.0.41",
+		"@types/react-dom": "^17.0.14"
+	},
 	"lint-staged": {
 		"*.{mjs,js,jsx,ts,tsx}": "eslint --fix --ext mjs,js,jsx,ts,tsx"
 	},
