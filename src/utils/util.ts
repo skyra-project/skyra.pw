@@ -179,3 +179,5 @@ export const handleResetKey = (
 
 	setGuildSettingsChanges(guildSettingsChanges);
 };
+
+export type AnyRef = any;

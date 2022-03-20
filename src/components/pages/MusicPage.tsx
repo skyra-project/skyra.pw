@@ -42,7 +42,7 @@ import SimpleGrid from '@mui/SimpleGrid';
 import Link from '@routing/Link';
 import type { Track, TrackInfo } from '@skyra/audio';
 import { WS_URL } from '@utils/constants';
-import { cast, getAcronym } from '@utils/util';
+import { AnyRef, cast, getAcronym } from '@utils/util';
 import React, { FC, forwardRef, memo, useEffect, useMemo, useState } from 'react';
 import FlipMove from 'react-flip-move';
 import { Else, If, Then, When } from 'react-if';
@@ -294,7 +294,7 @@ const MusicPage: FC<MusicPageProps> = ({ guildId }) => {
 	const VirtuosoComponents = useMemo<Components>(
 		() => ({
 			List: forwardRef(({ style, children }, listRef) => (
-				<List style={{ ...style, width: '100%' }} ref={listRef} component="nav">
+				<List style={{ ...style, width: '100%' }} ref={listRef as AnyRef} component="nav">
 					{children}
 				</List>
 			)),

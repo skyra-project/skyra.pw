@@ -3,6 +3,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import type { CSSProperties } from '@material-ui/core/styles/withStyles';
 import Typography, { TypographyProps } from '@material-ui/core/Typography';
 import NextComposed from '@next/NextComposed';
+import type { AnyRef } from '@utils/util';
 import clsx from 'clsx';
 import type { LinkProps as NextLinkProps } from 'next/link';
 import { useRouter } from 'next/router';
@@ -69,7 +70,7 @@ export default forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
 		}
 
 		return (
-			<MuiLink target="_blank" rel="noopener noreferrer" className={className} ref={ref} href={href as string} {...other}>
+			<MuiLink target="_blank" rel="noopener noreferrer" className={className} ref={ref as AnyRef} href={href as string} {...other}>
 				<If condition={Boolean(text)}>
 					<Then>
 						<Typography component="span" color="primary" variant="body2" {...TextTypographyProps}>
