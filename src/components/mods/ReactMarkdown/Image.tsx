@@ -17,7 +17,7 @@ interface ImageProps {
 	src: Exclude<NextImageProps['src'], string>;
 }
 
-const Image = forwardRef<HTMLImageElement, Parameters<Exclude<NormalComponents['img'], 'img'>>[0]>((props, ref) => {
+const Image = forwardRef<HTMLSpanElement, Parameters<Exclude<NormalComponents['img'], 'img'>>[0]>((props, ref) => {
 	const classes = useStyles();
 
 	const { src } = cast<ImageProps>(props);
