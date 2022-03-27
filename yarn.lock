@@ -2005,7 +2005,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/discord.js-utilities@npm:^4.9.2":
+"@sapphire/discord.js-utilities@npm:^4.9.3":
   version: 4.9.3
   resolution: "@sapphire/discord.js-utilities@npm:4.9.3"
   dependencies:
@@ -2017,7 +2017,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/eslint-config@npm:^4.3.1":
+"@sapphire/eslint-config@npm:^4.3.2":
   version: 4.3.2
   resolution: "@sapphire/eslint-config@npm:4.3.2"
   dependencies:
@@ -2046,7 +2046,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/prettier-config@npm:^1.4.0":
+"@sapphire/prettier-config@npm:^1.4.1":
   version: 1.4.1
   resolution: "@sapphire/prettier-config@npm:1.4.1"
   dependencies:
@@ -2064,7 +2064,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/ts-config@npm:^3.3.2":
+"@sapphire/ts-config@npm:^3.3.3":
   version: 3.3.3
   resolution: "@sapphire/ts-config@npm:3.3.3"
   dependencies:
@@ -2074,7 +2074,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/utilities@npm:^3.6.0, @sapphire/utilities@npm:^3.6.1":
+"@sapphire/utilities@npm:^3.6.1":
   version: 3.6.1
   resolution: "@sapphire/utilities@npm:3.6.1"
   checksum: 0a1479c7cb3f10455906d91a43e9457aec97155f5821d00d572920c0ee25e7842310e8af3ed0e2c967b8adc256016f38b4c3bf8f17843613bcb6754dbe5d9599
@@ -2098,12 +2098,12 @@ __metadata:
     "@material-ui/icons": ^4.11.2
     "@material-ui/lab": 4.0.0-alpha.60
     "@next/eslint-plugin-next": ^11.1.4
-    "@sapphire/discord.js-utilities": ^4.9.2
-    "@sapphire/eslint-config": ^4.3.1
+    "@sapphire/discord.js-utilities": ^4.9.3
+    "@sapphire/eslint-config": ^4.3.2
     "@sapphire/plugin-api": ^3.2.0
-    "@sapphire/prettier-config": ^1.4.0
-    "@sapphire/ts-config": ^3.3.2
-    "@sapphire/utilities": ^3.6.0
+    "@sapphire/prettier-config": ^1.4.1
+    "@sapphire/ts-config": ^3.3.3
+    "@sapphire/utilities": ^3.6.1
     "@skyra/audio": ^2.0.0
     "@skyra/discord-components-core": ^3.1.1
     "@skyra/discord-components-react": ^3.1.1
