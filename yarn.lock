@@ -2104,7 +2104,6 @@ __metadata:
     "@sapphire/prettier-config": ^1.4.2
     "@sapphire/ts-config": ^3.3.4
     "@sapphire/utilities": ^3.6.2
-    "@skyra/audio": ^2.0.0
     "@skyra/discord-components-core": ^3.1.1
     "@skyra/discord-components-react": ^3.1.1
     "@types/body-scroll-lock": ^3.1.0
@@ -2159,17 +2158,6 @@ __metadata:
     yup: ^0.32.11
   languageName: unknown
   linkType: soft
-
-"@skyra/audio@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@skyra/audio@npm:2.0.0"
-  dependencies:
-    backoff: ^2.5.0
-    tslib: ^2.3.1
-    ws: ^8.2.2
-  checksum: 7d4030c6bc185ae778a7dd7f0964230dddd03868a82057f6875ab6df8de055a77c750bc6522ecb99c422b476eb702a9b926e28ab6d7ecae5a347c13fcd3eccdc
-  languageName: node
-  linkType: hard
 
 "@skyra/discord-components-core@npm:^3.1.1":
   version: 3.1.1
@@ -3456,15 +3444,6 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: f1473df7b700d6795ca41301b1e65a0aff15ce6c1463fc0ce2cf0c821114b0330920f59d4cebf52976363ee817ba29ad2758544a4661a724b08191080b9fe1da
-  languageName: node
-  linkType: hard
-
-"backoff@npm:^2.5.0":
-  version: 2.5.0
-  resolution: "backoff@npm:2.5.0"
-  dependencies:
-    precond: 0.2
-  checksum: ccdcf2a26acd9379d0d4f09e3fb3b7ee34dee94f07ab74d1e38b38f89a3675d9f3cbebb142d9c61c655f4c9eb63f1d6ec28cebeb3dc9215efd8fe7cef92725b9
   languageName: node
   linkType: hard
 
@@ -8689,13 +8668,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"precond@npm:0.2":
-  version: 0.2.3
-  resolution: "precond@npm:0.2.3"
-  checksum: c613e7d68af3e0b43a294a994bf067cc2bc44b03fd17bc4fb133e30617a4f5b49414b08e9b392d52d7c6822d8a71f66a7fe93a8a1e7d02240177202cff3f63ef
-  languageName: node
-  linkType: hard
-
 "prelude-ls@npm:^1.2.1":
   version: 1.2.1
   resolution: "prelude-ls@npm:1.2.1"
@@ -11396,7 +11368,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^8.2.2, ws@npm:^8.4.0":
+"ws@npm:^8.4.0":
   version: 8.5.0
   resolution: "ws@npm:8.5.0"
   peerDependencies:
