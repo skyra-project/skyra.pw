@@ -35,8 +35,7 @@ export namespace Roles {
 			| 'RestrictedEmoji'
 			| 'RestrictedVoice'
 			| 'Public'
-			| 'RemoveInitial'
-			| 'Dj'}`;
+			| 'RemoveInitial'}`;
 
 		name: string;
 

@@ -1,8 +1,6 @@
 export const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 export const BASE_WEB_URL = process.env.NEXT_PUBLIC_BASE_WEB_URL;
 export const BASE_API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
-export const WS_URL = process.env.NEXT_PUBLIC_WS_URL;
-export const BASE_CDN_URL = 'https://cdn.skyra.pw';
 
 const DiscordOauthURL = `https://discord.com/oauth2/authorize`;
 export const serverURL = 'https://discord.com/invite/6gakFR2';

@@ -46,12 +46,6 @@ export interface GuildSettings {
 	messagesModerationMessageDisplay: boolean;
 	messagesModerationReasonDisplay: boolean;
 	messagesModeratorNameDisplay: boolean;
-	musicAllowedRoles: string[];
-	musicAllowedVoiceChannels: string[];
-	musicAllowStreams: boolean;
-	musicDefaultVolume: number;
-	musicMaximumDuration: number;
-	musicMaximumEntriesPerUser: number;
 	noMentionSpamAlerts: boolean;
 	noMentionSpamEnabled: boolean;
 	noMentionSpamMentionsAllowed: number;
@@ -63,7 +57,6 @@ export interface GuildSettings {
 	reactionRoles: ReactionRole[];
 	rolesAdmin: string[];
 	rolesAuto: RolesAuto[];
-	rolesDj: string[];
 	rolesInitial: string | null;
 	rolesModerator: string[];
 	rolesMuted: string | null;

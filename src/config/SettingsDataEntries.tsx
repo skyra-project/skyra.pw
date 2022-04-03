@@ -93,11 +93,6 @@ export const ConfigurableRoles: Roles.Role[] = [
 		key: 'rolesRestrictedVoice'
 	},
 	{
-		name: 'DJ',
-		tooltip: "The DJ roles for this server. DJs have more advanced control over Skyra's music commands",
-		key: 'rolesDj'
-	},
-	{
 		name: 'Public Roles',
 		tooltip: 'The public roles. These can be claimed by any user using the "roles" command.',
 		key: 'rolesPublic'

@@ -21,7 +21,6 @@ import GavelIcon from '@material-ui/icons/Gavel';
 import RolesIcon from '@material-ui/icons/Group';
 import InputIcon from '@material-ui/icons/Input';
 import MessagesIcon from '@material-ui/icons/Message';
-import MusicIcon from '@material-ui/icons/MusicNote';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Tooltip from '@mui/Tooltip';
@@ -280,16 +279,6 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 						href={`/guilds/${guildId}/${GuildRoutes.Suggestions}`}
 						itemText="Suggestions"
 						Icon={<FeedbackIcon />}
-					/>
-
-					{/* ------------------------------- */}
-
-					<ListItemLink
-						listItemOnClick={closeSidebarOnMobile}
-						listItemDisabled={!guildData || isLoading}
-						href={`/music/${guildId}`}
-						itemText="Music"
-						Icon={<MusicIcon />}
 					/>
 				</List>
 			</Box>
