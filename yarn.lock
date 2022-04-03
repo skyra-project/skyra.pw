@@ -2122,7 +2122,6 @@ __metadata:
     deepmerge: ^4.2.2
     discord-api-types: ^0.30.0
     discord.js: ^13.6.0
-    encoding: ^0.1.13
     eslint: ^8.12.0
     eslint-config-next: ^11.1.4
     eslint-config-prettier: ^8.5.0
@@ -2148,10 +2147,8 @@ __metadata:
     react-color: ^2.19.3
     react-dom: 17.0.2
     react-emoji-render: ^1.2.4
-    react-flip-move: ^3.0.4
     react-if: ^4.1.1
     react-markdown: 6.0.3
-    react-player: ^2.10.0
     react-virtuoso: ^2.8.4
     rehype-raw: 5.1.0
     rehype-sanitize: 4.0.0
@@ -4555,7 +4552,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"deepmerge@npm:^4.0.0, deepmerge@npm:^4.2.2":
+"deepmerge@npm:^4.2.2":
   version: 4.2.2
   resolution: "deepmerge@npm:4.2.2"
   checksum: a8c43a1ed8d6d1ed2b5bf569fa4c8eb9f0924034baf75d5d406e47e157a451075c4db353efea7b6bcc56ec48116a8ce72fccf867b6e078e7c561904b5897530b
@@ -7159,13 +7156,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"load-script@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "load-script@npm:1.0.0"
-  checksum: 8458e3f07b4a86f8d9d66e47a987811491a5d013af23ba7b371c6d3c9dc899885b072ccf65abf7874c10cb197d4975eacd8a7a125bfb38dbbcb267539f5dc1e9
-  languageName: node
-  linkType: hard
-
 "loader-runner@npm:^4.2.0":
   version: 4.2.0
   resolution: "loader-runner@npm:4.2.0"
@@ -7557,13 +7547,6 @@ __metadata:
   version: 1.0.1
   resolution: "mdurl@npm:1.0.1"
   checksum: 71731ecba943926bfbf9f9b51e28b5945f9411c4eda80894221b47cc105afa43ba2da820732b436f0798fd3edbbffcd1fc1415843c41a87fea08a41cc1e3d02b
-  languageName: node
-  linkType: hard
-
-"memoize-one@npm:^5.1.1":
-  version: 5.2.1
-  resolution: "memoize-one@npm:5.2.1"
-  checksum: a3cba7b824ebcf24cdfcd234aa7f86f3ad6394b8d9be4c96ff756dafb8b51c7f71320785fbc2304f1af48a0467cbbd2a409efc9333025700ed523f254cb52e3d
   languageName: node
   linkType: hard
 
@@ -9008,23 +8991,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-fast-compare@npm:^3.0.1":
-  version: 3.2.0
-  resolution: "react-fast-compare@npm:3.2.0"
-  checksum: 8ef272c825ae329f61633ce4ce7f15aa5b84e5214d88bc0823880236e03e985a13195befa2c7a4eda7db3b017dc7985729152d88445823f652403cf36c2b86aa
-  languageName: node
-  linkType: hard
-
-"react-flip-move@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "react-flip-move@npm:3.0.4"
-  peerDependencies:
-    react: ">=16.3.x"
-    react-dom: ">=16.3.x"
-  checksum: 048295a674b3c044539250aa1f2a5e9d60dea2f8fd859bd9ad2785b7b0676a8b2caebe9c1510ff3584b882316d76d6573dc28fdfc0cca5ddcc58c89fcd2da466
-  languageName: node
-  linkType: hard
-
 "react-if@npm:^4.1.1":
   version: 4.1.1
   resolution: "react-if@npm:4.1.1"
@@ -9069,21 +9035,6 @@ __metadata:
     "@types/react": ">=16"
     react: ">=16"
   checksum: 5176e6a314a397b4747570213ae6c092f76c5c3dc67c748731243a0d4108e002134a9061cea87df1bea00db46cc7d238e092bae1609de74983c844e8386c0554
-  languageName: node
-  linkType: hard
-
-"react-player@npm:^2.10.0":
-  version: 2.10.0
-  resolution: "react-player@npm:2.10.0"
-  dependencies:
-    deepmerge: ^4.0.0
-    load-script: ^1.0.0
-    memoize-one: ^5.1.1
-    prop-types: ^15.7.2
-    react-fast-compare: ^3.0.1
-  peerDependencies:
-    react: ">=16.6.0"
-  checksum: 6ed5200120d5141d2ff9feaf99364314a5ec1853a90cf4f89cf1a5032884169a13e7c915470ffb41f21fe9841405edd635134927c45f707f51952dcdbce30248
   languageName: node
   linkType: hard
 
