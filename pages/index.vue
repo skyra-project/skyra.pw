@@ -42,6 +42,7 @@ const bots = [
 ];
 
 definePageMeta({
-	layout: 'landing'
+	fit: true,
+	nav: false
 });
 </script>

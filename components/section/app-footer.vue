@@ -1,5 +1,5 @@
 <template>
-	<footer class="footer p-10 mt-10 absolute bottom-0 bg-base-200 text-base-content">
+	<footer class="footer p-10 mt-10 bg-base-200 text-base-content">
 		<div>
 			<svg
 				width="50"
@@ -32,8 +32,8 @@
 		</div>
 		<div>
 			<span class="footer-title">Legal</span>
-			<a class="link link-hover">Terms of use</a>
-			<a class="link link-hover">Privacy policy</a>
+			<nuxt-link class="link link-hover" to="terms">Terms of use</nuxt-link>
+			<nuxt-link class="link link-hover" to="privacy">Privacy policy</nuxt-link>
 			<a class="link link-hover">Cookie policy</a>
 		</div>
 	</footer>

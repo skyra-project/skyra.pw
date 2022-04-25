@@ -1,8 +1,10 @@
-import 'vue-router';
+import 'nuxt/dist/pages/runtime/composables';
 
-declare module 'vue-router' {
-  interface RouteMeta {
-	  invite?: string;
-	  dashboard?: boolean;
-  }
- }
+declare module 'nuxt/dist/pages/runtime/composables' {
+	interface PageMeta {
+		invite?: string;
+		dashboard?: boolean;
+		nav?: boolean;
+		fit?: boolean;
+	}
+}
