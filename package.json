@@ -27,5 +27,8 @@
 		"vue-eslint-parser": "^8.3.0"
 	},
 	"prettier": "@sapphire/prettier-config",
-	"packageManager": "yarn@3.2.0"
+	"packageManager": "yarn@3.2.0",
+	"dependencies": {
+		"@vueuse/nuxt": "^8.3.1"
+	}
 }

@@ -1,5 +1,5 @@
 <template>
-	<div class="content-fit pb-10">
+	<div class="content-fit py-10">
 		<Head>
 			<Title>Skyra | Privacy Policy</Title>
 			<Meta name="description" content="Skyra Project's Privacy Policy" />

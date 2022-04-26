@@ -21,7 +21,7 @@
 			</div>
 		</div>
 
-		<div class="flex flex-col flex-nowrap sm:flex-wrap sm:flex-row content-fit justify-center gap-y-4">
+		<div class="content-fit flex flex-col flex-nowrap sm:flex-wrap sm:flex-row justify-center gap-y-4">
 			<div v-for="bot of bots" class="sm:basis-1/2 xl:basis-1/3">
 				<div class="card bg-base-200 shadow-xl ring-1 ring-base-300 mx-2 h-full">
 					<div class="card-body">

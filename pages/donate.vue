@@ -1,5 +1,5 @@
 <template>
-	<div class="content-fit pb-10">
+	<div class="content-fit py-10">
 		<Head>
 			<Title>Skyra | Donation Links</Title>
 			<Meta name="description" content="See how you can donate to Skyra Project's development" />

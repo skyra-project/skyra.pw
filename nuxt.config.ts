@@ -10,6 +10,7 @@ export default defineNuxtConfig({
 			autoprefixer: {}
 		}
 	},
+	modules: ['@vueuse/nuxt'],
 	typescript: {
 		strict: true
 	}

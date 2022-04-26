@@ -533,7 +533,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxt/kit@npm:^3.0.0-rc.1":
+"@nuxt/kit@npm:^3.0.0-rc.0, @nuxt/kit@npm:^3.0.0-rc.1":
   version: 3.0.0-rc.1
   resolution: "@nuxt/kit@npm:3.0.0-rc.1"
   dependencies:
@@ -1211,12 +1211,68 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vueuse/core@npm:8.3.1":
+  version: 8.3.1
+  resolution: "@vueuse/core@npm:8.3.1"
+  dependencies:
+    "@vueuse/metadata": 8.3.1
+    "@vueuse/shared": 8.3.1
+    vue-demi: "*"
+  peerDependencies:
+    "@vue/composition-api": ^1.1.0
+    vue: ^2.6.0 || ^3.2.0
+  peerDependenciesMeta:
+    "@vue/composition-api":
+      optional: true
+    vue:
+      optional: true
+  checksum: 1fab2831029d266b525b8fea43217469c8f13021855333e51439920890d28be039a9a6d7d7e2439e4dea5910fc100c671d7187bd5065b53a3a91d59defe9492a
+  languageName: node
+  linkType: hard
+
 "@vueuse/head@npm:^0.7.6":
   version: 0.7.6
   resolution: "@vueuse/head@npm:0.7.6"
   peerDependencies:
     vue: ">=3"
   checksum: d8f49f5c2894b0d517231424a73e0efc42c6887cf2cc9e9dce7190229ac736a1864bc60d952080be3fa620e1309dd120b34595ae7a02800f29c44949f1590a21
+  languageName: node
+  linkType: hard
+
+"@vueuse/metadata@npm:8.3.1":
+  version: 8.3.1
+  resolution: "@vueuse/metadata@npm:8.3.1"
+  checksum: 6b9b3d6f625c1b3b960d7861bb5004df6773073d3b9da13e5f9db26f7446aeba346fdbb79ea9dba66c900dfaf6681eac44aebb9a5545e77cb49d6f08653183b0
+  languageName: node
+  linkType: hard
+
+"@vueuse/nuxt@npm:^8.3.1":
+  version: 8.3.1
+  resolution: "@vueuse/nuxt@npm:8.3.1"
+  dependencies:
+    "@nuxt/kit": ^3.0.0-rc.0
+    "@vueuse/core": 8.3.1
+    "@vueuse/metadata": 8.3.1
+    local-pkg: ^0.4.1
+    vue-demi: "*"
+  checksum: 00e73161ddce1de918abefcef66eaa2518516929e04966e0531ac143e62d15e729b048536e1d4f5dd73f9ed562552a582bb18c1f37d59de45d0b52e66713069a
+  languageName: node
+  linkType: hard
+
+"@vueuse/shared@npm:8.3.1":
+  version: 8.3.1
+  resolution: "@vueuse/shared@npm:8.3.1"
+  dependencies:
+    vue-demi: "*"
+  peerDependencies:
+    "@vue/composition-api": ^1.1.0
+    vue: ^2.6.0 || ^3.2.0
+  peerDependenciesMeta:
+    "@vue/composition-api":
+      optional: true
+    vue:
+      optional: true
+  checksum: a3457720ac61bf5e597c8516d64e732489fe50204d0af254d3cd1644477527b3e88758fe358d7a9ee57d68c70320ac06e39b95d3d573cb83bc4df485e7ae6451
   languageName: node
   linkType: hard
 
@@ -6553,6 +6609,7 @@ __metadata:
     "@types/prettier": ^2
     "@typescript-eslint/eslint-plugin": ^5.21.0
     "@typescript-eslint/parser": ^5.21.0
+    "@vueuse/nuxt": ^8.3.1
     autoprefixer: ^10.4.5
     daisyui: ^2.14.2
     eslint: ^8.14.0
@@ -7683,6 +7740,22 @@ __metadata:
   dependencies:
     bundle-runner: ^0.0.1
   checksum: 6ef21f019e2b415554dfc1c4ba554a39248a7d8107001de4a3637098787be06cf9784273ec997ee7e2a348949225d2ee534e5523ca8ec9c981e8d7e3965228d0
+  languageName: node
+  linkType: hard
+
+"vue-demi@npm:*":
+  version: 0.12.5
+  resolution: "vue-demi@npm:0.12.5"
+  peerDependencies:
+    "@vue/composition-api": ^1.0.0-rc.1
+    vue: ^3.0.0-0 || ^2.6.0
+  peerDependenciesMeta:
+    "@vue/composition-api":
+      optional: true
+  bin:
+    vue-demi-fix: bin/vue-demi-fix.js
+    vue-demi-switch: bin/vue-demi-switch.js
+  checksum: 40a0470caea8312e0d4df2541f141c36c768dfc7f2f7d41f0f28ba29df11d3119e2f09b94c815f13b7c7f3f45dbc247b0e9e0c02a1800e2823e241c1d771e39b
   languageName: node
   linkType: hard
 

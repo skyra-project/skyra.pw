@@ -1,7 +1,8 @@
 <template>
 	<div class="navbar bg-base-200">
 		<div class="flex-1">
-			<nuxt-link to="/" class="btn btn-ghost normal-case text-xl">Skyra Project</nuxt-link>
+			<nuxt-link to="/" class="btn btn-ghost hidden sm:inline-flex normal-case text-xl">Skyra Project</nuxt-link>
+			<nuxt-link to="/" class="btn btn-ghost inline-flex sm:hidden"><icons-skyra class="fill-current w-4" /></nuxt-link>
 		</div>
 		<div class="flex-none">
 			<ul class="menu menu-horizontal p-0">
