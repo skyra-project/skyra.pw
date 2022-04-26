@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	abbr[title] {
+		text-underline-offset: 0.1em;
+	}
+}
+
+@layer components {
+	.content-fit {
+		@apply lg:px-[calc(100%/12)] xl:px-[calc(100%/10)] 2xl:px-[calc(100%/6)];
+	}
+
+	::-webkit-scrollbar {
+		height: 8px; /* Manually measured based on the original thin scrollbar on Firefox */
+		width: 8px; /* Manually measured based on the original thin scrollbar on Firefox */
+	}
+
+	::-webkit-scrollbar-thumb {
+		@apply bg-secondary;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		@apply bg-secondary-focus;
+	}
+
+	::-webkit-scrollbar-track {
+		@apply bg-base-100;
+	}
+}
