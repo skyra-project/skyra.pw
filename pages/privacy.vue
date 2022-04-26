@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="content-fit pb-10">
 		<Head>
 			<Title>Skyra | Privacy Policy</Title>
 			<Meta name="description" content="Skyra Project's Privacy Policy" />
@@ -255,9 +255,3 @@
 		</article>
 	</div>
 </template>
-
-<script setup lang="ts">
-definePageMeta({
-	fit: true
-});
-</script>

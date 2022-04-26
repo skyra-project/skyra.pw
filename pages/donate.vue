@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="content-fit pb-10">
 		<Head>
 			<Title>Skyra | Donation Links</Title>
 			<Meta name="description" content="See how you can donate to Skyra Project's development" />
@@ -52,9 +52,3 @@
 		</article>
 	</div>
 </template>
-
-<script setup lang="ts">
-definePageMeta({
-	fit: true
-});
-</script>

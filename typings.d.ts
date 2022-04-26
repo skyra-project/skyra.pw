@@ -5,6 +5,5 @@ declare module 'nuxt/dist/pages/runtime/composables' {
 		invite?: string;
 		dashboard?: boolean;
 		nav?: boolean;
-		fit?: boolean;
 	}
 }

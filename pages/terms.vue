@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="content-fit pb-10">
 		<Head>
 			<Title>Skyra | Terms of Service</Title>
 			<Meta name="description" content="Skyra Project's Terms of Service" />
@@ -72,9 +72,3 @@
 		</article>
 	</div>
 </template>
-
-<script setup lang="ts">
-definePageMeta({
-	fit: true
-});
-</script>
