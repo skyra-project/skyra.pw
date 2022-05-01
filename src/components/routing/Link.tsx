@@ -71,7 +71,15 @@ export default forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
 		}
 
 		return (
-			<MuiLink target="_blank" rel="noopener noreferrer" className={className} ref={ref as AnyRef} href={href as string} {...other}>
+			<MuiLink
+				target="_blank"
+				rel="noopener noreferrer"
+				className={className}
+				ref={ref as AnyRef}
+				href={href as string}
+				{...other}
+				underline="hover"
+			>
 				<If condition={Boolean(text)}>
 					<Then>
 						<Typography component="span" color="primary" variant="body2" {...TextTypographyProps}>
