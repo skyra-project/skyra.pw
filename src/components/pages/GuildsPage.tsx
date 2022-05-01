@@ -2,10 +2,12 @@ import { useAuthenticated } from '@contexts/AuthenticationContext';
 import { useDiscordPack } from '@contexts/DiscordPackContext';
 import { useMobileContext } from '@contexts/MobileContext';
 import GeneralPage from '@layout/General';
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
+import { Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 import { FilteredGuildCards } from '@presentational/GuildCard';
 import type { NextPage } from 'next';
 import React from 'react';
@@ -21,13 +23,13 @@ const useStyles = makeStyles((theme: Theme) =>
 			[theme.breakpoints.up('sm')]: {
 				height: 'calc(100vh - 200px - 128px)'
 			},
-			[theme.breakpoints.down('xs')]: {
+			[theme.breakpoints.down('sm')]: {
 				height: ({ authenticated }: { authenticated: boolean }) => (authenticated ? 'unset' : 'calc(100vh - 200px - 128px)')
 			}
 		},
 		notSignedInText: {
 			fontSize: theme.typography.pxToRem(40),
-			[theme.breakpoints.down('sm')]: {
+			[theme.breakpoints.down('md')]: {
 				fontSize: theme.typography.pxToRem(30)
 			}
 		}

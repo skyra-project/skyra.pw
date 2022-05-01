@@ -3,16 +3,18 @@ import type { CustomCommand } from '@config/types/GuildSettings';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import DeleteIcon from '@material-ui/icons/Delete';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid/Grid';
+import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import ListItemText from '@mui/material/ListItemText';
+import { Theme, useTheme } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Typography from '@mui/material/Typography';
+import DeleteIcon from '@mui/icons-material/Delete';
 import SelectWithLabel from '@mods/Formik/SelectWithLabel';
 import TextField from '@mods/Formik/TextField';
 import GfmReactMarkdown from '@mods/ReactMarkdown/GfmReactMarkdown';
@@ -270,6 +272,7 @@ const CustomCommandSettings = () => {
 													)
 												})
 											}
+											size="large"
 										>
 											<DeleteIcon />
 										</IconButton>

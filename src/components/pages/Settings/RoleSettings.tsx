@@ -4,8 +4,10 @@ import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettings
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import PageHeader from '@layout/Settings/PageHeader';
 import Section from '@layout/Settings/Section';
-import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { Theme, useTheme } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import SimpleGrid from '@mui/SimpleGrid';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectRole, { SelectRoleProps } from '@selects/SelectRole';
@@ -37,7 +39,7 @@ type SelectCommonProps = Omit<SelectRoleProps, 'value' | 'onChange'> & Omit<Sele
 const RoleSettings: FC = () => {
 	const classes = useStyles();
 	const theme = useTheme();
-	const isOnMobile = useMediaQuery(theme.breakpoints.down('sm'));
+	const isOnMobile = useMediaQuery(theme.breakpoints.down('md'));
 	const { guildData } = useGuildDataContext();
 	const { guildSettings } = useGuildSettingsContext();
 	const { guildSettingsChanges, setGuildSettingsChanges } = useGuildSettingsChangesContext();

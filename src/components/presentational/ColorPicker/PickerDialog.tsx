@@ -1,8 +1,10 @@
 // Copyright (c) 2017 LoicMahieu. All rights reserved. MIT license.
 // Source: https://github.com/LoicMahieu/material-ui-color-picker
 
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
+import { Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Box from '@mui/material/Box';
 import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import React, { FC, memo, MouseEventHandler, useEffect, useRef } from 'react';
 import { ChromePicker, ColorChangeHandler } from 'react-color';

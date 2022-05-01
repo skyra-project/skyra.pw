@@ -21,13 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import IconButton from '@material-ui/core/IconButton';
-import Input, { InputProps } from '@material-ui/core/Input';
-import Paper, { PaperProps } from '@material-ui/core/Paper';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import type { CSSProperties } from '@material-ui/core/styles/withStyles';
-import ClearIcon from '@material-ui/icons/Clear';
-import SearchIcon from '@material-ui/icons/Search';
+import IconButton from '@mui/material/IconButton';
+import Input, { InputProps } from '@mui/material/Input';
+import Paper, { PaperProps } from '@mui/material/Paper';
+import { CSSProperties } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import ClearIcon from '@mui/icons-material/Clear';
+import SearchIcon from '@mui/icons-material/Search';
 import clsx from 'clsx';
 import React, { forwardRef, memo, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 
@@ -108,7 +109,7 @@ const useStyles = makeStyles((theme) =>
 		},
 		searchContainer: {
 			margin: 'auto 16px',
-			width: `calc(100% - ${theme.spacing(6 + 4)}px)` // 6 button + 4 margin
+			width: `calc(100% - ${theme.spacing(6 + 4)})` // 6 button + 4 margin
 		}
 	})
 );
@@ -233,6 +234,7 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 						[classes.iconButtonHidden]: value !== ''
 					})}
 					disabled={disabled}
+					size="large"
 				>
 					{React.cloneElement(<SearchIcon />, {
 						classes: { root: classes.icon }
@@ -244,6 +246,7 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 						[classes.iconButtonHidden]: value === ''
 					})}
 					disabled={disabled}
+					size="large"
 				>
 					{React.cloneElement(<ClearIcon />, {
 						classes: { root: classes.icon }

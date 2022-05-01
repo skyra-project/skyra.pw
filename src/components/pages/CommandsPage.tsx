@@ -1,9 +1,11 @@
 import type { FlattenedCommand } from '@config/types/ApiData';
 import GeneralPage from '@layout/General';
 import RefreshCommandsButton from '@layout/RefreshCommandsButton';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import { Theme } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import UiSearchBar from '@mui/UiSearchBar';
 import Category from '@presentational/CommandsPage/Category';
 import Loading from '@presentational/Loading';
@@ -26,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			position: 'sticky',
 			zIndex: theme.zIndex.appBar - 1,
 			top: theme.spacing(9),
-			[theme.breakpoints.down('sm')]: {
+			[theme.breakpoints.down('md')]: {
 				top: theme.spacing(8.5)
 			}
 		}

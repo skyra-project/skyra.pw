@@ -1,9 +1,11 @@
 import { setAuthenticated, useAuthenticated } from '@contexts/AuthenticationContext';
 import { mergeDiscordPack } from '@contexts/DiscordPackContext';
 import Footer from '@layout/Footer';
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import Box, { BoxProps } from '@material-ui/core/Box';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import { Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Box, { BoxProps } from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
 import { syncUser } from '@utils/util';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';

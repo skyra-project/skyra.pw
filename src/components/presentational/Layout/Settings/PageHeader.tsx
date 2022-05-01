@@ -1,6 +1,8 @@
-import Divider from '@material-ui/core/Divider';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Typography, { TypographyProps } from '@material-ui/core/Typography';
+import Divider from '@mui/material/Divider';
+import { Theme } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Typography, { TypographyProps } from '@mui/material/Typography';
 import React, { FC, memo, ReactNode } from 'react';
 
 interface PageHeaderProps {

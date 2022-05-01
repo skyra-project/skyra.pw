@@ -1,7 +1,9 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
+import { Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Box from '@mui/material/Box';
+import MenuItem from '@mui/material/MenuItem';
+import TextField from '@mui/material/TextField';
 import React, { ChangeEvent, FC, memo, useState } from 'react';
 import Select from './Select';
 
@@ -38,14 +40,14 @@ const useStyles = makeStyles((theme: Theme) =>
 			width: theme.spacing(20)
 		},
 		selectBoxMargin: {
-			[theme.breakpoints.down('sm')]: {
+			[theme.breakpoints.down('md')]: {
 				marginTop: theme.spacing(2)
 			}
 		},
 		textField: {
 			paddingLeft: theme.spacing(2),
 			width: theme.spacing(28),
-			[theme.breakpoints.down('sm')]: {
+			[theme.breakpoints.down('md')]: {
 				marginTop: theme.spacing(2),
 				width: theme.spacing(10),
 				paddingLeft: 'unset'
@@ -60,7 +62,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		label: {
 			paddingLeft: theme.spacing(2),
-			[theme.breakpoints.down('sm')]: {
+			[theme.breakpoints.down('md')]: {
 				paddingLeft: 'unset'
 			}
 		}

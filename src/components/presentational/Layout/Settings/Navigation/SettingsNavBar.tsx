@@ -1,13 +1,15 @@
 import type { TransformedLoginData } from '@config/types/ApiData';
 import UserMenu from '@layout/Navigation/UserMenu';
-import AppBar from '@material-ui/core/AppBar';
-import Box from '@material-ui/core/Box';
-import IconButton from '@material-ui/core/IconButton';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import MenuIcon from '@material-ui/icons/Menu';
-import Skeleton from '@material-ui/lab/Skeleton';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import { Theme } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import MenuIcon from '@mui/icons-material/Menu';
+import Skeleton from '@mui/material/Skeleton';
 import { SettingsDrawerWidth } from '@utils/constants';
 import React, { FC, memo } from 'react';
 import type { ValuesType } from 'utility-types';
@@ -40,7 +42,7 @@ const SettingsNavBar: FC<SettingsNavBarProps> = ({ guildData, toggleSidebar }) =
 	return (
 		<AppBar position="fixed" className={classes.appBar}>
 			<Toolbar>
-				<IconButton color="primary" edge="start" onClick={toggleSidebar} className={classes.menuButton}>
+				<IconButton color="primary" edge="start" onClick={toggleSidebar} className={classes.menuButton} size="large">
 					<MenuIcon color="secondary" />
 				</IconButton>
 

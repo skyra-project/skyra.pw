@@ -1,6 +1,8 @@
 import type features from '@assets/features';
 import { useAuthenticated } from '@contexts/AuthenticationContext';
-import { Box, createStyles, Divider, Hidden, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Box, Divider, Hidden, Theme, Typography } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 import React from 'react';
 
@@ -24,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'flex',
 			flexDirection: 'column',
 			width: '47%',
-			[theme.breakpoints.down('md')]: {
+			[theme.breakpoints.down('lg')]: {
 				width: '100%'
 			}
 		}
@@ -54,7 +56,7 @@ const HomePageSection = ({ name, previewContent, text }: typeof features extends
 				<Divider classes={{ root: classes.divider }} />
 				<Typography>{text}</Typography>
 			</div>
-			<Hidden mdDown>{previewContent}</Hidden>
+			<Hidden lgDown>{previewContent}</Hidden>
 		</Box>
 	);
 };

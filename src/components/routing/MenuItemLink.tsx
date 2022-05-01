@@ -1,7 +1,8 @@
-import { createStyles, makeStyles } from '@material-ui/core';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import MenuItem from '@material-ui/core/MenuItem';
-import Typography from '@material-ui/core/Typography';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import MenuItem from '@mui/material/MenuItem';
+import Typography from '@mui/material/Typography';
 import Link from '@routing/Link';
 import React, { forwardRef, memo, ReactElement } from 'react';
 

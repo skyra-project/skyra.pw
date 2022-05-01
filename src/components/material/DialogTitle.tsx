@@ -1,8 +1,10 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import CloseIcon from '@material-ui/icons/Close';
+import { Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import MuiDialogTitle from '@mui/material/DialogTitle';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import CloseIcon from '@mui/icons-material/Close';
 import React, { memo, PropsWithChildren } from 'react';
 
 interface DialogTitleProps {
@@ -26,7 +28,7 @@ const DialogTitle = ({ children, onClose }: PropsWithChildren<DialogTitleProps>)
 	return (
 		<MuiDialogTitle disableTypography>
 			<Typography variant="h6">{children}</Typography>
-			<IconButton classes={{ root: classes.dialogClose }} onClick={onClose}>
+			<IconButton classes={{ root: classes.dialogClose }} onClick={onClose} size="large">
 				<CloseIcon />
 			</IconButton>
 		</MuiDialogTitle>

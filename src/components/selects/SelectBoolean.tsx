@@ -1,6 +1,6 @@
-import FormControlLabel, { FormControlLabelProps } from '@material-ui/core/FormControlLabel';
-import ListItemText from '@material-ui/core/ListItemText';
-import Switch, { SwitchProps } from '@material-ui/core/Switch';
+import FormControlLabel, { FormControlLabelProps } from '@mui/material/FormControlLabel';
+import ListItemText from '@mui/material/ListItemText';
+import Switch, { SwitchProps } from '@mui/material/Switch';
 import React, { FC, memo } from 'react';
 
 export interface SelectBooleanProps extends SwitchProps {

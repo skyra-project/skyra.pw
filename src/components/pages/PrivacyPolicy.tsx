@@ -1,9 +1,11 @@
 import GeneralPage from '@layout/General';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Divider from '@material-ui/core/Divider';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Divider from '@mui/material/Divider';
+import { Theme } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
 import React from 'react';
 
@@ -21,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		header: {
 			paddingTop: theme.spacing(3),
 			paddingBottom: theme.spacing(3),
-			[theme.breakpoints.down('sm')]: {
+			[theme.breakpoints.down('md')]: {
 				fontSize: theme.typography.pxToRem(30)
 			}
 		},
@@ -36,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			}
 		},
 		privacyPolicyHeader: {
-			[theme.breakpoints.down('sm')]: {
+			[theme.breakpoints.down('md')]: {
 				fontSize: theme.typography.pxToRem(50)
 			}
 		}

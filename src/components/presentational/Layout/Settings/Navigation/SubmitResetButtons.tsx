@@ -1,10 +1,12 @@
 import { useMobileContext } from '@contexts/MobileContext';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import DeleteIcon from '@material-ui/icons/DeleteForever';
-import SaveIconIcon from '@material-ui/icons/Save';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import { Theme } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import DeleteIcon from '@mui/icons-material/DeleteForever';
+import SaveIconIcon from '@mui/icons-material/Save';
 import React, { FC, memo } from 'react';
 
 interface SubmitResetButtonsProps {

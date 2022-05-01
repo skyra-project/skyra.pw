@@ -1,9 +1,11 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
-import Fab from '@material-ui/core/Fab';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Zoom from '@material-ui/core/Zoom';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import { Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Box from '@mui/material/Box';
+import Fab from '@mui/material/Fab';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
+import Zoom from '@mui/material/Zoom';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Tooltip from '@mui/Tooltip';
 import React, { FC, memo, PropsWithChildren } from 'react';
 

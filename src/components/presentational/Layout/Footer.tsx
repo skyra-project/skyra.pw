@@ -1,9 +1,11 @@
 import SkyraLogo from '@assets/skyraLogo';
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Hidden from '@material-ui/core/Hidden';
-import Typography from '@material-ui/core/Typography';
+import { Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Hidden from '@mui/material/Hidden';
+import Typography from '@mui/material/Typography';
 import Link from '@routing/Link';
 import { CLIENT_ID, inviteURL } from '@utils/constants';
 import React, { memo } from 'react';
@@ -14,14 +16,14 @@ const useStyles = makeStyles((theme: Theme) =>
 			padding: '50px 0px',
 			background: theme.palette.secondary.main,
 			height: 200,
-			[theme.breakpoints.down('xs')]: {
+			[theme.breakpoints.down('sm')]: {
 				height: 'auto'
 			}
 		},
 		container: {
 			display: 'flex',
 			justifyContent: 'space-around',
-			[theme.breakpoints.down('xs')]: {
+			[theme.breakpoints.down('sm')]: {
 				flexDirection: 'column',
 				alignContent: 'center',
 				justifyContent: 'center',
@@ -68,7 +70,7 @@ const Footer = () => {
 	return (
 		<Box component="footer" className={classes.root}>
 			<Container maxWidth="sm">
-				<Hidden xsDown>
+				<Hidden smDown>
 					<Box className={classes.container}>
 						<Left />
 						<Middle />

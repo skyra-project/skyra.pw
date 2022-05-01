@@ -1,5 +1,7 @@
-import MuiList from '@material-ui/core/List';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import MuiList from '@mui/material/List';
+import { Theme } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import React, { forwardRef } from 'react';
 import type { NormalComponents } from 'react-markdown/src/ast-to-react';
 

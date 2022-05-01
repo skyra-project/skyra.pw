@@ -1,16 +1,18 @@
 import type { FlattenedCommand } from '@config/types/ApiData';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionActions from '@material-ui/core/AccordionActions';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import Grid from '@material-ui/core/Grid';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import BrushIcon from '@material-ui/icons/BrushTwoTone';
-import CodeIcon from '@material-ui/icons/CodeTwoTone';
-import CreateIcon from '@material-ui/icons/CreateTwoTone';
-import ExamplesIcon from '@material-ui/icons/EmojiObjects';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Accordion from '@mui/material/Accordion';
+import AccordionActions from '@mui/material/AccordionActions';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import Grid from '@mui/material/Grid';
+import { Theme } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Typography from '@mui/material/Typography';
+import BrushIcon from '@mui/icons-material/BrushTwoTone';
+import CodeIcon from '@mui/icons-material/CodeTwoTone';
+import CreateIcon from '@mui/icons-material/CreateTwoTone';
+import ExamplesIcon from '@mui/icons-material/EmojiObjects';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Chips from '@presentational/CommandsPage/Chips';
 import { reactStringReplace } from '@utils/reactStringReplace';
 import clsx from 'clsx';
@@ -28,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			marginTop: theme.spacing(2),
 			marginBottom: theme.spacing(2),
 			transition: 'width 0.2s ease-in-out',
-			[theme.breakpoints.down('xs')]: {
+			[theme.breakpoints.down('sm')]: {
 				maxWidth: 'none',
 				marginLeft: 0,
 				marginRight: 0

@@ -1,10 +1,12 @@
 import type { FlattenedCommand } from '@config/types/ApiData';
-import Chip from '@material-ui/core/Chip';
-import { amber, deepOrange } from '@material-ui/core/colors';
-import Grid from '@material-ui/core/Grid';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
-import LockIcon from '@material-ui/icons/Lock';
+import Chip from '@mui/material/Chip';
+import { amber, deepOrange } from '@mui/material/colors';
+import Grid from '@mui/material/Grid';
+import { Theme } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
+import LockIcon from '@mui/icons-material/Lock';
 import { useMobileContext } from 'contexts/MobileContext';
 import DiscordIcon from 'mdi-react/DiscordIcon';
 import React, { FC, memo, useCallback, useMemo } from 'react';

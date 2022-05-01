@@ -1,7 +1,8 @@
-import MuiLink from '@material-ui/core/Link';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import type { CSSProperties } from '@material-ui/core/styles/withStyles';
-import Typography, { TypographyProps } from '@material-ui/core/Typography';
+import MuiLink from '@mui/material/Link';
+import { Theme, CSSProperties } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Typography, { TypographyProps } from '@mui/material/Typography';
 import NextComposed from '@next/NextComposed';
 import type { AnyRef } from '@utils/util';
 import clsx from 'clsx';

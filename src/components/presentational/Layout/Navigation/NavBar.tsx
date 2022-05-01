@@ -1,7 +1,7 @@
-import AppBar from '@material-ui/core/AppBar';
-import Box from '@material-ui/core/Box';
-import Hidden from '@material-ui/core/Hidden';
-import Toolbar from '@material-ui/core/Toolbar';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Hidden from '@mui/material/Hidden';
+import Toolbar from '@mui/material/Toolbar';
 import React, { FC, memo } from 'react';
 import DesktopMenuItems from './DesktopMenuItems';
 import MobileNavMenu from './MobileNavMenu';
@@ -22,7 +22,7 @@ const NavBar: FC<NavBarProps> = ({ loading = false }) => {
 
 					<SkyraLogoButton />
 
-					<Hidden smDown>
+					<Hidden mdDown>
 						<DesktopMenuItems loading={loading} />
 					</Hidden>
 				</Toolbar>

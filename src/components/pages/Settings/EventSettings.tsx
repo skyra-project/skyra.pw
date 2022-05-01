@@ -2,7 +2,9 @@ import { ConfigurableMessageEvents, ConfigurableModerationEvents } from '@config
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
-import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Theme, Typography } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import SimpleGrid from '@mui/SimpleGrid';
 import Link from '@routing/Link';
 import SelectBoolean from '@selects/SelectBoolean';

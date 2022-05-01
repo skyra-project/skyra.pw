@@ -2,7 +2,7 @@ import features from '@assets/features';
 import { useAuthenticated } from '@contexts/AuthenticationContext';
 import { useDiscordPack } from '@contexts/DiscordPackContext';
 import GeneralPage from '@layout/General';
-import { Box, Container } from '@material-ui/core';
+import { Box, Container } from '@mui/material';
 import { FilteredGuildCards } from '@presentational/GuildCard';
 import HomePageSection from '@presentational/HomePageSection';
 import React, { FC } from 'react';

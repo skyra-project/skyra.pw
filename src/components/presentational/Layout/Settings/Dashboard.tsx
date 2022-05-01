@@ -5,10 +5,12 @@ import { mergeDiscordPack } from '@contexts/DiscordPackContext';
 import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
-import { Grow, useMediaQuery } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
-import Hidden from '@material-ui/core/Hidden';
-import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { Grow, useMediaQuery } from '@mui/material';
+import Box from '@mui/material/Box';
+import Hidden from '@mui/material/Hidden';
+import { Theme, useTheme } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import ErrorAlert from '@presentational/Alerts/Error';
 import Loading from '@presentational/Loading';
 import { objectToTuples } from '@sapphire/utilities';
@@ -50,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			marginTop: 64,
 			flexDirection: 'column',
 			overflowY: 'scroll',
-			[theme.breakpoints.down('sm')]: {
+			[theme.breakpoints.down('md')]: {
 				marginTop: 56
 			}
 		},
@@ -63,7 +65,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 	const theme = useTheme();
-	const isOnMobile = useMediaQuery(theme.breakpoints.down('sm'));
+	const isOnMobile = useMediaQuery(theme.breakpoints.down('md'));
 	const classes = useStyles();
 	const { guildData, setGuildData } = useGuildDataContext();
 	const { guildSettings, setGuildSettings } = useGuildSettingsContext();
@@ -173,7 +175,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 							toggleSidebar={toggleSidebar}
 						/>
 					</Hidden>
-					<Hidden xsDown>
+					<Hidden smDown>
 						<DesktopSettingsDrawer
 							guildData={guildData}
 							guildId={guildId}

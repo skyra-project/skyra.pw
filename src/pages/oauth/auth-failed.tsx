@@ -1,12 +1,14 @@
 import GeneralPage from '@layout/General';
-import { ButtonGroup, createStyles, makeStyles, Theme, useMediaQuery, useTheme } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import ForumIcon from '@material-ui/icons/Forum';
-import HomeIcon from '@material-ui/icons/Home';
+import { ButtonGroup, Theme, useMediaQuery, useTheme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import ForumIcon from '@mui/icons-material/Forum';
+import HomeIcon from '@mui/icons-material/Home';
 import { navigate } from '@utils/util';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
@@ -32,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const AuthFailedPage: NextPage = () => {
 	const classes = useStyles();
 	const theme = useTheme();
-	const isOnMobile = useMediaQuery(theme.breakpoints.down('sm'));
+	const isOnMobile = useMediaQuery(theme.breakpoints.down('md'));
 
 	return (
 		<>

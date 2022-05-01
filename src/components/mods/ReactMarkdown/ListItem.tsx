@@ -1,5 +1,5 @@
-import MuiListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import MuiListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 import React, { forwardRef } from 'react';
 import type { NormalComponents } from 'react-markdown/src/ast-to-react';
 

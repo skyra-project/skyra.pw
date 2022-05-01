@@ -4,19 +4,21 @@ import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettings
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import RefreshCommandsButton from '@layout/RefreshCommandsButton';
 import Section from '@layout/Settings/Section';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionActions from '@material-ui/core/AccordionActions';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import { green } from '@material-ui/core/colors';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Accordion from '@mui/material/Accordion';
+import AccordionActions from '@mui/material/AccordionActions';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import { green } from '@mui/material/colors';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import { Theme } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Typography from '@mui/material/Typography';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Loading from '@presentational/Loading';
 import SelectBoolean from '@selects/SelectBoolean';
 import React, { FC, memo, SetStateAction, useCallback, useEffect, useState } from 'react';
@@ -66,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const parseCommandDescription = (description: string) => description.replace(/<:(\w{2,32}):[0-9]{18}>/gi, '$1');
 
 const DisabledCommandSettings: FC<DisabledCommandSettingsProps> = ({ commands, setCommands }) => {
-	const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
+	const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 	const classes = useStyles();
 	const [expanded, setExpanded] = useState<string | false>(false);
 	const [loading, setLoading] = useState(true);

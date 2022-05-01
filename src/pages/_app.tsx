@@ -2,9 +2,9 @@ import '@config/globals.css';
 import DefaultSeoProps from '@config/SEO/DefaultSeoProps';
 import theme from '@config/theme';
 import { MobileContextProvider } from '@contexts/MobileContext';
-import { useMediaQuery } from '@material-ui/core';
-import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { useMediaQuery } from '@mui/material';
+import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
+import { ThemeProvider, Theme, StyledEngineProvider } from '@mui/material/styles';
 // Import just as a type because the GlobalThis type augment
 import type {} from '@skyra/discord-components-core';
 import { LocalStorageKeys } from '@utils/constants';
@@ -16,6 +16,11 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import NextNprogress from 'nextjs-progressbar';
 import React, { useEffect } from 'react';
+
+declare module '@mui/styles/defaultTheme' {
+	// eslint-disable-next-line @typescript-eslint/no-empty-interface
+	interface DefaultTheme extends Theme {}
+}
 
 const DiscordPackProvider = dynamic(() => import('@contexts/DiscordPackContext'));
 const AuthenticatedProvider = dynamic(() => import('@contexts/AuthenticationContext'));
@@ -85,7 +90,7 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 		clearState(LocalStorageKeys.HasCookieConsent);
 	}, []);
 
-	const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
 	return (
 		<>
@@ -111,18 +116,20 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 			</Head>
 			<DefaultSeo {...DefaultSeoProps} />
 
-			<ThemeProvider theme={theme}>
-				<MobileContextProvider value={{ isMobile }}>
-					<AuthenticatedProvider>
-						<DiscordPackProvider>
-							<ScopedCssBaseline>
-								<Component {...pageProps} />
-								<NextNprogress color="#0A5699" startPosition={0.3} stopDelayMs={200} height={3} />
-							</ScopedCssBaseline>
-						</DiscordPackProvider>
-					</AuthenticatedProvider>
-				</MobileContextProvider>
-			</ThemeProvider>
+			<StyledEngineProvider injectFirst>
+				<ThemeProvider theme={theme}>
+					<MobileContextProvider value={{ isMobile }}>
+						<AuthenticatedProvider>
+							<DiscordPackProvider>
+								<ScopedCssBaseline>
+									<Component {...pageProps} />
+									<NextNprogress color="#0A5699" startPosition={0.3} stopDelayMs={200} height={3} />
+								</ScopedCssBaseline>
+							</DiscordPackProvider>
+						</AuthenticatedProvider>
+					</MobileContextProvider>
+				</ThemeProvider>
+			</StyledEngineProvider>
 		</>
 	);
 };

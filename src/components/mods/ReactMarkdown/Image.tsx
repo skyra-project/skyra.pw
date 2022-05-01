@@ -1,4 +1,6 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Theme } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import { cast } from '@utils/util';
 import NextImage, { ImageProps as NextImageProps } from 'next/image';
 import React, { forwardRef, memo } from 'react';

@@ -1,24 +1,26 @@
 import { setAuthenticated, useAuthenticated } from '@contexts/AuthenticationContext';
 import { mergeDiscordPack, useDiscordPack } from '@contexts/DiscordPackContext';
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import IconButton from '@material-ui/core/IconButton';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuList from '@material-ui/core/MenuList';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import Typography from '@material-ui/core/Typography';
-import InviteIcon from '@material-ui/icons/Add';
-import LogoutIcon from '@material-ui/icons/Eject';
-import CommandsIcon from '@material-ui/icons/Extension';
-import DiscordChatIcon from '@material-ui/icons/Forum';
-import GavelIcon from '@material-ui/icons/Gavel';
-import HomeIcon from '@material-ui/icons/Home';
-import MenuIcon from '@material-ui/icons/Menu';
-import SyncIcon from '@material-ui/icons/Sync';
-import LoginIcon from '@material-ui/icons/VpnKey';
+import { Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Grow from '@mui/material/Grow';
+import IconButton from '@mui/material/IconButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
+import Paper from '@mui/material/Paper';
+import Popper from '@mui/material/Popper';
+import Typography from '@mui/material/Typography';
+import InviteIcon from '@mui/icons-material/Add';
+import LogoutIcon from '@mui/icons-material/Eject';
+import CommandsIcon from '@mui/icons-material/Extension';
+import DiscordChatIcon from '@mui/icons-material/Forum';
+import GavelIcon from '@mui/icons-material/Gavel';
+import HomeIcon from '@mui/icons-material/Home';
+import MenuIcon from '@mui/icons-material/Menu';
+import SyncIcon from '@mui/icons-material/Sync';
+import LoginIcon from '@mui/icons-material/VpnKey';
 import LazyAvatar from '@mui/LazyAvatar';
 import MenuItemLink from '@routing/MenuItemLink';
 import { oauthURL } from '@utils/constants';
@@ -118,6 +120,7 @@ const MobileNavMenu: FC = () => {
 				color="inherit"
 				aria-label="menu"
 				onClick={togglePopperMenu}
+				size="large"
 			>
 				<If condition={authenticated}>
 					<Then>

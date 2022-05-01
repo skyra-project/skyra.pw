@@ -1,8 +1,8 @@
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
-import { MenuItem, Typography } from '@material-ui/core';
-import Slider from '@material-ui/core/Slider';
+import { MenuItem, Typography } from '@mui/material';
+import Slider from '@mui/material/Slider';
 import SimpleGrid from '@mui/SimpleGrid';
 import Select from '@selects/Select';
 import SelectBoolean from '@selects/SelectBoolean';

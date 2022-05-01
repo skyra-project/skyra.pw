@@ -1,5 +1,6 @@
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
 import React, { forwardRef, ReactNodeArray } from 'react';
 import type { NormalComponents } from 'react-markdown/src/ast-to-react';

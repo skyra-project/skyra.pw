@@ -1,7 +1,9 @@
 import type { TransformedLoginData } from '@config/types/ApiData';
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
+import { Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
 import Link from '@routing/Link';
 import { guildAddURL } from '@utils/constants';
 import React, { memo } from 'react';
@@ -24,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			'&:hover': {
 				cursor: 'pointer'
 			},
-			[theme.breakpoints.down('xs')]: {
+			[theme.breakpoints.down('sm')]: {
 				width: '90vw',
 				maxWidth: '90vw'
 			}

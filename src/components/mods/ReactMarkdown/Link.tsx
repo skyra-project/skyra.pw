@@ -1,5 +1,6 @@
-import { Typography } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { Typography } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import RouterLink from '@routing/Link';
 import { AnyRef, cast } from '@utils/util';
 import React, { forwardRef } from 'react';

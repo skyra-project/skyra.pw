@@ -1,4 +1,6 @@
-import { Box, BoxProps, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Box, BoxProps, Theme, Typography } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 import React, { FC, memo, ReactNode } from 'react';
 import { Else, If, Then, When } from 'react-if';
@@ -14,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		root: {
 			marginRight: theme.spacing(4),
 			marginBottom: theme.spacing(2),
-			[theme.breakpoints.down('sm')]: {
+			[theme.breakpoints.down('md')]: {
 				flexBasis: '100%',
 				width: '100%',
 				marginRight: 0,

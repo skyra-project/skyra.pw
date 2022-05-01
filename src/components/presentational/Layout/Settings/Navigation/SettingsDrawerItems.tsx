@@ -1,28 +1,30 @@
 import SkyraLogo from '@assets/skyraLogo';
 import type { TransformedLoginData } from '@config/types/ApiData';
 import { FilterRoutes, GuildRoutes } from '@config/types/GuildRoutes';
-import Box from '@material-ui/core/Box';
-import Collapse from '@material-ui/core/Collapse';
-import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import EventIcon from '@material-ui/icons/EventNote';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import CustomCommandsIcon from '@material-ui/icons/Extension';
-import FeedbackIcon from '@material-ui/icons/Feedback';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import ChannelsIcon from '@material-ui/icons/Forum';
-import GavelIcon from '@material-ui/icons/Gavel';
-import RolesIcon from '@material-ui/icons/Group';
-import InputIcon from '@material-ui/icons/Input';
-import MessagesIcon from '@material-ui/icons/Message';
-import SettingsIcon from '@material-ui/icons/Settings';
-import Skeleton from '@material-ui/lab/Skeleton';
+import Box from '@mui/material/Box';
+import Collapse from '@mui/material/Collapse';
+import Divider from '@mui/material/Divider';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import { Theme } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Typography from '@mui/material/Typography';
+import EventIcon from '@mui/icons-material/EventNote';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import CustomCommandsIcon from '@mui/icons-material/Extension';
+import FeedbackIcon from '@mui/icons-material/Feedback';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import ChannelsIcon from '@mui/icons-material/Forum';
+import GavelIcon from '@mui/icons-material/Gavel';
+import RolesIcon from '@mui/icons-material/Group';
+import InputIcon from '@mui/icons-material/Input';
+import MessagesIcon from '@mui/icons-material/Message';
+import SettingsIcon from '@mui/icons-material/Settings';
+import Skeleton from '@mui/material/Skeleton';
 import Tooltip from '@mui/Tooltip';
 import GuildIcon from '@presentational/GuildIcon';
 import ListItemLink from '@routing/ListItemLink';
@@ -45,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		guildImage: {
 			...theme.mixins.toolbar,
-			padding: `0px ${theme.spacing(3)}px`,
+			padding: `0px ${theme.spacing(3)}`,
 			background: theme.palette.primary.main,
 			color: theme.palette.primary.contrastText,
 			display: 'flex',
@@ -116,7 +118,7 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 					</Then>
 					<Else>
 						<Fragment>
-							<Skeleton variant="circle" width={60} height={60} />
+							<Skeleton variant="circular" width={60} height={60} />
 							<Skeleton variant="text" width={100} height={14} />
 						</Fragment>
 					</Else>

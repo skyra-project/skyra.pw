@@ -1,4 +1,4 @@
-import Grid, { GridProps } from '@material-ui/core/Grid/Grid';
+import Grid, { GridProps } from '@mui/material/Grid/Grid';
 import React, { Children, FC, memo } from 'react';
 import { When } from 'react-if';
 

@@ -1,7 +1,8 @@
-import Box from '@material-ui/core/Box';
-import InputBase, { InputBaseProps } from '@material-ui/core/InputBase';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
+import Box from '@mui/material/Box';
+import InputBase, { InputBaseProps } from '@mui/material/InputBase';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import SearchIcon from '@mui/icons-material/Search';
 import React, { FC, memo } from 'react';
 
 const useStyles = makeStyles(() =>

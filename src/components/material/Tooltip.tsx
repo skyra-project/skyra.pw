@@ -1,6 +1,8 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
-import MUITooltip, { TooltipProps } from '@material-ui/core/Tooltip';
+import { Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Box from '@mui/material/Box';
+import MUITooltip, { TooltipProps } from '@mui/material/Tooltip';
 import clsx from 'clsx';
 import React, { FC } from 'react';
 

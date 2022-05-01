@@ -1,5 +1,5 @@
-import Box from '@material-ui/core/Box';
-import { ServerStyleSheets } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import ServerStyleSheets from '@mui/styles/ServerStyleSheets';
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
 

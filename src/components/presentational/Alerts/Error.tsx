@@ -1,8 +1,10 @@
-import { Button, createStyles, makeStyles, Theme } from '@material-ui/core';
-import Grow from '@material-ui/core/Grow';
-import Snackbar from '@material-ui/core/Snackbar';
-import CancelIcon from '@material-ui/icons/Cancel';
-import AlertTitle from '@material-ui/lab/AlertTitle';
+import { Button, Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Grow from '@mui/material/Grow';
+import Snackbar from '@mui/material/Snackbar';
+import CancelIcon from '@mui/icons-material/Cancel';
+import AlertTitle from '@mui/material/AlertTitle';
 import { Time } from '@utils/skyraUtils';
 import React, { Dispatch, FC, memo, ReactNode, SetStateAction } from 'react';
 import BaseAlert from './Base';

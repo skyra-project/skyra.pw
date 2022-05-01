@@ -1,10 +1,12 @@
 // Copyright (c) 2017 LoicMahieu. All rights reserved. MIT license.
 // Source: https://github.com/LoicMahieu/material-ui-color-picker
 
-import { useMediaQuery } from '@material-ui/core';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import MuiTextField from '@material-ui/core/TextField';
+import { useMediaQuery } from '@mui/material';
+import InputAdornment from '@mui/material/InputAdornment';
+import { Theme, useTheme } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import MuiTextField from '@mui/material/TextField';
 import LazyAvatar from '@mui/LazyAvatar';
 import { REGEXP } from '@utils/Color';
 import { fieldToTextField, TextFieldProps } from 'formik-material-ui';
@@ -28,7 +30,7 @@ const ColorPicker: FC<Omit<TextFieldProps, 'variant'>> = ({ form: { setFieldValu
 	const [showPicker, setShowPicker] = useState(false);
 	const classes = useStyles();
 	const theme = useTheme();
-	const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
 	const onChange = useCallback(
 		(event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {

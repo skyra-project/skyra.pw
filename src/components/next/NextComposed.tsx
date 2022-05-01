@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid, jsx-a11y/anchor-has-content */
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import NextLink from 'next/link';
 import React, { forwardRef, PropsWithChildren } from 'react';
 import type { UrlObject } from 'url';
