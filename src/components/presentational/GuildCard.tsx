@@ -1,9 +1,8 @@
 import type { TransformedLoginData } from '@config/types/ApiData';
-import { Theme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import Link from '@routing/Link';
 import { guildAddURL } from '@utils/constants';
 import React, { memo } from 'react';
@@ -14,7 +13,7 @@ interface GuildCardProps {
 	guild: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		card: {
 			minWidth: 230,

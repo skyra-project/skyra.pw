@@ -2,7 +2,6 @@ import { useMobileContext } from '@contexts/MobileContext';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { Theme } from '@mui/material/styles';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import DeleteIcon from '@mui/icons-material/DeleteForever';
@@ -15,7 +14,7 @@ interface SubmitResetButtonsProps {
 	submitChanges(): Promise<void>;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		fabContainer: {
 			position: 'fixed',

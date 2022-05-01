@@ -4,18 +4,19 @@ import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettings
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import PageHeader from '@layout/Settings/PageHeader';
 import Section from '@layout/Settings/Section';
-import { Theme, useTheme } from '@mui/material/styles';
+import SimpleGrid from '@material/SimpleGrid';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import SimpleGrid from '@mui/SimpleGrid';
+import { cast } from '@sapphire/utilities';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectRole, { SelectRoleProps } from '@selects/SelectRole';
 import SelectRoles, { SelectRolesProps } from '@selects/SelectRoles';
-import { cast, handleResetKey } from '@utils/util';
+import { handleResetKey } from '@utils/util';
 import React, { FC, memo } from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		button: {
 			[theme.breakpoints.only('md')]: {

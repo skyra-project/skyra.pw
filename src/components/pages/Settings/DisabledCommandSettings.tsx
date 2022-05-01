@@ -3,7 +3,9 @@ import type { DisableCommands } from '@config/types/ConfigurableData';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import RefreshCommandsButton from '@layout/RefreshCommandsButton';
+import { useTheme } from '@mui/material/styles';
 import Section from '@layout/Settings/Section';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Accordion from '@mui/material/Accordion';
 import AccordionActions from '@mui/material/AccordionActions';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -13,12 +15,10 @@ import Button from '@mui/material/Button';
 import { green } from '@mui/material/colors';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
-import { Theme } from '@mui/material/styles';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import Loading from '@presentational/Loading';
 import SelectBoolean from '@selects/SelectBoolean';
 import React, { FC, memo, SetStateAction, useCallback, useEffect, useState } from 'react';
@@ -28,7 +28,7 @@ interface DisabledCommandSettingsProps {
 	setCommands: (value: SetStateAction<FlattenedCommand[]>) => void;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		accordions: {
 			marginTop: theme.spacing(3)
@@ -68,7 +68,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export const parseCommandDescription = (description: string) => description.replace(/<:(\w{2,32}):[0-9]{18}>/gi, '$1');
 
 const DisabledCommandSettings: FC<DisabledCommandSettingsProps> = ({ commands, setCommands }) => {
-	const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+	const theme = useTheme();
+	const matches = useMediaQuery(() => theme.breakpoints.down('md'));
 	const classes = useStyles();
 	const [expanded, setExpanded] = useState<string | false>(false);
 	const [loading, setLoading] = useState(true);

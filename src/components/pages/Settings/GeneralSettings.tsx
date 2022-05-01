@@ -2,14 +2,13 @@ import { useMobileContext } from '@contexts/MobileContext';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
+import SimpleGrid from '@material/SimpleGrid';
+import AutoSavingForm from '@mods/Formik/AutoSaveForm';
+import TextField from '@mods/Formik/FormikTextField';
 import { ListItemText } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
-import { Theme } from '@mui/material/styles';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import AutoSavingForm from '@mods/Formik/AutoSaveForm';
-import TextField from '@mods/Formik/TextField';
-import SimpleGrid from '@mui/SimpleGrid';
 import Select from '@selects/Select';
 import { FastField } from 'formik';
 import React, { FC, memo } from 'react';
@@ -19,7 +18,7 @@ interface GeneralSettingsProps {
 	languages: string[];
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		languageOffset: {
 			marginTop: theme.spacing(5)

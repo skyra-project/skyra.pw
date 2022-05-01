@@ -1,14 +1,15 @@
+import Image from '@mods/ReactMarkdown/Image';
+import InlineCode from '@mods/ReactMarkdown/InlineCode';
+import Link from '@mods/ReactMarkdown/Link';
+import ListItem from '@mods/ReactMarkdown/ListItem';
+import OrderedList from '@mods/ReactMarkdown/OrderedList';
+import Strong from '@mods/ReactMarkdown/Strong';
+import UnorderedList from '@mods/ReactMarkdown/UnorderedList';
 import React, { FC } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
-import gfm from 'remark-gfm';
-import Image from './Image';
-import InlineCode from './InlineCode';
-import Link from './Link';
-import List from './List';
-import ListItem from './ListItem';
-import Strong from './Strong';
+import remarkGfm from 'remark-gfm';
 
 interface GfmReactMarkdownProps {
 	source: string;
@@ -16,16 +17,16 @@ interface GfmReactMarkdownProps {
 
 const GfmReactMarkdown: FC<GfmReactMarkdownProps> = ({ source }) => (
 	<ReactMarkdown
-		plugins={[gfm]}
+		remarkPlugins={[remarkGfm]}
 		rehypePlugins={[rehypeRaw, rehypeSanitize]}
 		components={{
-			a: Link as any,
-			img: Image as any,
-			strong: Strong as any,
-			ol: List as any,
-			ul: List as any,
-			li: ListItem as any,
-			code: InlineCode as any
+			a: Link,
+			img: Image,
+			strong: Strong,
+			ol: OrderedList,
+			ul: UnorderedList,
+			li: ListItem,
+			code: InlineCode
 		}}
 	>
 		{source}

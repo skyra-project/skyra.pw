@@ -11,7 +11,6 @@
 		"resolveJsonModule": true,
 		"jsx": "preserve",
 		"noEmit": true,
-		"tsBuildInfoFile": "./.tsbuildinfo",
 		"baseUrl": ".",
 		"rootDir": ".",
 		"paths": {
@@ -20,7 +19,7 @@
 			"@assets/*": ["components/assets/*"],
 			"@layout/*": ["components/presentational/Layout/*"],
 			"@mods/*": ["components/mods/*"],
-			"@mui/*": ["components/material/*"],
+			"@material/*": ["components/material/*"],
 			"@next/*": ["components/next/*"],
 			"@pages/*": ["components/pages/*"],
 			"@presentational/*": ["components/presentational/*"],

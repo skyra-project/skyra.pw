@@ -1,16 +1,15 @@
 import SkyraLogo from '@assets/skyraLogo';
-import { Theme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Hidden from '@mui/material/Hidden';
 import Typography from '@mui/material/Typography';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import Link from '@routing/Link';
 import { CLIENT_ID, inviteURL } from '@utils/constants';
 import React, { memo } from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		root: {
 			padding: '50px 0px',

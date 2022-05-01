@@ -1,17 +1,16 @@
 import type { FlattenedCommand } from '@config/types/ApiData';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Box from '@mui/material/Box';
-import { Theme } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Command from '@presentational/CommandsPage/Command';
 import React, { FC, memo, useCallback } from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		categoryAccordion: {
 			marginTop: theme.spacing(1),

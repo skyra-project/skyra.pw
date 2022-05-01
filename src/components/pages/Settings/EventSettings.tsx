@@ -2,16 +2,16 @@ import { ConfigurableMessageEvents, ConfigurableModerationEvents } from '@config
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
-import { Theme, Typography } from '@mui/material';
+import SimpleGrid from '@material/SimpleGrid';
+import { Typography } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import SimpleGrid from '@mui/SimpleGrid';
 import Link from '@routing/Link';
 import SelectBoolean from '@selects/SelectBoolean';
 import { useRouter } from 'next/router';
 import React, { FC, memo } from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		link: {
 			textDecoration: 'none',

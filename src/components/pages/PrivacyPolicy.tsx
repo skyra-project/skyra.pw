@@ -2,14 +2,13 @@ import GeneralPage from '@layout/General';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
-import { Theme } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
 import React from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		boldText: {
 			fontWeight: 'bolder'

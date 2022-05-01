@@ -1,9 +1,9 @@
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
+import SimpleGrid from '@material/SimpleGrid';
 import { MenuItem, Typography } from '@mui/material';
 import Slider from '@mui/material/Slider';
-import SimpleGrid from '@mui/SimpleGrid';
 import Select from '@selects/Select';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectDuration from '@selects/SelectDuration';

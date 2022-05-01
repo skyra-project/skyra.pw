@@ -1,8 +1,13 @@
 import { useAuthenticated } from '@contexts/AuthenticationContext';
 import UserMenu from '@layout/Navigation/UserMenu';
-import { Theme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
+import Tooltip from '@material/Tooltip';
+import InviteIcon from '@mui/icons-material/Add';
+import CommandsIcon from '@mui/icons-material/Extension';
+import DiscordChatIcon from '@mui/icons-material/Forum';
+import GavelIcon from '@mui/icons-material/Gavel';
+import HomeIcon from '@mui/icons-material/Home';
+import MenuIcon from '@mui/icons-material/Menu';
+import LoginIcon from '@mui/icons-material/VpnKey';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
@@ -12,26 +17,20 @@ import MenuList from '@mui/material/MenuList';
 import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import Typography from '@mui/material/Typography';
-import InviteIcon from '@mui/icons-material/Add';
-import CommandsIcon from '@mui/icons-material/Extension';
-import DiscordChatIcon from '@mui/icons-material/Forum';
-import GavelIcon from '@mui/icons-material/Gavel';
-import HomeIcon from '@mui/icons-material/Home';
-import MenuIcon from '@mui/icons-material/Menu';
-import LoginIcon from '@mui/icons-material/VpnKey';
-import Tooltip from '@mui/Tooltip';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import MenuItemLink from '@routing/MenuItemLink';
 import { oauthURL } from '@utils/constants';
 import { navigate } from '@utils/util';
 import { useRouter } from 'next/router';
-import React, { FC, memo, useEffect, useRef, useState } from 'react';
+import React, { FC, memo, useEffect, useRef, useState, MouseEvent as ReactMouseEvent } from 'react';
 import { When } from 'react-if';
 
 export interface DesktopMenuItemsProps {
 	loading?: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		transparentButton: {
 			background: 'transparent',
@@ -65,7 +64,7 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 		setPopperMenuOpen((prevOpen) => !prevOpen);
 	};
 
-	const closePopperMenu = (event: React.MouseEvent<EventTarget>) => {
+	const closePopperMenu = (event: MouseEvent | TouchEvent | ReactMouseEvent<HTMLAnchorElement | HTMLLIElement, MouseEvent>) => {
 		if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
 			return;
 		}

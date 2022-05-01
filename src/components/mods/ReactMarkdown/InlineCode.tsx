@@ -3,7 +3,7 @@ import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 import React, { forwardRef } from 'react';
-import type { CodeComponent } from 'react-markdown/src/ast-to-react';
+import type { CodeProps } from 'react-markdown/lib/ast-to-react';
 
 const useStyles = makeStyles(() =>
 	createStyles({
@@ -23,7 +23,7 @@ const useStyles = makeStyles(() =>
 	})
 );
 
-const InlineCode = forwardRef<HTMLSpanElement, Parameters<CodeComponent>[0]>(({ inline, children }, ref) => {
+const InlineCode = forwardRef<HTMLSpanElement, CodeProps>(({ inline, children }, ref) => {
 	const classes = useStyles();
 
 	if (inline) {

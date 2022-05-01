@@ -1,17 +1,6 @@
 import { setAuthenticated, useAuthenticated } from '@contexts/AuthenticationContext';
 import { mergeDiscordPack, useDiscordPack } from '@contexts/DiscordPackContext';
-import { Theme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Grow from '@mui/material/Grow';
-import IconButton from '@mui/material/IconButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
-import Paper from '@mui/material/Paper';
-import Popper from '@mui/material/Popper';
-import Typography from '@mui/material/Typography';
+import LazyAvatar from '@material/LazyAvatar';
 import InviteIcon from '@mui/icons-material/Add';
 import LogoutIcon from '@mui/icons-material/Eject';
 import CommandsIcon from '@mui/icons-material/Extension';
@@ -21,16 +10,26 @@ import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
 import SyncIcon from '@mui/icons-material/Sync';
 import LoginIcon from '@mui/icons-material/VpnKey';
-import LazyAvatar from '@mui/LazyAvatar';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Grow from '@mui/material/Grow';
+import IconButton from '@mui/material/IconButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
+import Paper from '@mui/material/Paper';
+import Popper from '@mui/material/Popper';
+import Typography from '@mui/material/Typography';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import MenuItemLink from '@routing/MenuItemLink';
 import { oauthURL } from '@utils/constants';
 import { displayAvatarURL } from '@utils/skyraUtils';
 import { clearData, logOut, syncUser } from '@utils/util';
 import { useRouter } from 'next/router';
-import React, { FC, memo, useEffect, useRef, useState } from 'react';
+import React, { FC, memo, MouseEvent as ReactMouseEvent, useEffect, useRef, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		menuButton: {
 			marginRight: theme.spacing(2)
@@ -83,7 +82,7 @@ const MobileNavMenu: FC = () => {
 		setPopperMenuOpen((prevOpen) => !prevOpen);
 	};
 
-	const closePopperMenu = (event: React.MouseEvent<EventTarget>) => {
+	const closePopperMenu = (event: MouseEvent | TouchEvent | ReactMouseEvent<HTMLAnchorElement | HTMLLIElement, MouseEvent>) => {
 		if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
 			return;
 		}

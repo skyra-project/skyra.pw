@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Hidden from '@mui/material/Hidden';
 import Typography from '@mui/material/Typography';
-import Tooltip from '@mui/Tooltip';
+import Tooltip from '@material/Tooltip';
 import { navigate } from '@utils/util';
 import React, { FC, memo } from 'react';
 

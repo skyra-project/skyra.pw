@@ -1,12 +1,11 @@
-import { Theme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import Box from '@mui/material/Box';
 import MUITooltip, { TooltipProps } from '@mui/material/Tooltip';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 import React, { FC } from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		tooltip: {
 			backgroundColor: theme.palette.text.primary,

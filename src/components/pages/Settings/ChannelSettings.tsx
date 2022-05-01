@@ -4,16 +4,15 @@ import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettings
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import PageHeader from '@layout/Settings/PageHeader';
 import Section from '@layout/Settings/Section';
-import { Theme } from '@mui/material';
+import SimpleGrid from '@material/SimpleGrid';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import SimpleGrid from '@mui/SimpleGrid';
 import SelectChannel from '@selects/SelectChannel';
 import SelectChannels from '@selects/SelectChannels';
 import { handleResetKey } from '@utils/util';
 import React, { FC, memo } from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		button: {
 			[theme.breakpoints.only('md')]: {

@@ -1,22 +1,24 @@
-/* eslint-disable jsx-a11y/anchor-is-valid, jsx-a11y/anchor-has-content */
 import { Typography } from '@mui/material';
-import NextLink from 'next/link';
+import { styled } from '@mui/material/styles';
+import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import React, { forwardRef, PropsWithChildren } from 'react';
-import type { UrlObject } from 'url';
 
-interface NextComposedProps {
-	as?: string | UrlObject;
-	href: string | UrlObject;
-	className?: string;
-	prefetch?: boolean;
+// Add support for the sx prop for consistency with the other branches.
+const Anchor = styled('a')({});
+
+export interface NextLinkComposedProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'>, Omit<NextLinkProps, 'href' | 'as'> {
+	to: NextLinkProps['href'];
+	linkAs?: NextLinkProps['as'];
 }
 
-export default forwardRef<HTMLAnchorElement, PropsWithChildren<NextComposedProps>>(({ as, href, prefetch, children, className }, ref) => (
-	<NextLink href={href} prefetch={prefetch} as={as}>
-		<Typography component="span" variant="body2" color="textPrimary">
-			<a ref={ref} className={className}>
-				{children}
-			</a>
-		</Typography>
-	</NextLink>
-));
+const NextLinkComposed = forwardRef<HTMLAnchorElement, PropsWithChildren<NextLinkComposedProps>>(
+	({ to, linkAs, replace, scroll, shallow, prefetch, locale, ...other }, ref) => (
+		<NextLink href={to} prefetch={prefetch} as={linkAs} replace={replace} scroll={scroll} shallow={shallow} passHref locale={locale}>
+			<Typography component="span" variant="body2" color="textPrimary">
+				<Anchor ref={ref} {...other} />
+			</Typography>
+		</NextLink>
+	)
+);
+
+export default NextLinkComposed;

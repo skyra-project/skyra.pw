@@ -1,10 +1,9 @@
 // Copyright (c) 2017 LoicMahieu. All rights reserved. MIT license.
 // Source: https://github.com/LoicMahieu/material-ui-color-picker
 
-import { Theme } from '@mui/material';
+import Box from '@mui/material/Box';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import Box from '@mui/material/Box';
 import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import React, { FC, memo, MouseEventHandler, useEffect, useRef } from 'react';
 import { ChromePicker, ColorChangeHandler } from 'react-color';
@@ -12,10 +11,10 @@ import { ChromePicker, ColorChangeHandler } from 'react-color';
 interface PickerDialogProps {
 	value?: string;
 	onChange?: ColorChangeHandler;
-	onClick?: MouseEventHandler<HTMLTextAreaElement | HTMLInputElement>;
+	onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		pickerBox: {
 			position: 'relative'
@@ -53,7 +52,7 @@ const PickerDialog: FC<PickerDialogProps> = ({ value, onClick, onChange }) => {
 	return (
 		<Box component="div" className={classes.pickerBox}>
 			<Box component="div" className={classes.positionBox}>
-				<Box component="div" className={classes.clickEventBox} onClick={onClick} />
+				<div className={classes.clickEventBox} onClick={onClick} />
 				<ChromePicker ref={scrollLockRef} color={value} onChange={onChange} disableAlpha />
 			</Box>
 		</Box>

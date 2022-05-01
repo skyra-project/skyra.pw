@@ -21,16 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import ClearIcon from '@mui/icons-material/Clear';
+import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton';
 import Input, { InputProps } from '@mui/material/Input';
 import Paper, { PaperProps } from '@mui/material/Paper';
-import { CSSProperties } from '@mui/material/styles';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import ClearIcon from '@mui/icons-material/Clear';
-import SearchIcon from '@mui/icons-material/Search';
 import clsx from 'clsx';
-import React, { forwardRef, memo, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, {
+	forwardRef,
+	memo,
+	useCallback,
+	useEffect,
+	useImperativeHandle,
+	useRef,
+	useState,
+	type ChangeEvent as ReactChangeEvent,
+	type CSSProperties,
+	type FocusEvent as ReactFocusEvent,
+	type KeyboardEvent as ReactKeyboardEvent
+} from 'react';
 
 interface SearchBarProps extends Omit<InputProps, 'onChange'> {
 	/**
@@ -147,7 +158,7 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 		}, [value]);
 
 		const handleFocus = useCallback(
-			(e) => {
+			(e: ReactFocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>) => {
 				if (onFocus) {
 					onFocus(e);
 				}
@@ -156,7 +167,7 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 		);
 
 		const handleBlur = useCallback(
-			(e) => {
+			(e: ReactFocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>) => {
 				setInnerValue((v) => v.trim());
 				if (onBlur) {
 					onBlur(e);
@@ -166,7 +177,7 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 		);
 
 		const handleInput = useCallback(
-			(e) => {
+			(e: ReactChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 				setInnerValue(e.target.value);
 				if (onChange) {
 					onChange(e.target.value);
@@ -189,7 +200,7 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 		}, [onRequestSearch, innerValue]);
 
 		const handleKeyUp = useCallback(
-			(e) => {
+			(e: ReactKeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 				if (e.charCode === 13 || e.key === 'Enter') {
 					handleRequestSearch();
 				} else if (cancelOnEscape && (e.charCode === 27 || e.key === 'Escape')) {

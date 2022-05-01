@@ -1,12 +1,12 @@
 import type features from '@assets/features';
 import { useAuthenticated } from '@contexts/AuthenticationContext';
-import { Box, Divider, Hidden, Theme, Typography } from '@mui/material';
+import { Box, Divider, Hidden, Typography } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 import React from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		oddBox: {
 			'&:nth-of-type(odd)': {

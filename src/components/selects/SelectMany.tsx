@@ -1,6 +1,8 @@
-import { List, Theme, useTheme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
+import DialogSearchBar from '@material/DialogSearchBar';
+import DialogTitle from '@material/DialogTitle';
+import LazyAvatar from '@material/LazyAvatar';
+import Tooltip from '@material/Tooltip';
+import { List, useTheme } from '@mui/material';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Dialog from '@mui/material/Dialog';
@@ -10,13 +12,11 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import ListItemText from '@mui/material/ListItemText';
-import DialogSearchBar from '@mui/DialogSearchBar';
-import DialogTitle from '@mui/DialogTitle';
-import LazyAvatar from '@mui/LazyAvatar';
-import Tooltip from '@mui/Tooltip';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import { toTitleCase } from '@sapphire/utilities';
 import { Time } from '@utils/skyraUtils';
-import { AnyRef, sleep } from '@utils/util';
+import { sleep } from '@utils/util';
 import React, { ChangeEvent, FC, forwardRef, Fragment, useCallback, useMemo, useState } from 'react';
 import { Else, If, Then } from 'react-if';
 import { Virtuoso, type Components } from 'react-virtuoso';
@@ -26,7 +26,7 @@ export interface SelectManyProps extends SelectOneProps {
 	value: string[];
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		dialogContent: {
 			padding: theme.spacing(2)
@@ -88,7 +88,7 @@ const SelectMany: FC<SelectManyProps> = ({ label, value, onChange, values, name,
 	const VirtuosoComponents = useMemo<Components>(
 		() => ({
 			List: forwardRef(({ style, children }, listRef) => (
-				<List style={{ ...style, width: '100%' }} ref={listRef as AnyRef} component="nav">
+				<List style={{ ...style, width: '100%' }} ref={listRef} component="nav">
 					{children}
 				</List>
 			)),

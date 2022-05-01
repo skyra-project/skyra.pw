@@ -8,7 +8,6 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Theme } from '@mui/material/styles';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import Typography from '@mui/material/Typography';
@@ -25,7 +24,7 @@ import InputIcon from '@mui/icons-material/Input';
 import MessagesIcon from '@mui/icons-material/Message';
 import SettingsIcon from '@mui/icons-material/Settings';
 import Skeleton from '@mui/material/Skeleton';
-import Tooltip from '@mui/Tooltip';
+import Tooltip from '@material/Tooltip';
 import GuildIcon from '@presentational/GuildIcon';
 import ListItemLink from '@routing/ListItemLink';
 import { noop } from '@sapphire/utilities';
@@ -43,7 +42,7 @@ export interface SettingsDrawerItemsProps {
 	toggleSidebar(): void;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		guildImage: {
 			...theme.mixins.toolbar,

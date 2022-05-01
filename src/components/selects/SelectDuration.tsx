@@ -1,4 +1,3 @@
-import { Theme } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import Box from '@mui/material/Box';
@@ -31,7 +30,7 @@ interface SelectDurationProps {
 	onChange: (value: number) => void;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		box: {
 			marginBottom: theme.spacing(3)
@@ -124,7 +123,7 @@ const SelectDuration: FC<SelectDurationProps> = ({ value, min, max, onChange }) 
 				}}
 			/>
 			<Select
-				classes={{ root: classes.selectBox }}
+				classes={{ select: classes.selectBox }}
 				FormControlProps={{ classes: { root: classes.selectBoxMargin } }}
 				title={error ? '' : 'Duration unit'}
 				error={Boolean(error)}

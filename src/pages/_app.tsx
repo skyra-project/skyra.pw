@@ -2,12 +2,14 @@ import '@config/globals.css';
 import DefaultSeoProps from '@config/SEO/DefaultSeoProps';
 import theme from '@config/theme';
 import { MobileContextProvider } from '@contexts/MobileContext';
-import { useMediaQuery } from '@mui/material';
-import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
-import { ThemeProvider, Theme, StyledEngineProvider } from '@mui/material/styles';
+import type { EmotionCache } from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
+import { CssBaseline, useMediaQuery } from '@mui/material';
+import { StyledEngineProvider, Theme, ThemeProvider } from '@mui/material/styles';
 // Import just as a type because the GlobalThis type augment
 import type {} from '@skyra/discord-components-core';
 import { LocalStorageKeys } from '@utils/constants';
+import createEmotionCache from '@utils/createEmotionCache';
 import { clearState } from '@utils/util';
 import type { NextPage } from 'next';
 import { DefaultSeo } from 'next-seo';
@@ -25,14 +27,15 @@ declare module '@mui/styles/defaultTheme' {
 const DiscordPackProvider = dynamic(() => import('@contexts/DiscordPackContext'));
 const AuthenticatedProvider = dynamic(() => import('@contexts/AuthenticationContext'));
 
-const App: NextPage<AppProps> = ({ Component, pageProps }) => {
-	useEffect(() => {
-		// Remove the server-side injected CSS.
-		const jssStyles = document.querySelector('#jss-server-side');
-		if (jssStyles) {
-			jssStyles.parentElement!.removeChild(jssStyles);
-		}
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache();
 
+interface SkyraAppProps extends AppProps {
+	emotionCache?: EmotionCache;
+}
+
+const App: NextPage<SkyraAppProps> = ({ Component, pageProps, emotionCache = clientSideEmotionCache }) => {
+	useEffect(() => {
 		window.$discordMessage = {
 			avatars: {
 				default: 'blue',
@@ -93,7 +96,7 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
 	return (
-		<>
+		<CacheProvider value={emotionCache}>
 			<Head>
 				<meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
 				<meta httpEquiv="X-UA-Compatible" content="ie=edge" />
@@ -121,16 +124,15 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 					<MobileContextProvider value={{ isMobile }}>
 						<AuthenticatedProvider>
 							<DiscordPackProvider>
-								<ScopedCssBaseline>
-									<Component {...pageProps} />
-									<NextNprogress color="#0A5699" startPosition={0.3} stopDelayMs={200} height={3} />
-								</ScopedCssBaseline>
+								<CssBaseline />
+								<Component {...pageProps} />
+								<NextNprogress color="#0A5699" startPosition={0.3} stopDelayMs={200} height={3} />
 							</DiscordPackProvider>
 						</AuthenticatedProvider>
 					</MobileContextProvider>
 				</ThemeProvider>
 			</StyledEngineProvider>
-		</>
+		</CacheProvider>
 	);
 };
 

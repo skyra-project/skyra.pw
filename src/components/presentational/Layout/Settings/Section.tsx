@@ -1,4 +1,4 @@
-import { Box, BoxProps, Theme, Typography } from '@mui/material';
+import { Box, BoxProps, Typography } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
@@ -11,7 +11,7 @@ export interface SectionProps extends Omit<BoxProps, 'title'> {
 	titleProps?: BoxProps;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		root: {
 			marginRight: theme.spacing(4),

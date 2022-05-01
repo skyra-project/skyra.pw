@@ -1,10 +1,10 @@
-import { Button, Theme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
+import CancelIcon from '@mui/icons-material/Cancel';
+import { Button } from '@mui/material';
+import AlertTitle from '@mui/material/AlertTitle';
 import Grow from '@mui/material/Grow';
 import Snackbar from '@mui/material/Snackbar';
-import CancelIcon from '@mui/icons-material/Cancel';
-import AlertTitle from '@mui/material/AlertTitle';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import { Time } from '@utils/skyraUtils';
 import React, { Dispatch, FC, memo, ReactNode, SetStateAction } from 'react';
 import BaseAlert from './Base';
@@ -27,7 +27,7 @@ interface ErrorAlertProps {
 	setOpen?: Dispatch<SetStateAction<boolean>>;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		snackbar: {
 			[theme.breakpoints.up('sm')]: {

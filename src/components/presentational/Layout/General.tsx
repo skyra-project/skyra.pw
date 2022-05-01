@@ -1,7 +1,6 @@
 import { setAuthenticated, useAuthenticated } from '@contexts/AuthenticationContext';
 import { mergeDiscordPack } from '@contexts/DiscordPackContext';
 import Footer from '@layout/Footer';
-import { Theme } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import Box, { BoxProps } from '@mui/material/Box';
@@ -12,14 +11,16 @@ import { useRouter } from 'next/router';
 import React, { FC, useEffect } from 'react';
 import { Else, If, Then } from 'react-if';
 import NavBar from './Navigation/NavBar';
-import ScrollToTopButton from './ScrollToTopButton';
+// import ScrollToTopButton from './ScrollToTopButton';
+import type { ReactNode } from 'react-markdown/lib/ast-to-react';
 
 export interface GeneralPageProps {
 	loading?: boolean;
 	containerProps?: BoxProps;
+	children?: ReactNode;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		container: {
 			display: 'flex',
@@ -70,9 +71,9 @@ const GeneralPage: FC<GeneralPageProps> = ({ children, loading = false, containe
 
 				<Footer />
 
-				<Box component="span">
+				{/* <Box component="span">
 					<ScrollToTopButton />
-				</Box>
+				</Box> */}
 			</Box>
 		</>
 	);

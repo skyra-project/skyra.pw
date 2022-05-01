@@ -1,5 +1,10 @@
 import { setAuthenticated, useAuthenticated } from '@contexts/AuthenticationContext';
 import { mergeDiscordPack, useDiscordPack } from '@contexts/DiscordPackContext';
+import LazyAvatar from '@material/LazyAvatar';
+import Tooltip from '@material/Tooltip';
+import LogoutIcon from '@mui/icons-material/Eject';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import SyncIcon from '@mui/icons-material/Sync';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
@@ -9,21 +14,15 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
-import { Theme } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import Typography from '@mui/material/Typography';
-import LogoutIcon from '@mui/icons-material/Eject';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import SyncIcon from '@mui/icons-material/Sync';
-import LazyAvatar from '@mui/LazyAvatar';
-import Tooltip from '@mui/Tooltip';
 import { displayAvatarURL } from '@utils/skyraUtils';
 import { clearData, logOut, syncUser } from '@utils/util';
 import { useRouter } from 'next/router';
-import React, { FC, memo, useEffect, useRef, useState } from 'react';
+import React, { FC, memo, MouseEvent as ReactMouseEvent, useEffect, useRef, useState } from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		popper: {
 			marginTop: theme.spacing(1)
@@ -69,7 +68,7 @@ const UserMenu: FC = () => {
 		setOpen((prevOpen) => !prevOpen);
 	};
 
-	const handleClose = (event: React.MouseEvent<EventTarget>) => {
+	const handleClose = (event: MouseEvent | TouchEvent | ReactMouseEvent<HTMLLIElement | HTMLAnchorElement, MouseEvent>) => {
 		if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
 			return;
 		}

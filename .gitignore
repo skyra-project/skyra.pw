@@ -13,6 +13,7 @@ sitemap.xml
 sw.js
 workbox*.js
 local.Dockerfile
+*.tsbuildinfo
 
 # misc
 .DS_Store

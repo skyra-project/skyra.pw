@@ -1,4 +1,3 @@
-import { Theme } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import MuiDialogTitle from '@mui/material/DialogTitle';
@@ -11,7 +10,7 @@ interface DialogTitleProps {
 	onClose: () => void;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		dialogClose: {
 			position: 'absolute',
@@ -26,7 +25,7 @@ const DialogTitle = ({ children, onClose }: PropsWithChildren<DialogTitleProps>)
 	const classes = useStyles();
 
 	return (
-		<MuiDialogTitle disableTypography>
+		<MuiDialogTitle>
 			<Typography variant="h6">{children}</Typography>
 			<IconButton classes={{ root: classes.dialogClose }} onClick={onClose} size="large">
 				<CloseIcon />

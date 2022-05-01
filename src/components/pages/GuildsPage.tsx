@@ -2,17 +2,16 @@ import { useAuthenticated } from '@contexts/AuthenticationContext';
 import { useDiscordPack } from '@contexts/DiscordPackContext';
 import { useMobileContext } from '@contexts/MobileContext';
 import GeneralPage from '@layout/General';
-import { Theme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import { FilteredGuildCards } from '@presentational/GuildCard';
 import type { NextPage } from 'next';
 import React from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		container: {
 			display: 'flex',

@@ -1,9 +1,9 @@
+import Typography from '@mui/material/Typography';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
-import React, { forwardRef, ReactNodeArray } from 'react';
-import type { NormalComponents } from 'react-markdown/src/ast-to-react';
+import React, { DetailedHTMLProps, forwardRef, HTMLAttributes, ReactNodeArray } from 'react';
+import type { WithReactMarkdownChildren } from './types';
 
 const useStyles = makeStyles(() =>
 	createStyles({
@@ -20,7 +20,9 @@ const useStyles = makeStyles(() =>
 	})
 );
 
-const Strong = forwardRef<HTMLSpanElement, Parameters<Exclude<NormalComponents['strong'], 'strong'>>[0]>(({ children }, ref) => {
+type StrongProps = WithReactMarkdownChildren<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>>;
+
+const Strong = forwardRef<HTMLSpanElement, StrongProps>(({ children }, ref) => {
 	const classes = useStyles();
 	return (
 		<Typography

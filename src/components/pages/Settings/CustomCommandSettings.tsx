@@ -3,6 +3,11 @@ import type { CustomCommand } from '@config/types/GuildSettings';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
+import SimpleGrid from '@material/SimpleGrid';
+import SelectWithLabel from '@mods/Formik/FormikSwitch';
+import TextField from '@mods/Formik/FormikTextField';
+import GfmReactMarkdown from '@mods/ReactMarkdown/GfmReactMarkdown';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid/Grid';
 import IconButton from '@mui/material/IconButton';
@@ -10,24 +15,18 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import ListItemText from '@mui/material/ListItemText';
-import { Theme, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import Typography from '@mui/material/Typography';
-import DeleteIcon from '@mui/icons-material/Delete';
-import SelectWithLabel from '@mods/Formik/SelectWithLabel';
-import TextField from '@mods/Formik/TextField';
-import GfmReactMarkdown from '@mods/ReactMarkdown/GfmReactMarkdown';
-import SimpleGrid from '@mui/SimpleGrid';
 import ColorPicker from '@presentational/ColorPicker/ColorPicker';
 import { parse, REGEXP } from '@utils/Color';
-import type { AnyRef } from '@utils/util';
 import { FastField, Formik, FormikConfig } from 'formik';
 import React, { forwardRef, Fragment, memo, useMemo } from 'react';
 import { Components, Virtuoso } from 'react-virtuoso';
 import { boolean, object, string } from 'yup';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		bottomSection: {
 			marginTop: theme.spacing(5)
@@ -129,7 +128,7 @@ const CustomCommandSettings = () => {
 	const VirtuosoComponents = useMemo<Components>(
 		() => ({
 			List: forwardRef(({ style, children }, listRef) => (
-				<List style={{ ...style, width: '100%' }} ref={listRef as AnyRef} component="nav">
+				<List style={{ ...style, width: '100%' }} ref={listRef} component="nav">
 					{children}
 				</List>
 			)),

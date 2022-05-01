@@ -1,8 +1,7 @@
 import type { TransformedLoginData } from '@config/types/ApiData';
-import { Theme } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import LazyAvatar from '@mui/LazyAvatar';
+import LazyAvatar from '@material/LazyAvatar';
 import { displayIconURL, getAcronym } from '@utils/util';
 import clsx from 'clsx';
 import React, { FC } from 'react';
@@ -14,7 +13,7 @@ interface GuildIconProps {
 	sizeClass?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		avatar: {
 			color: theme.palette.secondary.contrastText,

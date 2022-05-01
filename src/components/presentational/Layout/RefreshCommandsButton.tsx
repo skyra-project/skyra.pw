@@ -1,13 +1,13 @@
 import type { FlattenedCommand } from '@config/types/ApiData';
-import { Theme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
+import Tooltip from '@material/Tooltip';
+import CachedIcon from '@mui/icons-material/Cached';
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
+import type { Theme } from '@mui/material/styles';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Zoom from '@mui/material/Zoom';
-import CachedIcon from '@mui/icons-material/Cached';
-import Tooltip from '@mui/Tooltip';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import { ExpirableLocalStorageStructure, LocalStorageKeys } from '@utils/constants';
 import { Time } from '@utils/skyraUtils';
 import { apiFetch, saveState } from '@utils/util';

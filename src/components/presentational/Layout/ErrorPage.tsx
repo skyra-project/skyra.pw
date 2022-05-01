@@ -1,18 +1,18 @@
 import GeneralPage from '@layout/General';
-import { ButtonGroup, Theme, useMediaQuery, useTheme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
+import ForumIcon from '@mui/icons-material/Forum';
+import HomeIcon from '@mui/icons-material/Home';
+import { ButtonGroup, useMediaQuery, useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import ForumIcon from '@mui/icons-material/Forum';
-import HomeIcon from '@mui/icons-material/Home';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import { navigate } from '@utils/util';
 import React, { memo } from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		root: {
 			overflowY: 'hidden'

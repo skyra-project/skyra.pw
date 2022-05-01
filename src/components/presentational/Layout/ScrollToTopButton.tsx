@@ -1,15 +1,14 @@
-import { Theme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
+import Tooltip from '@material/Tooltip';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Zoom from '@mui/material/Zoom';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import Tooltip from '@mui/Tooltip';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import React, { FC, memo, PropsWithChildren } from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		scrollToTopButton: {
 			position: 'fixed',

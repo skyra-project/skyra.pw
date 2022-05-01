@@ -8,7 +8,7 @@ import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext
 import { Grow, useMediaQuery } from '@mui/material';
 import Box from '@mui/material/Box';
 import Hidden from '@mui/material/Hidden';
-import { Theme, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import ErrorAlert from '@presentational/Alerts/Error';
@@ -19,7 +19,7 @@ import { Time } from '@utils/skyraUtils';
 import { apiFetch, clearData } from '@utils/util';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react';
 import { When } from 'react-if';
 import type { ValuesType } from 'utility-types';
 import DesktopSettingsDrawer from './Navigation/DesktopSettingsDrawer';
@@ -29,9 +29,10 @@ import SubmitResetButtons from './Navigation/SubmitResetButtons';
 
 interface DashboardLayoutProps {
 	guildId: string;
+	children?: ReactNode;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		root: {
 			display: 'flex',

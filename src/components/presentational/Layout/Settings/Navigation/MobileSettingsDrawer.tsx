@@ -1,5 +1,4 @@
 import Drawer from '@mui/material/Drawer';
-import { Theme } from '@mui/material/styles';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import { SettingsDrawerWidth } from '@utils/constants';
@@ -10,7 +9,7 @@ interface MobileSettingsDrawerProps extends SettingsDrawerItemsProps {
 	mobileOpen: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		drawerPaper: {
 			width: SettingsDrawerWidth,

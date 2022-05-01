@@ -2,7 +2,7 @@ import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
-import SimpleGrid from '@mui/SimpleGrid';
+import SimpleGrid from '@material/SimpleGrid';
 import SelectChannels from '@selects/SelectChannels';
 import { handleResetKey } from '@utils/util';
 import React, { FC, memo } from 'react';

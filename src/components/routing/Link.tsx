@@ -1,20 +1,17 @@
-import MuiLink from '@mui/material/Link';
-import { Theme, CSSProperties } from '@mui/material/styles';
+import MuiLink, { LinkProps as MLinkProps } from '@mui/material/Link';
+import Typography, { TypographyProps } from '@mui/material/Typography';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import Typography, { TypographyProps } from '@mui/material/Typography';
-import NextComposed from '@next/NextComposed';
-import type { AnyRef } from '@utils/util';
+import NextLinkComposed, { NextLinkComposedProps } from '@next/NextComposed';
 import clsx from 'clsx';
 import type { LinkProps as NextLinkProps } from 'next/link';
 import { useRouter } from 'next/router';
-import React, { forwardRef, PropsWithChildren, ReactNode } from 'react';
+import React, { CSSProperties, forwardRef, PropsWithChildren, ReactNode } from 'react';
 import { Else, If, Then } from 'react-if';
-import type { UrlObject } from 'url';
 
-interface LinkProps extends NextLinkProps {
+type LinkProps = {
 	/** The href to navigate to */
-	href: string | UrlObject;
+	href: NextLinkProps['href'];
 	/** Force the link to open in the same tab */
 	forceSameTab?: boolean;
 	/** Optionally text to render inside a Typography component. If not provided then this will render children */
@@ -29,9 +26,14 @@ interface LinkProps extends NextLinkProps {
 	style?: CSSProperties;
 	/** Action to trigger when clicking this link, will trigger along with the navigation */
 	onClick?: (...args: unknown[]) => void;
-}
 
-const useStyles = makeStyles((theme: Theme) =>
+	as?: NextLinkProps['as'];
+	linkAs?: NextLinkProps['as']; // Useful when the as prop is shallow by styled().
+	noLinkStyle?: boolean;
+} & Omit<NextLinkComposedProps, 'to' | 'linkAs' | 'href'> &
+	Omit<MLinkProps, 'href'>;
+
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		link: {
 			cursor: 'pointer',
@@ -40,24 +42,45 @@ const useStyles = makeStyles((theme: Theme) =>
 				color: theme.palette.primary.dark
 			},
 			'&:visited': {
-				color: theme.palette.augmentColor({ main: theme.palette.primary.main }).dark
+				color: theme.palette.augmentColor({ color: { main: theme.palette.primary.main } }).dark
 			}
 		}
 	})
 );
 
 export default forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
-	({ href, forceSameTab, activeClassName = 'active', className: classNameFromProps, text, children, TextTypographyProps, ...other }, ref) => {
+	(
+		{
+			activeClassName = 'active',
+			as,
+			className: classNameProps,
+			href,
+			linkAs: linkAsProp,
+			locale,
+			noLinkStyle,
+			prefetch,
+			replace,
+			role,
+			scroll,
+			shallow,
+			forceSameTab,
+			text,
+			children,
+			TextTypographyProps,
+			...other
+		},
+		ref
+	) => {
 		const router = useRouter();
 		const classes = useStyles();
 		const pathname = typeof href === 'string' ? href : href.pathname;
-		const className = clsx(classes.link, classNameFromProps, {
+		const className = clsx(classes.link, classNameProps, {
 			[activeClassName]: router.pathname === pathname && activeClassName
 		});
 
 		if (forceSameTab || pathname?.startsWith('/')) {
 			return (
-				<NextComposed className={className} ref={ref} href={href} {...other}>
+				<NextLinkComposed className={className} ref={ref} to={href} {...other}>
 					<If condition={Boolean(text)}>
 						<Then>
 							<Typography component="span" color="primary" variant="body2" {...TextTypographyProps}>
@@ -66,19 +89,23 @@ export default forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
 						</Then>
 						<Else>{children}</Else>
 					</If>
-				</NextComposed>
+				</NextLinkComposed>
 			);
 		}
 
+		const linkAs = linkAsProp || as;
+		const nextjsProps = { to: href, linkAs, replace, scroll, shallow, prefetch, locale };
+
 		return (
 			<MuiLink
+				component={NextLinkComposed}
 				target="_blank"
 				rel="noopener noreferrer"
 				className={className}
-				ref={ref as AnyRef}
-				href={href as string}
-				{...other}
+				ref={ref}
 				underline="hover"
+				{...nextjsProps}
+				{...other}
 			>
 				<If condition={Boolean(text)}>
 					<Then>

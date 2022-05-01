@@ -1,18 +1,17 @@
 import type { FlattenedCommand } from '@config/types/ApiData';
-import Accordion from '@mui/material/Accordion';
-import AccordionActions from '@mui/material/AccordionActions';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import Grid from '@mui/material/Grid';
-import { Theme } from '@mui/material/styles';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
-import Typography from '@mui/material/Typography';
 import BrushIcon from '@mui/icons-material/BrushTwoTone';
 import CodeIcon from '@mui/icons-material/CodeTwoTone';
 import CreateIcon from '@mui/icons-material/CreateTwoTone';
 import ExamplesIcon from '@mui/icons-material/EmojiObjects';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Accordion from '@mui/material/Accordion';
+import AccordionActions from '@mui/material/AccordionActions';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import Chips from '@presentational/CommandsPage/Chips';
 import { reactStringReplace } from '@utils/reactStringReplace';
 import clsx from 'clsx';
@@ -22,7 +21,7 @@ import React, { FC, memo } from 'react';
 import ExtendedHelpBody from './ExtendedHelpBody';
 import ExtendedHelpSectionHeader from './ExtendedHelpSectionHeader';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		commandContainer: {
 			flex: '1 1 30%',

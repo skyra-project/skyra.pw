@@ -1,11 +1,10 @@
 import MuiList from '@mui/material/List';
-import { Theme } from '@mui/material/styles';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import React, { forwardRef } from 'react';
-import type { NormalComponents } from 'react-markdown/src/ast-to-react';
+import type { OrderedListProps } from 'react-markdown/lib/ast-to-react';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		list: {
 			[theme.breakpoints.up('md')]: {
@@ -15,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const List = forwardRef<HTMLUListElement, Parameters<Exclude<NormalComponents['li'], 'li'>>[0]>(({ children }, ref) => {
+const OrderedList = forwardRef<HTMLUListElement, OrderedListProps>(({ children }, ref) => {
 	const classes = useStyles();
 	return (
 		<MuiList classes={{ root: classes.list }} ref={ref} dense disablePadding>
@@ -24,4 +23,4 @@ const List = forwardRef<HTMLUListElement, Parameters<Exclude<NormalComponents['l
 	);
 });
 
-export default List;
+export default OrderedList;

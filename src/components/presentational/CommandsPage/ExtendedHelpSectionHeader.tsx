@@ -1,11 +1,10 @@
 import Divider from '@mui/material/Divider';
-import { Theme } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import Typography from '@mui/material/Typography';
 import React, { FC, memo, ReactElement } from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		textFlexBox: {
 			display: 'flex',

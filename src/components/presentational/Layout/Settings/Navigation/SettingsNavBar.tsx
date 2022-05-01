@@ -3,7 +3,6 @@ import UserMenu from '@layout/Navigation/UserMenu';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
-import { Theme } from '@mui/material/styles';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,7 +13,7 @@ import { SettingsDrawerWidth } from '@utils/constants';
 import React, { FC, memo } from 'react';
 import type { ValuesType } from 'utility-types';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		appBar: {
 			marginLeft: SettingsDrawerWidth,
@@ -40,7 +39,7 @@ const SettingsNavBar: FC<SettingsNavBarProps> = ({ guildData, toggleSidebar }) =
 	const classes = useStyles();
 
 	return (
-		<AppBar position="fixed" className={classes.appBar}>
+		<AppBar position="fixed" className={classes.appBar} enableColorOnDark>
 			<Toolbar>
 				<IconButton color="primary" edge="start" onClick={toggleSidebar} className={classes.menuButton} size="large">
 					<MenuIcon color="secondary" />
