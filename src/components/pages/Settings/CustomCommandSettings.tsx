@@ -22,8 +22,7 @@ import { parse, REGEXP } from '@utils/Color';
 import type { AnyRef } from '@utils/util';
 import { FastField, Formik, FormikConfig } from 'formik';
 import React, { forwardRef, Fragment, memo, useMemo } from 'react';
-import { Virtuoso } from 'react-virtuoso';
-import type { Components } from 'react-virtuoso/dist/interfaces';
+import { Components, Virtuoso } from 'react-virtuoso';
 import { boolean, object, string } from 'yup';
 
 const useStyles = makeStyles((theme: Theme) =>

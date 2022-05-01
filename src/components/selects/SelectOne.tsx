@@ -16,8 +16,7 @@ import { Time } from '@utils/skyraUtils';
 import { AnyRef, sleep } from '@utils/util';
 import React, { ChangeEvent, forwardRef, Fragment, ReactNode, useCallback, useMemo, useState } from 'react';
 import { Else, If, Then } from 'react-if';
-import { Virtuoso } from 'react-virtuoso';
-import type { Components } from 'react-virtuoso/dist/interfaces';
+import { Virtuoso, type Components } from 'react-virtuoso';
 
 export interface SelectOneProps {
 	/** The label to show on the button */

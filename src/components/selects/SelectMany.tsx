@@ -17,8 +17,7 @@ import { Time } from '@utils/skyraUtils';
 import { AnyRef, sleep } from '@utils/util';
 import React, { ChangeEvent, FC, forwardRef, Fragment, useCallback, useMemo, useState } from 'react';
 import { Else, If, Then } from 'react-if';
-import { Virtuoso } from 'react-virtuoso';
-import type { Components } from 'react-virtuoso/dist/interfaces';
+import { Virtuoso, type Components } from 'react-virtuoso';
 import type { SelectOneProps } from './SelectOne';
 
 export interface SelectManyProps extends SelectOneProps {
