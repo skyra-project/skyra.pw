@@ -27,7 +27,6 @@ import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Case, Default, Switch } from 'react-if';
 
 const GuildSettingsProvider = dynamic(() => import('@contexts/Settings/GuildSettingsContext'));
 const GuildSettingsChangesProvider = dynamic(() => import('@contexts/Settings/GuildSettingsChangesContext'));
@@ -77,6 +76,43 @@ const GuildSettingsPage: NextPage = () => {
 	const [guildId, ...path] = router.query.id ?? ['', ['']];
 	const joinedPath = path.join('/');
 
+	const renderSettingsPath = () => {
+		switch (joinedPath as GuildRoutes & FilterRoutes) {
+			case GuildRoutes.Channels:
+				return <ChannelSettings />;
+			case GuildRoutes.CustomCommands:
+				return <CustomCommandSettings />;
+			case GuildRoutes.DisabledCommands:
+				return <DisabledCommandSettings setCommands={setCommands} commands={commands} />;
+			case GuildRoutes.Events:
+				return <EventSettings />;
+			case GuildRoutes.Messages:
+				return <MessageSettings />;
+			case GuildRoutes.Moderation:
+				return <ModerationSettings />;
+			case GuildRoutes.Roles:
+				return <RoleSettings />;
+			case GuildRoutes.Suggestions:
+				return <SuggestionSettings />;
+			case FilterRoutes.Capitals:
+				return <FilterCapitalsSettings />;
+			case FilterRoutes.Invites:
+				return <FilterInvitesSettings />;
+			case FilterRoutes.Links:
+				return <FilterLinksSettings />;
+			case FilterRoutes.MessageDuplication:
+				return <FilterMessagesSettings />;
+			case FilterRoutes.NewLines:
+				return <FilterNewLineSettings />;
+			case FilterRoutes.Reactions:
+				return <FilterReactionSettings />;
+			case FilterRoutes.Words:
+				return <FilterWordSettings />;
+			default:
+				return <GeneralSettings languages={languages} />;
+		}
+	};
+
 	if (!authenticated) {
 		return <RedirectRoute redirectUri="/" />;
 	}
@@ -86,58 +122,7 @@ const GuildSettingsPage: NextPage = () => {
 			<GuildSettingsProvider>
 				<GuildDataProvider>
 					<Loading loading={loading} />
-					<Dashboard guildId={guildId}>
-						<Switch>
-							<Case condition={joinedPath === GuildRoutes.Channels}>
-								<ChannelSettings />
-							</Case>
-							<Case condition={joinedPath === GuildRoutes.CustomCommands}>
-								<CustomCommandSettings />
-							</Case>
-							<Case condition={joinedPath === GuildRoutes.DisabledCommands}>
-								<DisabledCommandSettings setCommands={setCommands} commands={commands} />
-							</Case>
-							<Case condition={joinedPath === GuildRoutes.Events}>
-								<EventSettings />
-							</Case>
-							<Case condition={joinedPath === GuildRoutes.Messages}>
-								<MessageSettings />
-							</Case>
-							<Case condition={joinedPath === GuildRoutes.Moderation}>
-								<ModerationSettings />
-							</Case>
-							<Case condition={joinedPath === GuildRoutes.Roles}>
-								<RoleSettings />
-							</Case>
-							<Case condition={joinedPath === GuildRoutes.Suggestions}>
-								<SuggestionSettings />
-							</Case>
-							<Case condition={joinedPath === FilterRoutes.Capitals}>
-								<FilterCapitalsSettings />
-							</Case>
-							<Case condition={joinedPath === FilterRoutes.Invites}>
-								<FilterInvitesSettings />
-							</Case>
-							<Case condition={joinedPath === FilterRoutes.Links}>
-								<FilterLinksSettings />
-							</Case>
-							<Case condition={joinedPath === FilterRoutes.MessageDuplication}>
-								<FilterMessagesSettings />
-							</Case>
-							<Case condition={joinedPath === FilterRoutes.NewLines}>
-								<FilterNewLineSettings />
-							</Case>
-							<Case condition={joinedPath === FilterRoutes.Reactions}>
-								<FilterReactionSettings />
-							</Case>
-							<Case condition={joinedPath === FilterRoutes.Words}>
-								<FilterWordSettings />
-							</Case>
-							<Default>
-								<GeneralSettings languages={languages} />
-							</Default>
-						</Switch>
-					</Dashboard>
+					<Dashboard guildId={guildId}>{renderSettingsPath()}</Dashboard>
 				</GuildDataProvider>
 			</GuildSettingsProvider>
 		</GuildSettingsChangesProvider>

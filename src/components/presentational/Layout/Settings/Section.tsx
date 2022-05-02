@@ -1,9 +1,5 @@
 import { Box, BoxProps, Typography } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
-import clsx from 'clsx';
 import React, { FC, memo, ReactNode } from 'react';
-import { Else, If, Then, When } from 'react-if';
 
 export interface SectionProps extends Omit<BoxProps, 'title'> {
 	title: ReactNode;
@@ -11,51 +7,57 @@ export interface SectionProps extends Omit<BoxProps, 'title'> {
 	titleProps?: BoxProps;
 }
 
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		root: {
-			marginRight: theme.spacing(4),
-			marginBottom: theme.spacing(2),
-			[theme.breakpoints.down('md')]: {
-				flexBasis: '100%',
-				width: '100%',
-				marginRight: 0,
-
-				'&:not:(:first-child)': {
-					marginTop: theme.spacing(3)
+export const Section: FC<SectionProps> = ({ title, children, titleProps, disableTypography = false, ...props }) => (
+	<Box
+		{...props}
+		sx={{
+			marginRight: {
+				md: (theme) => theme.spacing(4),
+				xs: 0
+			},
+			marginBottom: (theme) => theme.spacing(2),
+			flexBasis: {
+				md: 'inherit',
+				xs: '100%'
+			},
+			width: {
+				md: 'inherit',
+				xs: '100%'
+			},
+			'&:not:(:first-child)': {
+				marginTop: {
+					md: 'inherit',
+					xs: (theme) => theme.spacing(3)
 				}
-			}
-		},
-		typography: {
-			borderBottomWidth: 2,
-			borderBottomStyle: 'solid',
-			borderBottomColor: theme.palette.primary.main,
-			marginBottom: theme.spacing(3),
-			paddingBottom: theme.spacing(0.25)
-		}
-	})
+			},
+			...props.sx
+		}}
+	>
+		{Boolean(title) && (
+			<>
+				{disableTypography ? (
+					<Box {...titleProps}>{title}</Box>
+				) : (
+					<Typography
+						variant="h5"
+						component="h1"
+						{...titleProps}
+						sx={{
+							...titleProps?.sx,
+							borderBottomWidth: 2,
+							borderBottomStyle: 'solid',
+							borderBottomColor: (theme) => theme.palette.primary.main,
+							marginBottom: (theme) => theme.spacing(3),
+							paddingBottom: (theme) => theme.spacing(0.25)
+						}}
+					>
+						{title}
+					</Typography>
+				)}
+			</>
+		)}
+		{children}
+	</Box>
 );
-
-export const Section: FC<SectionProps> = ({ title, children, titleProps, disableTypography = false, ...props }) => {
-	const classes = useStyles();
-
-	return (
-		<Box {...props} className={clsx(classes.root, props.className)}>
-			<When condition={Boolean(title)}>
-				<If condition={disableTypography}>
-					<Then>
-						<Box {...titleProps}>{title}</Box>
-					</Then>
-					<Else>
-						<Typography variant="h5" component="h1" classes={{ root: classes.typography }} {...titleProps}>
-							{title}
-						</Typography>
-					</Else>
-				</If>
-			</When>
-			{children}
-		</Box>
-	);
-};
 
 export default memo(Section);

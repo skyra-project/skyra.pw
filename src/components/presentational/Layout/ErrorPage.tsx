@@ -7,26 +7,10 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import { navigate } from '@utils/util';
 import React, { memo } from 'react';
 
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		root: {
-			overflowY: 'hidden'
-		},
-		text: {
-			lineHeight: theme.spacing(0.2),
-			textAlign: 'center',
-			marginBottom: theme.spacing(5)
-		}
-	})
-);
-
 const NotFoundPage = () => {
-	const classes = useStyles();
 	const theme = useTheme();
 	const isOnMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -39,10 +23,20 @@ const NotFoundPage = () => {
 					justifyContent="center"
 					alignContent="stretch"
 					alignItems="center"
-					classes={{ root: classes.root }}
+					sx={{
+						overflowY: 'hidden'
+					}}
 				>
 					<Grid item>
-						<Typography variant={isOnMobile ? 'h5' : 'h4'} color="textPrimary" classes={{ root: classes.text }}>
+						<Typography
+							variant={isOnMobile ? 'h5' : 'h4'}
+							color="textPrimary"
+							sx={{
+								lineHeight: (theme) => theme.spacing(0.2),
+								textAlign: 'center',
+								marginBottom: (theme) => theme.spacing(5)
+							}}
+						>
 							Woah! Looks like you just ran into a non-existant page. If you think you found this page by mistake then feel free to join
 							the support server on Discord using the button below and let us know.
 						</Typography>

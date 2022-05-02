@@ -1,7 +1,5 @@
 import Divider from '@mui/material/Divider';
 import Typography, { TypographyProps } from '@mui/material/Typography';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import React, { FC, memo, ReactNode } from 'react';
 
 interface PageHeaderProps {
@@ -15,32 +13,24 @@ interface PageHeaderProps {
 	SubTitleTypographyProps?: TypographyProps;
 }
 
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		divider: {
-			backgroundColor: theme.palette.secondary.light,
-			marginBottom: theme.spacing(3),
-			paddingBottom: theme.spacing(0.25)
-		}
-	})
-);
-
-const PageHeader: FC<PageHeaderProps> = ({ title, subtitle, TitleTypographyProps, SubTitleTypographyProps }) => {
-	const classes = useStyles();
-
-	return (
-		<>
-			<Typography variant="h5" color="textPrimary" {...TitleTypographyProps}>
-				{title}
+const PageHeader: FC<PageHeaderProps> = ({ title, subtitle, TitleTypographyProps, SubTitleTypographyProps }) => (
+	<>
+		<Typography variant="h5" color="textPrimary" {...TitleTypographyProps}>
+			{title}
+		</Typography>
+		{subtitle && (
+			<Typography variant="subtitle1" color="textSecondary" {...SubTitleTypographyProps}>
+				{subtitle}
 			</Typography>
-			{subtitle && (
-				<Typography variant="subtitle1" color="textSecondary" {...SubTitleTypographyProps}>
-					{subtitle}
-				</Typography>
-			)}
-			<Divider classes={{ root: classes.divider }} />
-		</>
-	);
-};
+		)}
+		<Divider
+			sx={{
+				bgcolor: 'secondary.light',
+				mb: 3,
+				pb: 0.25
+			}}
+		/>
+	</>
+);
 
 export default memo(PageHeader);

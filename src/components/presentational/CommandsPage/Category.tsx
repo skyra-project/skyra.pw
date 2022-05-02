@@ -5,24 +5,8 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import Command from '@presentational/CommandsPage/Command';
 import React, { FC, memo, useCallback } from 'react';
-
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		categoryAccordion: {
-			marginTop: theme.spacing(1),
-			marginBottom: theme.spacing(1),
-			borderRadius: theme.spacing(0.5)
-		},
-		categoryHeading: {
-			fontSize: theme.typography.pxToRem(20),
-			fontWeight: 'bolder'
-		}
-	})
-);
 
 interface CategoryProps {
 	categoryName: string;
@@ -31,8 +15,6 @@ interface CategoryProps {
 }
 
 const Category: FC<CategoryProps> = ({ categoryName, commands, searchValue }) => {
-	const classes = useStyles();
-
 	const filterCommands = useCallback((command: FlattenedCommand) => command.name.toLowerCase().includes(searchValue.toLowerCase()), [searchValue]);
 
 	const filteredCategory = commands.filter((command) => command.category === categoryName).filter(filterCommands);
@@ -40,9 +22,23 @@ const Category: FC<CategoryProps> = ({ categoryName, commands, searchValue }) =>
 	if (!filteredCategory.length) return null;
 
 	return (
-		<Accordion defaultExpanded TransitionProps={{ unmountOnExit: true }} classes={{ root: classes.categoryAccordion }}>
+		<Accordion
+			defaultExpanded
+			TransitionProps={{ unmountOnExit: true }}
+			sx={{
+				my: 1,
+				borderRadius: (theme) => theme.spacing(0.5)
+			}}
+		>
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-				<Typography variant="h2" component="h1" className={classes.categoryHeading}>
+				<Typography
+					variant="h2"
+					component="h1"
+					sx={{
+						fontSize: (theme) => theme.typography.pxToRem(20),
+						fontWeight: 'bolder'
+					}}
+				>
 					{categoryName}
 				</Typography>
 			</AccordionSummary>

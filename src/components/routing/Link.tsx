@@ -1,13 +1,11 @@
 import MuiLink, { LinkProps as MLinkProps } from '@mui/material/Link';
 import Typography, { TypographyProps } from '@mui/material/Typography';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import NextLinkComposed, { NextLinkComposedProps } from '@next/NextComposed';
 import clsx from 'clsx';
 import type { LinkProps as NextLinkProps } from 'next/link';
 import { useRouter } from 'next/router';
 import React, { CSSProperties, forwardRef, PropsWithChildren, ReactNode } from 'react';
-import { Else, If, Then } from 'react-if';
+import styles from './Link.module.css';
 
 type LinkProps = {
 	/** The href to navigate to */
@@ -33,21 +31,6 @@ type LinkProps = {
 } & Omit<NextLinkComposedProps, 'to' | 'linkAs' | 'href'> &
 	Omit<MLinkProps, 'href'>;
 
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		link: {
-			cursor: 'pointer',
-			color: theme.palette.primary.main,
-			'&:hover': {
-				color: theme.palette.primary.dark
-			},
-			'&:visited': {
-				color: theme.palette.augmentColor({ color: { main: theme.palette.primary.main } }).dark
-			}
-		}
-	})
-);
-
 export default forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
 	(
 		{
@@ -72,23 +55,21 @@ export default forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
 		ref
 	) => {
 		const router = useRouter();
-		const classes = useStyles();
 		const pathname = typeof href === 'string' ? href : href.pathname;
-		const className = clsx(classes.link, classNameProps, {
+		const className = clsx(styles.link, classNameProps, {
 			[activeClassName]: router.pathname === pathname && activeClassName
 		});
 
 		if (forceSameTab || pathname?.startsWith('/')) {
 			return (
 				<NextLinkComposed className={className} ref={ref} to={href} {...other}>
-					<If condition={Boolean(text)}>
-						<Then>
-							<Typography component="span" color="primary" variant="body2" {...TextTypographyProps}>
-								{text}
-							</Typography>
-						</Then>
-						<Else>{children}</Else>
-					</If>
+					{Boolean(text) ? (
+						<Typography component="span" color="primary" variant="body2" {...TextTypographyProps}>
+							{text}
+						</Typography>
+					) : (
+						<>{children}</>
+					)}
 				</NextLinkComposed>
 			);
 		}
@@ -107,14 +88,13 @@ export default forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
 				{...nextjsProps}
 				{...other}
 			>
-				<If condition={Boolean(text)}>
-					<Then>
-						<Typography component="span" color="primary" variant="body2" {...TextTypographyProps}>
-							{text}
-						</Typography>
-					</Then>
-					<Else>{children}</Else>
-				</If>
+				{Boolean(text) ? (
+					<Typography component="span" color="primary" variant="body2" {...TextTypographyProps}>
+						{text}
+					</Typography>
+				) : (
+					<>{children}</>
+				)}
 			</MuiLink>
 		);
 	}

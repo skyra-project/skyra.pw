@@ -1,24 +1,6 @@
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import React, { FC, memo, ReactElement } from 'react';
-
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		textFlexBox: {
-			display: 'flex',
-			flexDirection: 'row',
-			alignItems: 'center',
-			alignContent: 'flex-start',
-			justifyContent: 'flex-start'
-		},
-		divider: {
-			marginLeft: theme.spacing(1),
-			marginRight: theme.spacing(1)
-		}
-	})
-);
 
 interface ExtendedHelpSectionHeaderProps {
 	icon: ReactElement;
@@ -26,12 +8,26 @@ interface ExtendedHelpSectionHeaderProps {
 }
 
 const ExtendedHelpSectionHeader: FC<ExtendedHelpSectionHeaderProps> = ({ icon, header }) => {
-	const classes = useStyles();
-
 	return (
-		<Typography variant="h5" classes={{ root: classes.textFlexBox }}>
+		<Typography
+			variant="h5"
+			sx={{
+				display: 'flex',
+				flexDirection: 'row',
+				alignItems: 'center',
+				alignContent: 'flex-start',
+				justifyContent: 'flex-start'
+			}}
+		>
 			{icon}
-			<Divider classes={{ root: classes.divider }} orientation="vertical" flexItem light />
+			<Divider
+				sx={{
+					mx: 1
+				}}
+				orientation="vertical"
+				flexItem
+				light
+			/>
 			{header}
 		</Typography>
 	);

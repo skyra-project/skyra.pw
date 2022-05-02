@@ -32,6 +32,7 @@ declare module 'next-pwa' {
 		}>;
 
 		experimental: Partial<{
+			esmExternals: boolean;
 			cpus: number;
 			plugins: boolean;
 			profiling: boolean;

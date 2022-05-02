@@ -1,5 +1,3 @@
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
@@ -30,46 +28,7 @@ interface SelectDurationProps {
 	onChange: (value: number) => void;
 }
 
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		box: {
-			marginBottom: theme.spacing(3)
-		},
-		selectBox: {
-			width: theme.spacing(20)
-		},
-		selectBoxMargin: {
-			[theme.breakpoints.down('md')]: {
-				marginTop: theme.spacing(2)
-			}
-		},
-		textField: {
-			paddingLeft: theme.spacing(2),
-			width: theme.spacing(28),
-			[theme.breakpoints.down('md')]: {
-				marginTop: theme.spacing(2),
-				width: theme.spacing(10),
-				paddingLeft: 'unset'
-			}
-		},
-		textFieldHelperText: {
-			position: 'absolute',
-			bottom: theme.spacing(-3),
-			left: theme.spacing(-1.5),
-			width: theme.spacing(62.5),
-			paddingLeft: theme.spacing(2)
-		},
-		label: {
-			paddingLeft: theme.spacing(2),
-			[theme.breakpoints.down('md')]: {
-				paddingLeft: 'unset'
-			}
-		}
-	})
-);
-
 const SelectDuration: FC<SelectDurationProps> = ({ value, min, max, onChange }) => {
-	const classes = useStyles();
 	const [inputDuration, inputUnit] = determineUnit(value ?? 0)!;
 	const [unit, setUnit] = useState(inputUnit);
 	const [duration, setDuration] = useState(inputDuration);
@@ -102,9 +61,22 @@ const SelectDuration: FC<SelectDurationProps> = ({ value, min, max, onChange }) 
 	}
 
 	return (
-		<Box className={classes.box}>
+		<Box mb={3}>
 			<TextField
-				className={classes.textField}
+				sx={{
+					pl: {
+						md: 2,
+						xs: 'unset'
+					},
+					width: {
+						md: (theme) => theme.spacing(28),
+						xs: (theme) => theme.spacing(10)
+					},
+					mt: {
+						md: 'inherit',
+						xs: 2
+					}
+				}}
 				helperText={error}
 				error={Boolean(error)}
 				value={isNaN(duration) ? '' : duration}
@@ -112,19 +84,35 @@ const SelectDuration: FC<SelectDurationProps> = ({ value, min, max, onChange }) 
 				label="Duration"
 				onChange={onChangeDuration}
 				InputLabelProps={{
-					classes: {
-						root: classes.label
+					sx: {
+						pl: {
+							md: 2,
+							xs: 'unset'
+						}
 					}
 				}}
 				FormHelperTextProps={{
-					classes: {
-						error: classes.textFieldHelperText
-					}
+					sx: (theme) => ({
+						position: 'absolute',
+						bottom: theme.spacing(-3),
+						left: theme.spacing(-1.5),
+						width: theme.spacing(62.5),
+						pl: 2
+					})
 				}}
 			/>
 			<Select
-				classes={{ select: classes.selectBox }}
-				FormControlProps={{ classes: { root: classes.selectBoxMargin } }}
+				sx={{
+					width: (theme) => theme.spacing(20)
+				}}
+				FormControlProps={{
+					sx: {
+						mt: {
+							md: 'inherit',
+							xs: 2
+						}
+					}
+				}}
 				title={error ? '' : 'Duration unit'}
 				error={Boolean(error)}
 				value={unit}

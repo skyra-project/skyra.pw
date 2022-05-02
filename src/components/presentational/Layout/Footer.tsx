@@ -1,41 +1,13 @@
 import SkyraLogo from '@assets/skyraLogo';
+import { useMediaQuery } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Hidden from '@mui/material/Hidden';
+import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import Link from '@routing/Link';
 import { CLIENT_ID, inviteURL } from '@utils/constants';
 import React, { memo } from 'react';
-
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		root: {
-			padding: '50px 0px',
-			background: theme.palette.secondary.main,
-			height: 200,
-			[theme.breakpoints.down('sm')]: {
-				height: 'auto'
-			}
-		},
-		container: {
-			display: 'flex',
-			justifyContent: 'space-around',
-			[theme.breakpoints.down('sm')]: {
-				flexDirection: 'column',
-				alignContent: 'center',
-				justifyContent: 'center',
-				textAlign: 'center',
-				alignItems: 'center',
-
-				'& > *:not(:first-of-type)': {
-					marginTop: 20
-				}
-			}
-		}
-	})
-);
 
 const Left = () => (
 	<Box textAlign="left" display="flex" flexDirection="column">
@@ -64,20 +36,61 @@ const Middle = () => (
 );
 
 const Footer = () => {
-	const classes = useStyles();
+	const theme = useTheme();
+	const isOnMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
 	return (
-		<Box component="footer" className={classes.root}>
+		<Box
+			component="footer"
+			sx={{
+				padding: '50px 0px',
+				bgcolor: 'secondary.main',
+				height: {
+					sm: 200,
+					xs: 'auto'
+				}
+			}}
+		>
 			<Container maxWidth="sm">
 				<Hidden smDown>
-					<Box className={classes.container}>
+					<Box
+						display="flex"
+						flexDirection={isOnMobile ? 'column' : undefined}
+						alignContent={isOnMobile ? 'center' : undefined}
+						justifyContent={isOnMobile ? 'center' : 'space-around'}
+						textAlign={isOnMobile ? 'center' : undefined}
+						alignItems={isOnMobile ? 'center' : undefined}
+						sx={{
+							'& > *:not(:first-of-type)': {
+								mt: {
+									sm: 'inherit',
+									xs: 20
+								}
+							}
+						}}
+					>
 						<Left />
 						<Middle />
 						<Right />
 					</Box>
 				</Hidden>
 				<Hidden smUp>
-					<Box className={classes.container}>
+					<Box
+						display="flex"
+						flexDirection={isOnMobile ? 'column' : undefined}
+						alignContent={isOnMobile ? 'center' : undefined}
+						justifyContent={isOnMobile ? 'center' : 'space-around'}
+						textAlign={isOnMobile ? 'center' : undefined}
+						alignItems={isOnMobile ? 'center' : undefined}
+						sx={{
+							'& > *:not(:first-of-type)': {
+								mt: {
+									sm: 'inherit',
+									xs: 20
+								}
+							}
+						}}
+					>
 						<Box display="flex" justifyContent="space-between" width="100%" px={3}>
 							<Left />
 							<Right />

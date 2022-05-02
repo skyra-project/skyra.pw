@@ -5,35 +5,12 @@ import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext
 import PageHeader from '@layout/Settings/PageHeader';
 import Section from '@layout/Settings/Section';
 import SimpleGrid from '@material/SimpleGrid';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import SelectChannel from '@selects/SelectChannel';
 import SelectChannels from '@selects/SelectChannels';
 import { handleResetKey } from '@utils/util';
 import React, { FC, memo } from 'react';
 
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		button: {
-			[theme.breakpoints.only('md')]: {
-				minHeight: 60
-			}
-		},
-		buttonText: {
-			display: 'block',
-			textAlign: 'left'
-		},
-		sectionSpacer: {
-			marginTop: theme.spacing(10),
-			[theme.breakpoints.down('lg')]: {
-				marginTop: theme.spacing(5)
-			}
-		}
-	})
-);
-
 const ChannelSettings: FC = () => {
-	const classes = useStyles();
 	const { guildData } = useGuildDataContext();
 	const { guildSettings } = useGuildSettingsContext();
 	const { guildSettingsChanges, setGuildSettingsChanges } = useGuildSettingsChangesContext();
@@ -75,16 +52,28 @@ const ChannelSettings: FC = () => {
 							label={name}
 							ButtonProps={{
 								fullWidth: true,
-								classes: {
-									root: classes.button,
-									label: classes.buttonText
+								sx: {
+									minHeight: {
+										lg: 'inherit',
+										md: 60,
+										xs: 'inherit'
+									},
+									textAlign: 'left'
 								}
 							}}
 						/>
 					))}
 				</SimpleGrid>
 			</Section>
-			<Section title="Logging Ignore Channels" className={classes.sectionSpacer}>
+			<Section
+				title="Logging Ignore Channels"
+				sx={{
+					marginTop: {
+						lg: (theme) => theme.spacing(10),
+						xs: (theme) => theme.spacing(5)
+					}
+				}}
+			>
 				<SimpleGrid
 					direction="row"
 					justifyContent="flex-start"
@@ -107,9 +96,13 @@ const ChannelSettings: FC = () => {
 							label={name}
 							ButtonProps={{
 								fullWidth: true,
-								classes: {
-									root: classes.button,
-									label: classes.buttonText
+								sx: {
+									minHeight: {
+										lg: 'inherit',
+										md: 60,
+										xs: 'inherit'
+									},
+									textAlign: 'left'
 								}
 							}}
 						/>

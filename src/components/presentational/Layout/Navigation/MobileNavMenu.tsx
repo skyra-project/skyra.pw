@@ -8,7 +8,6 @@ import DiscordChatIcon from '@mui/icons-material/Forum';
 import GavelIcon from '@mui/icons-material/Gavel';
 import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
-import SyncIcon from '@mui/icons-material/Sync';
 import LoginIcon from '@mui/icons-material/VpnKey';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
@@ -19,55 +18,15 @@ import MenuList from '@mui/material/MenuList';
 import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import Typography from '@mui/material/Typography';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import MenuItemLink from '@routing/MenuItemLink';
 import { oauthURL } from '@utils/constants';
 import { displayAvatarURL } from '@utils/skyraUtils';
 import { clearData, logOut, syncUser } from '@utils/util';
 import { useRouter } from 'next/router';
 import React, { FC, memo, MouseEvent as ReactMouseEvent, useEffect, useRef, useState } from 'react';
-import { Else, If, Then } from 'react-if';
-
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		menuButton: {
-			marginRight: theme.spacing(2)
-		},
-		popper: {
-			marginTop: theme.spacing(1),
-			zIndex: theme.zIndex.drawer + 1
-		},
-		button: {
-			borderBottomLeftRadius: 0,
-			borderTopLeftRadius: 0
-		},
-		transparentButton: {
-			background: 'transparent',
-			boxShadow: 'none',
-			'&:hover': {
-				background: theme.palette.primary.dark,
-				boxShadow: theme.shadows[1]
-			}
-		},
-		syncLogo: {
-			'&:hover': {
-				animation: `$syncLogoSpin 2s infinite cubic-bezier(0.65, 0.05, 0.36, 1)`
-			}
-		},
-		'@keyframes syncLogoSpin': {
-			'0%': {
-				transform: 'rotate(0deg)'
-			},
-			'100%': {
-				transform: 'rotate(-360deg)'
-			}
-		}
-	})
-);
+import SpinningSyncIcon from './SpinningSyncIcon';
 
 const MobileNavMenu: FC = () => {
-	const classes = useStyles();
 	const anchorRef = useRef<HTMLButtonElement>(null);
 	const [popperMenuIsOpen, setPopperMenuOpen] = useState(false);
 
@@ -115,29 +74,37 @@ const MobileNavMenu: FC = () => {
 				edge="start"
 				aria-controls={popperMenuIsOpen ? 'menu-popover' : undefined}
 				aria-haspopup="true"
-				className={classes.menuButton}
+				sx={{
+					mr: 2
+				}}
 				color="inherit"
 				aria-label="menu"
 				onClick={togglePopperMenu}
 				size="large"
 			>
-				<If condition={authenticated}>
-					<Then>
-						<LazyAvatar src={displayAvatarURL(pack?.user, { size: 32 })} imgProps={{ height: 32, width: 32 }} alt="U" />
-					</Then>
-					<Else>
-						<MenuIcon />
-					</Else>
-				</If>
+				{authenticated ? (
+					<LazyAvatar src={displayAvatarURL(pack?.user, { size: 32 })} imgProps={{ height: 32, width: 32 }} alt="U" />
+				) : (
+					<MenuIcon />
+				)}
 			</IconButton>
-			<Popper className={classes.popper} open={popperMenuIsOpen} anchorEl={anchorRef.current} transition disablePortal>
+			<Popper
+				sx={{
+					mt: 1,
+					zIndex: (theme) => theme.zIndex.drawer + 1
+				}}
+				open={popperMenuIsOpen}
+				anchorEl={anchorRef.current}
+				transition
+				disablePortal
+			>
 				{({ TransitionProps, placement }) => (
 					<Grow {...TransitionProps} style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}>
 						<Paper>
 							<ClickAwayListener onClickAway={closePopperMenu}>
 								<MenuList autoFocusItem={popperMenuIsOpen} id="menu-popover" onKeyDown={handleListKeyDown}>
-									<If condition={authenticated}>
-										<Then>
+									{authenticated ? (
+										<>
 											<MenuItem
 												component="a"
 												onClick={async (...args: Parameters<typeof closePopperMenu>) => {
@@ -158,15 +125,14 @@ const MobileNavMenu: FC = () => {
 												}}
 											>
 												<ListItemIcon>
-													<SyncIcon className={classes.syncLogo} />
+													<SpinningSyncIcon />
 												</ListItemIcon>
 												<Typography variant="inherit">Resync user data</Typography>
 											</MenuItem>
-										</Then>
-										<Else>
-											<MenuItemLink href={oauthURL.toString()} Icon={<LoginIcon />} text="Login" forceSameTab />
-										</Else>
-									</If>
+										</>
+									) : (
+										<MenuItemLink href={oauthURL.toString()} Icon={<LoginIcon />} text="Login" forceSameTab />
+									)}
 									{router.pathname !== '/' && <MenuItemLink href="/" Icon={<HomeIcon />} text="Go back home" />}
 									<MenuItemLink href="/commands" Icon={<CommandsIcon />} text="Commands" />
 									<MenuItemLink href="/privacy" Icon={<GavelIcon />} text="Privacy Policy" />

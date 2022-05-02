@@ -1,11 +1,9 @@
 import { useMobileContext } from '@contexts/MobileContext';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import DeleteIcon from '@mui/icons-material/DeleteForever';
 import SaveIconIcon from '@mui/icons-material/Save';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import React, { FC, memo } from 'react';
 
 interface SubmitResetButtonsProps {
@@ -14,48 +12,49 @@ interface SubmitResetButtonsProps {
 	submitChanges(): Promise<void>;
 }
 
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		fabContainer: {
-			position: 'fixed',
-			bottom: 30,
-			right: 30,
-			'& button': {
-				marginLeft: 30
-			}
-		},
-		saveIcon: {
-			marginRight: theme.spacing(2)
-		},
-		errorButton: {
-			backgroundColor: theme.palette.error.main,
-			'&:hover': {
-				backgroundColor: theme.palette.error.dark
-			}
-		}
-	})
-);
-
 const SubmitResetButtons: FC<SubmitResetButtonsProps> = ({ isLoading, isOnMobile, submitChanges }) => {
-	const classes = useStyles();
 	const { isMobile } = useMobileContext();
 	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
 	return (
-		<Box component="div" className={classes.fabContainer}>
+		<Box
+			component="div"
+			sx={{
+				position: 'fixed',
+				bottom: 30,
+				right: 30,
+				'& button': {
+					marginLeft: 30
+				}
+			}}
+		>
 			<Button
 				disabled={isLoading}
 				onClick={() => setGuildSettingsChanges(undefined)}
 				color="secondary"
-				classes={{ root: classes.errorButton }}
 				variant="contained"
 				size={isOnMobile ? 'small' : 'large'}
+				sx={{
+					mr: 3.75,
+					bgcolor: 'error.main',
+					'&:hover': {
+						bgcolor: 'error.dark'
+					}
+				}}
 			>
-				<DeleteIcon className={classes.saveIcon} />
+				<DeleteIcon
+					sx={{
+						mr: 2
+					}}
+				/>
 				{isMobile ? 'Reset' : 'Reset changes'}
 			</Button>
 			<Button disabled={isLoading} onClick={submitChanges} color="primary" variant="contained" size={isOnMobile ? 'small' : 'large'}>
-				<SaveIconIcon className={classes.saveIcon} />
+				<SaveIconIcon
+					sx={{
+						mr: 2
+					}}
+				/>
 				{isMobile ? 'Save' : 'Save changes'}
 			</Button>
 		</Box>

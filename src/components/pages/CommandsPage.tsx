@@ -4,8 +4,6 @@ import RefreshCommandsButton from '@layout/RefreshCommandsButton';
 import UiSearchBar from '@material/UiSearchBar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import Category from '@presentational/CommandsPage/Category';
 import Loading from '@presentational/Loading';
 import { ExpirableLocalStorageStructure, LocalStorageKeys } from '@utils/constants';
@@ -15,27 +13,7 @@ import { apiFetch, loadState, saveState } from '@utils/util';
 import debounce from 'lodash/debounce';
 import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		'@global': {
-			'.MuiAccordion-root.Mui-expanded:last-child': {
-				marginBottom: theme.spacing(2)
-			}
-		},
-		searchBar: {
-			marginBottom: theme.spacing(1),
-			position: 'sticky',
-			zIndex: theme.zIndex.appBar - 1,
-			top: theme.spacing(9),
-			[theme.breakpoints.down('md')]: {
-				top: theme.spacing(8.5)
-			}
-		}
-	})
-);
-
 const CommandsPage: FC = () => {
-	const classes = useStyles();
 	const [searchValue, setSearchValue] = useState('');
 	const [commandsBoxWidth, setCommandsBoxWidth] = useState(500);
 	const [commands, setCommands] = useState<FlattenedCommand[]>([]);
@@ -93,7 +71,6 @@ const CommandsPage: FC = () => {
 						onCancelSearch={() => setSearchValue('')}
 						onRequestSearch={(newValue) => setSearchValue(newValue ?? '')}
 						placeholder="Search a command..."
-						className={classes.searchBar}
 						PaperProps={{
 							elevation: 4
 						}}

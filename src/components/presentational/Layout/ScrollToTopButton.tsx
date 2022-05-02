@@ -4,23 +4,9 @@ import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Zoom from '@mui/material/Zoom';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import React, { FC, memo, PropsWithChildren } from 'react';
 
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		scrollToTopButton: {
-			position: 'fixed',
-			bottom: theme.spacing(2),
-			right: theme.spacing(2),
-			zIndex: theme.zIndex.drawer + 2
-		}
-	})
-);
-
 const ScrollToTopButton: FC = () => {
-	const classes = useStyles();
 	const trigger = useScrollTrigger({
 		disableHysteresis: true,
 		threshold: 100
@@ -36,13 +22,23 @@ const ScrollToTopButton: FC = () => {
 
 	return (
 		<Zoom in={trigger}>
-			<Tooltip title="Click to scroll to the top of the page">
-				<Box onClick={handleClick} className={classes.scrollToTopButton}>
-					<Fab color="primary" size="small" aria-label="scroll back to top">
-						<KeyboardArrowUpIcon />
-					</Fab>
-				</Box>
-			</Tooltip>
+			<div>
+				<Tooltip title="Click to scroll to the top of the page">
+					<Box
+						onClick={handleClick}
+						sx={{
+							position: 'fixed',
+							bottom: (theme) => theme.spacing(2),
+							right: (theme) => theme.spacing(2),
+							zIndex: (theme) => theme.zIndex.drawer + 2
+						}}
+					>
+						<Fab color="primary" size="small" aria-label="scroll back to top">
+							<KeyboardArrowUpIcon />
+						</Fab>
+					</Box>
+				</Tooltip>
+			</div>
 		</Zoom>
 	);
 };

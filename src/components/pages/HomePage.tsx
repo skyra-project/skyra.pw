@@ -12,20 +12,18 @@ const HomePage: FC = () => {
 	const pack = useDiscordPack();
 
 	return (
-		<>
-			<GeneralPage>
-				{authenticated && (
-					<Container>
-						<Box display="flex" flexWrap="wrap" flexDirection="row" justifyContent="center" alignItems="center">
-							{FilteredGuildCards(pack)}
-						</Box>
-					</Container>
-				)}
-				{features.map(({ name, previewContent, text }) => (
-					<HomePageSection name={name} text={text} previewContent={previewContent} key={name} />
-				))}
-			</GeneralPage>
-		</>
+		<GeneralPage>
+			{authenticated && (
+				<Container>
+					<Box display="flex" flexWrap="wrap" flexDirection="row" justifyContent="center" alignItems="center">
+						{FilteredGuildCards(pack)}
+					</Box>
+				</Container>
+			)}
+			{features.map(({ name, text }) => (
+				<HomePageSection name={name} text={text} key={name} />
+			))}
+		</GeneralPage>
 	);
 };
 

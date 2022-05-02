@@ -5,8 +5,6 @@ import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext
 import PageHeader from '@layout/Settings/PageHeader';
 import Section from '@layout/Settings/Section';
 import SimpleGrid from '@material/SimpleGrid';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectChannel from '@selects/SelectChannel';
 import SelectEmoji from '@selects/SelectEmoji';
@@ -14,24 +12,7 @@ import { EmojiRegexExtractId } from '@utils/constants';
 import { handleResetKey } from '@utils/util';
 import React, { FC, memo, useMemo } from 'react';
 
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		button: {
-			[theme.breakpoints.only('md')]: {
-				minHeight: 60
-			}
-		},
-		buttonText: {
-			display: 'flex',
-			textAlign: 'left',
-			alignItems: 'center',
-			justifyContent: 'space-between'
-		}
-	})
-);
-
 const SuggestionSettings: FC = () => {
-	const classes = useStyles();
 	const { guildData } = useGuildDataContext();
 	const { guildSettings } = useGuildSettingsContext();
 	const { guildSettingsChanges, setGuildSettingsChanges } = useGuildSettingsChangesContext();
@@ -68,9 +49,16 @@ const SuggestionSettings: FC = () => {
 						guild={guildData}
 						ButtonProps={{
 							fullWidth: true,
-							classes: {
-								root: classes.button,
-								label: classes.buttonText
+							sx: {
+								minHeight: {
+									lg: 'inherit',
+									md: 60,
+									xs: 'inherit'
+								},
+								display: 'flex',
+								textAlign: 'left',
+								alignItems: 'center',
+								justifyContent: 'space-between'
 							}
 						}}
 					/>
@@ -132,9 +120,16 @@ const SuggestionSettings: FC = () => {
 							label={title}
 							ButtonProps={{
 								fullWidth: true,
-								classes: {
-									root: classes.button,
-									label: classes.buttonText
+								sx: {
+									minHeight: {
+										lg: 'inherit',
+										md: 60,
+										xs: 'inherit'
+									},
+									display: 'flex',
+									textAlign: 'left',
+									alignItems: 'center',
+									justifyContent: 'space-between'
 								}
 							}}
 						/>

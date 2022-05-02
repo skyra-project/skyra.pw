@@ -9,8 +9,6 @@ import { Grow, useMediaQuery } from '@mui/material';
 import Box from '@mui/material/Box';
 import Hidden from '@mui/material/Hidden';
 import { useTheme } from '@mui/material/styles';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import ErrorAlert from '@presentational/Alerts/Error';
 import Loading from '@presentational/Loading';
 import { objectToTuples } from '@sapphire/utilities';
@@ -20,7 +18,6 @@ import { apiFetch, clearData } from '@utils/util';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react';
-import { When } from 'react-if';
 import type { ValuesType } from 'utility-types';
 import DesktopSettingsDrawer from './Navigation/DesktopSettingsDrawer';
 import MobileSettingsDrawer from './Navigation/MobileSettingsDrawer';
@@ -32,42 +29,10 @@ interface DashboardLayoutProps {
 	children?: ReactNode;
 }
 
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		root: {
-			display: 'flex',
-			height: '100vh'
-		},
-		drawer: {
-			[theme.breakpoints.up('sm')]: {
-				width: SettingsDrawerWidth,
-				flexShrink: 0
-			}
-		},
-		content: {
-			flexGrow: 1,
-			background: theme.palette.secondary.dark,
-			color: theme.palette.secondary.contrastText,
-			display: 'flex',
-			padding: theme.spacing(4),
-			marginTop: 64,
-			flexDirection: 'column',
-			overflowY: 'scroll',
-			[theme.breakpoints.down('md')]: {
-				marginTop: 56
-			}
-		},
-		link: {
-			color: theme.palette.primary.contrastText,
-			fontWeight: 'bolder'
-		}
-	})
-);
-
 const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 	const theme = useTheme();
 	const isOnMobile = useMediaQuery(theme.breakpoints.down('md'));
-	const classes = useStyles();
+
 	const { guildData, setGuildData } = useGuildDataContext();
 	const { guildSettings, setGuildSettings } = useGuildSettingsContext();
 	const { guildSettingsChanges, setGuildSettingsChanges } = useGuildSettingsChangesContext();
@@ -156,16 +121,31 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 				errorSubText={
 					<Box component="span">
 						Maybe try again later, or join{' '}
-						<a className={classes.link} href="https://join.skyra.pw">
+						<Box
+							component="a"
+							sx={{
+								color: 'primary.contrastText',
+								fontWeight: 'bolder'
+							}}
+							href="https://join.skyra.pw"
+						>
 							the support server
-						</a>{' '}
+						</Box>{' '}
 						and ask for support.
 					</Box>
 				}
 			/>
-			<Box className={classes.root}>
+			<Box display="flex" height="100vh">
 				<SettingsNavBar guildData={guildData} toggleSidebar={toggleSidebar} />
-				<Box component="nav" className={classes.drawer}>
+				<Box
+					component="nav"
+					sx={{
+						width: {
+							sm: SettingsDrawerWidth,
+							flexShrink: 0
+						}
+					}}
+				>
 					<Hidden smUp>
 						<MobileSettingsDrawer
 							mobileOpen={mobileOpen}
@@ -186,8 +166,23 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 						/>
 					</Hidden>
 				</Box>
-				<Box component="main" className={classes.content}>
-					<When condition={readyToRender}>{children}</When>
+				<Box
+					component="main"
+					sx={{
+						flexGrow: 1,
+						bgcolor: 'secondary.dark',
+						color: 'secondary.contrastText',
+						display: 'flex',
+						p: 4,
+						mt: {
+							md: '64px',
+							xs: '56px'
+						},
+						flexDirection: 'column',
+						overflowY: 'scroll'
+					}}
+				>
+					{readyToRender && <>{children}</>}
 					<Grow in={Object.keys(guildSettingsChanges ?? {}).length > 0} unmountOnExit mountOnEnter>
 						<SubmitResetButtons isLoading={isLoading} isOnMobile={isOnMobile} submitChanges={submitChanges} />
 					</Grow>

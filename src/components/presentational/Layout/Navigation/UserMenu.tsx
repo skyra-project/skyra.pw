@@ -4,7 +4,6 @@ import LazyAvatar from '@material/LazyAvatar';
 import Tooltip from '@material/Tooltip';
 import LogoutIcon from '@mui/icons-material/Eject';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import SyncIcon from '@mui/icons-material/Sync';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
@@ -15,46 +14,15 @@ import MenuList from '@mui/material/MenuList';
 import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import Typography from '@mui/material/Typography';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import { displayAvatarURL } from '@utils/skyraUtils';
 import { clearData, logOut, syncUser } from '@utils/util';
 import { useRouter } from 'next/router';
 import React, { FC, memo, MouseEvent as ReactMouseEvent, useEffect, useRef, useState } from 'react';
-
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		popper: {
-			marginTop: theme.spacing(1)
-		},
-		transparentButton: {
-			background: 'transparent',
-			boxShadow: 'none',
-			'&:hover': {
-				background: theme.palette.primary.dark,
-				boxShadow: theme.shadows[1]
-			}
-		},
-		syncLogo: {
-			'&:hover': {
-				animation: `$syncLogoSpin 2s infinite cubic-bezier(0.65, 0.05, 0.36, 1)`
-			}
-		},
-		'@keyframes syncLogoSpin': {
-			'0%': {
-				transform: 'rotate(0deg)'
-			},
-			'100%': {
-				transform: 'rotate(-360deg)'
-			}
-		}
-	})
-);
+import SpinningSyncIcon from './SpinningSyncIcon';
 
 const UserMenu: FC = () => {
 	const [open, setOpen] = useState(false);
 
-	const classes = useStyles();
 	const anchorRef = useRef<HTMLButtonElement>(null);
 
 	const authenticated = useAuthenticated();
@@ -104,7 +72,14 @@ const UserMenu: FC = () => {
 					color="primary"
 					variant="contained"
 					onClick={handleToggle}
-					classes={{ root: classes.transparentButton }}
+					sx={{
+						background: 'transparent',
+						boxShadow: 'none',
+						'&:hover': {
+							bgcolor: 'primary.dark',
+							boxShadow: (theme) => theme.shadows[1]
+						}
+					}}
 				>
 					<LazyAvatar
 						imgProps={{ height: 128, width: 128 }}
@@ -115,7 +90,7 @@ const UserMenu: FC = () => {
 					<ExpandMoreIcon />
 				</Button>
 			</Tooltip>
-			<Popper className={classes.popper} open={open} anchorEl={anchorRef.current} transition disablePortal>
+			<Popper sx={{ mt: 1 }} open={open} anchorEl={anchorRef.current} transition disablePortal>
 				{({ TransitionProps, placement }) => (
 					<Grow {...TransitionProps} style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}>
 						<Paper>
@@ -141,7 +116,7 @@ const UserMenu: FC = () => {
 										}}
 									>
 										<ListItemIcon>
-											<SyncIcon className={classes.syncLogo} />
+											<SpinningSyncIcon />
 										</ListItemIcon>
 										<Typography variant="inherit">Resync user data</Typography>
 									</MenuItem>

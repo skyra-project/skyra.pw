@@ -11,13 +11,10 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import ListItemText from '@mui/material/ListItemText';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import { toTitleCase } from '@sapphire/utilities';
 import { Time } from '@utils/skyraUtils';
 import { sleep } from '@utils/util';
 import React, { ChangeEvent, forwardRef, Fragment, ReactNode, useCallback, useMemo, useState } from 'react';
-import { Else, If, Then } from 'react-if';
 import { Virtuoso, type Components } from 'react-virtuoso';
 
 export interface SelectOneProps {
@@ -47,34 +44,9 @@ export interface SelectOneProps {
 	onReset(): void;
 }
 
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		dialogContent: {
-			padding: theme.spacing(2)
-		},
-		dialogActions: {
-			margin: 0,
-			padding: theme.spacing(1)
-		},
-		nameImage: {
-			display: 'inline-flex',
-			height: theme.spacing(2),
-			width: theme.spacing(2)
-		},
-		virtualizedList: {
-			margin: theme.spacing(1)
-		},
-		virtualizedListContainer: {
-			margin: 0,
-			padding: 0
-		}
-	})
-);
-
 export default function SelectOne({ label, values, name = 'None', imageInName, tooltipTitle, ButtonProps, onReset, onChange }: SelectOneProps) {
 	const [open, setOpen] = useState(false);
 	const [search, setSearch] = useState('');
-	const classes = useStyles();
 	const theme = useTheme();
 
 	const handleClose = useCallback(async () => {
@@ -120,23 +92,8 @@ export default function SelectOne({ label, values, name = 'None', imageInName, t
 
 	return (
 		<Fragment>
-			<If condition={Boolean(tooltipTitle)}>
-				<Then>
-					<Tooltip title={tooltipTitle ?? ''} placement="top">
-						<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...ButtonProps}>
-							{label}: {name}{' '}
-							{imageInName && (
-								<LazyAvatar
-									imgProps={{ height: theme.spacing(2), width: theme.spacing(2) }}
-									alt="Emoji"
-									src={imageInName}
-									className={classes.nameImage}
-								/>
-							)}
-						</Button>
-					</Tooltip>
-				</Then>
-				<Else>
+			{Boolean(tooltipTitle) ? (
+				<Tooltip title={tooltipTitle ?? ''} placement="top">
 					<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...ButtonProps}>
 						{label}: {name}{' '}
 						{imageInName && (
@@ -144,21 +101,49 @@ export default function SelectOne({ label, values, name = 'None', imageInName, t
 								imgProps={{ height: theme.spacing(2), width: theme.spacing(2) }}
 								alt="Emoji"
 								src={imageInName}
-								className={classes.nameImage}
+								sx={{
+									display: 'inline-flex',
+									height: (theme) => theme.spacing(2),
+									width: (theme) => theme.spacing(2)
+								}}
 							/>
 						)}
 					</Button>
-				</Else>
-			</If>
+				</Tooltip>
+			) : (
+				<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...ButtonProps}>
+					{label}: {name}{' '}
+					{imageInName && (
+						<LazyAvatar
+							imgProps={{ height: theme.spacing(2), width: theme.spacing(2) }}
+							alt="Emoji"
+							src={imageInName}
+							sx={{
+								display: 'inline-flex',
+								height: (theme) => theme.spacing(2),
+								width: (theme) => theme.spacing(2)
+							}}
+						/>
+					)}
+				</Button>
+			)}
 			<Dialog fullWidth maxWidth="xs" onClose={handleClose} open={open}>
 				<DialogTitle onClose={handleClose}>{toTitleCase(label)}</DialogTitle>
 				{values.length > 10 && <DialogSearchBar onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} />}
-				<DialogContent dividers classes={{ root: classes.dialogContent }}>
+				<DialogContent
+					dividers
+					sx={{
+						padding: 2
+					}}
+				>
 					<Virtuoso
 						totalCount={filteredValues.length}
 						overscan={30}
-						style={{ height: theme.spacing(50), width: '100%' }}
-						className={classes.virtualizedList}
+						style={{
+							height: theme.spacing(50),
+							margin: theme.spacing(1),
+							width: '100%'
+						}}
 						components={VirtuosoComponents}
 						itemContent={(index) => (
 							<>
@@ -172,7 +157,12 @@ export default function SelectOne({ label, values, name = 'None', imageInName, t
 						)}
 					/>
 				</DialogContent>
-				<DialogActions classes={{ root: classes.dialogActions }}>
+				<DialogActions
+					sx={{
+						margin: 0,
+						padding: 1
+					}}
+				>
 					<Button
 						onClick={() => {
 							onReset();

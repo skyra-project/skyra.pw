@@ -4,10 +4,7 @@ import { useMediaQuery } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import { useTheme } from '@mui/material/styles';
 import TextField, { TextFieldProps as MTextFieldProps } from '@mui/material/TextField';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import { REGEXP } from '@utils/Color';
-import clsx from 'clsx';
 import { useFormikContext } from 'formik';
 import getProperty from 'lodash/get';
 import React, { useState } from 'react';
@@ -24,26 +21,12 @@ interface FormikTextFieldProps<TFieldValues extends FormikValues = FormikValues,
 	TextFieldProps?: Omit<MTextFieldProps, TextFieldPropsOmittable>;
 }
 
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		smallAvatar: {
-			width: theme.spacing(2),
-			height: theme.spacing(2)
-		},
-		errorLabel: {
-			position: 'absolute',
-			top: theme.spacing(6.5)
-		}
-	})
-);
-
 const FormikTextField = <TFieldValues extends FormikValues = FormikValues, TName extends Path<TFieldValues> = Path<TFieldValues>>({
 	label,
 	name,
 	defaultValue,
 	TextFieldProps
 }: FormikTextFieldProps<TFieldValues, TName>) => {
-	const classes = useStyles();
 	const theme = useTheme();
 	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -70,7 +53,10 @@ const FormikTextField = <TFieldValues extends FormikValues = FormikValues, TName
 							<LazyAvatar
 								imgProps={{ height: theme.spacing(2), width: theme.spacing(2) }}
 								style={{ backgroundColor: REGEXP.HEX.test(getProperty(values, name)) ? getProperty(values, name) : 'transparent' }}
-								className={classes.smallAvatar}
+								sx={(theme) => ({
+									width: theme.spacing(2),
+									height: theme.spacing(2)
+								})}
 							>
 								{'\u200B'}
 							</LazyAvatar>
@@ -78,11 +64,12 @@ const FormikTextField = <TFieldValues extends FormikValues = FormikValues, TName
 					)
 				}}
 				FormHelperTextProps={{
-					classes: {
-						...TextFieldProps?.FormHelperTextProps?.classes,
-						error: clsx(classes.errorLabel, TextFieldProps?.FormHelperTextProps?.classes?.error)
-					},
-					...TextFieldProps?.FormHelperTextProps
+					...TextFieldProps?.FormHelperTextProps,
+					sx: {
+						...TextFieldProps?.FormHelperTextProps?.sx,
+						position: 'absolute',
+						top: (theme) => theme.spacing(6.5)
+					}
 				}}
 				inputProps={{
 					...TextFieldProps?.inputProps,

@@ -7,8 +7,6 @@ import Section from '@layout/Settings/Section';
 import SimpleGrid from '@material/SimpleGrid';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import { cast } from '@sapphire/utilities';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectRole, { SelectRoleProps } from '@selects/SelectRole';
@@ -16,29 +14,9 @@ import SelectRoles, { SelectRolesProps } from '@selects/SelectRoles';
 import { handleResetKey } from '@utils/util';
 import React, { FC, memo } from 'react';
 
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		button: {
-			[theme.breakpoints.only('md')]: {
-				minHeight: 60
-			}
-		},
-		buttonText: {
-			display: 'block',
-			textAlign: 'left'
-		},
-		divider: {
-			backgroundColor: theme.palette.secondary.light,
-			marginBottom: theme.spacing(3),
-			paddingBottom: theme.spacing(0.25)
-		}
-	})
-);
-
 type SelectCommonProps = Omit<SelectRoleProps, 'value' | 'onChange'> & Omit<SelectRolesProps, 'value' | 'onChange'> & { key: number };
 
 const RoleSettings: FC = () => {
-	const classes = useStyles();
 	const theme = useTheme();
 	const isOnMobile = useMediaQuery(theme.breakpoints.down('md'));
 	const { guildData } = useGuildDataContext();
@@ -91,9 +69,13 @@ const RoleSettings: FC = () => {
 							filterEveryone: true,
 							ButtonProps: {
 								fullWidth: true,
-								classes: {
-									root: classes.button,
-									label: classes.buttonText
+								sx: {
+									minHeight: {
+										lg: 'inherit',
+										md: 60,
+										xs: 'inherit'
+									},
+									textAlign: 'left'
 								}
 							},
 							onReset: () => handleResetKey(guildSettingsChanges, setGuildSettingsChanges, key)

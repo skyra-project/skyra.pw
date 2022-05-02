@@ -10,33 +10,14 @@ import Paper from '@mui/material/Paper';
 import Slider from '@mui/material/Slider';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import Select from '@selects/Select';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectDuration from '@selects/SelectDuration';
 import { bitwiseHas, bitwiseSet, removeNonAlphaNumeric, updateSliderValueObj } from '@utils/util';
 import React, { FC, Fragment, memo, useState } from 'react';
-import { When } from 'react-if';
-
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		words: {
-			padding: theme.spacing(1),
-			'& > *': {
-				margin: theme.spacing(1)
-			}
-		},
-		textField: {
-			marginRight: theme.spacing(1),
-			marginBottom: theme.spacing(1)
-		}
-	})
-);
 
 const FilterWordSettings: FC = () => {
 	const [newWord, setNewWord] = useState('');
-	const classes = useStyles();
 	const { guildSettings } = useGuildSettingsContext();
 	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
@@ -136,7 +117,10 @@ const FilterWordSettings: FC = () => {
 				>
 					<Box display="flex" mb={2} alignContent="center" alignItems="center" justifyContent="flex-start">
 						<TextField
-							classes={{ root: classes.textField }}
+							sx={{
+								mr: 1,
+								mb: 1
+							}}
 							label="Add Word"
 							value={newWord}
 							onChange={(e) => setNewWord(e.target.value)}
@@ -147,8 +131,15 @@ const FilterWordSettings: FC = () => {
 					</Box>
 				</form>
 
-				<When condition={guildSettings.selfmodFilterRaw.length !== 0}>
-					<Paper classes={{ root: classes.words }}>
+				{guildSettings.selfmodFilterRaw.length !== 0 && (
+					<Paper
+						sx={{
+							p: 1,
+							'& > *': {
+								m: 1
+							}
+						}}
+					>
 						{guildSettings.selfmodFilterRaw.map((word) => (
 							<Chip
 								color="primary"
@@ -162,7 +153,7 @@ const FilterWordSettings: FC = () => {
 							/>
 						))}
 					</Paper>
-				</When>
+				)}
 			</Section>
 		</Fragment>
 	);

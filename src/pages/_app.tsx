@@ -5,9 +5,7 @@ import { MobileContextProvider } from '@contexts/MobileContext';
 import type { EmotionCache } from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import { CssBaseline, useMediaQuery } from '@mui/material';
-import { StyledEngineProvider, Theme, ThemeProvider } from '@mui/material/styles';
-// Import just as a type because the GlobalThis type augment
-import type {} from '@skyra/discord-components-core';
+import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import { LocalStorageKeys } from '@utils/constants';
 import createEmotionCache from '@utils/createEmotionCache';
 import { clearState } from '@utils/util';
@@ -18,11 +16,6 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import NextNprogress from 'nextjs-progressbar';
 import React, { useEffect } from 'react';
-
-declare module '@mui/styles/defaultTheme' {
-	// eslint-disable-next-line @typescript-eslint/no-empty-interface
-	interface DefaultTheme extends Theme {}
-}
 
 const DiscordPackProvider = dynamic(() => import('@contexts/DiscordPackContext'));
 const AuthenticatedProvider = dynamic(() => import('@contexts/AuthenticationContext'));
@@ -36,33 +29,6 @@ interface SkyraAppProps extends AppProps {
 
 const App: NextPage<SkyraAppProps> = ({ Component, pageProps, emotionCache = clientSideEmotionCache }) => {
 	useEffect(() => {
-		window.$discordMessage = {
-			avatars: {
-				default: 'blue',
-				favna: '/avatars/favna.gif',
-				skyra: '/avatars/skyra.png'
-			},
-			profiles: {
-				skyra: {
-					author: 'Skyra',
-					avatar: '/avatars/skyra.png',
-					bot: true,
-					verified: true,
-					roleColor: '#1E88E5'
-				},
-				favna: {
-					author: 'Favna',
-					avatar: '/avatars/favna.gif',
-					roleColor: '#FF0000'
-				},
-				kyra: {
-					author: 'Kyra',
-					avatar: '/avatars/kyra.gif',
-					roleColor: '#FF9D01'
-				}
-			}
-		};
-
 		if (process.env.NODE_ENV === 'production') {
 			console.log(
 				'%cHold Up!',

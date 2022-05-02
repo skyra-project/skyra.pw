@@ -8,7 +8,6 @@ import GavelIcon from '@mui/icons-material/Gavel';
 import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
 import LoginIcon from '@mui/icons-material/VpnKey';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
@@ -17,43 +16,17 @@ import MenuList from '@mui/material/MenuList';
 import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import Typography from '@mui/material/Typography';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import MenuItemLink from '@routing/MenuItemLink';
 import { oauthURL } from '@utils/constants';
 import { navigate } from '@utils/util';
 import { useRouter } from 'next/router';
-import React, { FC, memo, useEffect, useRef, useState, MouseEvent as ReactMouseEvent } from 'react';
-import { When } from 'react-if';
+import React, { FC, memo, MouseEvent as ReactMouseEvent, useEffect, useRef, useState } from 'react';
 
 export interface DesktopMenuItemsProps {
 	loading?: boolean;
 }
 
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		transparentButton: {
-			background: 'transparent',
-			boxShadow: 'none',
-			'&:hover': {
-				background: theme.palette.primary.dark,
-				boxShadow: theme.shadows[1]
-			}
-		},
-		menuButton: {
-			marginRight: theme.spacing(2),
-			marginLeft: theme.spacing(2)
-		},
-		popper: {
-			marginTop: theme.spacing(-1),
-			zIndex: theme.zIndex.drawer + 1
-		}
-	})
-);
-
 const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
-	const classes = useStyles();
-
 	const anchorRef = useRef<HTMLButtonElement>(null);
 	const [popperMenuIsOpen, setPopperMenuOpen] = useState(false);
 	const router = useRouter();
@@ -89,7 +62,14 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 				<Button
 					color="primary"
 					variant="contained"
-					classes={{ root: classes.transparentButton }}
+					sx={{
+						background: 'transparent',
+						boxShadow: 'none',
+						'&:hover': {
+							bgcolor: 'primary.dark',
+							boxShadow: (theme) => theme.shadows[1]
+						}
+					}}
 					onClick={navigate('https://invite.skyra.pw')}
 					startIcon={<InviteIcon />}
 				>
@@ -102,7 +82,14 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 				<Button
 					color="primary"
 					variant="contained"
-					classes={{ root: classes.transparentButton }}
+					sx={{
+						background: 'transparent',
+						boxShadow: 'none',
+						'&:hover': {
+							bgcolor: 'primary.dark',
+							boxShadow: (theme) => theme.shadows[1]
+						}
+					}}
 					onClick={navigate('https://join.skyra.pw')}
 					startIcon={<DiscordChatIcon />}
 				>
@@ -112,27 +99,30 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 				</Button>
 			</Tooltip>
 
-			<When condition={authenticated}>
-				<UserMenu />
-			</When>
+			{authenticated && <UserMenu />}
 
-			<When condition={!authenticated && !loading}>
+			{!authenticated && !loading && (
 				<Tooltip title="Click to login and manage your servers" placement="bottom">
-					<Box component="div">
-						<Button
-							color="primary"
-							variant="contained"
-							classes={{ root: classes.transparentButton }}
-							onClick={navigate(oauthURL.toString(), true)}
-							startIcon={<LoginIcon />}
-						>
-							<Typography variant="body2" color="textPrimary">
-								Login
-							</Typography>
-						</Button>
-					</Box>
+					<Button
+						color="primary"
+						variant="contained"
+						sx={{
+							background: 'transparent',
+							boxShadow: 'none',
+							'&:hover': {
+								bgcolor: 'primary.dark',
+								boxShadow: (theme) => theme.shadows[1]
+							}
+						}}
+						onClick={navigate(oauthURL.toString(), true)}
+						startIcon={<LoginIcon />}
+					>
+						<Typography variant="body2" color="textPrimary">
+							Login
+						</Typography>
+					</Button>
 				</Tooltip>
-			</When>
+			)}
 
 			<Tooltip title="Open to view more pages and options">
 				<IconButton
@@ -140,7 +130,9 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 					edge="start"
 					aria-controls={popperMenuIsOpen ? 'menu-popover' : undefined}
 					aria-haspopup="true"
-					className={classes.menuButton}
+					sx={{
+						mx: 2
+					}}
 					color="inherit"
 					aria-label="menu"
 					onClick={togglePopperMenu}
@@ -149,7 +141,16 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 					<MenuIcon />
 				</IconButton>
 			</Tooltip>
-			<Popper className={classes.popper} open={popperMenuIsOpen} anchorEl={anchorRef.current} transition disablePortal>
+			<Popper
+				sx={{
+					mt: -1,
+					zIndex: (theme) => theme.zIndex.drawer + 1
+				}}
+				open={popperMenuIsOpen}
+				anchorEl={anchorRef.current}
+				transition
+				disablePortal
+			>
 				{({ TransitionProps, placement }) => (
 					<Grow {...TransitionProps} style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}>
 						<Paper>

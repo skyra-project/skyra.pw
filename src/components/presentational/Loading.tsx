@@ -1,30 +1,23 @@
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import React, { FC, memo } from 'react';
-
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		backdrop: {
-			zIndex: theme.zIndex.drawer + 1,
-			color: theme.palette.primary.contrastText
-		}
-	})
-);
 
 interface LoadingProps {
 	loading: boolean;
 }
 
-const Loading: FC<LoadingProps> = ({ loading }) => {
-	const classes = useStyles();
-
-	return (
-		<Backdrop className={classes.backdrop} open={loading} unmountOnExit mountOnEnter>
-			<CircularProgress color="primary" />
-		</Backdrop>
-	);
-};
+const Loading: FC<LoadingProps> = ({ loading }) => (
+	<Backdrop
+		sx={{
+			zIndex: (theme) => theme.zIndex.drawer + 1,
+			color: 'primary.contrastText'
+		}}
+		open={loading}
+		unmountOnExit
+		mountOnEnter
+	>
+		<CircularProgress color="primary" />
+	</Backdrop>
+);
 
 export default memo(Loading);

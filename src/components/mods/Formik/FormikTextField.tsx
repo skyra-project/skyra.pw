@@ -1,7 +1,4 @@
 import TextField, { TextFieldProps as MTextFieldProps } from '@mui/material/TextField';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
-import clsx from 'clsx';
 import { useFormikContext } from 'formik';
 import getProperty from 'lodash/get';
 import React from 'react';
@@ -18,25 +15,12 @@ interface FormikTextFieldProps<TFieldValues extends FormikValues = FormikValues,
 	TextFieldProps?: Omit<MTextFieldProps, TextFieldPropsOmittable>;
 }
 
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		errorLabel: {
-			position: 'absolute',
-			top: theme.spacing(6.5)
-		},
-		autoHeight: {
-			height: 'auto'
-		}
-	})
-);
-
 const FormikTextField = <TFieldValues extends FormikValues = FormikValues, TName extends Path<TFieldValues> = Path<TFieldValues>>({
 	label,
 	name,
 	defaultValue,
 	TextFieldProps
 }: FormikTextFieldProps<TFieldValues, TName>) => {
-	const classes = useStyles();
 	const { touched, errors, values, handleChange, handleBlur } = useFormikContext<TFieldValues>();
 
 	return (
@@ -50,17 +34,6 @@ const FormikTextField = <TFieldValues extends FormikValues = FormikValues, TName
 			variant="standard"
 			name={name}
 			{...TextFieldProps}
-			classes={{
-				...TextFieldProps?.classes,
-				root: clsx(classes.errorLabel, classes.autoHeight, TextFieldProps?.classes?.root)
-			}}
-			FormHelperTextProps={{
-				classes: {
-					...TextFieldProps?.FormHelperTextProps?.classes,
-					error: clsx(classes.errorLabel, TextFieldProps?.FormHelperTextProps?.classes?.error)
-				},
-				...TextFieldProps?.FormHelperTextProps
-			}}
 			label={label}
 			value={getProperty(values, name) ?? defaultValue}
 			onChange={handleChange}
