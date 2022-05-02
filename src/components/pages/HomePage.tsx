@@ -14,15 +14,17 @@ const HomePage: FC = () => {
 	return (
 		<GeneralPage>
 			{authenticated && (
-				<Container>
+				<Container maxWidth="md">
 					<Box display="flex" flexWrap="wrap" flexDirection="row" justifyContent="center" alignItems="center">
 						{FilteredGuildCards(pack)}
 					</Box>
 				</Container>
 			)}
-			{features.map(({ name, text }) => (
-				<HomePageSection name={name} text={text} key={name} />
-			))}
+			<Container maxWidth="md">
+				{features.map(({ name, text }) => (
+					<HomePageSection name={name} text={text} key={name} />
+				))}
+			</Container>
 		</GeneralPage>
 	);
 };

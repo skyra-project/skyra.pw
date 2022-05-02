@@ -36,7 +36,7 @@
 		"next-pwa": "^5.5.2",
 		"next-seo": "^5.4.0",
 		"nextjs-progressbar": "^0.0.14",
-		"react": "^17.x",
+		"react": "^18.1.0",
 		"react-color": "^2.19.3",
 		"react-dom": "^18.1.0",
 		"react-emoji-render": "^1.2.4",

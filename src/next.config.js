@@ -6,10 +6,6 @@ module.exports = withPWA({
 		dest: 'public',
 		disable: process.env.NODE_ENV === 'development'
 	},
-	swcMinify: true,
-	experimental: {
-		emotion: true
-	},
 	async rewrites() {
 		return [
 			{
