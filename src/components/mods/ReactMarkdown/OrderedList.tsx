@@ -1,6 +1,6 @@
-import MuiList from '@mui/material/List';
 import React, { forwardRef } from 'react';
 import type { OrderedListProps } from 'react-markdown/lib/ast-to-react';
+import { List as MuiList } from '@mui/material';
 
 const OrderedList = forwardRef<HTMLUListElement, OrderedListProps>(({ children }, ref) => (
 	<MuiList

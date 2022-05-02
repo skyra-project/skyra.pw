@@ -1,8 +1,7 @@
 import CloseIcon from '@mui/icons-material/Close';
-import MuiDialogTitle from '@mui/material/DialogTitle';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import React, { memo, PropsWithChildren } from 'react';
+
+import { DialogTitle as MuiDialogTitle, IconButton, Typography } from '@mui/material';
 
 interface DialogTitleProps {
 	onClose: () => void;

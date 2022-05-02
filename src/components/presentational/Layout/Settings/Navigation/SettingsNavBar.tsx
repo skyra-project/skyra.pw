@@ -1,15 +1,11 @@
 import type { TransformedLoginData } from '@config/types/ApiData';
 import UserMenu from '@layout/Navigation/UserMenu';
 import MenuIcon from '@mui/icons-material/Menu';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import Skeleton from '@mui/material/Skeleton';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import { SettingsDrawerWidth } from '@utils/constants';
 import React, { FC, memo } from 'react';
 import type { ValuesType } from 'utility-types';
+
+import { AppBar, Box, IconButton, Skeleton, Toolbar, Typography } from '@mui/material';
 
 interface SettingsNavBarProps {
 	guildData: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>> | undefined;

@@ -2,14 +2,13 @@ import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettings
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
 import SimpleGrid from '@material/SimpleGrid';
-import MenuItem from '@mui/material/MenuItem';
-import Slider from '@mui/material/Slider';
-import Typography from '@mui/material/Typography';
 import Select from '@selects/Select';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectDuration from '@selects/SelectDuration';
 import { bitwiseHas, bitwiseSet, updateSliderValueObj } from '@utils/util';
 import React, { FC, Fragment, memo } from 'react';
+
+import { MenuItem, Slider, Typography } from '@mui/material';
 
 const FilterInvitesSettings: FC = () => {
 	const { guildSettings } = useGuildSettingsContext();

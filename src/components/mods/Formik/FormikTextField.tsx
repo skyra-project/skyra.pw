@@ -1,8 +1,10 @@
-import TextField, { TextFieldProps as MTextFieldProps } from '@mui/material/TextField';
+import type { TextFieldProps as MTextFieldProps } from '@mui/material/TextField';
 import { useFormikContext } from 'formik';
 import getProperty from 'lodash/get';
 import React from 'react';
 import type { FieldPathValue, FormikValues, Path, TextFieldPropsOmittable, UnpackNestedValue } from './types';
+
+import { TextField } from '@mui/material';
 
 interface FormikTextFieldProps<TFieldValues extends FormikValues = FormikValues, TName extends Path<TFieldValues> = Path<TFieldValues>> {
 	/** The {@link TextField} label */

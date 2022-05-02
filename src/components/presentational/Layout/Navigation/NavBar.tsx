@@ -1,11 +1,9 @@
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Hidden from '@mui/material/Hidden';
-import Toolbar from '@mui/material/Toolbar';
 import React, { FC, memo } from 'react';
 import DesktopMenuItems from './DesktopMenuItems';
 import MobileNavMenu from './MobileNavMenu';
 import SkyraLogoButton from './SkyraLogoButton';
+
+import { AppBar, Box, Hidden, Toolbar } from '@mui/material';
 
 export interface NavBarProps {
 	loading?: boolean;

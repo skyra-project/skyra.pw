@@ -5,18 +5,20 @@ import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext
 import RefreshCommandsButton from '@layout/RefreshCommandsButton';
 import Section from '@layout/Settings/Section';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Accordion from '@mui/material/Accordion';
-import AccordionActions from '@mui/material/AccordionActions';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import {
+	Accordion,
+	AccordionActions,
+	AccordionDetails,
+	AccordionSummary,
+	Box,
+	Button,
+	Divider,
+	Grid,
+	Typography,
+	useMediaQuery,
+	useTheme
+} from '@mui/material';
 import { green } from '@mui/material/colors';
-import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
-import { useTheme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import Loading from '@presentational/Loading';
 import SelectBoolean from '@selects/SelectBoolean';
 import React, { FC, memo, SetStateAction, useCallback, useEffect, useState } from 'react';

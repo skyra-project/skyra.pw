@@ -1,5 +1,4 @@
-import { Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { Typography, styled } from '@mui/material';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import React, { forwardRef, PropsWithChildren, AnchorHTMLAttributes } from 'react';
 

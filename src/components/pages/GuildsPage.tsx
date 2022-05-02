@@ -2,12 +2,11 @@ import { useAuthenticated } from '@contexts/AuthenticationContext';
 import { useDiscordPack } from '@contexts/DiscordPackContext';
 import { useMobileContext } from '@contexts/MobileContext';
 import GeneralPage from '@layout/General';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
 import { FilteredGuildCards } from '@presentational/GuildCard';
 import type { NextPage } from 'next';
 import React from 'react';
+
+import { Box, Container, Typography } from '@mui/material';
 
 const GuildsPage: NextPage = () => {
 	const authenticated = useAuthenticated();

@@ -1,6 +1,6 @@
-import Divider from '@mui/material/Divider';
-import Typography, { TypographyProps } from '@mui/material/Typography';
+import type { TypographyProps } from '@mui/material/Typography';
 import React, { FC, memo, ReactNode } from 'react';
+import { Divider, Typography } from '@mui/material';
 
 interface PageHeaderProps {
 	/** The title of the page*/

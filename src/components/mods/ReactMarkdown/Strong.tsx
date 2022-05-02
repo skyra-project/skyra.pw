@@ -1,6 +1,6 @@
-import Typography from '@mui/material/Typography';
 import React, { DetailedHTMLProps, forwardRef, HTMLAttributes, ReactNode } from 'react';
 import type { WithReactMarkdownChildren } from './types';
+import { Typography } from '@mui/material';
 
 type StrongProps = WithReactMarkdownChildren<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>>;
 

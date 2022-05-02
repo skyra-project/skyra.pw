@@ -1,10 +1,7 @@
-// Copyright (c) 2017 LoicMahieu. All rights reserved. MIT license.
-// Source: https://github.com/LoicMahieu/material-ui-color-picker
-
-import Box from '@mui/material/Box';
 import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import React, { FC, memo, MouseEventHandler, useEffect, useRef } from 'react';
 import { ChromePicker, ColorChangeHandler } from 'react-color';
+import { Box } from '@mui/material';
 
 interface PickerDialogProps {
 	value?: string;

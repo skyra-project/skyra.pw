@@ -1,9 +1,7 @@
 import LazyAvatar from '@material/LazyAvatar';
 import type { FieldPathValue, FormikValues, Path, TextFieldPropsOmittable, UnpackNestedValue } from '@mods/Formik/types';
-import { useMediaQuery } from '@mui/material';
-import InputAdornment from '@mui/material/InputAdornment';
-import { useTheme } from '@mui/material/styles';
-import TextField, { TextFieldProps as MTextFieldProps } from '@mui/material/TextField';
+import { InputAdornment, TextField, useMediaQuery, useTheme } from '@mui/material';
+import type { TextFieldProps as MTextFieldProps } from '@mui/material/TextField';
 import { REGEXP } from '@utils/Color';
 import { useFormikContext } from 'formik';
 import getProperty from 'lodash/get';

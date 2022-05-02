@@ -1,7 +1,7 @@
 import SearchIcon from '@mui/icons-material/Search';
-import Box from '@mui/material/Box';
-import InputBase, { InputBaseProps } from '@mui/material/InputBase';
+import type { InputBaseProps } from '@mui/material/InputBase';
 import React, { FC, memo } from 'react';
+import { Box, InputBase } from '@mui/material';
 
 const DialogSearchBar: FC<InputBaseProps> = ({ onChange }) => {
 	return (

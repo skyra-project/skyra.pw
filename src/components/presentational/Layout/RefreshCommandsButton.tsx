@@ -1,14 +1,12 @@
 import type { FlattenedCommand } from '@config/types/ApiData';
 import Tooltip from '@material/Tooltip';
 import CachedIcon from '@mui/icons-material/Cached';
-import Box from '@mui/material/Box';
-import Fab from '@mui/material/Fab';
-import useScrollTrigger from '@mui/material/useScrollTrigger';
-import Zoom from '@mui/material/Zoom';
 import { ExpirableLocalStorageStructure, LocalStorageKeys } from '@utils/constants';
 import { Time } from '@utils/skyraUtils';
 import { apiFetch, saveState } from '@utils/util';
 import React, { FC, SetStateAction, useCallback, useMemo, useState } from 'react';
+
+import { Box, Fab, useScrollTrigger, Zoom } from '@mui/material';
 
 interface RefreshCommandsButtonProps {
 	setCommands: (value: SetStateAction<FlattenedCommand[]>) => void;

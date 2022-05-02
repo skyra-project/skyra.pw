@@ -1,7 +1,6 @@
-import FormControl, { FormControlProps } from '@mui/material/FormControl';
-import FormHelperText from '@mui/material/FormHelperText';
-import InputLabel from '@mui/material/InputLabel';
-import MSelect, { SelectProps as MSelectProps } from '@mui/material/Select';
+import { FormControl, FormHelperText, InputLabel, Select as MSelect } from '@mui/material';
+import type { FormControlProps } from '@mui/material/FormControl';
+import type { SelectProps as MSelectProps } from '@mui/material/Select';
 import React, { FC } from 'react';
 
 /**

@@ -1,7 +1,7 @@
-import { styled } from '@mui/material/styles';
 import NextImage from 'next/image';
 import React, { DetailedHTMLProps, forwardRef, ImgHTMLAttributes } from 'react';
 import type { WithReactMarkdownChildren } from './types';
+import { styled } from '@mui/material';
 
 const StyledNextImage = styled(NextImage)(({ theme }) => ({
 	paddingRight: theme.spacing(0.5),

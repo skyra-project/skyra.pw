@@ -1,9 +1,8 @@
-import ListItemIcon from '@mui/material/ListItemIcon';
-import MenuItem from '@mui/material/MenuItem';
-import Typography from '@mui/material/Typography';
 import Link from '@routing/Link';
 import React, { forwardRef, memo, ReactElement } from 'react';
 import styles from './MenuItemLink.module.css';
+
+import { ListItemIcon, MenuItem, Typography } from '@mui/material';
 
 export interface MenuItemLinkProps {
 	Icon: ReactElement;

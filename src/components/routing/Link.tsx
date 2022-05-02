@@ -1,11 +1,13 @@
-import MuiLink, { LinkProps as MLinkProps } from '@mui/material/Link';
-import Typography, { TypographyProps } from '@mui/material/Typography';
+import type { LinkProps as MLinkProps } from '@mui/material/Link';
+import type { TypographyProps } from '@mui/material/Typography';
 import NextLinkComposed, { NextLinkComposedProps } from '@next/NextComposed';
 import clsx from 'clsx';
 import type { LinkProps as NextLinkProps } from 'next/link';
 import { useRouter } from 'next/router';
 import React, { CSSProperties, forwardRef, PropsWithChildren, ReactNode } from 'react';
 import styles from './Link.module.css';
+
+import { Link as MuiLink, Typography } from '@mui/material';
 
 type LinkProps = {
 	/** The href to navigate to */

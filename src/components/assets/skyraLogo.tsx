@@ -1,5 +1,7 @@
-import { keyframes, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import React, { FC, memo } from 'react';
+
+import { keyframes } from '@mui/material';
 
 const spin = keyframes`
 0% {

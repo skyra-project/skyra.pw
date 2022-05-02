@@ -4,12 +4,6 @@ import CodeIcon from '@mui/icons-material/CodeTwoTone';
 import CreateIcon from '@mui/icons-material/CreateTwoTone';
 import ExamplesIcon from '@mui/icons-material/EmojiObjects';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Accordion from '@mui/material/Accordion';
-import AccordionActions from '@mui/material/AccordionActions';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import Chips from '@presentational/CommandsPage/Chips';
 import { reactStringReplace } from '@utils/reactStringReplace';
 import ReminderIcon from 'mdi-react/BellAlertIcon';
@@ -17,6 +11,8 @@ import HelpRhombusIcon from 'mdi-react/HelpRhombusIcon';
 import React, { FC, memo } from 'react';
 import ExtendedHelpBody from './ExtendedHelpBody';
 import ExtendedHelpSectionHeader from './ExtendedHelpSectionHeader';
+
+import { Accordion, AccordionActions, AccordionDetails, AccordionSummary, Grid, Typography } from '@mui/material';
 
 interface CommandProps {
 	command: FlattenedCommand;

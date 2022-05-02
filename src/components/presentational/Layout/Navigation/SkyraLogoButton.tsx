@@ -1,11 +1,9 @@
 import SkyraLogo from '@assets/skyraLogo';
 import Tooltip from '@material/Tooltip';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Hidden from '@mui/material/Hidden';
-import Typography from '@mui/material/Typography';
 import { navigate } from '@utils/util';
 import React, { FC, memo } from 'react';
+
+import { Box, Button, Hidden, Typography } from '@mui/material';
 
 const SkyraLogoButton: FC = () => (
 	<Box flexGrow={1}>

@@ -1,6 +1,6 @@
-import Divider from '@mui/material/Divider';
-import Typography from '@mui/material/Typography';
 import React, { FC, memo, ReactElement } from 'react';
+
+import { Divider, Typography } from '@mui/material';
 
 interface ExtendedHelpSectionHeaderProps {
 	icon: ReactElement;

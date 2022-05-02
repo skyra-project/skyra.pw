@@ -1,9 +1,7 @@
 import ClearIcon from '@mui/icons-material/Clear';
 import SearchIcon from '@mui/icons-material/Search';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import Input, { InputProps } from '@mui/material/Input';
-import Paper, { PaperProps } from '@mui/material/Paper';
+import type { InputProps } from '@mui/material/Input';
+import type { PaperProps } from '@mui/material/Paper';
 import type { Theme } from '@mui/material/styles';
 import React, {
 	forwardRef,
@@ -18,6 +16,8 @@ import React, {
 	type FocusEvent as ReactFocusEvent,
 	type KeyboardEvent as ReactKeyboardEvent
 } from 'react';
+
+import { Box, IconButton, Input, Paper } from '@mui/material';
 
 interface SearchBarProps extends Omit<InputProps, 'onChange'> {
 	/**

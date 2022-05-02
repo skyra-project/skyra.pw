@@ -1,10 +1,5 @@
 import SkyraLogo from '@assets/skyraLogo';
-import { useMediaQuery } from '@mui/material';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Hidden from '@mui/material/Hidden';
-import { useTheme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
+import { useMediaQuery, Box, Container, Hidden, useTheme, Typography } from '@mui/material';
 import Link from '@routing/Link';
 import { CLIENT_ID, inviteURL } from '@utils/constants';
 import React, { memo } from 'react';

@@ -1,10 +1,8 @@
 import Tooltip from '@material/Tooltip';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import Box from '@mui/material/Box';
-import Fab from '@mui/material/Fab';
-import useScrollTrigger from '@mui/material/useScrollTrigger';
-import Zoom from '@mui/material/Zoom';
 import React, { FC, memo, PropsWithChildren } from 'react';
+
+import { Box, Fab, useScrollTrigger, Zoom } from '@mui/material';
 
 const ScrollToTopButton: FC = () => {
 	const trigger = useScrollTrigger({

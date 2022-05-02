@@ -1,9 +1,8 @@
 import type { FlattenedCommand } from '@config/types/ApiData';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import LockIcon from '@mui/icons-material/Lock';
-import Chip from '@mui/material/Chip';
+import { Chip, Grid } from '@mui/material';
 import { amber, deepOrange } from '@mui/material/colors';
-import Grid from '@mui/material/Grid';
 import { useMobileContext } from 'contexts/MobileContext';
 import DiscordIcon from 'mdi-react/DiscordIcon';
 import React, { FC, memo, useCallback, useMemo } from 'react';

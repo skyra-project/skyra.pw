@@ -1,6 +1,6 @@
-import Box from '@mui/material/Box';
-import MUITooltip, { TooltipProps } from '@mui/material/Tooltip';
+import type { TooltipProps } from '@mui/material/Tooltip';
 import React, { FC } from 'react';
+import { Box, Tooltip as MUITooltip } from '@mui/material';
 
 const Tooltip: FC<TooltipProps> = ({ title, placement, enterDelay, children, ...props }) => (
 	<MUITooltip

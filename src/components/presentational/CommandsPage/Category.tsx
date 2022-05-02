@@ -1,12 +1,9 @@
 import type { FlattenedCommand } from '@config/types/ApiData';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Command from '@presentational/CommandsPage/Command';
 import React, { FC, memo, useCallback } from 'react';
+
+import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '@mui/material';
 
 interface CategoryProps {
 	categoryName: string;

@@ -8,21 +8,14 @@ import FormikSwitch from '@mods/Formik/FormikSwitch';
 import FormikTextField from '@mods/Formik/FormikTextField';
 import GfmReactMarkdown from '@mods/ReactMarkdown/GfmReactMarkdown';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid/Grid';
-import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
-import ListItemText from '@mui/material/ListItemText';
-import { useTheme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
 import ColorPicker from '@presentational/ColorPicker/ColorPicker';
 import { parse, REGEXP } from '@utils/Color';
 import { Form, Formik } from 'formik';
 import React, { forwardRef, Fragment, memo, useMemo } from 'react';
 import { Components, Virtuoso } from 'react-virtuoso';
 import { boolean, object, string } from 'yup';
+
+import { Button, Grid, IconButton, List, ListItem, ListItemSecondaryAction, ListItemText, useTheme, Typography } from '@mui/material';
 
 const CustomCommandSettings = () => {
 	const theme = useTheme();

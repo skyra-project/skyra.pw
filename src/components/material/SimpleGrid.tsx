@@ -1,5 +1,7 @@
-import Grid, { GridProps } from '@mui/material/Grid/Grid';
+import type { GridProps } from '@mui/material/Grid/Grid';
 import React, { Children as ReactChildren, FC, memo } from 'react';
+
+import { Grid } from '@mui/material';
 
 interface SimpleGridProps extends GridProps {
 	gridItemProps?: GridProps;

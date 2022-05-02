@@ -1,12 +1,12 @@
 import type { TransformedLoginData } from '@config/types/ApiData';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
 import Link from '@routing/Link';
 import { guildAddURL } from '@utils/constants';
 import React, { memo } from 'react';
 import type { ValuesType } from 'utility-types';
 import styles from './GuildCard.module.css';
 import GuildIcon from './GuildIcon';
+
+import { Card, CardHeader } from '@mui/material';
 
 interface GuildCardProps {
 	guild: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>;

@@ -14,15 +14,6 @@ import RolesIcon from '@mui/icons-material/Group';
 import InputIcon from '@mui/icons-material/Input';
 import MessagesIcon from '@mui/icons-material/Message';
 import SettingsIcon from '@mui/icons-material/Settings';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import Divider from '@mui/material/Divider';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Skeleton from '@mui/material/Skeleton';
-import Typography from '@mui/material/Typography';
 import GuildIcon from '@presentational/GuildIcon';
 import ListItemLink from '@routing/ListItemLink';
 import { isNullish, noop } from '@sapphire/utilities';
@@ -30,6 +21,8 @@ import { navigate } from '@utils/util';
 import { useRouter } from 'next/router';
 import React, { FC, Fragment, memo, useState } from 'react';
 import type { ValuesType } from 'utility-types';
+
+import { Box, Collapse, Divider, List, ListItem, ListItemIcon, ListItemText, Skeleton, Typography } from '@mui/material';
 
 export interface SettingsDrawerItemsProps {
 	guildData: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>> | undefined;

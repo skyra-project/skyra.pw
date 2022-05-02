@@ -2,19 +2,13 @@ import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettings
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
 import SimpleGrid from '@material/SimpleGrid';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
-import MenuItem from '@mui/material/MenuItem';
-import Paper from '@mui/material/Paper';
-import Slider from '@mui/material/Slider';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import Select from '@selects/Select';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectDuration from '@selects/SelectDuration';
 import { bitwiseHas, bitwiseSet, updateSliderValueObj } from '@utils/util';
 import React, { FC, Fragment, memo, useState } from 'react';
+
+import { Box, Button, Chip, MenuItem, Paper, Slider, TextField, Typography } from '@mui/material';
 
 const FilterLinksSettings: FC = () => {
 	const [newWord, setNewWord] = useState('');

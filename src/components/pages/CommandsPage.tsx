@@ -2,8 +2,6 @@ import type { FlattenedCommand } from '@config/types/ApiData';
 import GeneralPage from '@layout/General';
 import RefreshCommandsButton from '@layout/RefreshCommandsButton';
 import UiSearchBar from '@material/UiSearchBar';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import Category from '@presentational/CommandsPage/Category';
 import Loading from '@presentational/Loading';
 import { ExpirableLocalStorageStructure, LocalStorageKeys } from '@utils/constants';
@@ -12,6 +10,8 @@ import { useWindowSize } from '@utils/useWindowSize';
 import { apiFetch, loadState, saveState } from '@utils/util';
 import debounce from 'lodash/debounce';
 import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
+
+import { Box, Container } from '@mui/material';
 
 const CommandsPage: FC = () => {
 	const [searchValue, setSearchValue] = useState('');

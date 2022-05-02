@@ -1,8 +1,7 @@
-import Box from '@mui/material/Box';
-import MenuItem from '@mui/material/MenuItem';
-import TextField from '@mui/material/TextField';
 import React, { ChangeEvent, FC, memo, useState } from 'react';
 import Select from './Select';
+
+import { Box, MenuItem, TextField } from '@mui/material';
 
 const unitMap: Record<string, number> = {
 	seconds: 1000,

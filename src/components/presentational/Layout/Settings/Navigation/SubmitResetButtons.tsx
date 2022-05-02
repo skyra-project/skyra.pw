@@ -2,9 +2,9 @@ import { useMobileContext } from '@contexts/MobileContext';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import DeleteIcon from '@mui/icons-material/DeleteForever';
 import SaveIconIcon from '@mui/icons-material/Save';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import React, { FC, memo } from 'react';
+
+import { Box, Button } from '@mui/material';
 
 interface SubmitResetButtonsProps {
 	isLoading: boolean;

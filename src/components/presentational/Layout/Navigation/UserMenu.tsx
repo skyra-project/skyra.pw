@@ -4,21 +4,13 @@ import LazyAvatar from '@material/LazyAvatar';
 import Tooltip from '@material/Tooltip';
 import LogoutIcon from '@mui/icons-material/Eject';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Grow from '@mui/material/Grow';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
-import Paper from '@mui/material/Paper';
-import Popper from '@mui/material/Popper';
-import Typography from '@mui/material/Typography';
 import { displayAvatarURL } from '@utils/skyraUtils';
 import { clearData, logOut, syncUser } from '@utils/util';
 import { useRouter } from 'next/router';
 import React, { FC, memo, MouseEvent as ReactMouseEvent, useEffect, useRef, useState } from 'react';
 import SpinningSyncIcon from './SpinningSyncIcon';
+
+import { Box, Button, ClickAwayListener, Grow, ListItemIcon, MenuItem, MenuList, Paper, Popper, Typography } from '@mui/material';
 
 const UserMenu: FC = () => {
 	const [open, setOpen] = useState(false);

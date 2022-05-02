@@ -2,16 +2,19 @@ import DialogSearchBar from '@material/DialogSearchBar';
 import DialogTitle from '@material/DialogTitle';
 import LazyAvatar from '@material/LazyAvatar';
 import Tooltip from '@material/Tooltip';
-import { List, useTheme } from '@mui/material';
-import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
-import ListItemText from '@mui/material/ListItemText';
+import {
+	List,
+	useTheme,
+	Button,
+	Checkbox,
+	Dialog,
+	DialogActions,
+	DialogContent,
+	ListItem,
+	ListItemIcon,
+	ListItemSecondaryAction,
+	ListItemText
+} from '@mui/material';
 import { toTitleCase } from '@sapphire/utilities';
 import { Time } from '@utils/skyraUtils';
 import { sleep } from '@utils/util';
