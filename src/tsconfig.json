@@ -31,5 +31,5 @@
 		"skipLibCheck": true
 	},
 	"include": ["."],
-	"exclude": ["public/sw.js", "public/workbox*.js", ".next"]
+	"exclude": ["public/sw.js", "public/workbox*.js", ".next", "next.config.js"]
 }
