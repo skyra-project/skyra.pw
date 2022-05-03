@@ -27,9 +27,8 @@ const NotFoundPage = () => {
 							variant={isOnMobile ? 'h5' : 'h4'}
 							color="textPrimary"
 							sx={{
-								lineHeight: (theme) => theme.spacing(0.2),
 								textAlign: 'center',
-								marginBottom: (theme) => theme.spacing(5)
+								mb: 5
 							}}
 						>
 							Woah! Looks like you just ran into a non-existant page. If you think you found this page by mistake then feel free to join
