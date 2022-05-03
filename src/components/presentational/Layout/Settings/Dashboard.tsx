@@ -5,7 +5,7 @@ import { mergeDiscordPack } from '@contexts/DiscordPackContext';
 import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
-import { Grow, useMediaQuery, Box, Hidden, useTheme } from '@mui/material';
+import { Box, Grid, Grow, Hidden, useMediaQuery, useTheme } from '@mui/material';
 import ErrorAlert from '@presentational/Alerts/Error';
 import Loading from '@presentational/Loading';
 import { objectToTuples } from '@sapphire/utilities';
@@ -181,7 +181,20 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 				>
 					{readyToRender && <>{children}</>}
 					<Grow in={Object.keys(guildSettingsChanges ?? {}).length > 0} unmountOnExit mountOnEnter>
-						<SubmitResetButtons isLoading={isLoading} isOnMobile={isOnMobile} submitChanges={submitChanges} />
+						<Grid
+							container
+							direction="row"
+							justifyContent="flex-end"
+							alignItems="flex-end"
+							spacing={2}
+							sx={{
+								position: 'fixed',
+								bottom: 30,
+								right: 30
+							}}
+						>
+							<SubmitResetButtons isLoading={isLoading} isOnMobile={isOnMobile} submitChanges={submitChanges} />
+						</Grid>
 					</Grow>
 				</Box>
 			</Box>

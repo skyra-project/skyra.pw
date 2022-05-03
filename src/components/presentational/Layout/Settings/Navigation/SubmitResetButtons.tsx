@@ -2,9 +2,8 @@ import { useMobileContext } from '@contexts/MobileContext';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import DeleteIcon from '@mui/icons-material/DeleteForever';
 import SaveIconIcon from '@mui/icons-material/Save';
+import { Button, Grid } from '@mui/material';
 import React, { FC, memo } from 'react';
-
-import { Box, Button } from '@mui/material';
 
 interface SubmitResetButtonsProps {
 	isLoading: boolean;
@@ -17,47 +16,38 @@ const SubmitResetButtons: FC<SubmitResetButtonsProps> = ({ isLoading, isOnMobile
 	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
 	return (
-		<Box
-			component="div"
-			sx={{
-				position: 'fixed',
-				bottom: 30,
-				right: 30,
-				'& button': {
-					marginLeft: 30
-				}
-			}}
-		>
-			<Button
-				disabled={isLoading}
-				onClick={() => setGuildSettingsChanges(undefined)}
-				color="secondary"
-				variant="contained"
-				size={isOnMobile ? 'small' : 'large'}
-				sx={{
-					mr: 3.75,
-					bgcolor: 'error.main',
-					'&:hover': {
-						bgcolor: 'error.dark'
-					}
-				}}
-			>
-				<DeleteIcon
+		<>
+			<Grid item>
+				<Button
+					disabled={isLoading}
+					onClick={() => setGuildSettingsChanges(undefined)}
+					color="secondary"
+					variant="contained"
+					fullWidth={isMobile}
 					sx={{
-						mr: 2
+						bgcolor: 'error.main',
+						'&:hover': {
+							bgcolor: 'error.dark'
+						}
 					}}
-				/>
-				{isMobile ? 'Reset' : 'Reset changes'}
-			</Button>
-			<Button disabled={isLoading} onClick={submitChanges} color="primary" variant="contained" size={isOnMobile ? 'small' : 'large'}>
-				<SaveIconIcon
-					sx={{
-						mr: 2
-					}}
-				/>
-				{isMobile ? 'Save' : 'Save changes'}
-			</Button>
-		</Box>
+					startIcon={<DeleteIcon />}
+				>
+					{isMobile ? 'Reset' : 'Reset changes'}
+				</Button>
+			</Grid>
+			<Grid item>
+				<Button
+					disabled={isLoading}
+					onClick={submitChanges}
+					color="primary"
+					variant="contained"
+					startIcon={<SaveIconIcon />}
+					fullWidth={isMobile}
+				>
+					{isMobile ? 'Save' : 'Save changes'}
+				</Button>
+			</Grid>
+		</>
 	);
 };
 
