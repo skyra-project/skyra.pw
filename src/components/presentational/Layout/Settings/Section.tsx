@@ -12,11 +12,11 @@ export const Section: FC<SectionProps> = ({ title, children, titleProps, disable
 		{...props}
 		component="section"
 		sx={{
-			marginRight: {
-				md: (theme) => theme.spacing(4),
+			mr: {
+				md: 4,
 				xs: 0
 			},
-			marginBottom: (theme) => theme.spacing(2),
+			mb: 2,
 			flexBasis: {
 				md: 'inherit',
 				xs: '100%'
@@ -26,9 +26,9 @@ export const Section: FC<SectionProps> = ({ title, children, titleProps, disable
 				xs: '100%'
 			},
 			'&:not:(:first-of-type)': {
-				marginTop: {
+				mt: {
 					md: 'inherit',
-					xs: (theme) => theme.spacing(3)
+					xs: 3
 				}
 			},
 			...props.sx
@@ -48,8 +48,8 @@ export const Section: FC<SectionProps> = ({ title, children, titleProps, disable
 							borderBottomWidth: 2,
 							borderBottomStyle: 'solid',
 							borderBottomColor: (theme) => theme.palette.primary.main,
-							marginBottom: (theme) => theme.spacing(3),
-							paddingBottom: (theme) => theme.spacing(0.25)
+							mb: 3,
+							pb: 0.25
 						}}
 					>
 						{title}

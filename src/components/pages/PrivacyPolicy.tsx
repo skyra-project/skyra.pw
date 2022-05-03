@@ -1,7 +1,6 @@
 import GeneralPage from '@layout/General';
-import React from 'react';
-
 import { Box, Container, Divider, Typography } from '@mui/material';
+import React from 'react';
 
 const Email = () => {
 	return (
@@ -78,8 +77,7 @@ const PrivacyPolicy = () => (
 					id="welcome-to-skyra-project"
 					variant="h2"
 					sx={{
-						paddingTop: (theme) => theme.spacing(3),
-						paddingBottom: (theme) => theme.spacing(3),
+						py: 3,
 						fontSize: {
 							md: 'inherit',
 							xs: (theme) => theme.typography.pxToRem(30)
@@ -124,8 +122,7 @@ const PrivacyPolicy = () => (
 					id="information-we-collect"
 					variant="h2"
 					sx={{
-						paddingTop: (theme) => theme.spacing(3),
-						paddingBottom: (theme) => theme.spacing(3),
+						py: 3,
 						fontSize: {
 							md: 'inherit',
 							xs: (theme) => theme.typography.pxToRem(30)
@@ -149,8 +146,7 @@ const PrivacyPolicy = () => (
 					id="other-information"
 					variant="h3"
 					sx={{
-						paddingTop: (theme) => theme.spacing(3),
-						paddingBottom: (theme) => theme.spacing(3),
+						py: 3,
 						fontSize: {
 							md: 'inherit',
 							xs: (theme) => theme.typography.pxToRem(30)
@@ -192,8 +188,7 @@ const PrivacyPolicy = () => (
 					id="where-information-is-processed"
 					variant="h2"
 					sx={{
-						paddingTop: (theme) => theme.spacing(3),
-						paddingBottom: (theme) => theme.spacing(3),
+						py: 3,
 						fontSize: {
 							md: 'inherit',
 							xs: (theme) => theme.typography.pxToRem(30)
@@ -212,8 +207,7 @@ const PrivacyPolicy = () => (
 					id="our-use-of-your-information"
 					variant="h2"
 					sx={{
-						paddingTop: (theme) => theme.spacing(3),
-						paddingBottom: (theme) => theme.spacing(3),
+						py: 3,
 						fontSize: {
 							md: 'inherit',
 							xs: (theme) => theme.typography.pxToRem(30)
@@ -239,8 +233,7 @@ const PrivacyPolicy = () => (
 					id="our-legal-bases-for-handling-of-your-personal-data"
 					variant="h2"
 					sx={{
-						paddingTop: (theme) => theme.spacing(3),
-						paddingBottom: (theme) => theme.spacing(3),
+						py: 3,
 						fontSize: {
 							md: 'inherit',
 							xs: (theme) => theme.typography.pxToRem(30)
@@ -283,8 +276,7 @@ const PrivacyPolicy = () => (
 					id="our-disclosure-of-your-information"
 					variant="h2"
 					sx={{
-						paddingTop: (theme) => theme.spacing(3),
-						paddingBottom: (theme) => theme.spacing(3),
+						py: 3,
 						fontSize: {
 							md: 'inherit',
 							xs: (theme) => theme.typography.pxToRem(30)
@@ -336,8 +328,7 @@ const PrivacyPolicy = () => (
 					id="unsolicited-information"
 					variant="h2"
 					sx={{
-						paddingTop: (theme) => theme.spacing(3),
-						paddingBottom: (theme) => theme.spacing(3),
+						py: 3,
 						fontSize: {
 							md: 'inherit',
 							xs: (theme) => theme.typography.pxToRem(30)
@@ -355,8 +346,7 @@ const PrivacyPolicy = () => (
 					id="children"
 					variant="h2"
 					sx={{
-						paddingTop: (theme) => theme.spacing(3),
-						paddingBottom: (theme) => theme.spacing(3),
+						py: 3,
 						fontSize: {
 							md: 'inherit',
 							xs: (theme) => theme.typography.pxToRem(30)
@@ -378,8 +368,7 @@ const PrivacyPolicy = () => (
 					id="links-to-other-web-sites"
 					variant="h2"
 					sx={{
-						paddingTop: (theme) => theme.spacing(3),
-						paddingBottom: (theme) => theme.spacing(3),
+						py: 3,
 						fontSize: {
 							md: 'inherit',
 							xs: (theme) => theme.typography.pxToRem(30)
@@ -398,8 +387,7 @@ const PrivacyPolicy = () => (
 					id="data-retention"
 					variant="h2"
 					sx={{
-						paddingTop: (theme) => theme.spacing(3),
-						paddingBottom: (theme) => theme.spacing(3),
+						py: 3,
 						fontSize: {
 							md: 'inherit',
 							xs: (theme) => theme.typography.pxToRem(30)
@@ -417,8 +405,7 @@ const PrivacyPolicy = () => (
 					id="security"
 					variant="h2"
 					sx={{
-						paddingTop: (theme) => theme.spacing(3),
-						paddingBottom: (theme) => theme.spacing(3),
+						py: 3,
 						fontSize: {
 							md: 'inherit',
 							xs: (theme) => theme.typography.pxToRem(30)
@@ -437,8 +424,7 @@ const PrivacyPolicy = () => (
 					id="your-data-rights-and-choices"
 					variant="h2"
 					sx={{
-						paddingTop: (theme) => theme.spacing(3),
-						paddingBottom: (theme) => theme.spacing(3),
+						py: 3,
 						fontSize: {
 							md: 'inherit',
 							xs: (theme) => theme.typography.pxToRem(30)
@@ -450,8 +436,7 @@ const PrivacyPolicy = () => (
 				<Typography
 					component="div"
 					sx={{
-						paddingTop: (theme) => theme.spacing(1),
-						paddingBottom: (theme) => theme.spacing(1)
+						py: 1
 					}}
 				>
 					We believe that users should be treated equally no matter where they are, and so we are making the following options to control
@@ -496,8 +481,7 @@ const PrivacyPolicy = () => (
 					id="who-is-skyra-project's-eea-representative?"
 					variant="h2"
 					sx={{
-						paddingTop: (theme) => theme.spacing(3),
-						paddingBottom: (theme) => theme.spacing(3),
+						py: 3,
 						fontSize: {
 							md: 'inherit',
 							xs: (theme) => theme.typography.pxToRem(30)
@@ -516,8 +500,7 @@ const PrivacyPolicy = () => (
 					id="your-california-privacy-rights"
 					variant="h2"
 					sx={{
-						paddingTop: (theme) => theme.spacing(3),
-						paddingBottom: (theme) => theme.spacing(3),
+						py: 3,
 						fontSize: {
 							md: 'inherit',
 							xs: (theme) => theme.typography.pxToRem(30)
@@ -534,8 +517,7 @@ const PrivacyPolicy = () => (
 				<Typography
 					component="div"
 					sx={{
-						paddingTop: (theme) => theme.spacing(1),
-						paddingBottom: (theme) => theme.spacing(1)
+						py: 1
 					}}
 				>
 					<Box component="span" sx={{ fontWeight: 'bolder' }}>
@@ -545,8 +527,7 @@ const PrivacyPolicy = () => (
 				<Typography
 					component="div"
 					sx={{
-						paddingTop: (theme) => theme.spacing(1),
-						paddingBottom: (theme) => theme.spacing(1)
+						py: 1
 					}}
 				>
 					<Box component="span" sx={{ fontWeight: 'bolder' }}>
@@ -586,8 +567,7 @@ const PrivacyPolicy = () => (
 				<Typography
 					component="div"
 					sx={{
-						paddingTop: (theme) => theme.spacing(1),
-						paddingBottom: (theme) => theme.spacing(1)
+						py: 1
 					}}
 				>
 					<Box component="span" sx={{ fontWeight: 'bolder' }}>
@@ -611,8 +591,7 @@ const PrivacyPolicy = () => (
 				<Typography
 					component="div"
 					sx={{
-						paddingTop: (theme) => theme.spacing(1),
-						paddingBottom: (theme) => theme.spacing(1)
+						py: 1
 					}}
 				>
 					<Box component="span" sx={{ fontWeight: 'bolder' }}>
@@ -624,8 +603,7 @@ const PrivacyPolicy = () => (
 				<Typography
 					component="div"
 					sx={{
-						paddingTop: (theme) => theme.spacing(1),
-						paddingBottom: (theme) => theme.spacing(1)
+						py: 1
 					}}
 				>
 					<Box component="span" sx={{ fontWeight: 'bolder' }}>
@@ -652,8 +630,7 @@ const PrivacyPolicy = () => (
 				<Typography
 					component="div"
 					sx={{
-						paddingTop: (theme) => theme.spacing(1),
-						paddingBottom: (theme) => theme.spacing(1)
+						py: 1
 					}}
 				>
 					Requests Received: We received the following number of data requests between November 24, 2016 and July 20, 2020:
@@ -661,8 +638,7 @@ const PrivacyPolicy = () => (
 				<Typography
 					component="div"
 					sx={{
-						paddingTop: (theme) => theme.spacing(1),
-						paddingBottom: (theme) => theme.spacing(1)
+						py: 1
 					}}
 				>
 					<Box component="span" sx={{ fontStyle: 'italic' }}>
@@ -673,8 +649,7 @@ const PrivacyPolicy = () => (
 					id="changes-to-this-privacy-policy"
 					variant="h2"
 					sx={{
-						paddingTop: (theme) => theme.spacing(3),
-						paddingBottom: (theme) => theme.spacing(3),
+						py: 3,
 						fontSize: {
 							md: 'inherit',
 							xs: (theme) => theme.typography.pxToRem(30)
@@ -693,8 +668,7 @@ const PrivacyPolicy = () => (
 					id="contacting-us"
 					variant="h2"
 					sx={{
-						paddingTop: (theme) => theme.spacing(3),
-						paddingBottom: (theme) => theme.spacing(3),
+						py: 3,
 						fontSize: {
 							md: 'inherit',
 							xs: (theme) => theme.typography.pxToRem(30)

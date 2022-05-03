@@ -39,7 +39,7 @@ const AuthFailedPage: NextPage = () => {
 								sx={{
 									lineHeight: (theme) => theme.spacing(0.2),
 									textAlign: 'center',
-									marginBottom: (theme) => theme.spacing(5)
+									mb: 5
 								}}
 							>
 								Well that's very odd. It looks like the authentication failed! Our best recommendation is to try again. If that still

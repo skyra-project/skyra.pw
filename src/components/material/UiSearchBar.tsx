@@ -161,9 +161,9 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 				{...PaperProps}
 				sx={{
 					height: (theme) => theme.spacing(6),
-					marginBottom: (theme) => theme.spacing(1),
 					zIndex: (theme) => theme.zIndex.appBar - 1,
 					backgroundColor: (theme) => theme.palette.secondary.light,
+					mb: 1,
 					display: 'flex',
 					justifyContent: 'space-between',
 					position: 'sticky',
@@ -201,10 +201,10 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 					disabled={disabled}
 					size="large"
 					sx={{
-						marginRight: (theme) => theme.spacing(-1),
 						color: (theme) => theme.palette.action.active,
 						transform: value === '' ? 'scale(0,0)' : 'scale(1, 1)',
 						opacity: value === '' ? 0 : 1,
+						mr: -1,
 						transition: (theme) =>
 							theme.transitions.create(['transform', 'color'], {
 								duration: theme.transitions.duration.shorter,
