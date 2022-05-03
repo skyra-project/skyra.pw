@@ -10,6 +10,7 @@ export interface SectionProps extends Omit<BoxProps, 'title'> {
 export const Section: FC<SectionProps> = ({ title, children, titleProps, disableTypography = false, ...props }) => (
 	<Box
 		{...props}
+		component="section"
 		sx={{
 			marginRight: {
 				md: (theme) => theme.spacing(4),
@@ -24,7 +25,7 @@ export const Section: FC<SectionProps> = ({ title, children, titleProps, disable
 				md: 'inherit',
 				xs: '100%'
 			},
-			'&:not:(:first-child)': {
+			'&:not:(:first-of-type)': {
 				marginTop: {
 					md: 'inherit',
 					xs: (theme) => theme.spacing(3)

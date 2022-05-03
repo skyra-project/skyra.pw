@@ -1,32 +1,21 @@
 import features from '@assets/features';
-import { useAuthenticated } from '@contexts/AuthenticationContext';
-import { useDiscordPack } from '@contexts/DiscordPackContext';
 import GeneralPage from '@layout/General';
-import { Box, Container } from '@mui/material';
-import { FilteredGuildCards } from '@presentational/GuildCard';
+import { Container } from '@mui/material';
 import HomePageSection from '@presentational/HomePageSection';
+import dynamic from 'next/dynamic';
 import React, { FC } from 'react';
 
-const HomePage: FC = () => {
-	const authenticated = useAuthenticated();
-	const pack = useDiscordPack();
+const GuildCards = dynamic(() => import('@presentational/GuildCards'), { ssr: false });
 
-	return (
-		<GeneralPage>
-			{authenticated && (
-				<Container maxWidth="md">
-					<Box display="flex" flexWrap="wrap" flexDirection="row" justifyContent="center" alignItems="center">
-						{FilteredGuildCards(pack)}
-					</Box>
-				</Container>
-			)}
-			<Container maxWidth="md">
-				{features.map(({ name, text }) => (
-					<HomePageSection name={name} text={text} key={name} />
-				))}
-			</Container>
-		</GeneralPage>
-	);
-};
+const HomePage: FC = () => (
+	<GeneralPage>
+		<GuildCards />
+		<Container maxWidth="md">
+			{features.map(({ name, text }) => (
+				<HomePageSection name={name} text={text} key={name} />
+			))}
+		</Container>
+	</GeneralPage>
+);
 
 export default HomePage;
