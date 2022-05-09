@@ -79,3 +79,7 @@ body {
 	padding: 0;
 	margin: 0;
 }
+
+.discord-messages {
+	border-radius: 4px;
+}

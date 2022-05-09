@@ -10,9 +10,9 @@ const GuildCards = dynamic(() => import('@presentational/GuildCards'), { ssr: fa
 const HomePage: FC = () => (
 	<GeneralPage>
 		<GuildCards />
-		<Container maxWidth="md">
-			{features.map(({ name, text }) => (
-				<HomePageSection name={name} text={text} key={name} />
+		<Container maxWidth="xl" sx={{ my: 2 }}>
+			{features.map((feature, id) => (
+				<HomePageSection key={id} isOdd={Boolean(id % 2)} feature={feature} />
 			))}
 		</Container>
 	</GeneralPage>

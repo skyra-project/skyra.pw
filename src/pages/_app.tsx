@@ -4,7 +4,7 @@ import theme from '@config/theme';
 import { MobileContextProvider } from '@contexts/MobileContext';
 import type { EmotionCache } from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
-import { CssBaseline, useMediaQuery, StyledEngineProvider } from '@mui/material';
+import { CssBaseline, StyledEngineProvider, useMediaQuery } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { LocalStorageKeys } from '@utils/constants';
 import createEmotionCache from '@utils/createEmotionCache';
@@ -29,6 +29,33 @@ interface SkyraAppProps extends AppProps {
 
 const App: NextPage<SkyraAppProps> = ({ Component, pageProps, emotionCache = clientSideEmotionCache }) => {
 	useEffect(() => {
+		window.$discordMessage = {
+			avatars: {
+				default: 'blue',
+				favna: '/avatars/favna.gif',
+				skyra: '/avatars/skyra.png'
+			},
+			profiles: {
+				skyra: {
+					author: 'Skyra',
+					avatar: '/avatars/skyra.png',
+					bot: true,
+					verified: true,
+					roleColor: '#1E88E5'
+				},
+				favna: {
+					author: 'Favna',
+					avatar: '/avatars/favna.gif',
+					roleColor: '#FF0000'
+				},
+				kyra: {
+					author: 'Kyra',
+					avatar: '/avatars/kyra.gif',
+					roleColor: '#FF9D01'
+				}
+			}
+		};
+
 		if (process.env.NODE_ENV === 'production') {
 			console.log(
 				'%cHold Up!',

@@ -13,7 +13,7 @@ const GuildCards: FC = () => {
 	}
 
 	return (
-		<Container maxWidth="md">
+		<Container>
 			<Box display="flex" flexWrap="wrap" flexDirection="row" justifyContent="center" alignItems="center">
 				{FilteredGuildCards(pack)}
 			</Box>
