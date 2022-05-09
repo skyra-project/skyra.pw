@@ -8,7 +8,7 @@ const UnorderedList = forwardRef<HTMLUListElement, UnorderedListProps>(({ childr
 		dense
 		disablePadding
 		sx={{
-			paddingRight: {
+			pr: {
 				md: (theme) => theme.spacing(75)
 			}
 		}}

@@ -3,9 +3,9 @@ import React, { DetailedHTMLProps, forwardRef, ImgHTMLAttributes } from 'react';
 import type { WithReactMarkdownChildren } from './types';
 import { styled } from '@mui/material';
 
-const StyledNextImage = styled(NextImage)(({ theme }) => ({
-	paddingRight: theme.spacing(0.5),
-	paddingLeft: theme.spacing(1)
+const StyledNextImage = styled(NextImage)(() => ({
+	pr: 0.5,
+	pl: 1
 }));
 
 type ImageProps = WithReactMarkdownChildren<DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>>;

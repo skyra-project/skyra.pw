@@ -1,5 +1,5 @@
 import SkyraLogo from '@assets/skyraLogo';
-import { useMediaQuery, Box, Container, Hidden, useTheme, Typography } from '@mui/material';
+import { Box, Container, Hidden, Typography, useMediaQuery, useTheme } from '@mui/material';
 import Link from '@routing/Link';
 import { CLIENT_ID, inviteURL } from '@utils/constants';
 import React, { memo } from 'react';
@@ -24,7 +24,7 @@ const Right = () => (
 const Middle = () => (
 	<Box display="flex" flexDirection="column">
 		<SkyraLogo />
-		<Typography style={{ marginTop: 15 }} variant="caption">
+		<Typography sx={{ mt: 1.875 }} variant="caption">
 			Copyright © 2020 Skyra Project. All rights reserved.
 		</Typography>
 	</Box>

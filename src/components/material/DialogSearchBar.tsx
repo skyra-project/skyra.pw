@@ -10,16 +10,14 @@ const DialogSearchBar: FC<InputBaseProps> = ({ onChange }) => {
 				display: 'flex',
 				alignItems: 'center',
 				alignContent: 'center',
-				padding: 10,
-				marginTop: 0,
-				marginBottom: 0,
-				marginLeft: 10,
-				marginRight: 10
+				p: 1.25,
+				my: 0,
+				mx: 1.25
 			}}
 		>
 			<SearchIcon
 				sx={{
-					marginRight: 10
+					mr: 1.25
 				}}
 			/>
 			<InputBase

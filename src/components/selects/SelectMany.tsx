@@ -124,7 +124,7 @@ const SelectMany: FC<SelectManyProps> = ({ label, value, onChange, values, name,
 				<DialogContent
 					dividers
 					sx={{
-						padding: 2
+						p: 2
 					}}
 				>
 					<Virtuoso
@@ -132,7 +132,7 @@ const SelectMany: FC<SelectManyProps> = ({ label, value, onChange, values, name,
 						overscan={30}
 						style={{
 							height: theme.spacing(50),
-							margin: theme.spacing(1),
+							margin: 1,
 							width: '100%'
 						}}
 						components={VirtuosoComponents}
@@ -153,8 +153,8 @@ const SelectMany: FC<SelectManyProps> = ({ label, value, onChange, values, name,
 				</DialogContent>
 				<DialogActions
 					sx={{
-						margin: 0,
-						padding: 1
+						m: 0,
+						p: 1
 					}}
 				>
 					<Button onClick={() => setChecked([])} color="error">

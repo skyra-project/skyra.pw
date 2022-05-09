@@ -102,7 +102,7 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 								maxWidth: 60
 							}}
 						/>
-						<Typography variant="subtitle2" style={{ marginTop: 15 }} data-premid="server-title">
+						<Typography variant="subtitle2" sx={{ mt: 1.875 }} data-premid="server-title">
 							{guildData?.name}
 						</Typography>
 					</>

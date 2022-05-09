@@ -29,7 +29,7 @@ const GuildCard = memo<GuildCardProps>(({ guild }) => (
 				minHeight: 80,
 				maxHeight: 80,
 				bgcolor: 'secondary.main',
-				margin: 2,
+				m: 2,
 				'&:hover': {
 					cursor: 'pointer'
 				}

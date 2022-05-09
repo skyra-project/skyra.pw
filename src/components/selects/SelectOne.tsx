@@ -70,7 +70,9 @@ export default function SelectOne({ label, values, name = 'None', imageInName, t
 				<ListItem
 					{...props}
 					button
-					style={{ margin: 0 }}
+					sx={{
+						m: 0
+					}}
 					onClick={() => {
 						onChange(filteredValues[props['data-index']].value);
 						void handleClose();
@@ -126,7 +128,7 @@ export default function SelectOne({ label, values, name = 'None', imageInName, t
 				<DialogContent
 					dividers
 					sx={{
-						padding: 2
+						p: 2
 					}}
 				>
 					<Virtuoso
@@ -134,7 +136,7 @@ export default function SelectOne({ label, values, name = 'None', imageInName, t
 						overscan={30}
 						style={{
 							height: theme.spacing(50),
-							margin: theme.spacing(1),
+							margin: 1,
 							width: '100%'
 						}}
 						components={VirtuosoComponents}
@@ -152,8 +154,8 @@ export default function SelectOne({ label, values, name = 'None', imageInName, t
 				</DialogContent>
 				<DialogActions
 					sx={{
-						margin: 0,
-						padding: 1
+						m: 0,
+						p: 1
 					}}
 				>
 					<Button

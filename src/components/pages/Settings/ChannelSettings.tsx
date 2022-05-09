@@ -68,7 +68,7 @@ const ChannelSettings: FC = () => {
 			<Section
 				title="Logging Ignore Channels"
 				sx={{
-					marginTop: {
+					mt: {
 						lg: (theme) => theme.spacing(10),
 						xs: (theme) => theme.spacing(5)
 					}

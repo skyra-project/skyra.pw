@@ -4,13 +4,12 @@ import LazyAvatar from '@material/LazyAvatar';
 import Tooltip from '@material/Tooltip';
 import LogoutIcon from '@mui/icons-material/Eject';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Box, Button, ClickAwayListener, Grow, ListItemIcon, MenuItem, MenuList, Paper, Popper, Typography } from '@mui/material';
 import { displayAvatarURL } from '@utils/skyraUtils';
 import { clearData, logOut, syncUser } from '@utils/util';
 import { useRouter } from 'next/router';
 import React, { FC, memo, MouseEvent as ReactMouseEvent, useEffect, useRef, useState } from 'react';
 import SpinningSyncIcon from './SpinningSyncIcon';
-
-import { Box, Button, ClickAwayListener, Grow, ListItemIcon, MenuItem, MenuList, Paper, Popper, Typography } from '@mui/material';
 
 const UserMenu: FC = () => {
 	const [open, setOpen] = useState(false);
@@ -75,7 +74,11 @@ const UserMenu: FC = () => {
 				>
 					<LazyAvatar
 						imgProps={{ height: 128, width: 128 }}
-						style={{ marginRight: 5, height: 40, width: 40 }}
+						sx={{
+							height: 40,
+							width: 40,
+							mr: 0.625
+						}}
 						src={displayAvatarURL(pack?.user, { size: 128 })}
 						alt="U"
 					/>

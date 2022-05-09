@@ -52,8 +52,8 @@ const Chips: FC<ChipsProps> = ({ command }) => {
 						icon={<DoubleArrowIcon />}
 						color="secondary"
 						sx={{
-							padding: 0.2,
-							marginLeft: 1,
+							p: 0.2,
+							ml: 1,
 							width: '100%',
 							'& .MuiChip-iconSmall': {
 								transform: 'rotate(-90deg)',
@@ -71,8 +71,8 @@ const Chips: FC<ChipsProps> = ({ command }) => {
 						icon={<DiscordIcon />}
 						color="secondary"
 						sx={{
-							padding: 0.2,
-							marginLeft: 1,
+							p: 0.2,
+							ml: 1,
 							width: '100%',
 							'& .MuiChip-iconSmall': {
 								color: '#7289DA'
@@ -89,8 +89,8 @@ const Chips: FC<ChipsProps> = ({ command }) => {
 						color="secondary"
 						icon={<LockIcon />}
 						sx={{
-							padding: 0.2,
-							marginLeft: 1,
+							p: 0.2,
+							ml: 1,
 							width: '100%',
 							'& .MuiChip-iconSmall': {
 								color: deepOrange[500]

@@ -8,7 +8,7 @@ const OrderedList = forwardRef<HTMLUListElement, OrderedListProps>(({ children }
 		dense
 		disablePadding
 		sx={{
-			paddingRight: {
+			pr: {
 				md: (theme) => theme.spacing(75)
 			}
 		}}
