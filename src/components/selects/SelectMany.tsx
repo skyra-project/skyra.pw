@@ -26,7 +26,7 @@ export interface SelectManyProps extends SelectOneProps {
 	value: string[];
 }
 
-const SelectMany: FC<SelectManyProps> = ({ label, value, onChange, values, name, imageInName, tooltipTitle, ButtonProps: buttonProps }) => {
+const SelectMany: FC<SelectManyProps> = ({ label, value, onChange, values, name, imageInName, tooltipTitle, ButtonProps }) => {
 	const [open, setOpen] = useState(false);
 	const [checked, setChecked] = useState(value);
 	const [search, setSearch] = useState('');
@@ -85,7 +85,7 @@ const SelectMany: FC<SelectManyProps> = ({ label, value, onChange, values, name,
 		<Fragment>
 			{Boolean(tooltipTitle) ? (
 				<Tooltip title={tooltipTitle ?? ''} placement="top">
-					<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...buttonProps}>
+					<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...ButtonProps}>
 						{label}: {name}{' '}
 						{imageInName && (
 							<LazyAvatar
@@ -102,7 +102,7 @@ const SelectMany: FC<SelectManyProps> = ({ label, value, onChange, values, name,
 					</Button>
 				</Tooltip>
 			) : (
-				<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...buttonProps}>
+				<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...ButtonProps}>
 					{label}: {name}{' '}
 					{imageInName && (
 						<LazyAvatar
@@ -157,7 +157,7 @@ const SelectMany: FC<SelectManyProps> = ({ label, value, onChange, values, name,
 						padding: 1
 					}}
 				>
-					<Button onClick={() => setChecked([])} color="primary">
+					<Button onClick={() => setChecked([])} color="error">
 						Clear selected
 					</Button>
 					<Button
@@ -165,7 +165,7 @@ const SelectMany: FC<SelectManyProps> = ({ label, value, onChange, values, name,
 							onChange(checked);
 							void handleClose();
 						}}
-						color="primary"
+						color="success"
 					>
 						Submit
 					</Button>

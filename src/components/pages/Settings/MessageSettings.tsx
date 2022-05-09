@@ -25,6 +25,17 @@ const MessageSettings: FC = () => {
 						}
 						guild={guildData}
 						label="Ignored Channels"
+						ButtonProps={{
+							fullWidth: true,
+							sx: {
+								minHeight: {
+									lg: 'inherit',
+									md: 60,
+									xs: 'inherit'
+								},
+								textAlign: 'left'
+							}
+						}}
 					/>
 				</SimpleGrid>
 			</Section>
