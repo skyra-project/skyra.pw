@@ -1,7 +1,6 @@
+import { Box, MenuItem, TextField } from '@mui/material';
 import React, { ChangeEvent, FC, memo, useState } from 'react';
 import Select from './Select';
-
-import { Box, MenuItem, TextField } from '@mui/material';
 
 const unitMap: Record<string, number> = {
 	seconds: 1000,
@@ -76,6 +75,7 @@ const SelectDuration: FC<SelectDurationProps> = ({ value, min, max, onChange }) 
 						xs: 2
 					}
 				}}
+				variant="standard"
 				helperText={error}
 				error={Boolean(error)}
 				value={isNaN(duration) ? '' : duration}

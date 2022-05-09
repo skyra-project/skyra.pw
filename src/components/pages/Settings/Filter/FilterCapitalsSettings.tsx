@@ -74,7 +74,7 @@ const FilterCapitalsSettings: FC = () => {
 						value={guildSettings.selfmodCapitalsHardActionDuration}
 						min={1000}
 						onChange={(duration) => setGuildSettingsChanges({ selfmodCapitalsHardActionDuration: duration })}
-					></SelectDuration>
+					/>
 				</SimpleGrid>
 				<Typography>Maximum Threshold</Typography>
 				<Slider

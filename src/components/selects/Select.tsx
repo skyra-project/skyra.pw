@@ -20,9 +20,17 @@ interface SelectProps extends MSelectProps {
 
 const Select: FC<SelectProps> = ({ title, onChange, value, children, error, fullWidth = false, helperText = '', FormControlProps, ...props }) => {
 	return (
-		<FormControl {...FormControlProps} fullWidth={fullWidth} error={error}>
+		<FormControl {...FormControlProps} variant="standard" fullWidth={fullWidth} error={error}>
 			<InputLabel id={`label-for-${title}-select`}>{title}</InputLabel>
-			<MSelect {...props} label={title} labelId={`label-for-${title}-select`} value={value} onChange={onChange} fullWidth={fullWidth}>
+			<MSelect
+				{...props}
+				variant="standard"
+				label={title}
+				labelId={`label-for-${title}-select`}
+				value={value}
+				onChange={onChange}
+				fullWidth={fullWidth}
+			>
 				{children}
 			</MSelect>
 			<FormHelperText>{helperText}</FormHelperText>
