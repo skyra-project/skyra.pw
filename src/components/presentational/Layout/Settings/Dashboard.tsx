@@ -5,7 +5,7 @@ import { mergeDiscordPack } from '@contexts/DiscordPackContext';
 import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
-import { Box, Grid, Grow, Hidden, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Grid, Grow, Hidden } from '@mui/material';
 import ErrorAlert from '@presentational/Alerts/Error';
 import Loading from '@presentational/Loading';
 import { objectToTuples } from '@sapphire/utilities';
@@ -27,9 +27,6 @@ interface DashboardLayoutProps {
 }
 
 const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
-	const theme = useTheme();
-	const isOnMobile = useMediaQuery(theme.breakpoints.down('md'));
-
 	const { guildData, setGuildData } = useGuildDataContext();
 	const { guildSettings, setGuildSettings } = useGuildSettingsContext();
 	const { guildSettingsChanges, setGuildSettingsChanges } = useGuildSettingsChangesContext();
@@ -149,18 +146,11 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 							guildData={guildData}
 							guildId={guildId}
 							isLoading={isLoading}
-							isOnMobile={isOnMobile}
 							toggleSidebar={toggleSidebar}
 						/>
 					</Hidden>
 					<Hidden smDown>
-						<DesktopSettingsDrawer
-							guildData={guildData}
-							guildId={guildId}
-							isLoading={isLoading}
-							isOnMobile={isOnMobile}
-							toggleSidebar={toggleSidebar}
-						/>
+						<DesktopSettingsDrawer guildData={guildData} guildId={guildId} isLoading={isLoading} toggleSidebar={toggleSidebar} />
 					</Hidden>
 				</Box>
 				<Box
@@ -193,7 +183,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ guildId, children }) => {
 								right: 30
 							}}
 						>
-							<SubmitResetButtons isLoading={isLoading} isOnMobile={isOnMobile} submitChanges={submitChanges} />
+							<SubmitResetButtons isLoading={isLoading} submitChanges={submitChanges} />
 						</Grid>
 					</Grow>
 				</Box>

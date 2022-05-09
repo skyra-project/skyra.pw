@@ -23,20 +23,21 @@ import React, { FC, Fragment, memo, useState } from 'react';
 import type { ValuesType } from 'utility-types';
 
 import { Box, Collapse, Divider, List, ListItem, ListItemIcon, ListItemText, Skeleton, Typography } from '@mui/material';
+import { useMobileContext } from '@contexts/MobileContext';
 
 export interface SettingsDrawerItemsProps {
 	guildData: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>> | undefined;
 	guildId: string;
-	isOnMobile: boolean;
 	isLoading: boolean;
 	toggleSidebar(): void;
 }
 
-const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId, isOnMobile, toggleSidebar, isLoading }) => {
+const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId, toggleSidebar, isLoading }) => {
 	const router = useRouter();
 	const [openSubMenus, setOpenSubMenus] = useState<string[]>([]);
+	const { isMobile } = useMobileContext();
 
-	const closeSidebarOnMobile = () => (isOnMobile ? toggleSidebar() : noop());
+	const closeSidebarOnMobile = () => (isMobile ? toggleSidebar() : noop());
 
 	const handleSubMenu = (menuName: string) => {
 		return openSubMenus.includes(menuName)
@@ -109,7 +110,7 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 			</Box>
 			{/* --------------------- */}
 
-			<Box component="div" onKeyDown={isOnMobile ? toggleSidebar : noop}>
+			<Box component="div" onKeyDown={isMobile ? toggleSidebar : noop}>
 				<List style={{ overflowY: 'auto' }}>
 					<ListItemLink
 						listItemOnClick={closeSidebarOnMobile}

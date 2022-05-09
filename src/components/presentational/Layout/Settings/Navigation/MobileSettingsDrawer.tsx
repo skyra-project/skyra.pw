@@ -7,7 +7,7 @@ interface MobileSettingsDrawerProps extends SettingsDrawerItemsProps {
 	mobileOpen: boolean;
 }
 
-const MobileSettingsDrawer: FC<MobileSettingsDrawerProps> = ({ guildData, guildId, isOnMobile, mobileOpen, toggleSidebar, isLoading }) => (
+const MobileSettingsDrawer: FC<MobileSettingsDrawerProps> = ({ guildData, guildId, mobileOpen, toggleSidebar, isLoading }) => (
 	<Drawer
 		variant="temporary"
 		open={mobileOpen}
@@ -20,7 +20,7 @@ const MobileSettingsDrawer: FC<MobileSettingsDrawerProps> = ({ guildData, guildI
 			}
 		}}
 	>
-		<SettingsDrawerItems guildData={guildData} guildId={guildId} isLoading={isLoading} isOnMobile={isOnMobile} toggleSidebar={toggleSidebar} />
+		<SettingsDrawerItems guildData={guildData} guildId={guildId} isLoading={isLoading} toggleSidebar={toggleSidebar} />
 	</Drawer>
 );
 

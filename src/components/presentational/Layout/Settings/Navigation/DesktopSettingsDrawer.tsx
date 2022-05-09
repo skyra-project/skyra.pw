@@ -3,7 +3,7 @@ import React, { FC, memo } from 'react';
 import SettingsDrawerItems, { SettingsDrawerItemsProps } from './SettingsDrawerItems';
 import { Drawer } from '@mui/material';
 
-const DesktopSettingsDrawer: FC<SettingsDrawerItemsProps> = ({ guildData, guildId, isOnMobile, toggleSidebar, isLoading }) => (
+const DesktopSettingsDrawer: FC<SettingsDrawerItemsProps> = ({ guildData, guildId, toggleSidebar, isLoading }) => (
 	<Drawer
 		sx={{
 			'& .MuiDrawer-paper': {
@@ -15,7 +15,7 @@ const DesktopSettingsDrawer: FC<SettingsDrawerItemsProps> = ({ guildData, guildI
 		variant="permanent"
 		open
 	>
-		<SettingsDrawerItems guildData={guildData} guildId={guildId} isLoading={isLoading} isOnMobile={isOnMobile} toggleSidebar={toggleSidebar} />
+		<SettingsDrawerItems guildData={guildData} guildId={guildId} isLoading={isLoading} toggleSidebar={toggleSidebar} />
 	</Drawer>
 );
 

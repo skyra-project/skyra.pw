@@ -7,11 +7,10 @@ import React, { FC, memo } from 'react';
 
 interface SubmitResetButtonsProps {
 	isLoading: boolean;
-	isOnMobile: boolean;
 	submitChanges(): Promise<void>;
 }
 
-const SubmitResetButtons: FC<SubmitResetButtonsProps> = ({ isLoading, isOnMobile, submitChanges }) => {
+const SubmitResetButtons: FC<SubmitResetButtonsProps> = ({ isLoading, submitChanges }) => {
 	const { isMobile } = useMobileContext();
 	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
