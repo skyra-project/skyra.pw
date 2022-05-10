@@ -8,13 +8,12 @@ import GavelIcon from '@mui/icons-material/Gavel';
 import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
 import LoginIcon from '@mui/icons-material/VpnKey';
+import { Box, Button, ClickAwayListener, Grow, IconButton, MenuList, Paper, Popper, Typography } from '@mui/material';
 import MenuItemLink from '@routing/MenuItemLink';
 import { oauthURL } from '@utils/constants';
 import { navigate } from '@utils/util';
 import { useRouter } from 'next/router';
 import React, { FC, memo, MouseEvent as ReactMouseEvent, useEffect, useRef, useState } from 'react';
-
-import { Button, ClickAwayListener, Grow, IconButton, MenuList, Paper, Popper, Typography } from '@mui/material';
 
 export interface DesktopMenuItemsProps {
 	loading?: boolean;
@@ -152,14 +151,20 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 								<MenuList autoFocusItem={popperMenuIsOpen} id="menu-popover">
 									{router.pathname !== '/' && (
 										<Tooltip title="Click to go back to the home page" placement="left">
-											<MenuItemLink href="/" Icon={<HomeIcon />} text="Go back home" />
+											<Box>
+												<MenuItemLink href="/" Icon={<HomeIcon />} text="Go back home" />
+											</Box>
 										</Tooltip>
 									)}
 									<Tooltip title="Click to view Skyra's commands" placement="left">
-										<MenuItemLink href="/commands" Icon={<CommandsIcon />} text="Commands" />
+										<Box>
+											<MenuItemLink href="/commands" Icon={<CommandsIcon />} text="Commands" />
+										</Box>
 									</Tooltip>
 									<Tooltip title="Click to read how we handle your data" placement="left">
-										<MenuItemLink href="/privacy" Icon={<GavelIcon />} text="Privacy Policy" />
+										<Box>
+											<MenuItemLink href="/privacy" Icon={<GavelIcon />} text="Privacy Policy" />
+										</Box>
 									</Tooltip>
 								</MenuList>
 							</ClickAwayListener>
