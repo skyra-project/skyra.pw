@@ -1,3 +1,4 @@
+import '@config/discord-components.css';
 import '@config/globals.css';
 import DefaultSeoProps from '@config/SEO/DefaultSeoProps';
 import theme from '@config/theme';
