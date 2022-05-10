@@ -1,22 +1,21 @@
+import { Box, Tooltip as MTooltip, tooltipClasses } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import type { TooltipProps } from '@mui/material/Tooltip';
 import React, { FC } from 'react';
-import { Box, Tooltip as MUITooltip } from '@mui/material';
+
+const StyledTooltip = styled(({ className, ...props }: TooltipProps) => <MTooltip {...props} classes={{ popper: className }} />)(({ theme }) => ({
+	[`& .${tooltipClasses.tooltip}`]: {
+		backgroundColor: theme.palette.text.primary,
+		color: theme.palette.getContrastText(theme.palette.text.primary),
+		boxShadow: theme.shadows[5],
+		fontSize: '0.8rem'
+	}
+}));
 
 const Tooltip: FC<TooltipProps> = ({ title, placement, enterDelay, children, ...props }) => (
-	<MUITooltip
-		title={<Box p={1}>{title}</Box>}
-		placement={placement ?? 'top'}
-		enterDelay={enterDelay ?? 300}
-		{...props}
-		sx={{
-			bgcolor: 'text.primary',
-			boxShadow: (theme) => theme.shadows[5],
-			color: (theme) => theme.palette.getContrastText(theme.palette.text.primary),
-			fontSize: '0.8rem'
-		}}
-	>
+	<StyledTooltip title={<Box p={1}>{title}</Box>} placement={placement ?? 'top'} enterDelay={enterDelay ?? 300} {...props}>
 		{children}
-	</MUITooltip>
+	</StyledTooltip>
 );
 
 export default Tooltip;
