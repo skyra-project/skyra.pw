@@ -4,19 +4,21 @@ import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettings
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import RefreshCommandsButton from '@layout/RefreshCommandsButton';
 import Section from '@layout/Settings/Section';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionActions from '@material-ui/core/AccordionActions';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import { green } from '@material-ui/core/colors';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import {
+	Accordion,
+	AccordionActions,
+	AccordionDetails,
+	AccordionSummary,
+	Box,
+	Button,
+	Divider,
+	Grid,
+	Typography,
+	useMediaQuery,
+	useTheme
+} from '@mui/material';
+import { green } from '@mui/material/colors';
 import Loading from '@presentational/Loading';
 import SelectBoolean from '@selects/SelectBoolean';
 import React, { FC, memo, SetStateAction, useCallback, useEffect, useState } from 'react';
@@ -26,39 +28,6 @@ interface DisabledCommandSettingsProps {
 	setCommands: (value: SetStateAction<FlattenedCommand[]>) => void;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		accordions: {
-			marginTop: theme.spacing(3)
-		},
-		cancelButton: {
-			backgroundColor: theme.palette.error.main,
-
-			'&:hover': {
-				backgroundColor: theme.palette.error.dark
-			}
-		},
-		disableAllButton: {
-			backgroundColor: theme.palette.secondary.main,
-			color: theme.palette.text.primary,
-
-			'&:hover': {
-				backgroundColor: theme.palette.secondary.dark,
-				color: theme.palette.text.primary
-			}
-		},
-		enableAllButton: {
-			backgroundColor: green[600],
-			color: theme.palette.text.primary,
-
-			'&:hover': {
-				backgroundColor: green[800],
-				color: theme.palette.text.primary
-			}
-		}
-	})
-);
-
 /**
  * Parses command descriptions, replacing emojis with their proper counterparts
  * @param description Command description to parse
@@ -66,8 +35,9 @@ const useStyles = makeStyles((theme: Theme) =>
 export const parseCommandDescription = (description: string) => description.replace(/<:(\w{2,32}):[0-9]{18}>/gi, '$1');
 
 const DisabledCommandSettings: FC<DisabledCommandSettingsProps> = ({ commands, setCommands }) => {
-	const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
-	const classes = useStyles();
+	const theme = useTheme();
+	const matches = useMediaQuery(() => theme.breakpoints.down('md'));
+
 	const [expanded, setExpanded] = useState<string | false>(false);
 	const [loading, setLoading] = useState(true);
 	const [localCommands, setLocalCommands] = useState<Record<string, DisableCommands.Command>>({});
@@ -107,7 +77,7 @@ const DisabledCommandSettings: FC<DisabledCommandSettingsProps> = ({ commands, s
 				<Typography variant="subtitle2" color="textPrimary">
 					On this page you can disable commands on your server
 				</Typography>
-				<Box className={classes.accordions}>
+				<Box mt={3}>
 					{categories.map((catName, catIndex) => (
 						<Accordion
 							key={catIndex}
@@ -144,7 +114,14 @@ const DisabledCommandSettings: FC<DisabledCommandSettingsProps> = ({ commands, s
 								<Button
 									size="small"
 									variant="contained"
-									classes={{ root: classes.enableAllButton }}
+									sx={{
+										backgroundColor: green[600],
+										color: 'text.primary',
+										'&:hover': {
+											backgroundColor: green[800],
+											color: 'text.primary'
+										}
+									}}
 									onClick={() => {
 										const changedCommands: Record<string, DisableCommands.Command> = {};
 										for (const command of Object.values(localCommands)) {
@@ -166,7 +143,14 @@ const DisabledCommandSettings: FC<DisabledCommandSettingsProps> = ({ commands, s
 								<Button
 									size="small"
 									variant="contained"
-									classes={{ root: classes.disableAllButton }}
+									sx={{
+										bgcolor: 'secondary.main',
+										color: 'text.primary',
+										'&:hover': {
+											bgcolor: 'secondary.dark',
+											color: 'text.primary'
+										}
+									}}
 									onClick={() => {
 										const changedCommands: Record<string, DisableCommands.Command> = {};
 										for (const command of Object.values(localCommands)) {
@@ -188,7 +172,12 @@ const DisabledCommandSettings: FC<DisabledCommandSettingsProps> = ({ commands, s
 								<Button
 									size="small"
 									variant="contained"
-									classes={{ root: classes.cancelButton }}
+									sx={{
+										bgcolor: 'error.main',
+										'&:hover': {
+											bgcolor: 'error.dark'
+										}
+									}}
 									onClick={parseCommandsToLocalCommands}
 								>
 									Reset

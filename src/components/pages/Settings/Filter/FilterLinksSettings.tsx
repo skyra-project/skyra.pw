@@ -1,41 +1,17 @@
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import Chip from '@material-ui/core/Chip';
-import MenuItem from '@material-ui/core/MenuItem';
-import Paper from '@material-ui/core/Paper';
-import Slider from '@material-ui/core/Slider';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import SimpleGrid from '@mui/SimpleGrid';
+import SimpleGrid from '@material/SimpleGrid';
 import Select from '@selects/Select';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectDuration from '@selects/SelectDuration';
 import { bitwiseHas, bitwiseSet, updateSliderValueObj } from '@utils/util';
 import React, { FC, Fragment, memo, useState } from 'react';
-import { When } from 'react-if';
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		words: {
-			padding: theme.spacing(1),
-			'& > *': {
-				margin: theme.spacing(1)
-			}
-		},
-		textField: {
-			marginRight: theme.spacing(1),
-			marginBottom: theme.spacing(1)
-		}
-	})
-);
+import { Box, Button, Chip, MenuItem, Paper, Slider, TextField, Typography } from '@mui/material';
 
 const FilterLinksSettings: FC = () => {
 	const [newWord, setNewWord] = useState('');
-	const classes = useStyles();
 	const { guildSettings } = useGuildSettingsContext();
 	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 
@@ -140,7 +116,10 @@ const FilterLinksSettings: FC = () => {
 				>
 					<Box display="flex" mb={2} alignContent="center" alignItems="center" justifyContent="flex-start">
 						<TextField
-							classes={{ root: classes.textField }}
+							sx={{
+								mr: 1,
+								mb: 1
+							}}
 							label="Add Link"
 							value={newWord}
 							onChange={(e) => setNewWord(e.target.value)}
@@ -151,8 +130,15 @@ const FilterLinksSettings: FC = () => {
 					</Box>
 				</form>
 
-				<When condition={guildSettings.selfmodLinksAllowed.length !== 0}>
-					<Paper classes={{ root: classes.words }}>
+				{guildSettings.selfmodLinksAllowed.length !== 0 && (
+					<Paper
+						sx={{
+							p: 1,
+							'& > *': {
+								m: 1
+							}
+						}}
+					>
 						{guildSettings.selfmodLinksAllowed.map((word) => (
 							<Chip
 								color="primary"
@@ -166,7 +152,7 @@ const FilterLinksSettings: FC = () => {
 							/>
 						))}
 					</Paper>
-				</When>
+				)}
 			</Section>
 		</Fragment>
 	);

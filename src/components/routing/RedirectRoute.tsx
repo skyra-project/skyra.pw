@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
-import React, { FC, useEffect } from 'react';
+import React, { FC, ReactNode, useEffect } from 'react';
 
 export interface RedirectRouteProps {
 	redirectUri: string;
+	children?: ReactNode;
 }
 
 const RedirectRoute: FC<RedirectRouteProps> = ({ redirectUri, children }) => {

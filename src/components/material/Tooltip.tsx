@@ -1,37 +1,21 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
-import MUITooltip, { TooltipProps } from '@material-ui/core/Tooltip';
-import clsx from 'clsx';
+import { Box, Tooltip as MTooltip, tooltipClasses } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import type { TooltipProps } from '@mui/material/Tooltip';
 import React, { FC } from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		tooltip: {
-			backgroundColor: theme.palette.text.primary,
-			boxShadow: theme.shadows[5],
-			color: theme.palette.getContrastText(theme.palette.text.primary),
-			fontSize: '0.8rem'
-		},
-		box: {
-			padding: theme.spacing(1)
-		}
-	})
+const StyledTooltip = styled(({ className, ...props }: TooltipProps) => <MTooltip {...props} classes={{ popper: className }} />)(({ theme }) => ({
+	[`& .${tooltipClasses.tooltip}`]: {
+		backgroundColor: theme.palette.text.primary,
+		color: theme.palette.getContrastText(theme.palette.text.primary),
+		boxShadow: theme.shadows[5],
+		fontSize: '0.8rem'
+	}
+}));
+
+const Tooltip: FC<TooltipProps> = ({ title, placement, enterDelay, children, ...props }) => (
+	<StyledTooltip title={<Box p={1}>{title}</Box>} placement={placement ?? 'top'} enterDelay={enterDelay ?? 300} {...props}>
+		{children}
+	</StyledTooltip>
 );
-
-const Tooltip: FC<TooltipProps> = ({ title, placement, enterDelay, children, ...props }) => {
-	const classes = useStyles();
-
-	return (
-		<MUITooltip
-			title={<Box className={classes.box}>{title}</Box>}
-			placement={placement ?? 'top'}
-			enterDelay={enterDelay ?? 300}
-			{...props}
-			classes={{ tooltip: clsx(classes.tooltip, props.classes?.tooltip) }}
-		>
-			{children}
-		</MUITooltip>
-	);
-};
 
 export default Tooltip;

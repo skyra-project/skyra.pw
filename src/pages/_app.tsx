@@ -1,13 +1,14 @@
+import '@config/discord-components.css';
 import '@config/globals.css';
 import DefaultSeoProps from '@config/SEO/DefaultSeoProps';
 import theme from '@config/theme';
 import { MobileContextProvider } from '@contexts/MobileContext';
-import { useMediaQuery } from '@material-ui/core';
-import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline';
-import { ThemeProvider } from '@material-ui/core/styles';
-// Import just as a type because the GlobalThis type augment
-import type {} from '@skyra/discord-components-core';
+import type { EmotionCache } from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
+import { CssBaseline, StyledEngineProvider, useMediaQuery } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
 import { LocalStorageKeys } from '@utils/constants';
+import createEmotionCache from '@utils/createEmotionCache';
 import { clearState } from '@utils/util';
 import type { NextPage } from 'next';
 import { DefaultSeo } from 'next-seo';
@@ -20,14 +21,15 @@ import React, { useEffect } from 'react';
 const DiscordPackProvider = dynamic(() => import('@contexts/DiscordPackContext'));
 const AuthenticatedProvider = dynamic(() => import('@contexts/AuthenticationContext'));
 
-const App: NextPage<AppProps> = ({ Component, pageProps }) => {
-	useEffect(() => {
-		// Remove the server-side injected CSS.
-		const jssStyles = document.querySelector('#jss-server-side');
-		if (jssStyles) {
-			jssStyles.parentElement!.removeChild(jssStyles);
-		}
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache();
 
+interface SkyraAppProps extends AppProps {
+	emotionCache?: EmotionCache;
+}
+
+const App: NextPage<SkyraAppProps> = ({ Component, pageProps, emotionCache = clientSideEmotionCache }) => {
+	useEffect(() => {
 		window.$discordMessage = {
 			avatars: {
 				default: 'blue',
@@ -85,10 +87,10 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 		clearState(LocalStorageKeys.HasCookieConsent);
 	}, []);
 
-	const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
 	return (
-		<>
+		<CacheProvider value={emotionCache}>
 			<Head>
 				<meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
 				<meta httpEquiv="X-UA-Compatible" content="ie=edge" />
@@ -111,19 +113,20 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 			</Head>
 			<DefaultSeo {...DefaultSeoProps} />
 
-			<ThemeProvider theme={theme}>
-				<MobileContextProvider value={{ isMobile }}>
-					<AuthenticatedProvider>
-						<DiscordPackProvider>
-							<ScopedCssBaseline>
+			<StyledEngineProvider injectFirst>
+				<ThemeProvider theme={theme}>
+					<MobileContextProvider value={{ isMobile }}>
+						<AuthenticatedProvider>
+							<DiscordPackProvider>
+								<CssBaseline />
 								<Component {...pageProps} />
 								<NextNprogress color="#0A5699" startPosition={0.3} stopDelayMs={200} height={3} />
-							</ScopedCssBaseline>
-						</DiscordPackProvider>
-					</AuthenticatedProvider>
-				</MobileContextProvider>
-			</ThemeProvider>
-		</>
+							</DiscordPackProvider>
+						</AuthenticatedProvider>
+					</MobileContextProvider>
+				</ThemeProvider>
+			</StyledEngineProvider>
+		</CacheProvider>
 	);
 };
 

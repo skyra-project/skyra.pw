@@ -1,9 +1,9 @@
-import { blue } from '@material-ui/core/colors';
-import { createTheme } from '@material-ui/core/styles';
+import { createTheme } from '@mui/material';
+import { blue } from '@mui/material/colors';
 
 export default createTheme({
 	palette: {
-		type: 'dark',
+		mode: 'dark',
 		primary: {
 			main: blue[600],
 			light: blue[400],

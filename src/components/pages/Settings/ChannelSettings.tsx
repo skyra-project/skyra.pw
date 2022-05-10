@@ -4,35 +4,13 @@ import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettings
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import PageHeader from '@layout/Settings/PageHeader';
 import Section from '@layout/Settings/Section';
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import SimpleGrid from '@mui/SimpleGrid';
+import SimpleGrid from '@material/SimpleGrid';
 import SelectChannel from '@selects/SelectChannel';
 import SelectChannels from '@selects/SelectChannels';
 import { handleResetKey } from '@utils/util';
 import React, { FC, memo } from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		button: {
-			[theme.breakpoints.only('md')]: {
-				minHeight: 60
-			}
-		},
-		buttonText: {
-			display: 'block',
-			textAlign: 'left'
-		},
-		sectionSpacer: {
-			marginTop: theme.spacing(10),
-			[theme.breakpoints.down('md')]: {
-				marginTop: theme.spacing(5)
-			}
-		}
-	})
-);
-
 const ChannelSettings: FC = () => {
-	const classes = useStyles();
 	const { guildData } = useGuildDataContext();
 	const { guildSettings } = useGuildSettingsContext();
 	const { guildSettingsChanges, setGuildSettingsChanges } = useGuildSettingsChangesContext();
@@ -74,16 +52,28 @@ const ChannelSettings: FC = () => {
 							label={name}
 							ButtonProps={{
 								fullWidth: true,
-								classes: {
-									root: classes.button,
-									label: classes.buttonText
+								sx: {
+									minHeight: {
+										lg: 'inherit',
+										md: 60,
+										xs: 'inherit'
+									},
+									textAlign: 'left'
 								}
 							}}
 						/>
 					))}
 				</SimpleGrid>
 			</Section>
-			<Section title="Logging Ignore Channels" className={classes.sectionSpacer}>
+			<Section
+				title="Logging Ignore Channels"
+				sx={{
+					mt: {
+						lg: (theme) => theme.spacing(10),
+						xs: (theme) => theme.spacing(5)
+					}
+				}}
+			>
 				<SimpleGrid
 					direction="row"
 					justifyContent="flex-start"
@@ -106,9 +96,13 @@ const ChannelSettings: FC = () => {
 							label={name}
 							ButtonProps={{
 								fullWidth: true,
-								classes: {
-									root: classes.button,
-									label: classes.buttonText
+								sx: {
+									minHeight: {
+										lg: 'inherit',
+										md: 60,
+										xs: 'inherit'
+									},
+									textAlign: 'left'
 								}
 							}}
 						/>

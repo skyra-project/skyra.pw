@@ -1,5 +1,7 @@
-import Avatar, { AvatarProps } from '@material-ui/core/Avatar';
+import type { AvatarProps } from '@mui/material/Avatar';
 import React, { FC, memo } from 'react';
+
+import { Avatar } from '@mui/material';
 
 const LazyAvatar: FC<AvatarProps> = (props) => <Avatar {...props} imgProps={{ ...props.imgProps, loading: 'lazy' }} />;
 

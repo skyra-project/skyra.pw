@@ -1,75 +1,91 @@
-// Copyright (c) 2017 LoicMahieu. All rights reserved. MIT license.
-// Source: https://github.com/LoicMahieu/material-ui-color-picker
-
-import { useMediaQuery } from '@material-ui/core';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import MuiTextField from '@material-ui/core/TextField';
-import LazyAvatar from '@mui/LazyAvatar';
+import LazyAvatar from '@material/LazyAvatar';
+import type { FieldPathValue, FormikValues, Path, TextFieldPropsOmittable, UnpackNestedValue } from '@mods/Formik/types';
+import { InputAdornment, TextField, useMediaQuery, useTheme } from '@mui/material';
+import type { TextFieldProps as MTextFieldProps } from '@mui/material/TextField';
 import { REGEXP } from '@utils/Color';
-import { fieldToTextField, TextFieldProps } from 'formik-material-ui';
-import React, { ChangeEvent, FC, memo, useCallback, useState } from 'react';
+import { useFormikContext } from 'formik';
+import getProperty from 'lodash/get';
+import React, { useState } from 'react';
 import PickerDialog from './PickerDialog';
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		smallAvatar: {
-			width: theme.spacing(2),
-			height: theme.spacing(2)
-		},
-		errorLabel: {
-			position: 'absolute',
-			top: theme.spacing(6.5)
-		}
-	})
-);
+interface FormikTextFieldProps<TFieldValues extends FormikValues = FormikValues, TName extends Path<TFieldValues> = Path<TFieldValues>> {
+	/** The {@link TextField} label */
+	label: string;
+	/** The name of the field */
+	name: Path<TFieldValues>;
+	/** The default value for this field */
+	defaultValue?: UnpackNestedValue<FieldPathValue<TFieldValues, TName>>;
+	/** Additional properties to pas to the {@link TextField} component from material-ui */
+	TextFieldProps?: Omit<MTextFieldProps, TextFieldPropsOmittable>;
+}
 
-const ColorPicker: FC<Omit<TextFieldProps, 'variant'>> = ({ form: { setFieldValue, ...form }, field, ...props }) => {
-	const [showPicker, setShowPicker] = useState(false);
-	const classes = useStyles();
+const FormikTextField = <TFieldValues extends FormikValues = FormikValues, TName extends Path<TFieldValues> = Path<TFieldValues>>({
+	label,
+	name,
+	defaultValue,
+	TextFieldProps
+}: FormikTextFieldProps<TFieldValues, TName>) => {
 	const theme = useTheme();
-	const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-	const onChange = useCallback(
-		(event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-			setFieldValue(field.name, event.target.value);
-		},
-		[field.name, setFieldValue]
-	);
+	const { touched, errors, values, handleChange, handleBlur, setFieldValue } = useFormikContext<TFieldValues>();
+	const [showPicker, setShowPicker] = useState(false);
 
 	const togglePicker = () => setShowPicker(!showPicker);
 
 	return (
 		<>
-			<MuiTextField
-				{...props}
+			<TextField
+				autoComplete="on"
+				autoCorrect="off"
+				autoCapitalize="off"
+				spellCheck={false}
+				fullWidth
+				required
+				variant="standard"
+				name={name}
+				{...TextFieldProps}
 				InputProps={{
 					startAdornment: (
 						<InputAdornment disablePointerEvents position="start">
 							<LazyAvatar
 								imgProps={{ height: theme.spacing(2), width: theme.spacing(2) }}
-								style={{ backgroundColor: REGEXP.HEX.test(field.value) ? field.value : 'transparent' }}
-								className={classes.smallAvatar}
+								style={{ backgroundColor: REGEXP.HEX.test(getProperty(values, name)) ? getProperty(values, name) : 'transparent' }}
+								sx={(theme) => ({
+									width: theme.spacing(2),
+									height: theme.spacing(2)
+								})}
 							>
 								{'\u200B'}
 							</LazyAvatar>
 						</InputAdornment>
 					)
 				}}
-				variant="standard"
-				{...fieldToTextField({ field, form: { setFieldValue, ...form }, ...props })}
-				onChange={onChange}
-				onClick={togglePicker}
 				FormHelperTextProps={{
-					classes: { error: classes.errorLabel }
+					...TextFieldProps?.FormHelperTextProps,
+					sx: {
+						...TextFieldProps?.FormHelperTextProps?.sx,
+						position: 'absolute',
+						top: (theme) => theme.spacing(6.5)
+					}
 				}}
 				inputProps={{
+					...TextFieldProps?.inputProps,
 					readOnly: isMobile ? 'readonly' : undefined
 				}}
+				label={label}
+				value={getProperty(values, name) ?? defaultValue}
+				onChange={handleChange}
+				onClick={togglePicker}
+				onBlur={handleBlur}
+				error={getProperty(touched, name) && Boolean(getProperty(errors, name))}
+				helperText={getProperty(touched, name) && (getProperty(errors, name) as string)}
 			/>
-			{showPicker && <PickerDialog value={field.value} onClick={togglePicker} onChange={(color) => setFieldValue(field.name, color.hex)} />}
+			{showPicker && (
+				<PickerDialog value={getProperty(values, name)} onClick={togglePicker} onChange={(color) => setFieldValue(name, color.hex)} />
+			)}
 		</>
 	);
 };
 
-export default memo(ColorPicker);
+export default FormikTextField;

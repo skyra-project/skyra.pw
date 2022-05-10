@@ -1,31 +1,25 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { cast } from '@utils/util';
-import NextImage, { ImageProps as NextImageProps } from 'next/image';
-import React, { forwardRef, memo } from 'react';
-import type { NormalComponents } from 'react-markdown/src/ast-to-react';
+import NextImage from 'next/image';
+import React, { DetailedHTMLProps, forwardRef, ImgHTMLAttributes } from 'react';
+import type { WithReactMarkdownChildren } from './types';
+import { styled } from '@mui/material';
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		emoji: {
-			paddingRight: theme.spacing(0.5),
-			paddingLeft: theme.spacing(1)
-		}
-	})
-);
+const StyledNextImage = styled(NextImage)(() => ({
+	pr: 0.5,
+	pl: 1
+}));
 
-interface ImageProps {
-	src: Exclude<NextImageProps['src'], string>;
-}
+type ImageProps = WithReactMarkdownChildren<DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>>;
 
-const Image = forwardRef<HTMLSpanElement, Parameters<Exclude<NormalComponents['img'], 'img'>>[0]>((props, ref) => {
-	const classes = useStyles();
+const Image = forwardRef<HTMLSpanElement, ImageProps>(({ src }, ref) => {
+	if (!src) {
+		return null;
+	}
 
-	const { src } = cast<ImageProps>(props);
 	return (
 		<span ref={ref}>
-			<NextImage className={classes.emoji} src={src} alt="Emoji" height={16} width={16} />
+			<StyledNextImage src={src} alt="Emoji" height={16} width={16} />
 		</span>
 	);
 });
 
-export default memo(Image);
+export default Image;

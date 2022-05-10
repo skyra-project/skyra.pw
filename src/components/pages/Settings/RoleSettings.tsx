@@ -4,40 +4,21 @@ import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettings
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import PageHeader from '@layout/Settings/PageHeader';
 import Section from '@layout/Settings/Section';
-import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import SimpleGrid from '@mui/SimpleGrid';
+import SimpleGrid from '@material/SimpleGrid';
+import { cast } from '@sapphire/utilities';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectRole, { SelectRoleProps } from '@selects/SelectRole';
 import SelectRoles, { SelectRolesProps } from '@selects/SelectRoles';
-import { cast, handleResetKey } from '@utils/util';
+import { handleResetKey } from '@utils/util';
 import React, { FC, memo } from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		button: {
-			[theme.breakpoints.only('md')]: {
-				minHeight: 60
-			}
-		},
-		buttonText: {
-			display: 'block',
-			textAlign: 'left'
-		},
-		divider: {
-			backgroundColor: theme.palette.secondary.light,
-			marginBottom: theme.spacing(3),
-			paddingBottom: theme.spacing(0.25)
-		}
-	})
-);
+import { useTheme, useMediaQuery } from '@mui/material';
 
 type SelectCommonProps = Omit<SelectRoleProps, 'value' | 'onChange'> & Omit<SelectRolesProps, 'value' | 'onChange'> & { key: number };
 
 const RoleSettings: FC = () => {
-	const classes = useStyles();
 	const theme = useTheme();
-	const isOnMobile = useMediaQuery(theme.breakpoints.down('sm'));
+	const isOnMobile = useMediaQuery(theme.breakpoints.down('md'));
 	const { guildData } = useGuildDataContext();
 	const { guildSettings } = useGuildSettingsContext();
 	const { guildSettingsChanges, setGuildSettingsChanges } = useGuildSettingsChangesContext();
@@ -88,9 +69,13 @@ const RoleSettings: FC = () => {
 							filterEveryone: true,
 							ButtonProps: {
 								fullWidth: true,
-								classes: {
-									root: classes.button,
-									label: classes.buttonText
+								sx: {
+									minHeight: {
+										lg: 'inherit',
+										md: 60,
+										xs: 'inherit'
+									},
+									textAlign: 'left'
 								}
 							},
 							onReset: () => handleResetKey(guildSettingsChanges, setGuildSettingsChanges, key)

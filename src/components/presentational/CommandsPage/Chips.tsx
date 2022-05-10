@@ -1,33 +1,11 @@
 import type { FlattenedCommand } from '@config/types/ApiData';
-import Chip from '@material-ui/core/Chip';
-import { amber, deepOrange } from '@material-ui/core/colors';
-import Grid from '@material-ui/core/Grid';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
-import LockIcon from '@material-ui/icons/Lock';
+import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
+import LockIcon from '@mui/icons-material/Lock';
+import { Chip, Grid } from '@mui/material';
+import { amber, deepOrange } from '@mui/material/colors';
 import { useMobileContext } from 'contexts/MobileContext';
 import DiscordIcon from 'mdi-react/DiscordIcon';
 import React, { FC, memo, useCallback, useMemo } from 'react';
-
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		chip: {
-			padding: theme.spacing(0.2),
-			marginLeft: theme.spacing(1),
-			width: '100%'
-		},
-		rankIcon: {
-			transform: 'rotate(-90deg)',
-			color: amber[500]
-		},
-		discordIcon: {
-			color: '#7289DA' // Discord Blurple
-		},
-		guardedIcon: {
-			color: deepOrange[500]
-		}
-	})
-);
 
 interface ChipsProps {
 	command: FlattenedCommand;
@@ -36,7 +14,6 @@ interface ChipsProps {
 const GuildOnlyPreconditions = ['Administrator', 'DJ', 'GuildOnly', 'Moderator', 'NewsOnly', 'NSFW', 'TextOnly'];
 
 const Chips: FC<ChipsProps> = ({ command }) => {
-	const classes = useStyles();
 	const { isMobile } = useMobileContext();
 
 	const titles = useMemo<Record<number, string>>(
@@ -74,9 +51,14 @@ const Chips: FC<ChipsProps> = ({ command }) => {
 						label={isMobile ? mobileTitles[command.permissionLevel] : titles[command.permissionLevel]}
 						icon={<DoubleArrowIcon />}
 						color="secondary"
-						classes={{
-							root: classes.chip,
-							iconSmall: classes.rankIcon
+						sx={{
+							p: 0.2,
+							ml: 1,
+							width: '100%',
+							'& .MuiChip-iconSmall': {
+								transform: 'rotate(-90deg)',
+								color: amber[500]
+							}
 						}}
 					/>
 				</Grid>
@@ -88,9 +70,13 @@ const Chips: FC<ChipsProps> = ({ command }) => {
 						label={isMobile ? 'Usable in servers only.' : 'This can only be used in servers.'}
 						icon={<DiscordIcon />}
 						color="secondary"
-						classes={{
-							root: classes.chip,
-							iconSmall: classes.discordIcon
+						sx={{
+							p: 0.2,
+							ml: 1,
+							width: '100%',
+							'& .MuiChip-iconSmall': {
+								color: '#7289DA'
+							}
 						}}
 					/>
 				</Grid>
@@ -102,9 +88,13 @@ const Chips: FC<ChipsProps> = ({ command }) => {
 						label="This command cannot be disabled."
 						color="secondary"
 						icon={<LockIcon />}
-						classes={{
-							root: classes.chip,
-							iconSmall: classes.guardedIcon
+						sx={{
+							p: 0.2,
+							ml: 1,
+							width: '100%',
+							'& .MuiChip-iconSmall': {
+								color: deepOrange[500]
+							}
 						}}
 					/>
 				</Grid>

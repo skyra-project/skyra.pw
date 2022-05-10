@@ -1,40 +1,8 @@
 import SkyraLogo from '@assets/skyraLogo';
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Hidden from '@material-ui/core/Hidden';
-import Typography from '@material-ui/core/Typography';
+import { Box, Container, Hidden, Typography, useMediaQuery, useTheme } from '@mui/material';
 import Link from '@routing/Link';
 import { CLIENT_ID, inviteURL } from '@utils/constants';
 import React, { memo } from 'react';
-
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		root: {
-			padding: '50px 0px',
-			background: theme.palette.secondary.main,
-			height: 200,
-			[theme.breakpoints.down('xs')]: {
-				height: 'auto'
-			}
-		},
-		container: {
-			display: 'flex',
-			justifyContent: 'space-around',
-			[theme.breakpoints.down('xs')]: {
-				flexDirection: 'column',
-				alignContent: 'center',
-				justifyContent: 'center',
-				textAlign: 'center',
-				alignItems: 'center',
-
-				'& > *:not(:first-of-type)': {
-					marginTop: 20
-				}
-			}
-		}
-	})
-);
 
 const Left = () => (
 	<Box textAlign="left" display="flex" flexDirection="column">
@@ -56,27 +24,68 @@ const Right = () => (
 const Middle = () => (
 	<Box display="flex" flexDirection="column">
 		<SkyraLogo />
-		<Typography style={{ marginTop: 15 }} variant="caption">
+		<Typography sx={{ mt: 1.875 }} variant="caption">
 			Copyright © 2020 Skyra Project. All rights reserved.
 		</Typography>
 	</Box>
 );
 
 const Footer = () => {
-	const classes = useStyles();
+	const theme = useTheme();
+	const isOnMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
 	return (
-		<Box component="footer" className={classes.root}>
+		<Box
+			component="footer"
+			sx={{
+				padding: '50px 0px',
+				bgcolor: 'secondary.main',
+				height: {
+					sm: 200,
+					xs: 'auto'
+				}
+			}}
+		>
 			<Container maxWidth="sm">
-				<Hidden xsDown>
-					<Box className={classes.container}>
+				<Hidden smDown>
+					<Box
+						display="flex"
+						flexDirection={isOnMobile ? 'column' : undefined}
+						alignContent={isOnMobile ? 'center' : undefined}
+						justifyContent={isOnMobile ? 'center' : 'space-around'}
+						textAlign={isOnMobile ? 'center' : undefined}
+						alignItems={isOnMobile ? 'center' : undefined}
+						sx={{
+							'& > *:not(:first-of-type)': {
+								mt: {
+									sm: 'inherit',
+									xs: 20
+								}
+							}
+						}}
+					>
 						<Left />
 						<Middle />
 						<Right />
 					</Box>
 				</Hidden>
 				<Hidden smUp>
-					<Box className={classes.container}>
+					<Box
+						display="flex"
+						flexDirection={isOnMobile ? 'column' : undefined}
+						alignContent={isOnMobile ? 'center' : undefined}
+						justifyContent={isOnMobile ? 'center' : 'space-around'}
+						textAlign={isOnMobile ? 'center' : undefined}
+						alignItems={isOnMobile ? 'center' : undefined}
+						sx={{
+							'& > *:not(:first-of-type)': {
+								mt: {
+									sm: 'inherit',
+									xs: 20
+								}
+							}
+						}}
+					>
 						<Box display="flex" justifyContent="space-between" width="100%" px={3}>
 							<Left />
 							<Right />

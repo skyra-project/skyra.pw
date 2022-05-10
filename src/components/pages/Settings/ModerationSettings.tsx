@@ -2,7 +2,7 @@ import { ConfigurableModerationKeys } from '@config/SettingsDataEntries';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
-import SimpleGrid from '@mui/SimpleGrid';
+import SimpleGrid from '@material/SimpleGrid';
 import SelectBoolean from '@selects/SelectBoolean';
 import React, { FC, memo } from 'react';
 

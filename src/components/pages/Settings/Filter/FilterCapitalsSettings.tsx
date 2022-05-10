@@ -1,9 +1,8 @@
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
-import { MenuItem, Typography } from '@material-ui/core';
-import Slider from '@material-ui/core/Slider';
-import SimpleGrid from '@mui/SimpleGrid';
+import SimpleGrid from '@material/SimpleGrid';
+import { MenuItem, Typography, Slider } from '@mui/material';
 import Select from '@selects/Select';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectDuration from '@selects/SelectDuration';
@@ -75,7 +74,7 @@ const FilterCapitalsSettings: FC = () => {
 						value={guildSettings.selfmodCapitalsHardActionDuration}
 						min={1000}
 						onChange={(duration) => setGuildSettingsChanges({ selfmodCapitalsHardActionDuration: duration })}
-					></SelectDuration>
+					/>
 				</SimpleGrid>
 				<Typography>Maximum Threshold</Typography>
 				<Slider

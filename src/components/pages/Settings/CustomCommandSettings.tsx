@@ -3,63 +3,21 @@ import type { CustomCommand } from '@config/types/GuildSettings';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import DeleteIcon from '@material-ui/icons/Delete';
-import SelectWithLabel from '@mods/Formik/SelectWithLabel';
-import TextField from '@mods/Formik/TextField';
+import SimpleGrid from '@material/SimpleGrid';
+import FormikSwitch from '@mods/Formik/FormikSwitch';
+import FormikTextField from '@mods/Formik/FormikTextField';
 import GfmReactMarkdown from '@mods/ReactMarkdown/GfmReactMarkdown';
-import SimpleGrid from '@mui/SimpleGrid';
+import DeleteIcon from '@mui/icons-material/Delete';
 import ColorPicker from '@presentational/ColorPicker/ColorPicker';
 import { parse, REGEXP } from '@utils/Color';
-import type { AnyRef } from '@utils/util';
-import { FastField, Formik, FormikConfig } from 'formik';
+import { Form, Formik } from 'formik';
 import React, { forwardRef, Fragment, memo, useMemo } from 'react';
-import { Virtuoso } from 'react-virtuoso';
-import type { Components } from 'react-virtuoso/dist/interfaces';
+import { Components, Virtuoso } from 'react-virtuoso';
 import { boolean, object, string } from 'yup';
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		bottomSection: {
-			marginTop: theme.spacing(5)
-		},
-		tagHeader: {
-			textDecoration: 'underline',
-			fontWeight: 'bolder'
-		},
-		button: {
-			[theme.breakpoints.only('md')]: {
-				minHeight: 60
-			}
-		},
-		errorLabelTop: {
-			position: 'absolute',
-			top: theme.spacing(6.5)
-		},
-		errorLabelBottom: {
-			position: 'absolute',
-			bottom: theme.spacing(-0.5),
-			top: 'unset'
-		},
-		contentBoxPadding: {
-			paddingBottom: theme.spacing(3)
-		},
-		virtualizedList: {
-			margin: theme.spacing(1)
-		}
-	})
-);
+import { Button, Grid, IconButton, List, ListItem, ListItemSecondaryAction, ListItemText, useTheme, Typography } from '@mui/material';
 
 const CustomCommandSettings = () => {
-	const classes = useStyles();
 	const theme = useTheme();
 	const { guildSettings } = useGuildSettingsContext();
 	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
@@ -93,33 +51,6 @@ const CustomCommandSettings = () => {
 		return [...clone, next];
 	};
 
-	const formikConfig: FormikConfig<CustomCommands.Form> = {
-		initialValues: {
-			id: '',
-			content: '',
-			color: '#1E88E5',
-			embed: false
-		},
-		enableReinitialize: true,
-		validationSchema,
-		onSubmit: ({ id, content, color, embed }, { setSubmitting, resetForm }) => {
-			setSubmitting(true);
-
-			setGuildSettingsChanges({
-				customCommands: mergeCustomCommands(guildSettings.customCommands, {
-					id: id.toLowerCase(),
-					content,
-					color: parse(color || '#1E88E5').B10.value,
-					embed,
-					aliases: []
-				})
-			});
-
-			resetForm();
-			setSubmitting(false);
-		}
-	};
-
 	const sortCommands = (firstCommand: CustomCommand, secondCommand: CustomCommand) =>
 		firstCommand.id.toLowerCase() < secondCommand.id.toLowerCase() ? -1 : firstCommand.id.toLowerCase() > secondCommand.id.toLowerCase() ? 1 : 0;
 
@@ -128,7 +59,7 @@ const CustomCommandSettings = () => {
 	const VirtuosoComponents = useMemo<Components>(
 		() => ({
 			List: forwardRef(({ style, children }, listRef) => (
-				<List style={{ ...style, width: '100%' }} ref={listRef as AnyRef} component="nav">
+				<List style={{ ...style, width: '100%' }} ref={listRef} component="nav">
 					{children}
 				</List>
 			)),
@@ -156,9 +87,34 @@ const CustomCommandSettings = () => {
 						xl: 12
 					}}
 				>
-					<Formik {...formikConfig}>
-						{({ submitForm }) => (
-							<>
+					<Formik<CustomCommands.Form>
+						initialValues={{
+							id: '',
+							content: '',
+							color: '#1E88E5',
+							embed: false
+						}}
+						enableReinitialize
+						validationSchema={validationSchema}
+						onSubmit={({ id, content, color, embed }, { setSubmitting, resetForm }) => {
+							setSubmitting(true);
+
+							setGuildSettingsChanges({
+								customCommands: mergeCustomCommands(guildSettings.customCommands, {
+									id: id.toLowerCase(),
+									content,
+									color: parse(color || '#1E88E5').B10.value,
+									embed,
+									aliases: []
+								})
+							});
+
+							resetForm();
+							setSubmitting(false);
+						}}
+					>
+						{() => (
+							<Form>
 								<Grid
 									spacing={4}
 									container
@@ -168,65 +124,87 @@ const CustomCommandSettings = () => {
 									alignItems="flex-end"
 								>
 									<Grid item xs={12} sm={12} md={8} lg={8}>
-										<FastField
-											component={TextField}
+										<FormikTextField<CustomCommands.Form>
 											name="id"
-											type="text"
 											label="Name"
-											placeholder="Fill in the name for your custom command here"
-											autoComplete="off"
-											margin="normal"
-											autoFocus
+											TextFieldProps={{
+												placeholder: 'Fill in the name for your custom command here',
+												autoComplete: 'off',
+												margin: 'normal',
+												autoFocus: true
+											}}
 										/>
 									</Grid>
 									<Grid item xs={12} sm={12} md={4} lg={2}>
-										<FastField
-											component={ColorPicker}
+										<ColorPicker<CustomCommands.Form>
 											name="color"
-											type="text"
 											label="Color"
-											placeholder="Pick a color for the embedded message"
-											autoComplete="off"
-											autoCorrect="off"
-											autoCapitalize="off"
-											spellCheck="off"
-											margin="normal"
-											fullWidth
+											TextFieldProps={{
+												placeholder: 'Pick a color for the embedded message',
+												autoComplete: 'off',
+												autoCorrect: 'off',
+												autoCapitalize: 'off',
+												spellCheck: false,
+												margin: 'normal',
+												fullWidth: true
+											}}
 										/>
 									</Grid>
 									<Grid item xs={12} sm={12} md={12} lg={2}>
-										<FastField component={SelectWithLabel} name="embed" color="primary" title="Embed" />
+										<FormikSwitch<CustomCommands.Form> name="embed" title="Embed" />
 									</Grid>
 								</Grid>
-								<FastField
-									component={TextField}
+								<FormikTextField<CustomCommands.Form>
 									name="content"
-									type="text"
 									label="Content / Response"
-									placeholder="Fill in the content for your custom command here"
-									autoComplete="on"
-									autoCorrect="on"
-									autoCapitalize="on"
-									spellCheck="on"
-									margin="normal"
-									rows={3}
-									multiline
-									classes={{
-										root: classes.contentBoxPadding
-									}}
-									FormHelperTextProps={{
-										classes: { error: classes.errorLabelBottom }
+									TextFieldProps={{
+										placeholder: 'Fill in the content for your custom command here',
+										autoComplete: 'on',
+										autoCorrect: 'on',
+										autoCapitalize: 'on',
+										spellCheck: true,
+										margin: 'normal',
+										autoFocus: true,
+										minRows: 3,
+										multiline: true,
+										sx: {
+											pb: 3
+										},
+										FormHelperTextProps: {
+											sx: {
+												position: 'absolute',
+												bottom: (theme) => theme.spacing(-0.5),
+												top: 'unset'
+											}
+										}
 									}}
 								/>
-								<Button fullWidth classes={{ root: classes.button }} onClick={submitForm} color="primary" variant="contained">
+								<Button
+									fullWidth
+									sx={{
+										minHeight: {
+											lg: 'inherit',
+											md: 60,
+											xs: 'inherit'
+										}
+									}}
+									type="submit"
+									color="primary"
+									variant="contained"
+								>
 									Add
 								</Button>
-							</>
+							</Form>
 						)}
 					</Formik>
 				</SimpleGrid>
 			</Section>
-			<Section title="Registered Custom Commands" className={classes.bottomSection}>
+			<Section
+				title="Registered Custom Commands"
+				sx={{
+					mt: 3
+				}}
+			>
 				<SimpleGrid
 					direction="row"
 					justifyContent="flex-start"
@@ -242,15 +220,24 @@ const CustomCommandSettings = () => {
 						<Virtuoso
 							totalCount={sortedCommands.length}
 							overscan={3}
-							style={{ height: theme.spacing(40), width: '100%' }}
-							className={classes.virtualizedList}
+							style={{
+								height: theme.spacing(40),
+								width: '100%',
+								margin: theme.spacing(1)
+							}}
 							components={VirtuosoComponents}
 							itemContent={(index) => (
 								<>
 									<ListItemText
 										disableTypography
 										primary={
-											<Typography variant="body1" classes={{ root: classes.tagHeader }}>
+											<Typography
+												variant="body1"
+												sx={{
+													textDecoration: 'underline',
+													fontWeight: 'bolder'
+												}}
+											>
 												{guildSettings.prefix}
 												{sortedCommands[index].id.toLowerCase()}
 											</Typography>
@@ -271,6 +258,7 @@ const CustomCommandSettings = () => {
 													)
 												})
 											}
+											size="large"
 										>
 											<DeleteIcon />
 										</IconButton>

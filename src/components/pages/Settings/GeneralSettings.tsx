@@ -2,35 +2,27 @@ import { useMobileContext } from '@contexts/MobileContext';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
-import { ListItemText } from '@material-ui/core';
-import MenuItem from '@material-ui/core/MenuItem';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import SimpleGrid from '@material/SimpleGrid';
 import AutoSavingForm from '@mods/Formik/AutoSaveForm';
-import TextField from '@mods/Formik/TextField';
-import SimpleGrid from '@mui/SimpleGrid';
+import FormikTextField from '@mods/Formik/FormikTextField';
+import { ListItemText, MenuItem } from '@mui/material';
 import Select from '@selects/Select';
-import { FastField } from 'formik';
 import React, { FC, memo } from 'react';
-import { object, string } from 'yup';
+import { object, SchemaOf, string } from 'yup';
 
 interface GeneralSettingsProps {
 	languages: string[];
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		languageOffset: {
-			marginTop: theme.spacing(5)
-		}
-	})
-);
+interface FormShape {
+	prefix: string;
+}
 
-const validationSchema = object({
+const validationSchema: SchemaOf<FormShape> = object({
 	prefix: string().required('Setting a prefix is required').min(1, 'Prefix has a minimum length of 1').max(11, 'Prefix has a maximum length of 10')
 });
 
 const GeneralSettings: FC<GeneralSettingsProps> = ({ languages }) => {
-	const classes = useStyles();
 	const { guildSettings } = useGuildSettingsContext();
 	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
 	const { isMobile } = useMobileContext();
@@ -78,17 +70,17 @@ const GeneralSettings: FC<GeneralSettingsProps> = ({ languages }) => {
 						formikHelpers.setSubmitting(false);
 					}}
 				>
-					<FastField
-						component={TextField}
+					<FormikTextField<FormShape>
 						name="prefix"
-						type="text"
 						label="Prefix"
-						placeholder="This is your server's prefix, use it to trigger Skyra commands."
+						TextFieldProps={{
+							placeholder: "This is your server's prefix, use it to trigger Skyra commands."
+						}}
 					/>
 				</AutoSavingForm>
 				<Select
 					title="Language"
-					FormControlProps={{ classes: { root: classes.languageOffset } }}
+					FormControlProps={{ sx: { mt: 5 } }}
 					helperText="Select the language you want for this guild"
 					value={guildSettings.language}
 					onChange={(e) => setGuildSettingsChanges({ language: e.target.value })}

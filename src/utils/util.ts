@@ -7,7 +7,6 @@ import { BASE_API_URL, FetchMethods, LocalStorageKeys } from './constants';
 import isBrowser from './isBrowser';
 import { Time } from './skyraUtils';
 
-export const cast = <T>(value: unknown): T => value as T;
 export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const loadState = <T>(key: LocalStorageKeys): T | null => {
@@ -179,5 +178,3 @@ export const handleResetKey = (
 
 	setGuildSettingsChanges(guildSettingsChanges);
 };
-
-export type AnyRef = any;

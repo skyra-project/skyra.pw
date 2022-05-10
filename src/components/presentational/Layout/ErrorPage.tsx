@@ -1,32 +1,13 @@
 import GeneralPage from '@layout/General';
-import { ButtonGroup, createStyles, makeStyles, Theme, useMediaQuery, useTheme } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import ForumIcon from '@material-ui/icons/Forum';
-import HomeIcon from '@material-ui/icons/Home';
+import ForumIcon from '@mui/icons-material/Forum';
+import HomeIcon from '@mui/icons-material/Home';
+import { ButtonGroup, useMediaQuery, useTheme, Box, Button, Container, Grid, Typography } from '@mui/material';
 import { navigate } from '@utils/util';
 import React, { memo } from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		root: {
-			overflowY: 'hidden'
-		},
-		text: {
-			lineHeight: theme.spacing(0.2),
-			textAlign: 'center',
-			marginBottom: theme.spacing(5)
-		}
-	})
-);
-
 const NotFoundPage = () => {
-	const classes = useStyles();
 	const theme = useTheme();
-	const isOnMobile = useMediaQuery(theme.breakpoints.down('sm'));
+	const isOnMobile = useMediaQuery(theme.breakpoints.down('md'));
 
 	return (
 		<GeneralPage>
@@ -37,10 +18,19 @@ const NotFoundPage = () => {
 					justifyContent="center"
 					alignContent="stretch"
 					alignItems="center"
-					classes={{ root: classes.root }}
+					sx={{
+						overflowY: 'hidden'
+					}}
 				>
 					<Grid item>
-						<Typography variant={isOnMobile ? 'h5' : 'h4'} color="textPrimary" classes={{ root: classes.text }}>
+						<Typography
+							variant={isOnMobile ? 'h5' : 'h4'}
+							color="textPrimary"
+							sx={{
+								textAlign: 'center',
+								mb: 5
+							}}
+						>
 							Woah! Looks like you just ran into a non-existant page. If you think you found this page by mistake then feel free to join
 							the support server on Discord using the button below and let us know.
 						</Typography>

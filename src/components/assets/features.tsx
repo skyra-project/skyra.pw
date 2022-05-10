@@ -1,4 +1,4 @@
-import { Paper } from '@material-ui/core';
+import { Paper } from '@mui/material';
 import Link from '@routing/Link';
 import {
 	DiscordActionRow,
@@ -27,7 +27,7 @@ export default [
 			'For a full list of moderation commands, visit the commands page.'
 		].join(' '),
 		previewContent: (
-			<Paper elevation={8}>
+			<Paper elevation={1}>
 				<DiscordMessages>
 					<DiscordMessage profile="favna">
 						Skyra, mute <DiscordMention>Kyra</DiscordMention> 10m Spamming.
@@ -59,7 +59,7 @@ export default [
 			'She can create a random blurb of text using markov, roll a magic eightball, generate memes, and much much more!'
 		].join(' '),
 		previewContent: (
-			<Paper elevation={8}>
+			<Paper elevation={1}>
 				<DiscordMessages>
 					<DiscordMessage profile="kyra">Skyra, markov</DiscordMessage>
 					<DiscordMessage profile="skyra">
@@ -83,7 +83,7 @@ export default [
 			"She can also create polls, quote messages, get full size versions of users' avatars, and more!"
 		].join(' '),
 		previewContent: (
-			<Paper elevation={8}>
+			<Paper elevation={1}>
 				<DiscordMessages>
 					<DiscordMessage profile="kyra">Skyra, youtube Big Buck Bunny</DiscordMessage>
 					<DiscordMessage profile="skyra">
@@ -121,7 +121,7 @@ export default [
 			'Data is (nearly) always up-to-date by using the amazing GraphQL Pokémon API!'
 		].join(' '),
 		previewContent: (
-			<Paper elevation={8}>
+			<Paper elevation={1}>
 				<DiscordMessages>
 					<DiscordMessage profile="favna">Skyra, pokedex Dragonite</DiscordMessage>
 					<DiscordMessage profile="skyra">
@@ -208,7 +208,7 @@ export default [
 			"If you're just looking for your next watch or read, then Skyra has you covered by letting you look up anime and manga on anilist.co and kitsu.io."
 		].join(' '),
 		previewContent: (
-			<Paper elevation={8}>
+			<Paper elevation={1}>
 				<DiscordMessages>
 					<DiscordMessage profile="favna">Skyra, anime Pokemon</DiscordMessage>
 					<DiscordMessage profile="skyra">

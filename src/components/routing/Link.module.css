@@ -1,0 +1,15 @@
+.link {
+	cursor: pointer;
+	/* theme.primary.main */
+	color: #1e88e5;
+}
+
+.link:hover {
+	/* theme.primary.dark */
+	color: #1565c0;
+}
+
+.link:visited {
+	/* theme.primary.main with dark augment */
+	color: #155fa0;
+}

@@ -1,39 +1,15 @@
-// Copyright (c) 2017 LoicMahieu. All rights reserved. MIT license.
-// Source: https://github.com/LoicMahieu/material-ui-color-picker
-
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
 import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import React, { FC, memo, MouseEventHandler, useEffect, useRef } from 'react';
 import { ChromePicker, ColorChangeHandler } from 'react-color';
+import { Box } from '@mui/material';
 
 interface PickerDialogProps {
 	value?: string;
 	onChange?: ColorChangeHandler;
-	onClick?: MouseEventHandler<HTMLTextAreaElement | HTMLInputElement>;
+	onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		pickerBox: {
-			position: 'relative'
-		},
-		positionBox: {
-			position: 'absolute',
-			zIndex: theme.zIndex.modal
-		},
-		clickEventBox: {
-			position: 'fixed',
-			top: 0,
-			right: 0,
-			bottom: 0,
-			left: 0
-		}
-	})
-);
-
 const PickerDialog: FC<PickerDialogProps> = ({ value, onClick, onChange }) => {
-	const classes = useStyles();
 	const scrollLockRef = useRef<ChromePicker>(null);
 
 	useEffect(() => {
@@ -49,9 +25,19 @@ const PickerDialog: FC<PickerDialogProps> = ({ value, onClick, onChange }) => {
 	});
 
 	return (
-		<Box component="div" className={classes.pickerBox}>
-			<Box component="div" className={classes.positionBox}>
-				<Box component="div" className={classes.clickEventBox} onClick={onClick} />
+		<Box component="div" position="relative">
+			<Box component="div" position="absolute" sx={{ zIndex: 'modal' }}>
+				<Box
+					component="div"
+					onClick={onClick}
+					sx={{
+						position: 'fixed',
+						top: 0,
+						right: 0,
+						bottom: 0,
+						left: 0
+					}}
+				/>
 				<ChromePicker ref={scrollLockRef} color={value} onChange={onChange} disableAlpha />
 			</Box>
 		</Box>

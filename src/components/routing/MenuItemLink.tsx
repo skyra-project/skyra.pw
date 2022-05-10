@@ -1,9 +1,8 @@
-import { createStyles, makeStyles } from '@material-ui/core';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import MenuItem from '@material-ui/core/MenuItem';
-import Typography from '@material-ui/core/Typography';
 import Link from '@routing/Link';
 import React, { forwardRef, memo, ReactElement } from 'react';
+import styles from './MenuItemLink.module.css';
+
+import { ListItemIcon, MenuItem, Typography } from '@mui/material';
 
 export interface MenuItemLinkProps {
 	Icon: ReactElement;
@@ -13,31 +12,13 @@ export interface MenuItemLinkProps {
 	forceSameTab?: boolean;
 }
 
-const useStyles = makeStyles(() =>
-	createStyles({
-		menuLink: {
-			color: 'inherit',
-			'&:hover': {
-				color: 'inherit'
-			},
-			'&:visited': {
-				color: 'inherit'
-			}
-		}
-	})
-);
-
-const MenuItemLink = forwardRef<HTMLAnchorElement, MenuItemLinkProps>(({ href, text, forceSameTab = false, Icon }, ref) => {
-	const classes = useStyles();
-
-	return (
-		<Link href={href} forceSameTab={forceSameTab} className={classes.menuLink} ref={ref}>
-			<MenuItem>
-				<ListItemIcon>{Icon}</ListItemIcon>
-				<Typography variant="inherit">{text}</Typography>
-			</MenuItem>
-		</Link>
-	);
-});
+const MenuItemLink = forwardRef<HTMLAnchorElement, MenuItemLinkProps>(({ href, text, forceSameTab = false, Icon }, ref) => (
+	<Link href={href} forceSameTab={forceSameTab} className={styles.menuLink} ref={ref}>
+		<MenuItem>
+			<ListItemIcon>{Icon}</ListItemIcon>
+			<Typography variant="inherit">{text}</Typography>
+		</MenuItem>
+	</Link>
+));
 
 export default memo(MenuItemLink, () => true);

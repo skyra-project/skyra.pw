@@ -2,24 +2,14 @@ import { ConfigurableMessageEvents, ConfigurableModerationEvents } from '@config
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
-import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
-import SimpleGrid from '@mui/SimpleGrid';
+import SimpleGrid from '@material/SimpleGrid';
+import { Typography } from '@mui/material';
 import Link from '@routing/Link';
 import SelectBoolean from '@selects/SelectBoolean';
 import { useRouter } from 'next/router';
 import React, { FC, memo } from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		link: {
-			textDecoration: 'none',
-			color: theme.palette.primary.main
-		}
-	})
-);
-
 const EventSettings: FC = () => {
-	const classes = useStyles();
 	const router = useRouter();
 	const { guildSettings } = useGuildSettingsContext();
 	const { setGuildSettingsChanges } = useGuildSettingsChangesContext();
@@ -31,9 +21,7 @@ const EventSettings: FC = () => {
 			<Section title="Moderation Events">
 				<Typography variant="subtitle2" color="textPrimary">
 					These events involve moderation actions and require that you setup the Moderation Logs channel on{' '}
-					<Link className={classes.link} href={`/guilds/${guildId}/channels`}>
-						the Channels page
-					</Link>
+					<Link href={`/guilds/${guildId}/channels`}>the Channels page</Link>
 				</Typography>
 				<SimpleGrid>
 					{ConfigurableModerationEvents.map(({ title, key, description }, index) => (
@@ -51,9 +39,7 @@ const EventSettings: FC = () => {
 			<Section title="Message Events">
 				<Typography variant="subtitle2" color="textPrimary">
 					These events involve message events, the channels to set up vary on the type of event and each channel can be configured on{' '}
-					<Link className={classes.link} href={`/guilds/${guildId}/channels`}>
-						the Channels page
-					</Link>
+					<Link href={`/guilds/${guildId}/channels`}>the Channels page</Link>
 				</Typography>
 				<SimpleGrid>
 					{ConfigurableMessageEvents.map(({ title, key, description }, index) => (

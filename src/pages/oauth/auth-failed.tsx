@@ -1,54 +1,47 @@
 import GeneralPage from '@layout/General';
-import { ButtonGroup, createStyles, makeStyles, Theme, useMediaQuery, useTheme } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import ForumIcon from '@material-ui/icons/Forum';
-import HomeIcon from '@material-ui/icons/Home';
+import ForumIcon from '@mui/icons-material/Forum';
+import HomeIcon from '@mui/icons-material/Home';
+import { ButtonGroup, useMediaQuery, useTheme, Box, Button, Container, Grid, Typography } from '@mui/material';
 import { navigate } from '@utils/util';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		root: {
-			overflowY: 'hidden'
-		},
-		container: {
-			height: 'calc(100vh - 200px - 128px)',
-			display: 'flex'
-		},
-		text: {
-			lineHeight: theme.spacing(0.2),
-			textAlign: 'center',
-			marginBottom: theme.spacing(5)
-		}
-	})
-);
-
 const AuthFailedPage: NextPage = () => {
-	const classes = useStyles();
 	const theme = useTheme();
-	const isOnMobile = useMediaQuery(theme.breakpoints.down('sm'));
+	const isOnMobile = useMediaQuery(theme.breakpoints.down('md'));
 
 	return (
 		<>
 			<NextSeo title="Authentication Failed" description="Woops, the authentication failed :(" />
 			<GeneralPage>
-				<Container maxWidth="md" classes={{ root: classes.container }}>
+				<Container
+					maxWidth="md"
+					sx={{
+						height: 'calc(100vh - 200px - 128px)',
+						display: 'flex'
+					}}
+				>
 					<Grid
 						container
 						direction="column"
 						justifyContent="center"
 						alignContent="stretch"
 						alignItems="center"
-						classes={{ root: classes.root }}
+						sx={{
+							overflowY: 'hidden'
+						}}
 					>
 						<Grid item>
-							<Typography variant={isOnMobile ? 'h5' : 'h4'} color="textPrimary" classes={{ root: classes.text }}>
+							<Typography
+								variant={isOnMobile ? 'h5' : 'h4'}
+								color="textPrimary"
+								sx={{
+									lineHeight: (theme) => theme.spacing(0.2),
+									textAlign: 'center',
+									mb: 5
+								}}
+							>
 								Well that's very odd. It looks like the authentication failed! Our best recommendation is to try again. If that still
 								fails then please join the support server.
 							</Typography>

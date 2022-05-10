@@ -1,58 +1,25 @@
 import { useAuthenticated } from '@contexts/AuthenticationContext';
 import UserMenu from '@layout/Navigation/UserMenu';
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import IconButton from '@material-ui/core/IconButton';
-import MenuList from '@material-ui/core/MenuList';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import Typography from '@material-ui/core/Typography';
-import InviteIcon from '@material-ui/icons/Add';
-import CommandsIcon from '@material-ui/icons/Extension';
-import DiscordChatIcon from '@material-ui/icons/Forum';
-import GavelIcon from '@material-ui/icons/Gavel';
-import HomeIcon from '@material-ui/icons/Home';
-import MenuIcon from '@material-ui/icons/Menu';
-import LoginIcon from '@material-ui/icons/VpnKey';
-import Tooltip from '@mui/Tooltip';
+import Tooltip from '@material/Tooltip';
+import InviteIcon from '@mui/icons-material/Add';
+import CommandsIcon from '@mui/icons-material/Extension';
+import DiscordChatIcon from '@mui/icons-material/Forum';
+import GavelIcon from '@mui/icons-material/Gavel';
+import HomeIcon from '@mui/icons-material/Home';
+import MenuIcon from '@mui/icons-material/Menu';
+import LoginIcon from '@mui/icons-material/VpnKey';
+import { Box, Button, ClickAwayListener, Grow, IconButton, MenuList, Paper, Popper, Typography } from '@mui/material';
 import MenuItemLink from '@routing/MenuItemLink';
 import { oauthURL } from '@utils/constants';
 import { navigate } from '@utils/util';
 import { useRouter } from 'next/router';
-import React, { FC, memo, useEffect, useRef, useState } from 'react';
-import { When } from 'react-if';
+import React, { FC, memo, MouseEvent as ReactMouseEvent, useEffect, useRef, useState } from 'react';
 
 export interface DesktopMenuItemsProps {
 	loading?: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		transparentButton: {
-			background: 'transparent',
-			boxShadow: 'none',
-			'&:hover': {
-				background: theme.palette.primary.dark,
-				boxShadow: theme.shadows[1]
-			}
-		},
-		menuButton: {
-			marginRight: theme.spacing(2),
-			marginLeft: theme.spacing(2)
-		},
-		popper: {
-			marginTop: theme.spacing(-1),
-			zIndex: theme.zIndex.drawer + 1
-		}
-	})
-);
-
 const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
-	const classes = useStyles();
-
 	const anchorRef = useRef<HTMLButtonElement>(null);
 	const [popperMenuIsOpen, setPopperMenuOpen] = useState(false);
 	const router = useRouter();
@@ -63,7 +30,7 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 		setPopperMenuOpen((prevOpen) => !prevOpen);
 	};
 
-	const closePopperMenu = (event: React.MouseEvent<EventTarget>) => {
+	const closePopperMenu = (event: MouseEvent | TouchEvent | ReactMouseEvent<HTMLAnchorElement | HTMLLIElement, MouseEvent>) => {
 		if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
 			return;
 		}
@@ -88,7 +55,14 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 				<Button
 					color="primary"
 					variant="contained"
-					classes={{ root: classes.transparentButton }}
+					sx={{
+						background: 'transparent',
+						boxShadow: 'none',
+						'&:hover': {
+							bgcolor: 'primary.dark',
+							boxShadow: (theme) => theme.shadows[1]
+						}
+					}}
 					onClick={navigate('https://invite.skyra.pw')}
 					startIcon={<InviteIcon />}
 				>
@@ -101,7 +75,14 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 				<Button
 					color="primary"
 					variant="contained"
-					classes={{ root: classes.transparentButton }}
+					sx={{
+						background: 'transparent',
+						boxShadow: 'none',
+						'&:hover': {
+							bgcolor: 'primary.dark',
+							boxShadow: (theme) => theme.shadows[1]
+						}
+					}}
 					onClick={navigate('https://join.skyra.pw')}
 					startIcon={<DiscordChatIcon />}
 				>
@@ -111,27 +92,30 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 				</Button>
 			</Tooltip>
 
-			<When condition={authenticated}>
-				<UserMenu />
-			</When>
+			{authenticated && <UserMenu />}
 
-			<When condition={!authenticated && !loading}>
+			{!authenticated && !loading && (
 				<Tooltip title="Click to login and manage your servers" placement="bottom">
-					<Box component="div">
-						<Button
-							color="primary"
-							variant="contained"
-							classes={{ root: classes.transparentButton }}
-							onClick={navigate(oauthURL.toString(), true)}
-							startIcon={<LoginIcon />}
-						>
-							<Typography variant="body2" color="textPrimary">
-								Login
-							</Typography>
-						</Button>
-					</Box>
+					<Button
+						color="primary"
+						variant="contained"
+						sx={{
+							background: 'transparent',
+							boxShadow: 'none',
+							'&:hover': {
+								bgcolor: 'primary.dark',
+								boxShadow: (theme) => theme.shadows[1]
+							}
+						}}
+						onClick={navigate(oauthURL.toString(), true)}
+						startIcon={<LoginIcon />}
+					>
+						<Typography variant="body2" color="textPrimary">
+							Login
+						</Typography>
+					</Button>
 				</Tooltip>
-			</When>
+			)}
 
 			<Tooltip title="Open to view more pages and options">
 				<IconButton
@@ -139,15 +123,27 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 					edge="start"
 					aria-controls={popperMenuIsOpen ? 'menu-popover' : undefined}
 					aria-haspopup="true"
-					className={classes.menuButton}
+					sx={{
+						mx: 2
+					}}
 					color="inherit"
 					aria-label="menu"
 					onClick={togglePopperMenu}
+					size="large"
 				>
 					<MenuIcon />
 				</IconButton>
 			</Tooltip>
-			<Popper className={classes.popper} open={popperMenuIsOpen} anchorEl={anchorRef.current} transition disablePortal>
+			<Popper
+				sx={{
+					mt: -1,
+					zIndex: (theme) => theme.zIndex.drawer + 1
+				}}
+				open={popperMenuIsOpen}
+				anchorEl={anchorRef.current}
+				transition
+				disablePortal
+			>
 				{({ TransitionProps, placement }) => (
 					<Grow {...TransitionProps} style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}>
 						<Paper>
@@ -155,14 +151,20 @@ const DesktopMenuItems: FC<DesktopMenuItemsProps> = ({ loading = false }) => {
 								<MenuList autoFocusItem={popperMenuIsOpen} id="menu-popover">
 									{router.pathname !== '/' && (
 										<Tooltip title="Click to go back to the home page" placement="left">
-											<MenuItemLink href="/" Icon={<HomeIcon />} text="Go back home" />
+											<Box>
+												<MenuItemLink href="/" Icon={<HomeIcon />} text="Go back home" />
+											</Box>
 										</Tooltip>
 									)}
 									<Tooltip title="Click to view Skyra's commands" placement="left">
-										<MenuItemLink href="/commands" Icon={<CommandsIcon />} text="Commands" />
+										<Box>
+											<MenuItemLink href="/commands" Icon={<CommandsIcon />} text="Commands" />
+										</Box>
 									</Tooltip>
 									<Tooltip title="Click to read how we handle your data" placement="left">
-										<MenuItemLink href="/privacy" Icon={<GavelIcon />} text="Privacy Policy" />
+										<Box>
+											<MenuItemLink href="/privacy" Icon={<GavelIcon />} text="Privacy Policy" />
+										</Box>
 									</Tooltip>
 								</MenuList>
 							</ClickAwayListener>

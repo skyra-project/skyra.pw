@@ -1,19 +1,17 @@
-import MuiLink from '@material-ui/core/Link';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import type { CSSProperties } from '@material-ui/core/styles/withStyles';
-import Typography, { TypographyProps } from '@material-ui/core/Typography';
-import NextComposed from '@next/NextComposed';
-import type { AnyRef } from '@utils/util';
+import type { LinkProps as MLinkProps } from '@mui/material/Link';
+import type { TypographyProps } from '@mui/material/Typography';
+import NextLinkComposed, { NextLinkComposedProps } from '@next/NextComposed';
 import clsx from 'clsx';
 import type { LinkProps as NextLinkProps } from 'next/link';
 import { useRouter } from 'next/router';
-import React, { forwardRef, PropsWithChildren, ReactNode } from 'react';
-import { Else, If, Then } from 'react-if';
-import type { UrlObject } from 'url';
+import React, { CSSProperties, forwardRef, PropsWithChildren, ReactNode } from 'react';
+import styles from './Link.module.css';
 
-interface LinkProps extends NextLinkProps {
+import { Link as MuiLink, Typography } from '@mui/material';
+
+type LinkProps = {
 	/** The href to navigate to */
-	href: string | UrlObject;
+	href: NextLinkProps['href'];
 	/** Force the link to open in the same tab */
 	forceSameTab?: boolean;
 	/** Optionally text to render inside a Typography component. If not provided then this will render children */
@@ -28,57 +26,77 @@ interface LinkProps extends NextLinkProps {
 	style?: CSSProperties;
 	/** Action to trigger when clicking this link, will trigger along with the navigation */
 	onClick?: (...args: unknown[]) => void;
-}
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		link: {
-			cursor: 'pointer',
-			color: theme.palette.primary.main,
-			'&:hover': {
-				color: theme.palette.primary.dark
-			},
-			'&:visited': {
-				color: theme.palette.augmentColor({ main: theme.palette.primary.main }).dark
-			}
-		}
-	})
-);
+	as?: NextLinkProps['as'];
+	linkAs?: NextLinkProps['as']; // Useful when the as prop is shallow by styled().
+	noLinkStyle?: boolean;
+} & Omit<NextLinkComposedProps, 'to' | 'linkAs' | 'href'> &
+	Omit<MLinkProps, 'href'>;
 
 export default forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
-	({ href, forceSameTab, activeClassName = 'active', className: classNameFromProps, text, children, TextTypographyProps, ...other }, ref) => {
+	(
+		{
+			activeClassName = 'active',
+			as,
+			className: classNameProps,
+			href,
+			linkAs: linkAsProp,
+			locale,
+			noLinkStyle,
+			prefetch,
+			replace,
+			role,
+			scroll,
+			shallow,
+			forceSameTab,
+			text,
+			children,
+			TextTypographyProps,
+			...other
+		},
+		ref
+	) => {
 		const router = useRouter();
-		const classes = useStyles();
 		const pathname = typeof href === 'string' ? href : href.pathname;
-		const className = clsx(classes.link, classNameFromProps, {
+		const className = clsx(styles.link, classNameProps, {
 			[activeClassName]: router.pathname === pathname && activeClassName
 		});
 
 		if (forceSameTab || pathname?.startsWith('/')) {
 			return (
-				<NextComposed className={className} ref={ref} href={href} {...other}>
-					<If condition={Boolean(text)}>
-						<Then>
-							<Typography component="span" color="primary" variant="body2" {...TextTypographyProps}>
-								{text}
-							</Typography>
-						</Then>
-						<Else>{children}</Else>
-					</If>
-				</NextComposed>
-			);
-		}
-
-		return (
-			<MuiLink target="_blank" rel="noopener noreferrer" className={className} ref={ref as AnyRef} href={href as string} {...other}>
-				<If condition={Boolean(text)}>
-					<Then>
+				<NextLinkComposed className={className} ref={ref} to={href} {...other}>
+					{Boolean(text) ? (
 						<Typography component="span" color="primary" variant="body2" {...TextTypographyProps}>
 							{text}
 						</Typography>
-					</Then>
-					<Else>{children}</Else>
-				</If>
+					) : (
+						<>{children}</>
+					)}
+				</NextLinkComposed>
+			);
+		}
+
+		const linkAs = linkAsProp || as;
+		const nextjsProps = { to: href, linkAs, replace, scroll, shallow, prefetch, locale };
+
+		return (
+			<MuiLink
+				component={NextLinkComposed}
+				target="_blank"
+				rel="noopener noreferrer"
+				className={className}
+				ref={ref}
+				underline="hover"
+				{...nextjsProps}
+				{...other}
+			>
+				{Boolean(text) ? (
+					<Typography component="span" color="primary" variant="body2" {...TextTypographyProps}>
+						{text}
+					</Typography>
+				) : (
+					<>{children}</>
+				)}
 			</MuiLink>
 		);
 	}

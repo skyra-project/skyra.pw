@@ -1,35 +1,23 @@
-/**
- * MIT License
- *
- * Copyright (c) 2017-2020 Wertarbyte and contributors
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-import IconButton from '@material-ui/core/IconButton';
-import Input, { InputProps } from '@material-ui/core/Input';
-import Paper, { PaperProps } from '@material-ui/core/Paper';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import type { CSSProperties } from '@material-ui/core/styles/withStyles';
-import ClearIcon from '@material-ui/icons/Clear';
-import SearchIcon from '@material-ui/icons/Search';
-import clsx from 'clsx';
-import React, { forwardRef, memo, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import ClearIcon from '@mui/icons-material/Clear';
+import SearchIcon from '@mui/icons-material/Search';
+import type { InputProps } from '@mui/material/Input';
+import type { PaperProps } from '@mui/material/Paper';
+import type { Theme } from '@mui/material/styles';
+import React, {
+	forwardRef,
+	memo,
+	useCallback,
+	useEffect,
+	useImperativeHandle,
+	useRef,
+	useState,
+	type ChangeEvent as ReactChangeEvent,
+	type CSSProperties,
+	type FocusEvent as ReactFocusEvent,
+	type KeyboardEvent as ReactKeyboardEvent
+} from 'react';
+
+import { Box, IconButton, Input, Paper } from '@mui/material';
 
 interface SearchBarProps extends Omit<InputProps, 'onChange'> {
 	/**
@@ -70,49 +58,6 @@ interface SearchBarProps extends Omit<InputProps, 'onChange'> {
 	PaperProps?: PaperProps;
 }
 
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		root: {
-			height: theme.spacing(6),
-			display: 'flex',
-			justifyContent: 'space-between',
-			backgroundColor: theme.palette.secondary.light
-		},
-		iconButton: {
-			color: theme.palette.action.active,
-			transform: 'scale(1, 1)',
-			transition: theme.transitions.create(['transform', 'color'], {
-				duration: theme.transitions.duration.shorter,
-				easing: theme.transitions.easing.easeInOut
-			})
-		},
-		iconButtonHidden: {
-			transform: 'scale(0, 0)',
-			'& > $icon': {
-				opacity: 0
-			}
-		},
-		searchIconButton: {
-			marginRight: theme.spacing(-6)
-		},
-		icon: {
-			color: theme.palette.common.white,
-			transition: theme.transitions.create(['opacity'], {
-				duration: theme.transitions.duration.shorter,
-				easing: theme.transitions.easing.easeInOut
-			})
-		},
-		input: {
-			width: '100%',
-			color: theme.palette.common.white
-		},
-		searchContainer: {
-			margin: 'auto 16px',
-			width: `calc(100% - ${theme.spacing(6 + 4)}px)` // 6 button + 4 margin
-		}
-	})
-);
-
 interface SearchBarHandle {
 	focus(): void;
 	blur(): void;
@@ -137,7 +82,6 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 		},
 		ref
 	) => {
-		const classes = useStyles();
 		const inputRef = useRef<HTMLInputElement>();
 		const [innerValue, setInnerValue] = useState<string>(value ?? '');
 
@@ -146,7 +90,7 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 		}, [value]);
 
 		const handleFocus = useCallback(
-			(e) => {
+			(e: ReactFocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>) => {
 				if (onFocus) {
 					onFocus(e);
 				}
@@ -155,7 +99,7 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 		);
 
 		const handleBlur = useCallback(
-			(e) => {
+			(e: ReactFocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>) => {
 				setInnerValue((v) => v.trim());
 				if (onBlur) {
 					onBlur(e);
@@ -165,7 +109,7 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 		);
 
 		const handleInput = useCallback(
-			(e) => {
+			(e: ReactChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 				setInnerValue(e.target.value);
 				if (onChange) {
 					onChange(e.target.value);
@@ -188,7 +132,7 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 		}, [onRequestSearch, innerValue]);
 
 		const handleKeyUp = useCallback(
-			(e) => {
+			(e: ReactKeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 				if (e.charCode === 13 || e.key === 'Enter') {
 					handleRequestSearch();
 				} else if (cancelOnEscape && (e.charCode === 27 || e.key === 'Escape')) {
@@ -211,8 +155,30 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 		}));
 
 		return (
-			<Paper className={clsx(classes.root, className)} style={style} {...PaperProps}>
-				<div className={classes.searchContainer}>
+			<Paper
+				className={className}
+				style={style}
+				{...PaperProps}
+				sx={{
+					height: (theme) => theme.spacing(6),
+					zIndex: (theme) => theme.zIndex.appBar - 1,
+					backgroundColor: (theme) => theme.palette.secondary.light,
+					mb: 1,
+					display: 'flex',
+					justifyContent: 'space-between',
+					position: 'sticky',
+					top: {
+						md: (theme) => theme.spacing(9),
+						xs: (theme) => theme.spacing(8.5)
+					}
+				}}
+			>
+				<Box
+					sx={{
+						margin: 'auto 16px',
+						width: (theme) => `calc(100% - ${theme.spacing(6 + 4)})` // 6 button + 4 margin
+					}}
+				>
 					<Input
 						placeholder={placeholder}
 						inputRef={inputRef}
@@ -222,31 +188,63 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 						onKeyUp={handleKeyUp}
 						onFocus={handleFocus}
 						fullWidth
-						className={classes.input}
 						disableUnderline
 						disabled={disabled}
+						sx={{
+							width: '100%',
+							color: (theme) => theme.palette.common.white
+						}}
 					/>
-				</div>
+				</Box>
 				<IconButton
 					onClick={handleRequestSearch}
-					className={clsx(classes.iconButton, classes.searchIconButton, {
-						[classes.iconButtonHidden]: value !== ''
-					})}
 					disabled={disabled}
+					size="large"
+					sx={{
+						color: (theme) => theme.palette.action.active,
+						transform: value === '' ? 'scale(0,0)' : 'scale(1, 1)',
+						opacity: value === '' ? 0 : 1,
+						mr: -1,
+						transition: (theme) =>
+							theme.transitions.create(['transform', 'color'], {
+								duration: theme.transitions.duration.shorter,
+								easing: theme.transitions.easing.easeInOut
+							})
+					}}
 				>
 					{React.cloneElement(<SearchIcon />, {
-						classes: { root: classes.icon }
+						sx: (theme: Theme) => ({
+							color: theme.palette.common.white,
+							transition: theme.transitions.create(['opacity'], {
+								duration: theme.transitions.duration.shorter,
+								easing: theme.transitions.easing.easeInOut
+							})
+						})
 					})}
 				</IconButton>
 				<IconButton
 					onClick={handleCancel}
-					className={clsx(classes.iconButton, {
-						[classes.iconButtonHidden]: value === ''
-					})}
+					sx={{
+						color: (theme) => theme.palette.action.active,
+						transform: value === '' ? 'scale(0,0)' : 'scale(1, 1)',
+						opacity: value === '' ? 0 : 1,
+						transition: (theme) =>
+							theme.transitions.create(['transform', 'color'], {
+								duration: theme.transitions.duration.shorter,
+								easing: theme.transitions.easing.easeInOut
+							})
+					}}
 					disabled={disabled}
+					size="large"
 				>
 					{React.cloneElement(<ClearIcon />, {
-						classes: { root: classes.icon }
+						sx: (theme: Theme) => ({
+							color: theme.palette.common.white,
+							transition: theme.transitions.create(['opacity'], {
+								duration: theme.transitions.duration.shorter,
+								easing: theme.transitions.easing.easeInOut
+							})
+						})
 					})}
 				</IconButton>
 			</Paper>

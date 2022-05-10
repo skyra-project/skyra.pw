@@ -1,33 +1,25 @@
-import Box from '@material-ui/core/Box';
-import InputBase, { InputBaseProps } from '@material-ui/core/InputBase';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
+import SearchIcon from '@mui/icons-material/Search';
+import type { InputBaseProps } from '@mui/material/InputBase';
 import React, { FC, memo } from 'react';
-
-const useStyles = makeStyles(() =>
-	createStyles({
-		root: {
-			display: 'flex',
-			alignItems: 'center',
-			alignContent: 'center',
-			padding: 10,
-			marginTop: 0,
-			marginBottom: 0,
-			marginLeft: 10,
-			marginRight: 10
-		},
-		svg: {
-			marginRight: 10
-		}
-	})
-);
+import { Box, InputBase } from '@mui/material';
 
 const DialogSearchBar: FC<InputBaseProps> = ({ onChange }) => {
-	const classes = useStyles();
-
 	return (
-		<Box className={classes.root}>
-			<SearchIcon className={classes.svg} />
+		<Box
+			sx={{
+				display: 'flex',
+				alignItems: 'center',
+				alignContent: 'center',
+				p: 1.25,
+				my: 0,
+				mx: 1.25
+			}}
+		>
+			<SearchIcon
+				sx={{
+					mr: 1.25
+				}}
+			/>
 			<InputBase
 				autoFocus
 				autoCapitalize="false"

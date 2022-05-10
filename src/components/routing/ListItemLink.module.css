@@ -1,0 +1,5 @@
+.menuItem,
+.menuItem:hover,
+.menuItem:visited {
+	color: inherit;
+}

@@ -1,40 +1,24 @@
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import clsx from 'clsx';
-import React, { forwardRef, ReactNodeArray } from 'react';
-import type { NormalComponents } from 'react-markdown/src/ast-to-react';
+import React, { DetailedHTMLProps, forwardRef, HTMLAttributes, ReactNode } from 'react';
+import type { WithReactMarkdownChildren } from './types';
+import { Typography } from '@mui/material';
 
-const useStyles = makeStyles(() =>
-	createStyles({
-		strongText: {
-			display: 'flex',
+type StrongProps = WithReactMarkdownChildren<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>>;
+
+const Strong = forwardRef<HTMLSpanElement, StrongProps>(({ children }, ref) => (
+	<Typography
+		ref={ref}
+		variant="body1"
+		component="span"
+		sx={{
 			alignItems: 'center',
 			alignContent: 'center',
 			justifyContent: 'flex-start',
-			fontWeight: 'bolder'
-		},
-		inlineText: {
-			display: 'inline'
-		}
-	})
-);
-
-const Strong = forwardRef<HTMLSpanElement, Parameters<Exclude<NormalComponents['strong'], 'strong'>>[0]>(({ children }, ref) => {
-	const classes = useStyles();
-	return (
-		<Typography
-			ref={ref}
-			variant="body1"
-			component="span"
-			classes={{
-				root: clsx(classes.strongText, {
-					[classes.inlineText]: (children as ReactNodeArray).length !== 3
-				})
-			}}
-		>
-			{children}
-		</Typography>
-	);
-});
+			fontWeight: 'bolder',
+			display: (children as ReactNode[]).length === 3 ? 'flex' : 'inline'
+		}}
+	>
+		{children}
+	</Typography>
+));
 
 export default Strong;

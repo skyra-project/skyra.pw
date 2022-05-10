@@ -1,23 +1,14 @@
-import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core';
-import Button, { ButtonProps as MButtonProps } from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import DialogSearchBar from '@mui/DialogSearchBar';
-import DialogTitle from '@mui/DialogTitle';
-import LazyAvatar from '@mui/LazyAvatar';
-import Tooltip from '@mui/Tooltip';
+import DialogSearchBar from '@material/DialogSearchBar';
+import DialogTitle from '@material/DialogTitle';
+import LazyAvatar from '@material/LazyAvatar';
+import Tooltip from '@material/Tooltip';
+import { Button, Dialog, DialogActions, DialogContent, List, ListItem, ListItemSecondaryAction, ListItemText, useTheme } from '@mui/material';
+import type { ButtonProps as MButtonProps } from '@mui/material/Button';
 import { toTitleCase } from '@sapphire/utilities';
 import { Time } from '@utils/skyraUtils';
-import { AnyRef, sleep } from '@utils/util';
+import { sleep } from '@utils/util';
 import React, { ChangeEvent, forwardRef, Fragment, ReactNode, useCallback, useMemo, useState } from 'react';
-import { Else, If, Then } from 'react-if';
-import { Virtuoso } from 'react-virtuoso';
-import type { Components } from 'react-virtuoso/dist/interfaces';
+import { Virtuoso, type Components } from 'react-virtuoso';
 
 export interface SelectOneProps {
 	/** The label to show on the button */
@@ -46,34 +37,9 @@ export interface SelectOneProps {
 	onReset(): void;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		dialogContent: {
-			padding: theme.spacing(2)
-		},
-		dialogActions: {
-			margin: 0,
-			padding: theme.spacing(1)
-		},
-		nameImage: {
-			display: 'inline-flex',
-			height: theme.spacing(2),
-			width: theme.spacing(2)
-		},
-		virtualizedList: {
-			margin: theme.spacing(1)
-		},
-		virtualizedListContainer: {
-			margin: 0,
-			padding: 0
-		}
-	})
-);
-
 export default function SelectOne({ label, values, name = 'None', imageInName, tooltipTitle, ButtonProps, onReset, onChange }: SelectOneProps) {
 	const [open, setOpen] = useState(false);
 	const [search, setSearch] = useState('');
-	const classes = useStyles();
 	const theme = useTheme();
 
 	const handleClose = useCallback(async () => {
@@ -95,7 +61,7 @@ export default function SelectOne({ label, values, name = 'None', imageInName, t
 	const VirtuosoComponents = useMemo<Components>(
 		() => ({
 			List: forwardRef(({ style, children }, listRef) => (
-				<List style={{ ...style, width: '100%' }} ref={listRef as AnyRef} component="nav">
+				<List style={{ ...style, width: '100%' }} ref={listRef} component="nav">
 					{children}
 				</List>
 			)),
@@ -104,7 +70,9 @@ export default function SelectOne({ label, values, name = 'None', imageInName, t
 				<ListItem
 					{...props}
 					button
-					style={{ margin: 0 }}
+					sx={{
+						m: 0
+					}}
 					onClick={() => {
 						onChange(filteredValues[props['data-index']].value);
 						void handleClose();
@@ -119,23 +87,8 @@ export default function SelectOne({ label, values, name = 'None', imageInName, t
 
 	return (
 		<Fragment>
-			<If condition={Boolean(tooltipTitle)}>
-				<Then>
-					<Tooltip title={tooltipTitle ?? ''} placement="top">
-						<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...ButtonProps}>
-							{label}: {name}{' '}
-							{imageInName && (
-								<LazyAvatar
-									imgProps={{ height: theme.spacing(2), width: theme.spacing(2) }}
-									alt="Emoji"
-									src={imageInName}
-									className={classes.nameImage}
-								/>
-							)}
-						</Button>
-					</Tooltip>
-				</Then>
-				<Else>
+			{Boolean(tooltipTitle) ? (
+				<Tooltip title={tooltipTitle ?? ''} placement="top">
 					<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...ButtonProps}>
 						{label}: {name}{' '}
 						{imageInName && (
@@ -143,21 +96,49 @@ export default function SelectOne({ label, values, name = 'None', imageInName, t
 								imgProps={{ height: theme.spacing(2), width: theme.spacing(2) }}
 								alt="Emoji"
 								src={imageInName}
-								className={classes.nameImage}
+								sx={{
+									display: 'inline-flex',
+									height: (theme) => theme.spacing(2),
+									width: (theme) => theme.spacing(2)
+								}}
 							/>
 						)}
 					</Button>
-				</Else>
-			</If>
+				</Tooltip>
+			) : (
+				<Button variant="contained" color="primary" onClick={() => setOpen(true)} {...ButtonProps}>
+					{label}: {name}{' '}
+					{imageInName && (
+						<LazyAvatar
+							imgProps={{ height: theme.spacing(2), width: theme.spacing(2) }}
+							alt="Emoji"
+							src={imageInName}
+							sx={{
+								display: 'inline-flex',
+								height: (theme) => theme.spacing(2),
+								width: (theme) => theme.spacing(2)
+							}}
+						/>
+					)}
+				</Button>
+			)}
 			<Dialog fullWidth maxWidth="xs" onClose={handleClose} open={open}>
 				<DialogTitle onClose={handleClose}>{toTitleCase(label)}</DialogTitle>
 				{values.length > 10 && <DialogSearchBar onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} />}
-				<DialogContent dividers classes={{ root: classes.dialogContent }}>
+				<DialogContent
+					dividers
+					sx={{
+						p: 2
+					}}
+				>
 					<Virtuoso
 						totalCount={filteredValues.length}
 						overscan={30}
-						style={{ height: theme.spacing(50), width: '100%' }}
-						className={classes.virtualizedList}
+						style={{
+							height: theme.spacing(50),
+							margin: 1,
+							width: '100%'
+						}}
 						components={VirtuosoComponents}
 						itemContent={(index) => (
 							<>
@@ -171,7 +152,12 @@ export default function SelectOne({ label, values, name = 'None', imageInName, t
 						)}
 					/>
 				</DialogContent>
-				<DialogActions classes={{ root: classes.dialogActions }}>
+				<DialogActions
+					sx={{
+						m: 0,
+						p: 1
+					}}
+				>
 					<Button
 						onClick={() => {
 							onReset();

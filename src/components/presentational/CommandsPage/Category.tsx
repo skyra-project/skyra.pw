@@ -1,27 +1,9 @@
 import type { FlattenedCommand } from '@config/types/ApiData';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import Box from '@material-ui/core/Box';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Command from '@presentational/CommandsPage/Command';
 import React, { FC, memo, useCallback } from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		categoryAccordion: {
-			marginTop: theme.spacing(1),
-			marginBottom: theme.spacing(1),
-			borderRadius: theme.spacing(0.5)
-		},
-		categoryHeading: {
-			fontSize: theme.typography.pxToRem(20),
-			fontWeight: 'bolder'
-		}
-	})
-);
+import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '@mui/material';
 
 interface CategoryProps {
 	categoryName: string;
@@ -30,8 +12,6 @@ interface CategoryProps {
 }
 
 const Category: FC<CategoryProps> = ({ categoryName, commands, searchValue }) => {
-	const classes = useStyles();
-
 	const filterCommands = useCallback((command: FlattenedCommand) => command.name.toLowerCase().includes(searchValue.toLowerCase()), [searchValue]);
 
 	const filteredCategory = commands.filter((command) => command.category === categoryName).filter(filterCommands);
@@ -39,9 +19,23 @@ const Category: FC<CategoryProps> = ({ categoryName, commands, searchValue }) =>
 	if (!filteredCategory.length) return null;
 
 	return (
-		<Accordion defaultExpanded TransitionProps={{ unmountOnExit: true }} classes={{ root: classes.categoryAccordion }}>
+		<Accordion
+			defaultExpanded
+			TransitionProps={{ unmountOnExit: true }}
+			sx={{
+				my: 1,
+				borderRadius: (theme) => theme.spacing(0.5)
+			}}
+		>
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-				<Typography variant="h2" component="h1" className={classes.categoryHeading}>
+				<Typography
+					variant="h2"
+					component="h1"
+					sx={{
+						fontSize: (theme) => theme.typography.pxToRem(20),
+						fontWeight: 'bolder'
+					}}
+				>
 					{categoryName}
 				</Typography>
 			</AccordionSummary>
