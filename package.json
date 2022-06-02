@@ -14,7 +14,7 @@
 		"clean": "node scripts/clean.mjs",
 		"build:sitemap": "node scripts/sitemapGenerator.mjs",
 		"format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
-		"prepare": "husky install .github/husky"
+		"postinstall": "husky install .github/husky"
 	},
 	"dependencies": {
 		"@emotion/cache": "^11.7.1",
