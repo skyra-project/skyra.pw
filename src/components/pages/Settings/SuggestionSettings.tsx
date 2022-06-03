@@ -1,4 +1,4 @@
-import { ConfigurableEmojis, ConfigurableSuggestionActions } from '@config/SettingsDataEntries';
+import { ConfigurableSuggestionActions } from '@config/SettingsDataEntries';
 import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
@@ -78,60 +78,6 @@ const SuggestionSettings: FC = () => {
 									[key]: event.target.checked
 								})
 							}
-						/>
-					))}
-				</SimpleGrid>
-			</Section>
-
-			<Section title="Emojis">
-				<SimpleGrid
-					direction="row"
-					justifyContent="flex-start"
-					gridItemProps={{
-						xs: 12,
-						sm: 12,
-						md: 4,
-						lg: 4,
-						xl: 4
-					}}
-				>
-					{ConfigurableEmojis.map(({ title, description, key, defaultImage, defaultName, defaultId }, index) => (
-						<SelectEmoji
-							key={index}
-							tooltipTitle={description}
-							value={tagToId(guildSettings[key])}
-							defaultImage={defaultImage}
-							defaultName={defaultName}
-							defaultId={defaultId}
-							onReset={() => handleResetKey(guildSettingsChanges, setGuildSettingsChanges, key)}
-							onChange={(emojiID: typeof guildSettings[typeof key] | null) => {
-								if (emojiID) {
-									const emojiData = findEmoji(emojiID);
-									return setGuildSettingsChanges({
-										[key]: idToTag(emojiID, emojiData.name, emojiData.animated)
-									});
-								}
-
-								return setGuildSettingsChanges({
-									[key]: idToTag(defaultId, defaultName, false)
-								});
-							}}
-							guild={guildData}
-							label={title}
-							ButtonProps={{
-								fullWidth: true,
-								sx: {
-									minHeight: {
-										lg: 'inherit',
-										md: 60,
-										xs: 'inherit'
-									},
-									display: 'flex',
-									textAlign: 'left',
-									alignItems: 'center',
-									justifyContent: 'space-between'
-								}
-							}}
 						/>
 					))}
 				</SimpleGrid>

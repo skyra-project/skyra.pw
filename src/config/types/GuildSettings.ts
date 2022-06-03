@@ -153,8 +153,6 @@ export interface GuildSettings {
 	socialMultiplier: number;
 	stickyRoles: StickyRole[];
 	suggestionsChannel: string | null;
-	suggestionsEmojisDownVote: string;
-	suggestionsEmojisUpVote: string;
 	suggestionsOnActionDm: boolean;
 	suggestionsOnActionHideAuthor: boolean;
 	suggestionsOnActionRePost: boolean;
