@@ -7,19 +7,13 @@ import Section from '@layout/Settings/Section';
 import SimpleGrid from '@material/SimpleGrid';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectChannel from '@selects/SelectChannel';
-import SelectEmoji from '@selects/SelectEmoji';
-import { EmojiRegexExtractId } from '@utils/constants';
 import { handleResetKey } from '@utils/util';
-import React, { FC, memo, useMemo } from 'react';
+import React, { FC, memo } from 'react';
 
 const SuggestionSettings: FC = () => {
 	const { guildData } = useGuildDataContext();
 	const { guildSettings } = useGuildSettingsContext();
 	const { guildSettingsChanges, setGuildSettingsChanges } = useGuildSettingsChangesContext();
-
-	const findEmoji = useMemo(() => (id: string) => guildData.emojis.find((e) => e.id === id)!, [guildData.emojis]);
-	const tagToId = useMemo(() => (tag: string) => tag.replace(EmojiRegexExtractId, '$1'), []);
-	const idToTag = useMemo(() => (id: string, name: string, animated: boolean) => `${animated ? 'a' : ''}:${name}:${id}`, []);
 
 	return (
 		<>
