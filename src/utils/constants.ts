@@ -52,7 +52,6 @@ export enum FetchMethods {
 	Get = 'GET'
 }
 
-export const EmojiRegexExtractId = /<?a?:\w{2,32}:(\d{17,21})>?/gim;
 export const EmojiRegexExtractName = /<?a?:(\w{2,32}):\d{17,21}>?/gim;
 export const SettingsDrawerWidth = 240;
 

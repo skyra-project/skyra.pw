@@ -20,25 +20,6 @@ export const ConfigurableSuggestionActions: Suggestions.OnAction[] = [
 	}
 ];
 
-export const ConfigurableEmojis: Suggestions.Emoji[] = [
-	{
-		title: 'Upvote Emoji',
-		key: 'suggestionsEmojisUpVote',
-		description: 'The upvote emoji Skyra reacts with on every suggestion.',
-		defaultName: 'ArrowT',
-		defaultImage: 'https://cdn.discordapp.com/emojis/694594285487652954.png',
-		defaultId: '694594285487652954'
-	},
-	{
-		title: 'Downvote Emoji',
-		key: 'suggestionsEmojisDownVote',
-		description: 'The downvote emoji Skyra reacts with on every suggestion.',
-		defaultName: 'ArrowB',
-		defaultImage: 'https://cdn.discordapp.com/emojis/694594285269680179.png',
-		defaultId: '694594285269680179'
-	}
-];
-
 export const ConfigurableRemoveInitialRole: Roles.Role = {
 	name: 'Remove Initial',
 	tooltip: 'Whether claiming a public role should remove the initial role at the same time.',

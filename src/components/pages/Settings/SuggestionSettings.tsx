@@ -1,4 +1,4 @@
-import { ConfigurableEmojis, ConfigurableSuggestionActions } from '@config/SettingsDataEntries';
+import { ConfigurableSuggestionActions } from '@config/SettingsDataEntries';
 import { useGuildDataContext } from '@contexts/Settings/GuildDataContext';
 import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettingsChangesContext';
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
@@ -7,19 +7,13 @@ import Section from '@layout/Settings/Section';
 import SimpleGrid from '@material/SimpleGrid';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectChannel from '@selects/SelectChannel';
-import SelectEmoji from '@selects/SelectEmoji';
-import { EmojiRegexExtractId } from '@utils/constants';
 import { handleResetKey } from '@utils/util';
-import React, { FC, memo, useMemo } from 'react';
+import React, { FC, memo } from 'react';
 
 const SuggestionSettings: FC = () => {
 	const { guildData } = useGuildDataContext();
 	const { guildSettings } = useGuildSettingsContext();
 	const { guildSettingsChanges, setGuildSettingsChanges } = useGuildSettingsChangesContext();
-
-	const findEmoji = useMemo(() => (id: string) => guildData.emojis.find((e) => e.id === id)!, [guildData.emojis]);
-	const tagToId = useMemo(() => (tag: string) => tag.replace(EmojiRegexExtractId, '$1'), []);
-	const idToTag = useMemo(() => (id: string, name: string, animated: boolean) => `${animated ? 'a' : ''}:${name}:${id}`, []);
 
 	return (
 		<>
@@ -78,60 +72,6 @@ const SuggestionSettings: FC = () => {
 									[key]: event.target.checked
 								})
 							}
-						/>
-					))}
-				</SimpleGrid>
-			</Section>
-
-			<Section title="Emojis">
-				<SimpleGrid
-					direction="row"
-					justifyContent="flex-start"
-					gridItemProps={{
-						xs: 12,
-						sm: 12,
-						md: 4,
-						lg: 4,
-						xl: 4
-					}}
-				>
-					{ConfigurableEmojis.map(({ title, description, key, defaultImage, defaultName, defaultId }, index) => (
-						<SelectEmoji
-							key={index}
-							tooltipTitle={description}
-							value={tagToId(guildSettings[key])}
-							defaultImage={defaultImage}
-							defaultName={defaultName}
-							defaultId={defaultId}
-							onReset={() => handleResetKey(guildSettingsChanges, setGuildSettingsChanges, key)}
-							onChange={(emojiID: typeof guildSettings[typeof key] | null) => {
-								if (emojiID) {
-									const emojiData = findEmoji(emojiID);
-									return setGuildSettingsChanges({
-										[key]: idToTag(emojiID, emojiData.name, emojiData.animated)
-									});
-								}
-
-								return setGuildSettingsChanges({
-									[key]: idToTag(defaultId, defaultName, false)
-								});
-							}}
-							guild={guildData}
-							label={title}
-							ButtonProps={{
-								fullWidth: true,
-								sx: {
-									minHeight: {
-										lg: 'inherit',
-										md: 60,
-										xs: 'inherit'
-									},
-									display: 'flex',
-									textAlign: 'left',
-									alignItems: 'center',
-									justifyContent: 'space-between'
-								}
-							}}
 						/>
 					))}
 				</SimpleGrid>

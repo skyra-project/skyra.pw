@@ -6,20 +6,6 @@ export namespace Suggestions {
 
 		title: string;
 	}
-
-	export interface Emoji {
-		defaultId: string;
-
-		defaultImage: `https://cdn.discordapp.com/emojis/${string}.${'gif' | 'png'}`;
-
-		defaultName: string;
-
-		description: string;
-
-		key: `suggestionsEmojis${'DownVote' | 'UpVote'}`;
-
-		title: string;
-	}
 }
 
 export namespace Roles {
