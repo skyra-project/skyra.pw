@@ -156,8 +156,6 @@ export interface GuildSettings {
 	suggestionsOnActionDm: boolean;
 	suggestionsOnActionHideAuthor: boolean;
 	suggestionsOnActionRePost: boolean;
-	triggerAlias: TriggerAlias[];
-	triggerIncludes: TriggerIncludes[];
 }
 
 interface PermissionsNode {
@@ -196,15 +194,6 @@ interface ReactionRole {
 interface RolesAuto {
 	id: string;
 	points: number;
-}
-
-interface TriggerAlias {
-	input: string;
-	output: string;
-}
-
-interface TriggerIncludes extends TriggerAlias {
-	action: 'react';
 }
 
 interface UniqueRoleSet {
