@@ -1,4 +1,4 @@
-FROM node:17-alpine as runner
+FROM node:18-alpine as runner
 
 RUN apk add --no-cache dumb-init
 
@@ -6,6 +6,8 @@ WORKDIR /workspace
 
 ENV HUSKY=0
 ENV CI=true
+
+RUN sed -i 's/"postinstall": "husky install .github\/husky"/"postinstall": ""/' ./package.json
 
 COPY --chown=node:node package.json ./
 COPY --chown=node:node yarn.lock ./
