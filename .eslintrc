@@ -143,6 +143,13 @@
 			"rules": {
 				"@typescript-eslint/require-await": "off"
 			}
+		},
+
+		{
+			"files": ["src/next.config.js"],
+			"rules": {
+				"@typescript-eslint/no-var-requires": "off"
+			}
 		}
 	]
 }

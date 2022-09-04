@@ -18,7 +18,7 @@ import ListItemLink from '@routing/ListItemLink';
 import { isNullish, noop } from '@sapphire/utilities';
 import { navigate } from '@utils/util';
 import { useRouter } from 'next/router';
-import { FC, Fragment, memo, useState } from 'react';
+import { Fragment, memo, useState, type FC } from 'react';
 import type { ValuesType } from 'utility-types';
 
 import { useMobileContext } from '@contexts/MobileContext';

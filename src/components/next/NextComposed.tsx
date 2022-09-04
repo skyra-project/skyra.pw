@@ -1,6 +1,6 @@
 import { styled, Typography } from '@mui/material';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
-import { AnchorHTMLAttributes, forwardRef, PropsWithChildren } from 'react';
+import { forwardRef, type AnchorHTMLAttributes, type PropsWithChildren } from 'react';
 
 // Add support for the sx prop for consistency with the other branches.
 const Anchor = styled('a')({});

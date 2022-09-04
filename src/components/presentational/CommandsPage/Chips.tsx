@@ -5,7 +5,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import { Chip, Grid } from '@mui/material';
 import { amber, deepOrange } from '@mui/material/colors';
 import { useMobileContext } from 'contexts/MobileContext';
-import { FC, memo, useCallback, useMemo } from 'react';
+import { memo, useCallback, useMemo, type FC } from 'react';
 
 interface ChipsProps {
 	command: FlattenedCommand;

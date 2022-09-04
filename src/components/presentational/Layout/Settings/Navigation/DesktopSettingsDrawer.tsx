@@ -1,7 +1,7 @@
-import { SettingsDrawerWidth } from '@utils/constants';
-import React, { FC, memo } from 'react';
-import SettingsDrawerItems, { SettingsDrawerItemsProps } from './SettingsDrawerItems';
 import { Drawer } from '@mui/material';
+import { SettingsDrawerWidth } from '@utils/constants';
+import { memo, type FC } from 'react';
+import SettingsDrawerItems, { SettingsDrawerItemsProps } from './SettingsDrawerItems';
 
 const DesktopSettingsDrawer: FC<SettingsDrawerItemsProps> = ({ guildData, guildId, toggleSidebar, isLoading }) => (
 	<Drawer

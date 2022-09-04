@@ -3,22 +3,22 @@ import DialogTitle from '@material/DialogTitle';
 import LazyAvatar from '@material/LazyAvatar';
 import Tooltip from '@material/Tooltip';
 import {
-	List,
-	useTheme,
 	Button,
 	Checkbox,
 	Dialog,
 	DialogActions,
 	DialogContent,
+	List,
 	ListItem,
 	ListItemIcon,
 	ListItemSecondaryAction,
-	ListItemText
+	ListItemText,
+	useTheme
 } from '@mui/material';
 import { toTitleCase } from '@sapphire/utilities';
 import { Time } from '@utils/skyraUtils';
 import { sleep } from '@utils/util';
-import React, { ChangeEvent, FC, forwardRef, Fragment, useCallback, useMemo, useState } from 'react';
+import { forwardRef, Fragment, useCallback, useMemo, useState, type ChangeEvent, type FC } from 'react';
 import { Virtuoso, type Components } from 'react-virtuoso';
 import type { SelectOneProps } from './SelectOne';
 

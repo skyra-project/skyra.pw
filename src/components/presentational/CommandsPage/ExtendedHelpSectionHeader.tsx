@@ -1,4 +1,4 @@
-import React, { FC, memo, ReactElement } from 'react';
+import { memo, ReactElement, type FC } from 'react';
 
 import { Divider, Typography } from '@mui/material';
 

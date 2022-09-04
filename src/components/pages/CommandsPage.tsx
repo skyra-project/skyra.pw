@@ -9,7 +9,7 @@ import { Time } from '@utils/skyraUtils';
 import { useWindowSize } from '@utils/useWindowSize';
 import { apiFetch, loadState, saveState } from '@utils/util';
 import debounce from 'lodash/debounce';
-import { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState, type FC } from 'react';
 
 import { Box, Container } from '@mui/material';
 

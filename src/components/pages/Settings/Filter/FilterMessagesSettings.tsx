@@ -6,7 +6,7 @@ import Select from '@selects/Select';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectDuration from '@selects/SelectDuration';
 import { bitwiseHas, bitwiseSet, updateSliderValueObj } from '@utils/util';
-import React, { FC, Fragment, memo } from 'react';
+import { Fragment, memo, type FC } from 'react';
 
 import { MenuItem, Slider, Typography } from '@mui/material';
 

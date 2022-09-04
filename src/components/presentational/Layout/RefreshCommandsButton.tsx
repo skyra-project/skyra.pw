@@ -4,7 +4,7 @@ import CachedIcon from '@mui/icons-material/Cached';
 import { ExpirableLocalStorageStructure, LocalStorageKeys } from '@utils/constants';
 import { Time } from '@utils/skyraUtils';
 import { apiFetch, saveState } from '@utils/util';
-import React, { FC, SetStateAction, useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState, type FC, type SetStateAction } from 'react';
 
 import { Box, Fab, useScrollTrigger, Zoom } from '@mui/material';
 

@@ -1,7 +1,7 @@
 import type { FlattenedCommand } from '@config/types/ApiData';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Command from '@presentational/CommandsPage/Command';
-import React, { FC, memo, useCallback } from 'react';
+import { memo, useCallback, type FC } from 'react';
 
 import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '@mui/material';
 

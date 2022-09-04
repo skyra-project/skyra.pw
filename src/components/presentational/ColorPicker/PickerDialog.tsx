@@ -1,7 +1,7 @@
-import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
-import React, { FC, memo, MouseEventHandler, useEffect, useRef } from 'react';
-import { ChromePicker, ColorChangeHandler } from 'react-color';
 import { Box } from '@mui/material';
+import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import { memo, MouseEventHandler, useEffect, useRef, type FC } from 'react';
+import { ChromePicker, ColorChangeHandler } from 'react-color';
 
 interface PickerDialogProps {
 	value?: string;

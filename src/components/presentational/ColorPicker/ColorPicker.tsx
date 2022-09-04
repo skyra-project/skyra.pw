@@ -5,7 +5,7 @@ import type { TextFieldProps as MTextFieldProps } from '@mui/material/TextField'
 import { REGEXP } from '@utils/Color';
 import { useFormikContext } from 'formik';
 import getProperty from 'lodash/get';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PickerDialog from './PickerDialog';
 
 interface FormikTextFieldProps<TFieldValues extends FormikValues = FormikValues, TName extends Path<TFieldValues> = Path<TFieldValues>> {

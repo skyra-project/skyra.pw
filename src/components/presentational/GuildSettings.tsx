@@ -16,12 +16,12 @@ import GeneralSettings from '@pages/Settings/GeneralSettings';
 import ModerationSettings from '@pages/Settings/ModerationSettings';
 import RoleSettings from '@pages/Settings/RoleSettings';
 import SuggestionSettings from '@pages/Settings/SuggestionSettings';
-import { useRouter } from 'next/router';
-import React, { FC, memo, useCallback, useEffect, useState } from 'react';
 import Loading from '@presentational/Loading';
-import { apiFetch, loadState, saveState } from '@utils/util';
 import { ExpirableLocalStorageStructure, LocalStorageKeys } from '@utils/constants';
 import { Time } from '@utils/skyraUtils';
+import { apiFetch, loadState, saveState } from '@utils/util';
+import { useRouter } from 'next/router';
+import { memo, useCallback, useEffect, useState, type FC } from 'react';
 
 interface GuildSettingsProps {}
 

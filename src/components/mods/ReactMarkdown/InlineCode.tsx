@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import type { CodeProps } from 'react-markdown/lib/ast-to-react';
 
 const InlineCode = forwardRef<HTMLSpanElement, CodeProps>(({ inline, children }, ref) => {

@@ -2,7 +2,7 @@ import type { TransformedLoginData } from '@config/types/ApiData';
 import UserMenu from '@layout/Navigation/UserMenu';
 import MenuIcon from '@mui/icons-material/Menu';
 import { SettingsDrawerWidth } from '@utils/constants';
-import React, { FC, memo } from 'react';
+import { memo, type FC } from 'react';
 import type { ValuesType } from 'utility-types';
 
 import { AppBar, Box, IconButton, Skeleton, Toolbar, Typography } from '@mui/material';

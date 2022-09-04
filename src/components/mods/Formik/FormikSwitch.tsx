@@ -1,9 +1,8 @@
-import { ListItemText, FormControlLabel, Switch } from '@mui/material';
+import { FormControlLabel, ListItemText, Switch } from '@mui/material';
 import type { FormControlLabelProps as MFormControlLabelProps } from '@mui/material/FormControlLabel';
 import type { SwitchProps as MSwitchProps } from '@mui/material/Switch';
 import { useFormikContext } from 'formik';
 import getProperty from 'lodash/get';
-import React from 'react';
 import type { FieldPathValue, FormikValues, Path, UnpackNestedValue } from './types';
 
 interface FormikSwitchProps<TFieldValues extends FormikValues = FormikValues, TName extends Path<TFieldValues> = Path<TFieldValues>> {

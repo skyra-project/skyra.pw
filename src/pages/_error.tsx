@@ -2,7 +2,6 @@ import { robotBlockingPageProps } from '@config/SEO/DefaultSeoProps';
 import Error from '@layout/ErrorPage';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
-import React from 'react';
 
 const ErrorPage: NextPage = () => (
 	<>

@@ -10,9 +10,9 @@ import SelectBoolean from '@selects/SelectBoolean';
 import SelectRole, { SelectRoleProps } from '@selects/SelectRole';
 import SelectRoles, { SelectRolesProps } from '@selects/SelectRoles';
 import { handleResetKey } from '@utils/util';
-import React, { FC, memo } from 'react';
+import { memo, type FC } from 'react';
 
-import { useTheme, useMediaQuery } from '@mui/material';
+import { useMediaQuery, useTheme } from '@mui/material';
 
 type SelectCommonProps = Omit<SelectRoleProps, 'value' | 'onChange'> & Omit<SelectRolesProps, 'value' | 'onChange'> & { key: number };
 

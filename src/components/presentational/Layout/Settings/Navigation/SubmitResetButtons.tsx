@@ -3,7 +3,7 @@ import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettings
 import DeleteIcon from '@mui/icons-material/DeleteForever';
 import SaveIconIcon from '@mui/icons-material/Save';
 import { Button, Grid } from '@mui/material';
-import React, { FC, memo } from 'react';
+import { memo, type FC } from 'react';
 
 interface SubmitResetButtonsProps {
 	isLoading: boolean;

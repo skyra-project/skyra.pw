@@ -4,7 +4,7 @@ import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext
 import Section from '@layout/Settings/Section';
 import SimpleGrid from '@material/SimpleGrid';
 import SelectBoolean from '@selects/SelectBoolean';
-import React, { FC, memo } from 'react';
+import { memo, type FC } from 'react';
 
 const ModerationSettings: FC = () => {
 	const { guildSettings } = useGuildSettingsContext();

@@ -1,5 +1,5 @@
 import type { TransformedLoginData } from '@config/types/ApiData';
-import React, { memo } from 'react';
+import { memo } from 'react';
 import type { ValuesType } from 'utility-types';
 import SelectOne, { SelectOneProps } from './SelectOne';
 

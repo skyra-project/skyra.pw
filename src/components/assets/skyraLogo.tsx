@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import React, { FC, memo } from 'react';
+import { memo, type FC } from 'react';
 
 import { keyframes } from '@mui/material';
 

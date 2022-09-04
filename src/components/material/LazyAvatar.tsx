@@ -1,5 +1,5 @@
 import type { AvatarProps } from '@mui/material/Avatar';
-import React, { FC, memo } from 'react';
+import { memo, type FC } from 'react';
 
 import { Avatar } from '@mui/material';
 

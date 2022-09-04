@@ -7,7 +7,7 @@ import AutoSavingForm from '@mods/Formik/AutoSaveForm';
 import FormikTextField from '@mods/Formik/FormikTextField';
 import { ListItemText, MenuItem } from '@mui/material';
 import Select from '@selects/Select';
-import React, { FC, memo } from 'react';
+import { memo, type FC } from 'react';
 import { object, SchemaOf, string } from 'yup';
 
 interface GeneralSettingsProps {

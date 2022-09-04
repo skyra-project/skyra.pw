@@ -1,7 +1,7 @@
 import { Time } from '@utils/skyraUtils';
 import { useFormikContext } from 'formik';
 import debounce from 'lodash/debounce';
-import React, { FC, Fragment, memo, useCallback, useEffect } from 'react';
+import { Fragment, memo, useCallback, useEffect, type FC } from 'react';
 
 export interface AutoSaveProps {
 	/** The timeout in milliseconds between submits, @default 1000 */

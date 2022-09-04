@@ -7,7 +7,7 @@ import type { ButtonProps as MButtonProps } from '@mui/material/Button';
 import { toTitleCase } from '@sapphire/utilities';
 import { Time } from '@utils/skyraUtils';
 import { sleep } from '@utils/util';
-import React, { ChangeEvent, forwardRef, Fragment, ReactNode, useCallback, useMemo, useState } from 'react';
+import { forwardRef, Fragment, useCallback, useMemo, useState, type ChangeEvent, type ReactNode } from 'react';
 import { Virtuoso, type Components } from 'react-virtuoso';
 
 export interface SelectOneProps {

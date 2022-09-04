@@ -8,7 +8,7 @@ import { Box, Button, ClickAwayListener, Grow, ListItemIcon, MenuItem, MenuList,
 import { displayAvatarURL } from '@utils/skyraUtils';
 import { clearData, logOut, syncUser } from '@utils/util';
 import { useRouter } from 'next/router';
-import React, { FC, memo, MouseEvent as ReactMouseEvent, useEffect, useRef, useState } from 'react';
+import { memo, MouseEvent as ReactMouseEvent, useEffect, useRef, useState, type FC } from 'react';
 import SpinningSyncIcon from './SpinningSyncIcon';
 
 const UserMenu: FC = () => {

@@ -8,7 +8,7 @@ import Chips from '@presentational/CommandsPage/Chips';
 import { reactStringReplace } from '@utils/reactStringReplace';
 import ReminderIcon from 'mdi-react/BellAlertIcon';
 import HelpRhombusIcon from 'mdi-react/HelpRhombusIcon';
-import React, { FC, memo } from 'react';
+import { memo, type FC } from 'react';
 import ExtendedHelpBody from './ExtendedHelpBody';
 import ExtendedHelpSectionHeader from './ExtendedHelpSectionHeader';
 

@@ -1,7 +1,7 @@
 import { Box, Tooltip as MTooltip, tooltipClasses } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import type { TooltipProps } from '@mui/material/Tooltip';
-import React, { FC } from 'react';
+import type { FC } from 'react';
 
 const StyledTooltip = styled(({ className, ...props }: TooltipProps) => <MTooltip {...props} classes={{ popper: className }} />)(({ theme }) => ({
 	[`& .${tooltipClasses.tooltip}`]: {

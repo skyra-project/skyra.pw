@@ -2,12 +2,12 @@ import { useGuildSettingsChangesContext } from '@contexts/Settings/GuildSettings
 import { useGuildSettingsContext } from '@contexts/Settings/GuildSettingsContext';
 import Section from '@layout/Settings/Section';
 import SimpleGrid from '@material/SimpleGrid';
-import { MenuItem, Typography, Slider } from '@mui/material';
+import { MenuItem, Slider, Typography } from '@mui/material';
 import Select from '@selects/Select';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectDuration from '@selects/SelectDuration';
 import { bitwiseHas, bitwiseSet, updateSliderValueObj } from '@utils/util';
-import React, { FC, Fragment, memo } from 'react';
+import { Fragment, memo, type FC } from 'react';
 
 const FilterCapitalsSettings: FC = () => {
 	const { guildSettings } = useGuildSettingsContext();

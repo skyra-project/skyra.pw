@@ -4,7 +4,6 @@ import { useMobileContext } from '@contexts/MobileContext';
 import GeneralPage from '@layout/General';
 import { FilteredGuildCards } from '@presentational/GuildCard';
 import type { NextPage } from 'next';
-import React from 'react';
 
 import { Box, Container, Typography } from '@mui/material';
 

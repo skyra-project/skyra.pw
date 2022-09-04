@@ -13,6 +13,8 @@
 		"noEmit": true,
 		"baseUrl": ".",
 		"rootDir": ".",
+		"incremental": false,
+		"composite": false,
 		"paths": {
 			"@config/*": ["config/*"],
 			"@contexts/*": ["contexts/*"],

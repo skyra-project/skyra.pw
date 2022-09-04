@@ -2,7 +2,7 @@ import type { TransformedLoginData } from '@config/types/ApiData';
 import LazyAvatar from '@material/LazyAvatar';
 import type { SxProps, Theme } from '@mui/material/styles';
 import { displayIconURL, getAcronym } from '@utils/util';
-import React, { FC } from 'react';
+import type { FC } from 'react';
 import type { ValuesType } from 'utility-types';
 
 interface GuildIconProps {

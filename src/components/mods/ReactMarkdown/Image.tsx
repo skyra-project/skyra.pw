@@ -1,7 +1,7 @@
-import NextImage from 'next/image';
-import React, { DetailedHTMLProps, forwardRef, ImgHTMLAttributes } from 'react';
-import type { WithReactMarkdownChildren } from './types';
 import { styled } from '@mui/material';
+import NextImage from 'next/image';
+import { forwardRef, type DetailedHTMLProps, type ImgHTMLAttributes } from 'react';
+import type { WithReactMarkdownChildren } from './types';
 
 const StyledNextImage = styled(NextImage)(() => ({
 	pr: 0.5,

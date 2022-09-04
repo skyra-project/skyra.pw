@@ -5,7 +5,7 @@ import ListItem from '@mods/ReactMarkdown/ListItem';
 import OrderedList from '@mods/ReactMarkdown/OrderedList';
 import Strong from '@mods/ReactMarkdown/Strong';
 import UnorderedList from '@mods/ReactMarkdown/UnorderedList';
-import React, { FC } from 'react';
+import type { FC } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';

@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import { memo, type FC } from 'react';
 import DesktopMenuItems from './DesktopMenuItems';
 import MobileNavMenu from './MobileNavMenu';
 import SkyraLogoButton from './SkyraLogoButton';

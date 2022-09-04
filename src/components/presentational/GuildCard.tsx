@@ -1,7 +1,7 @@
 import type { TransformedLoginData } from '@config/types/ApiData';
 import Link from '@routing/Link';
 import { guildAddURL } from '@utils/constants';
-import React, { memo } from 'react';
+import { cloneElement, memo } from 'react';
 import type { ValuesType } from 'utility-types';
 import styles from './GuildCard.module.css';
 import GuildIcon from './GuildIcon';
@@ -51,4 +51,4 @@ export const FilteredGuildCards = (pack?: TransformedLoginData) =>
 		.filter((g) => g.manageable)
 		// Sort by whether Skyra is in the server or not, or sort by the name of the server
 		.sort((gA, gB) => (gA.skyraIsIn === gB.skyraIsIn ? gA.name.localeCompare(gB.name, 'en', { sensitivity: 'base' }) : gA.skyraIsIn ? -1 : 1))
-		.map((g, index) => React.cloneElement(<GuildCard guild={g} key={index} />));
+		.map((g, index) => cloneElement(<GuildCard guild={g} key={index} />));

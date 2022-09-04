@@ -1,5 +1,5 @@
 import type { TransformedLoginData } from '@config/types/ApiData';
-import React, { memo, PropsWithChildren } from 'react';
+import { memo, type PropsWithChildren } from 'react';
 import type { ValuesType } from 'utility-types';
 import SelectMany, { SelectManyProps } from './SelectMany';
 
