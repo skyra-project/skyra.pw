@@ -1,7 +1,6 @@
 import PageContent from '@pages/CommandsPage';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
-import React from 'react';
 
 const CommandsPage: NextPage = () => {
 	return (

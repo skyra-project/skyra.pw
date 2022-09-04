@@ -3,7 +3,7 @@ import GeneralPage from '@layout/General';
 import { Container } from '@mui/material';
 import HomePageSection from '@presentational/HomePageSection';
 import dynamic from 'next/dynamic';
-import React, { FC } from 'react';
+import type { FC } from 'react';
 
 const GuildCards = dynamic(() => import('@presentational/GuildCards'), { ssr: false });
 

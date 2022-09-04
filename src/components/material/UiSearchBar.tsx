@@ -3,7 +3,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import type { InputProps } from '@mui/material/Input';
 import type { PaperProps } from '@mui/material/Paper';
 import type { Theme } from '@mui/material/styles';
-import React, {
+import {
+	cloneElement,
 	forwardRef,
 	memo,
 	useCallback,
@@ -212,7 +213,7 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 							})
 					}}
 				>
-					{React.cloneElement(<SearchIcon />, {
+					{cloneElement(<SearchIcon />, {
 						sx: (theme: Theme) => ({
 							color: theme.palette.common.white,
 							transition: theme.transitions.create(['opacity'], {
@@ -237,7 +238,7 @@ const UiSearchBar = forwardRef<SearchBarHandle, SearchBarProps>(
 					disabled={disabled}
 					size="large"
 				>
-					{React.cloneElement(<ClearIcon />, {
+					{cloneElement(<ClearIcon />, {
 						sx: (theme: Theme) => ({
 							color: theme.palette.common.white,
 							transition: theme.transitions.create(['opacity'], {

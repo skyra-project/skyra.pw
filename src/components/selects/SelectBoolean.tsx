@@ -1,7 +1,7 @@
 import { FormControlLabel, ListItemText, Switch } from '@mui/material';
 import type { FormControlLabelProps } from '@mui/material/FormControlLabel';
 import type { SwitchProps } from '@mui/material/Switch';
-import React, { FC, memo } from 'react';
+import { memo, type FC } from 'react';
 
 export interface SelectBooleanProps extends SwitchProps {
 	/** The title to show next to the Switch */

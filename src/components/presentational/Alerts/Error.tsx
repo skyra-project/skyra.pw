@@ -1,7 +1,7 @@
 import CancelIcon from '@mui/icons-material/Cancel';
-import { Button, AlertTitle, Grow, Snackbar } from '@mui/material';
+import { AlertTitle, Button, Grow, Snackbar } from '@mui/material';
 import { Time } from '@utils/skyraUtils';
-import React, { Dispatch, FC, memo, ReactNode, SetStateAction } from 'react';
+import { Dispatch, memo, type FC, type ReactNode, type SetStateAction } from 'react';
 import BaseAlert from './Base';
 
 /** Props to pass to the ErrorAlert component, any additional props are passed to the `Snackbar` component */

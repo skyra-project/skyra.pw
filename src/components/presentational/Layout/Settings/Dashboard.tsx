@@ -14,7 +14,7 @@ import { Time } from '@utils/skyraUtils';
 import { apiFetch, clearData } from '@utils/util';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, type FC, type ReactNode } from 'react';
 import type { ValuesType } from 'utility-types';
 import DesktopSettingsDrawer from './Navigation/DesktopSettingsDrawer';
 import MobileSettingsDrawer from './Navigation/MobileSettingsDrawer';

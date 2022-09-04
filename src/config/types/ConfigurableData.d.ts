@@ -114,7 +114,7 @@ export namespace Channels {
 	export interface IgnoreChannel {
 		description: string;
 
-		key: `channelsIgnore${'All' | 'MessageDeletes' | 'MessageEdits' | 'ReactionAdds'}`;
+		key: `channelsIgnore${'All' | 'MessageDeletes' | 'MessageEdits' | 'ReactionAdds'}` | 'messagesIgnoreChannels';
 
 		name: string;
 	}

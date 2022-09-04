@@ -21,13 +21,13 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { Children, isValidElement, ReactElement, ReactNode, ReactText } from 'react';
+import { Children, isValidElement, type ReactElement, type ReactNode } from 'react';
 
 const hasChildren = (element: ReactNode): element is ReactElement<{ children: ReactNode[] }> =>
 	isValidElement<{ children?: ReactNode[] }>(element) && Boolean(element.props.children);
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-const childToString = (child?: ReactText | boolean | {} | null): string => {
+const childToString = (child?: string | number | boolean | {} | null): string => {
 	if (typeof child === 'undefined' || child === null || typeof child === 'boolean') {
 		return '';
 	}

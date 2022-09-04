@@ -8,7 +8,7 @@ import SimpleGrid from '@material/SimpleGrid';
 import SelectBoolean from '@selects/SelectBoolean';
 import SelectChannel from '@selects/SelectChannel';
 import { handleResetKey } from '@utils/util';
-import React, { FC, memo } from 'react';
+import { memo, type FC } from 'react';
 
 const SuggestionSettings: FC = () => {
 	const { guildData } = useGuildDataContext();

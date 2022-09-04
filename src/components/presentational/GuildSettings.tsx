@@ -13,16 +13,15 @@ import FilterNewLineSettings from '@pages/Settings/Filter/FilterNewLineSettings'
 import FilterReactionSettings from '@pages/Settings/Filter/FilterReactionSettings';
 import FilterWordSettings from '@pages/Settings/Filter/FilterWordSettings';
 import GeneralSettings from '@pages/Settings/GeneralSettings';
-import MessageSettings from '@pages/Settings/MessageSettings';
 import ModerationSettings from '@pages/Settings/ModerationSettings';
 import RoleSettings from '@pages/Settings/RoleSettings';
 import SuggestionSettings from '@pages/Settings/SuggestionSettings';
-import { useRouter } from 'next/router';
-import React, { FC, memo, useCallback, useEffect, useState } from 'react';
 import Loading from '@presentational/Loading';
-import { apiFetch, loadState, saveState } from '@utils/util';
 import { ExpirableLocalStorageStructure, LocalStorageKeys } from '@utils/constants';
 import { Time } from '@utils/skyraUtils';
+import { apiFetch, loadState, saveState } from '@utils/util';
+import { useRouter } from 'next/router';
+import { memo, useCallback, useEffect, useState, type FC } from 'react';
 
 interface GuildSettingsProps {}
 
@@ -80,8 +79,6 @@ const GuildSettings: FC<GuildSettingsProps> = () => {
 				return <DisabledCommandSettings setCommands={setCommands} commands={commands} />;
 			case GuildRoutes.Events:
 				return <EventSettings />;
-			case GuildRoutes.Messages:
-				return <MessageSettings />;
 			case GuildRoutes.Moderation:
 				return <ModerationSettings />;
 			case GuildRoutes.Roles:

@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import type { LiProps } from 'react-markdown/lib/ast-to-react';
 
 import { ListItem as MuiListItem, ListItemText } from '@mui/material';

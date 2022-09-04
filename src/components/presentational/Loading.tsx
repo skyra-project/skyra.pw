@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import { memo, type FC } from 'react';
 
 import { Backdrop, CircularProgress } from '@mui/material';
 

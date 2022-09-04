@@ -1,5 +1,5 @@
 import Link from '@routing/Link';
-import React, { forwardRef, memo, ReactElement } from 'react';
+import { forwardRef, memo, type ReactElement } from 'react';
 import styles from './MenuItemLink.module.css';
 
 import { ListItemIcon, MenuItem, Typography } from '@mui/material';

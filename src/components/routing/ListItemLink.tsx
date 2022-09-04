@@ -1,7 +1,7 @@
 import type { SxProps, Theme } from '@mui/material/styles';
 import Link from '@routing/Link';
 import { useRouter } from 'next/router';
-import React, { forwardRef, ReactElement } from 'react';
+import { forwardRef, type ReactElement } from 'react';
 import styles from './ListItemLink.module.css';
 
 import { ListItem, ListItemIcon, ListItemText } from '@mui/material';

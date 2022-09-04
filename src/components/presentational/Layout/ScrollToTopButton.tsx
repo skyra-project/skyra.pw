@@ -1,6 +1,6 @@
 import Tooltip from '@material/Tooltip';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import React, { FC, memo, PropsWithChildren } from 'react';
+import { memo, PropsWithChildren, type FC } from 'react';
 
 import { Box, Fab, useScrollTrigger, Zoom } from '@mui/material';
 

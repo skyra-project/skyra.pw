@@ -1,11 +1,13 @@
-import { Typography, styled } from '@mui/material';
+import { styled, Typography } from '@mui/material';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
-import React, { forwardRef, PropsWithChildren, AnchorHTMLAttributes } from 'react';
+import { forwardRef, type AnchorHTMLAttributes, type PropsWithChildren } from 'react';
 
 // Add support for the sx prop for consistency with the other branches.
 const Anchor = styled('a')({});
 
-export interface NextLinkComposedProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'>, Omit<NextLinkProps, 'href' | 'as'> {
+export interface NextLinkComposedProps
+	extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href' | `on${string}`>,
+		Omit<NextLinkProps, 'href' | 'as' | `on${string}`> {
 	to: NextLinkProps['href'];
 	linkAs?: NextLinkProps['as'];
 }

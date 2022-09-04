@@ -8,7 +8,7 @@ import SimpleGrid from '@material/SimpleGrid';
 import SelectChannel from '@selects/SelectChannel';
 import SelectChannels from '@selects/SelectChannels';
 import { handleResetKey } from '@utils/util';
-import React, { FC, memo } from 'react';
+import { memo, type FC } from 'react';
 
 const ChannelSettings: FC = () => {
 	const { guildData } = useGuildDataContext();

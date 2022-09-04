@@ -1,6 +1,6 @@
 import SyncIcon from '@mui/icons-material/Sync';
-import { keyframes } from '@mui/system';
 import { styled } from '@mui/material';
+import { keyframes } from '@mui/system';
 
 const spin = keyframes`
 0% {

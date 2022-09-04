@@ -11,11 +11,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ColorPicker from '@presentational/ColorPicker/ColorPicker';
 import { parse, REGEXP } from '@utils/Color';
 import { Form, Formik } from 'formik';
-import React, { forwardRef, Fragment, memo, useMemo } from 'react';
+import { forwardRef, Fragment, memo, useMemo } from 'react';
 import { Components, Virtuoso } from 'react-virtuoso';
 import { boolean, object, string } from 'yup';
 
-import { Button, Grid, IconButton, List, ListItem, ListItemSecondaryAction, ListItemText, useTheme, Typography } from '@mui/material';
+import { Button, Grid, IconButton, List, ListItem, ListItemSecondaryAction, ListItemText, Typography, useTheme } from '@mui/material';
 
 const CustomCommandSettings = () => {
 	const theme = useTheme();

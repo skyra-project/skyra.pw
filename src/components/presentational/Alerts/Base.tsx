@@ -1,5 +1,5 @@
 import type { AlertProps } from '@mui/material/Alert';
-import React, { FC, memo } from 'react';
+import { memo, type FC } from 'react';
 
 import { Alert as MuiAlert } from '@mui/material';
 

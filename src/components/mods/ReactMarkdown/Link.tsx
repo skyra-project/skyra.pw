@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 import RouterLink from '@routing/Link';
-import React, { AnchorHTMLAttributes, DetailedHTMLProps, forwardRef } from 'react';
+import { forwardRef, type AnchorHTMLAttributes, type DetailedHTMLProps } from 'react';
 import type { WithReactMarkdownChildren } from './types';
 
 const SkyraPwPathRegex = /<?https:\/\/skyra\.pw(?<path>\/[a-z]+)?>?/;

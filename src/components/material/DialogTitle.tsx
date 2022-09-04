@@ -1,5 +1,5 @@
 import CloseIcon from '@mui/icons-material/Close';
-import React, { memo, PropsWithChildren } from 'react';
+import { memo, type PropsWithChildren } from 'react';
 
 import { DialogTitle as MuiDialogTitle, IconButton, Typography } from '@mui/material';
 

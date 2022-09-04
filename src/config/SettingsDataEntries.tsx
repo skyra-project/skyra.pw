@@ -247,5 +247,11 @@ export const ConfigurableIgnoreChannels: Channels.IgnoreChannel[] = [
 		name: 'Reaction add logs',
 		description: 'Channels I should ignore when checking for added reactions.',
 		key: 'channelsIgnoreReactionAdds'
+	},
+	{
+		name: 'Message Delete, Edit and Reaction Add logs',
+		description:
+			'Channels I should ignore for all three of deleted messages to log, checking for editing messages to log, and checking for added reactions.',
+		key: 'messagesIgnoreChannels'
 	}
 ];

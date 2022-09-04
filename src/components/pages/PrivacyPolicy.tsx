@@ -1,6 +1,5 @@
 import GeneralPage from '@layout/General';
 import { Box, Container, Divider, Typography } from '@mui/material';
-import React from 'react';
 
 const Email = () => {
 	return (

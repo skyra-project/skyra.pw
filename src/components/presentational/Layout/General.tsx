@@ -1,15 +1,15 @@
 import { setAuthenticated, useAuthenticated } from '@contexts/AuthenticationContext';
 import { mergeDiscordPack } from '@contexts/DiscordPackContext';
 import Footer from '@layout/Footer';
+import { Box, LinearProgress } from '@mui/material';
 import type { BoxProps } from '@mui/material/Box';
 import { syncUser } from '@utils/util';
 import sx from 'mui-sx';
 import { useRouter } from 'next/router';
-import React, { FC, useEffect } from 'react';
+import { useEffect, type FC } from 'react';
 import type { ReactNode } from 'react-markdown/lib/ast-to-react';
 import NavBar from './Navigation/NavBar';
 import ScrollToTopButton from './ScrollToTopButton';
-import { Box, LinearProgress } from '@mui/material';
 
 export interface GeneralPageProps {
 	loading?: boolean;

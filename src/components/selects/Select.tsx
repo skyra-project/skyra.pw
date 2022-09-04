@@ -1,7 +1,7 @@
 import { FormControl, FormHelperText, InputLabel, Select as MSelect } from '@mui/material';
 import type { FormControlProps } from '@mui/material/FormControl';
 import type { SelectProps as MSelectProps } from '@mui/material/Select';
-import React, { FC } from 'react';
+import type { FC } from 'react';
 
 /**
  * Props to pass to the Select component.

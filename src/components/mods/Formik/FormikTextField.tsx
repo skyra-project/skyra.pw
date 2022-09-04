@@ -1,7 +1,6 @@
 import type { TextFieldProps as MTextFieldProps } from '@mui/material/TextField';
 import { useFormikContext } from 'formik';
 import getProperty from 'lodash/get';
-import React from 'react';
 import type { FieldPathValue, FormikValues, Path, TextFieldPropsOmittable, UnpackNestedValue } from './types';
 
 import { TextField } from '@mui/material';

@@ -1,5 +1,5 @@
 import { Box, BoxProps, Typography } from '@mui/material';
-import React, { FC, memo, ReactNode } from 'react';
+import { memo, type FC, type ReactNode } from 'react';
 
 export interface SectionProps extends Omit<BoxProps, 'title'> {
 	title: ReactNode;

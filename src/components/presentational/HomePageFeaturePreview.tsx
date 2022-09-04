@@ -1,6 +1,6 @@
 import type features from '@assets/features';
-import { Hidden, Grid } from '@mui/material';
-import React, { FC, memo } from 'react';
+import { Grid, Hidden } from '@mui/material';
+import { memo, type FC } from 'react';
 
 type HomePageFeaturePreviewProps = Pick<typeof features extends Array<infer U> ? U : never, 'previewContent'>;
 

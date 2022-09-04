@@ -1,11 +1,11 @@
+import DiscordIcon from '@assets/DiscordIcon';
 import type { FlattenedCommand } from '@config/types/ApiData';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import LockIcon from '@mui/icons-material/Lock';
 import { Chip, Grid } from '@mui/material';
 import { amber, deepOrange } from '@mui/material/colors';
 import { useMobileContext } from 'contexts/MobileContext';
-import DiscordIcon from 'mdi-react/DiscordIcon';
-import React, { FC, memo, useCallback, useMemo } from 'react';
+import { memo, useCallback, useMemo, type FC } from 'react';
 
 interface ChipsProps {
 	command: FlattenedCommand;
@@ -73,10 +73,7 @@ const Chips: FC<ChipsProps> = ({ command }) => {
 						sx={{
 							p: 0.2,
 							ml: 1,
-							width: '100%',
-							'& .MuiChip-iconSmall': {
-								color: '#7289DA'
-							}
+							width: '100%'
 						}}
 					/>
 				</Grid>

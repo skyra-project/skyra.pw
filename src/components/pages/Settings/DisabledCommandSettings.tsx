@@ -21,7 +21,7 @@ import {
 import { green } from '@mui/material/colors';
 import Loading from '@presentational/Loading';
 import SelectBoolean from '@selects/SelectBoolean';
-import React, { FC, memo, SetStateAction, useCallback, useEffect, useState } from 'react';
+import { memo, SetStateAction, useCallback, useEffect, useState, type FC } from 'react';
 
 interface DisabledCommandSettingsProps {
 	commands: FlattenedCommand[];

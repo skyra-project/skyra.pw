@@ -56,7 +56,6 @@ export interface GuildSettings {
 	prefix: string;
 	reactionRoles: ReactionRole[];
 	rolesAdmin: string[];
-	rolesAuto: RolesAuto[];
 	rolesInitial: string | null;
 	rolesModerator: string[];
 	rolesMuted: string | null;
@@ -145,12 +144,6 @@ export interface GuildSettings {
 	selfmodReactionsSoftAction: number;
 	selfmodReactionsThresholdDuration: number;
 	selfmodReactionsThresholdMaximum: number;
-	socialAchieve: boolean;
-	socialAchieveMessage: string | null;
-	socialEnabled: boolean;
-	socialIgnoredChannels: string[];
-	socialIgnoredRoles: string[];
-	socialMultiplier: number;
 	stickyRoles: StickyRole[];
 	suggestionsChannel: string | null;
 	suggestionsOnActionDm: boolean;
@@ -189,11 +182,6 @@ interface ReactionRole {
 	emoji: string;
 	message: string | null;
 	channel: string;
-}
-
-interface RolesAuto {
-	id: string;
-	points: number;
 }
 
 interface UniqueRoleSet {

@@ -2,7 +2,7 @@ import SkyraLogo from '@assets/skyraLogo';
 import { Box, Container, Hidden, Typography, useMediaQuery, useTheme } from '@mui/material';
 import Link from '@routing/Link';
 import { CLIENT_ID, inviteURL } from '@utils/constants';
-import React, { memo } from 'react';
+import { memo } from 'react';
 
 const Left = () => (
 	<Box textAlign="left" display="flex" flexDirection="column">

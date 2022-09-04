@@ -1,7 +1,7 @@
 import SkyraLogo from '@assets/skyraLogo';
 import Tooltip from '@material/Tooltip';
 import { navigate } from '@utils/util';
-import React, { FC, memo } from 'react';
+import { memo, type FC } from 'react';
 
 import { Box, Button, Hidden, Typography } from '@mui/material';
 

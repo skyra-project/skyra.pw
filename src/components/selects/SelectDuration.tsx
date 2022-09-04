@@ -1,5 +1,5 @@
 import { Box, MenuItem, TextField } from '@mui/material';
-import React, { ChangeEvent, FC, memo, useState } from 'react';
+import { ChangeEvent, memo, useState, type FC } from 'react';
 import Select from './Select';
 
 const unitMap: Record<string, number> = {

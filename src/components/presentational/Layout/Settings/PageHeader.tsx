@@ -1,6 +1,6 @@
-import type { TypographyProps } from '@mui/material/Typography';
-import React, { FC, memo, ReactNode } from 'react';
 import { Divider, Typography } from '@mui/material';
+import type { TypographyProps } from '@mui/material/Typography';
+import { memo, type FC, type ReactNode } from 'react';
 
 interface PageHeaderProps {
 	/** The title of the page*/

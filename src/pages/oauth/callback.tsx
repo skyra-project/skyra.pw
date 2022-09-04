@@ -8,7 +8,7 @@ import { apiFetch, saveState } from '@utils/util';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const OauthCallback: NextPage = () => {
 	const [loading, setLoading] = useState(false);

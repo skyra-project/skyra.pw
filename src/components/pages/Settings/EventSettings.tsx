@@ -7,7 +7,7 @@ import { Typography } from '@mui/material';
 import Link from '@routing/Link';
 import SelectBoolean from '@selects/SelectBoolean';
 import { useRouter } from 'next/router';
-import React, { FC, memo } from 'react';
+import { memo, type FC } from 'react';
 
 const EventSettings: FC = () => {
 	const router = useRouter();

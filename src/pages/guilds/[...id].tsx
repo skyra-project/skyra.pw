@@ -2,7 +2,6 @@ import { useAuthenticated } from '@contexts/AuthenticationContext';
 import RedirectRoute from '@routing/RedirectRoute';
 import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
-import React from 'react';
 
 const GuildSettingsProvider = dynamic(() => import('@contexts/Settings/GuildSettingsContext'));
 const GuildSettingsChangesProvider = dynamic(() => import('@contexts/Settings/GuildSettingsChangesContext'));

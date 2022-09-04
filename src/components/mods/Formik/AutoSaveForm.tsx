@@ -1,6 +1,6 @@
 import { Time } from '@utils/skyraUtils';
 import { Form, Formik, FormikHelpers } from 'formik';
-import React, { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 import type { ObjectShape, OptionalObjectSchema, TypeOfShape } from 'yup/lib/object';
 import AutoSave from './AutoSave';
 

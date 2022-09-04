@@ -1,5 +1,5 @@
 import type { GridProps } from '@mui/material/Grid/Grid';
-import React, { Children as ReactChildren, FC, memo } from 'react';
+import { Children as ReactChildren, memo, type FC } from 'react';
 
 import { Grid } from '@mui/material';
 

@@ -16,7 +16,7 @@ import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import NextNprogress from 'nextjs-progressbar';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 const DiscordPackProvider = dynamic(() => import('@contexts/DiscordPackContext'));
 const AuthenticatedProvider = dynamic(() => import('@contexts/AuthenticationContext'));

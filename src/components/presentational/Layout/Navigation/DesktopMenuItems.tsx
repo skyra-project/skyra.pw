@@ -13,7 +13,7 @@ import MenuItemLink from '@routing/MenuItemLink';
 import { oauthURL } from '@utils/constants';
 import { navigate } from '@utils/util';
 import { useRouter } from 'next/router';
-import React, { FC, memo, MouseEvent as ReactMouseEvent, useEffect, useRef, useState } from 'react';
+import { memo, MouseEvent as ReactMouseEvent, useEffect, useRef, useState, type FC } from 'react';
 
 export interface DesktopMenuItemsProps {
 	loading?: boolean;

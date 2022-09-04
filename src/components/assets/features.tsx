@@ -13,7 +13,6 @@ import {
 	DiscordMessage,
 	DiscordMessages
 } from '@skyra/discord-components-react';
-import React from 'react';
 import { Twemoji } from 'react-emoji-render';
 
 const heavyRightPointingArrow = '\u276F';

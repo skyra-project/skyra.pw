@@ -89,7 +89,7 @@
 		"react/no-is-mounted": "warn",
 		"react/no-this-in-sfc": "warn",
 		"react/no-typos": "error",
-		"react/react-in-jsx-scope": "error",
+		"react/react-in-jsx-scope": "off",
 		"react/require-render-return": "error",
 		"react/style-prop-object": "warn",
 		"react/void-dom-elements-no-children": "warn",
@@ -142,6 +142,13 @@
 			"files": ["src/pages/**/*.tsx", "src/next.config.js"],
 			"rules": {
 				"@typescript-eslint/require-await": "off"
+			}
+		},
+
+		{
+			"files": ["src/next.config.js"],
+			"rules": {
+				"@typescript-eslint/no-var-requires": "off"
 			}
 		}
 	]

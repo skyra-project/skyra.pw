@@ -1,6 +1,6 @@
-import React, { forwardRef } from 'react';
-import type { UnorderedListProps } from 'react-markdown/lib/ast-to-react';
 import { List as MuiList } from '@mui/material';
+import { forwardRef } from 'react';
+import type { UnorderedListProps } from 'react-markdown/lib/ast-to-react';
 
 const UnorderedList = forwardRef<HTMLUListElement, UnorderedListProps>(({ children }, ref) => (
 	<MuiList

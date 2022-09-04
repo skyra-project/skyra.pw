@@ -1,7 +1,7 @@
 import type features from '@assets/features';
 import { Box, Divider, Grid, Typography } from '@mui/material';
 import dynamic from 'next/dynamic';
-import React, { FC } from 'react';
+import type { FC } from 'react';
 
 interface HomePageSectionProps {
 	feature: typeof features extends Array<infer U> ? U : never;

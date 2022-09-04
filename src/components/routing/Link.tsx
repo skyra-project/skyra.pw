@@ -4,7 +4,7 @@ import NextLinkComposed, { NextLinkComposedProps } from '@next/NextComposed';
 import clsx from 'clsx';
 import type { LinkProps as NextLinkProps } from 'next/link';
 import { useRouter } from 'next/router';
-import React, { CSSProperties, forwardRef, PropsWithChildren, ReactNode } from 'react';
+import { forwardRef, type CSSProperties, type PropsWithChildren, type ReactNode } from 'react';
 import styles from './Link.module.css';
 
 import { Link as MuiLink, Typography } from '@mui/material';

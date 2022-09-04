@@ -14,7 +14,7 @@ import { oauthURL } from '@utils/constants';
 import { displayAvatarURL } from '@utils/skyraUtils';
 import { clearData, logOut, syncUser } from '@utils/util';
 import { useRouter } from 'next/router';
-import React, { FC, memo, MouseEvent as ReactMouseEvent, useEffect, useRef, useState } from 'react';
+import { memo, MouseEvent as ReactMouseEvent, useEffect, useRef, useState, type FC } from 'react';
 import SpinningSyncIcon from './SpinningSyncIcon';
 
 import { ClickAwayListener, Grow, IconButton, ListItemIcon, MenuItem, MenuList, Paper, Popper, Typography } from '@mui/material';
