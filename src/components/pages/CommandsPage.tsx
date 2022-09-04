@@ -9,7 +9,7 @@ import { Time } from '@utils/skyraUtils';
 import { useWindowSize } from '@utils/useWindowSize';
 import { apiFetch, loadState, saveState } from '@utils/util';
 import debounce from 'lodash/debounce';
-import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Box, Container } from '@mui/material';
 
@@ -26,12 +26,16 @@ const CommandsPage: FC = () => {
 		if (commandsFromLocalStorage && (process.env.NODE_ENV === 'development' || commandsFromLocalStorage.expire > Date.now())) {
 			setCommands(commandsFromLocalStorage.data);
 		} else {
-			const commandsData = await apiFetch<FlattenedCommand[]>('/commands');
-			setCommands(commandsData);
-			saveState<ExpirableLocalStorageStructure<FlattenedCommand[]>>(LocalStorageKeys.Commands, {
-				expire: Date.now() + Time.Day * 6,
-				data: commandsData
-			});
+			try {
+				const commandsData = await apiFetch<FlattenedCommand[]>('/commands');
+				setCommands(commandsData);
+				saveState<ExpirableLocalStorageStructure<FlattenedCommand[]>>(LocalStorageKeys.Commands, {
+					expire: Date.now() + Time.Day * 6,
+					data: commandsData
+				});
+			} catch (error) {
+				setLoading(false);
+			}
 		}
 
 		setLoading(false);

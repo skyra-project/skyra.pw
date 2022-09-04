@@ -13,7 +13,6 @@ import FilterNewLineSettings from '@pages/Settings/Filter/FilterNewLineSettings'
 import FilterReactionSettings from '@pages/Settings/Filter/FilterReactionSettings';
 import FilterWordSettings from '@pages/Settings/Filter/FilterWordSettings';
 import GeneralSettings from '@pages/Settings/GeneralSettings';
-import MessageSettings from '@pages/Settings/MessageSettings';
 import ModerationSettings from '@pages/Settings/ModerationSettings';
 import RoleSettings from '@pages/Settings/RoleSettings';
 import SuggestionSettings from '@pages/Settings/SuggestionSettings';
@@ -80,8 +79,6 @@ const GuildSettings: FC<GuildSettingsProps> = () => {
 				return <DisabledCommandSettings setCommands={setCommands} commands={commands} />;
 			case GuildRoutes.Events:
 				return <EventSettings />;
-			case GuildRoutes.Messages:
-				return <MessageSettings />;
 			case GuildRoutes.Moderation:
 				return <ModerationSettings />;
 			case GuildRoutes.Roles:

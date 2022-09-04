@@ -12,18 +12,17 @@ import ChannelsIcon from '@mui/icons-material/Forum';
 import GavelIcon from '@mui/icons-material/Gavel';
 import RolesIcon from '@mui/icons-material/Group';
 import InputIcon from '@mui/icons-material/Input';
-import MessagesIcon from '@mui/icons-material/Message';
 import SettingsIcon from '@mui/icons-material/Settings';
 import GuildIcon from '@presentational/GuildIcon';
 import ListItemLink from '@routing/ListItemLink';
 import { isNullish, noop } from '@sapphire/utilities';
 import { navigate } from '@utils/util';
 import { useRouter } from 'next/router';
-import React, { FC, Fragment, memo, useState } from 'react';
+import { FC, Fragment, memo, useState } from 'react';
 import type { ValuesType } from 'utility-types';
 
-import { Box, Collapse, Divider, List, ListItem, ListItemIcon, ListItemText, Skeleton, Typography } from '@mui/material';
 import { useMobileContext } from '@contexts/MobileContext';
+import { Box, Collapse, Divider, List, ListItem, ListItemIcon, ListItemText, Skeleton, Typography } from '@mui/material';
 
 export interface SettingsDrawerItemsProps {
 	guildData: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>> | undefined;
@@ -215,16 +214,6 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 						href={`/guilds/${guildId}/${GuildRoutes.Events}`}
 						itemText="Events"
 						Icon={<EventIcon />}
-					/>
-
-					{/* ------------------------------- */}
-
-					<ListItemLink
-						listItemOnClick={closeSidebarOnMobile}
-						listItemDisabled={!guildData || isLoading}
-						href={`/guilds/${guildId}/${GuildRoutes.Messages}`}
-						itemText="Messages"
-						Icon={<MessagesIcon />}
 					/>
 
 					{/* ------------------------------- */}
