@@ -1,3 +1,11 @@
+/**
+ * Code taken from Media Kit provided through https://discord.com/branding
+ * Property of Discord Inc.
+ * All Rights Reserved
+ *
+ * Exact source in Media Kit source: /Logos/3_Icon_Clyde/RGB/icon_clyde_blurple_RGB.svg
+ */
+
 import { SvgIcon, type SvgIconProps } from '@mui/material';
 import { memo, type FC } from 'react';
 
