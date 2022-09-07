@@ -1,98 +1,63 @@
 {
-  "projectName": "skyra.pw",
-  "projectOwner": "skyra-project",
-  "repoType": "github",
-  "repoHost": "https://github.com",
-  "files": [
-    "README.md"
-  ],
-  "imageSize": 100,
-  "commit": true,
-  "commitConvention": "angular",
-  "contributors": [
-    {
-      "login": "Favna",
-      "name": "Jeroen Claassens",
-      "avatar_url": "https://avatars3.githubusercontent.com/u/4019718?v=4",
-      "profile": "https://favware.tech/",
-      "contributions": [
-        "bug",
-        "code",
-        "content",
-        "design",
-        "infra",
-        "maintenance",
-        "platform",
-        "projectManagement",
-        "review"
-      ]
-    },
-    {
-      "login": "kyranet",
-      "name": "Antonio Román",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/24852502?v=4",
-      "profile": "https://github.com/kyranet",
-      "contributions": [
-        "bug",
-        "code",
-        "content",
-        "design",
-        "projectManagement",
-        "review"
-      ]
-    },
-    {
-      "login": "gc",
-      "name": "GC",
-      "avatar_url": "https://avatars2.githubusercontent.com/u/30398469?v=4",
-      "profile": "https://github.com/gc",
-      "contributions": [
-        "bug",
-        "code",
-        "content",
-        "design",
-        "platform",
-        "review"
-      ]
-    },
-    {
-      "login": "cfanoulis",
-      "name": "Charalampos Fanoulis",
-      "avatar_url": "https://avatars3.githubusercontent.com/u/38255093?v=4",
-      "profile": "https://github.com/cfanoulis",
-      "contributions": [
-        "design",
-        "code"
-      ]
-    },
-    {
-      "login": "MrJacz",
-      "name": "Jacz",
-      "avatar_url": "https://avatars3.githubusercontent.com/u/23615291?v=4",
-      "profile": "https://jaczaus.me/",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "Rexogamer",
-      "name": "Ed L",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/42586271?v=4",
-      "profile": "https://github.com/Rexogamer",
-      "contributions": [
-        "content"
-      ]
-    },
-    {
-      "login": "abstraq",
-      "name": "Josh",
-      "avatar_url": "https://avatars.githubusercontent.com/u/42789460?v=4",
-      "profile": "https://www.abstraq.me",
-      "contributions": [
-        "code"
-      ]
-    }
-  ],
-  "contributorsPerLine": 7,
-  "skipCi": true
+	"projectName": "skyra.pw",
+	"projectOwner": "skyra-project",
+	"repoType": "github",
+	"repoHost": "https://github.com",
+	"files": ["README.md"],
+	"imageSize": 100,
+	"commit": true,
+	"commitConvention": "angular",
+	"contributors": [
+		{
+			"login": "Favna",
+			"name": "Jeroen Claassens",
+			"avatar_url": "https://avatars3.githubusercontent.com/u/4019718?v=4",
+			"profile": "https://favware.tech/",
+			"contributions": ["bug", "code", "content", "design", "infra", "maintenance", "platform", "projectManagement", "review"]
+		},
+		{
+			"login": "kyranet",
+			"name": "Aura Román",
+			"avatar_url": "https://avatars0.githubusercontent.com/u/24852502?v=4",
+			"profile": "https://github.com/kyranet",
+			"contributions": ["bug", "code", "content", "design", "projectManagement", "review"]
+		},
+		{
+			"login": "gc",
+			"name": "GC",
+			"avatar_url": "https://avatars2.githubusercontent.com/u/30398469?v=4",
+			"profile": "https://github.com/gc",
+			"contributions": ["bug", "code", "content", "design", "platform", "review"]
+		},
+		{
+			"login": "cfanoulis",
+			"name": "Charalampos Fanoulis",
+			"avatar_url": "https://avatars3.githubusercontent.com/u/38255093?v=4",
+			"profile": "https://github.com/cfanoulis",
+			"contributions": ["design", "code"]
+		},
+		{
+			"login": "MrJacz",
+			"name": "Jacz",
+			"avatar_url": "https://avatars3.githubusercontent.com/u/23615291?v=4",
+			"profile": "https://jaczaus.me/",
+			"contributions": ["code"]
+		},
+		{
+			"login": "Rexogamer",
+			"name": "Ed L",
+			"avatar_url": "https://avatars0.githubusercontent.com/u/42586271?v=4",
+			"profile": "https://github.com/Rexogamer",
+			"contributions": ["content"]
+		},
+		{
+			"login": "abstraq",
+			"name": "Josh",
+			"avatar_url": "https://avatars.githubusercontent.com/u/42789460?v=4",
+			"profile": "https://www.abstraq.me",
+			"contributions": ["code"]
+		}
+	],
+	"contributorsPerLine": 7,
+	"skipCi": true
 }
