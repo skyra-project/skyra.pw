@@ -102,10 +102,18 @@ const App: NextPage<SkyraAppProps> = ({ Component, pageProps, emotionCache = cli
 				<meta httpEquiv="Page-Exit" content="RevealTrans(Duration=3.0,Transition=12)" />
 
 				<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+				<link rel="icon" type="image/png" sizes="36x36" href="/icons/android-chrome-36x36.png" />
+				<link rel="icon" type="image/png" sizes="48x48" href="/icons/android-chrome-48x48.png" />
+				<link rel="icon" type="image/png" sizes="72x72" href="/icons/android-chrome-72x72.png" />
+				<link rel="icon" type="image/png" sizes="96x96" href="/icons/android-chrome-96x96.png" />
+				<link rel="icon" type="image/png" sizes="144x144" href="/icons/android-chrome-144x144.png" />
 				<link rel="icon" type="image/png" sizes="192x192" href="/icons/android-chrome-192x192.png" />
-				<link rel="icon" type="image/png" sizes="194x194" href="/icons/android-chrome-194x194.png" />
-				<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+				<link rel="icon" type="image/png" sizes="256x256" href="/icons/android-chrome-256x256.png" />
+				<link rel="icon" type="image/png" sizes="384x384" href="/icons/android-chrome-384x384.png" />
+				<link rel="icon" type="image/png" sizes="512x512" href="/icons/android-chrome-512x512.png" />
 				<link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
+				<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+				<link rel="icon" type="image/png" sizes="192x194" href="/icons/favicon-192x194.png" />
 				<link rel="manifest" href="/manifest.json" />
 				<link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color={theme.palette.primary.main} />
 				<link rel="shortcut icon" href="/icons/favicon.ico" />
