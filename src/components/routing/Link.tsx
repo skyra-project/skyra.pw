@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { forwardRef, type CSSProperties, type PropsWithChildren, type ReactNode } from 'react';
 import styles from './Link.module.css';
 
-import { Link as MuiLink, Typography } from '@mui/material';
+import { Link as MuiLink } from '@mui/material';
 
 type LinkProps = {
 	/** The href to navigate to */
@@ -65,13 +65,7 @@ export default forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
 		if (forceSameTab || pathname?.startsWith('/')) {
 			return (
 				<NextLinkComposed className={className} ref={ref} to={href} {...other}>
-					{Boolean(text) ? (
-						<Typography component="span" color="primary" variant="body2" {...TextTypographyProps}>
-							{text}
-						</Typography>
-					) : (
-						<>{children}</>
-					)}
+					{Boolean(text) ? text : <>{children}</>}
 				</NextLinkComposed>
 			);
 		}
@@ -90,13 +84,7 @@ export default forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
 				{...nextjsProps}
 				{...other}
 			>
-				{Boolean(text) ? (
-					<Typography component="span" color="primary" variant="body2" {...TextTypographyProps}>
-						{text}
-					</Typography>
-				) : (
-					<>{children}</>
-				)}
+				{Boolean(text) ? text : <>{children}</>}
 			</MuiLink>
 		);
 	}
