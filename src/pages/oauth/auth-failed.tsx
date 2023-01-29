@@ -36,7 +36,7 @@ const AuthFailedPage: NextPage = () => {
 								variant={isOnMobile ? 'h5' : 'h4'}
 								color="textPrimary"
 								sx={{
-									lineHeight: (theme) => theme.spacing(0.2),
+									lineHeight: 1.6,
 									textAlign: 'center',
 									mb: 5
 								}}
