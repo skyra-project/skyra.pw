@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url';
 
 const srcDir = new URL('../src/', import.meta.url);
 
-sitemapGenerator({
+await sitemapGenerator({
 	baseUrl: 'https://skyra.pw',
 	pagesDirectory: fileURLToPath(new URL('pages/', srcDir)),
 	targetDirectory: fileURLToPath(new URL('public/', srcDir)),
