@@ -45,7 +45,7 @@ const ChannelSettings: FC = () => {
 							tooltipTitle={description}
 							value={guildSettings[key]}
 							onReset={() => handleResetKey(guildSettingsChanges, setGuildSettingsChanges, key)}
-							onChange={(channel: typeof guildSettings[typeof key]) => {
+							onChange={(channel: (typeof guildSettings)[typeof key]) => {
 								return setGuildSettingsChanges({ [key]: channel });
 							}}
 							guild={guildData}
@@ -91,7 +91,7 @@ const ChannelSettings: FC = () => {
 							tooltipTitle={description}
 							value={guildSettings[key]}
 							onReset={() => handleResetKey(guildSettingsChanges, setGuildSettingsChanges, key)}
-							onChange={(channel: typeof guildSettings[typeof key]) => setGuildSettingsChanges({ [key]: channel })}
+							onChange={(channel: (typeof guildSettings)[typeof key]) => setGuildSettingsChanges({ [key]: channel })}
 							guild={guildData}
 							label={name}
 							ButtonProps={{
