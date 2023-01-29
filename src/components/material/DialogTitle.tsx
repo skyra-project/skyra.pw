@@ -9,7 +9,9 @@ interface DialogTitleProps {
 
 const DialogTitle = ({ children, onClose }: PropsWithChildren<DialogTitleProps>) => (
 	<MuiDialogTitle>
-		<Typography variant="h6">{children}</Typography>
+		<Typography variant="h6" component="div">
+			{children}
+		</Typography>
 		<IconButton
 			sx={{
 				position: 'absolute',
