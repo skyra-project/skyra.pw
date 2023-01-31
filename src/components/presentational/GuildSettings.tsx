@@ -15,7 +15,6 @@ import FilterWordSettings from '@pages/Settings/Filter/FilterWordSettings';
 import GeneralSettings from '@pages/Settings/GeneralSettings';
 import ModerationSettings from '@pages/Settings/ModerationSettings';
 import RoleSettings from '@pages/Settings/RoleSettings';
-import SuggestionSettings from '@pages/Settings/SuggestionSettings';
 import Loading from '@presentational/Loading';
 import { ExpirableLocalStorageStructure, LocalStorageKeys } from '@utils/constants';
 import { Time } from '@utils/skyraUtils';
@@ -83,8 +82,6 @@ const GuildSettings: FC<GuildSettingsProps> = () => {
 				return <ModerationSettings />;
 			case GuildRoutes.Roles:
 				return <RoleSettings />;
-			case GuildRoutes.Suggestions:
-				return <SuggestionSettings />;
 			case FilterRoutes.Capitals:
 				return <FilterCapitalsSettings />;
 			case FilterRoutes.Invites:

@@ -1,13 +1,3 @@
-export namespace Suggestions {
-	export interface OnAction {
-		description: string;
-
-		key: `suggestionsOnAction${'Dm' | 'RePost' | 'HideAuthor'}`;
-
-		title: string;
-	}
-}
-
 export namespace Roles {
 	export interface Role {
 		key: `roles${
