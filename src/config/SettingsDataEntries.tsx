@@ -1,24 +1,4 @@
-import type { Channels, Events, Moderation, Roles, Suggestions } from './types/ConfigurableData';
-
-export const ConfigurableSuggestionActions: Suggestions.OnAction[] = [
-	{
-		title: 'DM',
-		key: 'suggestionsOnActionDm',
-		description: "If this setting is enabled, Skyra will DM the suggestion's author every time it is updated."
-	},
-	{
-		title: 'Repost',
-		key: 'suggestionsOnActionRePost',
-		description:
-			"If this setting is enabled, Skyra will repost the suggestion's message every time it is updated. If it is disabled, it will edit the original message."
-	},
-	{
-		title: 'Hide Author',
-		key: 'suggestionsOnActionHideAuthor',
-		description:
-			'This setting allows you to update suggestions anonymously. It will substitute the updater\'s name with either "An administrator" or "A moderator", according to their permission level.'
-	}
-];
+import type { Channels, Events, Moderation, Roles } from './types/ConfigurableData';
 
 export const ConfigurableRemoveInitialRole: Roles.Role = {
 	name: 'Remove Initial',

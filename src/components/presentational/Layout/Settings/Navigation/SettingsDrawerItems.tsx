@@ -245,16 +245,6 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 						itemText="Custom Commands"
 						Icon={<CustomCommandsIcon />}
 					/>
-
-					{/* ------------------------------- */}
-
-					<ListItemLink
-						listItemOnClick={closeSidebarOnMobile}
-						listItemDisabled={!guildData || isLoading}
-						href={`/guilds/${guildId}/${GuildRoutes.Suggestions}`}
-						itemText="Suggestions"
-						Icon={<FeedbackIcon />}
-					/>
 				</List>
 			</Box>
 		</Fragment>

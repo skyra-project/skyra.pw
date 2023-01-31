@@ -145,10 +145,6 @@ export interface GuildSettings {
 	selfmodReactionsThresholdDuration: number;
 	selfmodReactionsThresholdMaximum: number;
 	stickyRoles: StickyRole[];
-	suggestionsChannel: string | null;
-	suggestionsOnActionDm: boolean;
-	suggestionsOnActionHideAuthor: boolean;
-	suggestionsOnActionRePost: boolean;
 }
 
 interface PermissionsNode {

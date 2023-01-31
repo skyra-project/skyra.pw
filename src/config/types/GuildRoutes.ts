@@ -5,8 +5,7 @@ export enum GuildRoutes {
 	Events = 'events',
 	Messages = 'messages',
 	Moderation = 'moderation',
-	Roles = 'roles',
-	Suggestions = 'suggestions'
+	Roles = 'roles'
 }
 
 export enum FilterRoutes {
