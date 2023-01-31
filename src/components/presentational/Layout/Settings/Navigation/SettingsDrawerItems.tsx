@@ -6,7 +6,6 @@ import EventIcon from '@mui/icons-material/EventNote';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import CustomCommandsIcon from '@mui/icons-material/Extension';
-import FeedbackIcon from '@mui/icons-material/Feedback';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import ChannelsIcon from '@mui/icons-material/Forum';
 import GavelIcon from '@mui/icons-material/Gavel';
