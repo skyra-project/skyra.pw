@@ -35,10 +35,7 @@ const PrivacyPolicy = () => (
 					variant="h1"
 					align="center"
 					sx={{
-						fontSize: {
-							md: 'inherit',
-							xs: (theme) => theme.typography.pxToRem(50)
-						}
+						fontSize: '50px'
 					}}
 				>
 					SKYRA PRIVACY POLICY
@@ -77,10 +74,8 @@ const PrivacyPolicy = () => (
 					variant="h2"
 					sx={{
 						py: 3,
-						fontSize: {
-							md: 'inherit',
-							xs: (theme) => theme.typography.pxToRem(30)
-						}
+						fontSize: '30px',
+						textTransform: 'uppercase'
 					}}
 				>
 					WELCOME TO SKYRA PROJECT!
@@ -122,10 +117,8 @@ const PrivacyPolicy = () => (
 					variant="h2"
 					sx={{
 						py: 3,
-						fontSize: {
-							md: 'inherit',
-							xs: (theme) => theme.typography.pxToRem(30)
-						}
+						fontSize: '30px',
+						textTransform: 'uppercase'
 					}}
 				>
 					INFORMATION WE COLLECT
@@ -146,10 +139,8 @@ const PrivacyPolicy = () => (
 					variant="h3"
 					sx={{
 						py: 3,
-						fontSize: {
-							md: 'inherit',
-							xs: (theme) => theme.typography.pxToRem(30)
-						}
+						fontSize: '30px',
+						textTransform: 'uppercase'
 					}}
 				>
 					OTHER INFORMATION
@@ -188,10 +179,8 @@ const PrivacyPolicy = () => (
 					variant="h2"
 					sx={{
 						py: 3,
-						fontSize: {
-							md: 'inherit',
-							xs: (theme) => theme.typography.pxToRem(30)
-						}
+						fontSize: '30px',
+						textTransform: 'uppercase'
 					}}
 				>
 					WHERE INFORMATION IS PROCESSED
@@ -207,10 +196,8 @@ const PrivacyPolicy = () => (
 					variant="h2"
 					sx={{
 						py: 3,
-						fontSize: {
-							md: 'inherit',
-							xs: (theme) => theme.typography.pxToRem(30)
-						}
+						fontSize: '30px',
+						textTransform: 'uppercase'
 					}}
 				>
 					OUR USE OF YOUR INFORMATION
@@ -233,10 +220,8 @@ const PrivacyPolicy = () => (
 					variant="h2"
 					sx={{
 						py: 3,
-						fontSize: {
-							md: 'inherit',
-							xs: (theme) => theme.typography.pxToRem(30)
-						}
+						fontSize: '30px',
+						textTransform: 'uppercase'
 					}}
 				>
 					OUR LEGAL BASES FOR HANDLING OF YOUR PERSONAL DATA
@@ -276,10 +261,8 @@ const PrivacyPolicy = () => (
 					variant="h2"
 					sx={{
 						py: 3,
-						fontSize: {
-							md: 'inherit',
-							xs: (theme) => theme.typography.pxToRem(30)
-						}
+						fontSize: '30px',
+						textTransform: 'uppercase'
 					}}
 				>
 					OUR DISCLOSURE OF YOUR INFORMATION
@@ -328,10 +311,8 @@ const PrivacyPolicy = () => (
 					variant="h2"
 					sx={{
 						py: 3,
-						fontSize: {
-							md: 'inherit',
-							xs: (theme) => theme.typography.pxToRem(30)
-						}
+						fontSize: '30px',
+						textTransform: 'uppercase'
 					}}
 				>
 					UNSOLICITED INFORMATION
@@ -346,10 +327,8 @@ const PrivacyPolicy = () => (
 					variant="h2"
 					sx={{
 						py: 3,
-						fontSize: {
-							md: 'inherit',
-							xs: (theme) => theme.typography.pxToRem(30)
-						}
+						fontSize: '30px',
+						textTransform: 'uppercase'
 					}}
 				>
 					CHILDREN
@@ -368,10 +347,8 @@ const PrivacyPolicy = () => (
 					variant="h2"
 					sx={{
 						py: 3,
-						fontSize: {
-							md: 'inherit',
-							xs: (theme) => theme.typography.pxToRem(30)
-						}
+						fontSize: '30px',
+						textTransform: 'uppercase'
 					}}
 				>
 					LINKS TO OTHER WEB SITES
@@ -387,10 +364,8 @@ const PrivacyPolicy = () => (
 					variant="h2"
 					sx={{
 						py: 3,
-						fontSize: {
-							md: 'inherit',
-							xs: (theme) => theme.typography.pxToRem(30)
-						}
+						fontSize: '30px',
+						textTransform: 'uppercase'
 					}}
 				>
 					DATA RETENTION
@@ -405,10 +380,8 @@ const PrivacyPolicy = () => (
 					variant="h2"
 					sx={{
 						py: 3,
-						fontSize: {
-							md: 'inherit',
-							xs: (theme) => theme.typography.pxToRem(30)
-						}
+						fontSize: '30px',
+						textTransform: 'uppercase'
 					}}
 				>
 					SECURITY
@@ -424,10 +397,8 @@ const PrivacyPolicy = () => (
 					variant="h2"
 					sx={{
 						py: 3,
-						fontSize: {
-							md: 'inherit',
-							xs: (theme) => theme.typography.pxToRem(30)
-						}
+						fontSize: '30px',
+						textTransform: 'uppercase'
 					}}
 				>
 					YOUR DATA RIGHTS AND CHOICES
@@ -481,10 +452,8 @@ const PrivacyPolicy = () => (
 					variant="h2"
 					sx={{
 						py: 3,
-						fontSize: {
-							md: 'inherit',
-							xs: (theme) => theme.typography.pxToRem(30)
-						}
+						fontSize: '30px',
+						textTransform: 'uppercase'
 					}}
 				>
 					WHO IS SKYRA PROJECT'S EEA REPRESENTATIVE?
@@ -500,10 +469,8 @@ const PrivacyPolicy = () => (
 					variant="h2"
 					sx={{
 						py: 3,
-						fontSize: {
-							md: 'inherit',
-							xs: (theme) => theme.typography.pxToRem(30)
-						}
+						fontSize: '30px',
+						textTransform: 'uppercase'
 					}}
 				>
 					YOUR CALIFORNIA PRIVACY RIGHTS
@@ -649,10 +616,8 @@ const PrivacyPolicy = () => (
 					variant="h2"
 					sx={{
 						py: 3,
-						fontSize: {
-							md: 'inherit',
-							xs: (theme) => theme.typography.pxToRem(30)
-						}
+						fontSize: '30px',
+						textTransform: 'uppercase'
 					}}
 				>
 					CHANGES TO THIS PRIVACY POLICY
@@ -668,10 +633,8 @@ const PrivacyPolicy = () => (
 					variant="h2"
 					sx={{
 						py: 3,
-						fontSize: {
-							md: 'inherit',
-							xs: (theme) => theme.typography.pxToRem(30)
-						}
+						fontSize: '30px',
+						textTransform: 'uppercase'
 					}}
 				>
 					CONTACTING US
