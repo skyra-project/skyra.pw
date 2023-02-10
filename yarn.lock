@@ -2361,7 +2361,6 @@ __metadata:
     eslint-plugin-prettier: ^4.2.1
     eslint-plugin-react: ^7.32.2
     eslint-plugin-react-hooks: ^4.6.0
-    fibers: ^5.0.3
     formik: ^2.2.9
     husky: ^8.0.3
     lint-staged: ^13.1.1
@@ -4151,15 +4150,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"detect-libc@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "detect-libc@npm:1.0.3"
-  bin:
-    detect-libc: ./bin/detect-libc.js
-  checksum: daaaed925ffa7889bd91d56e9624e6c8033911bb60f3a50a74a87500680652969dbaab9526d1e200a4c94acf80fc862a22131841145a0a8482d60a99c24f4a3e
-  languageName: node
-  linkType: hard
-
 "diff@npm:^4.0.1":
   version: 4.0.2
   resolution: "diff@npm:4.0.2"
@@ -4932,15 +4922,6 @@ __metadata:
   dependencies:
     reusify: ^1.0.4
   checksum: 32cf15c29afe622af187d12fc9cd93e160a0cb7c31a3bb6ace86b7dea3b28e7b72acde89c882663f307b2184e14782c6c664fa315973c03626c7d4bff070bb0b
-  languageName: node
-  linkType: hard
-
-"fibers@npm:^5.0.3":
-  version: 5.0.3
-  resolution: "fibers@npm:5.0.3"
-  dependencies:
-    detect-libc: ^1.0.3
-  checksum: d66c5e18a911aab3480b846e1c837e5c7cfacb27a2a5fe512919865eaecef33cdd4abc14d777191a6a93473dc52356d48549c91a2a7b8b3450544c44104b23f3
   languageName: node
   linkType: hard
 
