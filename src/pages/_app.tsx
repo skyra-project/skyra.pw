@@ -18,8 +18,8 @@ import Head from 'next/head';
 import NextNprogress from 'nextjs-progressbar';
 import { useEffect } from 'react';
 
-const DiscordPackProvider = dynamic(() => import('@contexts/DiscordPackContext'));
-const AuthenticatedProvider = dynamic(() => import('@contexts/AuthenticationContext'));
+const DiscordPackProvider = dynamic(() => import('@contexts/DiscordPackContext'), { ssr: false });
+const AuthenticatedProvider = dynamic(() => import('@contexts/AuthenticationContext'), { ssr: false });
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
