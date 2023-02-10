@@ -18,10 +18,7 @@ const HomePageSection: FC<HomePageSectionProps> = ({ feature, isOdd }) => {
 				sx={{
 					display: 'flex',
 					flexDirection: 'column',
-					width: {
-						lg: '100%',
-						xs: '47%'
-					}
+					width: '100%'
 				}}
 			>
 				<Typography variant="h3" component="h1">
