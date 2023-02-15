@@ -17,7 +17,7 @@ const Right = () => (
 		<Link href="https://join.skyra.pw" text="Support Server" />
 		<Link href="/privacy" text="Privacy Policy" />
 		<Link href={inviteURL.toString()} text="Invite Link" />
-		<Link href="https://github.com/skyra-project/skyra" text="Github" />
+		<Link href="https://github.com/skyra-project/skyra" text="GitHub" />
 	</Box>
 );
 
