@@ -1,23 +1,19 @@
 # dependencies
-node_modules/
-.pnp/
+node_modules
 package-lock.json
-.pnp.js
 
-# production
-build/
-dist/
-.next/
-.tsbuildinfo
-sitemap.xml
-sw.js
-workbox*.js
-local.Dockerfile
-*.tsbuildinfo
+# Yarn files
+.yarn/install-state.gz
+.yarn/build-state.yml
 
 # misc
 .DS_Store
 Thumbs.db
+
+# Logs
+logs/
+coverage/
+*.log*
 
 # Local env vars
 .env.local
@@ -29,12 +25,10 @@ Thumbs.db
 .idea/
 .vs/
 
-# Log files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-*.log
-
-# Yarn files
-.yarn/install-state.gz
-.yarn/build-state.yml
+# Nuxt files
+.nuxt
+.nitro
+.cache
+.output
+.env
+dist
