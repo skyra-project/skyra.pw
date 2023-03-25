@@ -58,6 +58,11 @@ const manifestIcons = [
 ];
 
 export default defineNuxtConfig({
+	vue: {
+		compilerOptions: {
+			isCustomElement: (tag) => tag.startsWith('discord-')
+		}
+	},
 	modules: [
 		'@nuxtjs/tailwindcss',
 		'@pinia-plugin-persistedstate/nuxt',

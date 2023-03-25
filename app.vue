@@ -10,6 +10,18 @@
 import { configure } from 'vee-validate';
 import { defineCustomElements } from '@skyra/discord-components-core/loader';
 
+if (!process.server) {
+	window.$discordMessage ??= {};
+	window.$discordMessage.profiles = {
+		...window.$discordMessage.profiles,
+		kyra: {
+			author: 'Kyra',
+			avatar: '/avatars/kyra.gif',
+			roleColor: '#ff9d01'
+		},
+	};
+}
+
 defineCustomElements();
 
 watch(usePreferredColorScheme(), (value) => {

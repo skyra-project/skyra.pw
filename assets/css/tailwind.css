@@ -7,7 +7,6 @@
 	html,
 	body,
 	footer {
-		@apply bg-zinc-50 text-gray-800 dark:bg-zinc-800 dark:text-gray-200;
 		font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
 			'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 	}
