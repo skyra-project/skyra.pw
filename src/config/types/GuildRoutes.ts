@@ -1,6 +1,5 @@
 export enum GuildRoutes {
 	Channels = 'channels',
-	CustomCommands = 'custom-commands',
 	DisabledCommands = 'disabled-commands',
 	Events = 'events',
 	Messages = 'messages',

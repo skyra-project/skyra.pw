@@ -2,7 +2,6 @@ import type { FlattenedCommand } from '@config/types/ApiData';
 import { FilterRoutes, GuildRoutes } from '@config/types/GuildRoutes';
 import Dashboard from '@layout/Settings/Dashboard';
 import ChannelSettings from '@pages/Settings/ChannelSettings';
-import CustomCommandSettings from '@pages/Settings/CustomCommandSettings';
 import DisabledCommandSettings from '@pages/Settings/DisabledCommandSettings';
 import EventSettings from '@pages/Settings/EventSettings';
 import FilterCapitalsSettings from '@pages/Settings/Filter/FilterCapitalsSettings';
@@ -72,8 +71,6 @@ const GuildSettings: FC<GuildSettingsProps> = () => {
 		switch (joinedPath as GuildRoutes & FilterRoutes) {
 			case GuildRoutes.Channels:
 				return <ChannelSettings />;
-			case GuildRoutes.CustomCommands:
-				return <CustomCommandSettings />;
 			case GuildRoutes.DisabledCommands:
 				return <DisabledCommandSettings setCommands={setCommands} commands={commands} />;
 			case GuildRoutes.Events:

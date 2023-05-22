@@ -5,7 +5,6 @@ import Tooltip from '@material/Tooltip';
 import EventIcon from '@mui/icons-material/EventNote';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import CustomCommandsIcon from '@mui/icons-material/Extension';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import ChannelsIcon from '@mui/icons-material/Forum';
 import GavelIcon from '@mui/icons-material/Gavel';
@@ -233,16 +232,6 @@ const SettingsDrawerItems: FC<SettingsDrawerItemsProps> = ({ guildData, guildId,
 						href={`/guilds/${guildId}/${GuildRoutes.DisabledCommands}`}
 						itemText="Disable Commands"
 						Icon={<InputIcon />}
-					/>
-
-					{/* ------------------------------- */}
-
-					<ListItemLink
-						listItemOnClick={closeSidebarOnMobile}
-						listItemDisabled={!guildData || isLoading}
-						href={`/guilds/${guildId}/${GuildRoutes.CustomCommands}`}
-						itemText="Custom Commands"
-						Icon={<CustomCommandsIcon />}
 					/>
 				</List>
 			</Box>

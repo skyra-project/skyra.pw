@@ -58,16 +58,6 @@ export namespace General {
 	};
 }
 
-export namespace CustomCommands {
-	// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-	export type Form = {
-		id: string;
-		content: string;
-		color: string;
-		embed: boolean;
-	};
-}
-
 export namespace Channels {
 	export interface Channel {
 		description: string;
