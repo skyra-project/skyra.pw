@@ -27,7 +27,6 @@ export interface GuildSettings {
 	channelsLogsRoleUpdate: string | null;
 	channelsLogsServerUpdate: string | null;
 	commandAutoDelete: CommandAutoDelete[];
-	customCommands: CustomCommand[];
 	disabledChannels: string[];
 	disabledCommands: string[];
 	disabledCommandsChannels: DisabledCommandChannel[];
@@ -151,14 +150,6 @@ interface PermissionsNode {
 	id: string;
 	allow: string[];
 	deny: string[];
-}
-
-export interface CustomCommand {
-	id: string;
-	embed: boolean;
-	color: number;
-	content: string;
-	aliases: never[];
 }
 
 type CommandAutoDelete = readonly [string, number];
