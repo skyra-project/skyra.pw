@@ -3,7 +3,7 @@ FROM node:18-alpine AS base
 
 RUN apk add --no-cache dumb-init jq
 
-ENV HUSKY=0
+ENV YARN_DISABLE_GIT_HOOKS=1
 ENV NEXT_TELEMETRY_DISABLED=1
 
 ENTRYPOINT ["dumb-init", "--"]
@@ -64,10 +64,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/src/.next/static ./.next/static
 ENV PORT 8281
 ENV NODE_ENV="production"
 ENV NODE_OPTIONS="--enable-source-maps"
-
-# Remove postinstall script to disable husky
-RUN jq 'del(.scripts.postinstall)' package.json > package.json.tmp \
-    && mv package.json.tmp package.json
 
 # Install production dependencies only
 RUN yarn workspaces focus --all --production
