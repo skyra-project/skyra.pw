@@ -1,7 +1,9 @@
 # Base Stage
-FROM node:18-alpine AS base
+FROM node:20-alpine AS base
 
-RUN apk add --no-cache dumb-init jq
+WORKDIR /home/node/app
+
+RUN apk add --no-cache dumb-init jq libc6-compat curl
 
 ENV YARN_DISABLE_GIT_HOOKS=1
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -9,12 +11,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENTRYPOINT ["dumb-init", "--"]
 
 # Dependencies stage
-FROM base AS deps
-
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat
-
-WORKDIR /app
+FROM base AS builder
 
 COPY --chown=node:node package.json ./
 COPY --chown=node:node yarn.lock ./
@@ -23,17 +20,6 @@ COPY --chown=node:node .yarn/ .yarn/
 
 RUN yarn install --immutable
 
-# Builder stage
-FROM base AS builder
-
-WORKDIR /app
-
-COPY --from=deps /app/node_modules ./node_modules
-
-COPY package.json ./
-COPY yarn.lock ./
-COPY .yarnrc.yml .
-COPY .yarn/ .yarn/
 COPY src/ src/
 COPY scripts/ scripts/
 
@@ -41,40 +27,19 @@ RUN yarn build
 
 # Runner stage
 FROM base AS runner
-WORKDIR /app
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+COPY --from=builder --chown=node:node /home/node/app/src/public ./src/public
+COPY --from=builder --chown=node:node /home/node/app/src/.next/standalone ./
+COPY --from=builder --chown=node:node /home/node/app/src/.next/static ./src/.next/static
 
-# Copy package config
-COPY --chown=nextjs:node package.json ./
-COPY --chown=nextjs:node yarn.lock ./
-COPY --chown=nextjs:node .yarnrc.yml .
-COPY --chown=nextjs:node .yarn/ .yarn/
-
-# Copy public directory
-COPY --from=builder --chown=nextjs:nodejs /app/src/public ./public
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/src/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/src/.next/static ./.next/static
-
-# Set the production env vars
 ENV PORT 8281
 ENV NODE_ENV="production"
 ENV NODE_OPTIONS="--enable-source-maps"
 
-# Install production dependencies only
-RUN yarn workspaces focus --all --production
+RUN chown -R node:node /home/node/app/
 
-# Ensure proper ownership
-RUN chown nextjs:nodejs /app
+USER node
 
-# Switch to NextJs user
-USER nextjs
-
-# Expose the port
 EXPOSE 8281
 
-CMD ["node", "server.js"]
+CMD HOSTNAME="0.0.0.0" node src/server.js
