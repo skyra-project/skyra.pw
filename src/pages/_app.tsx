@@ -108,7 +108,6 @@ const App: NextPage<SkyraAppProps> = ({ Component, pageProps, emotionCache = cli
 				<link rel="icon" type="image/png" sizes="96x96" href="/icons/android-chrome-96x96.png" />
 				<link rel="icon" type="image/png" sizes="144x144" href="/icons/android-chrome-144x144.png" />
 				<link rel="icon" type="image/png" sizes="192x192" href="/icons/android-chrome-192x192.png" />
-				<link rel="icon" type="image/png" sizes="256x256" href="/icons/android-chrome-256x256.png" />
 				<link rel="icon" type="image/png" sizes="384x384" href="/icons/android-chrome-384x384.png" />
 				<link rel="icon" type="image/png" sizes="512x512" href="/icons/android-chrome-512x512.png" />
 				<link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />

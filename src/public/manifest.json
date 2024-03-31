@@ -16,8 +16,7 @@
 		{
 			"src": "https://skyra.pw/icons/android-chrome-36x36.png",
 			"sizes": "36x36",
-			"type": "image/png",
-			"purpose": "any badge"
+			"type": "image/png"
 		},
 		{
 			"src": "https://skyra.pw/icons/android-chrome-48x48.png",
@@ -45,11 +44,6 @@
 			"type": "image/png"
 		},
 		{
-			"src": "https://skyra.pw/icons/android-chrome-256x256.png",
-			"sizes": "256x256",
-			"type": "image/png"
-		},
-		{
 			"src": "https://skyra.pw/icons/android-chrome-384x384.png",
 			"sizes": "384x384",
 			"type": "image/png"
@@ -58,12 +52,6 @@
 			"src": "https://skyra.pw/icons/android-chrome-512x512.png",
 			"sizes": "512x512",
 			"type": "image/png"
-		},
-		{
-			"src": "https://skyra.pw/icons/maskable_icon.png",
-			"sizes": "640x640",
-			"type": "image/png",
-			"purpose": "any maskable"
 		}
 	],
 	"shortcuts": [
@@ -71,19 +59,40 @@
 			"name": "Skyra Dashboard",
 			"short_name": "Homepage",
 			"description": "Go to Skyra's dashboard",
-			"url": "/"
+			"url": "/",
+			"icons": [
+				{
+					"src": "https://skyra.pw/icons/android-chrome-96x96.png",
+					"sizes": "96x96",
+					"type": "image/png"
+				}
+			]
 		},
 		{
 			"name": "Skyra Commands",
 			"short_name": "Commands",
 			"description": "View Skyra's commands",
-			"url": "/commands"
+			"url": "/commands",
+			"icons": [
+				{
+					"src": "https://skyra.pw/icons/android-chrome-96x96.png",
+					"sizes": "96x96",
+					"type": "image/png"
+				}
+			]
 		},
 		{
 			"name": "Skyra Privacy Policy",
 			"short_name": "Privacy Policy",
 			"description": "Read Skyra's Privacy Policy",
-			"url": "/privacy"
+			"url": "/privacy",
+			"icons": [
+				{
+					"src": "https://skyra.pw/icons/android-chrome-96x96.png",
+					"sizes": "96x96",
+					"type": "image/png"
+				}
+			]
 		}
 	],
 	"splash_pages": {
@@ -94,8 +103,7 @@
 			{
 				"src": "https://skyra.pw/icons/android-chrome-36x36.png",
 				"sizes": "36x36",
-				"type": "image/png",
-				"purpose": "any badge"
+				"type": "image/png"
 			},
 			{
 				"src": "https://skyra.pw/icons/android-chrome-48x48.png",
@@ -123,11 +131,6 @@
 				"type": "image/png"
 			},
 			{
-				"src": "https://skyra.pw/icons/android-chrome-256x256.png",
-				"sizes": "256x256",
-				"type": "image/png"
-			},
-			{
 				"src": "https://skyra.pw/icons/android-chrome-384x384.png",
 				"sizes": "384x384",
 				"type": "image/png"
@@ -136,12 +139,6 @@
 				"src": "https://skyra.pw/icons/android-chrome-512x512.png",
 				"sizes": "512x512",
 				"type": "image/png"
-			},
-			{
-				"src": "https://skyra.pw/icons/maskable_icon.png",
-				"sizes": "640x640",
-				"type": "image/png",
-				"purpose": "any maskable"
 			}
 		]
 	}
