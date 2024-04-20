@@ -27,6 +27,8 @@
 		"@sapphire/prettier-config": "^1.4.5",
 		"@sapphire/ts-config": "^3.3.4",
 		"@tailwindcss/typography": "^0.5.12",
+		"@types/culori": "^2.1.0",
+		"culori": "^4.0.1",
 		"daisyui": "^4.10.2",
 		"discord-api-types": "0.37.32",
 		"lint-staged": "^13.1.1",

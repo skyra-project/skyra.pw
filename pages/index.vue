@@ -1,7 +1,10 @@
 <template>
-	<section class="text-center max-w-96 mt-16">
-		<h2 class="title pb-4">Imagine a moderation app</h2>
-		<p>
+	<section class="text-center mt-28">
+		<h2 class="title pb-4">
+			Imagine a<br />
+			moderation app
+		</h2>
+		<p class="max-w-[30rem]">
 			A very customizable multilanguage application to help you moderate your server, with a complete logging suite and more,
 			<span class="underline underline-offset-2 font-bold">100% for free</span>!
 		</p>
@@ -12,8 +15,8 @@
 		<nuxt-link class="btn btn-wide join-item" to="#explore"><Icon name="ph:magnifying-glass-fill" class="w-5 h-5" /> Explore</nuxt-link>
 	</section>
 
-	<h2 id="explore" class="text-5xl font-bold mt-32">Explore</h2>
-	<section class="grid grid-cols-2 gap-8 mt-16">
+	<h2 id="explore" class="text-5xl font-bold mt-72">Explore</h2>
+	<section class="grid grid-cols-2 gap-20 mt-32">
 		<div class="flex items-center gap-4">
 			<div class="w-full">
 				<discord-messages class="w-full">
@@ -155,7 +158,7 @@
 		</div>
 	</section>
 
-	<section class="grid grid-cols-2 gap-8 mt-16">
+	<section class="grid grid-cols-2 gap-20 mt-32">
 		<div class="prose max-w-none">
 			<h3 class="text-3xl font-bold flex items-center gap-2 mb-4">
 				<Icon name="ph:shield-fill" class="w-8 h-8" aria-hidden="true" />
@@ -169,8 +172,8 @@
 
 			<p>
 				<Icon name="ph:binoculars-duotone" class="w-5 h-5 my-0 mr-1 text-purple-500" />
-				Skyra can also listen for external moderation actions. You prefer banning by hand than by bot? Good news, Skyra can be
-				configured to listen and log external bans, retrieving the reason from audit logs!
+				Skyra can also listen for external moderation actions. You prefer banning by hand than by bot? Good news, Skyra can be configured to
+				listen and log external bans, retrieving the reason from audit logs!
 			</p>
 		</div>
 
@@ -341,7 +344,7 @@ const otherApps = [
 .title {
 	@apply text-5xl font-bold;
 	line-height: 3.8rem;
-	background: linear-gradient(to bottom in oklch, whitesmoke 40%, color-mix(in oklch, currentColor, oklch(var(--p) / 1) 80%) 100%);
+	background: linear-gradient(to bottom in oklch, whitesmoke 40%, color-mix(in oklch, currentColor, oklch(var(--branding-skyra) / 1) 80%) 100%);
 	background-clip: text;
 	-webkit-text-fill-color: transparent;
 }

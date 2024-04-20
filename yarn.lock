@@ -2333,8 +2333,10 @@ __metadata:
     "@sapphire/prettier-config": "npm:^1.4.5"
     "@sapphire/ts-config": "npm:^3.3.4"
     "@tailwindcss/typography": "npm:^0.5.12"
+    "@types/culori": "npm:^2.1.0"
     "@vueuse/core": "npm:^10.9.0"
     "@vueuse/nuxt": "npm:^10.9.0"
+    culori: "npm:^4.0.1"
     daisyui: "npm:^4.10.2"
     discord-api-types: "npm:0.37.32"
     lint-staged: "npm:^13.1.1"
@@ -2414,6 +2416,13 @@ __metadata:
     "@tufjs/canonical-json": "npm:2.0.0"
     minimatch: "npm:^9.0.3"
   checksum: 10/d89d618c74c4eed3906d9ba5bd1bd9d0fa7a73ad6266b11c74c13102ee00bfdbd8e73fe786bd2e8e3ae347f9a66f044d973a7466dc7c2c2f98a7ff926ff275c4
+  languageName: node
+  linkType: hard
+
+"@types/culori@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@types/culori@npm:2.1.0"
+  checksum: 10/505d0ff9ccb56ffb71bab7eed415a8c2cfc0117f8c99f91f1aa127c5dc43f294ef04e7cab5e7da9df5545974c16239f60555d01b6b37278ad12a5124a85be682
   languageName: node
   linkType: hard
 
@@ -4823,6 +4832,13 @@ __metadata:
   version: 3.3.0
   resolution: "culori@npm:3.3.0"
   checksum: 10/e11fc8e2cd86a2a6cfe4eb676c26ce94d6bb404b8b142f24d2841125f91f9453efcb25ae9c335d0679340d7b51b09299b17dd74aaef066e751352702d47eba62
+  languageName: node
+  linkType: hard
+
+"culori@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "culori@npm:4.0.1"
+  checksum: 10/8751ea969bfa7d89fdd7dbc67d6bb37a10c459416574b26853b099f7a0c068d0d29942b3c034f60092f4593faa4e7008e0aca743a418f815fac19939332c4bea
   languageName: node
   linkType: hard
 

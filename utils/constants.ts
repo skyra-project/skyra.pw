@@ -43,3 +43,5 @@ export const ModerationActions = {
 	VoiceMute: { color: Colors.Amber, name: 'Voice Mute', temporary: Colors.Amber300, undo: Colors.LightBlue },
 	Warning: { color: Colors.Yellow, name: 'Warning', temporary: Colors.Yellow300, undo: Colors.LightBlue }
 };
+
+export const ProviderAppNameKey = Symbol() as InjectionKey<Ref<'artiel' | 'iriss' | 'nekokai' | 'skyra' | 'teryl'>>;

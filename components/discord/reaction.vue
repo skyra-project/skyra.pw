@@ -1,5 +1,5 @@
 <template>
-	<div class="discord-reaction" :class="{self}">
+	<div class="discord-reaction" :class="{ self }">
 		<span class="mx-0.5 flex items-center"><slot></slot></span>
 		<span class="font-bold">{{ count }}</span>
 	</div>
@@ -17,7 +17,7 @@ defineProps<{ count: number; self?: boolean }>();
 }
 
 .discord-reaction:hover {
-	background-color: hsl( 223 6.7% 20.6% / 1);
+	background-color: hsl(223 6.7% 20.6% / 1);
 	border-color: hsl(0 0 100% / 0.2);
 }
 
