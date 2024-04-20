@@ -1,10 +1,10 @@
 {
-	"extends": "./src/tsconfig.json",
+	"extends": "./tsconfig.json",
 	"compilerOptions": {
 		"baseUrl": ".",
 		"allowJs": true,
 		"checkJs": true
 	},
-	"include": ["scripts", "src"],
+	"include": ["components", "layouts", "modules", "pages", "server", "utils", "nuxt.config.ts", "tailwind.config.js"],
 	"exclude": []
 }
