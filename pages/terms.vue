@@ -1,11 +1,11 @@
 <template>
-	<div class="content-fit py-10">
-		<Head>
-			<Title>Skyra | Terms of Service</Title>
-			<Meta name="description" content="Skyra Project's Terms of Service" />
-		</Head>
+	<Head>
+		<Title>Terms of Service</Title>
+		<Meta name="description" content="Skyra Project's Terms of Service" />
+	</Head>
 
-		<article class="prose max-w-none">
+	<div class="content-fit py-10">
+		<article class="prose">
 			<h1>Skyra Terms of Service</h1>
 			<p>Last updated and effective: March 18, 2022</p>
 			<hr />

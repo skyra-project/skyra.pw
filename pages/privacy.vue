@@ -1,11 +1,11 @@
 <template>
-	<div class="content-fit py-10">
-		<Head>
-			<Title>Skyra | Privacy Policy</Title>
-			<Meta name="description" content="Skyra Project's Privacy Policy" />
-		</Head>
+	<Head>
+		<Title>Privacy Policy</Title>
+		<Meta name="description" content="Skyra Project's Privacy Policy" />
+	</Head>
 
-		<article class="prose max-w-none">
+	<div class="content-fit py-10">
+		<article class="prose">
 			<h1>Skyra Privacy Policy</h1>
 			<p>Last updated and effective: October 4, 2020</p>
 			<hr />

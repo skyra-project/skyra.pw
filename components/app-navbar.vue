@@ -1,5 +1,5 @@
 <template>
-	<div ref="navbar" class="app-navbar" :class="y > 100 ? 'bg-base-200/80' : 'bg-transparent'">
+	<div ref="navbar" class="app-navbar" :class="y > 100 ? 'bg-base-200/80 backdrop-blur-sm' : 'bg-transparent'">
 		<div class="navbar-start">
 			<div class="dropdown">
 				<div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
@@ -49,11 +49,11 @@
 						</ul>
 					</li>
 					<li>
-						<a><Icon name="ph:plus-circle-duotone" class="text-success" /> Invite App</a>
+						<nuxt-link :to="App.invite"><Icon name="ph:plus-circle-duotone" class="text-success" /> Invite App</nuxt-link>
 					</li>
 				</ul>
 			</div>
-			<nuxt-link class="flex items-center" to="/">
+			<nuxt-link class="flex items-center" :to="App.landing">
 				<icons-skyra class="w-10 h-10" />
 				<h1 class="font-bold text-2xl ml-2">{{ App.name }}</h1>
 			</nuxt-link>
@@ -123,11 +123,11 @@ const { y } = useScroll(document);
 const appName = inject(ProviderAppNameKey)!;
 
 const Apps = {
-	artiel: { name: 'Artiel', invite: Invites.Artiel },
-	iriss: { name: 'Iriss', invite: Invites.Iriss },
-	nekokai: { name: 'Nekokai', invite: Invites.Nekokai },
-	skyra: { name: 'Skyra', invite: Invites.Skyra },
-	teryl: { name: 'Teryl', invite: Invites.Teryl }
+	artiel: { name: 'Artiel', invite: Invites.Artiel, landing: '/artiel' },
+	iriss: { name: 'Iriss', invite: Invites.Iriss, landing: '/iriss' },
+	nekokai: { name: 'Nekokai', invite: Invites.Nekokai, landing: '/nekokai' },
+	skyra: { name: 'Skyra', invite: Invites.Skyra, landing: '/' },
+	teryl: { name: 'Teryl', invite: Invites.Teryl, landing: '/teryl' }
 };
 
 const App = computed(() => Apps[appName.value]);
@@ -135,7 +135,9 @@ const App = computed(() => Apps[appName.value]);
 
 <style scoped>
 .app-navbar {
-	@apply navbar sticky top-0 z-50;
+	@apply navbar sticky top-2 z-50 rounded-xl drop-shadow-lg;
+	width: calc(100% - 1rem);
+	align-self: center;
 	transition-property: background-color;
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	transition-duration: 250ms;

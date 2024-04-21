@@ -16,8 +16,8 @@ const appName = inject(ProviderAppNameKey)!;
 .app-layout {
 	@apply flex flex-col min-h-screen;
 	background-image: linear-gradient(to top in oklch, oklch(var(--b1) / 1) 0%, transparent 70%),
-		radial-gradient(ellipse at 50% 0% in oklch, oklch(var(--color) / 0.2), transparent 80%);
-	background-size: 100vw 100vh;
+		radial-gradient(ellipse at calc(100vw * 0.5) 0% in oklch, oklch(var(--color) / 0.2), transparent 80%);
+	background-size: max(100vw, 600px) 50rem;
 	background-repeat: no-repeat;
 }
 
