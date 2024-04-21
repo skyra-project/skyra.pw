@@ -11,7 +11,7 @@ defineProps<{ count: number; self?: boolean }>();
 
 <style scoped>
 .discord-reaction {
-	@apply flex items-center border gap-1 w-fit px-1 rounded-md cursor-pointer;
+	@apply flex w-fit cursor-pointer items-center gap-1 rounded-md border px-1;
 	background-color: hsl(220 6.5% 18% / 1);
 	border-color: transparent;
 }

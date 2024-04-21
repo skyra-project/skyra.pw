@@ -4,25 +4,22 @@
 		<Meta name="description" content="Skyra's landing page" />
 	</Head>
 
-	<section class="text-center mt-28">
-		<h2 class="title pb-4">
-			Imagine a<br />
-			moderation app
-		</h2>
+	<section class="mt-28 flex flex-col items-center text-center">
+		<h2 class="title pb-4">Imagine a<br />moderation app</h2>
 		<p class="max-w-[30rem]">
 			A very customizable multilanguage application to help you moderate your server, with a complete logging suite and more,
-			<span class="underline underline-offset-2 font-bold">100% for free</span>!
+			<span class="font-bold underline underline-offset-2">100% for free</span>!
 		</p>
 	</section>
 
 	<section class="join mt-16">
-		<nuxt-link class="btn sm:btn-wide join-item" :to="Invites.Skyra"><Icon name="ph:plus-circle-fill" class="w-5 h-5" /> Add App</nuxt-link>
-		<nuxt-link class="btn sm:btn-wide join-item" to="#explore"><Icon name="ph:magnifying-glass-fill" class="w-5 h-5" /> Explore</nuxt-link>
+		<nuxt-link class="btn join-item sm:btn-wide" :to="Invites.Skyra"><Icon name="ph:plus-circle-fill" class="h-5 w-5" /> Add App</nuxt-link>
+		<nuxt-link class="btn join-item sm:btn-wide" to="#explore"><Icon name="ph:magnifying-glass-fill" class="h-5 w-5" /> Explore</nuxt-link>
 	</section>
 
-	<h2 id="explore" class="text-5xl font-bold mt-72">Explore</h2>
-	<section class="grid lg:grid-cols-2 gap-4 md:gap-12 lg:gap-20 mt-32">
-		<div class="flex flex-col-reverse lg:flex-row items-center gap-4 max-lg:order-last">
+	<h2 id="explore" class="mt-72 text-5xl font-bold">Explore</h2>
+	<section class="mt-32 grid gap-4 md:gap-12 lg:grid-cols-2 lg:gap-20">
+		<div class="flex flex-col-reverse items-center gap-4 max-lg:order-last lg:flex-row">
 			<discord-messages class="w-full">
 				<discord-message v-if="featureIndex === AutomodFeature.Spam" name="baddie">Guys look at me!</discord-message>
 				<discord-message v-if="featureIndex === AutomodFeature.Spam" name="baddie">Guys look at me!</discord-message>
@@ -32,18 +29,18 @@
 				>
 					<template v-if="featureIndex === AutomodFeature.Attachments">
 						Have you seen this????
-						<div class="grid grid-cols-2 gap-2 max-w-96">
-							<div class="bg-base-100 w-full aspect-video rounded-lg drop-shadow-lg flex items-center justify-center">
-								<Icon name="ph:image-duotone" class="animate-pulse w-24 h-24 text-base-content/20" />
+						<div class="grid max-w-96 grid-cols-2 gap-2">
+							<div class="flex aspect-video w-full items-center justify-center rounded-lg bg-base-100 drop-shadow-lg">
+								<Icon name="ph:image-duotone" class="h-24 w-24 animate-pulse text-base-content/20" />
 							</div>
-							<div class="bg-base-100 w-full aspect-video rounded-lg drop-shadow-lg flex items-center justify-center">
-								<Icon name="ph:image-duotone" class="animate-pulse w-24 h-24 text-base-content/20" />
+							<div class="flex aspect-video w-full items-center justify-center rounded-lg bg-base-100 drop-shadow-lg">
+								<Icon name="ph:image-duotone" class="h-24 w-24 animate-pulse text-base-content/20" />
 							</div>
-							<div class="bg-base-100 w-full aspect-video rounded-lg drop-shadow-lg flex items-center justify-center">
-								<Icon name="ph:image-duotone" class="animate-pulse w-24 h-24 text-base-content/20" />
+							<div class="flex aspect-video w-full items-center justify-center rounded-lg bg-base-100 drop-shadow-lg">
+								<Icon name="ph:image-duotone" class="h-24 w-24 animate-pulse text-base-content/20" />
 							</div>
-							<div class="bg-base-100 w-full aspect-video rounded-lg drop-shadow-lg flex items-center justify-center">
-								<Icon name="ph:image-duotone" class="animate-pulse w-24 h-24 text-base-content/20" />
+							<div class="flex aspect-video w-full items-center justify-center rounded-lg bg-base-100 drop-shadow-lg">
+								<Icon name="ph:image-duotone" class="h-24 w-24 animate-pulse text-base-content/20" />
 							</div>
 						</div>
 					</template>
@@ -57,7 +54,7 @@
 					</template>
 					<template v-else-if="featureIndex === AutomodFeature.Links">
 						Everyone check out those links!
-						<ul class="list-disc ml-5">
+						<ul class="ml-5 list-disc">
 							<li><span class="text-info">https://definitely-not-pishing.com</span></li>
 							<li><span class="text-info">https://redundant-spam-links.net</span></li>
 							<li><span class="text-info">https://too-many-links.com</span></li>
@@ -95,7 +92,7 @@
 				<discord-message name="skyra">Dear <discord-mention>Baddie</discord-mention>, {{ texts[featureIndex].alert }}</discord-message>
 			</discord-messages>
 
-			<div class="flex flex-row lg:flex-col items-center gap-1">
+			<div class="flex flex-row items-center gap-1 lg:flex-col">
 				<Icon name="ph:caret-down-bold" class="radio-feature-arrow rotate-90 lg:rotate-180" role="button" @click="advanceFeatureIndex(-1)" />
 				<div v-for="(text, index) of texts" class="radio-feature-container" :data-tip="text.tooltip">
 					<input v-model="featureIndex" type="radio" name="automod-feature" class="radio-feature" :value="index" />
@@ -105,8 +102,8 @@
 		</div>
 
 		<div class="prose">
-			<h3 class="text-3xl font-bold mb-4">
-				<Icon name="ph:shield-fill" class="w-8 h-8" aria-hidden="true" />
+			<h3 class="mb-4 text-3xl font-bold">
+				<Icon name="ph:shield-fill" class="h-8 w-8" aria-hidden="true" />
 				Skyra can act on <span class="underline underline-offset-4">{{ texts[featureIndex].title }}</span>
 			</h3>
 
@@ -115,15 +112,15 @@
 			<p>You can define what Skyra should do on every infraction:</p>
 			<ul>
 				<li>
-					<Icon name="ph:arrow-u-up-left" class="w-5 h-5 my-0 mr-1" />
+					<Icon name="ph:arrow-u-up-left" class="my-0 mr-1 h-5 w-5" />
 					<strong>Alert the user:</strong> send a message notifying the user of their infraction.
 				</li>
 				<li>
-					<Icon name="ph:flag-fill" class="w-5 h-5 my-0 mr-1 text-warning" />
+					<Icon name="ph:flag-fill" class="my-0 mr-1 h-5 w-5 text-warning" />
 					<strong>Post moderation log:</strong> send a message to the moderation log channel for moderators to see.
 				</li>
 				<li>
-					<Icon name="ph:trash-simple-fill" class="w-5 h-5 my-0 mr-1 text-error" />
+					<Icon name="ph:trash-simple-fill" class="my-0 mr-1 h-5 w-5 text-error" />
 					<strong>Delete the message:</strong> delete the message that triggered the infraction, keeping your channels clean.
 				</li>
 			</ul>
@@ -131,22 +128,22 @@
 			<p>And even what Skyra should do after repeated infractions!</p>
 			<ul>
 				<li>
-					<Icon name="ph:shield-check-duotone" class="w-5 h-5 my-0 mr-1 text-purple-500" />
+					<Icon name="ph:shield-check-duotone" class="my-0 mr-1 h-5 w-5 text-purple-500" />
 					<strong>Define the punishment action:</strong> from a simple warning to a full ban, and everything in between, with a customizable
 					<strong>punishment duration</strong> ranging from seconds to even years, or permanent.
 				</li>
 				<li>
-					<Icon name="ph:hourglass-duotone" class="w-5 h-5 my-0 mr-1" />
+					<Icon name="ph:hourglass-duotone" class="my-0 mr-1 h-5 w-5" />
 					<strong>Define the threshold:</strong> how many infractions are needed within a period of time before the punishment is applied.
 				</li>
 			</ul>
 		</div>
 	</section>
 
-	<section class="grid lg:grid-cols-2 gap-4 md:gap-12 lg:gap-20 mt-32">
+	<section class="mt-32 grid gap-4 md:gap-12 lg:grid-cols-2 lg:gap-20">
 		<div class="prose">
-			<h3 class="text-3xl font-bold mb-4">
-				<Icon name="ph:shield-fill" class="w-8 h-8" aria-hidden="true" />
+			<h3 class="mb-4 text-3xl font-bold">
+				<Icon name="ph:shield-fill" class="h-8 w-8" aria-hidden="true" />
 				A complete suite for <span class="underline underline-offset-4">moderation logs</span>
 			</h3>
 
@@ -156,14 +153,14 @@
 			</p>
 
 			<p>
-				<Icon name="ph:binoculars-duotone" class="w-5 h-5 my-0 mr-1 text-purple-500" />
+				<Icon name="ph:binoculars-duotone" class="my-0 mr-1 h-5 w-5 text-purple-500" />
 				Skyra can also listen for external moderation actions. You prefer banning by hand than by bot? Good news, Skyra can be configured to
 				listen and log external bans, retrieving the reason from audit logs!
 			</p>
 		</div>
 
-		<div class="flex flex-col lg:flex-row items-center gap-4">
-			<div class="flex flex-row lg:flex-col items-center gap-1">
+		<div class="flex flex-col items-center gap-4 lg:flex-row">
+			<div class="flex flex-row items-center gap-1 lg:flex-col">
 				<Icon
 					name="ph:caret-down-bold"
 					class="radio-feature-arrow rotate-90 lg:rotate-180"
@@ -195,21 +192,21 @@
 
 				<div class="join mt-4">
 					<button
-						class="btn md:btn-wide join-item"
+						class="btn join-item md:btn-wide"
 						:class="{ 'btn-info': moderationTemporary }"
 						:disabled="moderationAction.temporary === null"
 						@click="(moderationTemporary = !moderationTemporary), (moderationUndo = false)"
 					>
-						<Icon name="ph:hourglass-duotone" class="w-5 h-5 my-0 mr-1" />
+						<Icon name="ph:hourglass-duotone" class="my-0 mr-1 h-5 w-5" />
 						Temporary
 					</button>
 					<button
-						class="btn md:btn-wide join-item"
+						class="btn join-item md:btn-wide"
 						:class="{ 'btn-success': moderationUndo }"
 						:disabled="moderationAction.undo === null"
 						@click="(moderationUndo = !moderationUndo), (moderationTemporary = false)"
 					>
-						<Icon name="ph:arrow-counter-clockwise-duotone" class="w-5 h-5 my-0 mr-1" />
+						<Icon name="ph:arrow-counter-clockwise-duotone" class="my-0 mr-1 h-5 w-5" />
 						Undo
 					</button>
 				</div>
@@ -218,21 +215,21 @@
 	</section>
 
 	<section class="prose">
-		<h3 class="text-3xl font-bold mt-32 text-center">And a more!</h3>
+		<h3 class="mt-32 text-center text-3xl font-bold">And a more!</h3>
 		<p>Skyra not only comes with a very complete moderation suite, but also:</p>
 		<ul>
 			<li>
-				<Icon name="ph:chat-text-duotone" class="w-5 h-5 my-0 mr-1 text-warning" />
+				<Icon name="ph:chat-text-duotone" class="my-0 mr-1 h-5 w-5 text-warning" />
 				<strong>A large logging suite:</strong> Skyra can log almost everything that happens in your server: moderation actions, message
 				updates and deletions, channel updates and deletions, role updates and deletions, server updates, members changing voice channels, and
 				more.
 			</li>
 			<li>
-				<Icon name="ph:twitch-logo-duotone" class="w-5 h-5 my-0 mr-1 text-purple-500" />
+				<Icon name="ph:twitch-logo-duotone" class="my-0 mr-1 h-5 w-5 text-purple-500" />
 				<strong>Twitch notifications:</strong> Skyra can automatically moderate your server, so you can focus on what matters most.
 			</li>
 			<li>
-				<Icon name="ph:money-wavy-duotone" class="w-5 h-5 my-0 mr-1 text-error" />
+				<Icon name="ph:money-wavy-duotone" class="my-0 mr-1 h-5 w-5 text-error" />
 				<strong>No paywalls:</strong> all of Skyra's features are <strong>available for free</strong> and all logs are sent to your server as
 				soon as they happen, without any delay. Skyra Project <strong>will never paywall core features</strong>, and also
 				<strong>strongly believes in Open-Source Software</strong>, making all the apps' source code freely available to everyone, and will
@@ -241,8 +238,8 @@
 		</ul>
 	</section>
 
-	<section class="mt-32 invite-card flex flex-col items-center">
-		<h3 class="text-3xl font-bold mb-4">Liking what you see?</h3>
+	<section class="invite-card mt-32 flex flex-col items-center">
+		<h3 class="mb-4 text-3xl font-bold">Liking what you see?</h3>
 
 		<div class="join">
 			<nuxt-link :to="Invites.Skyra" class="btn btn-ghost join-item">Invite Skyra</nuxt-link>
@@ -251,12 +248,12 @@
 	</section>
 
 	<section class="prose text-center">
-		<h2 class="text-5xl font-bold mt-32">Other Apps</h2>
+		<h2 class="mt-32 text-5xl font-bold">Other Apps</h2>
 		<p>You want a feature that Skyra doesn't have? We got you covered!</p>
 	</section>
 
-	<div class="grid xl:grid-cols-2 gap-4 mt-8 w-full">
-		<div v-for="app of otherApps" class="other-apps-layout bg-base-200 shadow-xl rounded-xl">
+	<div class="mt-8 grid w-full gap-4 xl:grid-cols-2">
+		<div v-for="app of otherApps" class="other-apps-layout rounded-xl bg-base-200 shadow-xl">
 			<nuxt-img :src="app.avatar" width="256" height="256" :alt="`${app.name}'s avatar`" loading="lazy" class="other-apps-avatar" />
 			<h2 class="other-apps-title">
 				{{ app.name }}
@@ -264,12 +261,12 @@
 			</h2>
 			<div class="other-apps-description">
 				<p class="flex-grow">{{ app.description }}</p>
-				<div class="flex justify-end join mt-4">
-					<nuxt-link class="btn btn-neutral join-item" :to="app.explore">
-						<Icon name="ph:magnifying-glass-fill" class="w-5 h-5" /> Explore
+				<div class="join mt-4 flex justify-end">
+					<nuxt-link class="btn join-item btn-neutral" :to="app.explore">
+						<Icon name="ph:magnifying-glass-fill" class="h-5 w-5" /> Explore
 					</nuxt-link>
-					<nuxt-link class="btn btn-neutral join-item" :to="app.invite">
-						<Icon name="ph:plus-circle-fill" class="w-5 h-5" /> Add App
+					<nuxt-link class="btn join-item btn-neutral" :to="app.invite">
+						<Icon name="ph:plus-circle-fill" class="h-5 w-5" /> Add App
 					</nuxt-link>
 				</div>
 			</div>
@@ -370,7 +367,7 @@ const otherApps = [
 
 <style scoped>
 .title {
-	@apply text-4xl leading-[3.05rem] md:text-5xl md:leading-[3.8rem] font-bold;
+	@apply text-4xl font-bold leading-[3.05rem] md:text-5xl md:leading-[3.8rem];
 	background: linear-gradient(to bottom in oklch, whitesmoke 40%, oklch(from oklch(var(--branding-skyra)) calc(l + 0.1) c h) 100%);
 	background-clip: text;
 	-webkit-text-fill-color: transparent;
@@ -382,20 +379,20 @@ const otherApps = [
 }
 
 .radio-feature {
-	@apply appearance-none w-4 h-4 bg-base-content/20 rounded-full cursor-pointer;
+	@apply h-4 w-4 cursor-pointer appearance-none rounded-full bg-base-content/20;
 }
 
 .radio-feature-arrow {
-	@apply w-4 h-4;
+	@apply h-4 w-4;
 }
 
 @media not (hover: hover) {
 	.radio-feature {
-		@apply w-6 h-6;
+		@apply h-6 w-6;
 	}
 
 	.radio-feature-arrow {
-		@apply w-6 h-6;
+		@apply h-6 w-6;
 	}
 }
 
@@ -426,12 +423,12 @@ const otherApps = [
 }
 
 .other-apps-avatar {
-	@apply max-md:rounded-xl md:rounded-l-xl object-cover w-full h-full object-[0_20%];
+	@apply h-full w-full object-cover object-[0_20%] max-md:rounded-xl md:rounded-l-xl;
 	grid-area: a;
 }
 
 .other-apps-title {
-	@apply text-3xl md:text-xl md:mt-4 md:mr-4 font-semibold;
+	@apply text-3xl font-semibold md:mr-4 md:mt-4 md:text-xl;
 	grid-area: b;
 }
 
@@ -452,11 +449,11 @@ const otherApps = [
 }
 
 .invite-card {
-	@apply p-12 text-white relative;
+	@apply relative p-12 text-white;
 }
 
 .invite-card::before {
-	@apply w-full h-full absolute -z-10 rounded-xl top-0 left-0 -rotate-2 drop-shadow-lg;
+	@apply absolute left-0 top-0 -z-10 h-full w-full -rotate-2 rounded-xl drop-shadow-lg;
 	content: '';
 	background: linear-gradient(to bottom right in oklch, theme('colors.cyan.600') 0%, theme('colors.violet.600') 70%);
 }

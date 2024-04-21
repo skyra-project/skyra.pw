@@ -5,7 +5,7 @@
 				<div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
 					<Icon name="ph:list" class="h-5 w-5" />
 				</div>
-				<ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+				<ul tabindex="0" class="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow">
 					<li>
 						<a>Features</a>
 						<ul class="p-2">
@@ -18,31 +18,31 @@
 						<ul class="p-2">
 							<li>
 								<nuxt-link to="/artiel">
-									<Icon name="ph:game-controller-duotone" class="w-4 h-4 text-branding-artiel" />
+									<Icon name="ph:game-controller-duotone" class="h-4 w-4 text-branding-artiel" />
 									Artiel
 								</nuxt-link>
 							</li>
 							<li>
 								<nuxt-link to="/iriss">
-									<Icon name="ph:bookmarks-duotone" class="w-4 h-4 text-branding-iriss" />
+									<Icon name="ph:bookmarks-duotone" class="h-4 w-4 text-branding-iriss" />
 									Iriss
 								</nuxt-link>
 							</li>
 							<li>
 								<nuxt-link to="/nekokai">
-									<Icon name="ph:cat-duotone" class="w-4 h-4 text-branding-nekokai" />
+									<Icon name="ph:cat-duotone" class="h-4 w-4 text-branding-nekokai" />
 									Nekokai
 								</nuxt-link>
 							</li>
 							<li>
 								<nuxt-link to="/">
-									<Icon name="ph:shield-duotone" class="w-4 h-4 text-branding-skyra" />
+									<Icon name="ph:shield-duotone" class="h-4 w-4 text-branding-skyra" />
 									Skyra
 								</nuxt-link>
 							</li>
 							<li>
 								<nuxt-link to="/teryl">
-									<Icon name="ph:books-duotone" class="w-4 h-4 text-branding-teryl" />
+									<Icon name="ph:books-duotone" class="h-4 w-4 text-branding-teryl" />
 									Teryl
 								</nuxt-link>
 							</li>
@@ -54,60 +54,60 @@
 				</ul>
 			</div>
 			<nuxt-link class="flex items-center" :to="App.landing">
-				<icons-skyra class="w-10 h-10" />
-				<h1 class="font-bold text-2xl ml-2">{{ App.name }}</h1>
+				<icons-skyra class="h-10 w-10" />
+				<h1 class="ml-2 text-2xl font-bold">{{ App.name }}</h1>
 			</nuxt-link>
 		</div>
 		<div class="navbar-center hidden lg:flex">
-			<div class="dropdown dropdown-hover group">
-				<div tabindex="0" role="button" class="btn btn-ghost m-1 items-center group-hover:text-white transition-all">
+			<div class="group dropdown dropdown-hover">
+				<div tabindex="0" role="button" class="btn btn-ghost m-1 items-center transition-all group-hover:text-white">
 					Features
-					<Icon name="ph:caret-down" class="rotate-0 group-hover:rotate-180 transition-all" />
+					<Icon name="ph:caret-down" class="rotate-0 transition-all group-hover:rotate-180" />
 				</div>
-				<ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+				<ul tabindex="0" class="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow">
 					<li><a>Item 1</a></li>
 					<li><a>Item 2</a></li>
 				</ul>
 			</div>
-			<div class="dropdown dropdown-hover group">
-				<div tabindex="0" role="button" class="btn btn-ghost m-1 items-center group-hover:text-white transition-all">
+			<div class="group dropdown dropdown-hover">
+				<div tabindex="0" role="button" class="btn btn-ghost m-1 items-center transition-all group-hover:text-white">
 					Applications
-					<Icon name="ph:caret-down" class="rotate-0 group-hover:rotate-180 transition-all" />
+					<Icon name="ph:caret-down" class="rotate-0 transition-all group-hover:rotate-180" />
 				</div>
-				<ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+				<ul tabindex="0" class="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow">
 					<li>
 						<nuxt-link to="/artiel">
-							<Icon name="ph:game-controller-duotone" class="w-4 h-4 text-branding-artiel" />
+							<Icon name="ph:game-controller-duotone" class="h-4 w-4 text-branding-artiel" />
 							Artiel
 						</nuxt-link>
 					</li>
 					<li>
 						<nuxt-link to="/iriss">
-							<Icon name="ph:bookmarks-duotone" class="w-4 h-4 text-branding-iriss" />
+							<Icon name="ph:bookmarks-duotone" class="h-4 w-4 text-branding-iriss" />
 							Iriss
 						</nuxt-link>
 					</li>
 					<li>
 						<nuxt-link to="/nekokai">
-							<Icon name="ph:cat-duotone" class="w-4 h-4 text-branding-nekokai" />
+							<Icon name="ph:cat-duotone" class="h-4 w-4 text-branding-nekokai" />
 							Nekokai
 						</nuxt-link>
 					</li>
 					<li>
 						<nuxt-link to="/">
-							<Icon name="ph:shield-duotone" class="w-4 h-4 text-branding-skyra" />
+							<Icon name="ph:shield-duotone" class="h-4 w-4 text-branding-skyra" />
 							Skyra
 						</nuxt-link>
 					</li>
 					<li>
 						<nuxt-link to="/teryl">
-							<Icon name="ph:books-duotone" class="w-4 h-4 text-branding-teryl" />
+							<Icon name="ph:books-duotone" class="h-4 w-4 text-branding-teryl" />
 							Teryl
 						</nuxt-link>
 					</li>
 				</ul>
 			</div>
-			<nuxt-link :to="App.invite" class="btn btn-ghost hover:text-success transition-colors">
+			<nuxt-link :to="App.invite" class="btn btn-ghost transition-colors hover:text-success">
 				Invite App
 				<Icon name="ph:plus-circle-duotone" />
 			</nuxt-link>

@@ -1,3 +1,4 @@
+import { omitKeysFromObject } from '@sapphire/utilities';
 import { oklch } from 'culori';
 import colors from 'tailwindcss/colors';
 
@@ -5,7 +6,7 @@ module.exports = {
 	plugins: [require('@tailwindcss/typography'), require('daisyui')],
 	theme: {
 		colors: {
-			...colors,
+			...omitKeysFromObject(colors, 'lightBlue', 'warmGray', 'trueGray', 'coolGray'),
 			'branding-artiel': 'oklch(var(--branding-artiel) / <alpha-value>)',
 			'branding-iriss': 'oklch(var(--branding-iriss) / <alpha-value>)',
 			'branding-nekokai': 'oklch(var(--branding-nekokai) / <alpha-value>)',
@@ -43,7 +44,7 @@ module.exports = {
 
 function stringOklch(color: string) {
 	const value = oklch(color)!;
-	return `${cutNumber(value.l * 100)}% ${cutNumber(value.c)} ${cutNumber(value.h)}`;
+	return `${cutNumber(value.l * 100)}% ${cutNumber(value.c)} ${cutNumber(value.h!)}`;
 }
 
 function cutNumber(number: number) {

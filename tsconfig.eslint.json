@@ -5,6 +5,17 @@
 		"allowJs": true,
 		"checkJs": true
 	},
-	"include": ["components", "composables", "layouts", "modules", "pages", "server", "utils", "nuxt.config.ts", "tailwind.config.js"],
+	"include": [
+		"components",
+		"composables",
+		"layouts",
+		"modules",
+		"pages",
+		"server",
+		"utils",
+		"nuxt.config.ts",
+		"prettier.config.mjs",
+		"tailwind.config.js"
+	],
 	"exclude": []
 }

@@ -1,15 +1,15 @@
 <template>
-	<div class="flex flex-row gap-2 sm:gap-4 align-top hover:bg-base-200 rounded-xl p-2 sm:p-4 w-full">
+	<div class="flex w-full flex-row gap-2 rounded-xl p-2 align-top hover:bg-base-200 sm:gap-4 sm:p-4">
 		<div class="discord-message-avatar-wrapper">
 			<nuxt-img v-if="name === 'skyra'" src="/img/avatars/skyra.png" width="48" height="48" alt="Avatar" />
-			<Icon v-else-if="name === 'baddie'" name="ph:smiley-angry-fill" class="w-full h-full discord-message-avatar baddie" />
-			<Icon v-else name="ph:shooting-star-fill" class="w-full h-full text-info" />
+			<Icon v-else-if="name === 'baddie'" name="ph:smiley-angry-fill" class="discord-message-avatar baddie h-full w-full" />
+			<Icon v-else name="ph:shooting-star-fill" class="h-full w-full text-info" />
 		</div>
 		<div class="flex-grow gap-2 max-sm:text-xs">
-			<div class="flex flex-row items-center mb-0.5">
+			<div class="mb-0.5 flex flex-row items-center">
 				<div class="font-bold">{{ profile.name }}</div>
 				<span class="app-badge" v-if="profile.app">
-					<Icon v-if="profile.verified" name="ph:check-fat-fill" class="w-2 sm:w-3 h-2 sm:h-3 mr-0.5" />
+					<Icon v-if="profile.verified" name="ph:check-fat-fill" class="mr-0.5 h-2 w-2 sm:h-3 sm:w-3" />
 					<span>APP</span>
 				</span>
 			</div>
@@ -31,7 +31,7 @@ const profiles = {
 
 <style scoped>
 .app-badge {
-	@apply text-white rounded-md px-1 py-0.5 md:py-1 ml-1 flex flex-row items-center;
+	@apply ml-1 flex flex-row items-center rounded-md px-1 py-0.5 text-white md:py-1;
 	background-color: #5865f2;
 	font-size: 0.625rem;
 	line-height: 0.625rem;
@@ -45,7 +45,7 @@ const profiles = {
 }
 
 .discord-message-avatar-wrapper {
-	@apply w-8 md:w-12 h-8 md:h-12 rounded-full overflow-hidden flex-none;
+	@apply h-8 w-8 flex-none overflow-hidden rounded-full md:h-12 md:w-12;
 }
 
 .discord-message-avatar.baddie {
