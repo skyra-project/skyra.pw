@@ -9,11 +9,11 @@ export default defineNuxtConfig({
 		auth: {
 			name: 'skyra-auth',
 			maxAge: 604800,
-			password: process.env.AUTH_SECRET ?? '',
+			password: process.env.NITRO_AUTH_SECRET ?? '',
 			cookie: { sameSite: 'lax' },
 			sessionHeader: false
 		} satisfies SessionConfig,
-		clientId: process.env.DISCORD_CLIENT_ID,
-		clientSecret: process.env.DISCORD_CLIENT_SECRET
+		clientId: process.env.NITRO_DISCORD_CLIENT_ID,
+		clientSecret: process.env.NITRO_DISCORD_CLIENT_SECRET
 	}
 });
