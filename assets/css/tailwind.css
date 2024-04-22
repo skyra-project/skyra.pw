@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.icon {
+		vertical-align: text-bottom !important;
+	}
+
+	.prose {
+		@apply max-w-none;
+	}
+}
