@@ -136,10 +136,10 @@ const App = computed(() => Apps[appName.value]);
 <style scoped>
 .app-navbar {
 	@apply navbar sticky top-2 z-50 rounded-xl drop-shadow-lg;
-	width: calc(100% - 1rem);
 	align-self: center;
+	transition-duration: 250ms;
 	transition-property: background-color;
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-	transition-duration: 250ms;
+	width: calc(100% - 1rem);
 }
 </style>

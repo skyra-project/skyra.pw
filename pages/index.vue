@@ -414,12 +414,12 @@ const otherApps = [
 
 .other-apps-layout {
 	@apply grid gap-4 p-4;
+	grid-template-rows: 230px min-content 1fr;
+	grid-template-columns: 1fr;
 	grid-template-areas:
 		'a'
 		'b'
 		'c';
-	grid-template-rows: 230px min-content 1fr;
-	grid-template-columns: 1fr;
 }
 
 .other-apps-avatar {
@@ -440,11 +440,11 @@ const otherApps = [
 @screen md {
 	.other-apps-layout {
 		@apply p-0;
+		grid-template-rows: min-content 1fr;
+		grid-template-columns: 256px 1fr;
 		grid-template-areas:
 			'a b'
 			'a c';
-		grid-template-rows: min-content 1fr;
-		grid-template-columns: 256px 1fr;
 	}
 }
 
@@ -454,7 +454,7 @@ const otherApps = [
 
 .invite-card::before {
 	@apply absolute left-0 top-0 -z-10 h-full w-full -rotate-2 rounded-xl drop-shadow-lg;
-	content: '';
 	background: linear-gradient(to bottom right in oklch, theme('colors.cyan.600') 0%, theme('colors.violet.600') 70%);
+	content: '';
 }
 </style>
