@@ -20,7 +20,7 @@
 					<h3 class="mt-0"><Icon name="ph:share-fat-duotone" class="text-success" /> Share Code</h3>
 					<div class="join flex w-full">
 						<code class="join-item flex h-12 w-full min-w-0 flex-grow-0 cursor-pointer select-all items-center rounded-xl">
-							<span class="truncate pl-2">{{ shareBoard }}</span>
+							<span class="truncate whitespace-pre pl-2">{{ shareBoard }}</span>
 						</code>
 						<ClientOnly>
 							<button class="btn btn-success join-item" @click="copy()" :disabled="!isSupported || copied">
