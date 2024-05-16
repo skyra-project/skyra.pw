@@ -1,7 +1,7 @@
 <template>
 	<div class="flex w-full flex-row gap-2 rounded-xl p-2 align-top hover:bg-base-200 sm:gap-4 sm:p-4">
 		<div class="discord-message-avatar-wrapper">
-			<nuxt-img v-if="name === 'skyra'" src="/img/avatars/skyra.png" width="48" height="48" alt="Avatar" />
+			<nuxt-img v-if="name === 'wolfstar'" src="/img/avatars/wolfstar.png" width="48" height="48" alt="Avatar" />
 			<Icon v-else-if="name === 'baddie'" name="ph:smiley-angry-fill" class="discord-message-avatar baddie h-full w-full" />
 			<Icon v-else name="ph:shooting-star-fill" class="h-full w-full text-info" />
 		</div>
@@ -23,7 +23,7 @@ const props = defineProps<{ name: keyof typeof profiles }>();
 const profile = computed(() => profiles[props.name]);
 
 const profiles = {
-	skyra: { name: 'Skyra', app: true, verified: true },
+	wolfstar: { name: 'WolfStar', app: true, verified: true },
 	baddie: { name: 'Baddie', app: false, verified: false },
 	stella: { name: 'Stella', app: false, verified: false }
 };

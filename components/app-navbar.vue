@@ -18,31 +18,31 @@
 						<ul class="p-2">
 							<li>
 								<nuxt-link to="/artiel">
-									<Icon name="ph:game-controller-duotone" class="h-4 w-4 text-branding-artiel" />
+									<Icon name="ph:game-controller-duotone" class="text-branding-artiel h-4 w-4" />
 									Artiel
 								</nuxt-link>
 							</li>
 							<li>
 								<nuxt-link to="/iriss">
-									<Icon name="ph:bookmarks-duotone" class="h-4 w-4 text-branding-iriss" />
+									<Icon name="ph:bookmarks-duotone" class="text-branding-iriss h-4 w-4" />
 									Iriss
 								</nuxt-link>
 							</li>
 							<li>
 								<nuxt-link to="/nekokai">
-									<Icon name="ph:cat-duotone" class="h-4 w-4 text-branding-nekokai" />
+									<Icon name="ph:cat-duotone" class="text-branding-nekokai h-4 w-4" />
 									Nekokai
 								</nuxt-link>
 							</li>
 							<li>
 								<nuxt-link to="/">
-									<Icon name="ph:shield-duotone" class="h-4 w-4 text-branding-skyra" />
-									Skyra
+									<Icon name="ph:shield-duotone" class="h-4 w-4 text-branding-wolfstar" />
+									WolfStar
 								</nuxt-link>
 							</li>
 							<li>
 								<nuxt-link to="/teryl">
-									<Icon name="ph:books-duotone" class="h-4 w-4 text-branding-teryl" />
+									<Icon name="ph:books-duotone" class="text-branding-teryl h-4 w-4" />
 									Teryl
 								</nuxt-link>
 							</li>
@@ -54,7 +54,7 @@
 				</ul>
 			</div>
 			<nuxt-link class="flex items-center" :to="App.landing">
-				<icons-skyra class="h-10 w-10" />
+				<icons-wolfstar class="h-10 w-10" />
 				<h1 class="ml-2 text-2xl font-bold">{{ App.name }}</h1>
 			</nuxt-link>
 		</div>
@@ -77,31 +77,31 @@
 				<ul tabindex="0" class="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow">
 					<li>
 						<nuxt-link to="/artiel">
-							<Icon name="ph:game-controller-duotone" class="h-4 w-4 text-branding-artiel" />
+							<Icon name="ph:game-controller-duotone" class="text-branding-artiel h-4 w-4" />
 							Artiel
 						</nuxt-link>
 					</li>
 					<li>
 						<nuxt-link to="/iriss">
-							<Icon name="ph:bookmarks-duotone" class="h-4 w-4 text-branding-iriss" />
+							<Icon name="ph:bookmarks-duotone" class="text-branding-iriss h-4 w-4" />
 							Iriss
 						</nuxt-link>
 					</li>
 					<li>
 						<nuxt-link to="/nekokai">
-							<Icon name="ph:cat-duotone" class="h-4 w-4 text-branding-nekokai" />
+							<Icon name="ph:cat-duotone" class="text-branding-nekokai h-4 w-4" />
 							Nekokai
 						</nuxt-link>
 					</li>
 					<li>
 						<nuxt-link to="/">
-							<Icon name="ph:shield-duotone" class="h-4 w-4 text-branding-skyra" />
-							Skyra
+							<Icon name="ph:shield-duotone" class="h-4 w-4 text-branding-wolfstar" />
+							WolfStar
 						</nuxt-link>
 					</li>
 					<li>
 						<nuxt-link to="/teryl">
-							<Icon name="ph:books-duotone" class="h-4 w-4 text-branding-teryl" />
+							<Icon name="ph:books-duotone" class="text-branding-teryl h-4 w-4" />
 							Teryl
 						</nuxt-link>
 					</li>
@@ -126,7 +126,7 @@ const Apps = {
 	artiel: { name: 'Artiel', invite: Invites.Artiel, landing: '/artiel' },
 	iriss: { name: 'Iriss', invite: Invites.Iriss, landing: '/iriss' },
 	nekokai: { name: 'Nekokai', invite: Invites.Nekokai, landing: '/nekokai' },
-	skyra: { name: 'Skyra', invite: Invites.Skyra, landing: '/' },
+	wolfstar: { name: 'WolfStar', invite: Invites.WolfStar, landing: '/' },
 	teryl: { name: 'Teryl', invite: Invites.Teryl, landing: '/teryl' }
 };
 

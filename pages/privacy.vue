@@ -1,26 +1,28 @@
 <template>
 	<Head>
 		<Title>Privacy Policy</Title>
-		<Meta name="description" content="Skyra Project's Privacy Policy" />
+		<Meta name="description" content="WolfStar Project's Privacy Policy" />
 	</Head>
 
 	<div class="content-fit py-10">
 		<article class="prose">
-			<h1>Skyra Privacy Policy</h1>
-			<p>Last updated and effective: October 4, 2020</p>
+			<h1>WolfStar Privacy Policy</h1>
+			<p>Last updated and effective: May 12, 2024</p>
 			<hr />
-			<p><span class="font-bold">Owner and data controller</span>: Skyra Project</p>
-			<p><span class="font-bold">Owner contact email</span>: <nuxt-link to="mailto:contact@skyra.pw">contact@skyra.pw</nuxt-link></p>
+			<p><span class="font-bold">Owner and data controller</span>: WolfStar Project</p>
+			<p>
+				<span class="font-bold">Owner contact email</span>: <nuxt-link to="mailto:contact@wolfstar.rocks">contact@wolfstar.rocks</nuxt-link>
+			</p>
 			<hr />
 
-			<h2 class="uppercase">Welcome to Skyra Project</h2>
+			<h2 class="uppercase">Welcome to WolfStar Project</h2>
 			<p>
-				Skyra Project provides a chat bot for the <nuxt-link to="https://discord.com/privacy">Discord</nuxt-link> chat platform, (the "Bot"),
-				a website that serves as a dashboard (the "Site") and various related services (collectively, the "Service(s)"). The Service is
-				operated by Skyra Project (the "Company", "we" or "us") for users of the Service ("you" or the "user(s)"). This privacy policy sets
-				forth our policy with respect to information that is collected from visitors to the Site and users of the Bot and/or the Services.
-				Under applicable law, Skyra Project is the "data controller" of <nuxt-link to="https://discord.com/privacy">Discord</nuxt-link> user
-				data collected through the Services.
+				WolfStar Project provides a chat bot for the <nuxt-link to="https://discord.com/privacy">Discord</nuxt-link> chat platform, (the
+				"Bot"), a website that serves as a dashboard (the "Site") and various related services (collectively, the "Service(s)"). The Service
+				is operated by WolfStar Project (the "Company", "we" or "us") for users of the Service ("you" or the "user(s)"). This privacy policy
+				sets forth our policy with respect to information that is collected from visitors to the Site and users of the Bot and/or the
+				Services. Under applicable law, WolfStar Project is the "data controller" of
+				<nuxt-link to="https://discord.com/privacy">Discord</nuxt-link> user data collected through the Services.
 			</p>
 
 			<h2 class="uppercase">Information we collect</h2>
@@ -136,12 +138,12 @@
 			<p>
 				Our Services are for users age 13 and over and we do not knowingly collect personal information from children under the age of 13. If
 				you are a parent or guardian of a child under the age of 13 and believe he or she has disclosed personal information to us please
-				contact us at <nuxt-link to="mailto:contact@skyra.pw">contact@skyra.pw</nuxt-link>. Note: In some countries, the age of digital
-				consent is older than 13. If you are in those countries, you must be at least that age to use the Services. For example, for residents
-				of the EEA, where processing of personal information is based on consent, Skyra Project will not knowingly engage in that processing
-				for users under the age of consent established by applicable data protection law. If we learn that we are engaged in that processing
-				with such users, we will halt such processing and will take reasonable measures to promptly remove applicable information from our
-				records.
+				contact us at <nuxt-link to="mailto:contact@wolfstar.rocks">contact@wolfstar.rocks</nuxt-link>. Note: In some countries, the age of
+				digital consent is older than 13. If you are in those countries, you must be at least that age to use the Services. For example, for
+				residents of the EEA, where processing of personal information is based on consent, WolfStar Project will not knowingly engage in that
+				processing for users under the age of consent established by applicable data protection law. If we learn that we are engaged in that
+				processing with such users, we will halt such processing and will take reasonable measures to promptly remove applicable information
+				from our records.
 			</p>
 
 			<h2 class="uppercase">Links to other web sites</h2>
@@ -184,20 +186,20 @@
 			</ul>
 			<p>
 				If you would like to submit a data access request, you can do so by sending an email to
-				<nuxt-link to="mailto:contact@skyra.pw">contact@skyra.pw</nuxt-link>. Upon request we will start the process and provide you a link to
-				access the personal data the Services has on you within 30 standard working days.
+				<nuxt-link to="mailto:contact@wolfstar.rocks">contact@wolfstar.rocks</nuxt-link>. Upon request we will start the process and provide
+				you a link to access the personal data the Services has on you within 30 standard working days.
 			</p>
 			<ul>
 				<li class="font-bold">How do I correct, update, amend, or delete the personal data you have about me?</li>
 			</ul>
 			<p>
 				You can request modifications to your data from us directly. Please write us at
-				<nuxt-link to="mailto:contact@skyra.pw">contact@skyra.pw</nuxt-link> with the words "Personal Data Request" in the subject or body of
-				your message, along with an explanation of what data subject right you are seeking to exercise. For your protection, we may take steps
-				to verify identity before responding to your request.
+				<nuxt-link to="mailto:contact@wolfstar.rocks">contact@wolfstar.rocks</nuxt-link> with the words "Personal Data Request" in the subject
+				or body of your message, along with an explanation of what data subject right you are seeking to exercise. For your protection, we may
+				take steps to verify identity before responding to your request.
 			</p>
 
-			<h2 class="uppercase">Who is Skyra Project's EEA representative?</h2>
+			<h2 class="uppercase">Who is WolfStar Project's EEA representative?</h2>
 			<p>
 				As the Company is currently exclusively based within the EEA and the Company is of such a small size that we do not have the funds to
 				for a registered EEA representative the Company will handle any data protection matters, pursuant to Article 27 of the General Data
@@ -250,7 +252,7 @@
 			<h2 class="uppercase">Contacting us</h2>
 			<p>
 				Please also feel free to contact us if you have any questions about this Privacy Policy or the information practices of the Services.
-				You may contact us as follows: <nuxt-link to="mailto:contact@skyra.pw">contact@skyra.pw</nuxt-link>.
+				You may contact us as follows: <nuxt-link to="mailto:contact@wolfstar.rocks">contact@wolfstar.rocks</nuxt-link>.
 			</p>
 		</article>
 	</div>

@@ -1,7 +1,7 @@
 <template>
 	<Head>
-		<Title>Skyra</Title>
-		<Meta name="description" content="Skyra's landing page" />
+		<Title>WolfStar</Title>
+		<Meta name="description" content="WolfStar's landing page" />
 	</Head>
 
 	<section class="mt-28 flex flex-col items-center text-center">
@@ -13,7 +13,7 @@
 	</section>
 
 	<section class="join mt-16">
-		<nuxt-link class="btn join-item sm:btn-wide" :to="Invites.Skyra"><Icon name="ph:plus-circle-fill" class="h-5 w-5" /> Add App</nuxt-link>
+		<nuxt-link class="btn join-item sm:btn-wide" :to="Invites.WolfStar"><Icon name="ph:plus-circle-fill" class="h-5 w-5" /> Add App</nuxt-link>
 		<nuxt-link class="btn join-item sm:btn-wide" to="#explore"><Icon name="ph:magnifying-glass-fill" class="h-5 w-5" /> Explore</nuxt-link>
 	</section>
 
@@ -45,7 +45,7 @@
 						</div>
 					</template>
 					<template v-else-if="featureIndex === AutomodFeature.Capitals">
-						I CAN TALK IN ALL UPPER CASES, <strong>AND SKYRA WILL NOT STOP ME!</strong>
+						I CAN TALK IN ALL UPPER CASES, <strong>AND WOLFSTAR WILL NOT STOP ME!</strong>
 					</template>
 					<template v-else-if="featureIndex === AutomodFeature.Invites">
 						Everyone join my server!
@@ -89,7 +89,7 @@
 						I would like to say that you're a <strong>disgusting</strong> person.
 					</template>
 				</discord-message>
-				<discord-message name="skyra">Dear <discord-mention>Baddie</discord-mention>, {{ texts[featureIndex].alert }}</discord-message>
+				<discord-message name="wolfstar">Dear <discord-mention>Baddie</discord-mention>, {{ texts[featureIndex].alert }}</discord-message>
 			</discord-messages>
 
 			<div class="flex flex-row items-center gap-1 lg:flex-col">
@@ -104,12 +104,12 @@
 		<div class="prose">
 			<h3 class="mb-4 text-3xl font-bold">
 				<Icon name="ph:shield-fill" class="h-8 w-8" aria-hidden="true" />
-				Skyra can act on <span class="underline underline-offset-4">{{ texts[featureIndex].title }}</span>
+				WolfStar can act on <span class="underline underline-offset-4">{{ texts[featureIndex].title }}</span>
 			</h3>
 
-			<p>Enjoy the power of moderation with Skyra, a fully customizable moderation bot for your server.</p>
+			<p>Enjoy the power of moderation with WolfStar, a fully customizable moderation bot for your server.</p>
 
-			<p>You can define what Skyra should do on every infraction:</p>
+			<p>You can define what WolfStar should do on every infraction:</p>
 			<ul>
 				<li>
 					<Icon name="ph:arrow-u-up-left" class="my-0 mr-1 h-5 w-5" />
@@ -125,7 +125,7 @@
 				</li>
 			</ul>
 
-			<p>And even what Skyra should do after repeated infractions!</p>
+			<p>And even what WolfStar should do after repeated infractions!</p>
 			<ul>
 				<li>
 					<Icon name="ph:shield-check-duotone" class="my-0 mr-1 h-5 w-5 text-purple-500" />
@@ -148,14 +148,14 @@
 			</h3>
 
 			<p>
-				Easily searchable moderation logs, with a complete history of every action taken by Skyra in your server, and with the ability to
+				Easily searchable moderation logs, with a complete history of every action taken by WolfStar in your server, and with the ability to
 				filter them later by user, action, and more!
 			</p>
 
 			<p>
 				<Icon name="ph:binoculars-duotone" class="my-0 mr-1 h-5 w-5 text-purple-500" />
-				Skyra can also listen for external moderation actions. You prefer banning by hand than by bot? Good news, Skyra can be configured to
-				listen and log external bans, retrieving the reason from audit logs!
+				WolfStar can also listen for external moderation actions. You prefer banning by hand than by bot? Good news, WolfStar can be
+				configured to listen and log external bans, retrieving the reason from audit logs!
 			</p>
 		</div>
 
@@ -175,11 +175,11 @@
 
 			<div class="flex flex-col items-center">
 				<discord-messages>
-					<discord-message name="skyra">
+					<discord-message name="wolfstar">
 						<discord-embed
 							:color="moderationActionRender.color"
-							:author="{ icon: '/img/avatars/skyra.png', name: 'Skyra#7023 (266624760782258186)' }"
-							:footer="{ icon: '/img/avatars/skyra.png', text: 'Case 3' }"
+							:author="{ icon: '/img/avatars/wolfstar.png', name: 'WolfStar#7023 (266624760782258186)' }"
+							:footer="{ icon: '/img/avatars/wolfstar.png', text: 'Case 3' }"
 							:timestamp="Date.now()"
 						>
 							<span><strong>❯ Type:</strong> {{ moderationActionRender.name }}</span
@@ -216,22 +216,22 @@
 
 	<section class="prose">
 		<h3 class="mt-32 text-center text-3xl font-bold">And a more!</h3>
-		<p>Skyra not only comes with a very complete moderation suite, but also:</p>
+		<p>WolfStar not only comes with a very complete moderation suite, but also:</p>
 		<ul>
 			<li>
 				<Icon name="ph:chat-text-duotone" class="my-0 mr-1 h-5 w-5 text-warning" />
-				<strong>A large logging suite:</strong> Skyra can log almost everything that happens in your server: moderation actions, message
+				<strong>A large logging suite:</strong> WolfStar can log almost everything that happens in your server: moderation actions, message
 				updates and deletions, channel updates and deletions, role updates and deletions, server updates, members changing voice channels, and
 				more.
 			</li>
 			<li>
 				<Icon name="ph:twitch-logo-duotone" class="my-0 mr-1 h-5 w-5 text-purple-500" />
-				<strong>Twitch notifications:</strong> Skyra can automatically moderate your server, so you can focus on what matters most.
+				<strong>Twitch notifications:</strong> WolfStar can automatically moderate your server, so you can focus on what matters most.
 			</li>
 			<li>
 				<Icon name="ph:money-wavy-duotone" class="my-0 mr-1 h-5 w-5 text-error" />
-				<strong>No paywalls:</strong> all of Skyra's features are <strong>available for free</strong> and all logs are sent to your server as
-				soon as they happen, without any delay. Skyra Project <strong>will never paywall core features</strong>, and also
+				<strong>No paywalls:</strong> all of WolfStar's features are <strong>available for free</strong> and all logs are sent to your server
+				as soon as they happen, without any delay. WolfStar Project <strong>will never paywall core features</strong>, and also
 				<strong>strongly believes in Open-Source Software</strong>, making all the apps' source code freely available to everyone, and will
 				always stay that way.
 			</li>
@@ -242,17 +242,17 @@
 		<h3 class="mb-4 text-3xl font-bold">Liking what you see?</h3>
 
 		<div class="join">
-			<nuxt-link :to="Invites.Skyra" class="btn btn-ghost join-item">Invite Skyra</nuxt-link>
-			<nuxt-link to="https://join.skyra.pw" class="btn btn-ghost join-item">Support Server</nuxt-link>
+			<nuxt-link :to="Invites.WolfStar" class="btn btn-ghost join-item">Invite WolfStar</nuxt-link>
+			<nuxt-link to="https://join.wolfstar.rocks" class="btn btn-ghost join-item">Support Server</nuxt-link>
 		</div>
 	</section>
 
-	<section class="prose text-center">
+	<!-- <section class="prose text-center">
 		<h2 class="mt-32 text-5xl font-bold">Other Apps</h2>
-		<p>You want a feature that Skyra doesn't have? We got you covered!</p>
-	</section>
+		<p>You want a feature that WolfStar doesn't have? We got you covered!</p>
+	</section> -->
 
-	<div class="mt-8 grid w-full gap-4 xl:grid-cols-2">
+	<!-- <div class="mt-8 grid w-full gap-4 xl:grid-cols-2">
 		<div v-for="app of otherApps" class="other-apps-layout rounded-xl bg-base-200 shadow-xl">
 			<nuxt-img :src="app.avatar" width="256" height="256" :alt="`${app.name}'s avatar`" loading="lazy" class="other-apps-avatar" />
 			<h2 class="other-apps-title">
@@ -271,7 +271,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 </template>
 
 <script setup lang="ts">
@@ -329,46 +329,13 @@ function advanceModerationIndex(value: -1 | 1) {
 	moderationIndex.value = (moderationIndex.value + value + moderationActions.length) % moderationActions.length;
 }
 
-const otherApps = [
-	{
-		name: 'Iriss',
-		explore: '/iriss',
-		avatar: '/img/avatars/iriss.png',
-		invite: Invites.Iriss,
-		purposes: ['Suggestions', 'Feedback'],
-		description: "An app to help you manage the suggestions and feedback from your server's members."
-	},
-	{
-		name: 'Teryl',
-		explore: '/teryl',
-		avatar: '/img/avatars/teryl.png',
-		invite: Invites.Teryl,
-		purposes: ['Utilities', 'Miscellaneous'],
-		description: 'An app to supercharge your server with many utility commands.'
-	},
-	{
-		name: 'Nekokai',
-		explore: '/nekokai',
-		avatar: '/img/avatars/nekokai.png',
-		invite: Invites.Nekokai,
-		purposes: ['Anime', 'Manga'],
-		description: 'Do you like anime or manga? Nekokai is the perfect bot for you!'
-	},
-	{
-		name: 'Artiel',
-		explore: '/artiel',
-		avatar: '/img/avatars/artiel.png',
-		invite: Invites.Artiel,
-		purposes: ['Games', 'Fun'],
-		description: "Sometimes servers feel boring and you're out of ideas to make it more fun, Artiel is here to help you with that!"
-	}
-];
+const otherApps = [];
 </script>
 
 <style scoped>
 .title {
 	@apply text-4xl font-bold leading-[3.05rem] md:text-5xl md:leading-[3.8rem];
-	background: linear-gradient(to bottom in oklch, whitesmoke 40%, oklch(from oklch(var(--branding-skyra)) calc(l + 0.1) c h) 100%);
+	background: linear-gradient(to bottom in oklch, whitesmoke 40%, oklch(from oklch(var(--branding-wolfstar)) calc(l + 0.1) c h) 100%);
 	background-clip: text;
 	-webkit-text-fill-color: transparent;
 }

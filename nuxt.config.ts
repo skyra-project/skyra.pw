@@ -7,7 +7,7 @@ export default defineNuxtConfig({
 	image: { screens: {} },
 	runtimeConfig: {
 		auth: {
-			name: 'skyra-auth',
+			name: 'wolfstar-auth',
 			maxAge: 604800,
 			password: process.env.NITRO_AUTH_SECRET ?? '',
 			cookie: { sameSite: 'lax' },

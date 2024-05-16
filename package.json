@@ -1,5 +1,5 @@
 {
-	"name": "@skyra-project/dashboard",
+	"name": "@wolfstar-project/dashboard",
 	"version": "1.0.0",
 	"private": true,
 	"license": "Apache-2.0",
@@ -52,10 +52,13 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/skyra-project/skyra.pw.git"
+		"url": "git+https://github.com/wolfstar-project/wolfstar.rocks.git"
 	},
 	"bugs": {
-		"url": "https://github.com/skyra-project/skyra.pw/issues"
+		"url": "https://github.com/wolfstar-project/wolfstar.rocks/issues"
 	},
-	"packageManager": "yarn@4.1.1"
+	"packageManager": "yarn@4.1.1",
+	"dependencies": {
+		"pretty-quick": "^4.0.0"
+	}
 }

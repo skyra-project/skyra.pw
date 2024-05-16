@@ -1,8 +1,8 @@
 services:
-  skyra.pw:
-    image: skyrabot/skyra.pw:latest
+  wolfstar.rocks:
+    image: wolfstarbot/wolfstar.rocks:latest
     build: .
-    container_name: skyra.pw
+    container_name: wolfstar.rocks
     restart: 'no'
     tty: true
     env_file:

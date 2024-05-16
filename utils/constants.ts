@@ -1,9 +1,5 @@
 export const Invites = {
-	Artiel: 'https://discord.com/oauth2/authorize?client_id=948377028028145755&permissions=51200&scope=bot%20applications.commands',
-	Iriss: 'https://discord.com/oauth2/authorize?client_id=948377113457745990&permissions=326417868864&scope=bot%20applications.commands',
-	Nekokai: 'https://discord.com/oauth2/authorize?client_id=939613684592934992&permissions=16384&scope=bot%20applications.commands',
-	Skyra: 'https://discord.com/oauth2/authorize?client_id=266624760782258186&permissions=534185897078&scope=bot%20applications.commands',
-	Teryl: 'https://discord.com/oauth2/authorize?client_id=948377583626637343&scope=bot%20applications.commands'
+	WolfStar: 'https://discord.com/oauth2/authorize?client_id=&permissions=534185897078&scope=bot%20applications.commands'
 };
 
 export enum Colors {
@@ -44,4 +40,4 @@ export const ModerationActions = {
 	Warning: { color: Colors.Yellow, name: 'Warning', temporary: Colors.Yellow300, undo: Colors.LightBlue }
 };
 
-export const ProviderAppNameKey = Symbol() as InjectionKey<Ref<'artiel' | 'iriss' | 'nekokai' | 'skyra' | 'teryl'>>;
+export const ProviderAppNameKey = Symbol() as InjectionKey<Ref<'wolfstar'>>;

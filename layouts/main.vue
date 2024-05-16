@@ -21,23 +21,7 @@ const appName = inject(ProviderAppNameKey)!;
 	background-repeat: no-repeat;
 }
 
-.app-layout.skyra {
-	--color: var(--branding-skyra);
-}
-
-.app-layout.artiel {
-	--color: var(--branding-artiel);
-}
-
-.app-layout.iriss {
-	--color: var(--branding-iriss);
-}
-
-.app-layout.nekokai {
-	--color: var(--branding-nekokai);
-}
-
-.app-layout.teryl {
-	--color: var(--branding-teryl);
+.app-layout.wolfstar {
+	--color: var(--branding-wolfstar);
 }
 </style>

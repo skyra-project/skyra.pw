@@ -7,11 +7,7 @@ module.exports = {
 	theme: {
 		colors: {
 			...omitKeysFromObject(colors, 'lightBlue', 'warmGray', 'trueGray', 'coolGray'),
-			'branding-artiel': 'oklch(var(--branding-artiel) / <alpha-value>)',
-			'branding-iriss': 'oklch(var(--branding-iriss) / <alpha-value>)',
-			'branding-nekokai': 'oklch(var(--branding-nekokai) / <alpha-value>)',
-			'branding-skyra': 'oklch(var(--branding-skyra) / <alpha-value>)',
-			'branding-teryl': 'oklch(var(--branding-teryl) / <alpha-value>)'
+			'branding-wolfstar': 'oklch(var(--branding-wolfstar) / <alpha-value>)'
 		}
 	},
 	daisyui: {
@@ -20,22 +16,15 @@ module.exports = {
 				light: {
 					...require('daisyui/src/theming/themes')['light'],
 					primary: '#1e88e5',
-					'--branding-artiel': stringOklch('#ebb971'),
-					'--branding-iriss': stringOklch('#ddbd96'),
-					'--branding-nekokai': stringOklch('#a185e5'),
-					'--branding-skyra': stringOklch('#1e88e5'),
-					'--branding-teryl': stringOklch('#6b79c9')
+
+					'--branding-wolfstar': stringOklch('#1e88e5')
 				}
 			},
 			{
 				dark: {
 					...require('daisyui/src/theming/themes')['dark'],
 					primary: '#1e88e5',
-					'--branding-artiel': stringOklch('#ebb971'),
-					'--branding-iriss': stringOklch('#ddbd96'),
-					'--branding-nekokai': stringOklch('#a185e5'),
-					'--branding-skyra': stringOklch('#1e88e5'),
-					'--branding-teryl': stringOklch('#6b79c9')
+					'--branding-wolfstar': stringOklch('#1e88e5')
 				}
 			}
 		]
