@@ -59,6 +59,9 @@
 	},
 	"packageManager": "yarn@4.1.1",
 	"dependencies": {
+		"@pinia-plugin-persistedstate/nuxt": "^1.2.0",
+		"@pinia/nuxt": "^0.5.1",
+		"@vite-pwa/nuxt": "^0.7.0",
 		"pretty-quick": "^4.0.0"
 	}
 }

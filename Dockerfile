@@ -6,7 +6,7 @@ WORKDIR /home/node/app
 RUN apk add --no-cache dumb-init jq libc6-compat curl
 
 ENV YARN_DISABLE_GIT_HOOKS=1
-ENV NEXT_TELEMETRY_DISABLED=1
+ENV NUXT_TELEMETRY_DISABLED=1
 
 ENTRYPOINT ["dumb-init", "--"]
 

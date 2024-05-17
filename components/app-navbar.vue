@@ -13,7 +13,7 @@
 							<li><a>Submenu 2</a></li>
 						</ul>
 					</li>
-					<li>
+					<!-- <li>
 						<a>Applications</a>
 						<ul class="p-2">
 							<li>
@@ -47,7 +47,7 @@
 								</nuxt-link>
 							</li>
 						</ul>
-					</li>
+					</li> -->
 					<li>
 						<nuxt-link :to="App.invite"><Icon name="ph:plus-circle-duotone" class="text-success" /> Invite App</nuxt-link>
 					</li>
@@ -59,7 +59,7 @@
 			</nuxt-link>
 		</div>
 		<div class="navbar-center hidden lg:flex">
-			<div class="group dropdown dropdown-hover">
+			<!-- <div class="group dropdown dropdown-hover">
 				<div tabindex="0" role="button" class="btn btn-ghost m-1 items-center transition-all group-hover:text-white">
 					Features
 					<Icon name="ph:caret-down" class="rotate-0 transition-all group-hover:rotate-180" />
@@ -106,7 +106,7 @@
 						</nuxt-link>
 					</li>
 				</ul>
-			</div>
+			</div> -->
 			<nuxt-link :to="App.invite" class="btn btn-ghost transition-colors hover:text-success">
 				Invite App
 				<Icon name="ph:plus-circle-duotone" />
@@ -123,11 +123,8 @@ const { y } = useScroll(document);
 const appName = inject(ProviderAppNameKey)!;
 
 const Apps = {
-	artiel: { name: 'Artiel', invite: Invites.Artiel, landing: '/artiel' },
-	iriss: { name: 'Iriss', invite: Invites.Iriss, landing: '/iriss' },
-	nekokai: { name: 'Nekokai', invite: Invites.Nekokai, landing: '/nekokai' },
 	wolfstar: { name: 'WolfStar', invite: Invites.WolfStar, landing: '/' },
-	teryl: { name: 'Teryl', invite: Invites.Teryl, landing: '/teryl' }
+	
 };
 
 const App = computed(() => Apps[appName.value]);
