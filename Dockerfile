@@ -20,7 +20,7 @@ COPY --chown=node:node .yarn/ .yarn/
 
 RUN yarn install --immutable
 
-COPY src/ src/
+COPY ./ src/
 COPY scripts/ scripts/
 
 RUN yarn build
@@ -28,9 +28,9 @@ RUN yarn build
 # Runner stage
 FROM base AS runner
 
-COPY --from=builder --chown=node:node /home/node/app/src/public ./src/public
-COPY --from=builder --chown=node:node /home/node/app/src/.next/standalone ./
-COPY --from=builder --chown=node:node /home/node/app/src/.next/static ./src/.next/static
+COPY --from=builder --chown=node:node /home/node/app/public ./src/public
+COPY --from=builder --chown=node:node /home/node/app/.nuxt/standalone ./
+COPY --from=builder --chown=node:node /home/node/app/.nuxt/static ./src/.nuxt/static
 
 ENV PORT 8281
 ENV NODE_ENV="production"

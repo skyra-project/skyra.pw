@@ -41,3 +41,33 @@ export const ModerationActions = {
 };
 
 export const ProviderAppNameKey = Symbol() as InjectionKey<Ref<'wolfstar'>>;
+
+export interface ExpirableLocalStorageStructure<T> {
+	expire: number;
+	data: T;
+}
+
+export enum LocalStorageKeys {
+	HasCookieConsent = 'allows_cookies',
+	DiscordPack = 'discord_pack',
+	LastSync = 'last_sync',
+	Commands = 'commands',
+	Languages = 'languages'
+}
+
+export enum FetchMethods {
+	Post = 'POST',
+	Patch = 'PATCH',
+	Get = 'GET'
+}
+
+export const EmojiRegexExtractName = /<?a?:(\w{2,32}):\d{17,21}>?/gim;
+export const SettingsDrawerWidth = 240;
+
+/**
+ * Regex that matches the OAUTH2 `code` in the Discord callback URL
+ * @raw `/\?code=(?<code>[A-Za-z0-9]+)/i`
+ * @remark The regex is case insensitive
+ * @remark Capture group 1 is the code. It is named `code`.
+ */
+export const CodeMatchRegex = /\?code=(?<code>[A-Za-z0-9]+)/i;

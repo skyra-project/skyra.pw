@@ -1,15 +1,34 @@
 <template>
 	<div class="app-layout" :class="appName">
-		<app-navbar></app-navbar>
-		<main class="mx-4 flex flex-grow flex-col items-center sm:mx-auto sm:w-5/6 lg:max-w-5xl xl:max-w-7xl">
-			<slot></slot>
+		<sections-app-navbar></sections-app-navbar>
+		<main
+			:class="[
+				'mx-4 flex flex-grow flex-col items-center sm:mx-auto sm:w-5/6 lg:max-w-5xl xl:max-w-7xl',
+				{ 'flex h-[calc(100vh-200px)] items-center justify-center': loading }
+			]"
+		>
+			<div v-if="loading" class="w-full">
+				<div class="loading-bar loading loading-lg"></div>
+			</div>
+			<slot v-else></slot>
 		</main>
-		<app-footer></app-footer>
+
+		<sections-app-footer></sections-app-footer>
+		<div class="fixed bottom-4 right-4 z-50 flex space-x-2">
+			<change-theme></change-theme>
+			<scrollToTopButton></scrollToTopButton>
+		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
+import scrollToTopButton from '~/layouts/scroll-to-top-button.vue';
+import changeTheme from '~/layouts/change-theme.vue';
 const appName = inject(ProviderAppNameKey)!;
+
+const props = defineProps<{
+	loading?: boolean;
+}>();
 </script>
 
 <style scoped>

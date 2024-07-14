@@ -6,7 +6,7 @@ module.exports = {
 	plugins: [require('@tailwindcss/typography'), require('daisyui')],
 	theme: {
 		colors: {
-			...omitKeysFromObject(colors, 'lightBlue', 'warmGray', 'trueGray', 'coolGray'),
+			...omitKeysFromObject(colors, 'sky', 'stone', 'neutral', 'gray'),
 			'branding-wolfstar': 'oklch(var(--branding-wolfstar) / <alpha-value>)'
 		}
 	},
@@ -15,16 +15,17 @@ module.exports = {
 			{
 				light: {
 					...require('daisyui/src/theming/themes')['light'],
-					primary: '#1e88e5',
-
-					'--branding-wolfstar': stringOklch('#1e88e5')
+					primary: '#fd171b',
+					secondary: '#050505',
+					'--branding-wolfstar': stringOklch('#fd171b')
 				}
 			},
 			{
 				dark: {
 					...require('daisyui/src/theming/themes')['dark'],
-					primary: '#1e88e5',
-					'--branding-wolfstar': stringOklch('#1e88e5')
+					primary: '#fd171b',
+					secondary: '#050505',
+					'--branding-wolfstar': stringOklch('#fd171b')
 				}
 			}
 		]

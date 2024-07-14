@@ -1,0 +1,151 @@
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import { useGuildSettings } from '~/composables/settings/useGuildSettings';
+import { useGuildSettingsChanges } from '~/composables/settings/useGuildSettingsChanges';
+import Section from '~/layouts/settings/section.vue';
+import SelectBoolean from '~/components/selects/SelectBoolean.vue';
+import Select from '~/components/selects/Select.vue';
+import SelectDuration from '~/components/selects/SelectDuration.vue';
+import { bitwiseHas, bitwiseSet, updateSliderValueObj } from '~/utils/util';
+
+const { guildSettings } = useGuildSettings();
+const { setGuildSettingsChanges } = useGuildSettingsChanges();
+
+const newWord = ref('');
+
+const softActionEnabled = computed(() => ({
+	alerts: bitwiseHas(guildSettings.value.selfmodLinksSoftAction, 0b100),
+	logs: bitwiseHas(guildSettings.value.selfmodLinksSoftAction, 0b010),
+	deletes: bitwiseHas(guildSettings.value.selfmodLinksSoftAction, 0b001)
+}));
+
+const updateSoftAction = (bit: number, checked: boolean) => {
+	setGuildSettingsChanges({
+		selfmodLinksSoftAction: bitwiseSet(guildSettings.value.selfmodLinksSoftAction, bit, checked)
+	});
+};
+
+const addLink = () => {
+	try {
+		const { hostname } = new URL(/^https?:\/\//.test(newWord.value) ? newWord.value : `https://${newWord.value}`);
+		if (hostname.length <= 128 && !guildSettings.value.selfmodLinksAllowed.includes(hostname)) {
+			setGuildSettingsChanges({
+				selfmodLinksAllowed: [...guildSettings.value.selfmodLinksAllowed, hostname]
+			});
+			newWord.value = '';
+		}
+	} catch {
+		// intentionally empty
+	}
+};
+
+const removeLink = (word: string) => {
+	setGuildSettingsChanges({
+		selfmodLinksAllowed: guildSettings.value.selfmodLinksAllowed.filter((item) => item !== word)
+	});
+};
+</script>
+
+<template>
+	<div>
+		<Section title="Link Filter">
+			<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+				<SelectBoolean
+					:title="`Filter ${guildSettings.selfmodLinksEnabled ? 'Enabled' : 'Disabled'}`"
+					:current-value="guildSettings.selfmodLinksEnabled"
+					description="Whether or not this system should be enabled."
+					@change="(value) => setGuildSettingsChanges({ selfmodLinksEnabled: value })"
+				/>
+				<SelectBoolean
+					:title="`Alerts ${softActionEnabled.alerts ? 'Enabled' : 'Disabled'}`"
+					:current-value="softActionEnabled.alerts"
+					description="Toggle message alerts in the channel the infraction took place."
+					@change="(value) => updateSoftAction(0b100, value)"
+				/>
+				<SelectBoolean
+					:title="`Logs ${softActionEnabled.logs ? 'Enabled' : 'Disabled'}`"
+					:current-value="softActionEnabled.logs"
+					description="Toggle message logs in the moderation logs channel."
+					@change="(value) => updateSoftAction(0b010, value)"
+				/>
+				<SelectBoolean
+					:title="`Deletes ${softActionEnabled.deletes ? 'Enabled' : 'Disabled'}`"
+					:current-value="softActionEnabled.deletes"
+					description="Toggle message deletions."
+					@change="(value) => updateSoftAction(0b001, value)"
+				/>
+			</div>
+		</Section>
+
+		<Section title="Punishments">
+			<div class="flex flex-col gap-4 md:flex-row">
+				<Select
+					title="Action"
+					helper-text="The action to perform as punishment"
+					:value="guildSettings.selfmodLinksHardAction"
+					@change="(value) => value && setGuildSettingsChanges({ selfmodLinksHardAction: typeof value === 'string' ? +value : value })"
+				>
+					<option :value="0">None</option>
+					<option :value="1">Warning</option>
+					<option :value="2">Kick</option>
+					<option :value="3">Mute</option>
+					<option :value="4">Softban</option>
+					<option :value="5">Ban</option>
+				</Select>
+				<SelectDuration
+					:value="guildSettings.selfmodLinksHardActionDuration"
+					:min="1000"
+					@change="(duration) => setGuildSettingsChanges({ selfmodLinksHardActionDuration: duration })"
+				/>
+			</div>
+
+			<div class="mt-4">
+				<p>Maximum Threshold</p>
+				<input
+					type="range"
+					min="0"
+					max="60"
+					:value="guildSettings.selfmodLinksThresholdMaximum"
+					@input="
+						(e) =>
+							setGuildSettingsChanges(
+								updateSliderValueObj('selfmodLinksThresholdMaximum', Number((e.target as HTMLInputElement).value))
+							)
+					"
+					class="range"
+				/>
+			</div>
+
+			<div class="mt-4">
+				<p>Threshold Duration (in seconds)</p>
+				<input
+					type="range"
+					min="0"
+					max="120"
+					:value="guildSettings.selfmodLinksThresholdDuration / 1000"
+					@input="
+						(e) =>
+							setGuildSettingsChanges(
+								updateSliderValueObj('selfmodLinksThresholdDuration', Number((e.target as HTMLInputElement).value) * 1000)
+							)
+					"
+					class="range"
+				/>
+			</div>
+		</Section>
+
+		<Section title="Options">
+			<form @submit.prevent="addLink" class="mb-4 flex items-center">
+				<input v-model="newWord" type="text" placeholder="Add Link" class="input input-bordered mr-2" />
+				<button type="submit" class="btn btn-primary">Confirm</button>
+			</form>
+
+			<div v-if="guildSettings.selfmodLinksAllowed.length > 0" class="flex flex-wrap gap-2">
+				<div v-for="word in guildSettings.selfmodLinksAllowed" :key="word" class="badge badge-primary badge-lg">
+					{{ word }}
+					<button class="btn btn-ghost btn-xs" @click="removeLink(word)">×</button>
+				</div>
+			</div>
+		</Section>
+	</div>
+</template>

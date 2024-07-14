@@ -1,0 +1,26 @@
+<script setup lang="ts">
+import { useGuildSettings } from '~/composables/settings/useGuildSettings';
+import { useGuildSettingsChanges } from '~/composables/settings/useGuildSettingsChanges';
+import { ConfigurableModerationKeys } from '~/config/SettingsDataEntries';
+import Section from '~/layouts/settings/section.vue';
+import SelectBoolean from '~/components/selects/SelectBoolean.vue';
+
+const { guildSettings } = useGuildSettings();
+const { setGuildSettingsChanges } = useGuildSettingsChanges();
+</script>
+
+<template>
+	<Section title="Punishment Settings">
+		<p>These settings affect what Skyra does when you're punishing (ban, kick, mute, etc) someone.</p>
+		<div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+			<SelectBoolean
+				v-for="{ description, key, name } in ConfigurableModerationKeys"
+				:key="key"
+				:title="name"
+				:current-value="guildSettings[key]"
+				:description="description"
+				@change="(value) => setGuildSettingsChanges({ [key]: value })"
+			/>
+		</div>
+	</Section>
+</template>

@@ -49,8 +49,8 @@
 					</template>
 					<template v-else-if="featureIndex === AutomodFeature.Invites">
 						Everyone join my server!
-						<nuxt-link to="https://discord.gg/6gakFR2" class="text-info">https://discord.gg/6gakFR2</nuxt-link>
-						<discord-invite link="https://discord.gg/6gakFR2" />
+						<nuxt-link to="https://discord.gg/gqAnRyUXG8" class="text-info">https://discord.gg/gqAnRyUXG8</nuxt-link>
+						<discord-invite link="https://discord.gg/gqAnRyUXG8" />
 					</template>
 					<template v-else-if="featureIndex === AutomodFeature.Links">
 						Everyone check out those links!
@@ -225,10 +225,6 @@
 				more.
 			</li>
 			<li>
-				<Icon name="ph:twitch-logo-duotone" class="my-0 mr-1 h-5 w-5 text-purple-500" />
-				<strong>Twitch notifications:</strong> WolfStar can automatically moderate your server, so you can focus on what matters most.
-			</li>
-			<li>
 				<Icon name="ph:money-wavy-duotone" class="my-0 mr-1 h-5 w-5 text-error" />
 				<strong>No paywalls:</strong> all of WolfStar's features are <strong>available for free</strong> and all logs are sent to your server
 				as soon as they happen, without any delay. WolfStar Project <strong>will never paywall core features</strong>, and also
@@ -252,7 +248,7 @@
 		<p>You want a feature that WolfStar doesn't have? We got you covered!</p>
 	</section> -->
 
-	<!-- <div class="mt-8 grid w-full gap-4 xl:grid-cols-2">
+	<div class="mt-8 grid w-full gap-4 xl:grid-cols-2">
 		<div v-for="app of otherApps" class="other-apps-layout rounded-xl bg-base-200 shadow-xl">
 			<nuxt-img :src="app.avatar" width="256" height="256" :alt="`${app.name}'s avatar`" loading="lazy" class="other-apps-avatar" />
 			<h2 class="other-apps-title">
@@ -271,7 +267,7 @@
 				</div>
 			</div>
 		</div>
-	</div> -->
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -329,7 +325,7 @@ function advanceModerationIndex(value: -1 | 1) {
 	moderationIndex.value = (moderationIndex.value + value + moderationActions.length) % moderationActions.length;
 }
 
-const otherApps = [];
+const otherApps: any = [];
 </script>
 
 <style scoped>
