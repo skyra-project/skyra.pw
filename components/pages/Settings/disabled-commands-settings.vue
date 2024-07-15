@@ -4,7 +4,7 @@ import { useGuildSettings } from '~/composables/settings/useGuildSettings';
 import { useGuildSettingsChanges } from '~/composables/settings/useGuildSettingsChanges';
 import RefreshCommandsButton from '~/layouts/refresh_commands_buttons.vue';
 import Section from '~/layouts/settings/section.vue';
-import Loading from '~/components/pages/loading.vue';
+import Loading from '~/components/presentational/loading.vue';
 import type { FlattenedCommand } from '~/config/types/ApiData';
 import type { DisableCommands } from '~/config/types/ConfigurableData';
 

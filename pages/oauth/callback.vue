@@ -5,13 +5,16 @@
 			<p>Please use the <code>Login</code> button instead or click <NuxtLink to="/login" class="underline">here</NuxtLink>.</p>
 		</template>
 		<client-only v-else>
-			<h1 v-if="pending" class="animate-pulse">Loading...</h1>
+			<div v-if="status === 'pending'">
+				<Loading :loading="status === 'pending'"></Loading>
+				<h1>Authenticating...</h1>
+			</div>
 			<template v-else-if="error">
 				<h1>Failed to complete authentication flow:</h1>
 				<pre><code>{{ error }}</code></pre>
 			</template>
 			<template v-else-if="data">
-				<h1>Welcome {{ (data as APIUser).global_name ?? (data as APIUser).username }}</h1>
+				<h1>Welcome {{ data.name }}</h1>
 				<p>You will be redirected to the main page in a second.</p>
 				<div class="bg-gray-200 dark:bg-stone-900 mt-2 rounded-lg p-1" aria-label="Progress" role="progressbar">
 					<div class="progress h-4 rounded-md bg-rose-500"></div>
@@ -23,12 +26,12 @@
 
 <script setup lang="ts">
 import { promiseTimeout } from '@vueuse/core';
-import type { APIUser } from 'discord-api-types/v10';
+import Loading from '~/components/presentational/loading.vue';
 
 const { code } = useRoute().query;
 
-const redirectUri = `${getOrigin()}/auth/callback`;
-const { data, error, pending, execute } = useFetch('auth/callback', {
+const redirectUri = `${getOrigin()}/oauth/callback`;
+const { data, error, status, execute } = useFetch('/api/auth/callback', {
 	body: JSON.stringify({ code, redirectUri }),
 	method: 'POST',
 	key: 'callback',
@@ -44,7 +47,7 @@ async function performCall() {
 	await execute();
 	if (!data.value) return;
 
-	useAuth().session.value = data.value as APIUser;
+	useAuth().session.value = data.value;
 	await promiseTimeout(1000);
 	await useRouter().replace(useAuth().redirectTo.value);
 }

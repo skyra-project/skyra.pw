@@ -15,7 +15,11 @@ export default defineNuxtPlugin((nuxtApp) => {
 				case 500:
 					navigateTo('/500');
 					break;
+				case 403:
+					navigateTo('/403');
+					break;
 				default:
+					navigateTo('/error');
 					break;
 			}
 		}
@@ -23,26 +27,26 @@ export default defineNuxtPlugin((nuxtApp) => {
 
 	// Hook per errori Vue (opzionale)
 	nuxtApp.hook('vue:error', (error, instance, info) => {
-		// Gestisci l'errore, ad esempio inviandolo a un servizio di reporting
 		console.error('Vue error:', error);
 	});
 
 	// Gestione degli errori lato server
 	if (import.meta.server) {
 		nuxtApp.hooks.hook('app:error', (error: H3Error) => {
-			if (error.statusCode === 404) {
-				error.unhandled = false;
-				// Puoi anche impostare una pagina di errore personalizzata qui se lo desideri
-				// error.fatal = true
-				error.data = { url: '/404' };
-			}
-			if (error.statusCode === 500) {
-				error.unhandled = false;
-				error.data = { url: '/500' };
-			}
-			if (error.statusCode === 403) {
-				error.unhandled = false;
-				error.data = { url: '/403' };
+			error.unhandled = false;
+			switch (error.statusCode) {
+				case 404:
+					error.data = { url: '/404' };
+					break;
+				case 500:
+					error.data = { url: '/500' };
+					break;
+				case 403:
+					error.data = { url: '/403' };
+					break;
+				default:
+					error.data = { url: '/error' };
+					break;
 			}
 		});
 	}

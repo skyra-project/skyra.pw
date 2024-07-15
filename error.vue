@@ -1,13 +1,19 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { useRobotsRule } from '#imports';
+import type { NuxtError } from '#app';
 
 const { isMobile } = useDevice();
 
+const props = defineProps({
+	error: Object as () => NuxtError
+});
+
 const errorInfo = computed(() => {
 	return {
-		title: '404',
+		title: props.error?.statusCode,
 		message:
-			'Woah! Looks like you just ran into a non-existent page. If you think you found this page by mistake, feel free to join the support server on Discord or go back home.'
+			"Oh no! Something went wrong on our end. We're working on fixing it. Please try again later or contact support if the problem persists."
 	};
 });
 
@@ -15,11 +21,23 @@ const clearErrorAndNavigate = () => clearError({ redirect: '/' });
 
 const rule = useRobotsRule();
 rule.value = 'noindex,nofollow,nosnippet,notranslate,noimageindex,noarchive,max-snippet:-1,max-image-preview:none,max-video-preview:-1';
+
+switch (props.error?.statusCode ?? props.error?.response?.status) {
+	case 404:
+		navigateTo('/404');
+		break;
+	case 403:
+		navigateTo('/403');
+		break;
+	case 500:
+		navigateTo('/500');
+		break;
+}
 </script>
 
 <template>
 	<div class="container mx-auto flex min-h-screen max-w-md flex-col items-center justify-center p-4">
-		<h1 class="text-9xl font-bold text-error">
+		<h1 class="text-9xl font-bold text-info">
 			{{ errorInfo.title }}
 		</h1>
 		<h2 :class="[isMobile ? 'text-2xl' : 'text-3xl', 'mb-5 text-center']">

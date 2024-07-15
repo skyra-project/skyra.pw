@@ -10,6 +10,7 @@ module.exports = {
 			'branding-wolfstar': 'oklch(var(--branding-wolfstar) / <alpha-value>)'
 		}
 	},
+	safelist: ['oklch'],
 	daisyui: {
 		themes: [
 			{

@@ -10,13 +10,14 @@ const errorInfo = computed(() => {
 	};
 });
 
-const clearErrorAndNavigate = (path: string) => {
-	clearError();
-	navigateTo(path);
-};
+const clearErrorAndNavigate = () => clearError({ redirect: '/' });
+
+const rule = useRobotsRule();
+rule.value = 'noindex,nofollow,nosnippet,notranslate,noimageindex,noarchive,max-snippet:-1,max-image-preview:none,max-video-preview:-1';
 </script>
 
 <template>
+	<Robots :follow="false" :index="false" />
 	<div class="container mx-auto flex min-h-screen max-w-md flex-col items-center justify-center p-4">
 		<h1 class="text-9xl font-bold text-warning">
 			{{ errorInfo.title }}
@@ -29,7 +30,7 @@ const clearErrorAndNavigate = (path: string) => {
 			<a href="https://join.wolfstar.rocks" target="_blank" class="btn btn-primary mb-2 sm:mb-0 sm:mr-2">
 				<Icon name="mdi:forum" class="mr-2" /> Join Support Server
 			</a>
-			<button @click="clearErrorAndNavigate('/')" class="btn btn-primary"><Icon name="mdi:home" class="mr-2" /> Go Back Home</button>
+			<button @click="clearErrorAndNavigate()" class="btn btn-primary"><Icon name="mdi:home" class="mr-2" /> Go Back Home</button>
 		</div>
 	</div>
 </template>

@@ -20,7 +20,7 @@ COPY --chown=node:node .yarn/ .yarn/
 
 RUN yarn install --immutable
 
-COPY ./ src/
+COPY ./ ./
 COPY scripts/ scripts/
 
 RUN yarn build
@@ -28,11 +28,8 @@ RUN yarn build
 # Runner stage
 FROM base AS runner
 
-COPY --from=builder --chown=node:node /home/node/app/public ./src/public
-COPY --from=builder --chown=node:node /home/node/app/.nuxt/standalone ./
-COPY --from=builder --chown=node:node /home/node/app/.nuxt/static ./src/.nuxt/static
+COPY --from=builder /home/node/app/.output /home/node/app/.output
 
-ENV PORT 8281
 ENV NODE_ENV="production"
 ENV NODE_OPTIONS="--enable-source-maps"
 
@@ -40,6 +37,6 @@ RUN chown -R node:node /home/node/app/
 
 USER node
 
-EXPOSE 8281
+EXPOSE ${PORT}
 
-CMD HOSTNAME="0.0.0.0" node src/server.js
+CMD node .output/server/index.mjs

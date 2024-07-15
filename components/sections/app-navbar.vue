@@ -117,36 +117,26 @@
 				<div class="dropdown dropdown-end">
 					<label tabindex="0" class="avatar btn btn-circle btn-ghost" @click="toggleDropdown">
 						<div class="w-10 rounded-full">
+							<source
+								v-if="isAnimated"
+								media="(prefers-reduced-motion: no-preference), (prefers-reduced-data: no-preference)"
+								type="image/gif"
+								:srcset="makeSrcset('gif')"
+							/>
+							<source type="image/webp" :srcset="makeSrcset('webp')" />
+							<source type="image/png" :srcset="makeSrcset('png')" />
 							<img
-								v-if="isDefault"
-								:src="defaultAvatar"
-								alt="Default Avatar"
+								:src="displayAvatarURL(session as any, { format: 'png', size: 128 })"
+								alt="Avatar"
 								class="h-8 w-8 rounded-full"
 								decoding="async"
 								crossorigin="anonymous"
 							/>
-							<picture v-else>
-								<source
-									v-if="isAnimated"
-									media="(prefers-reduced-motion: no-preference), (prefers-reduced-data: no-preference)"
-									type="image/gif"
-									:srcset="makeSrcset('gif')"
-								/>
-								<source type="image/webp" :srcset="makeSrcset('webp')" />
-								<source type="image/png" :srcset="makeSrcset('png')" />
-								<img
-									:src="createUrl('png', 128)"
-									alt="Avatar"
-									class="h-8 w-8 rounded-full"
-									decoding="async"
-									crossorigin="anonymous"
-								/>
-							</picture>
 						</div>
 					</label>
 					<ul v-if="isDropdownOpen" tabindex="0" class="menu-compact menu dropdown-content mt-3 w-64 rounded-box bg-base-100 p-2 shadow">
 						<li class="menu-title">
-							<span>{{ session?.username ?? session?.global_name }}</span>
+							<span>{{ session?.name }}</span>
 						</li>
 						<li>
 							<a @click="authLogout()" class="justify-between">
@@ -161,7 +151,7 @@
 				v-else
 				@click="
 					async () => {
-						await navigateTo(getLoginURL());
+						await navigateTo(getLoginURL(), { external: true });
 					}
 				"
 				class="btn btn-ghost"
@@ -188,14 +178,9 @@ const isDropdownOpen = ref(false);
 const toggleDropdown = () => {
 	isDropdownOpen.value = !isDropdownOpen.value;
 };
+
 const isDefault = ref(false);
 const isAnimated = ref(false);
-
-const defaultAvatar = computed(() =>
-	session.value?.id
-		? `https://cdn.discordapp.com/embed/avatars/${BigInt(session.value.id) % BigInt(5)}.png`
-		: 'https://cdn.discordapp.com/embed/avatars/0.png'
-);
 
 watch(
 	session,
@@ -211,12 +196,8 @@ watch(
 	{ immediate: true }
 );
 
-function createUrl(format: 'webp' | 'png' | 'gif', size: number) {
-	return `https://cdn.discordapp.com/avatars/${session.value!.id}/${session.value!.avatar}.${format}?size=${size}`;
-}
-
 function makeSrcset(format: 'webp' | 'png' | 'gif') {
-	return `${createUrl(format, 64)} 1x, ${createUrl(format, 128)} 2x, ${createUrl(format, 256)} 3x, ${createUrl(format, 512)} 4x`;
+	return `${displayAvatarURL(session as any, { format, size: 64 })} 1x, ${displayAvatarURL(session as any, { format, size: 128 })} 2x, ${displayAvatarURL(session as any, { format, size: 256 })} 3x, ${displayAvatarURL(session as any, { format, size: 512 })} 4x`;
 }
 
 const App = computed(() => Apps[appName.value]);

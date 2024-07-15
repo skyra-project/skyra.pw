@@ -40,7 +40,9 @@ export function useTheme() {
 	watch(
 		colorMode,
 		(newMode) => {
-			document.documentElement.setAttribute('data-theme', newMode);
+			if (import.meta.client) {
+				document.documentElement.setAttribute('data-theme', newMode);
+			}
 		},
 		{ immediate: true }
 	);

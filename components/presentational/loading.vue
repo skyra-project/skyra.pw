@@ -4,24 +4,17 @@
 	</div>
 </template>
 
-<script setup>
-import { useMemo } from '@vueuse/nuxt';
+<script setup lang="ts">
+interface Props {
+	loading: boolean;
+}
 
-const props = defineProps({
-	loading: {
-		type: Boolean,
-		required: true
-	}
-});
-
-// Memoize for performance optimization (if needed)
-const loading = useMemo(() => props.loading, [props.loading]);
+defineProps<Props>();
 </script>
 
-<style>
-/* Customize progress appearance if needed */
+<style scoped>
 .progress {
-	@apply border-gray-200 h-20 w-20 animate-spin rounded-full border-4 border-t-4; /* DaisyUI default styling */
-	/* Or add your own Tailwind CSS classes for a custom look */
+	@apply h-20 w-20 border-collapse animate-spin rounded-full border-4 border-t-4;
+	border-top-color: --primary; /* Cambia questo colore se necessario */
 }
 </style>

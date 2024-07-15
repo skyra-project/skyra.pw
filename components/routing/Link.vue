@@ -67,9 +67,9 @@ const linkProps = computed(() => {
 	color: --pri; /* theme.primary.main */
 }
 .link:hover {
-	color: #1565c0; /* theme.primary.dark */
+	color: #fd171b; /* theme.primary.dark */
 }
 .link:visited {
-	color: #155fa0; /* theme.primary.main with dark augment */
+	color: #d71417; /* theme.primary.main with dark augment */
 }
 </style>
