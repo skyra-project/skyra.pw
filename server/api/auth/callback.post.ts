@@ -2,6 +2,7 @@ import { isNullishOrEmpty } from '@sapphire/utilities';
 
 export default eventHandler(async (event) => {
 	const { code, redirectUri } = (await readBody(event)) as OAuth2BodyData;
+
 	if (isNullishOrEmpty(code) || isNullishOrEmpty(redirectUri)) {
 		throw createError({ message: 'Invalid body parameters', statusCode: 400 });
 	}
@@ -17,7 +18,7 @@ export default eventHandler(async (event) => {
 	}
 
 	const session = await useAuthSession(event);
-	await session.update({ id: user.id, name: user.username, avatar: user.avatar });
+	await session.update({ name: user.global_name ?? user.username, ...user });
 	return session.data;
 });
 

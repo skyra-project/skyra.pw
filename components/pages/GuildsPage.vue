@@ -2,8 +2,6 @@
 import FilteredGuildCards from '~/components/presentational/guild-card.vue';
 
 const { loggedIn, session } = useAuth();
-
-const { isMobile } = useDevice();
 </script>
 
 <template>

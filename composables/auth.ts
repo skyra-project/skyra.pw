@@ -1,11 +1,14 @@
+import type { APIUser } from 'discord-api-types/v10';
+
 export const useAuth = () =>
 	useNuxtApp().$auth as {
 		loggedIn: ComputedRef<boolean>;
-		session: Ref<{
-			name: string;
-			id: string;
-			avatar: string | null;
-		} | null>;
+		session: Ref<
+			| ({
+					name: string;
+			  } & APIUser)
+			| null
+		>;
 		redirectTo: Ref<string>;
 		updateSession: (opts?: { dedupe?: 'cancel' | 'defer' }) => Promise<void>;
 	};

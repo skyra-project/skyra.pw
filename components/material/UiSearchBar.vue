@@ -1,103 +1,128 @@
 <template>
-	<div class="bg-gray-800 relative flex items-center justify-between rounded-md p-2 shadow-md">
-		<input
-			v-model="innerValue"
-			ref="inputRef"
-			type="text"
-			:placeholder="placeholder"
-			@focus="handleFocus"
-			@blur="handleBlur"
-			@input="handleInput"
-			@keyup="handleKeyUp"
-			class="w-full bg-transparent text-white outline-none"
-		/>
+	<div
+		class="paper bg-secondary-light sticky mb-1 flex justify-between"
+		:class="className"
+		:style="[paperStyle, { top: useDevice().isMobile ? '34px' : '36px' }]"
+	>
+		<div class="mx-4 w-full">
+			<input
+				ref="inputRef"
+				:placeholder="placeholder"
+				:value="modelValue"
+				@input="handleInput"
+				@blur="handleBlur"
+				@keyup="handleKeyUp"
+				@focus="handleFocus"
+				:disabled="disabled"
+				class="input input-ghost w-full text-white focus:outline-none"
+			/>
+		</div>
 		<button
 			@click="handleRequestSearch"
 			:disabled="disabled"
-			class="text-white transition-transform"
-			:class="{ 'scale-0 opacity-0': innerValue === '' }"
+			class="btn btn-circle btn-ghost transition-all duration-200"
+			:class="{ 'scale-0 opacity-0': !modelValue, 'scale-100 opacity-100': modelValue }"
 		>
-			<SearchIcon />
+			<i class="fas fa-search text-white"></i>
 		</button>
 		<button
 			@click="handleCancel"
 			:disabled="disabled"
-			class="text-white transition-transform"
-			:class="{ 'scale-0 opacity-0': innerValue === '' }"
+			class="btn btn-circle btn-ghost transition-all duration-200"
+			:class="{ 'scale-0 opacity-0': !modelValue, 'scale-100 opacity-100': modelValue }"
 		>
-			<ClearIcon />
+			<i class="fas fa-times text-white"></i>
 		</button>
 	</div>
 </template>
 
-<script setup>
-import { ref, watch } from 'vue';
-import { SearchIcon, ClearIcon } from '@heroicons/vue/solid';
+<script setup lang="ts">
+import { ref, watch, onMounted } from 'vue';
 
-const props = defineProps({
-	cancelOnEscape: { type: Boolean, default: false },
-	className: { type: String, default: '' },
-	disabled: { type: Boolean, default: false },
-	onCancelSearch: { type: Function },
-	onRequestSearch: { type: Function },
-	style: { type: Object, default: () => ({}) },
-	onFocus: { type: Function },
-	onBlur: { type: Function },
-	onChange: { type: Function },
-	onKeyUp: { type: Function },
-	value: { type: String, default: '' },
-	placeholder: { type: String, default: '' }
+interface Props {
+	modelValue: string;
+	cancelOnEscape?: boolean;
+	className?: string;
+	disabled?: boolean;
+	placeholder?: string;
+	paperStyle?: Record<string, string>;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+	modelValue: '',
+	cancelOnEscape: false,
+	className: '',
+	disabled: false,
+	placeholder: '',
+	paperStyle: () => ({})
 });
 
-const innerValue = ref(props.value);
-const inputRef = ref(null);
+const emit = defineEmits<{
+	(e: 'update:modelValue', value: string): void;
+	(e: 'cancelSearch'): void;
+	(e: 'requestSearch', value: string): void;
+	(e: 'focus', event: FocusEvent): void;
+	(e: 'blur', event: FocusEvent): void;
+}>();
 
-watch(
-	() => props.value,
-	(newValue) => {
-		innerValue.value = newValue;
-	}
-);
+const inputRef = ref<HTMLInputElement | null>(null);
 
-const handleFocus = (e) => {
-	if (props.onFocus) props.onFocus(e);
+const handleInput = (e: Event) => {
+	const target = e.target as HTMLInputElement;
+	emit('update:modelValue', target.value);
 };
 
-const handleBlur = (e) => {
-	innerValue.value = innerValue.value.trim();
-	if (props.onBlur) props.onBlur(e);
+const handleBlur = (e: FocusEvent) => {
+	emit('blur', e);
 };
 
-const handleInput = (e) => {
-	innerValue.value = e.target.value;
-	if (props.onChange) props.onChange(e.target.value);
+const handleFocus = (e: FocusEvent) => {
+	emit('focus', e);
 };
 
 const handleCancel = () => {
-	innerValue.value = '';
-	if (props.onCancelSearch) props.onCancelSearch();
+	emit('update:modelValue', '');
+	emit('cancelSearch');
 };
 
 const handleRequestSearch = () => {
-	if (props.onRequestSearch) props.onRequestSearch(innerValue.value);
+	emit('requestSearch', props.modelValue);
 };
 
-const handleKeyUp = (e) => {
+const handleKeyUp = (e: KeyboardEvent) => {
 	if (e.key === 'Enter') {
 		handleRequestSearch();
 	} else if (props.cancelOnEscape && e.key === 'Escape') {
 		handleCancel();
 	}
-	if (props.onKeyUp) props.onKeyUp(e);
 };
+
+// Expose focus and blur methods
+defineExpose({
+	focus: () => inputRef.value?.focus(),
+	blur: () => inputRef.value?.blur()
+});
+
+// Watch for external value changes
+watch(
+	() => props.modelValue,
+	(newValue) => {
+		if (inputRef.value) {
+			inputRef.value.value = newValue;
+		}
+	}
+);
+
+onMounted(() => {
+	if (inputRef.value) {
+		inputRef.value.value = props.modelValue;
+	}
+});
 </script>
 
 <style scoped>
-.scale-0 {
-	transform: scale(0);
-	opacity: 0;
-}
-.opacity-0 {
-	opacity: 0;
+.paper {
+	z-index: 1099; /* Adjust as needed */
+	height: 48px; /* Equivalent to theme.spacing(6) */
 }
 </style>

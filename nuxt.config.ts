@@ -85,7 +85,8 @@ export default defineNuxtConfig({
 		} satisfies SessionConfig,
 		public: {
 			origin: process.env.NITRO_ORIGIN,
-			clientId: process.env.NITRO_DISCORD_CLIENT_ID
+			clientId: process.env.NITRO_DISCORD_CLIENT_ID,
+			apiOrigin: process.env.NITRO_API_ORIGIN
 		},
 		clientId: process.env.NITRO_DISCORD_CLIENT_ID,
 		clientSecret: process.env.NITRO_DISCORD_CLIENT_SECRET
