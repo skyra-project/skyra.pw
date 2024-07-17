@@ -1,51 +1,43 @@
 import type { LoginData } from '@sapphire/plugin-api';
-import type { Guild, ChannelType } from 'discord.js';
+import type { APIGuild, ChannelType } from 'discord-api-types/v10';
 
 export interface TransformedLoginData extends LoginData {
 	transformedGuilds?: OauthFlattenedGuild[];
 }
 
-interface FlattenedGuild
-	extends Pick<
-		Guild,
-		| 'afkChannelId'
-		| 'afkTimeout'
-		| 'applicationId'
-		| 'approximateMemberCount'
-		| 'approximatePresenceCount'
-		| 'available'
-		| 'banner'
-		| 'defaultMessageNotifications'
-		| 'description'
-		| 'widgetEnabled'
-		| 'explicitContentFilter'
-		| 'features'
-		| 'icon'
-		| 'id'
-		| 'joinedTimestamp'
-		| 'mfaLevel'
-		| 'name'
-		| 'ownerId'
-		| 'partnered'
-		| 'preferredLocale'
-		| 'premiumSubscriptionCount'
-		| 'premiumTier'
-		| 'splash'
-		| 'systemChannelId'
-		| 'vanityURLCode'
-		| 'verificationLevel'
-		| 'verified'
-	> {
+interface FlattenedGuild {
+	afkChannelId: APIGuild['afk_channel_id'];
+	afkTimeout: APIGuild['afk_timeout'];
+	applicationId: APIGuild['application_id'];
+	approximateMemberCount: NonNullable<APIGuild['approximate_member_count']>;
+	approximatePresenceCount: NonNullable<APIGuild['approximate_presence_count']>;
+	available: boolean;
+	banner: APIGuild['banner'];
+	defaultMessageNotifications: APIGuild['default_message_notifications'];
+	description: APIGuild['description'];
+	widgetEnabled: NonNullable<APIGuild['widget_enabled']>;
+	explicitContentFilter: APIGuild['explicit_content_filter'];
+	features: APIGuild['features'];
+	icon: APIGuild['icon'];
+	id: APIGuild['id'];
+	joinedTimestamp: number;
+	mfaLevel: APIGuild['mfa_level'];
+	name: APIGuild['name'];
+	ownerId: APIGuild['owner_id'];
+	partnered: boolean;
+	preferredLocale: APIGuild['preferred_locale'];
+	premiumSubscriptionCount: NonNullable<APIGuild['premium_subscription_count']>;
+	premiumTier: APIGuild['premium_tier'];
+	splash: APIGuild['splash'];
+	systemChannelId: APIGuild['system_channel_id'];
+	vanityURLCode: APIGuild['vanity_url_code'];
+	verificationLevel: APIGuild['verification_level'];
+	verified: boolean;
 	channels: FlattenedGuildChannel[];
-
 	emojis: FlattenedEmoji[];
-
 	manageable: boolean;
-
 	permissions?: number;
-
 	roles: FlattenedRole[];
-
 	skyraIsIn: boolean;
 }
 
