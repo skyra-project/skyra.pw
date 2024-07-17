@@ -1,6 +1,5 @@
-import type { ChannelTypeString } from '@sapphire/discord.js-utilities';
 import type { LoginData } from '@sapphire/plugin-api';
-import type { Guild } from 'discord.js';
+import type { Guild, ChannelType } from 'discord.js';
 
 export interface TransformedLoginData extends LoginData {
 	transformedGuilds?: OauthFlattenedGuild[];
@@ -91,7 +90,7 @@ interface FlattenedChannel {
 
 	id: string;
 
-	type: ChannelTypeString;
+	type: ChannelType;
 }
 
 interface FlattenedGuildChannel extends FlattenedChannel {
@@ -113,7 +112,7 @@ interface FlattenedGuildChannel extends FlattenedChannel {
 
 	topic?: string | null;
 
-	type: ChannelTypeString;
+	type: ChannelType;
 
 	userLimit?: number;
 }
@@ -123,7 +122,7 @@ export interface FlattenedNewsChannel extends FlattenedGuildChannel {
 
 	topic: string | null;
 
-	type: 'GUILD_NEWS';
+	type: ChannelType.GuildAnnouncement;
 }
 
 export interface FlattenedTextChannel extends FlattenedGuildChannel {
@@ -133,13 +132,13 @@ export interface FlattenedTextChannel extends FlattenedGuildChannel {
 
 	topic: string | null;
 
-	type: 'GUILD_TEXT';
+	type: ChannelType.GuildText;
 }
 
 export interface FlattenedVoiceChannel extends FlattenedGuildChannel {
 	bitrate: number;
 
-	type: 'GUILD_VOICE';
+	type: ChannelType.GuildVoice;
 
 	userLimit: number;
 }
@@ -147,7 +146,7 @@ export interface FlattenedVoiceChannel extends FlattenedGuildChannel {
 export interface FlattenedDMChannel extends FlattenedChannel {
 	recipient: string;
 
-	type: 'DM';
+	type: ChannelType.DM;
 }
 
 interface FlattenedUser {

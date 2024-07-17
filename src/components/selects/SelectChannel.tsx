@@ -1,4 +1,5 @@
 import type { TransformedLoginData } from '@config/types/ApiData';
+import { ChannelType } from 'discord-api-types/v10';
 import { memo } from 'react';
 import type { ValuesType } from 'utility-types';
 import SelectOne, { SelectOneProps } from './SelectOne';
@@ -22,7 +23,7 @@ const SelectChannel = ({ label, value, guild, onChange, tooltipTitle, ...props }
 			onChange={onChange}
 			tooltipTitle={tooltipTitle}
 			values={guild.channels
-				.filter((c) => c.type === 'GUILD_TEXT' || c.type === 'GUILD_NEWS')
+				.filter((c) => c.type === ChannelType.GuildText || c.type === ChannelType.GuildAnnouncement)
 				.sort((c1, c2) => c1.rawPosition - c2.rawPosition)
 				.map((c) => ({ name: c.name, value: c.id }))}
 		/>
