@@ -4,7 +4,6 @@
 
 <script lang="ts" setup>
 import GfmVueMarkdown from '@/components/mods/markdown/gfm-vue-markdown.vue';
-import { defineProps, computed } from 'vue';
 import { EmojiRegexExtractName } from '@/utils/constants';
 
 interface ExtendedHelpBodyProps {

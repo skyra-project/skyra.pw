@@ -1,15 +1,14 @@
 <template>
-	<Link :href="href" :forceSameTab="forceSameTab" class="menu-link">
+	<RoutingLink :href="href" :forceSameTab="forceSameTab" class="menu-link">
 		<div class="flex items-center">
 			<component :is="icon" class="mr-2" />
 			<span>{{ text }}</span>
 		</div>
-	</Link>
+	</RoutingLink>
 </template>
 
 <script setup lang="ts">
 import type { FunctionalComponent, SVGAttributes } from 'vue';
-import Link from './Link.vue';
 
 interface MenuItemLinkProps {
 	href: string;

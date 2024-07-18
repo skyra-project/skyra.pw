@@ -2,9 +2,8 @@
 import { ref, computed, onMounted } from 'vue';
 import { useGuildSettings } from '~/composables/settings/useGuildSettings';
 import { useGuildSettingsChanges } from '~/composables/settings/useGuildSettingsChanges';
-import RefreshCommandsButton from '~/layouts/refresh_commands_buttons.vue';
-import Section from '~/layouts/settings/section.vue';
-import Loading from '~/components/presentational/loading.vue';
+import RefreshCommandsButton from '~/components/refresh_commands_buttons.vue';
+
 import type { FlattenedCommand } from '~/config/types/ApiData';
 import type { DisableCommands } from '~/config/types/ConfigurableData';
 
@@ -68,10 +67,10 @@ const parseCommandDescription = (description: string) => description.replace(/<:
 
 <template>
 	<div>
-		<Loading :loading="loading" />
+		<PresentationalLoading :loading="loading" />
 		<RefreshCommandsButton @fresh="(newCommands) => emit('update:commands', newCommands)" :setCommands="setGuildSettingsChanges" />
 
-		<Section title="Commands">
+		<PresentationalLayoutsSettingsSection title="Commands">
 			<p class="mb-4 text-sm">On this page you can disable commands on your server</p>
 
 			<div v-for="category in categories" :key="category" class="mb-4">
@@ -108,6 +107,6 @@ const parseCommandDescription = (description: string) => description.replace(/<:
 					</div>
 				</div>
 			</div>
-		</Section>
+		</PresentationalLayoutsSettingsSection>
 	</div>
 </template>

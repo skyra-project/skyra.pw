@@ -1,12 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue';
 import { useGuildSettings } from '~/composables/settings/useGuildSettings';
 import { useGuildSettingsChanges } from '~/composables/settings/useGuildSettingsChanges';
-import Section from '~/layouts/settings/section.vue';
-import SelectBoolean from '~/components/selects/SelectBoolean.vue';
-import Select from '~/components/selects/Select.vue';
-import SelectDuration from '~/components/selects/SelectDuration.vue';
-import { bitwiseHas, bitwiseSet, updateSliderValueObj } from '~/utils/util';
 
 const { guildSettings } = useGuildSettings();
 const { setGuildSettingsChanges } = useGuildSettingsChanges();
@@ -26,38 +20,38 @@ const updateSoftAction = (bit: number, checked: boolean) => {
 
 <template>
 	<div>
-		<Section title="Reaction Filter">
+		<PresentationalLayoutsSettingsSection title="Reaction Filter">
 			<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-				<SelectBoolean
+				<SelectsSelectBoolean
 					:title="`Filter ${guildSettings.selfmodReactionsEnabled ? 'Enabled' : 'Disabled'}`"
 					:current-value="guildSettings.selfmodReactionsEnabled"
 					description="Whether or not this system should be enabled."
 					@change="(value) => setGuildSettingsChanges({ selfmodReactionsEnabled: value })"
 				/>
-				<SelectBoolean
+				<SelectsSelectBoolean
 					:title="`Alerts ${softActionEnabled.alerts ? 'Enabled' : 'Disabled'}`"
 					:current-value="softActionEnabled.alerts"
 					description="Toggle message alerts in the channel the infraction took place."
 					@change="(value) => updateSoftAction(0b100, value)"
 				/>
-				<SelectBoolean
+				<SelectsSelectBoolean
 					:title="`Logs ${softActionEnabled.logs ? 'Enabled' : 'Disabled'}`"
 					:current-value="softActionEnabled.logs"
 					description="Toggle message logs in the moderation logs channel."
 					@change="(value) => updateSoftAction(0b010, value)"
 				/>
-				<SelectBoolean
+				<SelectsSelectBoolean
 					:title="`Deletes ${softActionEnabled.deletes ? 'Enabled' : 'Disabled'}`"
 					:current-value="softActionEnabled.deletes"
 					description="Toggle message deletions."
 					@change="(value) => updateSoftAction(0b001, value)"
 				/>
 			</div>
-		</Section>
+		</PresentationalLayoutsSettingsSection>
 
-		<Section title="Punishments">
+		<PresentationalLayoutsSettingsSection title="Punishments">
 			<div class="flex flex-col gap-4 md:flex-row">
-				<Select
+				<SelectsSelect
 					title="Action"
 					helper-text="The action to perform as punishment"
 					:value="guildSettings.selfmodReactionsHardAction"
@@ -69,8 +63,8 @@ const updateSoftAction = (bit: number, checked: boolean) => {
 					<option :value="3">Mute</option>
 					<option :value="4">Softban</option>
 					<option :value="5">Ban</option>
-				</Select>
-				<SelectDuration
+				</SelectsSelect>
+				<SelectsSelectDuration
 					:value="guildSettings.selfmodReactionsHardActionDuration"
 					:min="1000"
 					@change="(duration) => setGuildSettingsChanges({ selfmodReactionsHardActionDuration: duration })"
@@ -110,6 +104,6 @@ const updateSoftAction = (bit: number, checked: boolean) => {
 					class="range"
 				/>
 			</div>
-		</Section>
+		</PresentationalLayoutsSettingsSection>
 	</div>
 </template>

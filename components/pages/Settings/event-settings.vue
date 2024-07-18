@@ -2,7 +2,7 @@
 import { useRouter } from 'vue-router';
 import { useGuildSettings } from '~/composables/settings/useGuildSettings';
 import { ConfigurableModerationEvents, ConfigurableMessageEvents } from '~/config/SettingsDataEntries';
-import Section from '~/layouts/settings/section.vue';
+
 import SelectBoolean from '~/components/selects/SelectBoolean.vue';
 import { useGuildSettingsChanges } from '~/composables/settings/useGuildSettingsChanges';
 
@@ -15,7 +15,7 @@ const guildId = computed(() => router.currentRoute.value.params.id as string);
 
 <template>
 	<div>
-		<Section title="Moderation Events">
+		<PresentationalLayoutsSettingsSection title="Moderation Events">
 			<p class="mb-4 text-sm">
 				These events involve moderation actions and require that you setup the Moderation Logs channel on
 				<NuxtLink :to="`/guilds/${guildId}/channels`" class="link">the Channels page</NuxtLink>
@@ -30,9 +30,9 @@ const guildId = computed(() => router.currentRoute.value.params.id as string);
 					@change="(value) => setGuildSettingsChanges({ [key]: value })"
 				/>
 			</div>
-		</Section>
+		</PresentationalLayoutsSettingsSection>
 
-		<Section title="Message Events">
+		<PresentationalLayoutsSettingsSection title="Message Events">
 			<p class="mb-4 text-sm">
 				These events involve message events, the channels to set up vary on the type of event and each channel can be configured on
 				<NuxtLink :to="`/guilds/${guildId}/channels`" class="link">the Channels page</NuxtLink>
@@ -47,6 +47,6 @@ const guildId = computed(() => router.currentRoute.value.params.id as string);
 					@change="(value) => setGuildSettingsChanges({ [key]: value })"
 				/>
 			</div>
-		</Section>
+		</PresentationalLayoutsSettingsSection>
 	</div>
 </template>

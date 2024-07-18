@@ -7,8 +7,6 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps } from 'vue';
-
 interface ExtendedHelpSectionHeaderProps {
 	icon: string; // Assuming icon is a string representing the component name
 	header: string;

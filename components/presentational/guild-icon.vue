@@ -5,9 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, computed } from 'vue';
 import LazyAvatar from '~/components/material/lazy-avatar.vue';
-import { displayIconURL, getAcronym } from '~/utils/util';
 import type { TransformedLoginData } from '~/config/types/ApiData';
 import type { ValuesType } from 'utility-types';
 

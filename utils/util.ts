@@ -7,6 +7,34 @@ export const isBrowser = typeof window !== 'undefined';
 
 export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
+export const loadState = <T>(key: LocalStorageKeys): T | null => {
+	if (isBrowser) {
+		const serializedState = localStorage.getItem(key);
+		return serializedState ? (JSON.parse(serializedState) as T) : null;
+	}
+
+	return null;
+};
+
+export const saveState = <T>(key: LocalStorageKeys, state: T): T => {
+	try {
+		if (isBrowser) {
+			const serializedState = JSON.stringify(state);
+			localStorage.setItem(key, serializedState);
+		}
+	} catch {
+		// intentionally empty
+	}
+
+	return state;
+};
+
+export const clearState = (key: LocalStorageKeys) => {
+	if (isBrowser) {
+		localStorage.removeItem(key);
+	}
+};
+
 export function navigate(path: string, forceSameTab = false) {
 	if (!forceSameTab && (path.startsWith('http') || path.startsWith('//') || path.startsWith('mailto:'))) {
 		return () => window.open(path, '_blank', 'noreferrer=yes');

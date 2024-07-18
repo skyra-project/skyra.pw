@@ -1,4 +1,5 @@
 import { isNullishOrEmpty } from '@sapphire/utilities';
+import { useDiscordPack } from '~/composables/discordPack';
 
 export default eventHandler(async (event) => {
 	const { code, redirectUri } = (await readBody(event)) as OAuth2BodyData;
@@ -12,10 +13,19 @@ export default eventHandler(async (event) => {
 		throw createError({ message: 'Failed to fetch the token', statusCode: 500 });
 	}
 
+	const auth = await fetchAuth(data);
+
+	if (!auth) {
+		throw createError({ message: 'Failed to fetch the auth', statusCode: 500 });
+	}
+
 	const user = await fetchUser(data.access_token);
 	if (!user) {
 		throw createError({ message: 'Failed to fetch the user', statusCode: 500 });
 	}
+	const { mergePack } = useDiscordPack();
+
+	mergePack(auth);
 
 	const session = await useAuthSession(event);
 	await session.update({ name: user.global_name ?? user.username, ...user });

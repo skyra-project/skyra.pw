@@ -1,13 +1,22 @@
+import { LoginData } from '@sapphire/plugin-api';
 import {
+	GuildDefaultMessageNotifications,
+	GuildExplicitContentFilter,
+	GuildMFALevel,
+	GuildPremiumTier,
+	GuildVerificationLevel,
+	Locale,
 	OAuth2Routes,
+	RESTAPIPartialCurrentUserGuild,
 	RouteBases,
 	Routes,
 	type RESTGetAPICurrentUserResult,
 	type RESTPostOAuth2AccessTokenResult,
 	type RESTPostOAuth2AccessTokenURLEncodedData
 } from 'discord-api-types/v10';
+import { FlattenedGuild, OauthFlattenedGuild, PartialOauthFlattenedGuild, TransformedLoginData } from '~/config/types/ApiData';
 
-const { clientId, clientSecret } = useRuntimeConfig();
+const { clientId, clientSecret, apiOrigin } = useRuntimeConfig();
 
 export async function fetchAccessToken(code: string, redirectUri: string) {
 	const data = {
@@ -45,4 +54,21 @@ async function fetchData<T extends object>(token: string, route: string) {
 	});
 
 	return result.ok ? ((await result.json()) as T) : null;
+}
+
+export async function fetchAuth(data: RESTPostOAuth2AccessTokenResult) {
+	const result = await fetch(`${apiOrigin}/oauth/authorize`, {
+		method: 'POST',
+		body: JSON.stringify(data),
+		credentials: 'include',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	});
+
+	const json = await result.json();
+	if (result.ok) return json as TransformedLoginData;
+
+	console.error(json);
+	return null;
 }

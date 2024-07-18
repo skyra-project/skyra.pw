@@ -23,8 +23,8 @@ const syncGuildData = async () => {
 	isLoading.value = true;
 	try {
 		const [guildDataResponse, guildSettingsResponse] = await Promise.all([
-			$fetch<ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>>(`/api/guilds/${props.guildId}`),
-			$fetch(`/api/guilds/${props.guildId}/settings`)
+			$fetch<ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>>(`guilds/${props.guildId}`),
+			$fetch(`guilds/${props.guildId}/settings`)
 		]);
 		guildData.value = guildDataResponse;
 		guildSettings.value = guildSettingsResponse;
@@ -45,7 +45,7 @@ onMounted(syncGuildData);
 const submitChanges = async () => {
 	try {
 		isLoading.value = true;
-		const response = await $fetch<GuildSettings>(`/api/guilds/${props.guildId}/settings`, {
+		const response = await $fetch<GuildSettings>(`guilds/${props.guildId}/settings`, {
 			method: 'patch',
 			body: {
 				guild_id: props.guildId,
@@ -88,7 +88,7 @@ const readyToRender = computed(
 			<Title>{{ guildData?.name ?? 'Guild' }} Settings</Title>
 		</Head>
 
-		<Loading :loading="isLoading" />
+		<PresentationalLoading :loading="isLoading" />
 
 		<ErrorAlert
 			:open="hasError"
@@ -99,26 +99,6 @@ const readyToRender = computed(
 
 		<div class="flex h-screen">
 			<SettingsNavBar :guild-data="guildData" :toggle-sidebar="toggleSidebar" />
-
-			<div class="hidden w-64 flex-shrink-0 sm:block">
-				<!--         <DesktopSettingsDrawer
-          :guild-data="guildData"
-          :guild-id="guildId"
-          :is-loading="isLoading"
-          :toggle-sidebar="toggleSidebar"
-        /> -->
-			</div>
-
-			<div class="sm:hidden">
-				<!--       <MobileSettingsDrawer
-          :mobile-open="mobileOpen"
-          :guild-data="guildData"
-          :guild-id="guildId"
-          :is-loading="isLoading"
-          :toggle-sidebar="toggleSidebar"
-        /> -->
-			</div>
-
 			<main class="mt-16 flex flex-grow flex-col overflow-y-scroll bg-base-300 p-4 text-base-content sm:mt-0">
 				<slot v-if="readyToRender"></slot>
 
@@ -142,4 +122,3 @@ const readyToRender = computed(
 	opacity: 0;
 }
 </style>
-import type { ValuesType } from 'utility-types'; import type { TransformedLoginData } from '~/config/types/ApiData';

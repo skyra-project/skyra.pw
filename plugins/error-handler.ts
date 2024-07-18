@@ -40,6 +40,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 					break;
 				case 500:
 					error.data = { url: '/500' };
+					error.unhandled = true;
 					break;
 				case 403:
 					error.data = { url: '/403' };
@@ -48,6 +49,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 					error.data = { url: '/error' };
 					break;
 			}
+			console.log('Error handler plugin loaded', error);
 		});
 	}
 });

@@ -1,12 +1,11 @@
 <template>
-	<SelectOne :label="label" :name="channelName" :values="channelOptions" :tooltipTitle="tooltipTitle" @change="onChange" />
+	<se :label="label" :name="channelName" :values="channelOptions" :tooltipTitle="tooltipTitle" @change="onChange" />
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps } from 'vue';
-import SelectOne from './SelectOne.vue';
 import type { TransformedLoginData } from '~/config/types/ApiData';
 import type { ValuesType } from 'utility-types';
+import { ChannelType } from 'discord-api-types/v9';
 
 interface SelectChannelProps {
 	label: string;
@@ -25,7 +24,7 @@ const channelName = computed(() => {
 
 const channelOptions = computed(() => {
 	return props.guild.channels
-		.filter((c) => c.type === 'GUILD_TEXT' || c.type === 'GUILD_NEWS')
+		.filter((c) => c.type === ChannelType.GuildText || c.type === ChannelType.GuildAnnouncement)
 		.sort((c1, c2) => c1.rawPosition - c2.rawPosition)
 		.map((c) => ({ name: c.name, value: c.id }));
 });

@@ -3,10 +3,6 @@ import useGuild from '~/composables/settings/useGuildData';
 import { useGuildSettings } from '~/composables/settings/useGuildSettings';
 import { useGuildSettingsChanges } from '~/composables/settings/useGuildSettingsChanges';
 import { ConfigurableLoggingChannels, ConfigurableIgnoreChannels } from '~/config/SettingsDataEntries';
-import PageHeader from '~/layouts/settings/page-header.vue';
-import Section from '~/layouts/settings/section.vue';
-import SelectChannel from '~/components/selects/SelectChannel.vue';
-import SelectChannels from '~/components/selects/SelectChannels.vue';
 
 const { guildData } = useGuild();
 const { guildSettings } = useGuildSettings();
@@ -26,14 +22,9 @@ const commonProps = {
 
 <template>
 	<div>
-		<PageHeader
-			title="Channels"
-			subtitle="Here you can configure different kinds of channels for Skyra. Hover over a button to get more information for that specific channel."
-		/>
-
-		<Section title="Logging Channels">
+		<PresentationalLayoutsSettingsSection title="Logging Channels">
 			<div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-				<SelectChannel
+				<SelectsSelectChannel
 					v-for="{ name, description, key } in ConfigurableLoggingChannels"
 					:key="key"
 					v-bind="commonProps"
@@ -44,11 +35,11 @@ const commonProps = {
 					@reset="() => handleResetKey(key)"
 				/>
 			</div>
-		</Section>
+		</PresentationalLayoutsSettingsSection>
 
-		<Section title="Logging Ignore Channels" class="mt-10 md:mt-20">
+		<PresentationalLayoutsSettingsSection title="Logging Ignore Channels" class="mt-10 md:mt-20">
 			<div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-				<SelectChannels
+				<SelectsSelectChannels
 					v-for="{ name, description, key } in ConfigurableIgnoreChannels"
 					:key="key"
 					v-bind="commonProps"
@@ -59,6 +50,6 @@ const commonProps = {
 					@reset="() => handleResetKey(key)"
 				/>
 			</div>
-		</Section>
+		</PresentationalLayoutsSettingsSection>
 	</div>
 </template>

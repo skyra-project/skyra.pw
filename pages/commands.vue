@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Loading :loading="loading" />
+		<PresentationalLoading :loading="loading" />
 		<RefreshCommandsButton :setCommands="setCommands" @fresh="handleFreshCommands" />
 		<div class="container mx-auto">
 			<UiSearchBar
@@ -27,8 +27,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { useElementSize, useDebounceFn, useStorage } from '@vueuse/core';
 import type { FlattenedCommand } from '~/config/types/ApiData';
-import Loading from '~/components/presentational/loading.vue';
-import RefreshCommandsButton from '~/layouts/refresh_commands_buttons.vue';
+import RefreshCommandsButton from '~/components/refresh_commands_buttons.vue';
 import UiSearchBar from '~/components/material/UiSearchBar.vue';
 import category from '~/components/presentational/CommandsPage/category.vue';
 
@@ -50,7 +49,7 @@ const fetchCommands = async () => {
 		commands.value = commandsStorage.value.data;
 	} else {
 		try {
-			const commandsData = await $fetch<FlattenedCommand[]>('/api/commands');
+			const commandsData = await $fetch<FlattenedCommand[]>(getApiOrigin() + '/commands');
 			commands.value = commandsData;
 			commandsStorage.value = {
 				expire: Date.now() + Time.Day * 6,

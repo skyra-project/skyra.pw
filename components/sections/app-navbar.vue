@@ -139,6 +139,7 @@
 							<span>{{ session?.name }}</span>
 						</li>
 						<li>
+							<nuxt-link to="/profile">Profile</nuxt-link>
 							<a @click="authLogout()" class="justify-between">
 								Logout
 								<span class="badge badge-sm">New</span>

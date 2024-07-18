@@ -1,12 +1,12 @@
+import { APIUser, RESTGetAPICurrentUserGuildsResult } from 'discord-api-types/v10';
 import type { H3Event, SessionConfig } from 'h3';
+import { TransformedLoginData } from '~/config/types/ApiData';
 
 const sessionConfig = useRuntimeConfig().auth as SessionConfig;
 
-export interface AuthSession {
-	id: string;
+export type AuthSession = APIUser & {
 	name: string;
-	avatar: string | null;
-}
+};
 
 export function useAuthSession(event: H3Event) {
 	return useSession<AuthSession>(event, sessionConfig);

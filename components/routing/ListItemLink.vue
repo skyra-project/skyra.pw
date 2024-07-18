@@ -1,16 +1,14 @@
 <template>
-	<Link :href="href" :forceSameTab="forceSameTab" class="menu-link" ref="linkRef">
+	<RoutingLink :href="href" :forceSameTab="forceSameTab" class="menu-link" ref="linkRef">
 		<li :class="computedClass" :disabled="listItemDisabled" @click="handleClick">
 			<component v-if="Icon" :is="Icon" class="mr-2" />
 			<span>{{ itemText }}</span>
 		</li>
-	</Link>
+	</RoutingLink>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, defineProps } from 'vue';
 import type { FunctionalComponent } from 'vue';
-import Link from './Link.vue';
 
 interface ListItemLinkProps {
 	href: string;

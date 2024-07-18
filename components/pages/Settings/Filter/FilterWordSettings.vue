@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { useGuildSettingsChanges } from '@/composables/settings/useGuildSettingsChanges.ts';
+import { useGuildSettingsChanges } from '@/composables/settings/useGuildSettingsChanges';
 import { useGuildSettings } from '@/composables/settings/useGuildSettings';
 import { bitwiseHas, bitwiseSet, removeNonAlphaNumeric, updateSliderValueObj } from '@/utils/util';
 
@@ -43,42 +43,42 @@ const thresholdDuration = computed({
 
 <template>
 	<div>
-		<Section title="Word Filter">
-			<SimpleGrid>
-				<SelectBoolean
+		<PresentationalLayoutsSettingsSection title="Word Filter">
+			<div class="grid grid-cols-1 gap-4">
+				<SelectsSelectBoolean
 					:title="`Filter ${guildSettings.selfmodFilterEnabled ? 'Enabled' : 'Disabled'}`"
 					@change="setGuildSettingsChanges({ selfmodFilterEnabled: $event })"
 					:current-value="guildSettings.selfmodFilterEnabled"
 					description="Whether or not this system should be enabled."
 				/>
-				<SelectBoolean
+				<SelectsSelectBoolean
 					:title="`Alerts ${bitwiseHas(guildSettings.selfmodFilterSoftAction, 0b100) ? 'Enabled' : 'Disabled'}`"
 					@change="updateSoftAction(0b100, $event)"
 					:current-value="bitwiseHas(guildSettings.selfmodFilterSoftAction, 0b100)"
 					description="Toggle message alerts in the channel the infraction took place."
 				/>
-				<SelectBoolean
+				<SelectsSelectBoolean
 					:title="`Logs ${bitwiseHas(guildSettings.selfmodFilterSoftAction, 0b010) ? 'Enabled' : 'Disabled'}`"
 					@change="updateSoftAction(0b010, $event)"
 					:current-value="bitwiseHas(guildSettings.selfmodFilterSoftAction, 0b010)"
 					description="Toggle message logs in the moderation logs channel."
 				/>
-				<SelectBoolean
+				<SelectsSelectBoolean
 					:title="`Deletes ${bitwiseHas(guildSettings.selfmodFilterSoftAction, 0b001) ? 'Enabled' : 'Disabled'}`"
 					@change="updateSoftAction(0b001, $event)"
 					:current-value="bitwiseHas(guildSettings.selfmodFilterSoftAction, 0b001)"
 					description="Toggle message deletions."
 				/>
-			</SimpleGrid>
-		</Section>
+			</div>
+		</PresentationalLayoutsSettingsSection>
 
-		<Section title="Punishments">
-			<SimpleGrid direction="row" justify-content="flex-start">
-				<Select
+		<PresentationalLayoutsSettingsSection title="Punishments">
+			<div class="grid grid-cols-2 gap-4">
+				<SelectsSelect
 					title="Action"
 					helper-text="The action to perform as punishment"
 					:value="guildSettings.selfmodFilterHardAction"
-					@change="setGuildSettingsChanges({ selfmodFilterHardAction: $event })"
+					@change="setGuildSettingsChanges({ selfmodFilterHardAction: $event as number | undefined })"
 				>
 					<option :value="0">None</option>
 					<option :value="1">Warning</option>
@@ -86,24 +86,26 @@ const thresholdDuration = computed({
 					<option :value="3">Mute</option>
 					<option :value="4">Softban</option>
 					<option :value="5">Ban</option>
-				</Select>
-				<SelectDuration
+				</SelectsSelect>
+				<SelectsSelectDuration
 					:value="guildSettings.selfmodFilterHardActionDuration"
 					:min="1000"
 					@change="setGuildSettingsChanges({ selfmodFilterHardActionDuration: $event })"
 				/>
-			</SimpleGrid>
-			<div>
-				<p>Maximum Threshold</p>
-				<input v-model="thresholdMaximum" type="range" min="0" max="60" />
 			</div>
-			<div>
-				<p>Threshold Duration (in seconds)</p>
-				<input v-model="thresholdDuration" type="range" min="0" max="120" />
-			</div>
-		</Section>
 
-		<Section title="Filtered Words">
+			<div class="mt-4">
+				<p>Maximum Threshold</p>
+				<input v-model="thresholdMaximum" type="range" min="0" max="60" class="w-full" />
+			</div>
+
+			<div class="mt-4">
+				<p>Threshold Duration (in seconds)</p>
+				<input v-model="thresholdDuration" type="range" min="0" max="120" class="w-full" />
+			</div>
+		</PresentationalLayoutsSettingsSection>
+
+		<PresentationalLayoutsSettingsSection title="Filtered Words">
 			<form @submit.prevent="addWord">
 				<div class="mb-2 flex items-center">
 					<input v-model="newWord" class="mb-1 mr-1" placeholder="Add Word" />
@@ -121,6 +123,6 @@ const thresholdDuration = computed({
 					{{ word }}
 				</span>
 			</div>
-		</Section>
+		</PresentationalLayoutsSettingsSection>
 	</div>
 </template>

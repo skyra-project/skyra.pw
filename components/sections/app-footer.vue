@@ -1,7 +1,9 @@
 <template>
 	<footer class="footer mt-24 bg-base-200 p-10 text-base-content">
 		<aside>
-			<IconsWolfStar class="h-12 w-12" />
+			<div class="w-10 rounded-full">
+				<icons-wolfstar class="h-12 w-12" />
+			</div>
 			<p>WolfStar Project<br />Providing reliable open-source software since 2024</p>
 			<p>© 2024 All rights reserved.</p>
 		</aside>

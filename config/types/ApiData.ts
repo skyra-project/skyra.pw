@@ -6,7 +6,7 @@ export interface TransformedLoginData extends LoginData {
 	transformedGuilds?: OauthFlattenedGuild[];
 }
 
-interface FlattenedGuild
+export interface FlattenedGuild
 	extends Pick<
 		Guild,
 		| 'afkChannelId'
@@ -39,15 +39,7 @@ interface FlattenedGuild
 	> {
 	channels: FlattenedGuildChannel[];
 
-	emojis: FlattenedEmoji[];
-
-	manageable: boolean;
-
-	permissions?: number;
-
 	roles: FlattenedRole[];
-
-	wolfstarIsIn: boolean;
 }
 
 interface FlattenedEmoji {
@@ -236,16 +228,16 @@ interface ExtendedHelp {
 	usages?: string[];
 }
 
-interface PartialOauthFlattenedGuild extends Omit<FlattenedGuild, 'joinedTimestamp' | 'ownerId' | 'region' | 'features'> {
+export interface PartialOauthFlattenedGuild extends Omit<FlattenedGuild, 'joinedTimestamp' | 'ownerId' | 'region' | 'features'> {
 	joinedTimestamp: FlattenedGuild['joinedTimestamp'] | null;
 
 	ownerId: FlattenedGuild['ownerId'] | null;
 }
 
-interface OauthFlattenedGuild extends PartialOauthFlattenedGuild {
+export interface OauthFlattenedGuild extends PartialOauthFlattenedGuild {
 	manageable: boolean;
 
-	permissions: number;
+	permissions: string;
 
 	wolfstarIsIn: boolean;
 }

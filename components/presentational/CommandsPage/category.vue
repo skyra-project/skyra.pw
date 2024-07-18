@@ -6,16 +6,14 @@
 		</div>
 		<div class="collapse-content">
 			<div class="flex flex-wrap">
-				<Command v-for="(command, idx) in filteredCategory" :key="idx" :command="command" />
+				<PresentationalCommandsPageCommand v-for="(command, idx) in filteredCategory" :key="idx" :command="command" />
 			</div>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import type { FlattenedCommand } from '~/config/types/ApiData';
-import Command from '~/components/presentational/CommandsPage/command.vue';
 
 interface Props {
 	categoryName: string;

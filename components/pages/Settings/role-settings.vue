@@ -1,16 +1,12 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import { useGuildSettings } from '~/composables/useGuildSettings';
+import useGuildData from '~/composables/settings/useGuildData';
+import { useGuildSettings } from '~/composables/settings/useGuildSettings';
+import { useGuildSettingsChanges } from '~/composables/settings/useGuildSettingsChanges';
 import { ConfigurableRemoveInitialRole, ConfigurableRoles } from '~/config/SettingsDataEntries';
-import PageHeader from '~/components/Settings/PageHeader.vue';
-import Section from '~/components/Settings/Section.vue';
-import SelectBoolean from '~/components/selects/SelectBoolean.vue';
-import SelectRole from '~/components/selects/SelectRole.vue';
-import SelectRoles from '~/components/selects/SelectRoles.vue';
 
-const { guildData, guildSettings, setGuildSettingsChanges } = useGuildSettings();
-
-const isOnMobile = useDevice().isMobile;
+const { guildData } = useGuildData();
+const { guildSettings } = useGuildSettings();
+const { setGuildSettingsChanges } = useGuildSettingsChanges();
 
 const handleResetKey = (key: string) => {
 	setGuildSettingsChanges({ [key]: undefined });
@@ -27,26 +23,19 @@ const commonProps = computed(() => ({
 
 <template>
 	<div>
-		<PageHeader
-			title="Roles"
-			:subtitle="`Here you can configure special roles known to Skyra for your server. ${
-				isOnMobile ? 'Long press' : 'Hover over'
-			} a button to get more information about that particular role`"
-		/>
-
-		<Section title="Toggles">
-			<SelectBoolean
+		<PresentationalLayoutsSettingsSection title="Toggles">
+			<SelectsSelectBoolean
 				:title="ConfigurableRemoveInitialRole.name"
 				:description="ConfigurableRemoveInitialRole.tooltip"
 				:current-value="guildSettings.rolesRemoveInitial"
 				@change="(value) => setGuildSettingsChanges({ rolesRemoveInitial: value })"
 			/>
-		</Section>
+		</PresentationalLayoutsSettingsSection>
 
-		<Section title="Configurable Roles">
+		<PresentationalLayoutsSettingsSection title="Configurable Roles">
 			<div class="grid grid-cols-1 gap-4 md:grid-cols-3">
 				<template v-for="{ name, tooltip, key } in ConfigurableRoles" :key="key">
-					<SelectRoles
+					<SelectsSelectRoles
 						v-if="Array.isArray(guildSettings[key])"
 						v-bind="commonProps"
 						:label="name"
@@ -55,17 +44,17 @@ const commonProps = computed(() => ({
 						@change="(newRole) => setGuildSettingsChanges({ [key]: newRole })"
 						@reset="() => handleResetKey(key)"
 					/>
-					<SelectRole
+					<SelectsSelectRole
 						v-else
 						v-bind="commonProps"
 						:label="name"
 						:tooltip-title="tooltip"
-						:value="guildSettings[key]"
+						:value="guildSettings[key] as string"
 						@change="(newRole) => setGuildSettingsChanges({ [key]: newRole })"
 						@reset="() => handleResetKey(key)"
 					/>
 				</template>
 			</div>
-		</Section>
+		</PresentationalLayoutsSettingsSection>
 	</div>
 </template>

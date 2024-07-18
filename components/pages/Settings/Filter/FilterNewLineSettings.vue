@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { useGuildSettings } from '~/composables/settings/useGuildSettings';
 import { useGuildSettingsChanges } from '~/composables/settings/useGuildSettingsChanges';
-import Section from '~/layouts/settings/section.vue';
+
 import SelectBoolean from '~/components/selects/SelectBoolean.vue';
 import Select from '~/components/selects/Select.vue';
 import SelectDuration from '~/components/selects/SelectDuration.vue';
@@ -26,7 +26,7 @@ const updateSoftAction = (bit: number, checked: boolean) => {
 
 <template>
 	<div>
-		<Section title="Line Spam Filter">
+		<PresentationalLayoutsSettingsSection title="Line Spam Filter">
 			<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
 				<SelectBoolean
 					:title="`Filter ${guildSettings.selfmodNewlinesEnabled ? 'Enabled' : 'Disabled'}`"
@@ -53,9 +53,9 @@ const updateSoftAction = (bit: number, checked: boolean) => {
 					@change="(value) => updateSoftAction(0b001, value)"
 				/>
 			</div>
-		</Section>
+		</PresentationalLayoutsSettingsSection>
 
-		<Section title="Punishments">
+		<PresentationalLayoutsSettingsSection title="Punishments">
 			<div class="flex flex-col gap-4 md:flex-row">
 				<Select
 					title="Action"
@@ -110,9 +110,9 @@ const updateSoftAction = (bit: number, checked: boolean) => {
 					class="range"
 				/>
 			</div>
-		</Section>
+		</PresentationalLayoutsSettingsSection>
 
-		<Section title="Options">
+		<PresentationalLayoutsSettingsSection title="Options">
 			<div class="mt-4">
 				<p>Maximum amount of new lines in a message before filter is applied</p>
 				<input
@@ -126,6 +126,6 @@ const updateSoftAction = (bit: number, checked: boolean) => {
 					class="range"
 				/>
 			</div>
-		</Section>
+		</PresentationalLayoutsSettingsSection>
 	</div>
 </template>

@@ -6,7 +6,7 @@
 		</template>
 		<client-only v-else>
 			<div v-if="status === 'pending'">
-				<Loading :loading="status === 'pending'"></Loading>
+				<PresentationalLoading :loading="status === 'pending'"></PresentationalLoading>
 				<h1>Authenticating...</h1>
 			</div>
 			<template v-else-if="error">
@@ -16,9 +16,7 @@
 			<template v-else-if="data">
 				<h1>Welcome {{ data.name }}</h1>
 				<p>You will be redirected to the main page in a second.</p>
-				<div class="bg-gray-200 dark:bg-stone-900 mt-2 rounded-lg p-1" aria-label="Progress" role="progressbar">
-					<div class="progress h-4 rounded-md bg-rose-500"></div>
-				</div>
+				<PresentationalLoading :loading="true" />
 			</template>
 		</client-only>
 	</section>
@@ -26,11 +24,11 @@
 
 <script setup lang="ts">
 import { promiseTimeout } from '@vueuse/core';
-import Loading from '~/components/presentational/loading.vue';
 
 const { code } = useRoute().query;
 
 const redirectUri = `${getOrigin()}/oauth/callback`;
+
 const { data, error, status, execute } = useFetch('/api/auth/callback', {
 	body: JSON.stringify({ code, redirectUri }),
 	method: 'POST',

@@ -1,23 +1,19 @@
 <template>
 	<div>
-		<Loading v-if="loading" />
-		<Dashboard v-else :guild-id="guildId">
+		<PresentationalLoading :loading="loading" v-if="loading" />
+		<PresentationalLayoutsSettingsDashboardLayout v-else :guild-id="guildId">
 			<component :is="settingsComponent" :commands="commands" :languages="languages" />
-		</Dashboard>
+		</PresentationalLayoutsSettingsDashboardLayout>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, defineAsyncComponent } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
 import { LocalStorageKeys, type ExpirableLocalStorageStructure } from '~/utils/constants.ts';
 import type { FlattenedCommand } from '~/config/types/ApiData.ts';
 import { useLocalStorage } from '@vueuse/core';
 import { Time } from '~/utils/wolfstarUtils';
 
 // Components
-const Loading = defineAsyncComponent(() => import('./loading.vue'));
-const Dashboard = defineAsyncComponent(() => import('~/layouts/settings/dashboard-layout.vue'));
 
 const route = useRoute();
 
@@ -38,7 +34,7 @@ const fetchCommandsAndLanguages = async () => {
 	if (commandsFromLocalStorage.value.expire > Date.now() || import.meta.env.DEV) {
 		commands.value = commandsFromLocalStorage.value.data;
 	} else {
-		const commandsData = await $fetch<FlattenedCommand[]>('/api/commands');
+		const commandsData = await $fetch<FlattenedCommand[]>(`${getApiOrigin()}/commands`);
 		commands.value = commandsData;
 		commandsFromLocalStorage.value = {
 			expire: Date.now() + Time.Day * 6,
@@ -54,7 +50,7 @@ const fetchCommandsAndLanguages = async () => {
 	if (languagesFromLocalStorage.value.expire > Date.now() || import.meta.env.DEV) {
 		languages.value = languagesFromLocalStorage.value.data;
 	} else {
-		const languagesData = await $fetch<string[]>('/api/languages');
+		const languagesData = await $fetch<string[]>(`${getApiOrigin()}/languages`);
 		languages.value = languagesData;
 		languagesFromLocalStorage.value = {
 			expire: Date.now() + Time.Day * 6,

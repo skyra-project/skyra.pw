@@ -4,8 +4,8 @@ export const BaseUrl = 'https://wolfstar.rocks';
 export const DefaultSeoProps: NuxtAppConfig['head'] = {
 	charset: 'utf-8',
 	viewport: 'width=device-width, initial-scale=1',
-	title: 'WolfStar Dashboard',
-	titleTemplate: '%s | WolfStar Dashboard',
+	title: 'WolfStar',
+	titleTemplate: '%s - WolfStar',
 	htmlAttrs: { lang: 'en_GB' },
 	link: [
 		{ rel: 'alternate', href: 'https://wolfstar.rocks' },

@@ -3,8 +3,6 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, defineProps } from 'vue';
-
 interface RedirectRouteProps {
 	redirectUri: string;
 }

@@ -1,6 +1,6 @@
 <template>
 	<Head>
-		<Title>WolfStar</Title>
+		<Title>Home</Title>
 		<Meta name="description" content="WolfStar's landing page" />
 	</Head>
 

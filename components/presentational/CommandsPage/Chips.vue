@@ -28,7 +28,6 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps } from 'vue';
 import type { FlattenedCommand } from '~/config/types/ApiData';
 
 interface CommandProps {

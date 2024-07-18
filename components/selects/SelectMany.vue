@@ -36,8 +36,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, defineProps } from 'vue';
-
 interface Value {
 	name: string;
 	value: string;

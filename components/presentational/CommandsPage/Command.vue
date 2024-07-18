@@ -15,50 +15,46 @@
 			<div class="collapse-content">
 				<div class="flex flex-col">
 					<template v-if="command.extendedHelp.usages">
-						<ExtendedHelpSectionHeader icon="mdi-pencil" header="Command Usage" />
+						<PresentationalCommandsPageExtendedHelpSectionHeader icon="mdi-pencil" header="Command Usage" />
 						<div v-for="(usage, index) in command.extendedHelp.usages" :key="index">
-							<ExtendedHelpBody :body="`\`WolfStar, ${command.name} ${usage}\``" />
+							<PresentationalCommandsPageExtendedHelpBody :body="`\`WolfStar, ${command.name} ${usage}\``" />
 						</div>
 					</template>
 
 					<template v-if="command.extendedHelp.extendedHelp">
-						<ExtendedHelpSectionHeader icon="mdi-help-rhombus" header="Extended Help" />
-						<ExtendedHelpBody :body="resolvedExtendedHelp!" />
+						<PresentationalCommandsPageExtendedHelpSectionHeader icon="mdi-help-rhombus" header="Extended Help" />
+						<PresentationalCommandsPageExtendedHelpBody :body="resolvedExtendedHelp!" />
 					</template>
 
 					<template v-if="command.extendedHelp.explainedUsage">
-						<ExtendedHelpSectionHeader icon="mdi-code-tags" header="Explained Usage" />
-						<ExtendedHelpBody :body="explainedUsage!" />
+						<PresentationalCommandsPageExtendedHelpSectionHeader icon="mdi-code-tags" header="Explained Usage" />
+						<PresentationalCommandsPageExtendedHelpBody :body="explainedUsage!" />
 					</template>
 
 					<template v-if="command.extendedHelp.possibleFormats">
-						<ExtendedHelpSectionHeader icon="mdi-brush" header="Possible Formats" />
-						<ExtendedHelpBody :body="possibleFormats!" />
+						<PresentationalCommandsPageExtendedHelpSectionHeader icon="mdi-brush" header="Possible Formats" />
+						<PresentationalCommandsPageExtendedHelpBody :body="possibleFormats!" />
 					</template>
 
 					<template v-if="command.extendedHelp.examples">
-						<ExtendedHelpSectionHeader icon="mdi-lightbulb-outline" header="Examples" />
-						<ExtendedHelpBody :body="examples!" />
+						<PresentationalCommandsPageExtendedHelpSectionHeader icon="mdi-lightbulb-outline" header="Examples" />
+						<PresentationalCommandsPageExtendedHelpBody :body="examples!" />
 					</template>
 
 					<template v-if="command.extendedHelp.reminder">
-						<ExtendedHelpSectionHeader icon="mdi-bell-alert" header="Reminder" />
-						<ExtendedHelpBody :body="command.extendedHelp.reminder" />
+						<PresentationalCommandsPageExtendedHelpSectionHeader icon="mdi-bell-alert" header="Reminder" />
+						<PresentationalCommandsPageExtendedHelpBody :body="command.extendedHelp.reminder" />
 					</template>
 				</div>
 			</div>
 			<div class="p-4">
-				<Chips :command="command" />
+				<PresentationalCommandsPageChips :command="command" />
 			</div>
 		</div>
 	</div>
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps } from 'vue';
-import ExtendedHelpBody from './extended-help-body.vue';
-import ExtendedHelpSectionHeader from './extended-help-section-header.vue';
-import Chips from './Chips.vue';
 import type { FlattenedCommand } from '~/config/types/ApiData';
 
 interface CommandProps {

@@ -69,15 +69,16 @@ export default defineNuxtConfig({
 		'@nuxt/content',
 		'@nuxt/image',
 		'nuxt-icon',
-		'nuxt-security',
+		//'nuxt-security',
 		'@vueuse/nuxt',
 		'@vite-pwa/nuxt',
-		'@formkit/nuxt'
+		'@formkit/nuxt',
+		'nuxt-link-checker'
 	],
 	image: { screens: {} },
 	runtimeConfig: {
 		auth: {
-			name: 'wolfstar-auth',
+			name: 'WOLFSTAR_AUTH',
 			maxAge: 604800,
 			password: process.env.NITRO_AUTH_SECRET ?? '',
 			cookie: { sameSite: 'lax' },
@@ -89,52 +90,54 @@ export default defineNuxtConfig({
 			apiOrigin: process.env.NITRO_API_ORIGIN
 		},
 		clientId: process.env.NITRO_DISCORD_CLIENT_ID,
-		clientSecret: process.env.NITRO_DISCORD_CLIENT_SECRET
+		clientSecret: process.env.NITRO_DISCORD_CLIENT_SECRET,
+		apiOrigin: process.env.NITRO_API_ORIGIN
 	},
 
-	security: {
-		allowedMethodsRestricter: {
-			methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT']
-		},
-		headers: {
-			contentSecurityPolicy: {
-				'img-src': ["'self'", 'data:', 'cdn.wolfstar.rocks']
-			},
-			permissionsPolicy: {
-				accelerometer: ['()'],
-				'ambient-light-sensor': ['()'],
-				autoplay: ['()'],
-				battery: ['()'],
-				camera: ['()'],
-				'display-capture': ['()'],
-				'document-domain': ['()'],
-				'encrypted-media': ['()'],
-				fullscreen: ['()'],
-				gamepad: ['()'],
-				geolocation: ['()'],
-				gyroscope: ['()'],
-				hid: ['()'],
-				'idle-detection': ['()'],
-				'local-fonts': ['()'],
-				magnetometer: ['()'],
-				microphone: ['()'],
-				midi: ['()'],
-				payment: ['()'],
-				'picture-in-picture': ['()'],
-				'publickey-credentials-get': ['()'],
-				'screen-wake-lock': ['()'],
-				serial: ['()'],
-				'speaker-selection': ['()'],
-				usb: ['()'],
-				'web-share': ['()'],
-				'xr-spatial-tracking': ['()']
-			}
-		},
-		corsHandler: {
-			origin: process.env.ORIGIN || '*',
-			methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT']
-		}
-	},
+	/* 	security: {
+																																allowedMethodsRestricter: {
+																																																methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT']
+																																},
+																																/* headers: {
+																																																contentSecurityPolicy: {
+																																																																'img-src': ["'self'", 'data:', 'cdn.wolfstar.rocks', 'cdn.discordapp.com']
+																																																},
+																																																permissionsPolicy: {
+																																																																accelerometer: ['()'],
+																																																																'ambient-light-sensor': ['()'],
+																																																																autoplay: ['()'],
+																																																																battery: ['()'],
+																																																																camera: ['()'],
+																																																																'display-capture': ['()'],
+																																																																'document-domain': ['()'],
+																																																																'encrypted-media': ['()'],
+																																																																fullscreen: ['()'],
+																																																																gamepad: ['()'],
+																																																																geolocation: ['()'],
+																																																																gyroscope: ['()'],
+																																																																hid: ['()'],
+																																																																'idle-detection': ['()'],
+																																																																'local-fonts': ['()'],
+																																																																magnetometer: ['()'],
+																																																																microphone: ['()'],
+																																																																midi: ['()'],
+																																																																payment: ['()'],
+																																																																'picture-in-picture': ['()'],
+																																																																'publickey-credentials-get': ['()'],
+																																																																'screen-wake-lock': ['()'],
+																																																																serial: ['()'],
+																																																																'speaker-selection': ['()'],
+																																																																usb: ['()'],
+																																																																'web-share': ['()'],
+																																																																'xr-spatial-tracking': ['()']
+																																																}
+																																},
+																																corsHandler: {
+																																																origin: process.env.ORIGIN || '*',
+																																																methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT']
+																																},
+																																rateLimiter: false
+																}, */
 
 	nitro: {
 		prerender: {
@@ -151,14 +154,11 @@ export default defineNuxtConfig({
 		url: BaseUrl,
 		env: 'production'
 	},
-
 	plugins: ['~/plugins/0.auth.ts', '~/plugins/error-handler.ts'],
 
 	sitemap: {
 		exclude: ['/join', '/auth/guild', '/auth/callback', '/[...id]']
 	},
-
-	build: { transpile: ['vee-validate'] },
 
 	pwa: {
 		registerType: 'autoUpdate',

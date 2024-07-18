@@ -1,10 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useForm } from 'vee-validate';
-import { object, string } from 'yup';
 import { useGuildSettingsChanges } from '~/composables/settings/useGuildSettingsChanges';
 import { useGuildSettings } from '~/composables/settings/useGuildSettings';
-import Section from '~/layouts/settings/section.vue';
 
 const props = defineProps<{
 	languages: string[];
@@ -13,20 +9,17 @@ const props = defineProps<{
 const { guildSettings } = useGuildSettings();
 const { setGuildSettingsChanges } = useGuildSettingsChanges();
 
-const validationSchema = object({
-	prefix: string().required('Setting a prefix is required').min(1, 'Prefix has a minimum length of 1').max(11, 'Prefix has a maximum length of 10')
-});
+const validationSchema = {
+	prefix: [['required'], ['min', 1], ['max', 11]]
+};
 
-const { handleSubmit, errors, values } = useForm({
-	validationSchema,
-	initialValues: {
-		prefix: guildSettings.value.prefix
-	}
-});
+const initialValues = {
+	prefix: guildSettings.value.prefix
+};
 
-const onSubmit = handleSubmit((values) => {
+const onSubmit = (values: any) => {
 	setGuildSettingsChanges({ prefix: values.prefix });
-});
+};
 
 const mapLanguageKeysToNames = (langKey: string): [string] | [string, string] => {
 	const supportedLanguagesMap: Record<string, [string] | [string, string]> = {
@@ -49,31 +42,19 @@ const mapLanguageKeysToNames = (langKey: string): [string] | [string, string] =>
 		'sl-SI': ['Slovenščina', 'Slovenian'],
 		'tr-TR': ['Türkçe', 'Turkish']
 	};
-
 	return supportedLanguagesMap[langKey] ?? [langKey];
 };
 </script>
-
 <template>
-	<Section title="General Settings">
-		<form @submit.prevent="onSubmit" class="space-y-4">
-			<div class="form-control">
-				<label class="label" for="prefix">
-					<span class="label-text">Prefix</span>
-				</label>
-				<input
-					id="prefix"
-					v-model="values.prefix"
-					type="text"
-					placeholder="This is your server's prefix, use it to trigger Skyra commands."
-					class="input input-bordered"
-					:class="{ 'input-error': errors.prefix }"
-				/>
-				<label v-if="errors.prefix" class="label">
-					<span class="label-text-alt text-error">{{ errors.prefix }}</span>
-				</label>
-			</div>
-
+	<PresentationalLayoutsSettingsSection title="General Settings">
+		<ModsFormikAutoSaveForm :initial-values="initialValues" :validation-schema="validationSchema" :on-submit="onSubmit">
+			<ModsFormikFormTextField
+				label="Prefix"
+				name="prefix"
+				placeholder="This is your server's prefix, use it to trigger Skyra commands."
+				:validation="[['required'], ['min', 1], ['max', 11]]"
+			/>
+			Copy
 			<div class="form-control">
 				<label class="label" for="language">
 					<span class="label-text">Language</span>
@@ -94,6 +75,6 @@ const mapLanguageKeysToNames = (langKey: string): [string] | [string, string] =>
 			</div>
 
 			<button type="submit" class="btn btn-primary">Save Prefix</button>
-		</form>
-	</Section>
+		</ModsFormikAutoSaveForm>
+	</PresentationalLayoutsSettingsSection>
 </template>

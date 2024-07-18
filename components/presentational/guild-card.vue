@@ -1,5 +1,5 @@
 <template>
-	<Link :href="guild.wolfstarIsIn ? `/guilds/${guild.id}` : guildAddURL(guild.id)" class="link">
+	<RoutingLink :href="guild.wolfstarIsIn ? `/guilds/${guild.id}` : guildAddURL(guild.id)" class="link">
 		<div
 			class="card m-2 cursor-pointer bg-secondary"
 			:style="{
@@ -11,23 +11,20 @@
 			}"
 		>
 			<div class="card-header flex items-center">
-				<GuildIcon :guild="guild" />
+				<PresentationalGuildIcon :guild="guild" />
 				<div class="ml-2">
 					<h3 class="card-title">{{ guild.name }}</h3>
 					<p v-if="!guild.wolfstarIsIn" class="card-subtitle">Click to invite WolfStar</p>
 				</div>
 			</div>
 		</div>
-	</Link>
+	</RoutingLink>
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps } from 'vue';
-import Link from '~/components/routing/Link.vue';
-import GuildIcon from './guild-icon.vue';
-import { guildAddURL } from '~/composables/auth';
 import type { ValuesType } from 'utility-types';
 import type { TransformedLoginData } from '~/config/types/ApiData';
+
 interface GuildCardProps {
 	guild: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>;
 }

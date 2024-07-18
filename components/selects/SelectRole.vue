@@ -10,7 +10,7 @@ import type { ValuesType } from 'utility-types';
 
 interface SelectRoleProps {
 	label: string;
-	value: string;
+	value: string | null;
 	guild: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>;
 	filterEveryone: boolean;
 }

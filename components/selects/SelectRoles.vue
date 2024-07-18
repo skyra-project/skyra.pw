@@ -3,7 +3,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps } from 'vue';
 import type { TransformedLoginData } from '~/config/types/ApiData';
 import type { ValuesType } from 'utility-types';
 

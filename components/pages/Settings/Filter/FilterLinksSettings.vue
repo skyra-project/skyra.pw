@@ -2,10 +2,7 @@
 import { ref, computed } from 'vue';
 import { useGuildSettings } from '~/composables/settings/useGuildSettings';
 import { useGuildSettingsChanges } from '~/composables/settings/useGuildSettingsChanges';
-import Section from '~/layouts/settings/section.vue';
-import SelectBoolean from '~/components/selects/SelectBoolean.vue';
-import Select from '~/components/selects/Select.vue';
-import SelectDuration from '~/components/selects/SelectDuration.vue';
+
 import { bitwiseHas, bitwiseSet, updateSliderValueObj } from '~/utils/util';
 
 const { guildSettings } = useGuildSettings();
@@ -48,38 +45,38 @@ const removeLink = (word: string) => {
 
 <template>
 	<div>
-		<Section title="Link Filter">
+		<PresentationalLayoutsSettingsSection title="Link Filter">
 			<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-				<SelectBoolean
+				<SelectsSelectBoolean
 					:title="`Filter ${guildSettings.selfmodLinksEnabled ? 'Enabled' : 'Disabled'}`"
 					:current-value="guildSettings.selfmodLinksEnabled"
 					description="Whether or not this system should be enabled."
 					@change="(value) => setGuildSettingsChanges({ selfmodLinksEnabled: value })"
 				/>
-				<SelectBoolean
+				<SelectsSelectBoolean
 					:title="`Alerts ${softActionEnabled.alerts ? 'Enabled' : 'Disabled'}`"
 					:current-value="softActionEnabled.alerts"
 					description="Toggle message alerts in the channel the infraction took place."
 					@change="(value) => updateSoftAction(0b100, value)"
 				/>
-				<SelectBoolean
+				<SelectsSelectBoolean
 					:title="`Logs ${softActionEnabled.logs ? 'Enabled' : 'Disabled'}`"
 					:current-value="softActionEnabled.logs"
 					description="Toggle message logs in the moderation logs channel."
 					@change="(value) => updateSoftAction(0b010, value)"
 				/>
-				<SelectBoolean
+				<SelectsSelectBoolean
 					:title="`Deletes ${softActionEnabled.deletes ? 'Enabled' : 'Disabled'}`"
 					:current-value="softActionEnabled.deletes"
 					description="Toggle message deletions."
 					@change="(value) => updateSoftAction(0b001, value)"
 				/>
 			</div>
-		</Section>
+		</PresentationalLayoutsSettingsSection>
 
-		<Section title="Punishments">
+		<PresentationalLayoutsSettingsSection title="Punishments">
 			<div class="flex flex-col gap-4 md:flex-row">
-				<Select
+				<SelectsSelect
 					title="Action"
 					helper-text="The action to perform as punishment"
 					:value="guildSettings.selfmodLinksHardAction"
@@ -91,8 +88,8 @@ const removeLink = (word: string) => {
 					<option :value="3">Mute</option>
 					<option :value="4">Softban</option>
 					<option :value="5">Ban</option>
-				</Select>
-				<SelectDuration
+				</SelectsSelect>
+				<SelectsSelectDuration
 					:value="guildSettings.selfmodLinksHardActionDuration"
 					:min="1000"
 					@change="(duration) => setGuildSettingsChanges({ selfmodLinksHardActionDuration: duration })"
@@ -132,9 +129,9 @@ const removeLink = (word: string) => {
 					class="range"
 				/>
 			</div>
-		</Section>
+		</PresentationalLayoutsSettingsSection>
 
-		<Section title="Options">
+		<PresentationalLayoutsSettingsSection title="Options">
 			<form @submit.prevent="addLink" class="mb-4 flex items-center">
 				<input v-model="newWord" type="text" placeholder="Add Link" class="input input-bordered mr-2" />
 				<button type="submit" class="btn btn-primary">Confirm</button>
@@ -146,6 +143,6 @@ const removeLink = (word: string) => {
 					<button class="btn btn-ghost btn-xs" @click="removeLink(word)">×</button>
 				</div>
 			</div>
-		</Section>
+		</PresentationalLayoutsSettingsSection>
 	</div>
 </template>
