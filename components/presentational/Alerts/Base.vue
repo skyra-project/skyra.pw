@@ -6,7 +6,6 @@
 
 <script lang="ts" setup>
 import { defineProps, computed } from 'vue';
-import type { PropType } from 'vue';
 
 interface AlertProps {
 	severity?: 'error' | 'warning' | 'info' | 'success';

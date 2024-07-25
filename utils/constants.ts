@@ -48,7 +48,6 @@ export interface ExpirableLocalStorageStructure<T> {
 }
 
 export enum LocalStorageKeys {
-	HasCookieConsent = 'allows_cookies',
 	DiscordPack = 'discord_pack',
 	LastSync = 'last_sync',
 	Commands = 'commands',

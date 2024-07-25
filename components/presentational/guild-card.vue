@@ -1,24 +1,14 @@
 <template>
-	<RoutingLink :href="guild.wolfstarIsIn ? `/guilds/${guild.id}` : guildAddURL(guild.id)" class="link">
-		<div
-			class="card m-2 cursor-pointer bg-secondary"
-			:style="{
-				minWidth: '230px',
-				maxWidth: isMobile ? '90vw' : '230px',
-				width: isMobile ? '90vw' : 'inherit',
-				minHeight: '80px',
-				maxHeight: '80px'
-			}"
-		>
-			<div class="card-header flex items-center">
-				<PresentationalGuildIcon :guild="guild" />
-				<div class="ml-2">
-					<h3 class="card-title">{{ guild.name }}</h3>
-					<p v-if="!guild.wolfstarIsIn" class="card-subtitle">Click to invite WolfStar</p>
-				</div>
-			</div>
+	<NuxtLink
+		:to="guild.wolfstarIsIn ? `/guilds/${guild.id}` : guildAddURL(guild.id)"
+		class="bg-gray-700 hover:bg-gray-600 flex flex-col items-center rounded-lg p-4 transition-colors duration-200"
+	>
+		<div class="mb-2 h-16 w-16">
+			<PresentationalGuildIcon :guild="guild" size="16" />
 		</div>
-	</RoutingLink>
+		<!-- <h3 class="text-sm font-medium text-center text-white">{{ guild.name }}</h3> -->
+		<p v-if="!guild.wolfstarIsIn" class="text-gray-400 mt-1 text-center text-xs">Click to invite</p>
+	</NuxtLink>
 </template>
 
 <script setup lang="ts">
@@ -30,24 +20,4 @@ interface GuildCardProps {
 }
 
 const props = defineProps<GuildCardProps>();
-
-const isMobile = computed(() => window.innerWidth <= 768);
 </script>
-
-<style scoped>
-.card {
-	background-color: var(--secondary-main);
-}
-.card-header {
-	display: flex;
-	align-items: center;
-}
-.card-title {
-	font-weight: 600;
-	font-size: 1.25rem;
-}
-.card-subtitle {
-	color: var(--text-secondary);
-	font-size: 0.875rem;
-}
-</style>

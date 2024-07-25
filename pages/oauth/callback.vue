@@ -14,7 +14,7 @@
 				<pre><code>{{ error }}</code></pre>
 			</template>
 			<template v-else-if="data">
-				<h1>Welcome {{ data.name }}</h1>
+				<h1>Welcome {{ useAuth().session.value?.name }}</h1>
 				<p>You will be redirected to the main page in a second.</p>
 				<PresentationalLoading :loading="true" />
 			</template>
@@ -24,6 +24,7 @@
 
 <script setup lang="ts">
 import { promiseTimeout } from '@vueuse/core';
+import type { APIUser } from 'discord-api-types/v10';
 
 const { code } = useRoute().query;
 
@@ -45,7 +46,12 @@ async function performCall() {
 	await execute();
 	if (!data.value) return;
 
-	useAuth().session.value = data.value;
+	const user = data.value.user as APIUser;
+
+	const { setPack } = useDiscordPackStore();
+
+	setPack(data.value);
+	useAuth().session.value = { name: user.global_name ?? user.username, ...user };
 	await promiseTimeout(1000);
 	await useRouter().replace(useAuth().redirectTo.value);
 }

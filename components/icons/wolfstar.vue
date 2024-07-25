@@ -11,9 +11,9 @@ withDefaults(defineProps<Props>(), {
 	color: 'white'
 });
 
-const { theme } = useTheme();
+const { theme } = useThemeStore();
 
-const iconColor = computed(() => (theme.value !== 'dark' ? 'black' : 'white'));
+const iconColor = computed(() => (theme !== 'dark' ? 'black' : 'white'));
 
 console.log(iconColor.value);
 </script>

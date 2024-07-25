@@ -59,8 +59,10 @@ const manifestIcons = [
 ];
 
 export default defineNuxtConfig({
+	// Basic settings
 	devtools: { enabled: true },
 
+	// Modules
 	modules: [
 		'@nuxtjs/tailwindcss',
 		'@nuxtjs/device',
@@ -69,13 +71,24 @@ export default defineNuxtConfig({
 		'@nuxt/content',
 		'@nuxt/image',
 		'nuxt-icon',
-		//'nuxt-security',
 		'@vueuse/nuxt',
 		'@vite-pwa/nuxt',
 		'@formkit/nuxt',
-		'nuxt-link-checker'
+		'nuxt-link-checker',
+		'@nuxtjs/color-mode',
+		'@pinia/nuxt',
+		'@pinia-plugin-persistedstate/nuxt'
 	],
+
+	// Module configurations
 	image: { screens: {} },
+	vueuse: { autoImports: true },
+	formkit: { autoImport: true },
+	sitemap: {
+		exclude: ['/join', '/auth/guild', '/auth/callback', '/[...id]']
+	},
+
+	// Runtime configuration
 	runtimeConfig: {
 		auth: {
 			name: 'WOLFSTAR_AUTH',
@@ -94,51 +107,7 @@ export default defineNuxtConfig({
 		apiOrigin: process.env.NITRO_API_ORIGIN
 	},
 
-	/* 	security: {
-																																allowedMethodsRestricter: {
-																																																methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT']
-																																},
-																																/* headers: {
-																																																contentSecurityPolicy: {
-																																																																'img-src': ["'self'", 'data:', 'cdn.wolfstar.rocks', 'cdn.discordapp.com']
-																																																},
-																																																permissionsPolicy: {
-																																																																accelerometer: ['()'],
-																																																																'ambient-light-sensor': ['()'],
-																																																																autoplay: ['()'],
-																																																																battery: ['()'],
-																																																																camera: ['()'],
-																																																																'display-capture': ['()'],
-																																																																'document-domain': ['()'],
-																																																																'encrypted-media': ['()'],
-																																																																fullscreen: ['()'],
-																																																																gamepad: ['()'],
-																																																																geolocation: ['()'],
-																																																																gyroscope: ['()'],
-																																																																hid: ['()'],
-																																																																'idle-detection': ['()'],
-																																																																'local-fonts': ['()'],
-																																																																magnetometer: ['()'],
-																																																																microphone: ['()'],
-																																																																midi: ['()'],
-																																																																payment: ['()'],
-																																																																'picture-in-picture': ['()'],
-																																																																'publickey-credentials-get': ['()'],
-																																																																'screen-wake-lock': ['()'],
-																																																																serial: ['()'],
-																																																																'speaker-selection': ['()'],
-																																																																usb: ['()'],
-																																																																'web-share': ['()'],
-																																																																'xr-spatial-tracking': ['()']
-																																																}
-																																},
-																																corsHandler: {
-																																																origin: process.env.ORIGIN || '*',
-																																																methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT']
-																																},
-																																rateLimiter: false
-																}, */
-
+	// Nitro configuration
 	nitro: {
 		prerender: {
 			crawlLinks: true,
@@ -146,24 +115,19 @@ export default defineNuxtConfig({
 		}
 	},
 
-	formkit: {
-		autoImport: true
-	},
-
+	// Site configuration
 	site: {
 		url: BaseUrl,
 		env: 'production'
 	},
+
+	// Plugins
 	plugins: ['~/plugins/0.auth.ts', '~/plugins/error-handler.ts'],
 
-	sitemap: {
-		exclude: ['/join', '/auth/guild', '/auth/callback', '/[...id]']
-	},
-
+	// PWA configuration
 	pwa: {
 		registerType: 'autoUpdate',
 		includeManifestIcons: false,
-
 		devOptions: {
 			enabled: false,
 			type: 'module'
@@ -214,6 +178,7 @@ export default defineNuxtConfig({
 		}
 	},
 
+	// App configuration
 	app: {
 		head: DefaultSeoProps
 	}

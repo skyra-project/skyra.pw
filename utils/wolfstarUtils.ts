@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { RESTGetAPICurrentUserResult } from 'discord-api-types/v9';
+import type { RESTGetAPICurrentUserResult } from 'discord-api-types/v10';
 
 export enum Time {
 	Millisecond = 1,

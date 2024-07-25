@@ -1,28 +1,17 @@
-import { defineNuxtPlugin, useNuxtApp } from '#app';
+import { defineNuxtPlugin, showError } from '#app';
 import type { H3Error } from 'h3';
 
 export default defineNuxtPlugin((nuxtApp) => {
 	// Gestione degli errori lato client
 	nuxtApp.vueApp.config.errorHandler = (err, instance, info) => {
 		const error = err as any;
-		const statusCode = error?.statusCode || error?.response?.status;
+		const statusCode = error?.statusCode || error?.response?.status || 500;
 
-		if (import.meta.client) {
-			switch (statusCode) {
-				case 404:
-					navigateTo('/404');
-					break;
-				case 500:
-					navigateTo('/500');
-					break;
-				case 403:
-					navigateTo('/403');
-					break;
-				default:
-					navigateTo('/error');
-					break;
-			}
-		}
+		showError({
+			statusCode,
+			statusMessage: error.message || 'An error occurred',
+			data: { originalError: error }
+		});
 	};
 
 	// Hook per errori Vue (opzionale)
@@ -34,22 +23,12 @@ export default defineNuxtPlugin((nuxtApp) => {
 	if (import.meta.server) {
 		nuxtApp.hooks.hook('app:error', (error: H3Error) => {
 			error.unhandled = false;
-			switch (error.statusCode) {
-				case 404:
-					error.data = { url: '/404' };
-					break;
-				case 500:
-					error.data = { url: '/500' };
-					error.unhandled = true;
-					break;
-				case 403:
-					error.data = { url: '/403' };
-					break;
-				default:
-					error.data = { url: '/error' };
-					break;
-			}
-			console.log('Error handler plugin loaded', error);
+			const statusCode = error.statusCode || 500;
+			showError({
+				statusCode,
+				statusMessage: error.message,
+				data: { originalError: error }
+			});
 		});
 	}
 });

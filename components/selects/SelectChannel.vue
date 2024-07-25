@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import type { TransformedLoginData } from '~/config/types/ApiData';
 import type { ValuesType } from 'utility-types';
-import { ChannelType } from 'discord-api-types/v9';
+import { ChannelType } from 'discord-api-types/v10';
 
 interface SelectChannelProps {
 	label: string;

@@ -27,7 +27,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { useElementSize, useDebounceFn, useStorage } from '@vueuse/core';
 import type { FlattenedCommand } from '~/config/types/ApiData';
-import RefreshCommandsButton from '~/components/refresh_commands_buttons.vue';
+import RefreshCommandsButton from '~/components/refresh-commands-buttons.vue';
 import UiSearchBar from '~/components/material/UiSearchBar.vue';
 import category from '~/components/presentational/CommandsPage/category.vue';
 

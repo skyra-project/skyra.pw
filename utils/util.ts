@@ -8,7 +8,7 @@ export const isBrowser = typeof window !== 'undefined';
 export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const loadState = <T>(key: LocalStorageKeys): T | null => {
-	if (isBrowser) {
+	if (import.meta.client) {
 		const serializedState = localStorage.getItem(key);
 		return serializedState ? (JSON.parse(serializedState) as T) : null;
 	}
@@ -18,8 +18,9 @@ export const loadState = <T>(key: LocalStorageKeys): T | null => {
 
 export const saveState = <T>(key: LocalStorageKeys, state: T): T => {
 	try {
-		if (isBrowser) {
+		if (import.meta.client) {
 			const serializedState = JSON.stringify(state);
+			console.log(serializedState);
 			localStorage.setItem(key, serializedState);
 		}
 	} catch {
@@ -30,7 +31,7 @@ export const saveState = <T>(key: LocalStorageKeys, state: T): T => {
 };
 
 export const clearState = (key: LocalStorageKeys) => {
-	if (isBrowser) {
+	if (import.meta.client) {
 		localStorage.removeItem(key);
 	}
 };

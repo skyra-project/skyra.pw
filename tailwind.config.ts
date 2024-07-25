@@ -2,6 +2,7 @@ import { omitKeysFromObject } from '@sapphire/utilities';
 import { oklch } from 'culori';
 import colors from 'tailwindcss/colors';
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
 	plugins: [require('@tailwindcss/typography'), require('daisyui')],
 	theme: {

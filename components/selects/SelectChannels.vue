@@ -14,6 +14,7 @@ import { computed } from 'vue';
 import SelectMany from './SelectMany.vue';
 import type { TransformedLoginData } from '~/config/types/ApiData';
 import type { ValuesType } from 'utility-types';
+import { ChannelType } from 'discord-api-types/v10';
 
 interface SelectChannelsProps {
 	label: string;
@@ -27,7 +28,7 @@ const props = defineProps<SelectChannelsProps>();
 
 const channelOptions = computed(() => {
 	return props.guild.channels
-		.filter((c) => c.type === 'GUILD_TEXT' || c.type === 'GUILD_NEWS')
+		.filter((c) => c.type === ChannelType.GuildText || c.type === ChannelType.GuildAnnouncement)
 		.sort((c1, c2) => c1.rawPosition - c2.rawPosition)
 		.map((c) => ({ name: c.name, value: c.id }));
 });

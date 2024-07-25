@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-gray-900 min-h-screen text-white">
+	<div v-if="loggedIn" class="bg-gray-900 min-h-screen text-white">
 		<!-- Profile Header -->
 		<div class="bg-gray-800 border-gray-600/50 border-b p-6">
 			<div class="container mx-auto flex items-center justify-between">
@@ -33,32 +33,26 @@
 			</div>
 		</div>
 
-		<!-- Navigation Bar -->
-		<!-- 	  <nav class="bg-gray-800 border-b border-gray-600/50">
-		<div class="container mx-auto flex justify-start p-2 space-x-4">
-		  <a href="#" class="px-4 py-2 text-yellow-400 hover:bg-gray-700 rounded transition duration-150">📁 Servers</a>
-		  <a href="#" class="px-4 py-2 hover:bg-gray-700 rounded transition duration-150">👑 Premium</a>
-		  <a href="#" class="px-4 py-2 hover:bg-gray-700 rounded transition duration-150">⚙️ Settings</a>
-		</div>
-	  </nav> -->
-
-		<!-- Servers PresentationalLayoutsSettingsSection -->
+		<!-- Servers Section -->
 		<div class="container mx-auto p-6">
-			<h2 class="mb-4 text-4xl font-bold">Servers</h2>
-			<p class="text-gray-400 mb-6">Servers you're in ({{ pack.guilds?.length ?? 0 }} servers)</p>
-
-			<!-- Server Grid -->
-			<!-- <PresentationalGuildCards :pack=pack /> -->
+			<PresentationalGuildCards :pack="pack" />
 		</div>
+	</div>
+	<div v-else class="bg-gray-900 min-h-screen">
+		<p class="text-center text-2xl md:text-4xl">
+			Sorry, you are not logged in and can therefore not view this page. Please click the "Login" button at the top right to login with Discord
+		</p>
 	</div>
 </template>
 
 <script setup lang="ts">
-const { session } = useAuth();
+if (!useAuth().loggedIn.value) {
+	navigateTo('/');
+}
 
-const { pack } = useDiscordPack();
+const { session, loggedIn } = useAuth();
+const { pack } = useDiscordPackStore();
 
-const isDropdownOpen = ref(false);
 const isDefault = ref(true);
 const isAnimated = ref(false);
 
@@ -78,14 +72,5 @@ watch(
 
 function makeSrcset(format: 'webp' | 'png' | 'gif') {
 	return `${displayAvatarURL(session.value as any, { format, size: 64 })} 1x, ${displayAvatarURL(session.value as any, { format, size: 128 })} 2x, ${displayAvatarURL(session.value as any, { format, size: 256 })} 3x, ${displayAvatarURL(session.value as any, { format, size: 512 })} 4x`;
-}
-
-function toggleDropdown() {
-	isDropdownOpen.value = !isDropdownOpen.value;
-}
-
-function handleLogout() {
-	authLogout();
-	isDropdownOpen.value = false;
 }
 </script>

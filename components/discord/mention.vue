@@ -4,12 +4,11 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useTheme } from '@/composables/theme'; // Assicurati che il percorso sia corretto
 
-const { theme } = useTheme();
+const { theme } = useThemeStore();
 
 const tagStyle = computed(() => {
-	if (theme.value === 'dark') {
+	if (theme === 'dark') {
 		return {
 			backgroundColor: 'hsl(235 85.6% 64.7% / 0.3)',
 			color: 'hsl(235 86.2% 88.6% / 1)'

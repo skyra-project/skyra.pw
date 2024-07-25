@@ -1,16 +1,16 @@
 <template>
-	<div>
-		<GuildCard v-for="guild in filteredGuilds" :key="guild.id" :guild="guild" />
+	<div class="bg-gray-800 rounded-lg p-6 shadow-lg">
+		<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+			<PresentationalGuildCard v-for="guild in filteredGuilds" :key="guild.id" :guild="guild" />
+		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import GuildCard from './guild-card.vue';
 import type { TransformedLoginData } from '~/config/types/ApiData';
 
 interface FilteredGuildCardsProps {
-	pack?: TransformedLoginData;
+	pack: TransformedLoginData | null;
 }
 
 const props = defineProps<FilteredGuildCardsProps>();

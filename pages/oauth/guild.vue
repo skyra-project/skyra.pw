@@ -13,16 +13,13 @@
 			</template>
 			<template v-else>
 				<h1 class="animate-pulse">Redirecting to guild...</h1>
-				<loading :loading="true"></loading>
+				<PresentationalLoading :loading="true" />
 			</template>
 		</client-only>
 	</section>
 </template>
 
 <script setup lang="ts">
-import loading from '~/components/presentational/loading.vue';
-import { ref, onMounted } from 'vue';
-
 const route = useRoute();
 const router = useRouter();
 

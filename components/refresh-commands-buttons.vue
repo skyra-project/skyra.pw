@@ -3,12 +3,12 @@ import { ref, computed } from 'vue';
 import { useScroll, useStorage } from '@vueuse/core';
 import { useAsyncData } from '#app';
 import type { FlattenedCommand } from '~/config/types/ApiData';
-import type { GuildSettings } from '~/config/types/GuildSettings'; // Assicurati che questo percorso sia corretto
+import type { GuildSettings } from '~/config/types/GuildSettings'; // Make sure this path is correct
 import { Time } from '~/utils/wolfstarUtils';
 import type { ExpirableLocalStorageStructure } from '~/utils/constants';
-import { LocalStorageKeys } from '~/utils/constants'; // Assicurati di importare LocalStorageKeys
+import { LocalStorageKeys } from '~/utils/constants'; // Make sure to import LocalStorageKeys
 
-// Aggiorniamo la definizione dei props per accettare entrambi i tipi di funzione
+// Update the props definition to accept both types of functions
 const props = defineProps<{
 	setCommands: ((commands: FlattenedCommand[]) => void) | ((changes: Partial<GuildSettings>) => void);
 }>();
@@ -36,10 +36,10 @@ const handleClick = async () => {
 		disabled.value = true;
 		const { data: commandsData } = await useAsyncData('commands', () => $fetch<FlattenedCommand[]>('/api/commands'));
 		if (commandsData.value) {
-			// Usiamo l'emit per inviare i nuovi comandi al componente genitore
+			// Use emit to send the new commands to the parent component
 			emit('fresh', commandsData.value);
 
-			// Aggiorniamo lo storage locale
+			// Update the local storage
 			commandsStorage.value = {
 				expire: Date.now() + Time.Day * 6,
 				data: commandsData.value
@@ -53,7 +53,7 @@ const handleClick = async () => {
 	}
 };
 
-// Carica i comandi dal local storage se non sono scaduti
+// Load the commands from local storage if they haven't expired
 if (!isExpired.value) {
 	emit('fresh', commandsStorage.value.data);
 }
