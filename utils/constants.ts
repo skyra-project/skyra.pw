@@ -45,3 +45,70 @@ export const ModerationActions = {
 };
 
 export const ProviderAppNameKey = Symbol() as InjectionKey<Ref<'artiel' | 'iriss' | 'nekokai' | 'skyra' | 'teryl'>>;
+
+export const Profiles = {
+	skyra: { name: 'Skyra', app: true, verified: true },
+	teryl: { name: 'Teryl', app: true, verified: true },
+	baddie: { name: 'Baddie', app: false, verified: false },
+	stella: { name: 'Stella', app: false, verified: false }
+} as const satisfies Record<string, Profile>;
+
+export interface Profile {
+	name: string;
+	app: boolean;
+	verified: boolean;
+}
+
+export type ProfileName = keyof typeof Profiles;
+
+export const OtherApps = {
+	Skyra: {
+		name: 'Skyra',
+		explore: '/',
+		avatar: '/img/avatars/skyra.png',
+		invite: Invites.Skyra,
+		purposes: ['Moderation', 'Logging'],
+		description: "An app to help you manage your server's moderation and logging."
+	},
+	Iriss: {
+		name: 'Iriss',
+		explore: '/iriss',
+		avatar: '/img/avatars/iriss.png',
+		invite: Invites.Iriss,
+		purposes: ['Suggestions', 'Feedback'],
+		description: "An app to help you manage the suggestions and feedback from your server's members."
+	},
+	Teryl: {
+		name: 'Teryl',
+		explore: '/teryl',
+		avatar: '/img/avatars/teryl.png',
+		invite: Invites.Teryl,
+		purposes: ['Utilities', 'Miscellaneous'],
+		description: 'An app to supercharge your server with many utility commands.'
+	},
+	Nekokai: {
+		name: 'Nekokai',
+		explore: '/nekokai',
+		avatar: '/img/avatars/nekokai.png',
+		invite: Invites.Nekokai,
+		purposes: ['Anime', 'Manga'],
+		description: 'Do you like anime or manga? Nekokai is the perfect bot for you!'
+	},
+	Artiel: {
+		name: 'Artiel',
+		explore: '/artiel',
+		avatar: '/img/avatars/artiel.png',
+		invite: Invites.Artiel,
+		purposes: ['Games', 'Fun'],
+		description: "Sometimes servers feel boring and you're out of ideas to make it more fun, Artiel is here to help you with that!"
+	}
+} as const satisfies Record<string, OtherApp>;
+
+export interface OtherApp {
+	name: string;
+	explore: `/${string}`;
+	avatar: `/img/avatars/${string}`;
+	invite: string;
+	purposes: readonly string[];
+	description: string;
+}

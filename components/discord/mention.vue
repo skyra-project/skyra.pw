@@ -1,13 +1,25 @@
 <template>
-	<span class="tag">@<slot></slot></span>
+	<span class="tag">
+		<span v-if="kind === 'mention'">@</span>
+		<icons-app v-else-if="kind === 'app'" class="icon" />
+		<slot></slot>
+	</span>
 </template>
+
+<script setup lang="ts">
+defineProps<{ kind: 'mention' | 'app' }>();
+</script>
 
 <style scoped>
 .tag {
-	@apply rounded-md px-0.5;
+	@apply gap-1 rounded-md px-0.5;
 	cursor: pointer;
 	background-color: hsl(235 85.6% 64.7% / 0.3);
 	color: hsl(235 86.2% 88.6% / 1);
+}
+
+.tag > .icon {
+	@apply mr-0.5 inline-block h-3 w-3 -translate-y-0.5;
 }
 
 .tag:hover {

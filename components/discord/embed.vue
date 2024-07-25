@@ -26,12 +26,12 @@ defineProps<{
 	timestamp?: number | Date;
 }>();
 
-const dtf = new Intl.DateTimeFormat(undefined, { dateStyle: 'short', timeStyle: 'short' });
+const dtf = new Intl.DateTimeFormat('en-US', { dateStyle: 'short', timeStyle: 'short' });
 </script>
 
 <style scoped>
 .discord-embed {
-	@apply max-w-fit border-l-4 bg-base-200 p-4;
+	@apply mt-1 max-w-fit border-l-4 bg-base-200 p-3;
 	border-radius: 0.25rem;
 }
 </style>

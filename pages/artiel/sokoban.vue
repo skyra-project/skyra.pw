@@ -1,6 +1,6 @@
 <template>
 	<h2 class="mb-24 mt-32 text-5xl font-bold">Sokoban</h2>
-	<div class="grid w-full grid-cols-1 lg:grid-cols-2 rounded-xl bg-base-200 drop-shadow-xl">
+	<div class="grid w-full grid-cols-1 rounded-xl bg-base-200 drop-shadow-xl lg:grid-cols-2">
 		<div class="flex flex-col items-center justify-between gap-8 p-4 max-lg:order-last">
 			<div class="sokoban-grid p-4" :style="{ '--height': height }">
 				<div v-for="(row, rowIndex) of rows" class="sokoban-grid-row" :style="{ '--width': width }">
@@ -48,7 +48,7 @@
 				<input type="range" min="4" max="10" class="range" v-model.number="height" />
 			</div>
 
-			<div class="mt-8 grid grid-cols-3 md:grid-cols-4 gap-4">
+			<div class="mt-8 grid grid-cols-3 gap-4 md:grid-cols-4">
 				<button v-for="entry in components" class="btn tooltip tooltip-top h-24 w-24 p-4" :data-tip="entry.name" @click="selected = entry">
 					<component :is="entry.component" class="h-full w-full" />
 				</button>

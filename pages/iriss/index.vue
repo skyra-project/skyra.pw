@@ -16,6 +16,8 @@
 		<nuxt-link class="btn join-item md:btn-wide" :to="Invites.Iriss"><Icon name="ph:plus-circle-fill" class="h-5 w-5" /> Add App</nuxt-link>
 		<nuxt-link class="btn join-item md:btn-wide" to="#explore"><Icon name="ph:magnifying-glass-fill" class="h-5 w-5" /> Explore</nuxt-link>
 	</section>
+
+	<other-apps :apps="[OtherApps.Skyra, OtherApps.Teryl, OtherApps.Nekokai, OtherApps.Artiel]" />
 </template>
 
 <style scoped>

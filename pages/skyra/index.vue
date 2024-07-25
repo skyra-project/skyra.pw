@@ -63,8 +63,8 @@
 						</ul>
 					</template>
 					<template v-else-if="featureIndex === AutomodFeature.Mentions">
-						Everyone notice me! <discord-mention>everyone</discord-mention> <discord-mention>members</discord-mention>{{ ' '
-						}}<discord-mention>moderators</discord-mention>
+						Everyone notice me! <discord-mention kind="mention">everyone</discord-mention>
+						<discord-mention kind="mention">members</discord-mention>{{ ' ' }}<discord-mention kind="mention">moderators</discord-mention>
 					</template>
 					<template v-else-if="featureIndex === AutomodFeature.Newlines">
 						Hehehehe
@@ -89,7 +89,9 @@
 						I would like to say that you're a <strong>disgusting</strong> person.
 					</template>
 				</discord-message>
-				<discord-message name="skyra">Dear <discord-mention>Baddie</discord-mention>, {{ texts[featureIndex].alert }}</discord-message>
+				<discord-message name="skyra">
+					Dear <discord-mention kind="mention">Baddie</discord-mention>, {{ texts[featureIndex].alert }}
+				</discord-message>
 			</discord-messages>
 
 			<div class="flex flex-row items-center gap-1 lg:flex-col">
@@ -247,34 +249,12 @@
 		</div>
 	</section>
 
-	<section class="prose text-center">
-		<h2 class="mt-32 text-5xl font-bold">Other Apps</h2>
-		<p>You want a feature that Skyra doesn't have? We got you covered!</p>
-	</section>
-
-	<div class="mt-8 grid w-full gap-4 xl:grid-cols-2">
-		<div v-for="app of otherApps" class="other-apps-layout rounded-xl bg-base-200 shadow-xl">
-			<nuxt-img :src="app.avatar" width="256" height="256" :alt="`${app.name}'s avatar`" loading="lazy" class="other-apps-avatar" />
-			<h2 class="other-apps-title">
-				{{ app.name }}
-				<div v-for="purpose of app.purposes" class="badge badge-neutral">{{ purpose }}</div>
-			</h2>
-			<div class="other-apps-description">
-				<p class="flex-grow">{{ app.description }}</p>
-				<div class="join mt-4 flex justify-end">
-					<nuxt-link class="btn join-item btn-neutral" :to="app.explore">
-						<Icon name="ph:magnifying-glass-fill" class="h-5 w-5" /> Explore
-					</nuxt-link>
-					<nuxt-link class="btn join-item btn-neutral" :to="app.invite">
-						<Icon name="ph:plus-circle-fill" class="h-5 w-5" /> Add App
-					</nuxt-link>
-				</div>
-			</div>
-		</div>
-	</div>
+	<other-apps :apps="[OtherApps.Iriss, OtherApps.Teryl, OtherApps.Nekokai, OtherApps.Artiel]" />
 </template>
 
 <script setup lang="ts">
+definePageMeta({ alias: ['/'] });
+
 enum AutomodFeature {
 	Attachments,
 	Capitals,
@@ -328,41 +308,6 @@ function advanceFeatureIndex(value: -1 | 1) {
 function advanceModerationIndex(value: -1 | 1) {
 	moderationIndex.value = (moderationIndex.value + value + moderationActions.length) % moderationActions.length;
 }
-
-const otherApps = [
-	{
-		name: 'Iriss',
-		explore: '/iriss',
-		avatar: '/img/avatars/iriss.png',
-		invite: Invites.Iriss,
-		purposes: ['Suggestions', 'Feedback'],
-		description: "An app to help you manage the suggestions and feedback from your server's members."
-	},
-	{
-		name: 'Teryl',
-		explore: '/teryl',
-		avatar: '/img/avatars/teryl.png',
-		invite: Invites.Teryl,
-		purposes: ['Utilities', 'Miscellaneous'],
-		description: 'An app to supercharge your server with many utility commands.'
-	},
-	{
-		name: 'Nekokai',
-		explore: '/nekokai',
-		avatar: '/img/avatars/nekokai.png',
-		invite: Invites.Nekokai,
-		purposes: ['Anime', 'Manga'],
-		description: 'Do you like anime or manga? Nekokai is the perfect bot for you!'
-	},
-	{
-		name: 'Artiel',
-		explore: '/artiel',
-		avatar: '/img/avatars/artiel.png',
-		invite: Invites.Artiel,
-		purposes: ['Games', 'Fun'],
-		description: "Sometimes servers feel boring and you're out of ideas to make it more fun, Artiel is here to help you with that!"
-	}
-];
 </script>
 
 <style scoped>
@@ -412,42 +357,6 @@ const otherApps = [
 	transition: linear background-color 0.25s;
 }
 
-.other-apps-layout {
-	@apply grid gap-4 p-4;
-	grid-template-rows: 230px min-content 1fr;
-	grid-template-columns: 1fr;
-	grid-template-areas:
-		'a'
-		'b'
-		'c';
-}
-
-.other-apps-avatar {
-	@apply h-full w-full object-cover object-[0_20%] max-md:rounded-xl md:rounded-l-xl;
-	grid-area: a;
-}
-
-.other-apps-title {
-	@apply text-3xl font-semibold md:mr-4 md:mt-4 md:text-xl;
-	grid-area: b;
-}
-
-.other-apps-description {
-	@apply flex flex-col md:mb-4 md:mr-4;
-	grid-area: c;
-}
-
-@screen md {
-	.other-apps-layout {
-		@apply p-0;
-		grid-template-rows: min-content 1fr;
-		grid-template-columns: 256px 1fr;
-		grid-template-areas:
-			'a b'
-			'a c';
-	}
-}
-
 .invite-card {
 	@apply relative p-12 text-white;
 }
@@ -455,6 +364,11 @@ const otherApps = [
 .invite-card::before {
 	@apply absolute left-0 top-0 -z-10 h-full w-full -rotate-2 rounded-xl drop-shadow-lg;
 	background: linear-gradient(to bottom right in oklch, theme('colors.cyan.600') 0%, theme('colors.violet.600') 70%);
+	background: linear-gradient(
+		to bottom right in oklch,
+		oklch(from oklch(var(--branding-skyra)) calc(l + 0.1) c calc(h - 30)) 0%,
+		oklch(from oklch(var(--branding-skyra)) calc(l - 0.1) c calc(h + 30)) 70%
+	);
 	content: '';
 }
 </style>

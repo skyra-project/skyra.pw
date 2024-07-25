@@ -18,6 +18,8 @@
 	</section>
 
 	<nuxt-link to="/artiel/sokoban">Sokoban here!</nuxt-link>
+
+	<other-apps :apps="[OtherApps.Skyra, OtherApps.Iriss, OtherApps.Teryl, OtherApps.Nekokai]" />
 </template>
 
 <style scoped>

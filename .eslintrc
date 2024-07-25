@@ -1,5 +1,5 @@
 {
-	"extends": ["plugin:@next/eslint-plugin-next/recommended", "@sapphire", "plugin:import/typescript"],
+	"extends": ["@sapphire", "plugin:import/typescript"],
 	"parserOptions": {
 		"ecmaVersion": 2020,
 		"sourceType": "module",

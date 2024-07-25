@@ -15,5 +15,6 @@ export default defineNuxtConfig({
 		} satisfies SessionConfig,
 		clientId: process.env.NITRO_DISCORD_CLIENT_ID,
 		clientSecret: process.env.NITRO_DISCORD_CLIENT_SECRET
-	}
+	},
+	compatibilityDate: '2024-07-25'
 });
