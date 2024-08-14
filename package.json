@@ -13,7 +13,7 @@
 		"format": "prettier --write ."
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^19.3.0",
+		"@commitlint/cli": "^19.4.0",
 		"@commitlint/config-conventional": "^19.2.2",
 		"@nuxt/image": "^1.7.0",
 		"@nuxtjs/sitemap": "^5.3.5",
@@ -23,19 +23,19 @@
 		"@sapphire/prettier-config": "^2.0.0",
 		"@sapphire/ts-config": "^5.0.1",
 		"@sapphire/utilities": "^3.17.0",
-		"@tailwindcss/typography": "^0.5.13",
+		"@tailwindcss/typography": "^0.5.14",
 		"@types/culori": "^2.1.1",
-		"@vueuse/core": "^10.11.0",
-		"@vueuse/nuxt": "^10.11.0",
+		"@vueuse/core": "^10.11.1",
+		"@vueuse/nuxt": "^10.11.1",
 		"culori": "^4.0.1",
 		"daisyui": "^4.12.10",
 		"discord-api-types": "0.37.93",
-		"lint-staged": "^15.2.7",
+		"lint-staged": "^15.2.9",
 		"nuxt": "^3.12.4",
 		"nuxt-icon": "^0.6.10",
 		"prettier": "^3.3.3",
 		"prettier-plugin-css-order": "^2.1.2",
-		"prettier-plugin-tailwindcss": "^0.6.5"
+		"prettier-plugin-tailwindcss": "^0.6.6"
 	},
 	"resolutions": {
 		"minimist": "^1.2.6"
@@ -57,5 +57,5 @@
 	"bugs": {
 		"url": "https://github.com/skyra-project/skyra.pw/issues"
 	},
-	"packageManager": "yarn@4.1.1"
+	"packageManager": "yarn@4.4.0"
 }
