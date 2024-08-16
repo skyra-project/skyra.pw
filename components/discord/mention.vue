@@ -12,7 +12,7 @@ defineProps<{ kind: 'mention' | 'app' }>();
 
 <style scoped>
 .tag {
-	@apply gap-1 rounded-md px-0.5;
+	@apply gap-1 rounded-md px-0.5 font-normal;
 	cursor: pointer;
 	background-color: hsl(235 85.6% 64.7% / 0.3);
 	color: hsl(235 86.2% 88.6% / 1);

@@ -18,7 +18,7 @@
 	</section>
 
 	<h2 id="explore" class="mt-72 text-5xl font-bold">Explore</h2>
-	<section class="mt-32 grid gap-4 md:gap-12 lg:grid-cols-2 lg:gap-20">
+	<section class="mt-32 grid w-full gap-4 md:gap-12 lg:grid-cols-2 lg:gap-20">
 		<div class="flex flex-col-reverse items-center gap-4 max-lg:order-last lg:flex-row">
 			<discord-messages class="w-full">
 				<discord-message v-show="reminderPublic" name="teryl" :command="{ user: 'stella', name: 'reminders create' }">
@@ -85,6 +85,103 @@
 		</div>
 	</section>
 
+	<section class="mt-32 grid w-full gap-4 md:gap-12 lg:grid-cols-2 lg:gap-20">
+		<div class="prose">
+			<h3 class="mb-4 text-3xl font-bold">
+				<Icon name="ph:tag-fill" class="h-8 w-8" aria-hidden="true" />
+				Teryl can do <span class="underline underline-offset-4">tags</span>
+			</h3>
+
+			<p>Chunks of text you can store in the bot for referencing later.</p>
+
+			<p>You can define the tag's style:</p>
+			<ul>
+				<li>
+					<Icon name="ph:text-align-left-duotone" class="my-0 mr-1 h-5 w-5 text-branding-teryl" />
+					<strong>Text:</strong> the default, displays the content as-is like a normal message.
+				</li>
+				<li>
+					<Icon name="ph:chat-text-duotone" class="my-0 mr-1 h-5 w-5 text-branding-teryl" />
+					<strong>Card:</strong> displays the content inside a card.
+				</li>
+			</ul>
+
+			<p>And you can change how the tag is sent!</p>
+			<ul>
+				<li>
+					<template v-if="tagMode === 'hide'">
+						<icon name="ph:eye-slash-duotone" class="my-0 mr-1 h-5 w-5 text-base-content/60" />
+						<strong>Hide:</strong> hide the message, perfect for checking a tag before showing it.
+					</template>
+					<template v-else>
+						<icon name="ph:eye-duotone" class="my-0 mr-1 h-5 w-5 text-warning" />
+						<strong>Show:</strong> display the tag on Discord.
+					</template>
+				</li>
+				<li>
+					<template v-if="tagMode === 'user'">
+						<icon name="ph:user-duotone" class="my-0 mr-1 h-5 w-5 text-purple-500" />
+						<strong>Suggest:</strong> suggest the tag to a user, this will ping only the specified user.
+					</template>
+					<template v-else>
+						<icon name="ph:user-circle-dashed-duotone" class="my-0 mr-1 h-5 w-5 text-base-content/60" />
+						<strong>No user:</strong> the default, it will show the tag content as-is.
+					</template>
+				</li>
+			</ul>
+		</div>
+
+		<div class="flex flex-col-reverse items-center gap-4 max-lg:order-last lg:flex-row-reverse">
+			<discord-messages class="w-full">
+				<discord-message :ephemeral="tagMode === 'hide'" name="teryl" :command="{ user: 'stella', name: 'tag' }">
+					<span v-show="tagMode === 'user'" class="font-bold">
+						Tag suggestion for <discord-mention kind="mention">user</discord-mention>:
+						<br />
+					</span>
+
+					<discord-embed v-if="tagEmbed" color="#6b79c9">
+						Teryl is a misc and utilities Discord bot.
+					</discord-embed>
+					<template v-else>
+						Teryl is a misc and utilities Discord bot.
+					</template>
+				</discord-message>
+			</discord-messages>
+
+			<div class="flex flex-col gap-2">
+				<button
+					class="btn tooltip tooltip-right"
+					@click="tagEmbed = !tagEmbed"
+					:aria-label="tagEmbed ? 'Card' : 'Text'"
+					:data-tip="tagEmbed ? 'Card' : 'Text'"
+				>
+					<icon v-if="tagEmbed" name="ph:chat-text-duotone" class="h-6 w-6 text-branding-teryl" aria-hidden="true" />
+					<icon v-else name="ph:text-align-left-duotone" class="h-6 w-6 text-branding-teryl" aria-hidden="true" />
+				</button>
+
+				<button
+					class="btn tooltip tooltip-right"
+					@click="tagMode = tagMode === 'hide' ? 'visible' : 'hide'"
+					:aria-label="tagMode === 'hide' ? 'Hidden' : 'Visible'"
+					:data-tip="tagMode === 'hide' ? 'Hidden' : 'Visible'"
+				>
+					<icon v-if="tagMode === 'hide'" name="ph:eye-slash-duotone" class="h-6 w-6 text-base-content/60" aria-hidden="true" />
+					<icon v-else name="ph:eye-duotone" class="h-6 w-6 text-warning" aria-hidden="true" />
+				</button>
+
+				<button
+					class="btn tooltip tooltip-right"
+					@click="tagMode = tagMode === 'user' ? 'visible' : 'user'"
+					:aria-label="tagMode === 'user' ? 'Suggesting' : 'Not Suggesting'"
+					:data-tip="tagMode === 'user' ? 'Suggesting' : 'Not Suggesting'"
+				>
+					<icon v-if="tagMode === 'user'" name="ph:user-duotone" class="h-6 w-6 text-purple-500" aria-hidden="true" />
+					<icon v-else name="ph:user-circle-dashed-duotone" class="h-6 w-6 text-base-content/60" aria-hidden="true" />
+				</button>
+			</div>
+		</div>
+	</section>
+
 	<section class="invite-card mt-32 flex flex-col items-center">
 		<h3 class="mb-4 text-3xl font-bold">Liking what you see?</h3>
 
@@ -100,6 +197,9 @@
 <script setup lang="ts">
 const reminderPublic = ref(false);
 const reminderPublicSubscribed = ref(false);
+
+const tagEmbed = ref(false);
+const tagMode = ref<'visible' | 'hide' | 'user'>('visible');
 </script>
 
 <style scoped>
