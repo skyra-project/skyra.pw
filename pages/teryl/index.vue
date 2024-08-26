@@ -139,12 +139,8 @@
 						<br />
 					</span>
 
-					<discord-embed v-if="tagEmbed" color="#6b79c9">
-						Teryl is a misc and utilities Discord bot.
-					</discord-embed>
-					<template v-else>
-						Teryl is a misc and utilities Discord bot.
-					</template>
+					<discord-embed v-if="tagEmbed" color="#6b79c9"> Teryl is a misc and utilities Discord bot. </discord-embed>
+					<template v-else> Teryl is a misc and utilities Discord bot. </template>
 				</discord-message>
 			</discord-messages>
 
