@@ -1,8 +1,9 @@
 export interface GuildSettings {
 	channelsIgnoreAll: string[];
-	channelsIgnoreMessageDeletes: string[];
-	channelsIgnoreMessageEdits: string[];
-	channelsIgnoreReactionAdds: string[];
+	channelsIgnoreMessageDelete: string[];
+	channelsIgnoreMessageEdit: string[];
+	channelsIgnoreReactionAdd: string[];
+	channelsIgnoreVoiceActivity: string[];
 	channelsLogsChannelCreate: string | null;
 	channelsLogsChannelDelete: string | null;
 	channelsLogsChannelUpdate: string | null;
@@ -11,10 +12,10 @@ export interface GuildSettings {
 	channelsLogsEmojiUpdate: string | null;
 	channelsLogsImage: string | null;
 	channelsLogsMemberAdd: string | null;
+	channelsLogsMemberNicknameUpdate: string | null;
 	channelsLogsMemberRemove: string | null;
-	channelsLogsMemberNickNameUpdate: string | null;
-	channelsLogsMemberUserNameUpdate: string | null;
 	channelsLogsMemberRolesUpdate: string | null;
+	channelsLogsMemberUsernameUpdate: string | null;
 	channelsLogsMessageDelete: string | null;
 	channelsLogsMessageDeleteNsfw: string | null;
 	channelsLogsMessageUpdate: string | null;
@@ -26,6 +27,8 @@ export interface GuildSettings {
 	channelsLogsRoleDelete: string | null;
 	channelsLogsRoleUpdate: string | null;
 	channelsLogsServerUpdate: string | null;
+	channelsLogsVoiceChannel: string | null;
+	channelsMediaOnly: string[];
 	commandAutoDelete: CommandAutoDelete[];
 	disabledChannels: string[];
 	disabledCommands: string[];
@@ -33,7 +36,11 @@ export interface GuildSettings {
 	disableNaturalPrefix: boolean;
 	eventsBanAdd: boolean;
 	eventsBanRemove: boolean;
+	eventsIncludeBots: boolean;
+	eventsTimeout: boolean;
 	eventsTwemojiReactions: boolean;
+	eventsUnknownMessages: boolean;
+	id: string;
 	language: string;
 	messagesAutoDeleteIgnoredAll: boolean;
 	messagesAutoDeleteIgnoredChannels: string[];
@@ -49,13 +56,14 @@ export interface GuildSettings {
 	noMentionSpamEnabled: boolean;
 	noMentionSpamMentionsAllowed: number;
 	noMentionSpamTimePeriod: number;
-	notificationsStreamsTwitchStreamers: NotificationsStreamTwitch[];
 	permissionsRoles: PermissionsNode[];
 	permissionsUsers: PermissionsNode[];
 	prefix: string;
 	reactionRoles: ReactionRole[];
 	rolesAdmin: string[];
 	rolesInitial: string | null;
+	rolesInitialBots: string | null;
+	rolesInitialHumans: string | null;
 	rolesModerator: string[];
 	rolesMuted: string | null;
 	rolesPublic: string[];
@@ -93,7 +101,7 @@ export interface GuildSettings {
 	selfmodFilterSoftAction: number;
 	selfmodFilterThresholdDuration: number;
 	selfmodFilterThresholdMaximum: number;
-	selfmodIgnoreChannels: string[];
+	selfmodIgnoredChannels: string[];
 	selfmodInvitesEnabled: boolean;
 	selfmodInvitesHardAction: number;
 	selfmodInvitesHardActionDuration: number | null;
@@ -175,21 +183,3 @@ interface UniqueRoleSet {
 	name: string;
 	roles: readonly string[];
 }
-
-enum NotificationsStreamsTwitchEventStatus {
-	Online,
-	Offline
-}
-
-interface NotificationsStreamsTwitchStreamer {
-	channel: string;
-	author: string;
-	message: string | null;
-	embed: boolean;
-	status: NotificationsStreamsTwitchEventStatus;
-	gamesBlacklist: readonly string[];
-	gamesWhitelist: readonly string[];
-	createdAt: number;
-}
-
-type NotificationsStreamTwitch = [string, readonly NotificationsStreamsTwitchStreamer[]];

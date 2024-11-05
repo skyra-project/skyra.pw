@@ -73,8 +73,8 @@ export namespace Channels {
 					| 'Image'
 					| 'MemberAdd'
 					| 'MemberRemove'
-					| 'MemberNickNameUpdate'
-					| 'MemberUserNameUpdate'
+					| 'MemberNicknameUpdate'
+					| 'MemberUsernameUpdate'
 					| 'MemberRolesUpdate'
 					| 'MessageDelete'
 					| 'MessageDeleteNsfw'
@@ -94,7 +94,7 @@ export namespace Channels {
 	export interface IgnoreChannel {
 		description: string;
 
-		key: `channelsIgnore${'All' | 'MessageDeletes' | 'MessageEdits' | 'ReactionAdds'}` | 'messagesIgnoreChannels';
+		key: `channelsIgnore${'All' | 'MessageDelete' | 'MessageEdit' | 'ReactionAdd'}` | 'messagesIgnoreChannels';
 
 		name: string;
 	}

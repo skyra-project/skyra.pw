@@ -107,12 +107,12 @@ export const ConfigurableLoggingChannels: Channels.Channel[] = [
 	{
 		name: 'Member Nickname Update Logs',
 		description: 'The channel I will send a message to when a member changes their nickname.',
-		key: 'channelsLogsMemberNickNameUpdate'
+		key: 'channelsLogsMemberNicknameUpdate'
 	},
 	{
 		name: 'Member Username Update Logs',
 		description: 'The channel I will send a message to when a member changes their username.',
-		key: 'channelsLogsMemberUserNameUpdate'
+		key: 'channelsLogsMemberUsernameUpdate'
 	},
 	{
 		name: 'Member Role Logs',
@@ -210,23 +210,22 @@ export const ConfigurableLoggingChannels: Channels.Channel[] = [
 		key: 'channelsLogsServerUpdate'
 	}
 ];
-
 export const ConfigurableIgnoreChannels: Channels.IgnoreChannel[] = [
 	{ name: 'All logs', description: 'Channels I should ignore for all types of logging.', key: 'channelsIgnoreAll' },
 	{
 		name: 'Message delete logs',
 		description: 'Channels I should ignore when checking for deleted messages to log.',
-		key: 'channelsIgnoreMessageDeletes'
+		key: 'channelsIgnoreMessageDelete'
 	},
 	{
 		name: 'Message edit logs',
 		description: 'Channels I should ignore when checking for edited messages to log.',
-		key: 'channelsIgnoreMessageEdits'
+		key: 'channelsIgnoreMessageEdit'
 	},
 	{
 		name: 'Reaction add logs',
 		description: 'Channels I should ignore when checking for added reactions.',
-		key: 'channelsIgnoreReactionAdds'
+		key: 'channelsIgnoreReactionAdd'
 	},
 	{
 		name: 'Message Delete, Edit and Reaction Add logs',
