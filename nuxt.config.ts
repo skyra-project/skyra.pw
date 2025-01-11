@@ -82,8 +82,10 @@ export default defineNuxtConfig({
 
 	// Module configurations
 	image: { screens: {} },
+
 	vueuse: { autoImports: true },
 	formkit: { autoImport: true },
+
 	sitemap: {
 		exclude: ['/join', '/auth/guild', '/auth/callback', '/[...id]']
 	},
@@ -105,6 +107,10 @@ export default defineNuxtConfig({
 		clientId: process.env.NITRO_DISCORD_CLIENT_ID,
 		clientSecret: process.env.NITRO_DISCORD_CLIENT_SECRET,
 		apiOrigin: process.env.NITRO_API_ORIGIN
+	},
+
+	build: {
+		transpile: ['trpc-nuxt']
 	},
 
 	// Nitro configuration
@@ -181,5 +187,7 @@ export default defineNuxtConfig({
 	// App configuration
 	app: {
 		head: DefaultSeoProps
-	}
+	},
+
+	compatibilityDate: '2025-01-10'
 });

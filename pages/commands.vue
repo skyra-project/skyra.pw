@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<PresentationalLoading :loading="loading" />
-		<RefreshCommandsButton :setCommands="setCommands" @fresh="handleFreshCommands" />
+		<PresentationalLoading :loading="isLoading" />
+		<RefreshCommandsButton @click="refresh" />
 		<div class="container mx-auto">
 			<UiSearchBar
 				v-model="searchValue"
@@ -15,7 +15,7 @@
 					v-for="(categoryName, index) in categories"
 					:key="index"
 					:category-name="categoryName"
-					:commands="commands"
+					:commands="filteredCommands"
 					:search-value="searchValue"
 				/>
 			</div>
@@ -24,61 +24,63 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
-import { useElementSize, useDebounceFn, useStorage } from '@vueuse/core';
+import { ref, computed } from 'vue';
+import { useElementSize } from '@vueuse/core';
 import type { FlattenedCommand } from '~/config/types/ApiData';
-import RefreshCommandsButton from '~/components/refresh-commands-buttons.vue';
-import UiSearchBar from '~/components/material/UiSearchBar.vue';
-import category from '~/components/presentational/CommandsPage/category.vue';
+import { useClientTrpc } from '~/composables/public';
 
+const client = useClientTrpc();
 const searchValue = ref('');
-const commands = ref<FlattenedCommand[]>([]);
-const loading = ref(false);
-
 const commandsBoxRef = ref<HTMLElement | null>(null);
 const { width: commandsBoxWidth } = useElementSize(commandsBoxRef);
 
-const commandsStorage = useStorage<ExpirableLocalStorageStructure<FlattenedCommand[]>>(LocalStorageKeys.Commands, {
-	expire: 0,
-	data: []
+// tRPC queries usando il client
+const commands = ref<FlattenedCommand[]>([]);
+const searchResults = ref<FlattenedCommand[]>([]);
+const isLoading = ref(false);
+
+// Fetch iniziale dei comandi
+const fetchCommands = async () => {
+	isLoading.value = true;
+	try {
+		commands.value = await client.commands.getAll.query();
+	} catch (error) {
+		console.error('Failed to fetch commands:', error);
+		commands.value = [];
+	}
+	isLoading.value = false;
+};
+
+// Watch per la ricerca
+watch(searchValue, async (newValue) => {
+	if (newValue.length > 0) {
+		try {
+			searchResults.value = await client.commands.search.query({
+				query: newValue,
+				category: undefined
+			});
+		} catch (error) {
+			console.error('Search failed:', error);
+			searchResults.value = [];
+		}
+	} else {
+		searchResults.value = [];
+	}
 });
 
-const fetchCommands = async () => {
-	loading.value = true;
-	if (commandsStorage.value.expire > Date.now() || import.meta.env.DEV) {
-		commands.value = commandsStorage.value.data;
-	} else {
-		try {
-			const commandsData = await $fetch<FlattenedCommand[]>(getApiOrigin() + '/commands');
-			commands.value = commandsData;
-			commandsStorage.value = {
-				expire: Date.now() + Time.Day * 6,
-				data: commandsData
-			};
-		} catch (error) {
-			console.error('Failed to fetch commands:', error);
-		}
-	}
-	loading.value = false;
+const filteredCommands = computed<FlattenedCommand[]>(() => {
+	return searchValue.value ? searchResults.value : commands.value;
+});
+
+const categories = computed<string[]>(() => [...new Set(filteredCommands.value.map((cmd: FlattenedCommand) => cmd.category))]);
+
+const refresh = async () => {
+	await client.commands.refresh.mutate();
+	await fetchCommands();
 };
 
-onMounted(fetchCommands);
-
-const categories = computed(() => [...new Set(commands.value.map((command) => command.category))]);
-
-const handleSearch = useDebounceFn((value: string) => {
-	searchValue.value = value;
-}, 200);
-
-const setCommands = (newCommands: FlattenedCommand[]) => {
-	commands.value = newCommands;
-	commandsStorage.value = {
-		expire: Date.now() + Time.Day * 6,
-		data: newCommands
-	};
-};
-
-const handleFreshCommands = (newCommands: FlattenedCommand[]) => {
-	setCommands(newCommands);
-};
+// Fetch iniziale al mount
+onMounted(() => {
+	fetchCommands();
+});
 </script>

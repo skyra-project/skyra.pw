@@ -22,10 +22,13 @@
 		"@formkit/vue": "^1.6.5",
 		"@nuxt/content": "^2.13.1",
 		"@nuxt/image": "^1.7.0",
+		"@nuxtjs/color-mode": "^3.4.2",
 		"@nuxtjs/device": "^3.1.1",
 		"@nuxtjs/robots": "^4.0.0",
 		"@nuxtjs/sitemap": "^5.3.4",
 		"@nuxtjs/tailwindcss": "^6.12.1",
+		"@pinia-plugin-persistedstate/nuxt": "^1.2.1",
+		"@pinia/nuxt": "^0.5.1",
 		"@sapphire/discord.js-utilities": "^7.3.0",
 		"@sapphire/plugin-api": "^6.1.1",
 		"@sapphire/prettier-config": "^2.0.0",
@@ -34,10 +37,6 @@
 		"@tailwindcss/typography": "^0.5.13",
 		"@types/body-scroll-lock": "^3.1.2",
 		"@types/culori": "^2.1.1",
-		"@nuxtjs/color-mode": "^3.4.2",
-		"@pinia-plugin-persistedstate/nuxt": "^1.2.1",
-		"@pinia/nuxt": "^0.5.1",
-		"pinia": "^2.1.7",
 		"@types/lodash": "^4",
 		"@vite-pwa/nuxt": "^0.9.1",
 		"@vueuse/core": "^10.11.0",
@@ -54,6 +53,7 @@
 		"nuxt-icon": "^0.6.10",
 		"nuxt-link-checker": "^3.0.2",
 		"nuxt-security": "^2.0.0-rc.9",
+		"pinia": "^2.1.7",
 		"prettier": "^3.3.3",
 		"prettier-plugin-css-order": "^2.1.2",
 		"prettier-plugin-tailwindcss": "^0.6.5",
@@ -85,9 +85,15 @@
 	"bugs": {
 		"url": "https://github.com/wolfstar-project/wolfstar.rocks/issues"
 	},
-	"packageManager": "yarn@4.3.1",
+	"packageManager": "yarn@4.6.0",
 	"volta": {
-		"node": "20.15.0",
+		"node": "22.12.0",
 		"yarn": "4.3.1"
+	},
+	"dependencies": {
+		"@trpc/client": "^10.45.2",
+		"@trpc/server": "^10.45.2",
+		"trpc-nuxt": "^0.10.22",
+		"zod": "^3.24.1"
 	}
 }

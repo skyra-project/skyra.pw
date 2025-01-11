@@ -1,20 +1,12 @@
-import { LoginData } from '@sapphire/plugin-api';
 import {
-	GuildDefaultMessageNotifications,
-	GuildExplicitContentFilter,
-	GuildMFALevel,
-	GuildPremiumTier,
-	GuildVerificationLevel,
-	Locale,
 	OAuth2Routes,
-	RESTAPIPartialCurrentUserGuild,
 	RouteBases,
 	Routes,
 	type RESTGetAPICurrentUserResult,
 	type RESTPostOAuth2AccessTokenResult,
 	type RESTPostOAuth2AccessTokenURLEncodedData
 } from 'discord-api-types/v10';
-import { FlattenedGuild, OauthFlattenedGuild, PartialOauthFlattenedGuild, TransformedLoginData } from '~/config/types/ApiData';
+import { TransformedLoginData } from '~/config/types/ApiData';
 
 const { clientId, clientSecret, apiOrigin } = useRuntimeConfig();
 

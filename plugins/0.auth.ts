@@ -1,17 +1,17 @@
+import { useClientTrpc } from '~/composables/public';
+
 export default defineNuxtPlugin(async (nuxtApp) => {
 	// Skip plugin when rendering error page
 	if (nuxtApp.payload.error) {
 		return {};
 	}
 
-	const { data: session, refresh: updateSession } = await useFetch('/api/auth/session', { key: 'session' });
+	const { data: session, refresh: updateSession } = useAsyncData('auth-session', () => useClientTrpc().auth.session.query(), { immediate: true });
+
 	const loggedIn = computed(() => !!session.value?.id);
 
-	// Create a ref to know where to redirect the user when logged in
 	const redirectTo = useState<string>('authRedirect', () => '/');
-
-	// Add global route middleware to protect pages using:
-	// definePageMeta({ auth: true });
+	// Protezione route
 	addRouteMiddleware(
 		'auth',
 		(to) => {
@@ -23,11 +23,11 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 		{ global: true }
 	);
 
-	const currentRoute = useRoute();
-
+	// Watch client-side
 	if (import.meta.client) {
-		watch(loggedIn, async (loggedIn) => {
-			if (!loggedIn && currentRoute.meta.auth) {
+		const currentRoute = useRoute();
+		watch(loggedIn, async (isLoggedIn) => {
+			if (!isLoggedIn && currentRoute.meta.auth) {
 				redirectTo.value = currentRoute.path;
 				await navigateTo('/login');
 			}

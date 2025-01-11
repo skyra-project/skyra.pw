@@ -1,0 +1,72 @@
+<template>
+
+    <main class="mx-4 flex flex-grow flex-col items-center sm:mx-auto sm:w-5/6 lg:max-w-5xl xl:max-w-7xl">
+      <div class="container mx-auto flex min-h-[calc(100vh-4rem)] max-w-md flex-col items-center justify-center p-4">
+        <h1 :class="['text-9xl font-bold', getErrorColor()]">
+          {{ props.error?.statusCode ?? '500' }}
+        </h1>
+        <h2 class="mb-5 text-center text-2xl md:text-3xl text-gray-300">
+          {{ getErrorMessage() }}
+        </h2>
+
+        <div class="btn-group flex-col sm:flex-row">
+          <a 
+            href="https://join.wolfstar.rocks" 
+            target="_blank" 
+            class="btn btn-primary mb-2 sm:mb-0 sm:mr-2"
+          >
+            <Icon name="mdi:forum" class="mr-2" /> Join Support Server
+          </a>
+          <button 
+            @click="handleRetry" 
+            class="btn btn-primary"
+          >
+            <Icon name="mdi:home" class="mr-2" /> Go Back Home
+          </button>
+        </div>
+      </div>
+    </main>
+  
+</template>
+
+<script setup lang="ts">
+import type { NuxtError } from '#app'
+
+interface Props {
+  error: NuxtError
+}
+
+const props = defineProps<Props>()
+const router = useRouter()
+
+function getErrorMessage() {
+  switch (props.error?.statusCode) {
+    case 401:
+    case 403:
+      return "You don't have permission to access this page"
+    case 404:
+      return 'The page you are looking for does not exist'
+    case 500:
+      return 'An internal server error occurred'
+    default:
+      return props.error?.message || 'An unexpected error occurred'
+  }
+}
+
+function getErrorColor() {
+  switch (props.error?.statusCode) {
+    case 401:
+    case 403:
+      return 'text-yellow-500'
+    case 404:
+      return 'text-blue-500'
+    case 500:
+    default:
+      return 'text-red-500'
+  }
+}
+
+async function handleRetry() {
+  await router.push('/')
+}
+</script>
