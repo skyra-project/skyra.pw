@@ -4,8 +4,8 @@ import { useGuildSettings } from '~/composables/settings/useGuildSettings';
 import { useGuildSettingsChanges } from '~/composables/settings/useGuildSettingsChanges';
 import RefreshCommandsButton from '~/components/refresh-commands-buttons.vue';
 
-import type { FlattenedCommand } from '~/config/types/ApiData';
-import type { DisableCommands } from '~/config/types/ConfigurableData';
+import type { FlattenedCommand } from '~/types/ApiData';
+import type { DisableCommands } from '~/types/ConfigurableData';
 
 const props = defineProps<{
 	commands: FlattenedCommand[];

@@ -1,22 +1,26 @@
 <template>
-	<SelectMany :name="roleCount" :values="roleValues" v-bind="props" />
+	<SelectsSelectOne :name="roleName" :values="roleValues" v-bind="props" />
 </template>
 
 <script setup lang="ts">
-import type { TransformedLoginData } from '~/config/types/ApiData';
+import { computed } from 'vue';
+
+import type { TransformedLoginData } from '~/types/ApiData';
 import type { ValuesType } from 'utility-types';
 
-interface SelectRolesProps {
+interface SelectRoleProps {
 	label: string;
-	value: string[];
+	value: string | null;
 	guild: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>;
 	filterEveryone: boolean;
-	onChange: (value: string[]) => void;
 }
 
-const props = defineProps<SelectRolesProps>();
+const props = defineProps<SelectRoleProps>();
 
-const roleCount = computed(() => props.value.length);
+const roleName = computed(() => {
+	const role = props.guild.roles.find((r) => r.id === props.value);
+	return role ? role.name : '';
+});
 
 const roleValues = computed(() => {
 	return props.guild.roles

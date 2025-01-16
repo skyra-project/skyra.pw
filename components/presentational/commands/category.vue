@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import type { FlattenedCommand } from '~/config/types/ApiData';
+import type { FlattenedCommand } from '~/types/ApiData';
 
 interface Props {
 	categoryName: string;

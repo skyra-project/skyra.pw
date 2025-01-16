@@ -1,5 +1,5 @@
 <template>
-	<SelectMany
+	<SelectsSelectMany
 		:label="label"
 		:name="value.length.toString()"
 		:values="channelOptions"
@@ -11,8 +11,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import SelectMany from './SelectMany.vue';
-import type { TransformedLoginData } from '~/config/types/ApiData';
+import type { TransformedLoginData } from '~/types/ApiData';
 import type { ValuesType } from 'utility-types';
 import { ChannelType } from 'discord-api-types/v10';
 

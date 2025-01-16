@@ -1,6 +1,8 @@
 <template>
 	<div>
-		<PresentationalLoading :loading="isLoading" />
+		<div v-if="isLoading" class="flex items-center justify-center p-4">
+			<div class="loading loading-spinner loading-lg text-primary"></div>
+		</div>
 		<RefreshCommandsButton @click="refresh" />
 		<div class="container mx-auto">
 			<UiSearchBar
@@ -26,7 +28,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useElementSize } from '@vueuse/core';
-import type { FlattenedCommand } from '~/config/types/ApiData';
+import type { FlattenedCommand } from '~/types/ApiData';
 import { useClientTrpc } from '~/composables/public';
 
 const client = useClientTrpc();

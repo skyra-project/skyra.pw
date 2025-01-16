@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { useGuildSettings } from '~/composables/settings/useGuildSettings';
-import { ConfigurableModerationEvents, ConfigurableMessageEvents } from '~/config/SettingsDataEntries';
+import { ConfigurableModerationEvents, ConfigurableMessageEvents } from '~/types/SettingsDataEntries';
 
-import SelectBoolean from '~/components/selects/SelectBoolean.vue';
+import SelectBoolean from '~/components/selects/select-boolean.vue';
 import { useGuildSettingsChanges } from '~/composables/settings/useGuildSettingsChanges';
 
 const router = useRouter();

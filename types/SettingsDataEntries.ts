@@ -1,4 +1,4 @@
-import type { Channels, Events, Moderation, Roles } from './types/ConfigurableData';
+import type { Channels, Events, Moderation, Roles } from './ConfigurableData';
 
 export const ConfigurableRemoveInitialRole: Roles.Role = {
 	name: 'Remove Initial',

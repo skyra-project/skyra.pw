@@ -6,9 +6,8 @@ import {
 	type RESTPostOAuth2AccessTokenResult,
 	type RESTPostOAuth2AccessTokenURLEncodedData
 } from 'discord-api-types/v10';
-import { TransformedLoginData } from '~/config/types/ApiData';
 
-const { clientId, clientSecret, apiOrigin } = useRuntimeConfig();
+const { clientId, clientSecret } = useRuntimeConfig();
 
 export async function fetchAccessToken(code: string, redirectUri: string) {
 	const data = {
@@ -46,21 +45,4 @@ async function fetchData<T extends object>(token: string, route: string) {
 	});
 
 	return result.ok ? ((await result.json()) as T) : null;
-}
-
-export async function fetchAuth(data: RESTPostOAuth2AccessTokenResult) {
-	const result = await fetch(`${apiOrigin}/oauth/authorize`, {
-		method: 'POST',
-		body: JSON.stringify(data),
-		credentials: 'include',
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	});
-
-	const json = await result.json();
-	if (result.ok) return json as TransformedLoginData;
-
-	console.error(json);
-	return null;
 }

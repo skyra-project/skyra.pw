@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import type { TransformedLoginData } from '~/config/types/ApiData';
+import type { TransformedLoginData } from '~/types/ApiData';
 
 interface FilteredGuildCardsProps {
 	pack: TransformedLoginData | null;

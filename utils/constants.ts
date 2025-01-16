@@ -29,6 +29,15 @@ export enum Colors {
 	Yellow300 = '#fff176'
 }
 
+export enum Time {
+	Millisecond = 1,
+	Second = 1000,
+	Minute = 1000 * 60,
+	Hour = 1000 * 60 * 60,
+	Day = 1000 * 60 * 60 * 24,
+	Year = 1000 * 60 * 60 * 24 * 365
+}
+
 export const ModerationActions = {
 	Ban: { color: Colors.Red, name: 'Ban', temporary: Colors.Red300, undo: Colors.LightBlue },
 	Kick: { color: Colors.Orange, name: 'Kick', temporary: null, undo: null },
@@ -52,6 +61,12 @@ export enum LocalStorageKeys {
 	LastSync = 'last_sync',
 	Commands = 'commands',
 	Languages = 'languages'
+}
+
+export enum StorageKeys {
+	Commands = 'commandsStore',
+	Language = 'languageStore',
+	Theme = 'themeStore'
 }
 
 export enum FetchMethods {

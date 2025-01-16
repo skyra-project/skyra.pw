@@ -6,76 +6,59 @@
 				<div class="flex items-center space-x-4">
 					<div class="avatar">
 						<div class="h-20 w-20 overflow-hidden rounded-full">
-							<source
-								v-if="isAnimated"
-								media="(prefers-reduced-motion: no-preference), (prefers-reduced-data: no-preference)"
-								type="image/gif"
-								:srcset="makeSrcset('gif')"
-							/>
-							<source type="image/webp" :srcset="makeSrcset('webp')" />
-							<source type="image/png" :srcset="makeSrcset('png')" />
 							<img
-								:src="displayAvatarURL(session, { format: 'png', size: 128 })"
-								:alt="session?.global_name ?? session?.username"
-								class="h-full w-full object-cover"
+								v-if="isDefault"
+								:src="defaultAvatar"
+								alt="Default Avatar"
+								class="h-8 w-8 rounded-full"
 								decoding="async"
 								crossorigin="anonymous"
 							/>
+							<picture v-else>
+								<source
+									v-if="isAnimated"
+									media="(prefers-reduced-motion: no-preference), (prefers-reduced-data: no-preference)"
+									type="image/gif"
+									:srcset="makeSrcset('gif')"
+								/>
+								<source type="image/webp" :srcset="makeSrcset('webp')" />
+								<source type="image/png" :srcset="makeSrcset('png')" />
+								<img
+									:src="createUrl('png', 128)"
+									alt="Avatar"
+									class="h-8 w-8 rounded-full"
+									decoding="async"
+									crossorigin="anonymous"
+								/>
+							</picture>
 						</div>
-					</div>
-					<div>
-						<h1 class="flex items-center text-3xl font-bold">
-							{{ session?.global_name ?? session?.username }}
-						</h1>
-						<p class="text-lg text-red-400">@{{ session?.username }}</p>
+						<div>
+							<h1 class="flex items-center text-3xl font-bold">
+								{{ session.name }}
+							</h1>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<!-- Servers Section -->
-		<div class="container mx-auto p-6">
-			<div v-if="isLoadingPack">
-				<PresentationalLoading :loading="true" />
-			</div>
-			<div v-else-if="packError">
-				<p class="text-red-500">Failed to load servers: {{ packError }}</p>
-			</div>
-			<!-
-	  <PresentationalGuildCards v-else :pack="pack" />
-			-->
-		</div>
 	</div>
-	...existing code...
 </template>
 
 <script setup lang="ts">
-import { useClientTrpc } from '~/composables/public';
-import type { APIUser } from 'discord-api-types/v10';
+const { session } = useAuth();
 
-const client = useClientTrpc();
 const router = useRouter();
 
-const session = ref<APIUser | null>(null);
-const pack = ref([]);
 const isLoadingPack = ref(false);
 const packError = ref<string | null>(null);
 const isAnimated = ref(false);
-const isDefault = ref(true);
+const isDefault = ref(false);
 
 // Fetch session on mount
 onMounted(async () => {
 	try {
-		const response = await client.auth.session.query();
-		if (!response) {
-			router.push('/');
-			return;
-		}
-		session.value = response;
-
 		// Fetch pack data after successful session
 		isLoadingPack.value = true;
-		pack.value = []; //await client.guilds.getPack.query()
 	} catch (error) {
 		console.error('Failed to fetch session:', error);
 		packError.value = error instanceof Error ? error.message : 'Unknown error';
@@ -84,6 +67,12 @@ onMounted(async () => {
 		isLoadingPack.value = false;
 	}
 });
+
+const defaultAvatar = computed(() =>
+	session.value?.id
+		? `https://cdn.discordapp.com/embed/avatars/${BigInt(session.value.id) % BigInt(5)}.png`
+		: 'https://cdn.discordapp.com/embed/avatars/0.png'
+);
 
 watch(
 	session,
@@ -99,8 +88,11 @@ watch(
 	{ immediate: true }
 );
 
+function createUrl(format: 'webp' | 'png' | 'gif', size: number) {
+	return `https://cdn.discordapp.com/avatars/${session.value!.id}/${session.value!.avatar}.${format}?size=${size}`;
+}
+
 function makeSrcset(format: 'webp' | 'png' | 'gif') {
-	if (!session.value) return '';
-	return `${displayAvatarURL(session.value, { format, size: 64 })} 1x, ${displayAvatarURL(session.value, { format, size: 128 })} 2x, ${displayAvatarURL(session.value, { format, size: 256 })} 3x, ${displayAvatarURL(session.value, { format, size: 512 })} 4x`;
+	return `${createUrl(format, 64)} 1x, ${createUrl(format, 128)} 2x, ${createUrl(format, 256)} 3x, ${createUrl(format, 512)} 4x`;
 }
 </script>

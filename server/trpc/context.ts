@@ -4,13 +4,10 @@
  */
 import { inferAsyncReturnType } from '@trpc/server';
 import type { H3Event } from 'h3';
-import { useAuthSession } from '../utils/session';
 
 export async function createContext(event: H3Event) {
-	const session = await useAuthSession(event);
 	return {
-		event,
-		user: session.data
+		event
 	};
 }
 

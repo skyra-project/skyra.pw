@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useScroll, useStorage } from '@vueuse/core';
-import { useAsyncData } from '#app';
-import type { FlattenedCommand } from '~/config/types/ApiData';
-import type { GuildSettings } from '~/config/types/GuildSettings'; // Make sure this path is correct
+import type { FlattenedCommand } from '~/types/ApiData';
+import type { GuildSettings } from '~/types/GuildSettings'; // Make sure this path is correct
 import { Time } from '~/utils/wolfstarUtils';
 import type { ExpirableLocalStorageStructure } from '~/utils/constants';
 import { LocalStorageKeys } from '~/utils/constants'; // Make sure to import LocalStorageKeys

@@ -107,6 +107,7 @@
 					</li>
 				</ul>
 			</div> -->
+
 			<nuxt-link :to="App.invite" class="btn btn-ghost transition-colors hover:text-success">
 				Invite App
 				<Icon name="ph:plus-circle-duotone" />
@@ -116,7 +117,15 @@
 			<template v-if="loggedIn">
 				<div class="dropdown dropdown-end">
 					<label tabindex="0" class="avatar btn btn-circle btn-ghost" @click="toggleDropdown">
-						<div class="w-10 rounded-full">
+						<img
+							v-if="isDefault"
+							:src="defaultAvatar"
+							alt="Default Avatar"
+							class="h-8 w-8 rounded-full"
+							decoding="async"
+							crossorigin="anonymous"
+						/>
+						<picture v-else>
 							<source
 								v-if="isAnimated"
 								media="(prefers-reduced-motion: no-preference), (prefers-reduced-data: no-preference)"
@@ -125,14 +134,8 @@
 							/>
 							<source type="image/webp" :srcset="makeSrcset('webp')" />
 							<source type="image/png" :srcset="makeSrcset('png')" />
-							<img
-								:src="displayAvatarURL(session as any, { format: 'png', size: 128 })"
-								alt="Avatar"
-								class="h-8 w-8 rounded-full"
-								decoding="async"
-								crossorigin="anonymous"
-							/>
-						</div>
+							<img :src="createUrl('png', 128)" alt="Avatar" class="h-8 w-8 rounded-full" decoding="async" crossorigin="anonymous" />
+						</picture>
 					</label>
 					<ul v-if="isDropdownOpen" tabindex="0" class="menu-compact menu dropdown-content mt-3 w-64 rounded-box bg-base-100 p-2 shadow">
 						<li class="menu-title">
@@ -172,7 +175,7 @@ const Apps = {
 	wolfstar: { name: 'WolfStar', invite: Invites.WolfStar, landing: '/' }
 };
 
-const { session, loggedIn } = useAuth();
+const { session, loggedIn } = useAuth() ?? {};
 
 const isDropdownOpen = ref(false);
 
@@ -180,8 +183,32 @@ const toggleDropdown = () => {
 	isDropdownOpen.value = !isDropdownOpen.value;
 };
 
-const isDefault = ref(false);
+const router = useRouter();
+
+const isLoadingPack = ref(false);
+const packError = ref<string | null>(null);
 const isAnimated = ref(false);
+const isDefault = ref(false);
+
+// Fetch session on mount
+onMounted(async () => {
+	try {
+		// Fetch pack data after successful session
+		isLoadingPack.value = true;
+	} catch (error) {
+		console.error('Failed to fetch session:', error);
+		packError.value = error instanceof Error ? error.message : 'Unknown error';
+		router.push('/');
+	} finally {
+		isLoadingPack.value = false;
+	}
+});
+
+const defaultAvatar = computed(() =>
+	session.value?.id
+		? `https://cdn.discordapp.com/embed/avatars/${BigInt(session.value.id) % BigInt(5)}.png`
+		: 'https://cdn.discordapp.com/embed/avatars/0.png'
+);
 
 watch(
 	session,
@@ -197,11 +224,15 @@ watch(
 	{ immediate: true }
 );
 
-function makeSrcset(format: 'webp' | 'png' | 'gif') {
-	return `${displayAvatarURL(session as any, { format, size: 64 })} 1x, ${displayAvatarURL(session as any, { format, size: 128 })} 2x, ${displayAvatarURL(session as any, { format, size: 256 })} 3x, ${displayAvatarURL(session as any, { format, size: 512 })} 4x`;
+function createUrl(format: 'webp' | 'png' | 'gif', size: number) {
+	return `https://cdn.discordapp.com/avatars/${session.value!.id}/${session.value!.avatar}.${format}?size=${size}`;
 }
 
-const App = computed(() => Apps[appName.value]);
+function makeSrcset(format: 'webp' | 'png' | 'gif') {
+	return `${createUrl(format, 64)} 1x, ${createUrl(format, 128)} 2x, ${createUrl(format, 256)} 3x, ${createUrl(format, 512)} 4x`;
+}
+
+const App = computed(() => Apps[appName.value] ?? Apps.wolfstar);
 </script>
 
 <style scoped>

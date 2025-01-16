@@ -1,40 +1,11 @@
-import type { TransformedLoginData } from '~/config/types/ApiData';
-import type { Selfmod } from '~/config/types/ConfigurableData';
-import type { GuildSettings } from '~/config/types/GuildSettings';
+import type { TransformedLoginData } from '~/types/ApiData';
+import type { Selfmod } from '~/types/ConfigurableData';
+import type { GuildSettings } from '~/types/GuildSettings';
 import type { ValuesType } from 'utility-types';
 
 export const isBrowser = typeof window !== 'undefined';
 
 export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-export const loadState = <T>(key: LocalStorageKeys): T | null => {
-	if (import.meta.client) {
-		const serializedState = localStorage.getItem(key);
-		return serializedState ? (JSON.parse(serializedState) as T) : null;
-	}
-
-	return null;
-};
-
-export const saveState = <T>(key: LocalStorageKeys, state: T): T => {
-	try {
-		if (import.meta.client) {
-			const serializedState = JSON.stringify(state);
-			console.log(serializedState);
-			localStorage.setItem(key, serializedState);
-		}
-	} catch {
-		// intentionally empty
-	}
-
-	return state;
-};
-
-export const clearState = (key: LocalStorageKeys) => {
-	if (import.meta.client) {
-		localStorage.removeItem(key);
-	}
-};
 
 export function navigate(path: string, forceSameTab = false) {
 	if (!forceSameTab && (path.startsWith('http') || path.startsWith('//') || path.startsWith('mailto:'))) {

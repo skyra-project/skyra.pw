@@ -1,9 +1,8 @@
 import { z } from 'zod';
 import { publicProcedure, router } from '../trpc';
-import type { FlattenedCommand } from '~/config/types/ApiData';
+import type { FlattenedCommand } from '~/types/ApiData';
 import { getApiOrigin } from '~/composables/public';
-
-const Time = { Day: 1000 * 60 * 60 * 24 };
+import { Time } from '~/utils/constants';
 
 const commandsCache = {
 	data: [] as FlattenedCommand[],
@@ -16,7 +15,7 @@ async function fetchCommands() {
 	}
 
 	try {
-		const commands = await $fetch<FlattenedCommand[]>(getApiOrigin() + '/api/commands');
+		const commands = await $fetch<FlattenedCommand[]>(getApiOrigin() + '/commands');
 		commandsCache.data = commands;
 		commandsCache.expire = Date.now() + Time.Day * 6;
 		return commands;

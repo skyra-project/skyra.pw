@@ -1,7 +1,7 @@
 import '@vite-pwa/nuxt';
 import 'nuxt';
 import type { SessionConfig } from 'h3';
-import { DefaultSeoProps, BaseUrl } from './config/seo/defaultSeoProps';
+import { DefaultSeoProps, BaseUrl } from './utils/seo/defaultSeoProps';
 
 const manifestIcons = [
 	{
@@ -77,7 +77,7 @@ export default defineNuxtConfig({
 		'nuxt-link-checker',
 		'@nuxtjs/color-mode',
 		'@pinia/nuxt',
-		'@pinia-plugin-persistedstate/nuxt'
+		'pinia-plugin-persistedstate/nuxt'
 	],
 
 	// Module configurations
@@ -87,7 +87,7 @@ export default defineNuxtConfig({
 	formkit: { autoImport: true },
 
 	sitemap: {
-		exclude: ['/join', '/auth/guild', '/auth/callback', '/[...id]']
+		exclude: ['/join', '/oauth/guild', '/oauth/callback', '/[...id]']
 	},
 
 	// Runtime configuration
@@ -129,6 +129,9 @@ export default defineNuxtConfig({
 
 	// Plugins
 	plugins: ['~/plugins/0.auth.ts', '~/plugins/error-handler.ts'],
+	pinia: {
+		storesDirs: ['./stores/**']
+	},
 
 	// PWA configuration
 	pwa: {

@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import type { ValuesType } from 'utility-types';
-import type { TransformedLoginData } from '~/config/types/ApiData';
+import type { TransformedLoginData } from '~/types/ApiData';
 
 interface GuildIconProps {
 	guild?: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>;

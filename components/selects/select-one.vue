@@ -46,7 +46,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { sleep } from '~/utils/util';
-import { Time } from '~/utils/wolfstarUtils';
+import { Time } from '~/utils/constants';
 
 interface SelectOneProps {
 	label: string;

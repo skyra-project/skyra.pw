@@ -2,7 +2,7 @@
 import useGuildData from '~/composables/settings/useGuildData';
 import { useGuildSettings } from '~/composables/settings/useGuildSettings';
 import { useGuildSettingsChanges } from '~/composables/settings/useGuildSettingsChanges';
-import { ConfigurableRemoveInitialRole, ConfigurableRoles } from '~/config/SettingsDataEntries';
+import { ConfigurableRemoveInitialRole, ConfigurableRoles } from '~/types/SettingsDataEntries';
 
 const { guildData } = useGuildData();
 const { guildSettings } = useGuildSettings();

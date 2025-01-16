@@ -14,7 +14,7 @@ interface DialogTitleProps {
 	onClose: () => void;
 }
 
-const props = defineProps<DialogTitleProps>();
+defineProps<DialogTitleProps>();
 </script>
 
 <style scoped>

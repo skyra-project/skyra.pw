@@ -15,16 +15,13 @@
 
 		<sections-app-footer></sections-app-footer>
 		<div class="fixed bottom-4 right-4 z-50 flex space-x-2">
-			<ChangeTheme></ChangeTheme>
-			<scrollToTopButton></scrollToTopButton>
+			<PresentationalLayoutsChangeTheme></PresentationalLayoutsChangeTheme>
+			<PresentationalLayoutsScrollToTopButton></PresentationalLayoutsScrollToTopButton>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-import scrollToTopButton from '~/components/presentational/Layouts/scroll-to-top-button.vue';
-
-import ChangeTheme from '~/components/presentational/Layouts/change-theme.vue';
 const appName = inject(ProviderAppNameKey)!;
 
 const props = defineProps<{

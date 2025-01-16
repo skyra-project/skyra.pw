@@ -55,7 +55,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { FlattenedCommand } from '~/config/types/ApiData';
+import type { FlattenedCommand } from '~/types/ApiData';
 
 interface CommandProps {
 	command: FlattenedCommand;

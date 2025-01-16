@@ -2,7 +2,7 @@
 import useGuild from '~/composables/settings/useGuildData';
 import { useGuildSettings } from '~/composables/settings/useGuildSettings';
 import { useGuildSettingsChanges } from '~/composables/settings/useGuildSettingsChanges';
-import { ConfigurableLoggingChannels, ConfigurableIgnoreChannels } from '~/config/SettingsDataEntries';
+import { ConfigurableLoggingChannels, ConfigurableIgnoreChannels } from '~/types/SettingsDataEntries';
 
 const { guildData } = useGuild();
 const { guildSettings } = useGuildSettings();

@@ -3,8 +3,8 @@ import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAsyncData } from '#app';
 import type { ValuesType } from 'utility-types';
-import type { TransformedLoginData } from '~/config/types/ApiData';
-import type { GuildSettings } from '~/config/types/GuildSettings';
+import type { TransformedLoginData } from '~/types/ApiData';
+import type { GuildSettings } from '~/types/GuildSettings';
 
 const props = defineProps<{
 	guildId: string;

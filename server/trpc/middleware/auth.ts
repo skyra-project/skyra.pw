@@ -1,14 +1,11 @@
 import { middleware } from '~/server/trpc/trpc';
 import { publicProcedure } from '~/server/trpc/trpc';
-import { TRPCError } from '@trpc/server';
 
 export const isAuthenticated = middleware(async ({ ctx, next }) => {
-	if (!ctx.user?.id) {
-		throw new TRPCError({ code: 'UNAUTHORIZED' });
-	}
+	const session = requireAuthSession(ctx.event);
 	return next({
 		ctx: {
-			user: ctx.user
+			session
 		}
 	});
 });

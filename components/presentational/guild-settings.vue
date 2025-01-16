@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import { LocalStorageKeys, type ExpirableLocalStorageStructure } from '~/utils/constants.ts';
-import type { FlattenedCommand } from '~/config/types/ApiData.ts';
+import type { FlattenedCommand } from '~/types/ApiData';
 import { useLocalStorage } from '@vueuse/core';
 import { Time } from '~/utils/wolfstarUtils';
 

@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia';
 import { useColorMode, useLocalStorage } from '@vueuse/core';
+import { StorageKeys } from '~/utils/constants';
 
 export type Theme = 'light' | 'dark' | 'auto';
 
-export const useThemeStore = defineStore({
-	id: 'themeStore',
+export const useThemeStore = defineStore(StorageKeys.Theme, {
 	state: () => {
 		const { system } = useColorMode<Theme>({
 			attribute: 'data-theme',
@@ -39,5 +39,8 @@ export const useThemeStore = defineStore({
 				document.documentElement.setAttribute('data-theme', this.store);
 			}
 		}
+	},
+	persist: {
+		storage: piniaPluginPersistedstate.localStorage()
 	}
 });

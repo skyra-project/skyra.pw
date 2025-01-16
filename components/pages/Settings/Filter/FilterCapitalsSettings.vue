@@ -78,7 +78,7 @@ const thresholdDuration = computed({
 					title="Action"
 					helper-text="The action to perform as punishment"
 					:value="guildSettings.selfmodFilterHardAction"
-					@change="setGuildSettingsChanges({ selfmodFilterHardAction: $event })"
+					@change="setGuildSettingsChanges({ selfmodFilterHardAction: $event as number })"
 				>
 					<option :value="0">None</option>
 					<option :value="1">Warning</option>

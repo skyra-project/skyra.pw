@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useGuildSettings } from '~/composables/settings/useGuildSettings';
 import { useGuildSettingsChanges } from '~/composables/settings/useGuildSettingsChanges';
-import { ConfigurableModerationKeys } from '~/config/SettingsDataEntries';
+import { ConfigurableModerationKeys } from '~/types/SettingsDataEntries';
 
-import SelectBoolean from '~/components/selects/SelectBoolean.vue';
+import SelectBoolean from '~/components/selects/select-boolean.vue';
 
 const { guildSettings } = useGuildSettings();
 const { setGuildSettingsChanges } = useGuildSettingsChanges();
