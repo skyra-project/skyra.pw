@@ -1,4 +1,0 @@
-@import 'tailwindcss';
-@import '@nuxt/ui';
-
-@config "../../tailwind.config.ts";

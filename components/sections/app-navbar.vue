@@ -177,8 +177,6 @@ const Apps = {
 
 const { session, loggedIn } = useAuth() ?? {};
 
-console.log(session);
-
 const isDropdownOpen = ref(false);
 
 const toggleDropdown = () => {

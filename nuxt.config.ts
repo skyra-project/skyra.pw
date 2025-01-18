@@ -11,22 +11,24 @@ export default defineNuxtConfig({
 	// Modules
 	modules: [
 		'@nuxtjs/tailwindcss',
+		'@nuxtjs/color-mode',
 		'@nuxtjs/device',
 		'@nuxtjs/sitemap',
 		'@nuxtjs/robots',
-		'@nuxt/image',
-		'@nuxt/ui',
+		'@nuxt/image', // '@nuxt/ui',
 		'@vueuse/nuxt',
 		'@vite-pwa/nuxt',
 		'@formkit/nuxt',
 		'@pinia/nuxt',
-		'nuxt-icon',
 		'nuxt-link-checker',
-		'pinia-plugin-persistedstate/nuxt'
+		'pinia-plugin-persistedstate/nuxt',
+		'@nuxt/icon'
 	],
-	css: ['~/assets/css/main.css'],
 	icon: {
-		componentName: 'NuxtIcon'
+		componentName: 'NuxtIcon',
+		serverBundle: {
+			collections: ['uil', 'mdi', 'heroicons'] // <!--- this
+		}
 	},
 	// Module configurations
 	image: { screens: {} },

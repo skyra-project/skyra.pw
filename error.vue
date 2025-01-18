@@ -9,8 +9,6 @@ const error = useError();
 
 const statusCode = computed(() => error.value?.statusCode ?? 500);
 
-console.log(error.value?.message);
-
 const router = useRouter();
 const appName = ref<'wolfstar'>('wolfstar');
 watch(

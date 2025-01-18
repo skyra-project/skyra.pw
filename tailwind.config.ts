@@ -2,10 +2,9 @@ import { omitKeysFromObject } from '@sapphire/utilities';
 import type { Config } from 'tailwindcss';
 import { oklch } from 'culori';
 import colors from 'tailwindcss/colors';
-import DaisyUI from 'daisyui';
 
 export default <Partial<Config>>{
-	plugins: [DaisyUI],
+	plugins: [require('@tailwindcss/typography'), require('daisyui')],
 	theme: {
 		colors: {
 			...omitKeysFromObject(colors, 'sky', 'stone', 'neutral', 'gray'),

@@ -30,7 +30,7 @@ const processedBody = computed(() => {
 
 <style scoped>
 :deep(.markdown-body) {
-	@apply prose-stone prose max-w-none;
+	@apply prose prose-stone max-w-none;
 }
 :deep(a) {
 	@apply link link-primary;
