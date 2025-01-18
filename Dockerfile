@@ -1,9 +1,17 @@
 # Base Stage
-FROM node:20-alpine AS base
+FROM --platform=$TARGETPLATFORM node:20-alpine AS base
 
 WORKDIR /home/node/app
 
-RUN apk add --no-cache dumb-init jq libc6-compat curl
+# Installa dumb-init per la tua architettura
+RUN case "$(arch)" in \
+    x86_64) ARCH='x86_64' ;; \
+    aarch64) ARCH='aarch64' ;; \
+    armv7l) ARCH='armhf' ;; \
+    armv6l) ARCH='armel' ;; \
+    *) echo "Unsupported architecture: $(arch)"; exit 1 ;; \
+    esac \
+    && apk add --no-cache dumb-init jq libc6-compat curl
 
 ENV YARN_DISABLE_GIT_HOOKS=1
 ENV NUXT_TELEMETRY_DISABLED=1

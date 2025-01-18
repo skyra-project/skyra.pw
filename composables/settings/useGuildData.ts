@@ -1,6 +1,6 @@
 import type { ValuesType } from 'utility-types';
 import { ref, type Ref } from 'vue';
-import type { TransformedLoginData } from '~/types/ApiData';
+import type { TransformedLoginData } from '~/utils/types/ApiData';
 
 const useGuild = (): {
 	guildData: Ref<ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>>;

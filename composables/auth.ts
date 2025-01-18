@@ -1,10 +1,4 @@
-export const useAuth = () =>
-	useNuxtApp().$auth as {
-		loggedIn: ComputedRef<boolean>;
-		session: Ref<AuthSession | null>;
-		redirectTo: Ref<string>;
-		updateSession: (opts?: { dedupe?: 'cancel' | 'defer' }) => Promise<void>;
-	};
+export const useAuth = () => useNuxtApp().$auth;
 
 export function getLoginURL() {
 	const DiscordOauthURL = `https://discord.com/oauth2/authorize`;

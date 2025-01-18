@@ -2,6 +2,7 @@
 import { publicProcedure, router } from '../trpc';
 import { authRouter } from './auth';
 import { commandsRouter } from './commands';
+import { languagesRouter } from './languages';
 
 export const appRouter = router({
 	healthcheck: publicProcedure.query(() => {
@@ -13,7 +14,8 @@ export const appRouter = router({
 
 	// Merge of router auth
 	auth: authRouter,
-	commands: commandsRouter
+	commands: commandsRouter,
+	languages: languagesRouter
 });
 
 // export type definition of API

@@ -1,32 +1,19 @@
 import { z } from 'zod';
+import Fuse from 'fuse.js';
 import { publicProcedure, router } from '../trpc';
-import type { FlattenedCommand } from '~/types/ApiData';
-import { getApiOrigin } from '~/composables/public';
-import { Time } from '~/utils/constants';
+import { useCommandsStore } from '~/stores/commands';
 
-const commandsCache = {
-	data: [] as FlattenedCommand[],
-	expire: 0
+const fuseOptions = {
+	keys: ['name', 'description'],
+	threshold: 0.3,
+	ignoreLocation: true
 };
 
-async function fetchCommands() {
-	if (commandsCache.expire > Date.now()) {
-		return commandsCache.data;
-	}
-
-	try {
-		const commands = await $fetch<FlattenedCommand[]>(getApiOrigin() + '/commands');
-		commandsCache.data = commands;
-		commandsCache.expire = Date.now() + Time.Day * 6;
-		return commands;
-	} catch (error) {
-		console.error('Failed to fetch commands:', error);
-		return [];
-	}
-}
-
 export const commandsRouter = router({
-	getAll: publicProcedure.query(() => fetchCommands()),
+	getAll: publicProcedure.query(() => {
+		const store = useCommandsStore();
+		return store.commands;
+	}),
 
 	search: publicProcedure
 		.input(
@@ -36,16 +23,24 @@ export const commandsRouter = router({
 			})
 		)
 		.query(async ({ input }) => {
-			const commands = await fetchCommands();
-			return commands.filter((cmd) => {
-				const matchesQuery = cmd.name.toLowerCase().includes(input.query.toLowerCase());
-				const matchesCategory = !input.category || cmd.category === input.category;
-				return matchesQuery && matchesCategory;
-			});
+			const store = useCommandsStore();
+			const commands = store.commands;
+			let filteredCommands = commands;
+
+			if (input.category) {
+				filteredCommands = commands.filter((cmd) => cmd.category === input.category);
+			}
+
+			if (input.query) {
+				const fuse = new Fuse(filteredCommands, fuseOptions);
+				return fuse.search(input.query).map((result) => result.item);
+			}
+
+			return filteredCommands;
 		}),
 
 	refresh: publicProcedure.mutation(async () => {
-		commandsCache.expire = 0;
-		return fetchCommands();
+		const store = useCommandsStore();
+		return store.fetchCommands();
 	})
 });

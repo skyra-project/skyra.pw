@@ -1,5 +1,4 @@
-import { ref, computed } from 'vue';
-import type { GuildSettings } from '~/types/GuildSettings';
+import type { GuildSettings } from '~/utils/types/GuildSettings';
 import deepMerge, { type Options as DeepMergeOptions } from 'deepmerge';
 import { useGuildSettingsChanges } from '~/composables/settings/useGuildSettingsChanges';
 

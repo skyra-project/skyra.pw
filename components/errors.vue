@@ -14,36 +14,46 @@
 				</span>
 			</div>
 
-			<div class="relative mx-auto max-w-md overflow-hidden rounded-xl border-2 border-dashed border-red-500 bg-red-500/10 p-6">
-				<div class="relative pl-6 text-left font-mono text-red-500">
-					<span class="animate-blink absolute left-4">&gt;</span>
-					<pre class="whitespace-pre-line">{{ errorInfo.consoleMessage }}</pre>
+			<div
+				class="relative mx-auto max-w-lg overflow-hidden rounded-xl border-2 border-dashed border-red-500/80 bg-red-500/10 shadow-lg transition-all hover:border-red-600"
+			>
+				<div class="p-8">
+					<div class="relative pl-8 text-left font-mono text-red-600">
+						<Icon name="mdi:alert-circle" class="absolute left-0 top-1 h-5 w-5 animate-pulse" />
+						<pre class="whitespace-pre-line text-lg leading-relaxed">{{ errorInfo.consoleMessage }}</pre>
+						<pre v-if="message" class="mt-4 whitespace-pre-line rounded-lg bg-red-500/15 p-4 shadow-inner">{{ message }}</pre>
+					</div>
+
+					<p class="mt-4 border-t border-red-500/20 pt-4 text-base italic text-red-500/70">
+						{{ errorInfo.batMessage }}
+					</p>
+
+					<div class="mt-6 flex flex-col justify-center gap-5 border-t border-red-500/20 pt-6 sm:flex-row">
+						<button @click="$router.push('/')" class="group btn btn-primary transition-all hover:scale-105">
+							<Icon name="mdi:home" class="mr-2 transition-transform group-hover:-translate-y-0.5" />
+							Return Home
+						</button>
+						<a href="https://join.wolfstar.rocks" target="_blank" class="group btn btn-outline transition-all hover:scale-105">
+							<Icon name="mdi:forum" class="mr-2 transition-transform group-hover:-translate-y-0.5" />
+							Server Support
+						</a>
+					</div>
 				</div>
 			</div>
 
-			<div class="perspective-1000 relative mt-8 h-32">
-				<span class="animate-hang relative -top-[100%] inline-block origin-bottom text-8xl"> 🦇 </span>
-			</div>
-
-			<p class="text-gray-500 mt-8 text-xl font-medium italic">
-				{{ errorInfo.batMessage }}
-			</p>
-
-			<div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-				<button @click="$router.push('/')" class="btn btn-primary"><Icon name="mdi:home" class="mr-2" /> Return Home</button>
-				<a href="https://join.wolfstar.rocks" target="_blank" class="btn btn-outline">
-					<Icon name="mdi:forum" class="mr-2" /> Server Support
-				</a>
+			<div class="perspective-1000 relative mt-12 h-36">
+				<span class="animate-hang relative -top-[100%] inline-block origin-bottom text-8xl drop-shadow-lg filter"> 🦇 </span>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { ErrorType, errorMessages } from '~/types/errors';
+import { ErrorType, errorMessages } from '~/utils/types/errors';
 
 const props = defineProps<{
 	statusCode: number;
+	message: string | null;
 }>();
 
 const errorInfo = computed(() => errorMessages[props.statusCode as ErrorType] || errorMessages[ErrorType.INTERNAL_SERVER]);

@@ -1,42 +1,39 @@
 import { defineStore } from 'pinia';
-import { useColorMode, useLocalStorage } from '@vueuse/core';
+import { useColorMode, type BasicColorMode } from '@vueuse/core';
 import { StorageKeys } from '~/utils/constants';
 
-export type Theme = 'light' | 'dark' | 'auto';
+export type Theme = BasicColorMode;
 
 export const useThemeStore = defineStore(StorageKeys.Theme, {
 	state: () => {
-		const { system } = useColorMode<Theme>({
+		const { system, store } = useColorMode<Theme>({
 			attribute: 'data-theme',
-			selector: 'data-theme'
+			selector: 'data-theme',
+			emitAuto: true
 		});
 		return {
 			system,
-			store: useLocalStorage('theme', 'auto' as Theme),
-			availableThemes: ['light', 'dark', 'system'] as Theme[]
+			store,
+			mode: computed(() => (store.value === 'auto' ? system.value : store.value))
 		};
-	},
-	hydrate(storeState, initialState) {
-		// @ts-expect-error: https://github.com/microsoft/TypeScript/issues/43826
-		storeState.store = useLocalStorage('theme', 'auto' as Theme);
 	},
 	getters: {
 		theme(): Theme {
-			return this.store === 'auto' ? this.system : (this.store as Theme);
+			return this.mode;
 		}
 	},
 	actions: {
 		setTheme(value: Theme) {
-			this.store = value;
+			this.mode = value;
 			if (import.meta.client) {
-				document.documentElement.setAttribute('data-theme', this.store);
+				document.documentElement.setAttribute('data-theme', this.mode);
 			}
 		},
 		toggleTheme() {
-			this.store = this.store === 'auto' ? this.system : this.store === 'light' ? 'dark' : 'light';
+			this.mode = this.mode === 'dark' ? 'light' : 'dark';
 
 			if (import.meta.client) {
-				document.documentElement.setAttribute('data-theme', this.store);
+				document.documentElement.setAttribute('data-theme', this.mode);
 			}
 		}
 	},
@@ -44,3 +41,7 @@ export const useThemeStore = defineStore(StorageKeys.Theme, {
 		storage: piniaPluginPersistedstate.localStorage()
 	}
 });
+
+if (import.meta.hot) {
+	import.meta.hot.accept(acceptHMRUpdate(useThemeStore, import.meta.hot));
+}

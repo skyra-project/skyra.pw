@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import type { GuildSettings } from '~/types/GuildSettings';
+import type { GuildSettings } from '~/utils/types/GuildSettings';
 import deepMerge, { type Options as DeepMergeOptions } from 'deepmerge';
 
 // Overwrite arrays when merging

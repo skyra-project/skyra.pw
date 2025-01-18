@@ -1,37 +1,9 @@
-import type { TransformedLoginData } from '~/types/ApiData';
-import type { Selfmod } from '~/types/ConfigurableData';
-import type { GuildSettings } from '~/types/GuildSettings';
-import type { ValuesType } from 'utility-types';
+import type { Selfmod } from '~/utils/types/ConfigurableData';
+import type { GuildSettings } from '~/utils/types/GuildSettings';
 
 export const isBrowser = typeof window !== 'undefined';
 
 export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-export function navigate(path: string, forceSameTab = false) {
-	if (!forceSameTab && (path.startsWith('http') || path.startsWith('//') || path.startsWith('mailto:'))) {
-		return () => window.open(path, '_blank', 'noreferrer=yes');
-	}
-	const Router = useRouter();
-	return () => Router.push(path);
-}
-
-export function displayIconURL(guild: ValuesType<NonNullable<TransformedLoginData['transformedGuilds']>>, { format = 'default', size = 256 } = {}) {
-	if (guild.icon === null) return undefined;
-	if (format === 'default') format = guild.icon.startsWith('a_') ? 'gif' : 'png';
-	return `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.${format}${`?size=${size}`}`;
-}
-
-/**
- * Retrieves an acronym for a guild name based on Discord datamining
- * @see https://github.com/discordjs/discord.js/pull/4104
- * @param name The guild name to retrieve the acronym for
- */
-export function getAcronym(name: string) {
-	return name
-		.replace(/'s /g, ' ')
-		.replace(/\w+/g, (e) => e[0])
-		.replace(/\s/g, '');
-}
 
 export function removeNonAlphaNumeric(str: string) {
 	return str.replace(/[^0-9a-zA-Z]/gi, '');

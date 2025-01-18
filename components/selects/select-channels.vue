@@ -10,8 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import type { TransformedLoginData } from '~/types/ApiData';
+import type { TransformedLoginData } from '~/utils/types/ApiData';
 import type { ValuesType } from 'utility-types';
 import { ChannelType } from 'discord-api-types/v10';
 

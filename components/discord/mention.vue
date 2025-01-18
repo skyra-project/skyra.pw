@@ -3,8 +3,6 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-
 const { theme } = useThemeStore();
 
 const tagStyle = computed(() => {

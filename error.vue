@@ -1,18 +1,15 @@
 <template>
 	<nuxt-layout name="main">
-		<Errors :statusCode="statusCode" />
+		<Errors :statusCode="statusCode" :message="error?.message ?? null" />
 	</nuxt-layout>
 </template>
 
 <script setup lang="ts">
-import type { NuxtError } from '#app';
+const error = useError();
 
-interface Props {
-	error: NuxtError;
-}
+const statusCode = computed(() => error.value?.statusCode ?? 500);
 
-const props = defineProps<Props>();
-const statusCode = computed(() => props.error.statusCode);
+console.log(error.value?.message);
 
 const router = useRouter();
 const appName = ref<'wolfstar'>('wolfstar');

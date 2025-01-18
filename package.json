@@ -5,8 +5,10 @@
 	"license": "Apache-2.0",
 	"type": "module",
 	"scripts": {
-		"build": "nuxt build",
 		"dev": "nuxt dev",
+		"dev:sw": "SW=true nuxi dev",
+		"build": "nuxi build",
+		"build:sw": "SW=true nuxi build",
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare",
@@ -22,7 +24,7 @@
 		"@formkit/vue": "^1.6.9",
 		"@nuxt/content": "^2.13.4",
 		"@nuxt/image": "^1.9.0",
-		"@nuxtjs/color-mode": "^3.5.2",
+		"@nuxt/ui": "^2.20.0",
 		"@nuxtjs/device": "^3.2.4",
 		"@nuxtjs/robots": "^5.1.1",
 		"@nuxtjs/sitemap": "^7.0.2",
@@ -34,21 +36,26 @@
 		"@sapphire/ts-config": "^5.0.1",
 		"@sapphire/utilities": "^3.18.1",
 		"@tailwindcss/typography": "^0.5.16",
+		"@trpc/client": "^10.45.2",
+		"@trpc/server": "^10.45.2",
 		"@types/body-scroll-lock": "^3.1.2",
 		"@types/culori": "^2.1.1",
 		"@types/lodash": "^4",
+		"@types/tinycolor2": "^1.4.6",
 		"@vite-pwa/nuxt": "^0.10.6",
 		"@vueuse/components": "^12.4.0",
 		"@vueuse/core": "^12.4.0",
 		"@vueuse/nuxt": "^12.4.0",
+		"@vueuse/router": "^12.4.0",
 		"body-scroll-lock": "^4.0.0-beta.0",
 		"culori": "^4.0.1",
 		"daisyui": "^4.12.23",
 		"discord-api-types": "0.37.115",
-		"discord.js": "^14.17.3",
+		"fuse.js": "7.0.0",
 		"lint-staged": "^15.3.0",
 		"lodash": "^4.17.21",
 		"lucide-vue-next": "^0.471.0",
+		"markdown-it-anchor": "^9.2.0",
 		"nuxt": "^3.15.1",
 		"nuxt-icon": "^0.6.10",
 		"nuxt-link-checker": "^4.0.4",
@@ -60,14 +67,20 @@
 		"prettier-plugin-tailwindcss": "^0.6.9",
 		"pretty-quick": "^4.0.0",
 		"tailwindcss": "^3.4.17",
+		"tinycolor2": "^1.6.0",
+		"trpc-nuxt": "^0.10.22",
+		"trpc-playground": "^1.0.4",
 		"utility-types": "^3.11.0",
-		"yup": "^1.6.1"
+		"vue-markdown-render": "^2.2.1",
+		"zod": "^3.24.1"
 	},
 	"resolutions": {
 		"@types/node": "20.11.5",
 		"ansi-regex": "^5.0.1",
 		"discord-api-types": "^0.37.92",
-		"minimist": "^1.2.8"
+		"minimist": "^1.2.8",
+		"@nuxt/ui": "^3.0.0-alpha.11",
+		"tailwindcss": "next"
 	},
 	"lint-staged": {
 		"*.@(js|ts|vue|yml|yaml|md|json)": [
@@ -89,13 +102,6 @@
 	"packageManager": "yarn@4.6.0",
 	"volta": {
 		"node": "22.12.0",
-		"yarn": "4.3.1"
-	},
-	"dependencies": {
-		"@trpc/client": "^10.45.2",
-		"@trpc/server": "^10.45.2",
-		"trpc-nuxt": "^0.10.22",
-		"trpc-playground": "^1.0.4",
-		"zod": "^3.24.1"
+		"yarn": "4.6.0"
 	}
 }

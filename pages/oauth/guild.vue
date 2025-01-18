@@ -5,7 +5,7 @@
 		<Meta property="og:title" content="OAUTH Guild Callback" />
 		<Meta property="og:description" content="A landing page for the OAuth2.0 guild callback flow." />
 	</Head>
-	<section class="prose prose-stone max-w-none dark:prose-invert">
+	<section class="prose-stone dark:prose-invert prose max-w-none">
 		<client-only>
 			<template v-if="!guildId">
 				<h1>Missing guild ID</h1>

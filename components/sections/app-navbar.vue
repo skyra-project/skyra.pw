@@ -114,7 +114,7 @@
 			</nuxt-link>
 		</div>
 		<div class="navbar-end">
-			<template v-if="loggedIn">
+			<template v-if="session && loggedIn">
 				<div class="dropdown dropdown-end">
 					<label tabindex="0" class="avatar btn btn-circle btn-ghost" @click="toggleDropdown">
 						<img
@@ -176,6 +176,8 @@ const Apps = {
 };
 
 const { session, loggedIn } = useAuth() ?? {};
+
+console.log(session);
 
 const isDropdownOpen = ref(false);
 

@@ -195,7 +195,7 @@
 						class="btn join-item md:btn-wide"
 						:class="{ 'btn-info': moderationTemporary }"
 						:disabled="moderationAction.temporary === null"
-						@click="(moderationTemporary = !moderationTemporary), (moderationUndo = false)"
+						@click="((moderationTemporary = !moderationTemporary), (moderationUndo = false))"
 					>
 						<Icon name="ph:hourglass-duotone" class="my-0 mr-1 h-5 w-5" />
 						Temporary
@@ -204,7 +204,7 @@
 						class="btn join-item md:btn-wide"
 						:class="{ 'btn-success': moderationUndo }"
 						:disabled="moderationAction.undo === null"
-						@click="(moderationUndo = !moderationUndo), (moderationTemporary = false)"
+						@click="((moderationUndo = !moderationUndo), (moderationTemporary = false))"
 					>
 						<Icon name="ph:arrow-counter-clockwise-duotone" class="my-0 mr-1 h-5 w-5" />
 						Undo

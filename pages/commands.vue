@@ -1,40 +1,61 @@
 <template>
 	<div>
-		<div v-if="isLoading" class="flex items-center justify-center p-4">
-			<div class="loading loading-spinner loading-lg text-primary"></div>
+		<div v-if="isLoading">
+			<!-- Skeleton per le categorie -->
+			<div class="container mx-auto space-y-6 p-4">
+				<div v-for="i in 3" :key="i">
+					<!-- Header categoria -->
+					<USkeleton class="mb-4 h-8 w-48" />
+
+					<!-- Grid dei comandi -->
+					<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+						<div v-for="j in 3" :key="j" class="border-gray-200 dark:border-gray-800 space-y-4 rounded-lg border p-4">
+							<!-- Titolo comando -->
+							<USkeleton class="h-6 w-32" />
+
+							<!-- Descrizione -->
+							<USkeleton class="h-4 w-full" />
+
+							<!-- Chips -->
+							<div class="flex gap-2">
+								<USkeleton class="h-8 w-24" />
+								<USkeleton class="h-8 w-24" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<RefreshCommandsButton @click="refresh" />
-		<div class="container mx-auto">
-			<UiSearchBar
-				v-model="searchValue"
-				@cancel-search="searchValue = ''"
-				@request-search="searchValue = $event ?? ''"
-				placeholder="Search a command..."
-				:style="{ width: `${commandsBoxWidth}px` }"
-			/>
-			<div ref="commandsBoxRef" class="flex flex-col">
-				<category
-					v-for="(categoryName, index) in categories"
-					:key="index"
-					:category-name="categoryName"
-					:commands="filteredCommands"
-					:search-value="searchValue"
-				/>
+		<div v-else-if="commands.length === 0" class="flex items-center justify-center p-4">
+			<div class="text-center">
+				<p class="text-lg font-bold">No commands found.</p>
+				<p class="text-sm text-base-content">Please try again later.</p>
+			</div>
+		</div>
+		<div v-else>
+			<LayoutsRefreshCommands :commands="commands" :is-loading="isLoading" :on-refresh="refresh" />
+			<div class="container mx-auto">
+				<div ref="commandsBoxRef" class="flex flex-col">
+					<CommandsCategory
+						v-for="(categoryName, index) in categories"
+						:key="index"
+						:category-name="categoryName"
+						:commands="filteredCommands"
+						:search-value="searchValue"
+					/>
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import { useElementSize } from '@vueuse/core';
-import type { FlattenedCommand } from '~/types/ApiData';
+import type { FlattenedCommand } from '~/utils/types/ApiData';
 import { useClientTrpc } from '~/composables/public';
 
 const client = useClientTrpc();
 const searchValue = ref('');
 const commandsBoxRef = ref<HTMLElement | null>(null);
-const { width: commandsBoxWidth } = useElementSize(commandsBoxRef);
 
 // tRPC queries usando il client
 const commands = ref<FlattenedCommand[]>([]);
@@ -78,7 +99,6 @@ const categories = computed<string[]>(() => [...new Set(filteredCommands.value.m
 
 const refresh = async () => {
 	await client.commands.refresh.mutate();
-	await fetchCommands();
 };
 
 // Fetch iniziale al mount

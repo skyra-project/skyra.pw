@@ -15,8 +15,8 @@
 
 		<sections-app-footer></sections-app-footer>
 		<div class="fixed bottom-4 right-4 z-50 flex space-x-2">
-			<PresentationalLayoutsChangeTheme></PresentationalLayoutsChangeTheme>
-			<PresentationalLayoutsScrollToTopButton></PresentationalLayoutsScrollToTopButton>
+			<LayoutsChangeTheme></LayoutsChangeTheme>
+			<LayoutsScrollToTopButton></LayoutsScrollToTopButton>
 		</div>
 	</div>
 </template>

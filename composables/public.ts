@@ -1,7 +1,7 @@
 import type { AppRouter } from '~/server/trpc/routers';
 import type { inferRouterProxyClient } from '@trpc/client';
 
-export const useClientTrpc = (): inferRouterProxyClient<AppRouter> => useNuxtApp().$client as inferRouterProxyClient<AppRouter>;
+export const useClientTrpc = (): inferRouterProxyClient<AppRouter> => useNuxtApp().$client;
 
 export const getConfiguredOrigin = () => useRuntimeConfig().public.origin;
 

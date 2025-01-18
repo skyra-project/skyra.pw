@@ -1,11 +1,11 @@
 services:
   wolfstar.rocks:
-    image: wolfstarbot/wolfstar.rocks:latest
+    image: ghrc.io/wolfstar-project/wolfstar.rocks:stable
     build: .
     container_name: wolfstar.rocks
     restart: 'no'
     tty: true
     env_file:
-      - ./src/.env.production
+      - .env
     ports:
       - '8281:8281'

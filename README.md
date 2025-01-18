@@ -15,7 +15,7 @@ After forking/cloning this repo to a folder locally:
 5. Add redirect URL's for `http://localhost:3000/oauth/callback` and `http://localhost:3000/oauth/guild`
 6. Run a local instance of WolfStar, be sure to follow it's local development guidelines as well.
 
--   You have to set the CLIENT_ID, CLIENT_SECRET in WolfStar's configuration to your own bot properly!
+- You have to set the CLIENT_ID, CLIENT_SECRET in WolfStar's configuration to your own bot properly!
 
 7. Install dependencies with `yarn`.
 8. Run `yarn dev` to start the NextJS dev server
@@ -24,8 +24,8 @@ After forking/cloning this repo to a folder locally:
 
 **WolfStar links**
 
--   [WolfStar Invite Link](https://invite.wolfstar.rocks)
--   [Support Server](https://join.wolfstar.rocks)
+- [WolfStar Invite Link](https://invite.wolfstar.rocks)
+- [Support Server](https://join.wolfstar.rocks)
 
 ## Contributors
 

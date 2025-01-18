@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 
 interface LinkProps {
@@ -64,7 +63,7 @@ const linkProps = computed(() => {
 <style scoped>
 .link {
 	cursor: pointer;
-	color: --pri; /* theme.primary.main */
+	color: --primary; /* theme.primary.main */
 }
 .link:hover {
 	color: #fd171b; /* theme.primary.dark */
