@@ -1,5 +1,5 @@
 <template>
-	<se :label="label" :name="channelName" :values="channelOptions" :tooltipTitle="tooltipTitle" @change="onChange" />
+	<se :label="label" :name="channelName" :values="channelOptions" :tooltip-title="tooltipTitle" @change="onChange" />
 </template>
 
 <script setup lang="ts">

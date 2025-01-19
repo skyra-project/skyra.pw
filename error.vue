@@ -1,6 +1,6 @@
 <template>
 	<nuxt-layout name="main">
-		<Errors :statusCode="statusCode" :message="error?.message ?? null" />
+		<Errors :status-code="statusCode" :message="error?.message ?? null" />
 	</nuxt-layout>
 </template>
 

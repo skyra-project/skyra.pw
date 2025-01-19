@@ -68,7 +68,7 @@ const parseCommandDescription = (description: string) => description.replace(/<:
 <template>
 	<div>
 		<PresentationalLoading :loading="loading" />
-		<RefreshCommandsButton @fresh="(newCommands) => emit('update:commands', newCommands)" :setCommands="setGuildSettingsChanges" />
+		<RefreshCommandsButton :set-commands="setGuildSettingsChanges" @fresh="(newCommands) => emit('update:commands', newCommands)" />
 
 		<PresentationalLayoutsSettingsSection title="Commands">
 			<p class="mb-4 text-sm">On this page you can disable commands on your server</p>

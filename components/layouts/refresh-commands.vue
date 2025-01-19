@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { useScroll } from '@vueuse/core';
 import type { FlattenedCommand } from '~/utils/types/ApiData';
 
 // Props
@@ -44,13 +43,13 @@ const tooltipText = `
 <template>
 	<div class="fixed bottom-2 right-2 z-50" :class="{ 'right-8': trigger }">
 		<button
-			@click="handleClick"
 			class="btn btn-circle btn-primary"
 			:class="{ 'btn-disabled': disabled }"
 			:disabled="disabled"
 			:data-tip="tooltipText"
+			@click="handleClick"
 		>
-			<i class="i-mdi-cached"></i>
+			<i class="i-mdi-cached" />
 		</button>
 	</div>
 </template>

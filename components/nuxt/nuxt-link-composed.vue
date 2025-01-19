@@ -27,18 +27,18 @@ const otherProps = computed(() => {
 </script>
 
 <template>
-	<NuxtLink v-bind="linkProps" custom v-slot="{ navigate }">
+	<NuxtLink v-slot="{ navigate }" v-bind="linkProps" custom>
 		<span
-			@click="navigate"
-			@keypress.enter="navigate"
 			role="link"
 			tabindex="0"
 			:style="{ textDecoration: 'none', cursor: 'pointer' }"
 			v-bind="otherProps"
+			@click="navigate"
+			@keypress.enter="navigate"
 		>
-			<slot></slot>
+			<slot />
 			<span class="text-body-2 text-primary">
-				<slot name="anchor"></slot>
+				<slot name="anchor" />
 			</span>
 		</span>
 	</NuxtLink>

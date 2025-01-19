@@ -5,9 +5,9 @@
 			<rect x="0" y="16" width="16" height="16" fill="#DADADA" />
 		</pattern>
 
-		<rect x="0" y="0" width="256" height="256" fill="#F3F3F3"></rect>
-		<rect x="0" y="0" width="256" height="256" fill="url(#icons-sokoban-floor-checkerboard)"></rect>
+		<rect x="0" y="0" width="256" height="256" fill="#F3F3F3" />
+		<rect x="0" y="0" width="256" height="256" fill="url(#icons-sokoban-floor-checkerboard)" />
 
-		<slot></slot>
+		<slot />
 	</icons-sokoban-empty>
 </template>

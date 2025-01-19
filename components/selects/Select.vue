@@ -5,13 +5,13 @@
 		</label>
 		<select
 			:id="`label-for-${title}-select`"
-			class="select select-bordered w-full"
 			v-model="selectedValue"
-			@change="handleChange"
+			class="select select-bordered w-full"
 			:class="{ 'select-error': error }"
 			v-bind="{ ...propsWithoutValue, onChange: undefined }"
+			@change="handleChange"
 		>
-			<slot></slot>
+			<slot />
 		</select>
 		<span v-if="helperText" class="mt-1 text-xs">{{ helperText }}</span>
 	</div>

@@ -95,15 +95,15 @@ useHead({
 
 		<ErrorAlert
 			:open="hasError"
-			@update:open="hasError = $event"
 			error-text="An error occurred getting data from WolfStar's server."
 			:error-sub-text="'Maybe try again later, or join the support server and ask for support.'"
+			@update:open="hasError = $event"
 		/>
 
 		<div class="flex h-screen">
 			<SettingsNavBar :guild-data="guildData" :toggle-sidebar="toggleSidebar" />
 			<main class="mt-16 flex flex-grow flex-col overflow-y-scroll bg-base-300 p-4 text-base-content sm:mt-0">
-				<slot v-if="readyToRender"></slot>
+				<slot v-if="readyToRender" />
 
 				<Transition name="fade">
 					<div v-if="Object.keys(guildSettingsChanges).length > 0" class="fixed bottom-8 right-8 flex items-end justify-end space-x-2">

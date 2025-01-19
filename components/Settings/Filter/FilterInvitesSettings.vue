@@ -79,13 +79,13 @@ const updateSoftAction = (bit: number, checked: boolean) => {
 					min="0"
 					max="60"
 					:value="guildSettings.selfmodNewlinesThresholdMaximum"
+					class="range"
 					@input="
 						(e) =>
 							setGuildSettingsChanges(
 								updateSliderValueObj('selfmodNewlinesThresholdMaximum', Number((e.target as HTMLInputElement)?.value))
 							)
 					"
-					class="range"
 				/>
 			</div>
 
@@ -96,13 +96,13 @@ const updateSoftAction = (bit: number, checked: boolean) => {
 					min="0"
 					max="120"
 					:value="guildSettings.selfmodNewlinesThresholdDuration / 1000"
+					class="range"
 					@input="
 						(e) =>
 							setGuildSettingsChanges(
 								updateSliderValueObj('selfmodNewlinesThresholdDuration', Number((e.target as HTMLInputElement)?.value) * 1000)
 							)
 					"
-					class="range"
 				/>
 			</div>
 		</PresentationalLayoutsSettingsSection>
@@ -115,10 +115,10 @@ const updateSoftAction = (bit: number, checked: boolean) => {
 					min="10"
 					max="2000"
 					:value="guildSettings.selfmodNewlinesMaximum"
+					class="range"
 					@input="
 						(e) => setGuildSettingsChanges(updateSliderValueObj('selfmodNewlinesMaximum', Number((e.target as HTMLInputElement)?.value)))
 					"
-					class="range"
 				/>
 			</div>
 		</PresentationalLayoutsSettingsSection>

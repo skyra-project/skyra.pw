@@ -5,7 +5,7 @@
 			<div class="collapse-title text-xl font-medium">
 				<div class="flex flex-row content-start items-center justify-start">
 					<div class="w-full md:w-1/3">
-						<span class="text-lg font-bold" v-html="formattedCommandName"></span>
+						<span class="text-lg font-bold" v-html="formattedCommandName" />
 					</div>
 					<div class="w-full md:w-2/3">
 						<span class="text-sm text-secondary">{{ command.description }}</span>

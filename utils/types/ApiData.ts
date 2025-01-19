@@ -54,7 +54,7 @@ interface FlattenedEmoji {
 
 	require_colons: boolean;
 
-	roles: any[];
+	roles: FlattenedRole[];
 }
 
 interface FlattenedRole {

@@ -2,10 +2,10 @@
 	<div class="mb-3">
 		<input
 			v-model="duration"
-			@change="onChangeDuration"
 			:class="['input input-bordered', { 'input-error': error }]"
 			type="tel"
 			placeholder="Duration"
+			@change="onChangeDuration"
 		/>
 		<p v-if="error" class="text-error">{{ error }}</p>
 		<Select :title="error ? '' : 'Duration unit'" :options="unitOptions" :value="unit" :error="!!error" @change="onChangeUnit" />

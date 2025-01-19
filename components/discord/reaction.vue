@@ -1,6 +1,6 @@
 <template>
 	<div class="discord-reaction" :class="{ self }">
-		<span class="mx-0.5 flex items-center"><slot></slot></span>
+		<span class="mx-0.5 flex items-center"><slot /></span>
 		<span class="font-bold">{{ count }}</span>
 	</div>
 </template>

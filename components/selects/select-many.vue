@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<button @click="openDialog" class="btn btn-primary" v-tooltip="tooltipTitle">
+		<button v-tooltip="tooltipTitle" class="btn btn-primary" @click="openDialog">
 			{{ label }}: {{ displayValue }}
 			<img v-if="imageInName" :src="imageInName" alt="Emoji" class="ml-2 inline-flex h-8 w-8" />
 		</button>
@@ -9,15 +9,15 @@
 				<div class="w-full max-w-xs rounded-lg bg-white shadow-lg">
 					<div class="flex items-center justify-between border-b p-4">
 						<h3 class="text-xl">{{ label }}</h3>
-						<button @click="closeDialog" class="btn btn-circle btn-ghost btn-sm">✕</button>
+						<button class="btn btn-circle btn-ghost btn-sm" @click="closeDialog">✕</button>
 					</div>
 					<div class="p-4">
 						<input v-if="values.length > 10" v-model="search" type="text" placeholder="Search" class="input input-bordered mb-4 w-full" />
 						<div class="h-64 overflow-y-auto">
 							<ul>
-								<li v-for="item in filteredValues" :key="item.value" @click="toggleCheck(item.value)" class="cursor-pointer">
+								<li v-for="item in filteredValues" :key="item.value" class="cursor-pointer" @click="toggleCheck(item.value)">
 									<div class="flex items-center justify-between p-2">
-										<input type="checkbox" v-model="checkedValues" :value="item.value" class="checkbox-primary checkbox" />
+										<input v-model="checkedValues" type="checkbox" :value="item.value" class="checkbox-primary checkbox" />
 										<span>{{ item.name }}</span>
 										<img v-if="item.iconUrl" :src="item.iconUrl" alt="icon" class="ml-2 h-8 w-8" />
 									</div>
@@ -26,8 +26,8 @@
 						</div>
 					</div>
 					<div class="flex justify-end border-t p-4">
-						<button @click="clearSelection" class="btn btn-error btn-sm">Clear selected</button>
-						<button @click="submitSelection" class="btn btn-success btn-sm ml-2">Submit</button>
+						<button class="btn btn-error btn-sm" @click="clearSelection">Clear selected</button>
+						<button class="btn btn-success btn-sm ml-2" @click="submitSelection">Submit</button>
 					</div>
 				</div>
 			</div>

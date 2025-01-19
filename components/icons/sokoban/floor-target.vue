@@ -7,6 +7,6 @@
 			<path d="M 128,221 l 0,-65 l -30,30 l 60,0 l -30,-30" />
 		</g>
 
-		<slot></slot>
+		<slot />
 	</icons-sokoban-floor>
 </template>

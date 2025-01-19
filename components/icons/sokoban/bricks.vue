@@ -1,6 +1,6 @@
 <template>
 	<icons-sokoban-empty>
-		<rect fill="#333333" x="0" y="0" width="256" height="256"></rect>
+		<rect fill="#333333" x="0" y="0" width="256" height="256" />
 
 		<path
 			fill="#666666"

@@ -14,17 +14,17 @@
 		@input="handleInput"
 	>
 		<template #suffix>
-			<button type="button" @click="togglePicker" class="text-gray-500 hover:text-gray-700 h-full bg-white px-2 focus:outline-none">
-				<Icon name="fa6-solid:eye-dropper" />
+			<button type="button" class="text-gray-500 hover:text-gray-700 h-full bg-white px-2 focus:outline-none" @click="togglePicker">
+				<NuxtIcon name="fa6-solid:eye-dropper" />
 			</button>
 		</template>
 	</FormKit>
 
 	<Teleport to="body">
-		<div v-if="showPicker" @click.self="togglePicker" class="fixed inset-0 z-10 overflow-y-auto">
+		<div v-if="showPicker" class="fixed inset-0 z-10 overflow-y-auto" @click.self="togglePicker">
 			<div class="flex min-h-screen items-center justify-center">
 				<div class="fixed inset-0 transition-opacity" aria-hidden="true">
-					<div class="bg-gray-500 absolute inset-0 opacity-75"></div>
+					<div class="bg-gray-500 absolute inset-0 opacity-75" />
 				</div>
 
 				<div class="w-full max-w-lg transform overflow-hidden rounded-lg bg-white p-4 shadow-xl transition-all">
@@ -44,19 +44,19 @@
 					<div class="space-y-4">
 						<div class="slider-container">
 							<div class="h-4 rounded-full" :style="gradientH">
-								<input type="range" v-model="h" min="0" max="360" class="slider" />
+								<input v-model="h" type="range" min="0" max="360" class="slider" />
 							</div>
 						</div>
 
 						<div class="slider-container">
 							<div class="h-4 rounded-full" :style="gradientS">
-								<input type="range" v-model="s" min="0" max="100" class="slider" />
+								<input v-model="s" type="range" min="0" max="100" class="slider" />
 							</div>
 						</div>
 
 						<div class="slider-container">
 							<div class="h-4 rounded-full" :style="gradientL">
-								<input type="range" v-model="l" min="0" max="100" class="slider" />
+								<input v-model="l" type="range" min="0" max="100" class="slider" />
 							</div>
 						</div>
 					</div>
@@ -66,8 +66,8 @@
 						<button
 							v-for="type in ['hsl', 'rgb', 'hex']"
 							:key="type"
-							@click="colorType = type"
 							:class="['rounded px-3 py-1', colorType === type ? 'bg-blue-500 text-white' : 'bg-gray-200']"
+							@click="colorType = type"
 						>
 							{{ type.toUpperCase() }}
 						</button>
@@ -76,23 +76,23 @@
 					<!-- Color Input Fields -->
 					<div class="mt-4">
 						<div v-if="colorType === 'hsl'" class="grid grid-cols-3 gap-2">
-							<input type="number" v-model="h" min="0" max="360" class="color-input" placeholder="H" />
-							<input type="number" v-model="s" min="0" max="100" class="color-input" placeholder="S" />
-							<input type="number" v-model="l" min="0" max="100" class="color-input" placeholder="L" />
+							<input v-model="h" type="number" min="0" max="360" class="color-input" placeholder="H" />
+							<input v-model="s" type="number" min="0" max="100" class="color-input" placeholder="S" />
+							<input v-model="l" type="number" min="0" max="100" class="color-input" placeholder="L" />
 						</div>
 
 						<div v-else-if="colorType === 'rgb'" class="grid grid-cols-3 gap-2">
-							<input type="number" v-model="r" min="0" max="255" class="color-input" placeholder="R" />
-							<input type="number" v-model="g" min="0" max="255" class="color-input" placeholder="G" />
-							<input type="number" v-model="b" min="0" max="255" class="color-input" placeholder="B" />
+							<input v-model="r" type="number" min="0" max="255" class="color-input" placeholder="R" />
+							<input v-model="g" type="number" min="0" max="255" class="color-input" placeholder="G" />
+							<input v-model="b" type="number" min="0" max="255" class="color-input" placeholder="B" />
 						</div>
 
 						<div v-else class="flex">
-							<input type="text" v-model="hexColor" class="color-input w-full" placeholder="Hex Color" />
+							<input v-model="hexColor" type="text" class="color-input w-full" placeholder="Hex Color" />
 						</div>
 					</div>
 
-					<button @click="confirmColor" class="mt-4 w-full rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">Conferma</button>
+					<button class="mt-4 w-full rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" @click="confirmColor">Conferma</button>
 				</div>
 			</div>
 		</div>

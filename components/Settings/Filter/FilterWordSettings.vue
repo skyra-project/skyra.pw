@@ -47,27 +47,27 @@ const thresholdDuration = computed({
 			<div class="grid grid-cols-1 gap-4">
 				<SelectsSelectBoolean
 					:title="`Filter ${guildSettings.selfmodFilterEnabled ? 'Enabled' : 'Disabled'}`"
-					@change="setGuildSettingsChanges({ selfmodFilterEnabled: $event })"
 					:current-value="guildSettings.selfmodFilterEnabled"
 					description="Whether or not this system should be enabled."
+					@change="setGuildSettingsChanges({ selfmodFilterEnabled: $event })"
 				/>
 				<SelectsSelectBoolean
 					:title="`Alerts ${bitwiseHas(guildSettings.selfmodFilterSoftAction, 0b100) ? 'Enabled' : 'Disabled'}`"
-					@change="updateSoftAction(0b100, $event)"
 					:current-value="bitwiseHas(guildSettings.selfmodFilterSoftAction, 0b100)"
 					description="Toggle message alerts in the channel the infraction took place."
+					@change="updateSoftAction(0b100, $event)"
 				/>
 				<SelectsSelectBoolean
 					:title="`Logs ${bitwiseHas(guildSettings.selfmodFilterSoftAction, 0b010) ? 'Enabled' : 'Disabled'}`"
-					@change="updateSoftAction(0b010, $event)"
 					:current-value="bitwiseHas(guildSettings.selfmodFilterSoftAction, 0b010)"
 					description="Toggle message logs in the moderation logs channel."
+					@change="updateSoftAction(0b010, $event)"
 				/>
 				<SelectsSelectBoolean
 					:title="`Deletes ${bitwiseHas(guildSettings.selfmodFilterSoftAction, 0b001) ? 'Enabled' : 'Disabled'}`"
-					@change="updateSoftAction(0b001, $event)"
 					:current-value="bitwiseHas(guildSettings.selfmodFilterSoftAction, 0b001)"
 					description="Toggle message deletions."
+					@change="updateSoftAction(0b001, $event)"
 				/>
 			</div>
 		</PresentationalLayoutsSettingsSection>

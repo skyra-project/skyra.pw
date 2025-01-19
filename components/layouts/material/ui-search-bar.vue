@@ -9,29 +9,29 @@
 				ref="inputRef"
 				:placeholder="placeholder"
 				:value="modelValue"
+				:disabled="disabled"
+				class="input input-ghost w-full text-white focus:outline-none"
 				@input="handleInput"
 				@blur="handleBlur"
 				@keyup="handleKeyUp"
 				@focus="handleFocus"
-				:disabled="disabled"
-				class="input input-ghost w-full text-white focus:outline-none"
 			/>
 		</div>
 		<button
-			@click="handleRequestSearch"
 			:disabled="disabled"
 			class="btn btn-circle btn-ghost transition-all duration-200"
 			:class="{ 'scale-0 opacity-0': !modelValue, 'scale-100 opacity-100': modelValue }"
+			@click="handleRequestSearch"
 		>
-			<i class="fas fa-search text-white"></i>
+			<i class="fas fa-search text-white" />
 		</button>
 		<button
-			@click="handleCancel"
 			:disabled="disabled"
 			class="btn btn-circle btn-ghost transition-all duration-200"
 			:class="{ 'scale-0 opacity-0': !modelValue, 'scale-100 opacity-100': modelValue }"
+			@click="handleCancel"
 		>
-			<i class="fas fa-times text-white"></i>
+			<i class="fas fa-times text-white" />
 		</button>
 	</div>
 </template>

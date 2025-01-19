@@ -1,5 +1,5 @@
 <template>
-	<RoutingLink :href="href" :forceSameTab="forceSameTab" class="menu-link">
+	<RoutingLink :href="href" :force-same-tab="forceSameTab" class="menu-link">
 		<div class="flex items-center">
 			<component :is="icon" class="mr-2" />
 			<span>{{ text }}</span>

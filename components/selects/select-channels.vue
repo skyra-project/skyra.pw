@@ -3,7 +3,7 @@
 		:label="label"
 		:name="value.length.toString()"
 		:values="channelOptions"
-		:tooltipTitle="tooltipTitle"
+		:tooltip-title="tooltipTitle"
 		:value="value"
 		@change="onChange"
 	/>

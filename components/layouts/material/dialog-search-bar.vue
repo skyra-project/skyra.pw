@@ -1,6 +1,6 @@
 <template>
 	<div class="mx-5 my-0 flex items-center p-3">
-		<Icon name="mdi-magnify" class="mr-5" />
+		<NuxtIcon name="mdi-magnify" class="mr-5" />
 		<input
 			v-bind="otherProps"
 			autofocus
@@ -10,8 +10,8 @@
 			results="4"
 			placeholder="Search…"
 			aria-label="search input"
-			@input="handleInput"
 			class="input input-bordered w-full"
+			@input="handleInput"
 		/>
 	</div>
 </template>

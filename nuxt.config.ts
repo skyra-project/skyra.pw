@@ -11,24 +11,33 @@ export default defineNuxtConfig({
 	// Modules
 	modules: [
 		'@nuxtjs/tailwindcss',
-		'@nuxtjs/color-mode',
 		'@nuxtjs/device',
 		'@nuxtjs/sitemap',
 		'@nuxtjs/robots',
-		'@nuxt/image', // '@nuxt/ui',
+		'@nuxtjs/color-mode',
+		'@nuxt/image',
+		'@nuxt/icon',
 		'@vueuse/nuxt',
 		'@vite-pwa/nuxt',
 		'@formkit/nuxt',
 		'@pinia/nuxt',
 		'nuxt-link-checker',
 		'pinia-plugin-persistedstate/nuxt',
-		'@nuxt/icon'
+		'nuxt-og-image',
+		'nuxt-security',
+		'@nuxt/eslint'
 	],
 	icon: {
 		componentName: 'NuxtIcon',
 		serverBundle: {
-			collections: ['uil', 'mdi', 'heroicons'] // <!--- this
+			collections: ['uil', 'mdi', 'heroicons', 'ph'] // <!--- this
 		}
+	},
+
+	colorMode: {
+		preference: 'system', // default theme
+		dataValue: 'theme', // activate data-theme in <html> tag
+		classSuffix: ''
 	},
 	// Module configurations
 	image: { screens: {} },
@@ -56,7 +65,18 @@ export default defineNuxtConfig({
 		},
 		clientId: process.env.NITRO_DISCORD_CLIENT_ID,
 		clientSecret: process.env.NITRO_DISCORD_CLIENT_SECRET,
-		apiOrigin: process.env.NITRO_API_ORIGIN
+		apiOrigin: process.env.NITRO_API_ORIGIN,
+		sentry: {
+			config: {
+				environment: process.env.SENTRY_ENVIRONMENT
+			},
+			serverConfig: {
+				// Any server-specific config
+			},
+			clientConfig: {
+				// Any client-specific config
+			}
+		}
 	},
 
 	build: {

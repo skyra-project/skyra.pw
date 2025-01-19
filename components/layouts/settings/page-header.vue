@@ -14,6 +14,6 @@ const subtitleClasses = computed(() => `text-lg text-base-content/70 ${props.sub
 	<div>
 		<h1 :class="titleClasses">{{ title }}</h1>
 		<p v-if="subtitle" :class="subtitleClasses">{{ subtitle }}</p>
-		<div class="divider"></div>
+		<div class="divider" />
 	</div>
 </template>

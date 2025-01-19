@@ -1,6 +1,6 @@
 <template>
 	<div class="app-layout" :class="appName">
-		<sections-app-navbar></sections-app-navbar>
+		<sections-app-navbar />
 		<main
 			:class="[
 				'mx-4 flex flex-grow flex-col items-center sm:mx-auto sm:w-5/6 lg:max-w-5xl xl:max-w-7xl',
@@ -8,15 +8,15 @@
 			]"
 		>
 			<div v-if="loading" class="w-full">
-				<div class="loading-bar loading loading-lg"></div>
+				<div class="loading-bar loading loading-lg" />
 			</div>
-			<slot v-else></slot>
+			<slot v-else />
 		</main>
 
-		<sections-app-footer></sections-app-footer>
+		<sections-app-footer />
 		<div class="fixed bottom-4 right-4 z-50 flex space-x-2">
-			<LayoutsChangeTheme></LayoutsChangeTheme>
-			<LayoutsScrollToTopButton></LayoutsScrollToTopButton>
+			<LayoutsChangeTheme />
+			<LayoutsScrollToTopButton />
 		</div>
 	</div>
 </template>

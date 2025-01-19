@@ -5,7 +5,7 @@
 			<nuxt-img v-if="author.icon" :src="author.icon" width="20" height="20" class="h-5 w-5 rounded-full" />
 			<span class="font-bold">{{ author.name }}</span>
 		</div>
-		<slot></slot>
+		<slot />
 		<div v-if="footer" class="mt-2 flex items-center gap-2">
 			<nuxt-img v-if="footer.icon" src="/img/avatars/wolfstar.png" width="16" height="16" class="h-4 w-4 rounded-full" />
 			<span class="text-sm">

@@ -18,6 +18,6 @@ const titleClasses = computed(() => `text-xl font-bold border-b-2 border-primary
 		<div v-else-if="title">
 			<slot name="title">{{ title }}</slot>
 		</div>
-		<slot></slot>
+		<slot />
 	</section>
 </template>

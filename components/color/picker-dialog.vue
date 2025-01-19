@@ -1,11 +1,10 @@
 <template>
 	<div class="fixed inset-0 z-50">
-		<div class="fixed inset-0 bg-black opacity-50" @click="handleClick"></div>
+		<div class="fixed inset-0 bg-black opacity-50" @click="handleClick" />
 		<div ref="scrollLockRef" class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
 			<FormKit
 				type="color"
 				:value="value"
-				@input="(value: unknown) => handleChange(value as string)"
 				:classes="{
 					outer: 'relative',
 					input: 'input input-bordered',
@@ -14,6 +13,7 @@
 				}"
 				:validation="undefined"
 				:alpha="false"
+				@input="(value: unknown) => handleChange(value as string)"
 			/>
 		</div>
 	</div>

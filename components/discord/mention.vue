@@ -1,5 +1,5 @@
 <template>
-	<span class="tag" :style="tagStyle">@<slot></slot></span>
+	<span class="tag" :style="tagStyle">@<slot /></span>
 </template>
 
 <script setup>

@@ -52,7 +52,6 @@ export namespace DisableCommands {
 }
 
 export namespace General {
-	// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 	export type Form = {
 		prefix: string;
 	};

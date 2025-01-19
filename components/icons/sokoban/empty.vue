@@ -10,6 +10,6 @@
 		height="256px"
 		viewBox="0 0 256 256"
 	>
-		<slot></slot>
+		<slot />
 	</svg>
 </template>

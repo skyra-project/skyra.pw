@@ -1,7 +1,7 @@
 <template>
-	<RoutingLink :href="href" :forceSameTab="forceSameTab" class="menu-link" ref="linkRef">
+	<RoutingLink ref="linkRef" :href="href" :force-same-tab="forceSameTab" class="menu-link">
 		<li :class="computedClass" :disabled="listItemDisabled" @click="handleClick">
-			<component v-if="Icon" :is="Icon" class="mr-2" />
+			<component :is="NuxtIcon" class="mr-2" />
 			<span>{{ itemText }}</span>
 		</li>
 	</RoutingLink>
@@ -16,7 +16,7 @@ interface ListItemLinkProps {
 	listItemDisabled: boolean;
 	listItemDense?: boolean;
 	listItemSx?: Record<string, any>;
-	Icon?: FunctionalComponent;
+	NuxtIcon?: FunctionalComponent;
 	forceSameTab?: boolean;
 	listItemOnClick: () => void;
 }

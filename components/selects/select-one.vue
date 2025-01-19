@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<button @click="openDialog" class="btn btn-primary" :tooltip="tooltipTitle">
+		<button class="btn btn-primary" :tooltip="tooltipTitle" @click="openDialog">
 			{{ label }}: {{ name }}
 			<img v-if="imageInName" :src="imageInName" alt="Emoji" class="ml-2 inline-flex h-8 w-8" />
 		</button>
@@ -10,15 +10,15 @@
 				<div class="w-full max-w-xs rounded-lg bg-white shadow-lg">
 					<div class="flex items-center justify-between border-b p-4">
 						<h3 class="text-xl">{{ label }}</h3>
-						<button @click="closeDialog" class="btn btn-circle btn-ghost btn-sm">✕</button>
+						<button class="btn btn-circle btn-ghost btn-sm" @click="closeDialog">✕</button>
 					</div>
 					<div v-if="values.length > 10" class="p-4">
 						<input
 							v-model="search"
-							@input="search = ($event.target as HTMLInputElement).value"
 							type="text"
 							placeholder="Search"
 							class="input input-bordered mb-4 w-full"
+							@input="search = ($event.target as HTMLInputElement).value"
 						/>
 					</div>
 					<div class="h-64 overflow-y-auto p-4">
@@ -26,8 +26,8 @@
 							<li
 								v-for="item in filteredValues"
 								:key="item.value"
-								@click="selectItem(item.value)"
 								class="hover:bg-gray-100 cursor-pointer p-2"
+								@click="selectItem(item.value)"
 							>
 								<span>{{ item.name }}</span>
 								<img v-if="item.iconUrl" :src="item.iconUrl" alt="icon" class="ml-2 h-8 w-8" />
@@ -35,7 +35,7 @@
 						</ul>
 					</div>
 					<div class="flex justify-end border-t p-4">
-						<button @click="resetSelection" class="btn btn-error btn-sm">Remove setting</button>
+						<button class="btn btn-error btn-sm" @click="resetSelection">Remove setting</button>
 					</div>
 				</div>
 			</div>

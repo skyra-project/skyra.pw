@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useField } from 'vee-validate';
-import { useToggle } from '@vueuse/core';
 import type { Path, FormikValues } from './types';
 
 interface Props<T extends FormikValues> {
@@ -35,7 +34,7 @@ const handleToggle = () => {
 					{{ description }}
 				</span>
 			</span>
-			<input type="checkbox" :checked="isCheckedValue" @change="handleToggle" @blur="handleBlur" class="toggle toggle-primary" />
+			<input type="checkbox" :checked="isCheckedValue" class="toggle toggle-primary" @change="handleToggle" @blur="handleBlur" />
 		</label>
 	</div>
 </template>

@@ -1,7 +1,11 @@
 <template>
-	<div class="chip" :class="{ secondary: isSecondary }">
+	<div v-if="!loading" class="chip" :class="{ secondary: isSecondary }">
 		<span>{{ text }}</span>
-		<Icon :name="`mdi-${icon}`" class="ml-2" />
+		<NuxtIcon :name="`mdi-${icon}`" class="ml-2" />
+	</div>
+	<div v-else class="chip skeleton">
+		<span class="w-20">&nbsp;</span>
+		<div class="ml-2 h-4 w-4" />
 	</div>
 </template>
 
@@ -10,10 +14,12 @@ interface ChipProps {
 	text: string;
 	icon: string;
 	isSecondary?: boolean;
+	loading?: boolean;
 }
 
 withDefaults(defineProps<ChipProps>(), {
-	isSecondary: false
+	isSecondary: false,
+	loading: false
 });
 </script>
 
@@ -24,5 +30,9 @@ withDefaults(defineProps<ChipProps>(), {
 
 .chip.secondary {
 	@apply bg-secondary;
+}
+
+.chip.skeleton {
+	@apply animate-pulse bg-base-300 text-transparent;
 }
 </style>

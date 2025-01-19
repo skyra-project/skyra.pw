@@ -1,11 +1,14 @@
 <script setup lang="ts">
+const device = useDevice();
+const isMobile = computed(() => device.isMobile);
+
 const colorMode = useColorMode();
 const isDark = computed({
 	get() {
 		return colorMode.value === 'dark';
 	},
-	set(value: boolean) {
-		colorMode.preference = value ? 'dark' : 'light';
+	set() {
+		colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark';
 	}
 });
 
@@ -18,9 +21,9 @@ const toggleTheme = () => {
 	<ClientOnly>
 		<template #default>
 			<Transition name="fade">
-				<button class="btn btn-circle btn-ghost" @click="toggleTheme">
-					<Icon name="heroicons-moon-20-solid" v-if="!isDark" class="h-5 w-5" />
-					<Icon name="heroicons-sun-20-solid" v-else class="h-5 w-5" />
+				<button class="btn btn-circle btn-ghost btn-sm" :class="isMobile ? 'btn-md fixed' : 'btn-sm'" @click="toggleTheme">
+					<NuxtIcon v-if="!isDark" name="heroicons-moon-20-solid" :class="{ 'h-4 w-4': !isMobile, 'h-6 w-6': isMobile }" />
+					<NuxtIcon v-else name="heroicons-sun-20-solid" :class="{ 'h-4 w-4': !isMobile, 'h-6 w-6': isMobile }" />
 				</button>
 			</Transition>
 		</template>

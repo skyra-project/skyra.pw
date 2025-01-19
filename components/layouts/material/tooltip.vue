@@ -1,6 +1,6 @@
 <template>
 	<div class="relative inline-block" @mouseenter="showTooltip" @mouseleave="hideTooltip">
-		<slot></slot>
+		<slot />
 		<transition name="fade">
 			<div v-if="visible" :class="tooltipClasses">
 				<slot name="title">{{ title }}</slot>

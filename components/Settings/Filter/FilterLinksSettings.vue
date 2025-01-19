@@ -103,13 +103,13 @@ const removeLink = (word: string) => {
 					min="0"
 					max="60"
 					:value="guildSettings.selfmodLinksThresholdMaximum"
+					class="range"
 					@input="
 						(e) =>
 							setGuildSettingsChanges(
 								updateSliderValueObj('selfmodLinksThresholdMaximum', Number((e.target as HTMLInputElement).value))
 							)
 					"
-					class="range"
 				/>
 			</div>
 
@@ -120,19 +120,19 @@ const removeLink = (word: string) => {
 					min="0"
 					max="120"
 					:value="guildSettings.selfmodLinksThresholdDuration / 1000"
+					class="range"
 					@input="
 						(e) =>
 							setGuildSettingsChanges(
 								updateSliderValueObj('selfmodLinksThresholdDuration', Number((e.target as HTMLInputElement).value) * 1000)
 							)
 					"
-					class="range"
 				/>
 			</div>
 		</PresentationalLayoutsSettingsSection>
 
 		<PresentationalLayoutsSettingsSection title="Options">
-			<form @submit.prevent="addLink" class="mb-4 flex items-center">
+			<form class="mb-4 flex items-center" @submit.prevent="addLink">
 				<input v-model="newWord" type="text" placeholder="Add Link" class="input input-bordered mr-2" />
 				<button type="submit" class="btn btn-primary">Confirm</button>
 			</form>

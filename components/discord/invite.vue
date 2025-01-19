@@ -8,10 +8,10 @@
 			<div class="ml-4 flex-grow">
 				<nuxt-link class="font-bold" :to="link">WolfStar Lounge</nuxt-link>
 				<div class="flex flex-row items-center">
-					<span class="mr-1 inline-block h-1.5 w-1.5 rounded-full bg-green-500 sm:h-2 sm:w-2"></span>
+					<span class="mr-1 inline-block h-1.5 w-1.5 rounded-full bg-green-500 sm:h-2 sm:w-2" />
 					<span>{{ online.toLocaleString() }} Online</span>
 
-					<span class="ml-2 mr-1 inline-block h-1.5 w-1.5 rounded-full bg-base-content/80 sm:h-2 sm:w-2 md:ml-4"></span>
+					<span class="ml-2 mr-1 inline-block h-1.5 w-1.5 rounded-full bg-base-content/80 sm:h-2 sm:w-2 md:ml-4" />
 					<span>{{ members.toLocaleString() }} Members</span>
 				</div>
 			</div>

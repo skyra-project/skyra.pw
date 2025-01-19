@@ -81,13 +81,13 @@ const updateSoftAction = (bit: number, checked: boolean) => {
 					min="0"
 					max="60"
 					:value="guildSettings.selfmodMessagesThresholdMaximum"
+					class="range"
 					@input="
 						(e) =>
 							setGuildSettingsChanges(
 								updateSliderValueObj('selfmodMessagesThresholdMaximum', Number((e.target as HTMLInputElement)?.value))
 							)
 					"
-					class="range"
 				/>
 			</div>
 
@@ -98,13 +98,13 @@ const updateSoftAction = (bit: number, checked: boolean) => {
 					min="0"
 					max="120"
 					:value="guildSettings.selfmodMessagesThresholdDuration / 1000"
+					class="range"
 					@input="
 						(e) =>
 							setGuildSettingsChanges(
 								updateSliderValueObj('selfmodMessagesThresholdDuration', Number((e.target as HTMLInputElement)?.value) * 1000)
 							)
 					"
-					class="range"
 				/>
 			</div>
 		</PresentationalLayoutsSettingsSection>

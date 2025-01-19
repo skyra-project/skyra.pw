@@ -60,5 +60,14 @@ onMounted(() => {
 			</div>
 		</div>
 	</div>
-	<div v-else-if="isLoading" class="loading">Loading...</div>
+	<!-- Replace the loading div with skeleton -->
+	<div v-else-if="isLoading" class="collapse collapse-arrow my-1 rounded-lg bg-base-200">
+		<div class="collapse-title">
+			<div class="h-8 w-48 animate-pulse rounded-lg bg-base-300" />
+		</div>
+		<div class="collapse-content flex flex-wrap gap-2">
+			<!-- Add multiple skeleton items -->
+			<div v-for="n in 3" :key="n" class="h-12 w-48 animate-pulse rounded-lg bg-base-300" />
+		</div>
+	</div>
 </template>

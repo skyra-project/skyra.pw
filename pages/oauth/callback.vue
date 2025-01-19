@@ -13,7 +13,7 @@
 			<template v-else-if="data">
 				<p>You will be redirected to the main page in a second.</p>
 				<div class="bg-gray-200 dark:bg-stone-900 mt-2 rounded-lg p-1" aria-label="Progress" role="progressbar">
-					<div class="progress h-4 rounded-md bg-rose-500"></div>
+					<div class="progress h-4 rounded-md bg-rose-500" />
 				</div>
 			</template>
 		</client-only>
@@ -23,10 +23,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { promiseTimeout } from '@vueuse/core';
-import type { APIUser } from 'discord-api-types/v10';
-import { useClientTrpc } from '~/composables/public';
+import { useClientTrpc, getOrigin } from '~/composables/public';
+
 import { useAuth } from '~/composables/auth';
-import { getOrigin } from '~/composables/public';
 
 const { code } = useRoute().query as { code: string };
 const client = useClientTrpc();
@@ -44,6 +43,7 @@ const { data } = await useAsyncData('callback', async () => await client.auth.ca
 async function performCall() {
 	isLoading.value = true;
 	error.value = null;
+	if (!data.value) return;
 
 	try {
 		useAuth().session.value = data.value;
