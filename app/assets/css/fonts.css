@@ -1,0 +1,23 @@
+@font-face {
+	font-weight: 400;
+	src: url('https://cdn.skyra.pw/whitney-font/v2/Book.woff') format('woff');
+	font-family: 'Whitney';
+}
+
+@font-face {
+	font-weight: 500;
+	src: url('https://cdn.skyra.pw/whitney-font/v2/Medium.woff') format('woff');
+	font-family: 'Whitney';
+}
+
+@font-face {
+	font-weight: 600;
+	src: url('https://cdn.skyra.pw/whitney-font/v2/Semibold.woff') format('woff');
+	font-family: 'Whitney';
+}
+
+@font-face {
+	font-weight: 700;
+	src: url('https://cdn.skyra.pw/whitney-font/v2/Bold.woff') format('woff');
+	font-family: 'Whitney';
+}

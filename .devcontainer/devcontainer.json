@@ -1,0 +1,25 @@
+{
+	"name": "Nuxt3",
+	"image": "mcr.microsoft.com/vscode/devcontainers/typescript-node",
+	"features": {
+		"ghcr.io/devcontainers/features/node:1": {
+			"version": "22",
+			"pnpmVersion": "10"
+		}
+	},
+	"forwardPorts": [3000],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"bradlc.vscode-tailwindcss",
+				"dbaeumer.vscode-eslint",
+				"antfu.goto-alias",
+				"Nuxtr.nuxtr-vscode",
+				"Vue.volar",
+				"mikestead.dotenv",
+				"usernamehw.errorlens",
+				"formulahendry.auto-rename-tag"
+			]
+		}
+	}
+}

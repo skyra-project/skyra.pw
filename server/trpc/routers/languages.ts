@@ -1,48 +1,51 @@
 import { z } from 'zod';
-import Fuse from 'fuse.js';
-import { publicProcedure, router } from '../trpc';
-import { useLanguagesStore } from '~/stores/languages';
-
-const fuseOptions = {
-	keys: ['name', 'code'],
-	threshold: 0.3,
-	ignoreLocation: true
-};
-
-async function getLanguages() {
-	const store = useLanguagesStore();
-
-	if (store.languagesStorage.expire > Date.now()) {
-		return store.languages;
-	}
-
-	await store.fetchLanguages();
-	return store.languages;
-}
+import { Time } from '@sapphire/time-utilities';
+import { TRPCError } from '@trpc/server';
+import { isNullish } from '@sapphire/utilities';
+import { procedure, router } from '~~/server/trpc/trpc';
+import { useLanguagesStore } from '~~/app/stores/languages';
+import { useAPI } from '~~/app/composables/externalApi';
 
 export const languagesRouter = router({
-	getAll: publicProcedure.query(() => getLanguages()),
-
-	search: publicProcedure
+	getAll: procedure
+		.meta({
+			rateLimitRequired: true
+		})
+		.query(() => useLanguagesStore().languages),
+	refresh: procedure
+		.meta({
+			rateLimitRequired: true
+		})
 		.input(
-			z.object({
-				query: z.string()
-			})
+			z.optional(
+				z.object({
+					languages: z.array(z.string())
+				})
+			)
 		)
-		.query(async ({ input }) => {
-			const languages = await getLanguages();
+		.output(z.any())
+		.mutation(async ({ input }) => {
+			const store = useLanguagesStore();
+			try {
+				if (store.expired || process.env.NODE_ENV === 'development') {
+					return;
+				}
 
-			if (input.query) {
-				const fuse = new Fuse(languages, fuseOptions);
-				return fuse.search(input.query).map((result) => result.item);
+				if (isNullish(input) || !Array.isArray(input.languages) || isNullish(input.languages)) {
+					input ??= {
+						languages: []
+					};
+					input.languages = await useAPI<FlattenedCommand[]>('/languages', {
+						lazy: true
+					});
+				}
+
+				store.languagesStorage = {
+					expire: Date.now() + Time.Day * 6,
+					data: Array.isArray(input.languages) ? input.languages : []
+				};
+			} catch {
+				throw new TRPCError({ code: 'BAD_REQUEST' });
 			}
-
-			return languages;
-		}),
-
-	refresh: publicProcedure.mutation(async () => {
-		const store = useLanguagesStore();
-		store.languagesStorage.expire = 0;
-		return store.fetchLanguages();
-	})
+		})
 });

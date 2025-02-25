@@ -6,15 +6,7 @@ on:
     branches:
       - main
     paths:
-      - 'pages/**' # Directory Nuxt
-      - 'components/**' # Directory Nuxt
-      - 'composables/**' # Directory Nuxt
-      - 'layouts/**' # Directory Nuxt
-      - 'assets/**' # Directory Nuxt
-      - 'plugins/**' # Directory Nuxt
-      - 'store/**' # Directory Nuxt
-      - 'shared/**' # Directory Nuxt
-      - 'server/**' # Directory Nuxt
+      - 'app/**/*'
       - 'nuxt.config.ts' # File config Nuxt
       - 'Dockerfile'
       - '.github/workflows/continuous-delivery.yml'

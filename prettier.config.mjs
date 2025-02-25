@@ -1,9 +1,19 @@
-import config from '@sapphire/prettier-config';
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
+import sapphirePrettierConfig from '@sapphire/prettier-config';
 
 /** @type {import('prettier').Config} */
 export default {
-	...config,
-	plugins: [require.resolve('prettier-plugin-css-order'), require.resolve('prettier-plugin-tailwindcss')]
+	...sapphirePrettierConfig,
+	plugins: ['prettier-plugin-tailwindcss', 'prettier-plugin-css-order'],
+	overrides: [
+		...sapphirePrettierConfig.overrides,
+		{
+			files: ['README.md'],
+			options: {
+				tabWidth: 2,
+				useTabs: false,
+				printWidth: 80,
+				proseWrap: 'always'
+			}
+		}
+	]
 };

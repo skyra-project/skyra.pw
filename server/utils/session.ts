@@ -7,7 +7,6 @@ export interface AuthSession {
 	id: string;
 	name: string;
 	avatar: string | null;
-	token?: string;
 }
 
 export function useAuthSession(event: H3Event) {

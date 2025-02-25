@@ -1,17 +1,15 @@
-# Nuxt dev/build outputs
-.output
-.data
-.nuxt
-.nitro
-.cache
-dist
+node_modules/
+.nuxt/
+.nitro/
+.cache/
+.output/
+dist/
+functions/
 
-# Node dependencies
-node_modules
 
 # Logs
 logs
-*.log
+*.log*
 
 # Misc
 .DS_Store
@@ -23,4 +21,6 @@ logs
 .env.*
 !.env.example
 
-.yarn/install-state.gz
+.pnpm-store
+
+

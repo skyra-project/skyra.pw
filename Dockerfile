@@ -1,50 +1,53 @@
 # Base Stage
-FROM --platform=$TARGETPLATFORM node:20-alpine AS base
+ARG base=node:22.13.1-alpine
+FROM ${base} AS builder
 
-WORKDIR /home/node/app
+WORKDIR /app
 
-# Installa dumb-init per la tua architettura
-RUN case "$(arch)" in \
-    x86_64) ARCH='x86_64' ;; \
-    aarch64) ARCH='aarch64' ;; \
-    armv7l) ARCH='armhf' ;; \
-    armv6l) ARCH='armel' ;; \
-    *) echo "Unsupported architecture: $(arch)"; exit 1 ;; \
-    esac \
-    && apk add --no-cache dumb-init jq libc6-compat curl
+# Essential setup
+RUN set -ex && \
+    apk add --no-cache \
+    jq \
+    libc6-compat \
+    curl \
+    build-base && \
+    # Create minimal directory structure
+    mkdir -p /base/bin && \
+    # Install dumb-init
+    wget -O /base/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_"$(uname -m)" && \
+    chmod 755 /base/bin/dumb-init
 
-ENV YARN_DISABLE_GIT_HOOKS=1
-ENV NUXT_TELEMETRY_DISABLED=1
+# Install Node.js dependencies and build
+COPY package.json pnpm-lock.yaml .npmrc ./
+RUN npm install -g corepack@latest && \
+    corepack enable && \
+    pnpm install --frozen-lockfile --prod
 
-ENTRYPOINT ["dumb-init", "--"]
+COPY . .
+RUN pnpm run build
 
-# Dependencies stage
-FROM base AS builder
+# Final stage
+FROM scratch
 
-COPY --chown=node:node package.json ./
-COPY --chown=node:node yarn.lock ./
-COPY --chown=node:node .yarnrc.yml .
-COPY --chown=node:node .yarn/ .yarn/
+# Copy necessary files from builder
+COPY --from=builder /base /
+COPY --from=builder /lib /
+COPY --from=builder /app/.output /app/.output
 
-RUN yarn install --immutable
+# Set environment variables
+ENV NODE_ENV="production" \
+    NODE_OPTIONS="--enable-source-maps" \
+    NUXT_TELEMETRY_DISABLED=1
 
-COPY ./ ./
-COPY scripts/ scripts/
+# Create and use non-root user
+RUN addgroup -S nonroot && \
+    adduser -S nonroot -G nonroot && \
+    chown -R nonroot:nonroot /app
 
-RUN yarn build
-
-# Runner stage
-FROM base AS runner
-
-COPY --from=builder /home/node/app/.output /home/node/app/.output
-
-ENV NODE_ENV="production"
-ENV NODE_OPTIONS="--enable-source-maps"
-
-RUN chown -R node:node /home/node/app/
-
-USER node
+USER nonroot
+WORKDIR /app
 
 EXPOSE ${PORT}
 
-CMD node .output/server/index.mjs
+ENTRYPOINT ["/bin/dumb-init", "--"]
+CMD ["node", ".output/server/index.mjs"]

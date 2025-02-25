@@ -5,17 +5,6 @@
 		"allowJs": true,
 		"checkJs": true
 	},
-	"include": [
-		"components",
-		"composables",
-		"layouts",
-		"modules",
-		"pages",
-		"server",
-		"utils",
-		"nuxt.config.ts",
-		"prettier.config.mjs",
-		"tailwind.config.js"
-	],
+	"include": ["app/**/*.ts", "app/**/*.vue", "nuxt.config.ts"],
 	"exclude": []
 }

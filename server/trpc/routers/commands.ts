@@ -1,46 +1,53 @@
 import { z } from 'zod';
-import Fuse from 'fuse.js';
-import { publicProcedure, router } from '../trpc';
-import { useCommandsStore } from '~/stores/commands';
-
-const fuseOptions = {
-	keys: ['name', 'description'],
-	threshold: 0.3,
-	ignoreLocation: true
-};
+import { Time } from '@sapphire/time-utilities';
+import { TRPCError } from '@trpc/server';
+import { isNullish } from '@sapphire/utilities';
+import { procedure, router } from '~~/server/trpc/trpc';
+import { useCommandsStore } from '~~/app/stores/commands';
+import type { FlattenedCommand } from '~/shared/types';
+import { useAPI } from '~~/app/composables/externalApi';
 
 export const commandsRouter = router({
-	getAll: publicProcedure.query(() => {
-		const store = useCommandsStore();
-		return store.commands;
-	}),
-
-	search: publicProcedure
+	getAll: procedure
+		.meta({
+			rateLimitRequired: true
+		})
+		.output(z.array(z.custom<FlattenedCommand>()))
+		.query(() => useCommandsStore().commands),
+	refresh: procedure
+		.meta({
+			rateLimitRequired: true
+		})
 		.input(
-			z.object({
-				query: z.string(),
-				category: z.string().optional()
-			})
+			z.optional(
+				z.object({
+					commands: z.array(z.custom<FlattenedCommand>())
+				})
+			)
 		)
-		.query(async ({ input }) => {
+		.output(z.void())
+		.mutation(async ({ input }) => {
 			const store = useCommandsStore();
-			const commands = store.commands;
-			let filteredCommands = commands;
+			try {
+				if (store.expired || process.env.NODE_ENV === 'development') {
+					return;
+				}
 
-			if (input.category) {
-				filteredCommands = commands.filter((cmd) => cmd.category === input.category);
+				if (isNullish(input) || !Array.isArray(input.commands) || isNullish(input.commands)) {
+					input ??= {
+						commands: []
+					};
+					input.commands = await useAPI<FlattenedCommand[]>('/commands', {
+						lazy: true
+					});
+				}
+
+				store.commandsStorage = {
+					expire: Date.now() + Time.Day * 6,
+					data: Array.isArray(input.commands) ? input.commands : []
+				};
+			} catch {
+				throw new TRPCError({ code: 'BAD_REQUEST' });
 			}
-
-			if (input.query) {
-				const fuse = new Fuse(filteredCommands, fuseOptions);
-				return fuse.search(input.query).map((result) => result.item);
-			}
-
-			return filteredCommands;
-		}),
-
-	refresh: publicProcedure.mutation(async () => {
-		const store = useCommandsStore();
-		return store.fetchCommands();
-	})
+		})
 });

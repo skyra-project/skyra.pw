@@ -1,58 +1,206 @@
 import '@vite-pwa/nuxt';
 import 'nuxt';
 import type { SessionConfig } from 'h3';
-import { DefaultSeoProps, BaseUrl } from './utils/seo/defaultSeoProps';
-import { manifestIcons } from './utils/seo/manifest';
+import tailwindcss from '@tailwindcss/vite';
+
+const baseURL = 'https://wolfstar.rocks';
+
+const manifestIcons = [
+	{
+		src: 'https://wolfstar.rocks/icons/android-chrome-36x36.png',
+		sizes: '36x36',
+		type: 'image/png',
+		purpose: 'any badge'
+	},
+	{
+		src: 'https://wolfstar.rocks/icons/android-chrome-48x48.png',
+		sizes: '48x48',
+		type: 'image/png'
+	},
+	{
+		src: 'https://wolfstar.rocks/icons/android-chrome-72x72.png',
+		sizes: '72x72',
+		type: 'image/png'
+	},
+	{
+		src: 'https://wolfstar.rocks/icons/android-chrome-96x96.png',
+		sizes: '96x96',
+		type: 'image/png'
+	},
+	{
+		src: 'https://wolfstar.rocks/icons/android-chrome-144x144.png',
+		sizes: '144x144',
+		type: 'image/png'
+	},
+	{
+		src: 'https://wolfstar.rocks/icons/android-chrome-192x192.png',
+		sizes: '192x192',
+		type: 'image/png'
+	},
+	{
+		src: 'https://wolfstar.rocks/icons/android-chrome-256x256.png',
+		sizes: '256x256',
+		type: 'image/png'
+	},
+	{
+		src: 'https://wolfstar.rocks/icons/android-chrome-384x384.png',
+		sizes: '384x384',
+		type: 'image/png'
+	},
+	{
+		src: 'https://wolfstar.rocks/icons/android-chrome-512x512.png',
+		sizes: '512x512',
+		type: 'image/png'
+	},
+	{
+		src: 'https://wolfstar.rocks/icons/maskable_icon.png',
+		sizes: '640x640',
+		type: 'image/png',
+		purpose: 'any maskable'
+	}
+];
 
 export default defineNuxtConfig({
-	// Basic settings
-	devtools: { enabled: true },
-
-	// Modules
+	// Modules configuration
 	modules: [
-		'@nuxtjs/tailwindcss',
-		'@nuxtjs/device',
-		'@nuxtjs/sitemap',
-		'@nuxtjs/robots',
-		'@nuxtjs/color-mode',
 		'@nuxt/image',
-		'@nuxt/icon',
+		'vue-sonner/nuxt',
 		'@vueuse/nuxt',
-		'@vite-pwa/nuxt',
-		'@formkit/nuxt',
 		'@pinia/nuxt',
-		'nuxt-link-checker',
 		'pinia-plugin-persistedstate/nuxt',
-		'nuxt-og-image',
-		'nuxt-security',
-		'@nuxt/eslint'
+		'@nuxtjs/seo',
+		'@vite-pwa/nuxt',
+		'@sentry/nuxt/module',
+		'@nuxt/eslint',
+		'@prisma/nuxt',
+		'@vee-validate/nuxt',
+		// 'nuxt-security'
+		'@nuxt/icon',
+		'@nuxtjs/color-mode'
 	],
-	icon: {
-		componentName: 'NuxtIcon',
-		serverBundle: {
-			collections: ['uil', 'mdi', 'heroicons', 'ph'] // <!--- this
+	imports: {
+		presets: [
+			{
+				from: 'vue-sonner',
+				imports: ['toast']
+			},
+			{
+				from: '@sentry/nuxt',
+				imports: ['captureException']
+			},
+			{
+				from: 'consola',
+				imports: ['consola']
+			}
+		],
+		dirs: ['./database']
+	},
+	devtools: {
+		enabled: true
+	},
+	// App meta configuration
+	app: {
+		head: {
+			charset: 'utf-8',
+			viewport: 'width=device-width, initial-scale=1',
+			title: 'WolfStar',
+			titleTemplate: '%s - WolfStar',
+			htmlAttrs: { lang: 'en_GB' },
+			link: [
+				{ rel: 'alternate', href: baseURL },
+				{ rel: 'canonical', href: baseURL },
+				{ rel: 'apple-touch-icon', href: '/icons/apple-touch-icon.png' },
+				{ rel: 'apple-touch-startup-image', href: '/icons/apple-startup.png' },
+				{ rel: 'icon', href: '/icons/android-chrome-192x192.png' },
+				{ rel: 'icon', href: '/favicon.ico' },
+				{ rel: 'icon', href: '/icons/favicon-16x16.png' },
+				{ rel: 'icon', href: '/icons/favicon-32x32.png' },
+				{ rel: 'mask-icon', href: '/icons/safari-pinned-tab.svg' },
+				{ rel: 'shortcut icon', href: '/favicon.ico' }
+			],
+			meta: [
+				// Cache control
+				{ 'http-equiv': 'Cache-Control', content: '1y' },
+				{ 'http-equiv': 'Content-Type', content: 'text/html; charset=UTF-8' },
+				{ 'http-equiv': 'Expires', content: '1y' },
+				{ 'http-equiv': 'Pragma', content: '1y' },
+
+				// Page transitions
+				{ 'http-equiv': 'Page-Enter', content: 'RevealTrans(Duration=2.0,Transition=2)' },
+				{ 'http-equiv': 'Page-Exit', content: 'RevealTrans(Duration=3.0,Transition=12)' },
+
+				// Mobile specific
+				{ name: 'apple-mobile-web-app-capable', content: 'yes' },
+				{ name: 'apple-mobile-web-app-status-bar-style', content: 'black' },
+				{ name: 'apple-mobile-web-app-title', content: 'WolfStar Dashboard' },
+				{ name: 'HandheldFriendly', content: 'True' },
+
+				// Microsoft specific
+				{ name: 'application-name', content: 'WolfStar' },
+				{ name: 'msapplication-TileColor', content: '#fd171b' },
+				{ name: 'msapplication-TileImage', content: '/icons/mstile-144x144.png' },
+				{ name: 'msapplication-config', content: '/browserconfig.xml' },
+
+				// Theme and appearance
+				{ name: 'theme-color', content: '#fd171b' },
+
+				// SEO meta tags
+				{ name: 'revisit-after', content: '7 days' },
+				{ name: 'url', content: baseURL },
+				{ name: 'identifier-URL', content: baseURL },
+				{ name: 'shortlink', content: baseURL },
+				{ name: 'keywords', content: 'discord, bot, wolfstar, moderation, automation, wolfstar, cyborg' },
+				{
+					name: 'summary',
+					content: 'WolfStar is a multipurpose Discord bot designed to handle most tasks, helping users manage their servers easily.'
+				},
+				{ name: 'subject', content: 'Dashboard for WolfStar, a multifunctional Discord bot.' },
+
+				// Robots and indexing
+				{ name: 'robots', content: 'archive,follow,imageindex,index,odp,snippet,translate' },
+				{ name: 'googlebot', content: 'index,follow' },
+
+				// Authorship and ownership
+				{ name: 'author', content: 'WolfStar Project, contact@wolfstar.rocks' },
+				{ name: 'owner', content: 'WolfStar Project, contact@wolfstar.rocks' },
+				{ name: 'designer', content: 'WolfStar Project, contact@wolfstar.rocks' },
+				{ name: 'reply-to', content: 'contact@wolfstar.rocks' },
+
+				// Distribution and audience
+				{ name: 'target', content: 'all' },
+				{ name: 'audience', content: 'all' },
+				{ name: 'coverage', content: 'Worldwide' },
+				{ name: 'distribution', content: 'Global' },
+				{ name: 'rating', content: 'safe for kids' },
+
+				// Open Graph meta tags
+				{ property: 'og:email', content: 'contact@wolfstar.rocks' },
+				{
+					property: 'og:description',
+					content: 'WolfStar is a multipurpose Discord bot designed to handle most tasks, helping users manage their servers easily.'
+				},
+				{ property: 'og:image:alt', content: 'OpenGraphImage' },
+				{ property: 'og:image:height', content: '512' },
+				{ property: 'og:image:width', content: '1024' },
+				{ property: 'og:image', content: 'https://wolfstar.rocks/icons/opengraph.png' },
+				{ property: 'og:locale', content: 'en_GB' },
+				{ property: 'og:site_name', content: 'WolfStar Dashboard' },
+				{ property: 'og:title', content: 'WolfStar Dashboard' },
+				{ property: 'og:type', content: 'website' },
+				{ property: 'og:url', content: baseURL }
+			]
 		}
 	},
 
-	colorMode: {
-		preference: 'system', // default theme
-		dataValue: 'theme', // activate data-theme in <html> tag
-		classSuffix: ''
+	css: ['~/assets/css/main.css'],
+	site: {
+		name: 'WolfStar',
+		url: 'https://wolfstar.rocks'
 	},
-	// Module configurations
-	image: { screens: {} },
-
-	vueuse: { autoImports: true },
-	formkit: { autoImport: true },
-
-	sitemap: {
-		exclude: ['/join', '/oauth/guild', '/oauth/callback', '/[...id]']
-	},
-
 	// Runtime configuration
 	runtimeConfig: {
 		auth: {
-			name: 'WOLFSTAR_AUTH',
+			name: 'wolfstar-auth',
 			maxAge: 604800,
 			password: process.env.NITRO_AUTH_SECRET ?? '',
 			cookie: { sameSite: 'lax' },
@@ -61,47 +209,67 @@ export default defineNuxtConfig({
 		public: {
 			origin: process.env.NITRO_ORIGIN,
 			clientId: process.env.NITRO_DISCORD_CLIENT_ID,
-			apiOrigin: process.env.NITRO_API_ORIGIN
+			apiOrigin: process.env.NITRO_API_ORIGIN,
+			sentry: {
+				dsn: process.env.NITRO_SENTRY_DSN
+			}
 		},
+		token: process.env.NITRO_DISCORD_TOKEN,
 		clientId: process.env.NITRO_DISCORD_CLIENT_ID,
 		clientSecret: process.env.NITRO_DISCORD_CLIENT_SECRET,
-		apiOrigin: process.env.NITRO_API_ORIGIN,
-		sentry: {
-			config: {
-				environment: process.env.SENTRY_ENVIRONMENT
-			},
-			serverConfig: {
-				// Any server-specific config
-			},
-			clientConfig: {
-				// Any client-specific config
-			}
-		}
+		apiOrigin: process.env.NITRO_API_ORIGIN
 	},
-
+	// Build configuration
 	build: {
 		transpile: ['trpc-nuxt']
 	},
 
-	// Nitro configuration
+	routeRules: {
+		'/': { isr: true, prerender: true }
+	},
+	sourcemap: {
+		client: 'hidden'
+	},
+
+	future: {
+		compatibilityVersion: 4
+	},
+
+	experimental: {
+		viewTransition: true
+	},
+	compatibilityDate: '2025-01-10',
+	// Nitro server configuration
 	nitro: {
 		prerender: {
 			crawlLinks: true,
 			routes: ['/sitemap.xml', '/robots.txt']
 		}
 	},
-
-	// Site configuration
-	site: {
-		url: BaseUrl
+	vite: {
+		plugins: [tailwindcss()]
 	},
 
-	// Plugins
-	plugins: ['~/plugins/0.auth.ts', '~/plugins/error-handler.ts', '~/plugins/api.ts', '~/plugins/1.trpc.ts', '~/plugins/pinia.ts'],
+	icon: {
+		clientBundle: {
+			scan: true
+		},
+		serverBundle: {
+			remote: 'jsdelivr' // 'unpkg' or 'github-raw', or a custom function
+		},
+		componentName: 'NuxtIcon'
+	},
+	image: {
+		screens: {}
+	},
+
+	ogImage: {
+		zeroRuntime: true
+	},
+
 	pinia: {
 		storesDirs: ['./stores/**']
 	},
-
 	// PWA configuration
 	pwa: {
 		registerType: 'autoUpdate',
@@ -111,7 +279,7 @@ export default defineNuxtConfig({
 			type: 'module'
 		},
 		manifest: {
-			background_color: '#131516',
+			background_color: '#fd171b',
 			categories: ['discord', 'bot', 'framework', 'moderation', 'guide', 'wolfstar'],
 			description: 'WolfStar is a multipurpose Discord bot designed to handle most tasks, helping users manage their servers easily.',
 			display: 'minimal-ui',
@@ -156,10 +324,23 @@ export default defineNuxtConfig({
 		}
 	},
 
-	// App configuration
-	app: {
-		head: DefaultSeoProps
-	},
+	/* security: {
+								removeLoggers: false
+				}, */
 
-	compatibilityDate: '2025-01-10'
+	sentry: {
+		autoInjectServerSentry: 'experimental_dynamic-import'
+	},
+	sitemap: {
+		exclude: ['/join', '/oauth/guild', '/oauth/callback', '/[...id]']
+	},
+	veeValidate: {
+		// Use different names for components
+		componentNames: {
+			Form: 'VeeForm',
+			Field: 'VeeField',
+			FieldArray: 'VeeFieldArray',
+			ErrorMessage: 'VeeErrorMessage'
+		}
+	}
 });

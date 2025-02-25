@@ -6,6 +6,17 @@
 	"editor.quickSuggestions": {
 		"strings": true
 	},
-	"tailwindCSS.experimental.configFile": "tailwind.config.ts",
-	"eslint.useFlatConfig": true
+	"tailwindCSS.experimental.classRegex": ["tw`(.*?)`", "tw\\('(.*?)'\\)", "tw\\(\\s*('(.*?)'|\"(.*?)\")\\s*\\)"],
+	"tailwindCSS.experimental.configFile": "app/assets/css/main.css",
+	"eslint.useFlatConfig": true,
+	// Disable the default formatter, use eslint instead
+
+	// Auto fix
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "explicit",
+		"source.organizeImports": "never"
+	},
+
+	"terminal.explorerKind": "external",
+	"terminal.integrated.accessibleViewFocusOnCommandExecution": true
 }

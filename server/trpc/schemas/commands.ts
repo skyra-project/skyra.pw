@@ -5,7 +5,7 @@ export const commandSchema = z.object({
 	name: z.string(),
 	description: z.string(),
 	category: z.string(),
-	options: z.array(z.any()).optional()
+	options: z.optional(z.array(z.any()))
 });
 
 export type Command = z.infer<typeof commandSchema>;

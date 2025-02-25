@@ -1,0 +1,12 @@
+{
+	"recommendations": [
+		"bradlc.vscode-tailwindcss",
+		"dbaeumer.vscode-eslint",
+		"antfu.goto-alias",
+		"Nuxtr.nuxtr-vscode",
+		"Vue.volar",
+		"mikestead.dotenv",
+		"usernamehw.errorlens",
+		"formulahendry.auto-rename-tag"
+	]
+}
