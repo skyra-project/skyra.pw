@@ -1,17 +1,17 @@
 import { computed } from 'vue';
 import useGuildSettings from './useGuildSettings';
-import { ConfigurableModerationKeys } from '@/lib/types/SettingsDataEntries';
-import type { GuildData } from '@/lib/database/settings/types';
+import type { GuildData } from '~~/lib/database';
+import { ConfigurableModerationKeys } from '~~/shared/SettingsDataEntries';
 
 const useGuildModeration = () => {
-	const { settings } = useGuildSettings();
+	const { changes, settings } = useGuildSettings();
 
 	const moderationConfig = {
 		keys: ConfigurableModerationKeys
 	};
 
 	const updateModerationSetting = (key: keyof GuildData, value: boolean) => {
-		settings.value = { [key]: value };
+		changes({ [key]: value });
 	};
 
 	return {

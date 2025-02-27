@@ -135,13 +135,15 @@
 			</template>
 			<button
 				v-else
-				class="btn btn-ghost"
+				class="btn bg-[#5865F2] text-white"
 				@click="
 					async () => {
 						await navigateTo(getLoginURL(), { external: true });
 					}
 				"
 			>
+				<nuxt-icon name="ic:baseline-discord" class="h-[32px] w-[32px]" />
+
 				Login
 			</button>
 		</div>

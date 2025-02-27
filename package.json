@@ -8,7 +8,7 @@
 		"dev": "nuxt dev",
 		"dev:sw": "SW=true nuxi dev",
 		"start": "node .output/server/index.mjs",
-		"build": "nuxi build",
+		"build": "pnpm run pwa:generate-assets && nuxi build",
 		"build:sw": "SW=true nuxi build",
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
@@ -18,7 +18,8 @@
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
 		"format": "prettier --write .",
-		"format:check": "prettier --check ."
+		"format:check": "prettier --check .",
+		"pwa:generate-assets": "pwa-assets-generator --preset minimal-2023 public/logo.svg"
 	},
 	"dependencies": {
 		"@nuxtjs/color-mode": "^3.5.2",
@@ -73,9 +74,8 @@
 		"@sapphire/utilities": "^3.18.2",
 		"@sentry/nuxt": "^9.1.0",
 		"@tailwindcss/typography": "^0.5.16",
-		"@types/culori": "^2.1.1",
 		"@types/tinycolor2": "^1.4.6",
-		"culori": "^4.0.1",
+		"@vite-pwa/assets-generator": "^0.2.6",
 		"daisyui": "5.0.0-beta.8",
 		"discord-api-types": "0.37.119",
 		"eslint": "^9.20.1",
@@ -89,6 +89,8 @@
 		"prettier": "^3.3.3",
 		"prettier-plugin-css-order": "^2.1.2",
 		"prettier-plugin-tailwindcss": "^0.6.6",
+		"sharp": "^0.33.5",
+		"sharp-ico": "^0.1.5",
 		"simple-git-hooks": "^2.11.1",
 		"tailwindcss": "^4.0.6",
 		"typescript": "^5.7.3",
@@ -101,7 +103,10 @@
 			"vue-tsc": "2.1.10",
 			"@types/node": "20.11.5",
 			"@vercel/nft": "^0.27.4"
-		}
+		},
+		"ignoredBuiltDependencies": [
+			"sharp"
+		]
 	},
 	"simple-git-hooks": {
 		"pre-commit": "pnpm dlx lint-staged",
@@ -110,6 +115,9 @@
 	"lint-staged": {
 		"*.@(js|ts|vue|yml|yaml|md|json)": [
 			"prettier --write"
+		],
+		"*.@(js|ts|vue)": [
+			"eslint --fix"
 		]
 	},
 	"commitlint": {

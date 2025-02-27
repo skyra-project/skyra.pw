@@ -7,15 +7,8 @@ import { useLanguagesStore } from '~~/app/stores/languages';
 import { useAPI } from '~~/app/composables/externalApi';
 
 export const languagesRouter = router({
-	getAll: procedure
-		.meta({
-			rateLimitRequired: true
-		})
-		.query(() => useLanguagesStore().languages),
+	getAll: procedure.query(() => useLanguagesStore().languages),
 	refresh: procedure
-		.meta({
-			rateLimitRequired: true
-		})
 		.input(
 			z.optional(
 				z.object({
@@ -35,7 +28,7 @@ export const languagesRouter = router({
 					input ??= {
 						languages: []
 					};
-					input.languages = await useAPI<FlattenedCommand[]>('/languages', {
+					input.languages = await useAPI<string[]>('/languages', {
 						lazy: true
 					});
 				}

@@ -3,8 +3,6 @@ import 'nuxt';
 import type { SessionConfig } from 'h3';
 import tailwindcss from '@tailwindcss/vite';
 
-const baseURL = 'https://wolfstar.rocks';
-
 const manifestIcons = [
 	{
 		src: 'https://wolfstar.rocks/icons/android-chrome-36x36.png',
@@ -60,6 +58,10 @@ const manifestIcons = [
 	}
 ];
 
+const baseURL = 'https://wolfstar.rocks';
+const name = 'WolfStar Dashboard';
+const description = 'WolfStar is a multipurpose Discord bot designed to handle most tasks, helping users manage their servers easily.';
+
 export default defineNuxtConfig({
 	// Modules configuration
 	modules: [
@@ -74,7 +76,7 @@ export default defineNuxtConfig({
 		'@nuxt/eslint',
 		'@prisma/nuxt',
 		'@vee-validate/nuxt',
-		// 'nuxt-security'
+		'nuxt-security',
 		'@nuxt/icon',
 		'@nuxtjs/color-mode'
 	],
@@ -103,9 +105,8 @@ export default defineNuxtConfig({
 		head: {
 			charset: 'utf-8',
 			viewport: 'width=device-width, initial-scale=1',
-			title: 'WolfStar',
 			titleTemplate: '%s - WolfStar',
-			htmlAttrs: { lang: 'en_GB' },
+			htmlAttrs: { lang: 'en' },
 			link: [
 				{ rel: 'alternate', href: baseURL },
 				{ rel: 'canonical', href: baseURL },
@@ -132,7 +133,7 @@ export default defineNuxtConfig({
 				// Mobile specific
 				{ name: 'apple-mobile-web-app-capable', content: 'yes' },
 				{ name: 'apple-mobile-web-app-status-bar-style', content: 'black' },
-				{ name: 'apple-mobile-web-app-title', content: 'WolfStar Dashboard' },
+				{ name: 'apple-mobile-web-app-title', content: name },
 				{ name: 'HandheldFriendly', content: 'True' },
 
 				// Microsoft specific
@@ -152,9 +153,9 @@ export default defineNuxtConfig({
 				{ name: 'keywords', content: 'discord, bot, wolfstar, moderation, automation, wolfstar, cyborg' },
 				{
 					name: 'summary',
-					content: 'WolfStar is a multipurpose Discord bot designed to handle most tasks, helping users manage their servers easily.'
+					content: description
 				},
-				{ name: 'subject', content: 'Dashboard for WolfStar, a multifunctional Discord bot.' },
+				{ name: 'subject', content: description },
 
 				// Robots and indexing
 				{ name: 'robots', content: 'archive,follow,imageindex,index,odp,snippet,translate' },
@@ -162,8 +163,8 @@ export default defineNuxtConfig({
 
 				// Authorship and ownership
 				{ name: 'author', content: 'WolfStar Project, contact@wolfstar.rocks' },
-				{ name: 'owner', content: 'WolfStar Project, contact@wolfstar.rocks' },
-				{ name: 'designer', content: 'WolfStar Project, contact@wolfstar.rocks' },
+				{ name: 'owner', content: 'Davide Trinastich, redtwoghost@gmail.com' },
+				{ name: 'designer', content: 'Davide Trinastich, redtwoghost@gmail.com' },
 				{ name: 'reply-to', content: 'contact@wolfstar.rocks' },
 
 				// Distribution and audience
@@ -177,15 +178,15 @@ export default defineNuxtConfig({
 				{ property: 'og:email', content: 'contact@wolfstar.rocks' },
 				{
 					property: 'og:description',
-					content: 'WolfStar is a multipurpose Discord bot designed to handle most tasks, helping users manage their servers easily.'
+					content: description
 				},
 				{ property: 'og:image:alt', content: 'OpenGraphImage' },
 				{ property: 'og:image:height', content: '512' },
 				{ property: 'og:image:width', content: '1024' },
 				{ property: 'og:image', content: 'https://wolfstar.rocks/icons/opengraph.png' },
-				{ property: 'og:locale', content: 'en_GB' },
-				{ property: 'og:site_name', content: 'WolfStar Dashboard' },
-				{ property: 'og:title', content: 'WolfStar Dashboard' },
+				{ property: 'og:locale', content: 'en' },
+				{ property: 'og:site_name', content: name },
+				{ property: 'og:title', content: name },
 				{ property: 'og:type', content: 'website' },
 				{ property: 'og:url', content: baseURL }
 			]
@@ -241,6 +242,7 @@ export default defineNuxtConfig({
 	compatibilityDate: '2025-01-10',
 	// Nitro server configuration
 	nitro: {
+		preset: 'cloudflare-pages',
 		prerender: {
 			crawlLinks: true,
 			routes: ['/sitemap.xml', '/robots.txt']
@@ -273,27 +275,30 @@ export default defineNuxtConfig({
 	// PWA configuration
 	pwa: {
 		registerType: 'autoUpdate',
-		includeManifestIcons: false,
 		devOptions: {
 			enabled: false,
 			type: 'module'
 		},
+		workbox: {
+			navigateFallback: '/',
+			globPatterns: ['**/*.{js,css,html,png,svg,ico,xml}']
+		},
 		manifest: {
-			background_color: '#fd171b',
+			background_color: '#050505',
 			categories: ['discord', 'bot', 'framework', 'moderation', 'guide', 'wolfstar'],
-			description: 'WolfStar is a multipurpose Discord bot designed to handle most tasks, helping users manage their servers easily.',
+			description,
 			display: 'minimal-ui',
 			lang: 'en-GB',
-			name: 'WolfStar Dashboard',
+			name,
 			orientation: 'portrait-primary',
 			scope: '/',
 			short_name: 'WolfStar',
 			start_url: '/',
-			theme_color: '#050505',
+			theme_color: '#fd171b',
 			icons: manifestIcons,
 			shortcuts: [
 				{
-					name: 'WolfStar Dashboard',
+					name,
 					short_name: 'Homepage',
 					description: "Go to WolfStar's dashboard",
 					url: '/',
@@ -323,11 +328,48 @@ export default defineNuxtConfig({
 			]
 		}
 	},
-
-	/* security: {
-								removeLoggers: false
-				}, */
-
+	security: {
+		allowedMethodsRestricter: { methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT'] },
+		headers: {
+			contentSecurityPolicy: {
+				'img-src': ["'self'", 'data:', 'cdn.wolfstar.rocks', 'cdn.discordapp.com']
+			},
+			permissionsPolicy: {
+				accelerometer: ['()'],
+				'ambient-light-sensor': ['()'],
+				autoplay: ['()'],
+				battery: ['()'],
+				camera: ['()'],
+				'display-capture': ['()'],
+				'document-domain': ['()'],
+				'encrypted-media': ['()'],
+				fullscreen: ['()'],
+				gamepad: ['()'],
+				geolocation: ['()'],
+				gyroscope: ['()'],
+				hid: ['()'],
+				'idle-detection': ['()'],
+				'local-fonts': ['()'],
+				magnetometer: ['()'],
+				microphone: ['()'],
+				midi: ['()'],
+				payment: ['()'],
+				'picture-in-picture': ['()'],
+				'publickey-credentials-get': ['()'],
+				'screen-wake-lock': ['()'],
+				serial: ['()'],
+				'speaker-selection': ['()'],
+				usb: ['()'],
+				'web-share': ['()'],
+				'xr-spatial-tracking': ['()']
+			}
+		},
+		corsHandler: {
+			origin: process.env.ORIGIN || '*',
+			methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT']
+		},
+		rateLimiter: false
+	},
 	sentry: {
 		autoInjectServerSentry: 'experimental_dynamic-import'
 	},

@@ -1,12 +1,11 @@
 import { computed } from 'vue';
 import useGuildData from './useGuildData';
 import useGuildSettings from './useGuildSettings';
-import { ConfigurableRoles, ConfigurableRemoveInitialRole } from '@/lib/types/SettingsDataEntries';
-import type { GuildData, GuildDataKey, GuildDataValue } from '@/lib/database/settings/types';
-
+import type { GuildDataKey, GuildDataValue, GuildData } from '~~/lib/database';
+import { ConfigurableRemoveInitialRole, ConfigurableRoles } from '~~/shared/SettingsDataEntries';
 const useGuildRoles = () => {
 	const { guildData } = useGuildData();
-	const { settings } = useGuildSettings();
+	const { settings, changes } = useGuildSettings();
 
 	const roleConfig = {
 		removeInitial: ConfigurableRemoveInitialRole,
@@ -14,11 +13,11 @@ const useGuildRoles = () => {
 	};
 
 	const updateRoleSetting = (key: GuildDataKey, value: GuildDataValue) => {
-		settings.value = { [key]: value };
+		changes({ [key]: value });
 	};
 
 	const resetRole = (key: GuildDataKey) => {
-		settings.value = { [key]: undefined };
+		changes({ [key]: undefined });
 	};
 
 	const getRoleSelectComponent = (key: GuildDataKey) => {

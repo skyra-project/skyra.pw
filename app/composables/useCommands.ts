@@ -1,28 +1,16 @@
+import type { FlattenedCommand } from '~~/shared/types';
+
 export const useCommands = () => {
 	const client = useClientTrpc();
 	const commands = useState<FlattenedCommand[]>('commands', () => []);
 	const isLoading = useState<boolean>('isLoading', () => false);
-	const selectedCommand = ref<FlattenedCommand | null>(null);
+	const selectedCommand = shallowRef<FlattenedCommand | null>(null);
 
 	const handleError = (error: Error, context: string) => {
 		captureException(error, { extra: { context } });
 		toast.error('Error', {
 			description: `Failed to ${context.toLowerCase()}. Please try again.`
 		});
-	};
-
-	const executeCommand = async (command: FlattenedCommand) => {
-		try {
-			isLoading.value = true;
-			await client.commands.refresh.mutate();
-			toast.success('Command executed', {
-				description: `Successfully executed: ${command.name}`
-			});
-		} catch (error) {
-			handleError(error as Error, 'Execute Command');
-		} finally {
-			isLoading.value = false;
-		}
 	};
 
 	const fetchCommands = async () => {
@@ -42,7 +30,6 @@ export const useCommands = () => {
 		commands,
 		isLoading,
 		selectedCommand,
-		executeCommand,
 		fetchCommands
 	};
 };

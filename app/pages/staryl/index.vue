@@ -1,7 +1,7 @@
 <template>
 	<Head>
-		<Title>Nekokai</Title>
-		<Meta name="description" content="Nekokai's landing page" />
+		<Title>Staryl</Title>
+		<Meta name="description" content="Staryl's landing page" />
 	</Head>
 
 	<section class="mt-28 flex flex-col items-center text-center">
@@ -13,9 +13,7 @@
 	</section>
 
 	<section class="join mt-16">
-		<nuxt-link class="btn join-item md:btn-wide" :to="Invites.Nekokai"
-			><nuxt-icon name="ph:plus-circle-fill" class="h-5 w-5" /> Add App</nuxt-link
-		>
+		<nuxt-link class="btn join-item md:btn-wide" :to="Invites.Staryl"><nuxt-icon name="ph:plus-circle-fill" class="h-5 w-5" /> Add App</nuxt-link>
 		<nuxt-link class="btn join-item md:btn-wide" to="#explore"><nuxt-icon name="ph:magnifying-glass-fill" class="h-5 w-5" /> Explore</nuxt-link>
 	</section>
 

@@ -4,9 +4,9 @@ import { getOrigin } from '@/composables/public';
 
 // Generate OpenAPI schema document
 export const openApiDocument = generateOpenApiDocument(appRouter, {
-	title: 'Example CRUD API',
-	description: 'OpenAPI compliant REST API built using tRPC with Next.js',
+	title: 'Discord Integration API',
+	description: 'OpenAPI compliant REST API for Discord integration using tRPC',
 	version: '1.0.0',
 	baseUrl: `http://${getOrigin()}/api`,
-	tags: ['auth', 'users', 'guilds', 'discord']
+	tags: ['commands', 'guilds', 'languages']
 });

@@ -7,16 +7,16 @@
 </template>
 
 <script setup lang="ts">
-import type { TransformedLoginData } from '@/server/utils/types';
+import type { TransformedLoginData } from '~~/shared/types';
 
 interface FilteredGuildCardsProps {
-	pack: TransformedLoginData | null;
+	guilds: TransformedLoginData['transformedGuilds'] | null;
 }
 
 const props = defineProps<FilteredGuildCardsProps>();
 
 const filteredGuilds = computed(() => {
-	return (props.pack?.transformedGuilds ?? [])
+	return (props.guilds ?? [])
 		.filter((g) => g.manageable)
 		.sort((gA, gB) =>
 			gA.wolfstarIsIn === gB.wolfstarIsIn ? gA.name.localeCompare(gB.name, 'en', { sensitivity: 'base' }) : gA.wolfstarIsIn ? -1 : 1

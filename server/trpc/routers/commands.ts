@@ -4,20 +4,12 @@ import { TRPCError } from '@trpc/server';
 import { isNullish } from '@sapphire/utilities';
 import { procedure, router } from '~~/server/trpc/trpc';
 import { useCommandsStore } from '~~/app/stores/commands';
-import type { FlattenedCommand } from '~/shared/types';
+import type { FlattenedCommand } from '~~/shared/types';
 import { useAPI } from '~~/app/composables/externalApi';
 
 export const commandsRouter = router({
-	getAll: procedure
-		.meta({
-			rateLimitRequired: true
-		})
-		.output(z.array(z.custom<FlattenedCommand>()))
-		.query(() => useCommandsStore().commands),
+	getAll: procedure.output(z.array(z.custom<FlattenedCommand>())).query(() => useCommandsStore().commands),
 	refresh: procedure
-		.meta({
-			rateLimitRequired: true
-		})
 		.input(
 			z.optional(
 				z.object({

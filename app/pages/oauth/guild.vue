@@ -1,11 +1,5 @@
 <template>
 	<div>
-		<Head>
-			<Title>OAUTH Guild Callback</Title>
-
-			<Meta property="og:title" content="OAUTH Guild Callback" />
-			<Meta property="og:description" content="A landing page for the OAuth2.0 guild callback flow." />
-		</Head>
 		<section class="prose prose-stone dark:prose-invert max-w-none">
 			<client-only>
 				<template v-if="!guildId">
@@ -22,20 +16,26 @@
 </template>
 
 <script setup lang="ts">
-const route = useRoute();
-const router = useRouter();
+import { promiseTimeout } from '@vueuse/core';
 
+const router = useRouter();
 const guildId = ref<string | null>(null);
 
 onMounted(() => {
-	const queryGuildId = route.query.guild_id;
-	if (queryGuildId && typeof queryGuildId === 'string') {
-		guildId.value = queryGuildId;
+	const queryGuildId = useRouteParams('guildid');
+	if (queryGuildId && typeof queryGuildId.value === 'string') {
+		guildId.value = queryGuildId.value;
 		// Redirect after a short delay to show the loading animation
-		setTimeout(() => {
-			router.push(`/guilds/${guildId.value}`);
-		}, 1500);
+		promiseTimeout(1500);
+		router.push(`/guilds/${guildId.value}`);
 	}
+});
+
+useSeoMeta({
+	title: 'Auth Guild Callback',
+	robots: { none: true },
+	ogTitle: 'OAuth Guild Callback',
+	ogDescription: '"A landing page for the OAuth2.0 guild callback flow.'
 });
 </script>
 

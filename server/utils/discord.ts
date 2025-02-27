@@ -29,8 +29,6 @@ export async function fetchAccessToken(code: string, redirectUri: string) {
 
 	const json = await result.json();
 	if (result.ok) return json as RESTPostOAuth2AccessTokenResult;
-
-	consola.error(json);
 	return null;
 }
 

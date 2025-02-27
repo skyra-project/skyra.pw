@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { isNullOrUndefined } from '@sapphire/utilities';
 import { guildSchema, settingsUpdateSchema } from '~~/server/trpc/schemas/guild';
 import { router, procedure } from '~~/server/trpc/trpc';
+import type { GuildData } from '~~/lib/database';
 import { readSettings, serializeSettings, writeSettingsTransaction } from '~~/lib/database';
 
 export const settingsRouter = router({
@@ -16,18 +17,16 @@ export const settingsRouter = router({
 			auth: true
 		})
 		.input(guildSchema)
-		.output(z.string())
+		.output(z.string().or(z.custom<GuildData>()))
 		.query(
 			async ({
 				ctx: {
 					session: { data: user },
 					api
 				},
-				input: { guild: guildId }
+				input: { guildid: guildId, shouldSerialize }
 			}) => {
-				useRest().setToken(useRuntimeConfig().config);
-
-				const guild = await api.guilds.get(guildId, { with_counts: true });
+				const guild = await api().guilds.get(guildId, { with_counts: true });
 				if (!guild) {
 					throw new TRPCError({
 						code: 'BAD_REQUEST',
@@ -35,7 +34,7 @@ export const settingsRouter = router({
 					});
 				}
 
-				const member = await api.guilds.getMember(guild.id, user.id);
+				const member = await api().guilds.getMember(guild.id, user.id);
 				if (!member) {
 					throw new TRPCError({
 						code: 'BAD_REQUEST',
@@ -51,7 +50,7 @@ export const settingsRouter = router({
 				}
 
 				const settings = await readSettings(guild.id);
-				return serializeSettings(settings);
+				return shouldSerialize ? serializeSettings(settings) : (settings as unknown as GuildData);
 			}
 		),
 	update: procedure
@@ -68,8 +67,7 @@ export const settingsRouter = router({
 		.mutation(
 			async ({
 				ctx: {
-					session: { data: user },
-					api
+					session: { data: user }
 				},
 				input: { guildId, data }
 			}) => {
@@ -87,9 +85,7 @@ export const settingsRouter = router({
 					});
 				}
 
-				useRest().setToken(useRuntimeConfig().config);
-
-				const guild = await api.guilds.get(guildId, { with_counts: true });
+				const guild = await api().guilds.get(guildId, { with_counts: true });
 				if (!guild) {
 					throw new TRPCError({
 						code: 'BAD_REQUEST',
@@ -97,7 +93,9 @@ export const settingsRouter = router({
 					});
 				}
 
-				const member = await fetchMember(guildId, user.id).catch(() => null);
+				const member = await api()
+					.guilds.getMember(guild.id, user.id)
+					.catch(() => null);
 				if (!member) {
 					throw new TRPCError({
 						code: 'BAD_REQUEST',

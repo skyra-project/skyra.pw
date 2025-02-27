@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<Loading :is-loading="loading" />
 		<div class="flex h-screen">
 			<main class="bg-base-300 text-base-content mt-16 flex flex-grow flex-col overflow-y-scroll p-4 sm:mt-0">
 				<component
@@ -16,11 +15,9 @@
 
 				<Transition name="fade">
 					<div v-if="hasChanges" class="bg-base-300 fixed right-0 bottom-0 left-0 flex justify-end gap-4 p-4 shadow-lg">
-						<UButton variant="outline" :loading="loading" :disabled="loading" @click="resetChanges"> Reset Changes </UButton>
+						<button class="btn btn-outline" :class="{ loading: loading }" :disabled="loading" @click="resetChanges">Reset Changes</button>
 
-						<UButton variant="solid" color="primary" :loading="loading" :disabled="loading" @click="submitChanges">
-							Save Changes
-						</UButton>
+						<button class="btn btn-primary" :class="{ loading: loading }" :disabled="loading" @click="submitChanges">Save Changes</button>
 					</div>
 				</Transition>
 			</main>
@@ -30,55 +27,60 @@
 
 <script setup lang="ts">
 import { useRouteParams } from '@vueuse/router';
-import type { GuildData } from '@//lib/database';
-import type { FlattenedCommand } from '@/server/utils/types';
+import type { NuxtError } from '#app';
+import type { GuildData } from '~~/lib/database';
+import type { FlattenedCommand, FlattenedGuild } from '~~/shared/types';
 
 const route = useRoute();
 const router = useRouter();
-const toast = useToast();
 const guildId = useRouteParams('guildId');
 
-// Use the composable
-const { settings, setBaseSettings, resetChanges, hasChanges, changes } = useGuildSettings();
+// Use the composable with correct usage
+const { settings, resetChanges, hasChanges, changes } = useGuildSettings();
 
 const loading = ref(true);
 const commands = ref<FlattenedCommand[]>([]);
 const languages = ref<string[]>([]);
-const guildData = ref<any>(null);
+const guildData = ref<FlattenedGuild | null>(null);
 
 const fetchData = async () => {
 	try {
 		loading.value = true;
+		if (typeof guildId.value === 'string') {
+			const [commandsData, languagesData, guildDataResponse, guildSettingsResponse] = await Promise.all([
+				await useClientTrpc().commands.getAll.query(),
+				await useClientTrpc().languages.getAll.query(),
+				await useClientTrpc().guilds.search.query({
+					guildid: guildId.value
+				}),
+				await useClientTrpc().guilds.settings.fetch.query({
+					guildid: guildId.value,
+					shouldSerialize: true
+				})
+			]);
 
-		const [commandsData, languagesData, guildDataResponse, guildSettingsResponse] = await Promise.all([
-			useFetch('commands'),
-			useFetch('languages'),
-			useFetch(`guilds/${guildId.value}`),
-			useFetch(`guilds/${guildId}/settings`)
-		]);
-
-		commands.value = commandsData.value ?? [];
-		languages.value = languagesData.value ?? [];
-		guildData.value = guildDataResponse;
-		setBaseSettings(guildSettingsResponse);
+			commands.value = commandsData;
+			languages.value = languagesData;
+			guildData.value = guildDataResponse;
+			// Update settings using changes function
+			if (typeof guildSettingsResponse !== 'string') {
+				changes(guildSettingsResponse);
+			}
+		}
 	} catch (error) {
 		consola.error('Error fetching data:', error);
-		handleError(error);
+		handleError(error as NuxtError<unknown>);
 	} finally {
 		loading.value = false;
 	}
 };
 
-const handleError = async (error: any) => {
-	if (error.status === 401) {
+const handleError = async (error: NuxtError<unknown>) => {
+	if (error.statusCode === 401) {
 		await useAuth().updateSession();
 		await router.push('/');
 	} else {
-		toast.add({
-			title: 'Error',
-			description: 'An error occurred. Please try again.',
-			color: 'error'
-		});
+		toast.error('An error occurred. Please try again.');
 	}
 };
 
@@ -86,29 +88,38 @@ const submitChanges = async () => {
 	try {
 		loading.value = true;
 
-		const response = await $fetch<GuildData>(`guilds/${guildId}/settings`, {
-			method: 'PATCH',
-			body: {
-				guildId,
-				data: Object.entries(changes.value ?? {})
-			}
-		});
-
-		if (!response || !Object.keys(response).length) {
-			throw new Error('Invalid response');
+		if (!guildId.value) {
+			throw createError({
+				statusCode: 500,
+				message: 'Guild ID not found'
+			});
 		}
 
-		setBaseSettings(response);
-		resetChanges();
+		if (typeof guildId.value === 'string') {
+			const response = await useClientTrpc().guilds.settings.update.mutate({
+				guildId: guildId.value,
+				data: Object.entries(changes.value ?? {})
+			});
+
+			if (!response) {
+				throw createError({
+					statusCode: 500,
+					message: 'Failed to update settings'
+				});
+			}
+
+			setBaseSettings(response);
+			resetChanges();
+		}
 	} catch (error) {
-		handleError(error);
+		handleError(error as NuxtError<unknown>);
 	} finally {
 		loading.value = false;
 	}
 };
 
 const updateGuildSettings = (newSettings: Partial<GuildData>) => {
-	settings.value = newSettings;
+	changes(newSettings);
 };
 
 const readyToRender = computed(
@@ -116,7 +127,7 @@ const readyToRender = computed(
 );
 
 const settingsComponent = computed(() =>
-	defineAsyncComponent(() => import(`@//components/guild/Settings/${route.fullPath.split('/').slice(2).join('/')}.vue`))
+	defineAsyncComponent(() => import(`@/app/components/guild/Settings/${route.fullPath.split('/').slice(2).join('/')}.vue`))
 );
 
 useHead({

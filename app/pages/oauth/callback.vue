@@ -1,16 +1,17 @@
 <template>
-	<section class="container mx-auto p-4">
+	<section class="prose prose-stone dark:prose-invert max-w-none">
 		<template v-if="!code">
 			<h1>Missing code</h1>
 			<p>Please use the <code>Login</code> button instead or click <NuxtLink to="/login" class="underline">here</NuxtLink>.</p>
 		</template>
 		<client-only v-else>
-			<h1 v-if="isLoading" class="animate-pulse">Loading...</h1>
-			<template v-else-if="error">
+			<h1 v-if="status == 'pending'" class="animate-pulse">Loading...</h1>
+			<template v-else-if="status == 'error' && error">
 				<h1>Failed to complete authentication flow:</h1>
 				<pre><code>{{ error }}</code></pre>
 			</template>
 			<template v-else-if="data">
+				<h1>Welcome {{ data.name }}</h1>
 				<p>You will be redirected to the main page in a second.</p>
 				<div class="mt-2 rounded-lg bg-gray-200 p-1 dark:bg-stone-900" aria-label="Progress" role="progressbar">
 					<div class="progress h-4 rounded-md bg-rose-500"></div>
@@ -21,50 +22,51 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { promiseTimeout } from '@vueuse/core';
-import { useClientTrpc, getOrigin } from '@/composables/public';
 
-import { useAuth } from '@/composables/auth';
+const { code } = useRoute().query;
 
-const { code } = useRoute().query as { code: string };
-const client = useClientTrpc();
-const auth = useAuth();
-const redirectUri = `${getOrigin()}/oauth/callback`;
-
-const isLoading = ref(false);
-const error = ref<Error | null>(null);
-
-const { data } = await useAsyncData('callback', async () => await client.auth.callback.mutate({ code, redirectUri }), {
+const redirectUri = `${getOrigin()}/auth/callback`;
+const { data, error, status, execute } = useFetch('/api/auth/callback', {
+	body: JSON.stringify({ code, redirectUri }),
+	method: 'POST',
+	key: 'callback',
 	server: false,
 	immediate: false
 });
 
-async function performCall() {
-	isLoading.value = true;
-	error.value = null;
-	if (!data.value) return;
-
-	try {
-		useAuth().session.value = data.value;
-
-		await promiseTimeout(1000);
-		await useRouter().replace(auth.redirectTo.value);
-	} catch (e) {
-		error.value = e as Error;
-	} finally {
-		isLoading.value = false;
-	}
+if (import.meta.client && code) {
+	void performCall().catch(console.error);
 }
 
-if (import.meta.client && code) {
-	void performCall();
+async function performCall() {
+	await execute();
+	if (!data.value) return;
+
+	useAuth().session.value = data.value;
+	await promiseTimeout(1000);
+	await useRouter().replace(useAuth().redirectTo.value);
 }
 
 useSeoMeta({
-	title: 'Auth Callback',
+	title: 'OAuth Callback',
 	robots: { none: true },
-	ogTitle: 'Auth Callback',
+	ogTitle: 'OAuth Callback',
 	ogDescription: 'A landing page for the OAuth2.0 callback flow, use the Login button instead.'
 });
 </script>
+
+<style scoped>
+.progress {
+	animation: progressAnimation 1s;
+}
+
+@keyframes progressAnimation {
+	from {
+		width: 0;
+	}
+	to {
+		width: 100%;
+	}
+}
+</style>

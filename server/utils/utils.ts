@@ -78,7 +78,8 @@ async function transformGuild(userId: string, data: RESTAPIPartialCurrentUserGui
 					verificationLevel: GuildVerificationLevel.None,
 					verified: false
 				} as unknown as FlattenedGuild)
-			: flattenGuild({ ...guild, channels });
+			: // eslint-disable-next-line @typescript-eslint/no-explicit-any
+				flattenGuild({ ...guild, channels: channels as any });
 
 	return {
 		...serialized,

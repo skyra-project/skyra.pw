@@ -1,5 +1,4 @@
 import { isNullishOrEmpty } from '@sapphire/utilities';
-import { useAccessToken } from '~/composables/useAccessToken';
 
 export default eventHandler(async (event) => {
 	const { code, redirectUri } = (await readBody(event)) as OAuth2BodyData;
@@ -17,10 +16,8 @@ export default eventHandler(async (event) => {
 		throw createError({ message: 'Failed to fetch the user', statusCode: 500 });
 	}
 
-	useAccessToken().value = data.access_token;
-
 	const session = await useAuthSession(event);
-	await session.update({ id: user.id, name: user.username, avatar: user.avatar });
+	await session.update({ id: user.id, name: user.username, avatar: user.avatar, token: data.access_token });
 	return session.data;
 });
 

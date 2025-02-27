@@ -6,5 +6,6 @@ export const settingsUpdateSchema = z.object({
 });
 
 export const guildSchema = z.object({
-	guild: z.string()
+	guildid: z.string(),
+	shouldSerialize: z.boolean().optional()
 });
