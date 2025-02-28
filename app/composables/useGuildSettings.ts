@@ -1,4 +1,3 @@
-import { ref, computed, readonly } from 'vue';
 import deepMerge, { type Options as DeepMergeOptions } from 'deepmerge';
 import type { GuildData, GuildDataValue } from '~~/lib/database';
 
@@ -9,8 +8,8 @@ const mergeOptions: DeepMergeOptions = {
 };
 
 const useGuildSettings = () => {
-	const guildSettings = ref<GuildData | null>(null);
-	const guildSettingsChanges = ref<NullablePartialGuildData | null>(null);
+	const guildSettings = useState<GuildData | null>(() => null);
+	const guildSettingsChanges = useState<NullablePartialGuildData | null>(() => null);
 
 	const mergedSettings = computed({
 		get: () => {

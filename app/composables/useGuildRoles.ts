@@ -1,10 +1,10 @@
-import { computed } from 'vue';
 import useGuildData from './useGuildData';
 import useGuildSettings from './useGuildSettings';
 import type { GuildDataKey, GuildDataValue, GuildData } from '~~/lib/database';
 import { ConfigurableRemoveInitialRole, ConfigurableRoles } from '~~/shared/SettingsDataEntries';
+
 const useGuildRoles = () => {
-	const { guildData } = useGuildData();
+	const guildData = useGuildData();
 	const { settings, changes } = useGuildSettings();
 
 	const roleConfig = {

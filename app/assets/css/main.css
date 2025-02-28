@@ -1,6 +1,6 @@
 @import 'tailwindcss';
-@import './brand.css';
 @import './fonts.css';
+
 @plugin "@tailwindcss/typography";
 
 @plugin 'daisyui' {
@@ -116,10 +116,12 @@
 }
 
 @theme inline {
-	--branding-wolfstar: oklch(var(--color-primary) / <alpha-value>);
+	--branding-wolfstar: oklch(var(--branding-wolfstar) / <alpha-value>);
 }
 
 @theme {
+	--branding-wolfstar: oklch(63% 0.2502 28.13);
+	--branding-wolfstar-content: oklch(94% 0.028 342.258);
 	--default-ring-width: 3px;
 	--default-ring-color: var(--color-blue-500);
 	--font-whitney: 'Whitney';

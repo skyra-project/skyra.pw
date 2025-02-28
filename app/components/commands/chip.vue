@@ -1,7 +1,7 @@
 <template>
 	<div v-if="loading" class="chip-skeleton">
-		<USkeleton class="h-6 w-20" />
-		<USkeleton class="ml-2 h-4 w-4" />
+		<div class="skeleton h-6 w-20"></div>
+		<div class="skeleton ml-2 h-4 w-4"></div>
 	</div>
 	<div v-else class="chip" :class="[colorClass, { 'opacity-75 hover:opacity-100': interactive }]">
 		<span>{{ text }}</span>

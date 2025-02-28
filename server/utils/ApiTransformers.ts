@@ -20,6 +20,7 @@ import type {
 	APIGuildMediaChannel
 } from 'discord-api-types/v10';
 import { GuildFeature, ChannelType } from 'discord-api-types/v10';
+import api from '~~/shared/utils/api';
 import type {
 	FlattenedDMChannel,
 	FlattenedMember,
@@ -38,6 +39,7 @@ import type {
 	FlattenedMediaChannel,
 	FlattenedStageVoiceChannel
 } from '~~/shared/types';
+import { lazy } from '@sapphire/utilities';
 
 // #region Guild
 
@@ -133,6 +135,16 @@ function transformPermissionOverwrites(
 	]);
 }
 
+export function getParentChannel(channel: APIThreadChannel | Exclude<APIChannel, APIDMChannel | APIGroupDMChannel>) {
+	const channelResult = lazy(async () => {
+		if (!channel.parent_id) return null;
+		const parentChannel = await api().channels.get(channel.parent_id);
+		if (parentChannel.type !== ChannelType.GuildCategory) return null;
+		return flattenChannelCategory(parentChannel as APIGuildCategoryChannel);
+	});
+	return channelResult;
+}
+
 // #endregion Role
 
 // #region Channel
@@ -219,7 +231,7 @@ function flattenChannelCategory(channel: APIGuildCategoryChannel): FlattenedCate
 		guildId: channel.guild_id ?? null,
 		name: channel.name,
 		rawPosition: channel.position ?? 0,
-		parentId: null, // Categories cannot have parents
+		parentId: channel.parent_id ?? null, // Categories cannot have parents,
 		permissionOverwrites: transformPermissionOverwrites(channel.permission_overwrites),
 		createdTimestamp: DiscordSnowflake.timestampFrom(channel.id)
 	};

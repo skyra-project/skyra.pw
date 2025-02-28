@@ -6,10 +6,9 @@
 					<h1>Missing guild ID</h1>
 					<p>Please use the <code>Login</code> button instead or click <NuxtLink to="/login" class="underline">here</NuxtLink>.</p>
 				</template>
-				<template v-else>
-					<h1 class="animate-pulse">Redirecting to guild...</h1>
-					<PresentationalLoading :loading="true" />
-				</template>
+				<div v-else-if="isLoading" class="h-2 w-full rounded-full bg-gray-200">
+					<div class="h-full rounded-full bg-blue-600 transition-all duration-300 ease-out" :style="{ width: `${progress}%` }"></div>
+				</div>
 			</client-only>
 		</section>
 	</div>
@@ -21,12 +20,21 @@ import { promiseTimeout } from '@vueuse/core';
 const router = useRouter();
 const guildId = ref<string | null>(null);
 
-onMounted(() => {
+const { progress, isLoading, start, finish } = useLoadingIndicator();
+
+onMounted(async () => {
 	const queryGuildId = useRouteParams('guildid');
 	if (queryGuildId && typeof queryGuildId.value === 'string') {
 		guildId.value = queryGuildId.value;
-		// Redirect after a short delay to show the loading animation
-		promiseTimeout(1500);
+
+		// Start the loading indicator
+		start();
+
+		// Wait for animation
+		await promiseTimeout(1500);
+
+		// Finish loading and redirect
+		finish();
 		router.push(`/guilds/${guildId.value}`);
 	}
 });

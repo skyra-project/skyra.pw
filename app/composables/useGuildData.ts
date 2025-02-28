@@ -1,8 +1,7 @@
-import { ref } from 'vue';
-import type { TransformedLoginData } from '~~/shared/types';
+import type { OauthFlattenedGuild } from '~~/shared/types';
 
 const useGuild = () => {
-	const guildData = ref<keyof NonNullable<TransformedLoginData['transformedGuilds']>>();
+	const guildData = useState<NonNullable<OauthFlattenedGuild> | null>(() => null);
 
 	return guildData;
 };

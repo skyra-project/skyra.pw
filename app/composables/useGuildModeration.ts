@@ -1,4 +1,3 @@
-import { computed } from 'vue';
 import useGuildSettings from './useGuildSettings';
 import type { GuildData } from '~~/lib/database';
 import { ConfigurableModerationKeys } from '~~/shared/SettingsDataEntries';

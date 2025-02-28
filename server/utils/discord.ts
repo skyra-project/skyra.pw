@@ -1,14 +1,13 @@
 import type {
-	RESTGetAPIGuildMemberResult,
-	RESTGetAPIGuildResult,
 	RESTGetAPICurrentUserResult,
 	RESTPostOAuth2AccessTokenResult,
 	RESTPostOAuth2AccessTokenURLEncodedData,
-	RESTGetAPICurrentUserGuildsResult
+	RESTPostOAuth2RefreshTokenResult,
+	RESTPostOAuth2RefreshTokenURLEncodedData
 } from 'discord-api-types/v10';
 import { OAuth2Routes, RouteBases, Routes } from 'discord-api-types/v10';
 
-const { clientId, clientSecret, token } = useRuntimeConfig();
+const { clientId, clientSecret } = useRuntimeConfig();
 
 export async function fetchAccessToken(code: string, redirectUri: string) {
 	const data = {
@@ -32,29 +31,27 @@ export async function fetchAccessToken(code: string, redirectUri: string) {
 	return null;
 }
 
+export async function refreshAccessToken(refreshToken: string) {
+	const data = {
+		client_id: clientId,
+		client_secret: clientSecret,
+		grant_type: 'refresh_token',
+
+		refresh_token: refreshToken
+	} satisfies RESTPostOAuth2RefreshTokenURLEncodedData;
+	const result = await fetch(OAuth2Routes.tokenURL, {
+		method: 'POST',
+		body: new URLSearchParams(data).toString(),
+		headers: {
+			'content-type': 'application/x-www-form-urlencoded'
+		}
+	});
+
+	return result.ok ? ((await result.json()) as RESTPostOAuth2RefreshTokenResult) : null;
+}
+
 export async function fetchUser(token: string) {
 	return fetchData<RESTGetAPICurrentUserResult>(token, Routes.user());
-}
-
-// get current user guilds data
-
-export async function fetchUserGuilds() {
-	return fetchData<RESTGetAPICurrentUserGuildsResult>(token, Routes.userGuilds());
-}
-
-// get guild data
-export async function fetchGuild(guildId: string) {
-	return fetchData<RESTGetAPIGuildResult>(token, Routes.guild(guildId));
-}
-
-// get member data
-export async function fetchMember(guildId: string, userId: string) {
-	return fetchData<RESTGetAPIGuildMemberResult>(token, Routes.guildMember(guildId, userId));
-}
-
-// get role data
-export async function fetchRole(guildId: string, roleId: string) {
-	return fetchData<RESTGetAPIGuildResult>(token, Routes.guildRole(guildId, roleId));
 }
 
 async function fetchData<T extends object>(token: string, route: string) {

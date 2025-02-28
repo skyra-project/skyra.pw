@@ -5,8 +5,8 @@
 		<h3 class="header-text text-lg font-semibold">{{ header }}</h3>
 	</div>
 	<div v-else class="flex items-center gap-2">
-		<USkeleton class="h-6 w-6 rounded-full" />
-		<USkeleton class="h-6 w-48 rounded-lg" />
+		<div class="skeleton h-6 w-6 rounded-full"></div>
+		<div class="skeleton h-6 w-48 rounded-lg"></div>
 	</div>
 </template>
 

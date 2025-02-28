@@ -6,7 +6,7 @@
 		</template>
 		<client-only v-else>
 			<h1 v-if="status == 'pending'" class="animate-pulse">Loading...</h1>
-			<template v-else-if="status == 'error' && error">
+			<template v-else-if="error">
 				<h1>Failed to complete authentication flow:</h1>
 				<pre><code>{{ error }}</code></pre>
 			</template>
@@ -26,7 +26,7 @@ import { promiseTimeout } from '@vueuse/core';
 
 const { code } = useRoute().query;
 
-const redirectUri = `${getOrigin()}/auth/callback`;
+const redirectUri = `${getOrigin()}/oauth/callback`;
 const { data, error, status, execute } = useFetch('/api/auth/callback', {
 	body: JSON.stringify({ code, redirectUri }),
 	method: 'POST',

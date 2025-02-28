@@ -133,6 +133,10 @@ export interface ExpirableLocalStorageStructure<T> {
 	data: T;
 }
 
+export enum LocalStorageKeys {
+	Discord = 'discord_pack'
+}
+
 export enum StorageKeys {
 	Commands = 'commandsStore',
 	Language = 'languageStore'

@@ -1,4 +1,5 @@
 import { isNullishOrEmpty } from '@sapphire/utilities';
+import { useAuthStorage } from '~~/server/utils/session';
 
 export default eventHandler(async (event) => {
 	const { code, redirectUri } = (await readBody(event)) as OAuth2BodyData;
@@ -16,8 +17,13 @@ export default eventHandler(async (event) => {
 		throw createError({ message: 'Failed to fetch the user', statusCode: 500 });
 	}
 
+	const storage = useAuthStorage();
+	storage.set('refresh_token', data.refresh_token);
+	storage.set('access_token', data.access_token);
+	storage.set('expires_in', data.expires_in);
+
 	const session = await useAuthSession(event);
-	await session.update({ id: user.id, name: user.username, avatar: user.avatar, token: data.access_token });
+	await session.update({ id: user.id, name: user.username, avatar: user.avatar });
 	return session.data;
 });
 

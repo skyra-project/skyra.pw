@@ -9,25 +9,21 @@
 			@search="handleSearch"
 			@close="closeModal"
 		/>
-
 		<div v-if="isLoading">
-			<!-- Loading state with Nuxt UI Skeletons -->
-			<div class="container mx-auto flex flex-col gap-6 p-4 p-6">
+			<div class="container mx-auto flex flex-col gap-6 p-6 md:p-4">
 				<div v-for="i in 3" :key="i">
-					<USkeleton class="mb-4 h-8 w-48" />
+					<div class="skeleton mb-4 h-8 w-48"></div>
 					<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-						<UCard v-for="j in 3" :key="j" class="bg-base-200">
-							<template #header>
-								<USkeleton class="h-6 w-32" />
-							</template>
-							<USkeleton class="h-4 w-full" />
-							<template #footer>
-								<div class="flex gap-2">
-									<USkeleton class="h-8 w-24" />
-									<USkeleton class="h-8 w-24" />
+						<div v-for="j in 3" :key="j" class="card bg-base-200">
+							<div class="card-body">
+								<div class="skeleton h-6 w-32"></div>
+								<div class="skeleton h-4 w-full"></div>
+								<div class="mt-4 flex gap-2">
+									<div class="skeleton h-8 w-24"></div>
+									<div class="skeleton h-8 w-24"></div>
 								</div>
-							</template>
-						</UCard>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -62,6 +58,7 @@
 
 <script setup lang="ts">
 import { onKeyStroke } from '@vueuse/core';
+import type { FlattenedCommand } from '~~/shared/types';
 
 const { commands, isLoading, fetchCommands } = useCommands();
 

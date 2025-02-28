@@ -12,7 +12,7 @@
 		</p>
 	</section>
 
-	<section class="join mt-16">
+	<section class="join mt-16 flex items-center justify-center">
 		<nuxt-link class="btn join-item sm:btn-wide" :to="Invites.WolfStar"
 			><nuxt-icon name="ph:plus-circle-fill" class="h-5 w-5" /> Add App</nuxt-link
 		>
@@ -242,10 +242,6 @@
 				<strong>A large logging suite:</strong> WolfStar can log almost everything that happens in your server: moderation actions, message
 				updates and deletions, channel updates and deletions, role updates and deletions, server updates, members changing voice channels, and
 				more.
-			</li>
-			<li>
-				<nuxt-icon name="ph:twitch-logo-duotone" class="my-0 mr-1 h-5 w-5 text-purple-500" />
-				<strong>Twitch notifications:</strong> WolfStar can automatically moderate your server, so you can focus on what matters most.
 			</li>
 			<li>
 				<nuxt-icon name="ph:money-wavy-duotone" class="text-error my-0 mr-1 h-5 w-5" />

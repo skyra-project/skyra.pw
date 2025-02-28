@@ -19,7 +19,7 @@
 			</div>
 			<div><slot></slot></div>
 			<div v-if="ephemeral" class="discord-message-ephemeral-footer">
-				<icon name="ph:eye-duotone" /> Only you can see this •
+				<nuxt-icon name="ph:eye-duotone" /> Only you can see this •
 				<span class="discord-message-link">Dismiss message</span>
 			</div>
 		</div>
@@ -40,7 +40,7 @@ const profile = computed(() => Profiles[props.name]);
 	line-height: 0.625rem;
 }
 
-@screen md {
+@media (width >= 48rem) {
 	.app-badge {
 		font-size: 0.75rem;
 		line-height: 0.75rem;

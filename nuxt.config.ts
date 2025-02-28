@@ -256,9 +256,6 @@ export default defineNuxtConfig({
 		clientBundle: {
 			scan: true
 		},
-		serverBundle: {
-			remote: 'jsdelivr' // 'unpkg' or 'github-raw', or a custom function
-		},
 		componentName: 'NuxtIcon'
 	},
 	image: {
@@ -328,11 +325,20 @@ export default defineNuxtConfig({
 			]
 		}
 	},
+	colorMode: {
+		preference: 'system', // default theme
+		dataValue: 'theme', // activate data-theme in <html> tag
+		classSuffix: '',
+		fallback: 'light'
+	},
 	security: {
 		allowedMethodsRestricter: { methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT'] },
 		headers: {
 			contentSecurityPolicy: {
-				'img-src': ["'self'", 'data:', 'cdn.wolfstar.rocks', 'cdn.discordapp.com']
+				'img-src': ["'self'", 'data:', 'cdn.wolfstar.rocks', 'cdn.discordapp.com', 'jsdelivr.com'],
+				'script-src-attr': ["'self'", 'jsdelivr.com'],
+				'style-src': ["'self'", "'nonce-{{nonce}}'"],
+				'script-src': ["'self'", "'strict-dynamic'", "'nonce-{{nonce}}'"]
 			},
 			permissionsPolicy: {
 				accelerometer: ['()'],

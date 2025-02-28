@@ -5,7 +5,7 @@
 				<div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
 					<nuxt-icon name="ph:list" class="h-5 w-5" />
 				</div>
-				<ul tabindex="0" class="menu dropdown-content menu-sm rounded-box bg-base-100 z-[1] mt-3 w-52 w-full p-2 shadow">
+				<ul tabindex="0" class="menu dropdown-content menu-sm rounded-box bg-base-100 z-[1] mt-3 w-full p-2 shadow">
 					<li>
 						<a>Features</a>
 						<ul class="p-2">
@@ -13,41 +13,23 @@
 							<li><a>Submenu 2</a></li>
 						</ul>
 					</li>
-					<!-- 		<li>
+					<li>
 						<a>Applications</a>
 						<ul class="p-2">
 							<li>
-								<nuxt-link to="/artiel">
-									<nuxt-icon name="ph:game-controller-duotone" class="text-branding-artiel h-4 w-4" />
-									Artiel
-								</nuxt-link>
-							</li>
-							<li>
-								<nuxt-link to="/iriss">
-									<nuxt-icon name="ph:bookmarks-duotone" class="text-branding-iriss h-4 w-4" />
-									Iriss
-								</nuxt-link>
-							</li>
-							<li>
-								<nuxt-link to="/nekokai">
-									<nuxt-icon name="ph:cat-duotone" class="text-branding-nekokai h-4 w-4" />
-									Nekokai
-								</nuxt-link>
-							</li>-
-							<li>
 								<nuxt-link to="/">
-									<nuxt-icon name="ph:shield-duotone" class="h-4 w-4 text-branding-wolfstar" />
+									<nuxt-icon name="ph:shield-duotone" class="text-branding-wolfstar h-4 w-4" />
 									WolfStar
 								</nuxt-link>
 							</li>
 							<li>
-								<nuxt-link to="/teryl">
+								<nuxt-link to="/staryl">
 									<nuxt-icon name="ph:books-duotone" class="text-branding-teryl h-4 w-4" />
-									Teryl
+									Starly
 								</nuxt-link>
-							</li> -
-
-					</li>  -->
+							</li>
+						</ul>
+					</li>
 					<li>
 						<nuxt-link :to="App.invite"><nuxt-icon name="ph:plus-circle-duotone" class="text-success" /> Invite App</nuxt-link>
 					</li>
@@ -96,56 +78,51 @@
 			</nuxt-link>
 		</div>
 		<div class="navbar-end">
-			<template v-if="loggedIn">
-				<div class="dropdown dropdown-end">
-					<label tabindex="0" class="avatar btn btn-circle btn-ghost" @click="toggleDropdown">
-						<img
-							v-if="isDefault"
-							:src="defaultAvatar"
-							alt="Default Avatar"
-							class="h-8 w-8 rounded-full"
-							decoding="async"
-							crossorigin="anonymous"
-						/>
-						<picture v-else>
-							<source
-								v-if="isAnimated"
-								media="(prefers-reduced-motion: no-preference), (prefers-reduced-data: no-preference)"
-								type="image/gif"
-								:srcset="makeSrcset('gif')"
-							/>
-							<source type="image/webp" :srcset="makeSrcset('webp')" />
-							<source type="image/png" :srcset="makeSrcset('png')" />
-							<img :src="createUrl('png', 128)" alt="Avatar" class="h-8 w-8 rounded-full" decoding="async" crossorigin="anonymous" />
-						</picture>
-					</label>
-					<ul v-if="isDropdownOpen" tabindex="0" class="menu-compact menu dropdown-content rounded-box bg-base-100 mt-3 w-64 p-2 shadow">
-						<li class="menu-title">
-							<span>{{ session?.name }}</span>
-						</li>
-						<li>
-							<nuxt-link to="/profile">Profile</nuxt-link>
-							<a class="justify-between" @click="authLogout()">
-								Logout
-								<span class="badge badge-sm">New</span>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</template>
-			<button
-				v-else
-				class="btn bg-[#5865F2] text-white"
-				@click="
-					async () => {
-						await navigateTo(getLoginURL(), { external: true });
-					}
-				"
-			>
-				<nuxt-icon name="ic:baseline-discord" class="h-[32px] w-[32px]" />
+			<div class="flex gap-2">
+				<template v-if="loggedIn">
+					<div class="dropdown dropdown-end">
+						<div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" @click="toggleDropdown">
+							<div class="w-10 rounded-full">
+								<img v-if="isDefault" :src="defaultAvatar" alt="Default Avatar" decoding="async" crossorigin="anonymous" />
+								<picture v-else>
+									<source
+										v-if="isAnimated"
+										media="(prefers-reduced-motion: no-preference), (prefers-reduced-data: no-preference)"
+										type="image/gif"
+										:srcset="makeSrcset('gif')"
+									/>
+									<source type="image/webp" :srcset="makeSrcset('webp')" />
+									<source type="image/png" :srcset="makeSrcset('png')" />
+									<img :src="createUrl('png', 128)" alt="Avatar" decoding="async" crossorigin="anonymous" />
+								</picture>
+							</div>
+						</div>
+						<ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+							<li>
+								<nuxt-link to="/profile" class="justify-between">
+									Profile
+									<span class="badge badge-sm">New</span>
+								</nuxt-link>
+							</li>
+							<li><a @click="authLogout()">Logout</a></li>
+						</ul>
+					</div>
+				</template>
 
-				Login
-			</button>
+				<button
+					v-else
+					class="btn bg-[#5865F2] text-white"
+					@click="
+						async () => {
+							await navigateTo(getLoginURL(), { external: true });
+						}
+					"
+				>
+					<nuxt-icon name="ic:baseline-discord" class="h-[32px] w-[32px]" />
+
+					Login
+				</button>
+			</div>
 		</div>
 	</div>
 </template>
@@ -160,7 +137,7 @@ const Apps = {
 	staryl: { name: 'Staryl', invite: Invites.Staryl, landing: '/staryl' }
 };
 
-const { session, loggedIn } = useAuth() ?? {};
+const { session, loggedIn } = useAuth();
 
 const isDropdownOpen = ref(false);
 

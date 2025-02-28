@@ -1,8 +1,8 @@
-import { REST } from '@discordjs/rest';
+import { REST, type RESTOptions } from '@discordjs/rest';
 
-export const useRest = () => {
-	return new REST({
-		version: '10',
-		authPrefix: 'Bearer'
-	}).setToken((useRuntimeConfig().config as { token: string }).token);
+export const useRest = (options?: Partial<RESTOptions>) => {
+	if (!process.env.NITRO_DISCORD_TOKEN) {
+		throw new Error("'DISCORD_TOKEN' env is not defined");
+	}
+	return new REST(options).setToken(process.env.NITRO_DISCORD_TOKEN!);
 };
